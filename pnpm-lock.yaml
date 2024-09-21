@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@imengyu/vue3-context-menu':
+        specifier: ^1.4.2
+        version: 1.4.2
       '@mineadmin/echarts':
         specifier: ^1.0.1
         version: 1.0.1(element-plus@2.8.3(vue@3.5.7))
@@ -23,13 +26,31 @@ importers:
       '@mineadmin/table':
         specifier: ^1.0.19
         version: 1.0.19(element-plus@2.8.3(vue@3.5.7))
+      '@vueuse/core':
+        specifier: ^10.11.0
+        version: 10.11.1(vue@3.5.7)
+      '@vueuse/integrations':
+        specifier: ^10.11.0
+        version: 10.11.1(async-validator@4.2.5)(focus-trap@7.6.0)(sortablejs@1.15.2)(vue@3.5.7)
+      echarts:
+        specifier: ^5.5.1
+        version: 5.5.1
       element-plus:
         specifier: ^2.8.3
         version: 2.8.3(vue@3.5.7)
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
+      radash:
+        specifier: ^12.1.0
+        version: 12.1.0
+      sortablejs:
+        specifier: 1.15.2
+        version: 1.15.2
     devDependencies:
       vitepress:
         specifier: ^1.3.4
-        version: 1.3.4(@algolia/client-search@4.24.0)(async-validator@4.2.5)(postcss@8.4.47)(search-insights@2.17.2)
+        version: 1.3.4(@algolia/client-search@4.24.0)(async-validator@4.2.5)(postcss@8.4.47)(search-insights@2.17.2)(sortablejs@1.15.2)
 
 packages:
 
@@ -294,6 +315,9 @@ packages:
   '@floating-ui/utils@0.2.8':
     resolution: {integrity: sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==}
 
+  '@imengyu/vue3-context-menu@1.4.2':
+    resolution: {integrity: sha512-oSXPjGw9cdf+fIpk3KJEqDVBK/VV7RgvO7GMLaSUGqfY/aoZByvTRtrM7tF57ad/X4SJ7TQx1ccxyRyMYVOPLg==}
+
   '@jridgewell/sourcemap-codec@1.5.0':
     resolution: {integrity: sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==}
 
@@ -513,6 +537,47 @@ packages:
   '@vueuse/core@9.13.0':
     resolution: {integrity: sha512-pujnclbeHWxxPRqXWmdkKV5OX4Wk4YeK7wusHqRwU0Q7EFusHoqNA/aPhB6KCh9hEqJkLAJo7bb0Lh9b+OIVzw==}
 
+  '@vueuse/integrations@10.11.1':
+    resolution: {integrity: sha512-Y5hCGBguN+vuVYTZmdd/IMXLOdfS60zAmDmFYc4BKBcMUPZH1n4tdyDECCPjXm0bNT3ZRUy1xzTLGaUje8Xyaw==}
+    peerDependencies:
+      async-validator: ^4
+      axios: ^1
+      change-case: ^4
+      drauu: ^0.3
+      focus-trap: ^7
+      fuse.js: ^6
+      idb-keyval: ^6
+      jwt-decode: ^3
+      nprogress: ^0.2
+      qrcode: ^1.5
+      sortablejs: ^1
+      universal-cookie: ^6
+    peerDependenciesMeta:
+      async-validator:
+        optional: true
+      axios:
+        optional: true
+      change-case:
+        optional: true
+      drauu:
+        optional: true
+      focus-trap:
+        optional: true
+      fuse.js:
+        optional: true
+      idb-keyval:
+        optional: true
+      jwt-decode:
+        optional: true
+      nprogress:
+        optional: true
+      qrcode:
+        optional: true
+      sortablejs:
+        optional: true
+      universal-cookie:
+        optional: true
+
   '@vueuse/integrations@11.1.0':
     resolution: {integrity: sha512-O2ZgrAGPy0qAjpoI2YR3egNgyEqwG85fxfwmA9BshRIGjV4G6yu6CfOPpMHAOoCD+UfsIl7Vb1bXJ6ifrHYDDA==}
     peerDependencies:
@@ -609,6 +674,9 @@ packages:
 
   devlop@1.1.0:
     resolution: {integrity: sha512-RWmIqhcFf1lRYBvNmr7qTNuyCt/7/ns2jbpp1+PalgE/rDQcBT0fioSMUpJ93irlUhC5hrg4cYqe6U+0ImW0rA==}
+
+  echarts@5.5.1:
+    resolution: {integrity: sha512-Fce8upazaAXUVUVsjgV6mBnGuqgO+JNDlcgF79Dksy4+wgGpQB2lmYoO4TSweFg/mZITdpGHomw/cNBJZj1icA==}
 
   element-plus@2.8.3:
     resolution: {integrity: sha512-BXQOyDf0s7JHyNEV8iaO+iaOzTZPsBXVKMzMI967vLCodUBDLrtiY5vglAn1YEebQcUOEUMhGcttTpIvEkcBjQ==}
@@ -727,6 +795,10 @@ packages:
   property-information@6.5.0:
     resolution: {integrity: sha512-PgTgs/BlvHxOu8QuEN7wi5A0OmXaBcHpmCSTehcs6Uuu9IkDIEo13Hy7n898RHfrQ49vKCoGeWZSaAK01nwVig==}
 
+  radash@12.1.0:
+    resolution: {integrity: sha512-b0Zcf09AhqKS83btmUeYBS8tFK7XL2e3RvLmZcm0sTdF1/UUlHSsjXdCcWNxe7yfmAlPve5ym0DmKGtTzP6kVQ==}
+    engines: {node: '>=14.18.0'}
+
   regex@4.3.2:
     resolution: {integrity: sha512-kK/AA3A9K6q2js89+VMymcboLOlF5lZRCYJv3gzszXFHBr6kO6qLGzbm+UIugBEV8SMMKCTR59txoY6ctRHYVw==}
 
@@ -743,6 +815,9 @@ packages:
 
   shiki@1.18.0:
     resolution: {integrity: sha512-8jo7tOXr96h9PBQmOHVrltnETn1honZZY76YA79MHheGQg55jBvbm9dtU+MI5pjC5NJCFuA6rvVTLVeSW5cE4A==}
+
+  sortablejs@1.15.2:
+    resolution: {integrity: sha512-FJF5jgdfvoKn1MAKSdGs33bIqLi3LmsgVTliuX6iITj834F+JRQZN90Z93yql8h0K2t0RwDPBmxwlbZfDcxNZA==}
 
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
@@ -771,6 +846,9 @@ packages:
 
   trim-lines@3.0.1:
     resolution: {integrity: sha512-kRj8B+YHZCc9kQYdWfJB2/oUl9rA99qbowYYBtr4ui4mZyAQ2JpvVBd/6U2YloATfqBhBTSMhTpgBHtU0Mf3Rg==}
+
+  tslib@2.3.0:
+    resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
 
   unist-util-is@6.0.0:
     resolution: {integrity: sha512-2qCTHimwdxLfz+YzdGfkqNlH0tLi9xjTnHddPmJwtIG9MGsdbutfTc4P+haPD7l7Cjxf/WZj+we5qfVPvvxfYw==}
@@ -854,6 +932,9 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+
+  zrender@5.6.0:
+    resolution: {integrity: sha512-uzgraf4njmmHAbEUxMJ8Oxg+P3fT04O+9p7gY+wJRVxo8Ge+KmYv0WJev945EH4wFuc4OY2NLXz46FZrWS9xJg==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -1087,6 +1168,8 @@ snapshots:
       '@floating-ui/utils': 0.2.8
 
   '@floating-ui/utils@0.2.8': {}
+
+  '@imengyu/vue3-context-menu@1.4.2': {}
 
   '@jridgewell/sourcemap-codec@1.5.0': {}
 
@@ -1348,7 +1431,20 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/integrations@11.1.0(async-validator@4.2.5)(focus-trap@7.6.0)(vue@3.5.7)':
+  '@vueuse/integrations@10.11.1(async-validator@4.2.5)(focus-trap@7.6.0)(sortablejs@1.15.2)(vue@3.5.7)':
+    dependencies:
+      '@vueuse/core': 10.11.1(vue@3.5.7)
+      '@vueuse/shared': 10.11.1(vue@3.5.7)
+      vue-demi: 0.14.10(vue@3.5.7)
+    optionalDependencies:
+      async-validator: 4.2.5
+      focus-trap: 7.6.0
+      sortablejs: 1.15.2
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+
+  '@vueuse/integrations@11.1.0(async-validator@4.2.5)(focus-trap@7.6.0)(sortablejs@1.15.2)(vue@3.5.7)':
     dependencies:
       '@vueuse/core': 11.1.0(vue@3.5.7)
       '@vueuse/shared': 11.1.0(vue@3.5.7)
@@ -1356,6 +1452,7 @@ snapshots:
     optionalDependencies:
       async-validator: 4.2.5
       focus-trap: 7.6.0
+      sortablejs: 1.15.2
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -1430,6 +1527,11 @@ snapshots:
   devlop@1.1.0:
     dependencies:
       dequal: 2.0.3
+
+  echarts@5.5.1:
+    dependencies:
+      tslib: 2.3.0
+      zrender: 5.6.0
 
   element-plus@2.8.3(vue@3.5.7):
     dependencies:
@@ -1588,6 +1690,8 @@ snapshots:
 
   property-information@6.5.0: {}
 
+  radash@12.1.0: {}
+
   regex@4.3.2: {}
 
   rfdc@1.4.1: {}
@@ -1625,6 +1729,8 @@ snapshots:
       '@shikijs/vscode-textmate': 9.2.2
       '@types/hast': 3.0.4
 
+  sortablejs@1.15.2: {}
+
   source-map-js@1.2.1: {}
 
   space-separated-tokens@2.0.2: {}
@@ -1645,6 +1751,8 @@ snapshots:
   to-fast-properties@2.0.0: {}
 
   trim-lines@3.0.1: {}
+
+  tslib@2.3.0: {}
 
   unist-util-is@6.0.0:
     dependencies:
@@ -1687,7 +1795,7 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  vitepress@1.3.4(@algolia/client-search@4.24.0)(async-validator@4.2.5)(postcss@8.4.47)(search-insights@2.17.2):
+  vitepress@1.3.4(@algolia/client-search@4.24.0)(async-validator@4.2.5)(postcss@8.4.47)(search-insights@2.17.2)(sortablejs@1.15.2):
     dependencies:
       '@docsearch/css': 3.6.1
       '@docsearch/js': 3.6.1(@algolia/client-search@4.24.0)(search-insights@2.17.2)
@@ -1698,7 +1806,7 @@ snapshots:
       '@vue/devtools-api': 7.4.5
       '@vue/shared': 3.5.7
       '@vueuse/core': 11.1.0(vue@3.5.7)
-      '@vueuse/integrations': 11.1.0(async-validator@4.2.5)(focus-trap@7.6.0)(vue@3.5.7)
+      '@vueuse/integrations': 11.1.0(async-validator@4.2.5)(focus-trap@7.6.0)(sortablejs@1.15.2)(vue@3.5.7)
       focus-trap: 7.6.0
       mark.js: 8.11.1
       minisearch: 7.1.0
@@ -1746,5 +1854,9 @@ snapshots:
       '@vue/runtime-dom': 3.5.7
       '@vue/server-renderer': 3.5.7(vue@3.5.7)
       '@vue/shared': 3.5.7
+
+  zrender@5.6.0:
+    dependencies:
+      tslib: 2.3.0
 
   zwitch@2.0.4: {}

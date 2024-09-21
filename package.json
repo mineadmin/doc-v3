@@ -13,6 +13,13 @@
     "@mineadmin/pro-table": "^1.0.6",
     "@mineadmin/search": "^1.0.13",
     "@mineadmin/table": "^1.0.19",
+    "@vueuse/core": "^10.11.0",
+    "@vueuse/integrations": "^10.11.0",
+    "sortablejs": "1.15.2",
+    "@imengyu/vue3-context-menu": "^1.4.2",
+    "echarts": "^5.5.1",
+    "lodash-es": "^4.17.21",
+    "radash": "^12.1.0",
     "element-plus": "^2.8.3"
   }
 }
