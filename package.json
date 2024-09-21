@@ -6,5 +6,13 @@
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview"
+  },
+  "dependencies": {
+    "@mineadmin/echarts": "^1.0.1",
+    "@mineadmin/form": "^1.0.17",
+    "@mineadmin/pro-table": "^1.0.6",
+    "@mineadmin/search": "^1.0.13",
+    "@mineadmin/table": "^1.0.19",
+    "element-plus": "^2.8.3"
   }
 }
