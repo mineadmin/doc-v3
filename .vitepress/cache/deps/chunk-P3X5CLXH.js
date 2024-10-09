@@ -2,7 +2,7 @@ import {
   init_vue_runtime_esm_bundler
 } from "./chunk-74HL2VAL.js";
 
-// node_modules/.pnpm/vitepress@1.3.4_@algolia+client-search@4.24.0_async-validator@4.2.5_postcss@8.4.47_search-insights@2.17.2/node_modules/vitepress/lib/vue-demi.mjs
+// node_modules/.pnpm/vitepress@1.3.4_@algolia+client-search@4.24.0_async-validator@4.2.5_postcss@8.4.47_search-ins_letpjc63g7tzdxmcwzxh3jpk7e/node_modules/vitepress/lib/vue-demi.mjs
 init_vue_runtime_esm_bundler();
 init_vue_runtime_esm_bundler();
 var isVue2 = false;
@@ -39,4 +39,4 @@ vitepress/lib/vue-demi.mjs:
    * @license MIT
    *)
 */
-//# sourceMappingURL=chunk-2U45QGTX.js.map
+//# sourceMappingURL=chunk-P3X5CLXH.js.map

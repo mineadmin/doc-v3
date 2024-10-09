@@ -15,23 +15,23 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1(element-plus@2.8.3(vue@3.5.7))
       '@mineadmin/form':
-        specifier: ^1.0.17
-        version: 1.0.17(element-plus@2.8.3(vue@3.5.7))
+        specifier: ^1.0.20
+        version: 1.0.20(element-plus@2.8.3(vue@3.5.7))
       '@mineadmin/pro-table':
-        specifier: ^1.0.6
-        version: 1.0.6(element-plus@2.8.3(vue@3.5.7))
-      '@mineadmin/search':
-        specifier: ^1.0.13
-        version: 1.0.13(element-plus@2.8.3(vue@3.5.7))
-      '@mineadmin/table':
         specifier: ^1.0.19
         version: 1.0.19(element-plus@2.8.3(vue@3.5.7))
+      '@mineadmin/search':
+        specifier: ^1.0.19
+        version: 1.0.19(element-plus@2.8.3(vue@3.5.7))
+      '@mineadmin/table':
+        specifier: ^1.0.22
+        version: 1.0.22(element-plus@2.8.3(vue@3.5.7))
       '@vueuse/core':
-        specifier: ^10.11.0
-        version: 10.11.1(vue@3.5.7)
+        specifier: ^11.1.0
+        version: 11.1.0(vue@3.5.7)
       '@vueuse/integrations':
-        specifier: ^10.11.0
-        version: 10.11.1(async-validator@4.2.5)(focus-trap@7.6.0)(sortablejs@1.15.2)(vue@3.5.7)
+        specifier: ^11.1.0
+        version: 11.1.0(async-validator@4.2.5)(focus-trap@7.6.0)(sortablejs@1.15.2)(vue@3.5.7)
       echarts:
         specifier: ^5.5.1
         version: 5.5.1
@@ -326,23 +326,23 @@ packages:
     peerDependencies:
       element-plus: ^2.0.0
 
-  '@mineadmin/form@1.0.17':
-    resolution: {integrity: sha512-NTnv1SQOV+P8iH7jB/IADWr240e4j3eafUsyF/sDcoktjAW1bFBUTz0oQM8W25gZAO5ry6iQDHL4c7ImqKZuyw==}
+  '@mineadmin/form@1.0.20':
+    resolution: {integrity: sha512-IqS/Sry65RSzgPxXTE/SRPi3BBb/NRXSTYmUS9y7nplIf2IWGD1US9k2q3oIcKZJxj9E209UrkUPAu6/438grg==}
     peerDependencies:
       element-plus: ^2.0.0
 
-  '@mineadmin/pro-table@1.0.6':
-    resolution: {integrity: sha512-XD1RUoZu0LcXeVIpmcohwKSq53AcNWJDDobKEn4xwWU4d46nGXIz1AnRGxjbIRR+O96u6STo5q3A2ny8GjE1Dw==}
+  '@mineadmin/pro-table@1.0.19':
+    resolution: {integrity: sha512-9QU5xISzT+c/+rrafHJb/5qtnvu2VteSWGwEGwR+wX3IuajSlaIq4iz72yOaN+GiYLOIJAf1Sq3RkV0BtfpFGw==}
     peerDependencies:
       element-plus: ^2.0.0
 
-  '@mineadmin/search@1.0.13':
-    resolution: {integrity: sha512-aMiwpgRBc6UzXhfWl6ZPhm8sQmjX9ugLE8EtJsUe2n9KPD3Z1AOCPZEjhDgAwg+rtyf8UCeC38OmeZAEQ7ikvw==}
+  '@mineadmin/search@1.0.19':
+    resolution: {integrity: sha512-3o1zQvkHJBG8RbyXoyo6DbrQ08iO0AsjnDkIt2d5q2ITAeidQK44jswGm2M3raPbMbY+CVSQCDy6d4h+JBK0eQ==}
     peerDependencies:
       element-plus: ^2.0.0
 
-  '@mineadmin/table@1.0.19':
-    resolution: {integrity: sha512-DtVyB+iA1/lAw9UzQFSCUYL38+M2PuUbyGil8HDujFBNiRfP5rjDfclxkmJEw7btoxL/kpmHM4as0b5MvljDHw==}
+  '@mineadmin/table@1.0.22':
+    resolution: {integrity: sha512-kfcHRJnHLJXc00TBruLlO86fFlaqL+Q3jqZRcThEOZY2PC3xXxIPYyc+LiQrAU6MBqNGjiL9xBx4WCQxZ8gXpQ==}
     peerDependencies:
       element-plus: ^2.0.0
 
@@ -536,47 +536,6 @@ packages:
 
   '@vueuse/core@9.13.0':
     resolution: {integrity: sha512-pujnclbeHWxxPRqXWmdkKV5OX4Wk4YeK7wusHqRwU0Q7EFusHoqNA/aPhB6KCh9hEqJkLAJo7bb0Lh9b+OIVzw==}
-
-  '@vueuse/integrations@10.11.1':
-    resolution: {integrity: sha512-Y5hCGBguN+vuVYTZmdd/IMXLOdfS60zAmDmFYc4BKBcMUPZH1n4tdyDECCPjXm0bNT3ZRUy1xzTLGaUje8Xyaw==}
-    peerDependencies:
-      async-validator: ^4
-      axios: ^1
-      change-case: ^4
-      drauu: ^0.3
-      focus-trap: ^7
-      fuse.js: ^6
-      idb-keyval: ^6
-      jwt-decode: ^3
-      nprogress: ^0.2
-      qrcode: ^1.5
-      sortablejs: ^1
-      universal-cookie: ^6
-    peerDependenciesMeta:
-      async-validator:
-        optional: true
-      axios:
-        optional: true
-      change-case:
-        optional: true
-      drauu:
-        optional: true
-      focus-trap:
-        optional: true
-      fuse.js:
-        optional: true
-      idb-keyval:
-        optional: true
-      jwt-decode:
-        optional: true
-      nprogress:
-        optional: true
-      qrcode:
-        optional: true
-      sortablejs:
-        optional: true
-      universal-cookie:
-        optional: true
 
   '@vueuse/integrations@11.1.0':
     resolution: {integrity: sha512-O2ZgrAGPy0qAjpoI2YR3egNgyEqwG85fxfwmA9BshRIGjV4G6yu6CfOPpMHAOoCD+UfsIl7Vb1bXJ6ifrHYDDA==}
@@ -1182,28 +1141,28 @@ snapshots:
       - '@vue/composition-api'
       - typescript
 
-  '@mineadmin/form@1.0.17(element-plus@2.8.3(vue@3.5.7))':
+  '@mineadmin/form@1.0.20(element-plus@2.8.3(vue@3.5.7))':
     dependencies:
       element-plus: 2.8.3(vue@3.5.7)
       vue: 3.5.7
     transitivePeerDependencies:
       - typescript
 
-  '@mineadmin/pro-table@1.0.6(element-plus@2.8.3(vue@3.5.7))':
+  '@mineadmin/pro-table@1.0.19(element-plus@2.8.3(vue@3.5.7))':
     dependencies:
       element-plus: 2.8.3(vue@3.5.7)
       vue: 3.5.7
     transitivePeerDependencies:
       - typescript
 
-  '@mineadmin/search@1.0.13(element-plus@2.8.3(vue@3.5.7))':
+  '@mineadmin/search@1.0.19(element-plus@2.8.3(vue@3.5.7))':
     dependencies:
       element-plus: 2.8.3(vue@3.5.7)
       vue: 3.5.7
     transitivePeerDependencies:
       - typescript
 
-  '@mineadmin/table@1.0.19(element-plus@2.8.3(vue@3.5.7))':
+  '@mineadmin/table@1.0.22(element-plus@2.8.3(vue@3.5.7))':
     dependencies:
       element-plus: 2.8.3(vue@3.5.7)
       vue: 3.5.7
@@ -1427,19 +1386,6 @@ snapshots:
       '@vueuse/metadata': 9.13.0
       '@vueuse/shared': 9.13.0(vue@3.5.7)
       vue-demi: 0.14.10(vue@3.5.7)
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-      - vue
-
-  '@vueuse/integrations@10.11.1(async-validator@4.2.5)(focus-trap@7.6.0)(sortablejs@1.15.2)(vue@3.5.7)':
-    dependencies:
-      '@vueuse/core': 10.11.1(vue@3.5.7)
-      '@vueuse/shared': 10.11.1(vue@3.5.7)
-      vue-demi: 0.14.10(vue@3.5.7)
-    optionalDependencies:
-      async-validator: 4.2.5
-      focus-trap: 7.6.0
-      sortablejs: 1.15.2
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue

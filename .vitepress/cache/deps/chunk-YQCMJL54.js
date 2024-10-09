@@ -1,6 +1,6 @@
 import {
   isVue2
-} from "./chunk-2U45QGTX.js";
+} from "./chunk-P3X5CLXH.js";
 import {
   Comment,
   Fragment,
@@ -69068,4 +69068,4 @@ normalize-wheel-es/dist/index.mjs:
    * @license Modernizr 3.0.0pre (Custom Build) | MIT
    *)
 */
-//# sourceMappingURL=chunk-RQF5J35G.js.map
+//# sourceMappingURL=chunk-YQCMJL54.js.map

@@ -1,7 +1,7 @@
 import {
   ElButton
-} from "./chunk-RQF5J35G.js";
-import "./chunk-2U45QGTX.js";
+} from "./chunk-YQCMJL54.js";
+import "./chunk-P3X5CLXH.js";
 import {
   Fragment,
   computed,
@@ -21,66 +21,67 @@ import {
 } from "./chunk-74HL2VAL.js";
 import "./chunk-V4OQ3NZ2.js";
 
-// node_modules/.pnpm/@mineadmin+search@1.0.13_element-plus@2.8.3_vue@3.5.7_/node_modules/@mineadmin/search/dist/index.es.js
+// node_modules/.pnpm/@mineadmin+search@1.0.19_element-plus@2.8.3_vue@3.5.7_/node_modules/@mineadmin/search/dist/index.es.js
 init_vue_runtime_esm_bundler();
-var Z = { name: "HeroiconsMagnifyingGlass" };
-var M = (r, o) => {
+var q = { name: "HeroiconsMagnifyingGlass" };
+var y = (r, l) => {
   const m = r.__vccOpts || r;
-  for (const [d, p] of o) m[d] = p;
+  for (const [d, v] of l) m[d] = v;
   return m;
 };
-var D = { xmlns: "http://www.w3.org/2000/svg", width: "1.2em", height: "1.2em", viewBox: "0 0 20 20" };
-var q = [createBaseVNode("path", { fill: "currentColor", fillRule: "evenodd", d: "M9 3.5a5.5 5.5 0 1 0 0 11a5.5 5.5 0 0 0 0-11M2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9", clipRule: "evenodd" }, null, -1)];
-var J = M(Z, [["render", function(r, o, m, d, p, c) {
-  return openBlock(), createElementBlock("svg", D, q);
+var J = { xmlns: "http://www.w3.org/2000/svg", width: "1.2em", height: "1.2em", viewBox: "0 0 20 20" };
+var Q = [createBaseVNode("path", { fill: "currentColor", fillRule: "evenodd", d: "M9 3.5a5.5 5.5 0 1 0 0 11a5.5 5.5 0 0 0 0-11M2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9", clipRule: "evenodd" }, null, -1)];
+var X = y(q, [["render", function(r, l, m, d, v, g) {
+  return openBlock(), createElementBlock("svg", J, Q);
 }]]);
-var Q = { name: "CarbonZoomReset" };
-var X = { xmlns: "http://www.w3.org/2000/svg", width: "1.2em", height: "1.2em", viewBox: "0 0 32 32" };
-var Y = [createBaseVNode("path", { fill: "currentColor", d: "M22.448 21A10.86 10.86 0 0 0 25 14A10.99 10.99 0 0 0 6 6.466V2H4v8h8V8H7.332a8.977 8.977 0 1 1-2.1 8h-2.04A11.01 11.01 0 0 0 14 25a10.86 10.86 0 0 0 7-2.552L28.586 30L30 28.586Z" }, null, -1)];
-var ee = M(Q, [["render", function(r, o, m, d, p, c) {
-  return openBlock(), createElementBlock("svg", X, Y);
+var Y = { name: "CarbonZoomReset" };
+var ee = { xmlns: "http://www.w3.org/2000/svg", width: "1.2em", height: "1.2em", viewBox: "0 0 32 32" };
+var ae = [createBaseVNode("path", { fill: "currentColor", d: "M22.448 21A10.86 10.86 0 0 0 25 14A10.99 10.99 0 0 0 6 6.466V2H4v8h8V8H7.332a8.977 8.977 0 1 1-2.1 8h-2.04A11.01 11.01 0 0 0 14 25a10.86 10.86 0 0 0 7-2.552L28.586 30L30 28.586Z" }, null, -1)];
+var te = y(Y, [["render", function(r, l, m, d, v, g) {
+  return openBlock(), createElementBlock("svg", ee, ae);
 }]]);
-var ae = { name: "MaterialSymbolsKeyboardArrowUp" };
-var te = { xmlns: "http://www.w3.org/2000/svg", width: "1.3em", height: "1.3em", viewBox: "0 0 24 24" };
-var oe = [createBaseVNode("path", { fill: "currentColor", d: "m12 10.8l-4.6 4.6L6 14l6-6l6 6l-1.4 1.4z" }, null, -1)];
-var le = M(ae, [["render", function(r, o, m, d, p, c) {
-  return openBlock(), createElementBlock("svg", te, oe);
+var le = { name: "MaterialSymbolsKeyboardArrowUp" };
+var oe = { xmlns: "http://www.w3.org/2000/svg", width: "1.3em", height: "1.3em", viewBox: "0 0 24 24" };
+var se = [createBaseVNode("path", { fill: "currentColor", d: "m12 10.8l-4.6 4.6L6 14l6-6l6 6l-1.4 1.4z" }, null, -1)];
+var ne = y(le, [["render", function(r, l, m, d, v, g) {
+  return openBlock(), createElementBlock("svg", oe, se);
 }]]);
-var se = { name: "MaterialSymbolsKeyboardArrowDown" };
-var ne = { xmlns: "http://www.w3.org/2000/svg", width: "1.3em", height: "1.3em", viewBox: "0 0 24 24" };
-var re = [createBaseVNode("path", { fill: "currentColor", d: "m12 15.4l-6-6L7.4 8l4.6 4.6L16.6 8L18 9.4z" }, null, -1)];
-var ue = M(se, [["render", function(r, o, m, d, p, c) {
-  return openBlock(), createElementBlock("svg", ne, re);
+var re = { name: "MaterialSymbolsKeyboardArrowDown" };
+var ue = { xmlns: "http://www.w3.org/2000/svg", width: "1.3em", height: "1.3em", viewBox: "0 0 24 24" };
+var ie = [createBaseVNode("path", { fill: "currentColor", d: "m12 15.4l-6-6L7.4 8l4.6 4.6L16.6 8L18 9.4z" }, null, -1)];
+var ce = y(re, [["render", function(r, l, m, d, v, g) {
+  return openBlock(), createElementBlock("svg", ue, ie);
 }]]);
-var E = defineComponent({ name: "MaSearch", props: { options: { type: Object, default: () => ({}) }, formOptions: { type: Object, default: () => ({}) }, searchItems: { type: Array, default: () => [] } }, emits: ["search", "reset", "fold"], setup(r, { slots: o, attrs: m, emit: d, expose: p }) {
-  const c = ref({}), P = inject("MaSearchOptions"), B = ref(false), S = `_${Math.floor(1e5 * Math.random() + 2e4 * Math.random() + 5e3 * Math.random())}`, C = getCurrentInstance(), l = ref(r.options), g = ref(r.formOptions), i = ref(r.searchItems), _ = () => {
+var P = defineComponent({ name: "MaSearch", props: { options: { type: Object, default: () => ({}) }, formOptions: { type: Object, default: () => ({}) }, searchItems: { type: Array, default: () => [] } }, emits: ["search", "reset", "fold"], setup(r, { slots: l, attrs: m, emit: d, expose: v }) {
+  var I;
+  const g = inject("MaSearchOptions"), B = ref(false), b = `_${Math.floor(1e5 * Math.random() + 2e4 * Math.random() + 5e3 * Math.random())}`, A = getCurrentInstance(), o = ref(r.options), w = ref(r.formOptions), i = ref(r.searchItems), c = ref(((I = o.value) == null ? void 0 : I.defaultValue) ?? {}), $ = () => {
     var e;
-    return (e = C == null ? void 0 : C.proxy) == null ? void 0 : e.$refs[`maFormSearchRef${S}`];
-  }, b = () => l.value.fold, A = () => {
-    l.value.fold = !l.value.fold;
-    const e = l.value.foldRows;
+    return (e = A == null ? void 0 : A.proxy) == null ? void 0 : e.$refs[`maFormSearchRef${b}`];
+  }, _ = () => o.value.fold, C = () => {
+    o.value.fold = !o.value.fold;
+    const e = o.value.foldRows;
     i.value.map((a, u) => {
-      u > (e ? e - 1 : 1) && a.prop !== "__MaSearchAction" && (a.show = l.value.fold, i.value[u] = a);
-    }), d("fold", l.value.fold);
-  }, j = () => {
+      u > (e ? e - 1 : 1) && a.prop !== "__MaSearchAction" && (a.show = o.value.fold, i.value[u] = a);
+    }), d("fold", o.value.fold);
+  }, z = () => {
     var n, t;
-    const { text: e } = l.value, a = b() ? ((n = e == null ? void 0 : e.isFoldBtn) == null ? void 0 : n.call(e)) ?? "折叠" : ((t = e == null ? void 0 : e.notFoldBtn) == null ? void 0 : t.call(e)) ?? "展开", u = b() ? createVNode(le, null, null) : createVNode(ue, null, null);
-    return createVNode(resolveComponent("el-link"), { type: "primary", underline: false, onClick: () => A() }, { default: () => a, icon: () => createVNode("div", { className: "fold-icon" }, [u]) });
-  }, V = () => {
+    const { text: e } = o.value, a = _() ? ((n = e == null ? void 0 : e.isFoldBtn) == null ? void 0 : n.call(e)) ?? "折叠" : ((t = e == null ? void 0 : e.notFoldBtn) == null ? void 0 : t.call(e)) ?? "展开", u = _() ? createVNode(ne, null, null) : createVNode(ce, null, null);
+    return createVNode(resolveComponent("el-link"), { type: "primary", underline: false, onClick: () => C() }, { default: () => a, icon: () => createVNode("div", { className: "fold-icon" }, [u]) });
+  }, H = () => {
     var a, u, n;
-    const { text: e } = l.value;
-    return createVNode("div", { className: "mineadmin-list-search-action" }, [((a = o.actions) == null ? void 0 : a.call(o)) ?? createVNode("div", { className: "search-actions" }, [createVNode("div", { className: "actions-first" }, [(u = o.beforeActions) == null ? void 0 : u.call(o)]), createVNode(ElButton, { type: "primary", plain: true, onClick: () => (delete c.value.__MaSearchAction, void d("search", c.value)) }, { default: () => {
+    const { text: e } = o.value;
+    return createVNode("div", { className: "mineadmin-list-search-action" }, [((a = l.actions) == null ? void 0 : a.call(l)) ?? createVNode("div", { className: "search-actions" }, [createVNode("div", { className: "actions-first" }, [(u = l.beforeActions) == null ? void 0 : u.call(l)]), createVNode(ElButton, { type: "primary", plain: true, onClick: () => (delete c.value.__MaSearchAction, void d("search", c.value)) }, { default: () => {
       var t;
       return ((t = e == null ? void 0 : e.searchBtn) == null ? void 0 : t.call(e)) ?? "搜索";
-    }, icon: () => createVNode(J, null, null) }), createVNode(ElButton, { onClick: () => {
-      var t, L;
-      return (L = (t = _()) == null ? void 0 : t.getElFormRef()) == null || L.resetFields(), delete c.value.__MaSearchAction, void d("reset", c.value);
+    }, icon: () => createVNode(X, null, null) }), createVNode(ElButton, { onClick: () => {
+      var t, N;
+      return (N = (t = $()) == null ? void 0 : t.getElFormRef()) == null || N.resetFields(), delete c.value.__MaSearchAction, void d("reset", c.value);
     } }, { default: () => {
       var t;
       return ((t = e == null ? void 0 : e.resetBtn) == null ? void 0 : t.call(e)) ?? "重置";
-    }, icon: () => createVNode(ee, null, null) }), createVNode("div", { className: "actions-end" }, [(n = o.afterActions) == null ? void 0 : n.call(o)])]), j()]);
-  }, v = computed(() => {
-    const { cols: e } = l.value;
+    }, icon: () => createVNode(te, null, null) }), createVNode("div", { className: "actions-end" }, [(n = l.afterActions) == null ? void 0 : n.call(l)])]), z()]);
+  }, p = computed(() => {
+    const { cols: e } = o.value;
     switch (f.value) {
       case "xl":
         return (e == null ? void 0 : e.xl) ?? 4;
@@ -94,20 +95,20 @@ var E = defineComponent({ name: "MaSearch", props: { options: { type: Object, de
         return (e == null ? void 0 : e.xs) ?? 1;
     }
   });
-  computed(() => ({ display: "grid", gridGap: "10px 0px", gridTemplateColumns: `repeat(${v.value}, minmax(0, 1fr))` }));
+  computed(() => ({ display: "grid", gridGap: "10px 0px", gridTemplateColumns: `repeat(${p.value}, minmax(0, 1fr))` }));
   const O = (e, a = 1, u = 0) => {
     let n = a, t = u;
-    return e ? { gridColumnStart: v.value - n - t + 1, gridColumnEnd: `span ${n + t}`, marginLeft: t !== 0 ? `calc(((100% + 10px) / ${n + t}) * ${t})` : "unset" } : { gridColumn: `span ${n + t > v.value ? v.value : n + t}/span ${n + t > v.value ? v.value : n + t}`, marginLeft: t !== 0 ? `calc(((100% + 10px) / ${n + t}) * ${t})` : "unset" };
-  }, F = () => {
-    i.value.map((a, u) => {
+    return e ? { gridColumnStart: p.value - n - t + 1, gridColumnEnd: `span ${n + t}`, marginLeft: t !== 0 ? `calc(((100% + 10px) / ${n + t}) * ${t})` : "unset" } : { gridColumn: `span ${n + t > p.value ? p.value : n + t}/span ${n + t > p.value ? p.value : n + t}`, marginLeft: t !== 0 ? `calc(((100% + 10px) / ${n + t}) * ${t})` : "unset" };
+  }, k = () => {
+    R("__MaSearchAction") || i.value.push({ prop: "__MaSearchAction", render: () => H() }), i.value.map((a, u) => {
       a.prop !== "__MaSearchAction" ? (a.renderProps === void 0 ? a.renderProps = { class: "mine-w-full" } : a.renderProps.class = "mine-w-full", a.cols === void 0 ? a.cols = { style: O(false, a == null ? void 0 : a.span, a == null ? void 0 : a.offset) } : a.cols.style = O(false, a == null ? void 0 : a.span, a == null ? void 0 : a.offset)) : (a.itemProps = { labelWidth: "0px" }, a.cols = { style: O(true, 1) }), i.value[u] = a;
-    }), g.value.flex = { style: { display: "grid" } };
-    const { show: e } = l.value;
-    return createVNode(Fragment, null, [(typeof e == "function" ? e : () => e !== false)() && createVNode("div", { className: `mineadmin-list-search-panel sp-${S}` }, [createVNode(resolveComponent("ma-form"), mergeProps({ ref: `maFormSearchRef${S}`, modelValue: c.value, "onUpdate:modelValue": (a) => c.value = a, options: g.value, items: i.value }, m), { default: o != null && o.default ? () => {
+    }), w.value.flex = { style: { display: "grid" } };
+    const { show: e } = o.value;
+    return createVNode(Fragment, null, [(typeof e == "function" ? e : () => e !== false)() && createVNode("div", { className: `mineadmin-list-search-panel sp-${b}` }, [createVNode(resolveComponent("ma-form"), mergeProps({ ref: `maFormSearchRef${b}`, modelValue: c.value, "onUpdate:modelValue": (a) => c.value = a, options: w.value, items: i.value }, m), { default: l != null && l.default ? () => {
       var a;
-      return (a = o.default) == null ? void 0 : a.call(o);
+      return (a = l.default) == null ? void 0 : a.call(l);
     } : null })])]);
-  }, f = ref(), $ = () => {
+  }, f = ref(), F = () => {
     let e = window.innerWidth;
     switch (!!e) {
       case e < 768:
@@ -128,24 +129,26 @@ var E = defineComponent({ name: "MaSearch", props: { options: { type: Object, de
   };
   onMounted(() => {
     var e;
-    B.value = true, l.value.fold = ((e = l.value) == null ? void 0 : e.fold) ?? false, A(), $(), i.value.push({ prop: "__MaSearchAction", render: () => V() }), window.addEventListener("resize", $);
+    B.value = true, o.value.fold = ((e = o.value) == null ? void 0 : e.fold) ?? false, C(), F(), window.addEventListener("resize", F);
   }), onBeforeUnmount(() => {
-    window.removeEventListener("resize", $);
+    window.removeEventListener("resize", F);
   });
-  const k = (e) => i.value = e;
-  return p({ getMaFormRef: _, foldToggle: A, getFold: b, setShowState: (e) => l.value.show = e, getShowState: () => {
-    var e;
-    return ((e = l.value) == null ? void 0 : e.show) ?? true;
-  }, setOptions: (e) => l.value = Object.assign(l.value, e), getOptions: () => l.value, setFormOptions: (e) => g.value = Object.assign(l.value, e), getFormOptions: () => g.value, setItems: k, getItems: () => i.value, appendItem: (e) => i.value.push(e), removeItem: (e) => k(i.value.filter((a) => a.prop !== e)), getItemByProp: (e) => {
+  const L = (e) => i.value = e, R = (e) => {
     var a;
     return ((a = i.value.filter((u) => u.prop === e)) == null ? void 0 : a[0]) ?? null;
-  } }), () => P.ssr ? B.value && F() : F();
+  };
+  return v({ getMaFormRef: $, setSearchForm: (e) => {
+    c.value = Object.assign(c.value, e);
+  }, getSearchForm: () => (delete c.value.__MaSearchAction, c.value), foldToggle: C, getFold: _, setShowState: (e) => o.value.show = e, getShowState: () => {
+    var e;
+    return ((e = o.value) == null ? void 0 : e.show) ?? true;
+  }, setOptions: (e) => o.value = Object.assign(o.value, e), getOptions: () => o.value, setFormOptions: (e) => w.value = Object.assign(o.value, e), getFormOptions: () => w.value, setItems: L, getItems: () => i.value, appendItem: (e) => i.value.push(e), removeItem: (e) => L(i.value.filter((a) => a.prop !== e)), getItemByProp: R }), () => g.ssr ? B.value && k() : k();
 } });
-var de = { install(r, o) {
-  r.component(E.name, E), r.provide("MaSearchOptions", o ?? { ssr: false });
+var ve = { install(r, l) {
+  r.component(P.name, P), r.provide("MaSearchOptions", l ?? { ssr: false });
 } };
 export {
-  de as MaSearch,
-  de as default
+  ve as MaSearch,
+  ve as default
 };
 //# sourceMappingURL=@mineadmin_search.js.map
