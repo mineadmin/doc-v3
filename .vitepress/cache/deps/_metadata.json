@@ -1,71 +1,92 @@
 {
-  "hash": "cbc45bb3",
-  "configHash": "0fad24a3",
+  "hash": "8fe614df",
+  "configHash": "3fbd1cc4",
   "lockfileHash": "a0454a70",
-  "browserHash": "efa08b1f",
+  "browserHash": "36f63393",
   "optimized": {
     "vue": {
       "src": "../../../node_modules/.pnpm/vue@3.5.7/node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "6f121966",
+      "fileHash": "b7b89c14",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../node_modules/.pnpm/@vue+devtools-api@7.4.5/node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "4938839e",
+      "fileHash": "991a5de3",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../node_modules/.pnpm/@vueuse+core@11.1.0_vue@3.5.7/node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "269e0530",
+      "fileHash": "2e860ef8",
+      "needsInterop": false
+    },
+    "vitepress > @vueuse/integrations/useFocusTrap": {
+      "src": "../../../node_modules/.pnpm/@vueuse+integrations@11.1.0_async-validator@4.2.5_focus-trap@7.6.0_sortablejs@1.15.2_vue@3.5.7/node_modules/@vueuse/integrations/useFocusTrap.mjs",
+      "file": "vitepress___@vueuse_integrations_useFocusTrap.js",
+      "fileHash": "09bcca91",
+      "needsInterop": false
+    },
+    "vitepress > mark.js/src/vanilla.js": {
+      "src": "../../../node_modules/.pnpm/mark.js@8.11.1/node_modules/mark.js/src/vanilla.js",
+      "file": "vitepress___mark__js_src_vanilla__js.js",
+      "fileHash": "cf8c321e",
+      "needsInterop": false
+    },
+    "vitepress > minisearch": {
+      "src": "../../../node_modules/.pnpm/minisearch@7.1.0/node_modules/minisearch/dist/es/index.js",
+      "file": "vitepress___minisearch.js",
+      "fileHash": "180f33e2",
       "needsInterop": false
     },
     "element-plus": {
       "src": "../../../node_modules/.pnpm/element-plus@2.8.3_vue@3.5.7/node_modules/element-plus/es/index.mjs",
       "file": "element-plus.js",
-      "fileHash": "e0eb11f2",
+      "fileHash": "ada622f5",
       "needsInterop": false
     },
     "element-plus/es/locale/lang/zh-cn": {
       "src": "../../../node_modules/.pnpm/element-plus@2.8.3_vue@3.5.7/node_modules/element-plus/es/locale/lang/zh-cn.mjs",
       "file": "element-plus_es_locale_lang_zh-cn.js",
-      "fileHash": "bd81d1d3",
+      "fileHash": "fd0e3447",
       "needsInterop": false
     },
     "@mineadmin/table": {
       "src": "../../../node_modules/.pnpm/@mineadmin+table@1.0.19_element-plus@2.8.3_vue@3.5.7_/node_modules/@mineadmin/table/dist/index.es.js",
       "file": "@mineadmin_table.js",
-      "fileHash": "69397d5e",
+      "fileHash": "216a6921",
       "needsInterop": false
     },
     "@mineadmin/form": {
       "src": "../../../node_modules/.pnpm/@mineadmin+form@1.0.17_element-plus@2.8.3_vue@3.5.7_/node_modules/@mineadmin/form/dist/index.es.js",
       "file": "@mineadmin_form.js",
-      "fileHash": "45e8ef1c",
+      "fileHash": "36637f8d",
       "needsInterop": false
     },
     "@mineadmin/search": {
       "src": "../../../node_modules/.pnpm/@mineadmin+search@1.0.13_element-plus@2.8.3_vue@3.5.7_/node_modules/@mineadmin/search/dist/index.es.js",
       "file": "@mineadmin_search.js",
-      "fileHash": "0b3db63c",
+      "fileHash": "cb35d35f",
       "needsInterop": false
     },
     "@mineadmin/pro-table": {
       "src": "../../../node_modules/.pnpm/@mineadmin+pro-table@1.0.6_element-plus@2.8.3_vue@3.5.7_/node_modules/@mineadmin/pro-table/dist/index.es.js",
       "file": "@mineadmin_pro-table.js",
-      "fileHash": "371ff0af",
+      "fileHash": "90865b54",
       "needsInterop": false
     },
     "@imengyu/vue3-context-menu": {
       "src": "../../../node_modules/.pnpm/@imengyu+vue3-context-menu@1.4.2/node_modules/@imengyu/vue3-context-menu/lib/vue3-context-menu.umd.js",
       "file": "@imengyu_vue3-context-menu.js",
-      "fileHash": "b22f0df7",
+      "fileHash": "8b00d0e3",
       "needsInterop": true
     }
   },
   "chunks": {
+    "chunk-7GFEMRRO": {
+      "file": "chunk-7GFEMRRO.js"
+    },
     "chunk-YQCMJL54": {
       "file": "chunk-YQCMJL54.js"
     },
