@@ -8,7 +8,7 @@
  * @Link   https://github.com/mineadmin
  */
 
-import DefaultTheme from "vitepress/theme";
+import DefaultTheme from 'vitepress/theme';
 
 import elementplus from "element-plus"
 // 导入elementplus组件-中文
@@ -23,6 +23,8 @@ import MaSearch from '@mineadmin/search'
 import MaProTable from '@mineadmin/pro-table'
 import ContextMenu from "@imengyu/vue3-context-menu"
 
+import './styles/var.css'
+
 // maTable样式
 import '@mineadmin/table/dist/style.css'
 // maSearch样式
@@ -34,7 +36,6 @@ import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 
 
 export default {
-  ...DefaultTheme,
   enhanceApp({ app , router }) {
     app.use(elementplus, {
       locale: zhCn,
@@ -49,5 +50,6 @@ export default {
         contextMenu: ContextMenu.showContextMenu,
       },
     })
-  }
+  },
+  extends: DefaultTheme,
 }
