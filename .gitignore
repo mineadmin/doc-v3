@@ -6,3 +6,5 @@ dist-ssr
 .eslintcache
 .stylelintcache
 .idea*
+/.vitepress/.temp/
+/.vitepress/cache/
