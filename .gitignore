@@ -8,3 +8,4 @@ dist-ssr
 .idea*
 /.vitepress/.temp/
 /.vitepress/cache/
+/.vitepress/cache/deps/
