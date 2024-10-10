@@ -13,7 +13,7 @@ export default defineConfig({
   locales:{
     root:{
       label:"中文",
-      lang:"zh"
+      lang:"zh",
     },
     en:{
       label:"English",
@@ -24,10 +24,14 @@ export default defineConfig({
         logo: '/images/logo.svg',
         nav: enGetNavs,
         sidebar:enGetSidebar,
+        outline:{
+          level:[1 ,4],
+        },
       }
     }
   },
   themeConfig: {
+    logo: '/images/logo.svg',
     outline:{
       level:[1,4],
     },
