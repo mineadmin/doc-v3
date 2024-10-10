@@ -22,6 +22,32 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/zh/guide/introduce/thank',
         }
       ]
+    },
+    {
+      text: '开始',
+      items: [
+        {
+          text: '快速安装',
+          link: '/zh/guide/start/fast-install',
+        },
+        {
+          text: '正式部署',
+          link: '/zh/guide/start/fast-install',
+        },
+      ]
+    },
+    {
+      text: '其他',
+      items: [
+        {
+          text: '版本计划',
+          link: '/zh/guide/other/version-plan',
+        },
+        {
+          text: '更新记录',
+          link: '/zh/guide/other/update-desc',
+        },
+      ]
     }
   ],
   '/zh/backend/':[
