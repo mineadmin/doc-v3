@@ -1,14 +1,15 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
+sidebar: false
 
 hero:
-  name: "MineAdmin Doc V3.0"
-  text: "MineAdmin use manual and develop document"
-  tagline: My great project tagline
-  images: 
-    src: https://unpkg.com/@vbenjs/static-source@0.1.7/source/logo-v1.webp
-    alt: VitePress
+  name: MineAdmin
+  text: Enterprise-grade back-office management system
+  tagline: Brand new version, ready to use right out of the box
+  image: 
+    src: https://doc.mineadmin.com/logo.svg
+    alt: MineAdmin
   actions:
     - theme: brand
       text: Markdown Examples

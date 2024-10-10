@@ -1,4 +1,5 @@
 export default {
-    title: "MineAdmin 开发文档",
-    description: "MineAdmin 使用手册及开发文档",
+    title: "MineAdmin",
+    description: "企业级后台管理系统",
+    tagline: "全新版本，开箱即用",
 }

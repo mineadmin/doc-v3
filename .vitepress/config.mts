@@ -21,13 +21,14 @@ export default defineConfig({
       link:"/en/index",
       ...enGetConfig,
       themeConfig:{
+        logo: '/images/logo.svg',
         nav: enGetNavs,
         sidebar:enGetSidebar
       }
     }
   },
   themeConfig: {
-    logo: '/images/logo.svg',
+
     search:{
       provider:"local",
       options:{
