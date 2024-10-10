@@ -24,7 +24,11 @@ const sidebar:DefaultTheme.Sidebar = {
             items:[
                 {
                     text: "目录结构",
-                    link: "/zh/backend/guide/structure/"
+                    link: "/zh/backend/guide/structure"
+                },
+                {
+                    text: "部署",
+                    link: "/zh/backend/guide/deployment"
                 }
             ]
         }

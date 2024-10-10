@@ -55,8 +55,8 @@
 使用方法参考 <a href="https://laravel.com/docs/11.x/eloquent">laravel 文档</a> 
 中国开发者参考 <a href="https://learnku.com/docs/laravel/10.x/eloquent/14888">国内译文</a>
 <br />
-注意，协程版 Eloquent ORM 由 <a href="https://github.com/hyperf/hyperf"> Hyperf 官方维护</a>
-在用法上会和 Laravel 官方有一定差异。如缺少一些特性
+注意，<a href="https://hyperf.wiki/3.1/#/en/">协程版 Eloquent ORM</a> 由 <a href="https://github.com/hyperf/hyperf"> Hyperf </a>维护
+在用法上会和 Laravel 官方有一定差异。如缺少一些最新版的功能特性
 <br />
 如需某个特性功能请往 <a href="https://github.com/hyperf/hyperf/issues"> Hyperf </a> 提交您的问题。或参与开发
 </el-alert>

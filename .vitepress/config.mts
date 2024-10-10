@@ -23,12 +23,17 @@ export default defineConfig({
       themeConfig:{
         logo: '/images/logo.svg',
         nav: enGetNavs,
-        sidebar:enGetSidebar
+        sidebar:enGetSidebar,
+        outline:{
+          level:[1,4],
+        },
       }
     }
   },
   themeConfig: {
-
+    outline:{
+      level:[1,4],
+    },
     search:{
       provider:"local",
       options:{
