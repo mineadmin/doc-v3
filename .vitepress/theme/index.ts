@@ -8,22 +8,22 @@
  * @Link   https://github.com/mineadmin
  */
 
-import DefaultTheme from 'vitepress/theme';
+import type { EnhanceAppContext, Theme } from 'vitepress'
+import DefaultTheme from 'vitepress/theme'
 
-import elementplus from "element-plus"
-// 导入elementplus组件-中文
-import zhCn from 'element-plus/es/locale/lang/zh-cn'
-// 导入elementplus组件-暗黑模式
-import "element-plus/dist/index.css";
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 
-import MaTable from '@mineadmin/table'
-import MaForm from '@mineadmin/form'
-import MaSearch from '@mineadmin/search'
-import MaProTable from '@mineadmin/pro-table'
-import ContextMenu from "@imengyu/vue3-context-menu"
+import Layout from './components/layout.vue'
 
-import './styles/var.css'
+import zh from 'element-plus/dist/locale/zh-cn.mjs'
+
+import ContextMenu from '@imengyu/vue3-context-menu'
+import MaTable from '@mineadmin/table/dist/index.umd.js'
+import MaSearch from '@mineadmin/search/dist/index.umd.js'
+import MaForm from '@mineadmin/form/dist/index.umd.js'
+import MaProTable from '@mineadmin/pro-table/dist/index.umd.js'
 
 // maTable样式
 import '@mineadmin/table/dist/style.css'
@@ -35,21 +35,24 @@ import '@mineadmin/pro-table/dist/style.css'
 import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 
 
+import './styles/var.css'
+
 export default {
-  enhanceApp({ app , router }) {
-    app.use(elementplus, {
-      locale: zhCn,
-    })
-    app.use(MaTable)
-    app.use(MaForm)
-    app.use(MaSearch)
+  enhanceApp(ctx: EnhanceAppContext) {
+    const { app } = ctx;
+    app.use(ElementPlus, { locale: zh })
+    app.use(MaTable, { ssr: true })
+    app.use(MaSearch, { ssr: true })
+    app.use(MaForm, { ssr: true })
     app.use(MaProTable, {
-      ssr: false,
+      ssr: true,
       provider: {
         app,
         contextMenu: ContextMenu.showContextMenu,
       },
+      app,
     })
   },
   extends: DefaultTheme,
-}
+  Layout,
+} satisfies Theme;
