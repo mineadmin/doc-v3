@@ -31,6 +31,15 @@ const sidebar:DefaultTheme.Sidebar = {
                     link: "/zh/backend/guide/deployment"
                 }
             ]
+        },
+        {
+            text:"核心架构",
+            items:[
+                {
+                    text: "生命周期",
+                    link: "/zh/backend/kernel/lifecycle"
+                }
+            ]
         }
     ]
 }
