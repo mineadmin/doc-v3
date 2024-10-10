@@ -49,7 +49,17 @@
 
 ### Model 目录
 
-包含所有 Eloquent 模型类。 Laravel 中包含的 Eloquent ORM 提供了一个漂亮、简单的 ActiveRecord 实现来处理你的数据库。 每个数据库表都有一个相应的「模型」，用于与该表进行交互。 模型允许你查询表中的数据，以及将新记录插入表中
+包含所有 Eloquent 模型类。 MineAdmin 中包含的 Eloquent ORM 提供了一个漂亮、简单的 ActiveRecord 实现来处理你的数据库。 每个数据库表都有一个相应的「模型」，用于与该表进行交互。 模型允许你查询表中的数据，以及将新记录插入表中
+
+<el-alert type="warning">
+使用方法参考 <a href="https://laravel.com/docs/11.x/eloquent">laravel 文档</a> 
+中国开发者参考 <a href="https://learnku.com/docs/laravel/10.x/eloquent/14888">国内译文</a>
+<br />
+注意，协程版 Eloquent ORM 由 <a href="https://github.com/hyperf/hyperf"> Hyperf 官方维护</a>
+在用法上会和 Laravel 官方有一定差异。如缺少一些特性
+<br />
+如需某个特性功能请往 <a href="https://github.com/hyperf/hyperf/issues"> Hyperf </a> 提交您的问题。或参与开发
+</el-alert>
 
 ### Service 目录
 
@@ -61,5 +71,5 @@
 
 ### Schema 目录
 
-包含所有的 Swagger Schema 类，严谨参与业务调度。此目录只是为了方便生成 Swagger OpenApi 文件
+包含所有的 Swagger Schema 类，理论上 <el-tag type="danger">严格禁止</el-tag> 参与业务调度。此目录只是为了方便生成 Swagger OpenApi 文件
 
