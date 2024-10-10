@@ -24,15 +24,15 @@ export default defineConfig({
         logo: '/images/logo.svg',
         nav: enGetNavs,
         sidebar:enGetSidebar,
-        outline:{
-          level:[1,4],
-        },
       }
     }
   },
   themeConfig: {
     outline:{
       level:[1,4],
+    },
+    editLink: {
+      pattern: 'https://github.com/mineadmin/doc-v3/edit/main/docs/:path'
     },
     search:{
       provider:"local",

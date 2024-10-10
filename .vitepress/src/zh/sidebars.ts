@@ -40,6 +40,19 @@ const sidebar:DefaultTheme.Sidebar = {
                     link: "/zh/backend/kernel/lifecycle"
                 }
             ]
+        },
+        {
+            text:"安全相关",
+            items:[
+                {
+                    text: "用户认证",
+                    link: "/zh/backend/security/passport"
+                },
+                {
+                    text: "用户授权(RBAC)",
+                    link: "/zh/backend/security/access"
+                }
+            ]
         }
     ]
 }
