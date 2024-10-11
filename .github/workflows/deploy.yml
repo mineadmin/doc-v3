@@ -48,7 +48,7 @@ jobs:
       - name: Build with VitePress
         run: |
           pnpm run build
-          scp -i /tmp/test.pem -P ~/.ssh/id_rsa -r .vitepress/dist/ ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }}:/opt/www/doc-v3/
+          scp -i ~/.ssh/id_rsa -P ${{ secrets.SERVER_PORT }} -r .vitepress/dist/ ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }}:/opt/www/doc-v3/
             if [ $? -ne 0 ]; then
               echo "Upload failed"
               exit 1
