@@ -10,8 +10,8 @@ MineAdmin不管下载插件应用、更新插件应用还是开发插件应用�
 
 获取步骤：
 
-- 登录 [MineAdmin](/login) 官网
-- 进入 `个人中心`  的 [_设置_](/member/setting) 页面
+- 登录 [MineAdmin](https://www.mineadmin.com/login) 官网
+- 进入 `个人中心`  的 [_设置_](https://www.mineadmin.com/member/setting) 页面
 - 点击查看`我的AccessToken`
 
 ::: danger

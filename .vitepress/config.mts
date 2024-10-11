@@ -5,16 +5,10 @@ import enGetConfig from "./src/en/config";
 import zhGetConfig from "./src/zh/config";
 import zhGetSidebar from "./src/zh/sidebars";
 import enGetSidebar from "./src/en/sidebars";
-import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  ignoreDeadLinks: false,
-  vite: {
-    plugins: [
-      groupIconVitePlugin()
-    ],
-  },
+  ignoreDeadLinks: true,
   ...zhGetConfig,
   locales:{
     root:{
@@ -102,9 +96,4 @@ export default defineConfig({
   },
   srcDir: 'docs',
   lastUpdated: true,
-  markdown: {
-    config(md) {
-      md.use(groupIconMdPlugin)
-    },
-  },
 })
