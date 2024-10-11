@@ -9,6 +9,7 @@ import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-i
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  ignoreDeadLinks: false,
   vite: {
     plugins: [
       groupIconVitePlugin()
