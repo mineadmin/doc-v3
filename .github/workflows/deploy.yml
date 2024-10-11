@@ -20,38 +20,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
         with:
-          fetch-depth: 0
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9.11.0
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: pnpm
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-      - name: Install dependencies
-        run: pnpm install
-      - name: Install Package
-        run: |
-          sudo apt-get install openssh-client -y
-      - name: Build pem
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-        run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-      - name: Build with VitePress
-        run: |
-          pnpm run build
-          scp -i ~/.ssh/id_rsa -P ${{ secrets.SERVER_PORT }} -r .vitepress/dist/ ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }}:/opt/www/doc-v3/
-          if [ $? -ne 0 ]; then
-            echo "Upload failed"
-            exit 1
-          fi
-          echo "Upload successful"
+          host: ${{ secrets.SERVER_HOST }}
+          port: ${{ secrets.SERVER_PORT }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /opt/www
+            sh deploy-doc-v3.sh
