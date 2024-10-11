@@ -36,10 +36,7 @@ jobs:
         uses: actions/configure-pages@v3
       - name: Install dependencies
         run: pnpm install
-      - name: Build with VitePress
-        run: |
-          pnpm run build
-      - name: Deploy to server
+      - name: Build And Deploy to server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -47,6 +44,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
+            pnpm run build
             if [! -d "/opt/www/doc-v3" ]; then
               mkdir -p /opt/www/doc-v3
             fi
