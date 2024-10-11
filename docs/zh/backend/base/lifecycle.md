@@ -29,4 +29,4 @@ MineAdmin 是构建运行在 [PHP](https://php.net) + ([Swoole](https://swoole.c
 
 :::
 
-![时序图](./token.png)
+![时序图](token.png)

@@ -204,12 +204,19 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text:"核心架构",
+      text:"进阶",
       items:[
         {
           text: "生命周期",
-          link: "/zh/backend/kernel/lifecycle"
-        }
+          link: "/zh/backend/base/lifecycle"
+        },
+        { text: "路由与API文档",link: "/zh/backend/base/router"},
+        { text: "错误处理",link: "/zh/backend/base/error-handler"},
+        {text: "日志",link: "/zh/backend/base/logger"},
+        {text: "事件",link: "/zh/backend/base/event-handler"},
+        {text: "文件上传",link: "/zh/backend/base/upload"},
+        {text: "JWT",link: "/zh/backend/base/jwt"},
+        {text: "多语言",link: "/zh/backend/base/lang"},
       ]
     },
     {
