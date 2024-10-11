@@ -225,6 +225,37 @@ const sidebar:DefaultTheme.Sidebar = {
         }
       ]
     }
+  ],
+  '/zh/plugin/':[
+    {
+      text:"快速开始",
+      items:[
+        {
+          text:"准备工作",
+          link:"/zh/plugin"
+        },
+        {
+          text:"插件命令",
+          link:"/zh/plugin/command"
+        },
+        {
+          text:"创建应用",
+          link:"/zh/plugin/create"
+        },
+        {
+          text:"插件目录结构",
+          link:"/zh/plugin/structure"
+        },
+        {
+          text:"mine.json 说明及示例",
+          link:"/zh/plugin/mineJson"
+        },
+        {
+          text:"ConfigProvider 说明",
+          link:"/zh/plugin/configProvider"
+        }
+      ]
+    }
   ]
 }
 
