@@ -95,5 +95,5 @@ export default defineConfig({
     }
   },
   srcDir: 'docs',
-  lastUpdated: true,
+  lastUpdated: true
 })

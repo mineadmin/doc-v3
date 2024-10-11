@@ -24,6 +24,8 @@ import MaTable from '@mineadmin/table/dist/index.umd.js'
 import MaSearch from '@mineadmin/search/dist/index.umd.js'
 import MaForm from '@mineadmin/form/dist/index.umd.js'
 import MaProTable from '@mineadmin/pro-table/dist/index.umd.js'
+import giscusTalk from 'vitepress-plugin-comment-with-giscus';
+import { useData, useRoute } from 'vitepress';
 
 // maTable样式
 import '@mineadmin/table/dist/style.css'
@@ -43,6 +45,25 @@ import './styles/vp-code-group.css'
 
 
 export default {
+    setup(){
+        const { frontmatter } = useData();
+        const route = useRoute();
+        // giscus配置
+        giscusTalk({
+              repo: 'mineadmin/mineadmin', //仓库
+              repoId: 'MDEwOlJlcG9zaXRvcnk0MjQ2MDA5', //仓库ID
+              category: 'Q&A', // 讨论分类
+              categoryId: 'DIC_kwDOAEDJ-c4CR7vK', //讨论分类ID
+              mapping: 'pathname',
+              inputPosition: 'bottom',
+              lang: 'zh-CN',
+            },
+            {
+              frontmatter, route
+            },
+            true
+        );
+    },
   enhanceApp(ctx: EnhanceAppContext) {
     const { app } = ctx;
     app.use(ElementPlus, { locale: zh })
