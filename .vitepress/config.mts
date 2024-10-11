@@ -7,9 +7,6 @@ import zhGetSidebar from "./src/zh/sidebars";
 import enGetSidebar from "./src/en/sidebars";
 import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 
-
-import giteeSvg from '../docs/public/images/gitee.svg'
-
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   vite: {
