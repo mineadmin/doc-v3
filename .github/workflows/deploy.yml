@@ -39,7 +39,7 @@ jobs:
       - name: Install Package
         run: |
           sudo apt-get install openssh-client -y
-          scp 
+          scp
       - name: Build with VitePress
         run: |
           pnpm run build
