@@ -39,18 +39,15 @@ jobs:
       - name: Build with VitePress
         run: |
           pnpm run build
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
         with:
-          path: docs/.vitepress/dist
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
-    name: Deploy
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          host: ${{ secrets.SERVER_HOST }}
+          port: ${{ secrets.SERVER_PORT }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            if [! -d "/opt/www/doc-v3" ]; then
+              mkdir -p /opt/www/doc-v3
+            fi
+            rsync -avz --delete.vitepress/dist/ /opt/www/doc-v3/
