@@ -40,7 +40,7 @@ jobs:
         run: |
           pnpm run build
           echo ${{ secrets.SSH_KEY }} > /tmp/test.pem
-          scp -i /tmp/test.pem -P ${{ secrets.SERVER_PORT }} -r.vitepress/dist/ ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }}:/opt/www/doc-v3/
+          scp -i /tmp/test.pem -P ${{ secrets.SERVER_PORT }} -r .vitepress/dist/ ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }}:/opt/www/doc-v3/
             if [ $? -ne 0 ]; then
               echo "Upload failed"
               exit 1
