@@ -5,11 +5,18 @@ import enGetConfig from "./src/en/config";
 import zhGetConfig from "./src/zh/config";
 import zhGetSidebar from "./src/zh/sidebars";
 import enGetSidebar from "./src/en/sidebars";
+import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
+
 
 import giteeSvg from '../docs/public/images/gitee.svg'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  vite: {
+    plugins: [
+      groupIconVitePlugin()
+    ],
+  },
   ...zhGetConfig,
   locales:{
     root:{
@@ -97,4 +104,9 @@ export default defineConfig({
   },
   srcDir: 'docs',
   lastUpdated: true,
+  markdown: {
+    config(md) {
+      md.use(groupIconMdPlugin)
+    },
+  },
 })
