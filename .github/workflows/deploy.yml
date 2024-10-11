@@ -36,16 +36,13 @@ jobs:
         uses: actions/configure-pages@v3
       - name: Install dependencies
         run: pnpm install
-      - name: Build And Deploy to server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          port: ${{ secrets.SERVER_PORT }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            pnpm run build
-            if [! -d "/opt/www/doc-v3" ]; then
-              mkdir -p /opt/www/doc-v3
+      - name: Build with VitePress
+        run: |
+          pnpm run build
+          echo ${{ secrets.SSH_KEY }} > /tmp/test.pem
+          scp -i /tmp/test.pem -P ${{ secrets.SERVER_PORT }} -r.vitepress/dist/ ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }}:/opt/www/doc-v3/
+            if [ $? -ne 0 ]; then
+              echo "Upload failed"
+              exit 1
             fi
-            rsync -avz --delete .vitepress/dist/ /opt/www/doc-v3/
+            echo "Upload successful"
