@@ -36,11 +36,14 @@ jobs:
         uses: actions/configure-pages@v3
       - name: Install dependencies
         run: pnpm install
+      - name: Install Package
+        run: |
+          sudo apt-get install openssh-client -y
+          scp 
       - name: Build with VitePress
         run: |
           pnpm run build
           echo ${{ secrets.SSH_KEY }} > /tmp/test.pem
-          sudo apt-get install openssh-client -y
           scp -i /tmp/test.pem -P ${{ secrets.SERVER_PORT }} -r .vitepress/dist/ ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }}:/opt/www/doc-v3/
             if [ $? -ne 0 ]; then
               echo "Upload failed"
