@@ -229,30 +229,66 @@ const sidebar:DefaultTheme.Sidebar = {
   '/zh/plugin/':[
     {
       text:"快速开始",
+      items:
+          [
+            {
+              text:"准备工作",
+              link:"/zh/plugin"
+            },
+            {
+              text:"插件命令",
+              link:"/zh/plugin/command"
+            },
+            {
+              text:"创建应用",
+              link:"/zh/plugin/create"
+            },
+            {
+              text:"插件目录结构",
+              link:"/zh/plugin/structure"
+            },
+            {
+              text:"mine.json 说明及示例",
+              link:"/zh/plugin/mineJson"
+            },
+            {
+            text:"ConfigProvider 说明",
+            link:"/zh/plugin/configProvider"
+          }
+          ]
+    },
+    {
+      text:"后端开发",
       items:[
         {
-          text:"准备工作",
-          link:"/zh/plugin"
+          text: "数据库迁移",
+          link: "/zh/plugin/backend/migrate"
         },
         {
-          text:"插件命令",
-          link:"/zh/plugin/command"
+          text: "单元测试",
+          link: "/zh/plugin/backend/unit-test"
+        },
+      ]
+    },
+    {
+      text:"前端开发",
+      items:[
+        {
+          text: "前端开发规范",
+          link: "/zh/plugin/front/develop"
+        }
+      ]
+    },
+    {
+      text:"应用上架",
+      items:[
+        {
+          text: "应用发布",
+          link: "/zh/plugin/develop/publish"
         },
         {
-          text:"创建应用",
-          link:"/zh/plugin/create"
-        },
-        {
-          text:"插件目录结构",
-          link:"/zh/plugin/structure"
-        },
-        {
-          text:"mine.json 说明及示例",
-          link:"/zh/plugin/mineJson"
-        },
-        {
-          text:"ConfigProvider 说明",
-          link:"/zh/plugin/configProvider"
+          text: "注意事项",
+          link: "/zh/plugin/develop/question"
         }
       ]
     }
