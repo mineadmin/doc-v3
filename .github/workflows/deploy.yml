@@ -28,5 +28,6 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
+            source ~/.bashrc
             cd /opt/www
             sh deploy-doc-v3.sh
