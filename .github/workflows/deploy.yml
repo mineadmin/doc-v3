@@ -50,4 +50,4 @@ jobs:
             if [! -d "/opt/www/doc-v3" ]; then
               mkdir -p /opt/www/doc-v3
             fi
-            rsync -avz --delete.vitepress/dist/ /opt/www/doc-v3/
+            rsync -avz --delete .vitepress/dist/ /opt/www/doc-v3/
