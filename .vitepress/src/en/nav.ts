@@ -8,8 +8,8 @@ const nav:DefaultTheme.NavItem[] = [
     {
         text: 'Old Version Documentation',
         items: [
-            { text: '1.x ~ 2.x Development Documentation', link: 'https://doc.mineadmin/v1-2/index.html' },
-            { text: '0.x Development Documentation', link: '/v0/' }
+            { text: '1.x ~ 2.x Development Documentation', link: 'https://doc.mineadmin.com/v1-2/' },
+            { text: '0.x Development Documentation', link: 'https://doc.mineadmin.com/v1-2/' }
         ]
     }
 ]

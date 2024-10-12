@@ -9,8 +9,8 @@ const nav:DefaultTheme.NavItem[] = [
     {
         text: '老版本文档',
         items: [
-            { text: '1.x ~ 2.x开发文档', link: 'https://doc.mineadmin/v1-2/' },
-            { text: '0.x开发文档', link: 'https://doc.mineadmin/v0/' }
+            { text: '1.x ~ 2.x开发文档', link: 'https://doc.mineadmin.com/v1-2/' },
+            { text: '0.x开发文档', link: 'https://doc.mineadmin.com/v0/' }
         ]
     },
 ]
