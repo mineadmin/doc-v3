@@ -26,10 +26,6 @@ const sidebar:DefaultTheme.Sidebar = {
           text: '快速安装',
           link: '/zh/guide/start/fast-install',
         },
-        {
-          text: '正式部署',
-          link: '/zh/guide/start/fast-install',
-        },
       ]
     },
     {
