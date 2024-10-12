@@ -18,9 +18,11 @@
     "element-plus": "^2.8.3",
     "lodash-es": "^4.17.21",
     "radash": "^12.1.0",
-    "sortablejs": "1.15.2"
+    "sortablejs": "1.15.2",
+    "vitepress-plugin-announcement": "^0.1.2"
   },
   "devDependencies": {
+    "simple-git": "^3.27.0",
     "vitepress": "^1.4.0",
     "vitepress-plugin-comment-with-giscus": "^1.1.15",
     "vitepress-plugin-group-icons": "^1.2.4"

@@ -14,10 +14,6 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/zh/guide/introduce/declaration',
         },
         {
-          text: '版权说明',
-          link: '/zh/guide/introduce/copyright',
-        },
-        {
           text: '鸣谢',
           link: '/zh/guide/introduce/thank',
         }

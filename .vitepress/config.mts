@@ -5,9 +5,21 @@ import enGetConfig from "./src/en/config";
 import zhGetConfig from "./src/zh/config";
 import zhGetSidebar from "./src/zh/sidebars";
 import enGetSidebar from "./src/en/sidebars";
+import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
+
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  vite:{
+    plugins:[
+      AnnouncementPlugin({
+        title:"MineAdmin 交流群",
+        body:[
+          {type:"text",content:"官方QQ群: 150105478"}
+        ]
+      })
+    ]
+  },
   ignoreDeadLinks: true,
   ...zhGetConfig,
   locales:{
