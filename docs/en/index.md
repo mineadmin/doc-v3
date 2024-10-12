@@ -9,7 +9,7 @@ hero:
   tagline: Brand new version, ready to use right out of the box
   image:
     src: https://s21.ax1x.com/2024/10/10/pAJHfgJ.jpg
-    style: 'max-width: 520px !important; box-shadow: 2px 2px 8px #555; border-radius: 5px; '
+    style: 'max-width: 520px !important; box-shadow: 2px 2px 8px #555; border-radius: 5px;'
     alt: MineAdmin
   actions:
     - theme: brand
