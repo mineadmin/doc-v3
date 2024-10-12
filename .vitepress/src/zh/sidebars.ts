@@ -40,13 +40,17 @@ const sidebar:DefaultTheme.Sidebar = {
       text: '其他',
       items: [
         {
-          text: '版本计划',
-          link: '/zh/guide/other/version-plan',
+          text:"发行说明",
+          link:'/zh/guide/releases'
         },
         {
-          text: '更新记录',
-          link: '/zh/guide/other/update-desc',
+          text:"升级指南",
+          link:"/zh/guide/upgrade"
         },
+        {
+          text:"贡献指南",
+          link:"/zh/guide/contributions"
+        }
       ]
     }
   ],
@@ -173,23 +177,6 @@ const sidebar:DefaultTheme.Sidebar = {
     }
   ],
   '/zh/backend/':[
-    {
-      text:'前言',
-      items:[
-        {
-          text:"发行说明",
-          link:'/zh/backend/releases'
-        },
-        {
-          text:"升级指南",
-          link:"/zh/backend/upgrade"
-        },
-        {
-          text:"贡献指南",
-          link:"/zh/backend/contributions"
-        }
-      ]
-    },
     {
       text:"入门指南",
       items:[

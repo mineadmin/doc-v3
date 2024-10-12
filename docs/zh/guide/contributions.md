@@ -7,18 +7,15 @@
 ## 仓库地址
 > 请不要贡献到 Gitee 仓库，Gitee提交的代码会被Github仓库覆盖、而且贡献人列表也不会出现您的名字
 
-目前源代码仓库托管在 Github,码云仓库中的前后端源码作为镜像仓库。每天会自动同步代码。不支持任何形式的代码提交。
-但是 [文档](https://doc.mineadmin.com/) 是在[码云仓库](https://gitee.com/mineadmin/mineadmin-doc)上维护的。
-
 ### Github
 
 * [MineAdmin 后端源代码](https://github.com/mineadmin/mineadmin)
 * [MineAdmin 前端源代码](https://github.com/mineadmin/mineadmin-vue)
 * [MineAdmin 内核组件](https://github.com/mineadmin/components)
+* [MineAdmin 文档](https://github.com/mineadmin/doc-v3)
 
 ### Gitee
 
-* [MineAdmin 文档](https://gitee.com/mineadmin/doc-v3)
 * [MineAdmin 后端源代码](https://gitee.com/mineadmin/mineadmin)
 * [MineAdmin 前端源代码](https://gitee.com/mineadmin/mineadmin-vue)
 
@@ -32,7 +29,7 @@
 * 关注自己提交 Pull Request 的进度和状态，以推动您的 Pull Request 尽快合入主仓库；
 * 对其他人提交的 Pull Request 进行 Code Review，并给出您的建议和看法。
 * 根据他人或自己的需求，研发独立的功能组件；
-* 完善[文档](https://gitee.com/mineadmin/mineadmin-doc)，提供更好的使用说明。
+* 完善[文档](https://gitee.com/mineadmin/doc-v3)，提供更好的使用说明。
 
 ###  Pull Request 指南
 
