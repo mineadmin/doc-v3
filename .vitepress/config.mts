@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitepress'
+import { defineConfigWithTheme  } from 'vitepress'
 import enGetNavs from "./src/en/nav";
 import zhGetNavs from "./src/zh/nav";
 import enGetConfig from "./src/en/config";
@@ -9,7 +9,7 @@ import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
 
 
 // https://vitepress.dev/reference/site-config
-export default defineConfig({
+export default defineConfigWithTheme ({
   vite:{
     plugins:[
       AnnouncementPlugin({
@@ -21,11 +21,11 @@ export default defineConfig({
     ]
   },
   ignoreDeadLinks: true,
-  ...zhGetConfig,
   locales:{
     root:{
       label:"中文",
       lang:"zh",
+      ...zhGetConfig,
     },
     en:{
       label:"English",
@@ -45,11 +45,21 @@ export default defineConfig({
   themeConfig: {
     logo: '/images/logo.svg',
     outline:{
-      level:[1,4],
+      label: '页面导航',
     },
     editLink: {
-      pattern: 'https://github.com/mineadmin/doc-v3/edit/main/docs/:path'
+      pattern: 'https://github.com/mineadmin/doc-v3/edit/main/docs/:path',
+      text: '在Github上编辑此页面',
     },
+    lastUpdated: {
+      text: '最后更新于',
+    },
+    docFooter: {
+      next: '下一页',
+      prev: '上一页',
+    },
+    sidebarMenuLabel: '菜单',
+    returnToTopLabel: '回到顶部',
     search:{
       provider:"local",
       options:{
@@ -107,5 +117,4 @@ export default defineConfig({
     }
   },
   srcDir: 'docs',
-  lastUpdated: true
 })

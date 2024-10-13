@@ -13,13 +13,6 @@
         backdrop-filter: blur(20px);
     }
 
-    /* Feature透明 */
-    .VPFeature {
-        border: none;
-        box-shadow: 0 10px 30px 0 rgb(0 0 0 / 15%);
-        background-color: transparent;
-    }
-
     /* 文档页侧边栏顶部透明 */
     .curtain {
         /*background-color: rgba(255, 255, 255, .55);*/
@@ -32,6 +25,12 @@
         .VPNavBar:not(.home.top) .content-body {
             background-color: rgba(255, 255, 255, .55);
             backdrop-filter: blur(10px);
+        }
+    }
+
+    @media (min-width < 768px) {
+        .DocSearch-Button {
+            width: 30px !important; height: 30px !important;
         }
     }
 
@@ -53,18 +52,17 @@ html.dark {
         background-color: rgba(0, 0, 0, .55);
     }
 
-    /* Feature透明 */
-    .VPFeature {
-        border: none;
-        box-shadow: 0 10px 30px 0 rgb(255 255 255 / 15%);
-        background-color: transparent;
-    }
-
     @media (min-width < 960px) {
 
         /* 文档页导航中间透明 */
         .VPNavBar:not(.home.top) .content-body {
             background-color: rgba(0, 0, 0, .55);
+        }
+    }
+
+    @media (min-width < 768px) {
+        .DocSearch-Button {
+            width: 30px !important; height: 30px !important;
         }
     }
 
