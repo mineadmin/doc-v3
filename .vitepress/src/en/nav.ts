@@ -5,13 +5,7 @@ const nav:DefaultTheme.NavItem[] = [
     { text: 'Frontend', link: '/en/front' },
     { text: 'Backend', link: '/en/backend' },
     { text: 'Frequently Asked Questions', link: '/en/faq' },
-    {
-        text: 'Old Version Documentation',
-        items: [
-            { text: '1.x ~ 2.x Development Documentation', link: 'https://doc.mineadmin.com/v1-2/' },
-            { text: '0.x Development Documentation', link: 'https://doc.mineadmin.com/v1-2/' }
-        ]
-    }
+    { text: 'Old Version Documentation', link: 'https://docv2.mineadmin.com' },
 ]
 
 export default nav

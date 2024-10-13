@@ -40,5 +40,36 @@
         background-color: rgba(255, 255, 255, .55);
         backdrop-filter: blur(20px);
     }
+}
 
+html.dark {
+    /* 首页下滑后导航透明 */
+    .VPNavBar:not(.has-sidebar):not(.home.top) {
+        background-color: rgba(0, 0, 0, .75);
+    }
+
+    /* 搜索框透明 */
+    .DocSearch-Button {
+        background-color: rgba(0, 0, 0, .55);
+    }
+
+    /* Feature透明 */
+    .VPFeature {
+        border: none;
+        box-shadow: 0 10px 30px 0 rgb(255 255 255 / 15%);
+        background-color: transparent;
+    }
+
+    @media (min-width < 960px) {
+
+        /* 文档页导航中间透明 */
+        .VPNavBar:not(.home.top) .content-body {
+            background-color: rgba(0, 0, 0, .55);
+        }
+    }
+
+    /* 移动端大纲栏透明 */
+    .VPLocalNav {
+        background-color: rgba(0, 0, 0, .55);
+    }
 }
