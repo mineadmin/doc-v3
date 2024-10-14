@@ -37,7 +37,7 @@ export default defineConfigWithTheme ({
         nav: enGetNavs,
         sidebar:enGetSidebar,
         outline:{
-          level:[1 ,4],
+          level:[2 ,4],
         },
       }
     }
@@ -46,6 +46,7 @@ export default defineConfigWithTheme ({
     logo: '/images/logo.svg',
     outline:{
       label: '页面导航',
+      level: [2, 4],
     },
     editLink: {
       pattern: 'https://github.com/mineadmin/doc-v3/edit/main/docs/:path',
