@@ -1,0 +1,77 @@
+name: Deploy VitePress site to Docker
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v3
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build with VitePress
+        run: pnpm build
+      - name: Push Image
+        env:
+            DOCKER_USERNAME: ${{ secrets.CODING_USER }}
+            DOCKER_PASSWORD: ${{ secrets.CODING_PASS }}
+            DOCKER_REGISTRY: ${{ secrets.CODING_SERVER }}
+            SHA: ${{ github.sha }}
+        run: |
+          docker build . -t doc-v3:latest
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY
+          docker tag doc-v3:latest $DOCKER_REGISTRY/mineadmin/mineadmin/doc-v3:$SHA
+          docker push $DOCKER_REGISTRY/mineadmin/mineadmin/doc-v3:$SHA
+      - name: Build Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          port: ${{ secrets.SERVER_PORT }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            docker pul
+
+
+  # 部署工作
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: Build Server
+        env:
+          sha: ${{ github.sha }}
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          port: ${{ secrets.SERVER_PORT }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            docker pull ${{ secrets.CODING_SERVER }}/mineadmin/mineadmin/doc-v3:$sha
+            docker stop doc-v3 || true
+            docker rm doc-v3 || true
+            docker run -d --name doc-v3 -p 55500:80 ${{ secrets.CODING_SERVER }}/mineadmin/mineadmin/doc-v3:$sha
