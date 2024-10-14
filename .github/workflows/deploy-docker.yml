@@ -66,8 +66,8 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            export CONDING_SERVER=$DOCKER_REGISTRY
+            export CODING_SERVER=$DOCKER_REGISTRY
             export SHA=$SHA
-            export CONDING_USER=$DOCKER_USERNAME
-            export CONDING_PASS=$DOCKER_PASSWORD
+            export CODING_USER=$DOCKER_USERNAME
+            export CODING_PASS=$DOCKER_PASSWORD
             sh /opt/www/deploy-doc-v3.sh
