@@ -66,8 +66,8 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY
-            docker pull $DOCKER_REGISTRY/mineadmin/mineadmin/doc-v3:$SHA
-            docker stop doc-v3 || true
-            docker rm doc-v3 || true
-            docker run -d --name doc-v3 -p 55500:80 ${{ secrets.CODING_SERVER }}/mineadmin/mineadmin/doc-v3:$SHA
+            export CONDING_SERVER=$DOCKER_REGISTRY
+            export SHA=$SHA
+            export CONDING_USER=$DOCKER_USERNAME
+            export CONDING_PASS=$DOCKER_PASSWORD
+            sh /opt/www/deploy-doc-v3.sh
