@@ -1,16 +1,16 @@
 # 部署
 
-## 介绍
+本文将讲述如何在生产环境部署 MineAdmin 的前后端应用程序
 
-当你准备将 MineAdmin 后端应用程序部署到生成环境时，你可以参考本文内容来使其便捷的运行。
+## 后端
 
-## 服务部署
+### 服务部署
 
 一般来说，在新一代服务端应用程序。基本上都是由 docker 进行服务部署。
 MineAdmin 也提供了开箱即用的 [Dockerfile](https://github.com/mineadmin/MineAdmin/blob/master/Dockerfile) 以便你能够进行快速的服务部署
 在某些情况可能需要面临裸装部署在服务器中。以下介绍两种部署方式。以便快速上手
 
-### 直接部署在服务器中
+#### 直接部署在服务器中
 
 如果你需要将 MineAdmin 直接部署在服务器中。那么首先服务器要满足以下系统条件
 
@@ -22,7 +22,7 @@ php 与扩展安装请自行搜索相关教程，本处不另行说明
 * cURL PHP 扩展
 * Fileinfo PHP 扩展
 * OpenSSL PHP 扩展
-* PDO 扩展 
+* PDO 扩展
 * Redis 扩展
 * Json 扩展
 * PDO_MYSQL 扩展 (可选)
@@ -42,7 +42,7 @@ php bin/hyperf.php start
 默认的程序不提供常驻进程选项，我们推荐使用第三方应用例如 [supervisord](http://www.supervisord.org/)来进行项目的进程持久化运行
 如何使用请参考 [Hyperf文档](https://hyperf.wiki)
 
-### 以容器形式部署 (推荐)
+#### 以容器形式部署 (推荐)
 
 如果你想要以容器服务形式向外提供应用服务。可以使用项目下的 Dockerfile,用法很简单。
 
@@ -75,13 +75,13 @@ docker run -d --name mineadmin mineadmin
 以上两种部署方式的前提是已经配置好 <el-tag type="danger">.env</el-tag> 文件
 :::
 
-## 反向代理
+### 反向代理
 
 <el-alert type="warning">无论何时都不建议将应用程序直接暴露在公网环境，最好是再套一层代理转发</el-alert>
 
 本文将列举几个反向代理示例
 
-### Nginx
+#### Nginx
 
 如果你将程序部署在运行 nginx 的服务器上。你可以参考以下反向代理配置文件来作为站点的起点。
 
@@ -120,11 +120,11 @@ location ^~ /
 
 ```
 
-### K8s Ingress
+#### K8s Ingress
 
 如果你将程序部署在 k8s 集群中，你可以参考以下配置说明
 
-#### 创建服务
+##### 创建服务
 
 ```yaml
 # Kubernetes API 的版本
@@ -147,7 +147,7 @@ spec:
       targetPort: 9501
 ```
 
-#### 创建 Ingress 资源
+##### 创建 Ingress 资源
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -183,11 +183,43 @@ spec:
 ```
 
 
-## 调试模式
+### 调试模式
 
 在 `config/config.php` 配置文件中，调试选项决定了有多少错误信息实际上会展示给用户，默认情况下，该选项
 设置遵守环境变量 `APP_DEBUG` 的值.该值存储在你的项目 `.env` 文件中.
 
 ::: warning
-在生产环境中，该值应该永远为 `false`.如果在生产环境中设置为 `true` 将有可能把敏感信息返回给用户的风险 
+在生产环境中，该值应该永远为 `false`.如果在生产环境中设置为 `true` 将有可能把敏感信息返回给用户的风险
 :::
+
+## 前端
+
+### 服务部署
+
+#### 直接部署在服务器中
+
+如果你想要将 MineAdmin 前端服务部署在服务器中，以经典的 Nginx 服务为例。
+
+首先生成 静态资源,在你的项目 `web` 目录下执行 `pnpm build` 生成 PS: 可以在服务器进行生成，
+也可以在本地预先生成好
+
+将你的静态资源扔到站点目录。即可完成安装
+
+#### 以容器服务形式部署（推荐）
+
+与后端一致，我们提供了前端打包的 `Dockerfile`，
+进入你的 `应用程序/web` 目录下，执行 
+
+```shell
+docker build . -t frontend
+```
+
+即可打包成 nginx 镜像
+
+根据该镜像即可启动一个容器服务
+
+```shell
+docker run -d --name frontend frontend
+```
+
+配置站点反向代理到`[容器IP:80]` 端口即完成部署

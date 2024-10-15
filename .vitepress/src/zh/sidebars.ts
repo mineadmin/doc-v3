@@ -26,6 +26,10 @@ const sidebar:DefaultTheme.Sidebar = {
           text: '快速安装',
           link: '/zh/guide/start/fast-install',
         },
+        {
+          text: "部署",
+          link: "/zh/guide/start/deployment"
+        }
       ]
     },
     {
@@ -170,21 +174,12 @@ const sidebar:DefaultTheme.Sidebar = {
   ],
   '/zh/backend/':[
     {
-      text:"入门指南",
+      text:"进阶",
       items:[
         {
           text: "目录结构",
-          link: "/zh/backend/guide/structure"
+          link: "/zh/backend/base/structure"
         },
-        {
-          text: "部署",
-          link: "/zh/backend/guide/deployment"
-        }
-      ]
-    },
-    {
-      text:"进阶",
-      items:[
         {
           text: "生命周期",
           link: "/zh/backend/base/lifecycle"
