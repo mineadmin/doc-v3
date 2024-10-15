@@ -84,7 +84,11 @@ const sidebar:DefaultTheme.Sidebar = {
       text: '进阶',
       items: [
         {
-          text: '请求拦截器',
+          text: '自动导入',
+          link: '/zh/front/advanced/auto-import'
+        },
+        {
+          text: '请求与拦截器',
           link: '/zh/front/advanced/request'
         },
         {
