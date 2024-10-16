@@ -16,7 +16,7 @@
 然后进入一个空的目录。执行以下命令。`YourProject` 是要新建的应用名称目录。如果不传则默认为 mineadmin
 
 ```shell
-composer create-project mineadmin/mineadmin:3.0 YourProject
+composer create-project mineadmin/mineadmin:3.x-dev YourProject
 ```
 
 ### git (推荐)
