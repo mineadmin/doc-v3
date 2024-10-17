@@ -51,6 +51,9 @@ importers:
         specifier: ^0.1.2
         version: 0.1.2(vitepress@1.4.0(@algolia/client-search@4.24.0)(async-validator@4.2.5)(postcss@8.4.47)(search-insights@2.17.2)(sortablejs@1.15.2))
     devDependencies:
+      '@mdit/plugin-plantuml':
+        specifier: ^0.13.1
+        version: 0.13.1
       simple-git:
         specifier: ^3.27.0
         version: 3.27.0
@@ -367,6 +370,23 @@ packages:
 
   '@lit/reactive-element@2.0.4':
     resolution: {integrity: sha512-GFn91inaUa2oHLak8awSIigYz0cU0Payr1rcFsrkf5OJ5eSPxElyZfKh0f2p9FsTiZWXQdWGJeXZICEfXXYSXQ==}
+
+  '@mdit/plugin-plantuml@0.13.1':
+    resolution: {integrity: sha512-qupMO/lG1mDYaGHSutB9AO1TsxHjmp4yFnvp3VBNNRdVh9lqWhXFv/htrnr0IGEWAmlik6zlkCvz/YrKRONV5A==}
+    peerDependencies:
+      markdown-it: ^14.1.0
+    peerDependenciesMeta:
+      markdown-it:
+        optional: true
+
+  '@mdit/plugin-uml@0.13.1':
+    resolution: {integrity: sha512-JdCOg25OyG+QJFAba6AWwdpkaOjuht5VmOqYt4/h/AzLsIHh/2j+TnCZBn0XQm3D8yJ9Y4w4oouS4wpPduRW0A==}
+    engines: {node: '>= 18'}
+    peerDependencies:
+      markdown-it: ^14.1.0
+    peerDependenciesMeta:
+      markdown-it:
+        optional: true
 
   '@mineadmin/echarts@1.0.1':
     resolution: {integrity: sha512-dVdJZReDsQyoi+lwcTl0SpVg86zBQyBmdEqu1ooyfQPgaWNa0MKoD0pno02GxUnVvOYoe+GzkcSBpFhNZvmZZQ==}
@@ -1349,6 +1369,15 @@ snapshots:
   '@lit/reactive-element@2.0.4':
     dependencies:
       '@lit-labs/ssr-dom-shim': 1.2.1
+
+  '@mdit/plugin-plantuml@0.13.1':
+    dependencies:
+      '@mdit/plugin-uml': 0.13.1
+      '@types/markdown-it': 14.1.2
+
+  '@mdit/plugin-uml@0.13.1':
+    dependencies:
+      '@types/markdown-it': 14.1.2
 
   '@mineadmin/echarts@1.0.1(element-plus@2.8.3(vue@3.5.7))':
     dependencies:

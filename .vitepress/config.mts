@@ -1,4 +1,4 @@
-import { defineConfigWithTheme  } from 'vitepress'
+import {defineConfigWithTheme, type MarkdownRenderer} from 'vitepress'
 import enGetNavs from "./src/en/nav";
 import zhGetNavs from "./src/zh/nav";
 import enGetConfig from "./src/en/config";
@@ -6,6 +6,7 @@ import zhGetConfig from "./src/zh/config";
 import zhGetSidebar from "./src/zh/sidebars";
 import enGetSidebar from "./src/en/sidebars";
 import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
+import { plantuml } from "@mdit/plugin-plantuml";
 
 
 // https://vitepress.dev/reference/site-config
@@ -118,4 +119,12 @@ export default defineConfigWithTheme ({
     }
   },
   srcDir: 'docs',
+  markdown:{
+    config:(md:MarkdownRenderer)=>{
+      md.use(plantuml,{
+        type:"fence",
+        fence:"plantuml",
+      })
+    }
+  }
 })

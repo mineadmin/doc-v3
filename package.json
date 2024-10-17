@@ -22,6 +22,7 @@
     "vitepress-plugin-announcement": "^0.1.2"
   },
   "devDependencies": {
+    "@mdit/plugin-plantuml": "^0.13.1",
     "simple-git": "^3.27.0",
     "vitepress": "^1.4.0",
     "vitepress-plugin-comment-with-giscus": "^1.1.15",

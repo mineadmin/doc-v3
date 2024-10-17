@@ -29,4 +29,62 @@ MineAdmin 是构建运行在 [PHP](https://php.net) + ([Swoole](https://swoole.c
 
 :::
 
-![时序图](token.png)
+---
+
+### 时序图
+
+```plantuml
+participant "客户端" as Client
+participant "服务端" as Server
+
+Client -> Server : 登录请求
+Server -> Client : 登录成功，返回 access_token 和 refresh_token
+Client -> Local : 存储 access_token 和 refresh_token 到本地
+
+Client -> Server : 发送请求
+Server -> Client : 返回 401 错误码且本地 refresh_token 未过期
+Client -> Queue : 暂存请求信息
+Client -> Server : 用 refresh_token 换取新 token
+alt 换 token 接口返回 401
+    Client -> Local : 清除本地缓存
+    Client -> Server : 重定向到登录页面
+else 换 token 成功
+    Client -> Local : 更新本地 token
+    Client -> Server : 重试请求失败的接口
+end
+```
+
+### 流程图
+
+```plantuml
+start
+:登录成功;
+->
+:存储 access_token 和 refresh_token 到本地;
+->
+:发送请求;
+if (请求失败，code = 401 且本地 refresh_token 未过期) then (yes)
+->
+:暂存请求信息到队列;
+->
+:用 refresh_token 换新 token;
+if (换 token 接口返回 401) then (yes)
+->
+:清除本地缓存，重定向到登录页面;
+else (no)
+->
+:更新本地 token，重试请求失败的接口;
+endif
+else (no)
+endif
+```
+
+### 讲解
+
+在登录成功后，将 access token 与 refresh token 存储于本地。
+
+当某次请求出现失败，且错误码为 401，同时本地的 refresh_token 未过期时，需先将当前请求信息暂存至队列中。此队列旨在防止同一时刻多个请求同时去刷新 token。
+
+随后，利用 refresh token 换取新的 access_token 与 refresh_token。
+
+倘若换 token 的接口同样返回 401 错误码，则意味着 acces
