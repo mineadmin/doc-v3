@@ -36,12 +36,6 @@ import '@mineadmin/pro-table/dist/style.css'
 // ContextMenu 样式
 import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 
-
-import './styles/var.css'
-import './styles/blur.css'
-import './styles/vp-code-group.css'
-import './styles/vp-code.css'
-
 export default {
     setup(){
         const { frontmatter } = useData();
