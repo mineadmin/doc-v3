@@ -38,7 +38,6 @@ import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 
 
 import './styles/var.css'
-import './styles/block.css'
 import './styles/blur.css'
 import './styles/vp-code-group.css'
 import './styles/vp-code.css'

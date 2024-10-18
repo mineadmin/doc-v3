@@ -15,6 +15,210 @@
 
 :::
 
+## Http 规范
+
+### 路由命名
+
+在现代化应用程序中，Restful 风格已经风靡人心。在 `2.0` 以及 `3.0` 版本中。我们推荐按照以下说明规范你的 API 接口
+
+- 获取数据使用 GET
+- 修改数据使用 PUT
+- 删除数据使用 DELETE
+- 新增数据使用 POST
+
+以自带的 `UserController` 举例。
+
+- GET `/admin/user/list` 获取用户列表
+- PUT `/admin/user/{id}` 修改单一用户
+- POST `/admin/user` 创建用户
+- DELETE `/admin/user` 删除用户
+
+你应该保证你的应用程序尽量贴合官方推荐规范,但请不要`无脑参考`. 
+虽然技术的规范会使你的应用程序更加壮硕。但是不能一味追求规范。需要以业务的可持续迭代为主
+
+### HTTP 响应结构体
+
+在 `3.0` 版本中。我们推荐并遵循的是全局的响应对象为 `\App\Http\Common\Result`，也就是意味着
+在你的接口开发中，为了方便后续的`迭代升级`以及遵循统一的规范。你应该返回 `\App\Http\Common\Result` 实例。而不是自己拼接响应参数
+同时我们也提供了 `App\Http\Common\Controller\AbstractController` 方便在日常开发中能够快速返回 `Result` 实例
+
+只需在你的控制器中使用 `return $this->success()` 即可组装成一个全新的 `Result` 实例
+
+::: code-group
+
+```php [Result]
+<?php
+
+declare(strict_types=1);
+/**
+ * This file is part of MineAdmin.
+ *
+ * @link     https://www.mineadmin.com
+ * @document https://doc.mineadmin.com
+ * @contact  root@imoi.cn
+ * @license  https://github.com/mineadmin/MineAdmin/blob/master/LICENSE
+ */
+
+namespace App\Http\Common;
+
+use Hyperf\Contract\Arrayable;
+use Hyperf\Swagger\Annotation as OA;
+
+/**
+ * @template T
+ */
+#[OA\Schema(title: 'Api Response', description: 'Api Response')]
+class Result implements Arrayable
+{
+    /**
+     * @param ResultCode $code
+     * @param null|string $message
+     * @param T $data
+     */
+    public function __construct(
+        #[OA\Property(ref: 'ResultCode', title: '响应码')]
+        public ResultCode $code = ResultCode::SUCCESS,
+        #[OA\Property(title: '响应消息', type: 'string')]
+        public ?string $message = null,
+        #[OA\Property(title: '响应数据', type: 'array')]
+        public mixed $data = []
+    ) {
+        if ($this->message === null) {
+            $this->message = ResultCode::getMessage($this->code->value);
+        }
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'code' => $this->code->value,
+            'message' => $this->message,
+            'data' => $this->data,
+        ];
+    }
+}
+
+```
+
+```php [Common\Controller\AbstractController]
+abstract class AbstractController
+{
+    protected function success(mixed $data = [], ?string $message = null): Result
+    {
+        return new Result(ResultCode::SUCCESS, $message, $data);
+    }
+
+    protected function error(?string $message = null, mixed $data = []): Result
+    {
+        return new Result(ResultCode::FAIL, $message, $data);
+    }
+
+    protected function json(ResultCode $code, mixed $data = [], ?string $message = null): Result
+    {
+        return new Result($code, $message, $data);
+    }
+}
+```
+
+```php [Admin\Controller\AbstractController]
+<?php
+
+declare(strict_types=1);
+/**
+ * This file is part of MineAdmin.
+ *
+ * @link     https://www.mineadmin.com
+ * @document https://doc.mineadmin.com
+ * @contact  root@imoi.cn
+ * @license  https://github.com/mineadmin/MineAdmin/blob/master/LICENSE
+ */
+
+namespace App\Http\Admin\Controller;
+
+use App\Http\Common\Controller\AbstractController as Base;
+use Hyperf\Context\ApplicationContext;
+use Hyperf\HttpServer\Contract\RequestInterface;
+
+class AbstractController extends Base
+{
+    protected function getCurrentPage(): int
+    {
+        return (int) $this->getRequest()->input('page', 1);
+    }
+
+    protected function getPageSize(): int
+    {
+        return (int) $this->getRequest()->input('page_size', 10);
+    }
+
+    protected function getRequest(): RequestInterface
+    {
+        return ApplicationContext::getContainer()->get(RequestInterface::class);
+    }
+}
+
+```
+
+::: 
+
+### Http Result Code
+
+默认提供了一个 `App\Http\Common\ResultCode` 枚举。并准备了一些公用的 code 方便业务开发.
+
+```php [Result]
+<?php
+
+declare(strict_types=1);
+/**
+ * This file is part of MineAdmin.
+ *
+ * @link     https://www.mineadmin.com
+ * @document https://doc.mineadmin.com
+ * @contact  root@imoi.cn
+ * @license  https://github.com/mineadmin/MineAdmin/blob/master/LICENSE
+ */
+
+namespace App\Http\Common;
+
+use Hyperf\Constants\Annotation\Constants;
+use Hyperf\Constants\Annotation\Message;
+use Hyperf\Constants\ConstantsTrait;
+use Hyperf\Swagger\Annotation as OA;
+
+#[Constants]
+#[OA\Schema(title: 'ResultCode', type: 'integer', default: 200)]
+enum ResultCode: int
+{
+    use ConstantsTrait;
+
+    #[Message('result.success')]
+    case SUCCESS = 200;
+
+    #[Message('result.fail')]
+    case FAIL = 500;
+
+    #[Message('result.unauthorized')]
+    case UNAUTHORIZED = 401;
+
+    #[Message('result.forbidden')]
+    case FORBIDDEN = 403;
+
+    #[Message('result.not_found')]
+    case NOT_FOUND = 404;
+
+    #[Message('result.method_not_allowed')]
+    case METHOD_NOT_ALLOWED = 405;
+
+    #[Message('result.not_acceptable')]
+    case NOT_ACCEPTABLE = 406;
+
+    #[Message('result.conflict')]
+    case UNPROCESSABLE_ENTITY = 422;
+}
+
+```
+
+
 ## MineAdmin 注解
 
 以下所有没有做完整命名空间全部以 `Mine\Swagger\Attributes\` 前缀拼接为完整命名空间
