@@ -15,6 +15,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 
+// @ts-ignore
 import Layout from './components/layout.vue'
 
 import zh from 'element-plus/dist/locale/zh-cn.mjs'
@@ -24,8 +25,6 @@ import MaTable from '@mineadmin/table/dist/index.umd.js'
 import MaSearch from '@mineadmin/search/dist/index.umd.js'
 import MaForm from '@mineadmin/form/dist/index.umd.js'
 import MaProTable from '@mineadmin/pro-table/dist/index.umd.js'
-import giscusTalk from 'vitepress-plugin-comment-with-giscus';
-import { useData, useRoute } from 'vitepress';
 
 // maTable样式
 import '@mineadmin/table/dist/style.css'
@@ -36,28 +35,14 @@ import '@mineadmin/pro-table/dist/style.css'
 // ContextMenu 样式
 import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 
+import './styles/var.css'
+import {baiduPlugin} from "./plugin/baidu";
+
 export default {
-    setup(){
-        const { frontmatter } = useData();
-        const route = useRoute();
-        // giscus配置
-        giscusTalk({
-              repo: 'mineadmin/mineadmin', //仓库
-              repoId: 'MDEwOlJlcG9zaXRvcnk0MjQ2MDA5', //仓库ID
-              category: 'Q&A', // 讨论分类
-              categoryId: 'DIC_kwDOAEDJ-c4CR7vK', //讨论分类ID
-              mapping: 'pathname',
-              inputPosition: 'bottom',
-              lang: 'zh-CN',
-            },
-            {
-              frontmatter, route
-            },
-            true
-        );
-    },
   enhanceApp(ctx: EnhanceAppContext) {
+
     const { app } = ctx;
+    // @ts-ignore
     app.use(ElementPlus, { locale: zh })
     app.use(MaTable, { ssr: true })
     app.use(MaSearch, { ssr: true })
@@ -70,6 +55,7 @@ export default {
       },
       app,
     })
+    baiduPlugin()
   },
   extends: DefaultTheme,
   Layout,

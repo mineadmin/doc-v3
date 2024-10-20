@@ -130,19 +130,19 @@ const sidebar:DefaultTheme.Sidebar = {
         },
         {
           text: '插件',
-          link: '/zh/front/advanced/plugin'
+          link: '/zh/front/high/plugin'
         },
         {
           text: 'Hooks',
-          link: '/zh/front/advanced/hooks'
+          link: '/zh/front/high/hooks'
         },
         {
           text: '常用Store',
-          link: '/zh/front/advanced/store'
+          link: '/zh/front/high/store'
         },
         {
           text: 'JSX和TSX开发',
-          link: '/zh/front/advanced/jsx'
+          link: '/zh/front/high/tsx'
         }
       ],
     },
