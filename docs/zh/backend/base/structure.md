@@ -51,15 +51,14 @@
 
 包含所有 Eloquent 模型类。 MineAdmin 中包含的 Eloquent ORM 提供了一个漂亮、简单的 ActiveRecord 实现来处理你的数据库。 每个数据库表都有一个相应的「模型」，用于与该表进行交互。 模型允许你查询表中的数据，以及将新记录插入表中
 
-<el-alert type="warning">
-使用方法参考 <a href="https://laravel.com/docs/11.x/eloquent">laravel 文档</a> 
-中国开发者参考 <a href="https://learnku.com/docs/laravel/10.x/eloquent/14888">国内译文</a>
-<br />
-注意，<a href="https://hyperf.wiki/3.1/#/en/">协程版 Eloquent ORM</a> 由 <a href="https://github.com/hyperf/hyperf"> Hyperf </a>维护
+::: warning
+
+使用方法参考 [laravel 文档](https://laravel.com/docs/11.x/eloquent),中国开发者参考 [国内译文](https://learnku.com/docs/laravel/10.x/eloquent/14888)
+
+注意，[协程版 Eloquent ORM](https://hyperf.wiki/3.1/#/en/) 由 [Hyperf](https://github.com/hyperf/hyperf)维护
 在用法上会和 Laravel 官方有一定差异。
-<br />
-如需某个特性功能请往 <a href="https://github.com/hyperf/hyperf/issues"> Hyperf </a> 提交您的问题。或参与开发
-</el-alert>
+
+:::
 
 ### Service 目录
 
