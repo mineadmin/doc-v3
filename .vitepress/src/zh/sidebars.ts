@@ -193,7 +193,6 @@ const sidebar:DefaultTheme.Sidebar = {
         {text: "日志",link: "/zh/backend/base/logger"},
         {text: "事件",link: "/zh/backend/base/event-handler"},
         {text: "文件上传",link: "/zh/backend/base/upload"},
-        {text: "JWT",link: "/zh/backend/base/jwt"},
         {text: "多语言",link: "/zh/backend/base/lang"},
       ]
     },
