@@ -18,7 +18,7 @@
 
 ## 压缩
 
-在 `环境变量文件` 里设置 `VITE_BUILD_COMPRESS` 即可在构建打包时生成 .gz 或 .br 文件。但两者均需要 `nginx` 安装指定模块并开启后才会生效。
+在 `环境变量文件` 里设置 `VITE_BUILD_COMPRESS` 即可在构建打包时生成 `.gz` 或 `.br` 文件。但两者均需要 `nginx` 安装指定模块并开启后才会生效。
 ```yaml
 # 单独开启 gzip
 VITE_BUILD_COMPRESS = gzip
