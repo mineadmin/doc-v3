@@ -22,7 +22,7 @@ MineAdmin 是构建运行在 [PHP](https://php.net) + ([Swoole](https://swoole.c
 
 ::: tip
 
-自 `MineAdmin >= 3.0` 版本起，我们默认提供的应用程序认证机制都是由两个 token 来实现交互刷新鉴权的
+默认提供的应用程序认证机制都是由两个 token 来实现交互刷新鉴权的
 也就是 `AccessToken` 以及 `RefreshToken`
 
 而关于 Jwt 的生成和鉴权则统一由 MineAdmin 接入 [lcobucci/jwt](https://github.com/lcobucci/jwt) 组件而实现的

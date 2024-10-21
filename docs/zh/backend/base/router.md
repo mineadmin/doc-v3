@@ -1,7 +1,7 @@
 # 路由与API文档
 
-自 `MineAdmin 3.0` 我们内置为所有接口接入了 [Swagger](https://swagger.io) 文档,
-在本地开发时，访问 `localhost:9502/swagger` 即可访问现有的 API文档
+内置所有接口接入了 [Swagger](https://swagger.io) 文档,
+在本地开发时，访问 `localhost:9503/swagger` 即可访问现有的 API文档
 
 ::: tip
 
@@ -38,7 +38,7 @@
 
 ### HTTP 响应结构体
 
-在 `3.0` 版本中。我们推荐并遵循的是全局的响应对象为 `\App\Http\Common\Result`，也就是意味着
+推荐并遵循的是全局的响应对象为 `\App\Http\Common\Result`，也就是
 在你的接口开发中，为了方便后续的`迭代升级`以及遵循统一的规范。你应该返回 `\App\Http\Common\Result` 实例。而不是自己拼接响应参数
 同时我们也提供了 `App\Http\Common\Controller\AbstractController` 方便在日常开发中能够快速返回 `Result` 实例
 

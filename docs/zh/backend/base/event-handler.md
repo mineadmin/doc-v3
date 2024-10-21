@@ -5,9 +5,6 @@ MineAdmin 的事件是基于 [hyperf/event](https://github.com/hyperf/event),要
 
 ## 默认自带的监听者
 
-在 MineAdmin `>= 3.0` 版本中，我们准备了几个常用的事件处理。具体请查看项目 `config/autoload/listeners.php` 文件
-
-
 | 监听者                             | 作用                                                      | 是否自带 |
 |---------------------------------|---------------------------------------------------------|------|
 | ErrorExceptionHandler           | 当发生错误时，如果当前的错误报告级别与给定的错误级别匹配，就会抛出一个ErrorException异常     | √    |
