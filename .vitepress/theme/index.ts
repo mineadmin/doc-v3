@@ -36,7 +36,9 @@ import '@mineadmin/pro-table/dist/style.css'
 import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 
 import './styles/var.css'
-import {baiduPlugin} from "./plugin/baidu";
+import { baiduPlugin } from "./plugin/baidu";
+
+import "virtual:uno.css";
 
 export default {
   enhanceApp(ctx: EnhanceAppContext) {

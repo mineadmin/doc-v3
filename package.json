@@ -24,6 +24,7 @@
   "devDependencies": {
     "@mdit/plugin-plantuml": "^0.13.1",
     "simple-git": "^3.27.0",
+    "unocss": "^0.63.6",
     "vitepress": "^1.4.0",
     "vitepress-plugin-comment-with-giscus": "^1.1.15",
     "vitepress-plugin-group-icons": "^1.2.4"

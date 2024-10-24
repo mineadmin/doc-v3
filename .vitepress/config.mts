@@ -7,12 +7,13 @@ import zhGetSidebar from "./src/zh/sidebars";
 import enGetSidebar from "./src/en/sidebars";
 import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
 import { plantuml } from "@mdit/plugin-plantuml";
-
+import UnoCSS from 'unocss/vite'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfigWithTheme ({
   vite:{
     plugins:[
+      UnoCSS(),
       AnnouncementPlugin({
         title:"MineAdmin 交流群",
         body:[
