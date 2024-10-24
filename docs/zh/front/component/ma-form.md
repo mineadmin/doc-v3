@@ -6,7 +6,7 @@
 
 ### useForm 方式 
 
-<div style="margin-top: 20px;">
+<div class="mt-5 shadow-lg">
     <ma-form ref="form" :items="[
     { label: '用户名', prop: 'username', render: 'input' },
     { label: '昵称', prop: 'nickname', render: 'input' },

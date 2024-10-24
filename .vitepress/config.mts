@@ -35,7 +35,7 @@ export default defineConfigWithTheme ({
       link:"/en/index",
       ...enGetConfig,
       themeConfig:{
-        logo: '/images/logo.svg',
+        logo: '/logo.svg',
         nav: enGetNavs,
         sidebar:enGetSidebar,
         outline:{
@@ -45,7 +45,7 @@ export default defineConfigWithTheme ({
     }
   },
   themeConfig: {
-    logo: '/images/logo.svg',
+    logo: '/logo.svg',
     outline:{
       label: '页面导航',
       level: [2, 4],
