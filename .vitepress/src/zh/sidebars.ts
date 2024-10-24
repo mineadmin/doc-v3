@@ -84,6 +84,10 @@ const sidebar:DefaultTheme.Sidebar = {
       text: '进阶',
       items: [
         {
+          text: '系统参数配置',
+          link: '/zh/front/advanced/system-config'
+        },
+        {
           text: '自动导入',
           link: '/zh/front/advanced/auto-import'
         },
