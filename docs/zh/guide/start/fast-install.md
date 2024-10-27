@@ -26,7 +26,7 @@ composer create-project mineadmin/mineadmin:3.x-dev YourProject
 首先需要先把代码下载到本地，执行以下命令。`YourProject` 是要新建的应用名称目录。如果不传则默认为 mineadmin
 
 ```sh [下载代码]
-git clone -b 3.x https://github.com/mineadmin/MineAdmin.git
+git clone https://github.com/mineadmin/MineAdmin.git
 ```
 
 ## 安装系统并启动
