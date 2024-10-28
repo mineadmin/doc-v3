@@ -12,8 +12,6 @@ import type { EnhanceAppContext, Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 
 import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
-import 'element-plus/theme-chalk/dark/css-vars.css'
 
 // @ts-ignore
 import Layout from './components/layout.vue'
@@ -36,11 +34,14 @@ import '@mineadmin/pro-table/dist/style.css'
 import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 
 import './styles/var.css'
+import './styles/element.css'
 import { baiduPlugin } from "./plugin/baidu";
 
 import "virtual:uno.css";
 
 import Preview from '../components/preview.vue';
+import 'element-plus/dist/index.css'
+import 'element-plus/theme-chalk/dark/css-vars.css'
 
 export default {
   enhanceApp(ctx: EnhanceAppContext) {

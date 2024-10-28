@@ -9,11 +9,13 @@ import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
 import { plantuml } from "@mdit/plugin-plantuml";
 import { previewPlugin } from './plugins/previewPlugin'
 import UnoCSS from 'unocss/vite'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfigWithTheme ({
   vite:{
     plugins:[
+      vueJsx(),
       UnoCSS(),
       AnnouncementPlugin({
         title:"MineAdmin 交流群",
