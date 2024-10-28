@@ -162,12 +162,12 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/zh/front/component/ma-table'
         },
         {
-          text: 'MaProTable',
-          link: '/zh/front/component/ma-pro-table'
-        },
-        {
           text: 'MaSearch',
           link: '/zh/front/component/ma-search'
+        },
+        {
+          text: 'MaProTable',
+          link: '/zh/front/component/ma-pro-table'
         },
         {
           text: 'MaEcharts',

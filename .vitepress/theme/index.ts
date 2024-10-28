@@ -40,6 +40,8 @@ import { baiduPlugin } from "./plugin/baidu";
 
 import "virtual:uno.css";
 
+import Preview from '../components/preview.vue';
+
 export default {
   enhanceApp(ctx: EnhanceAppContext) {
 
@@ -57,6 +59,9 @@ export default {
       },
       app,
     })
+
+    app.component('Preview', Preview)
+
     baiduPlugin()
   },
   extends: DefaultTheme,
