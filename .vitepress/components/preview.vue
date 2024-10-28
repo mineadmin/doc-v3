@@ -26,14 +26,12 @@ const isOpen = ref<boolean>(false)
       class="not-prose relative w-full overflow-x-auto"
     >
       <div class="flex w-full p-4 pb-10">
-        <client-only>
-          <slot v-if="codeFiles.length > 0"></slot>
-          <div v-else class="text-sm">
-            <span class="rounded-sm">
-              出错了，找不到演示文件路径
-            </span>
-          </div>
-        </client-only>
+        <slot v-if="codeFiles.length > 0"></slot>
+        <div v-else class="text-sm">
+          <span class="rounded-sm">
+            出错了，找不到演示文件路径
+          </span>
+        </div>
       </div>
       <div class="relative min-h-42px w-full">
         <el-button
