@@ -133,16 +133,16 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/zh/front/high/provider'
         },
         {
-          text: '插件',
-          link: '/zh/front/high/plugin'
-        },
-        {
           text: 'Hooks',
           link: '/zh/front/high/hooks'
         },
         {
           text: '常用Store',
           link: '/zh/front/high/store'
+        },
+        {
+          text: '插件系统',
+          link: '/zh/front/high/plugins'
         },
         {
           text: 'JSX和TSX开发',
