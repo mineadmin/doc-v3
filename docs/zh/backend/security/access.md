@@ -11,7 +11,6 @@
 默认授权策略模型由 `config/autoload/casbin/rbac-model.conf` 定义.
 而 Admin 的授权检测则由控制器方法的 `Permission` 注解 和 `PermissionMiddleware` 中间件组合而成
 
-
 ::: code-group
 
 ```ini [rbac-model.conf]
