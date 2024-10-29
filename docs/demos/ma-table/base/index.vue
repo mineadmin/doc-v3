@@ -7,7 +7,7 @@ const columns = ref<MaTableColumns[]>([
   {
     label: '人员信息', prop: 'base',
     children: [
-      { label: '姓名', prop: 'name' },
+      { label: '姓名', prop: 'name', align: 'left' },
       { label: '所在部门', prop: 'dept' }
     ]
   },
