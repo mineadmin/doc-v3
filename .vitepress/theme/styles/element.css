@@ -18,18 +18,18 @@
 }
 
 
-.vp-doc table {
+.el-table table {
   margin: 0;
 }
 
-.vp-doc tr {
+.el-table tr {
   margin-top: 0; border: none;
 }
 
-.vp-doc th, .vp-doc td {
+.el-table th, .el-table td {
   border: 0;
 }
 
-.vp-doc tr:nth-child(2n) {
+.el-table tr:nth-child(2n) {
   background-color: transparent;
 }
