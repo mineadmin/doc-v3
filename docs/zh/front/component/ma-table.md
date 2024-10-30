@@ -21,7 +21,7 @@
 | `columns` | `el-table-column` 参数及[扩展参数](#columnextraprops) | `MaTableColumns[]` | [表格列属性](https://element-plus.org/zh-CN/component/table.html#table-column-%E5%B1%9E%E6%80%A7) | 1.0.0 |
 | `data`    | 表格数据                                                | `any[]`          | -                                                                                            | 1.0.0 |
 
-## ExtraProps
+### ExtraProps
 ::: tip 说明
 此为 `ma-table` 对 `el-table` 的扩展参数
 :::
@@ -39,7 +39,7 @@
 | `on`      | `el-table` 表格事件集合                                                     | <el-tooltip content="Object: { onSelect: (args) => {}, .... }">`鼠标放上查看`</el-tooltip>            | -        | 1.0.0 |
 
 
-### LoadingConfig说明
+#### LoadingConfig说明
 | 参数        | 说明      | 类型   | 默认值 | 版本    |
 |-----------|----------|------|-----|-------|
 | `text` | 显示在加载图标下方的加载文案   | `string`  | -   | 1.0.0 |
@@ -49,7 +49,7 @@
 | `background` | 背景遮罩的颜色   | `string` | -   | 1.0.0 |
 | `customClass` | 自定义 class 类名   | `string` | -   | 1.0.0 |
 
-## ColumnExtraProps
+### ColumnExtraProps
 ::: tip 说明
 此为 `ma-table` 对 `el-table-column` 的扩展参数
 :::

@@ -23,7 +23,7 @@
 | `options` | `el-form` 参数及[扩展参数](#extraprops) | `MaFormOptions`   | [表单属性](https://element-plus.org/zh-CN/component/form.html#form-attributes) | 1.0.0 |
 | `items`   | [ma-form-item参数](#maformitem)  | `MaFormItem[]` | -                                                                          | 1.0.0 |
 
-## ExtraProps
+### ExtraProps
 ::: tip 说明
 此为 `ma-form` 对 `el-form` 的扩展参数
 :::
@@ -37,7 +37,7 @@
 | `flex` | <el-tooltip content=" `flex` 布局，在 `layout` 为 `flex` 时生效。实际是用的 `el-row`，配置可参考 `element-plus` 的 `el-row` 文档">`鼠标放上查看`</el-tooltip> | [el-row文档](https://element-plus.org/zh-CN/component/layout.html#row-attributes)     | -        | 1.0.0 |
 | `footerSlot` | <el-tooltip content="配置型插槽，在 `template` 写法为 #footer">`鼠标放上查看`</el-tooltip>       | `() => {}`  | -  | 1.0.0 |
 
-### LoadingConfig说明
+#### LoadingConfig说明
 | 参数        | 说明      | 类型   | 默认值 | 版本    |
 |-----------|----------|------|-----|-------|
 | `text` | 显示在加载图标下方的加载文案   | `string`  | -   | 1.0.0 |
@@ -47,7 +47,7 @@
 | `background` | 背景遮罩的颜色   | `string` | -   | 1.0.0 |
 | `customClass` | 自定义 class 类名   | `string` | -   | 1.0.0 |
 
-## MaFormItem
+### MaFormItem
 
 | 参数             | 说明                                                                                                                                                                              | 类型                                                                                                 | 默认值     | 版本    |
 |----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|---------|-------|
