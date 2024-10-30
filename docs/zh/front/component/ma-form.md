@@ -10,10 +10,17 @@
 :::
 
 ## 配置方式使用
+<DemoPreview dir="demos/ma-form/config" />
 
 ## 模板方式使用
+<DemoPreview dir="demos/ma-form/template" />
 
 ## 获取`组件`和`el-form-item`的`Ref`
+:::tip 提示
+这个方式用于 **配置形式**，`template` 里可以自己定义 `ref` 
+:::
+
+<DemoPreview dir="demos/ma-form/getRef" />
 
 ## Props
 
@@ -58,7 +65,7 @@
 | `cols` | 在 `options.layout 为 flex` 下生效                                                                                                                                                   | [el-col文档](https://element-plus.org/zh-CN/component/layout.html#col-attributes)                    | -       | 1.0.0 |
 | `itemProps` | `el-form-item` 原生属性                                                                                                                                                             | [表单项属性](https://element-plus.org/zh-CN/component/form.html#formitem-attributes)                    | -       | 1.0.0 |
 | `itemSlots` | `el-form-item` 原生插槽                                                                                                                                                             | [表单项插槽](https://element-plus.org/zh-CN/component/form.html#formitem-slots)                         | -       | 1.0.0 |
-| `render` | 渲染单元格：<el-tooltip content="设置要渲染的组件，可设置 `element plus` 的所有 `form` 组件，例如：`input`, `datePicker`，也可以传入 `tsx`, `jsx` 语法的虚拟dom，也可以传入一个组件，函数式，例如：() => ElInput">`鼠标放上查看`</el-tooltip> | `string, () => any`                                                                                | -       | 1.0.0 |
+| `render` | 渲染单元格：<el-tooltip content="设置要渲染的组件，可设置 `element plus` 的所有 `form` 组件，例如：`input`, `datePicker`，也可以传入 `tsx`, `jsx` 语法的虚拟dom，也可以传入一个组件，函数式，例如：() => ElInput">`鼠标放上查看`</el-tooltip> | `string, (data) => any`                                                                            | -       | 1.0.0 |
 | `renderProps` | 被渲染组件的 `props` 属性                                                                                                                                                               | `Record<string, any>`                                                                              | -       | 1.0.0 |
 | `renderSlots` | 被渲染组件的插槽  | `Record<string, (...args) => {}>`                                                                  | -       | 1.0.0 |
 
