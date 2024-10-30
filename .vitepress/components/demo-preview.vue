@@ -42,7 +42,7 @@ const isOpen = ref<boolean>(false)
         >
           {{ isOpen ? '隐藏' : '显示' }}代码
         </el-button>
-        <div class="px-4 max-h-[500px] overflow-y-auto">
+        <div class="px-4">
           <code-group v-if="codeFiles.length > 0 && isOpen" :files="codeFiles">
             <template v-for="file in codeFiles" #[file]>
               <slot :name="file"></slot>

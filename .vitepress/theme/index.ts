@@ -39,7 +39,7 @@ import { baiduPlugin } from "./plugin/baidu";
 
 import "virtual:uno.css";
 
-import Preview from '../components/preview.vue';
+import DemoPreview from '../components/demo-preview.vue';
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 
@@ -61,7 +61,7 @@ export default {
       app,
     })
 
-    app.component('Preview', Preview)
+    app.component('DemoPreview', DemoPreview)
 
     baiduPlugin()
   },

@@ -1,6 +1,11 @@
 <script setup lang="tsx">
 import { ref } from 'vue'
-import type { MaTableColumns, MaTableExpose, MaTableOptions } from "@mineadmin/table"
+import type {
+  MaTableColumns,
+  MaTableExpose,
+  MaTableOptions
+} from "@mineadmin/table"
+import { ElMessage } from 'element-plus'
 
 const tableRef = ref<MaTableExpose>()
 const columns = ref<MaTableColumns[]>([
@@ -23,6 +28,13 @@ const options = ref<MaTableOptions>({
   defaultSort: { prop: 'xinshui', order: 'descending' },
   showSummary: true,
   sumText: '合计薪资',
+  // 分页配置
+  pagination: {
+    total: 30,
+    onChange: (currentPage: number, pageSize: number) => {
+      ElMessage.success('当前页：' + currentPage + ', 每页显示：' + pageSize)
+    }
+  }
 })
 
 const data: any[] = [
@@ -35,12 +47,14 @@ const data: any[] = [
   { name: '陈平安', dept: '运营部', xinshui: 8750, date: '2022-08-05' },
   { name: '王林', dept: '研发部', xinshui: 11369, date: '2022-09-05' },
 ]
+
 </script>
 
 <template>
-  <ma-table ref="tableRef" :columns="columns" :data="data" :options="options" />
+  <ma-table
+    ref="tableRef"
+    :columns="columns"
+    :data="data"
+    :options="options"
+  />
 </template>
-
-<style scoped>
-
-</style>

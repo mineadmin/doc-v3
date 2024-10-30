@@ -78,7 +78,7 @@ docker run -d --name mineadmin -p 9501:9501 -v .:/opt/www mineadmin
 ::: code-group
 
 ```shell[重新安装 Vendor]
-composer instsll -vvv
+composer install -vvv
 ```
 
 ```shell [数据表迁移]

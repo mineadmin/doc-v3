@@ -6,11 +6,12 @@
 由于全部兼容及支持原生 `el-table` 的所有参数、事件、插槽，表格只讲扩展参数。
 
 官方参数请参考 [Element plus](https://element-plus.org/zh-CN/component/table.html) 官方文档。
+
+**注意：演示组件显示语言包不对很正常，项目里不会存在此问题。**
 :::
 
 ## 使用
-<Preview dir="demos/ma-table/base/" />
-
+<DemoPreview dir="demos/ma-table" />
 
 ## Props
 
@@ -64,14 +65,13 @@
 
 | 名称              | 说明                                     | 参数 |
 |-----------------|----------------------------------------|----|
-| `default`       | 原生插槽，自定义默认内容，必须为 `el-table-columns` 标签 | -  |
 | `empty`         | 原生插槽，空数据时显示                            | -  |
 | `append`        | 原生插槽，表格最后一行                            | -  |
 | `pageLeft`      | 分页那行左边区域插槽                             |    |
 | `column-[prop]` | 表格列插槽，`prop` 为字段名                      |  scope  |
 | `header-[prop]` | 表格头插槽，`prop` 为字段名                      |  scope  |
 
-## Emit
+## Event
 | 名称              | 说明         | 参数          |
 |-----------------|------------|-------------|
 | `set-data-callback`  | 设置表格数据后的回调 | `data: any[]` |
@@ -87,6 +87,6 @@
 | `setColumns()`      | 设置表格列             | `(MaTableColumns[])` | -                  |
 | `getColumns()`      | 获取表格列             | -                    | `MaTableColumns[]` |
 | `appendColumn()`    | 追加表格列             | `(MaTableColumns)`   | -                  |
-| `removeColumn()`    | 移除表格列             | `(prop: string)`     | `MaTableColumns`   |
+| `removeColumn()`    | 移除表格列             | `(prop: string)`     | -                  |
 | `getColumnByProp()`    | 按`prop`获取表格列      | `(prop: string)`     | `MaTableColumns`   |
 | `getElTableRef()`    | 获取 `el-table` Ref | -                    | `El-Table`         |

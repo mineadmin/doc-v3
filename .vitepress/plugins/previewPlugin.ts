@@ -1,10 +1,12 @@
-import type { MarkdownEnv, MarkdownRenderer } from 'vitepress'
+import type { MarkdownEnv, MarkdownRenderer } from 'vitepress';
 
-import crypto from 'node:crypto'
-import { readdirSync } from 'node:fs'
-import { join } from 'node:path'
+import crypto from 'node:crypto';
+import { readdirSync } from 'node:fs';
+import { join } from 'node:path';
 
-export const rawPathRegexp = /^(.+?(?:\.([\da-z]+))?)(#[\w-]+)?(?: ?{(\d+(?:[,-]\d+)*)? ?(\S+)?})? ?(?:\[(.+)])?$/;
+export const rawPathRegexp =
+  // eslint-disable-next-line regexp/no-super-linear-backtracking, regexp/strict
+  /^(.+?(?:\.([\da-z]+))?)(#[\w-]+)?(?: ?{(\d+(?:[,-]\d+)*)? ?(\S+)?})? ?(?:\[(.+)])?$/;
 
 function rawPathToToken(rawPath: string) {
   const [
@@ -21,15 +23,15 @@ function rawPathToToken(rawPath: string) {
   return { extension, filepath, lang, lines, region, title };
 }
 
-export const previewPlugin = (md: MarkdownRenderer) => {
-  md.core.ruler.after('inline', 'preview', (state) => {
+export const demoPreviewPlugin = (md: MarkdownRenderer) => {
+  md.core.ruler.after('inline', 'demo-preview', (state) => {
     const insertComponentImport = (importString: string) => {
       const index = state.tokens.findIndex(
         (i) => i.type === 'html_block' && i.content.match(/<script setup>/g),
       );
       if (index === -1) {
         const importComponent = new state.Token('html_block', '', 0);
-        importComponent.content = `<script setup lang="ts">\n${importString}\n</script>\n`;
+        importComponent.content = `<script setup>\n${importString}\n</script>\n`;
         state.tokens.splice(0, 0, importComponent);
       } else {
         if (state.tokens[index]) {
@@ -42,7 +44,7 @@ export const previewPlugin = (md: MarkdownRenderer) => {
       }
     };
     // Define the regular expression to match the desired pattern
-    const regex = /<Preview[^>]*\sdir="([^"]*)"/g;
+    const regex = /<DemoPreview[^>]*\sdir="([^"]*)"/g;
     // Iterate through the Markdown content and replace the pattern
     state.src = state.src.replaceAll(regex, (_match, dir) => {
       const componentDir = join(process.cwd(), 'docs', dir).replaceAll(
@@ -88,7 +90,7 @@ export const previewPlugin = (md: MarkdownRenderer) => {
         return a.localeCompare(b, 'en', { sensitivity: 'base' });
       });
       state.tokens[index].content =
-        `<Preview files="${encodeURIComponent(JSON.stringify(childFiles))}" ><${ComponentName}/>
+        `<DemoPreview files="${encodeURIComponent(JSON.stringify(childFiles))}" ><${ComponentName}/>
         `;
 
       const _dummyToken = new state.Token('', '', 0);
@@ -119,7 +121,7 @@ export const previewPlugin = (md: MarkdownRenderer) => {
         tokenArray.push(templateEnd);
       });
       const endTag = new state.Token('html_inline', '', 0);
-      endTag.content = '</Preview>';
+      endTag.content = '</DemoPreview>';
       tokenArray.push(endTag);
 
       state.tokens.splice(index + 1, 0, ...tokenArray);

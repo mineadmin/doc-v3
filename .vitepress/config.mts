@@ -7,7 +7,7 @@ import zhGetSidebar from "./src/zh/sidebars";
 import enGetSidebar from "./src/en/sidebars";
 import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
 import { plantuml } from "@mdit/plugin-plantuml";
-import { previewPlugin } from './plugins/previewPlugin'
+import { demoPreviewPlugin } from './plugins/previewPlugin'
 import UnoCSS from 'unocss/vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 
@@ -125,7 +125,7 @@ export default defineConfigWithTheme ({
   srcDir: 'docs',
   markdown:{
     config:(md:MarkdownRenderer)=>{
-      md.use(previewPlugin)
+      md.use(demoPreviewPlugin)
       md.use(plantuml,{
         type:"fence",
         fence:"plantuml",

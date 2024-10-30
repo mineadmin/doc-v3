@@ -28,7 +28,7 @@ giscusTalk({
 </script>
 
 <template>
-  <ElConfigProvider :locale="zhCn">
+  <ElConfigProvider :locale="{ zhCn }">
     <Layout />
   </ElConfigProvider>
 </template>
