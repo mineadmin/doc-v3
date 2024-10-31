@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import useEcharts from "@mineadmin/echarts";
+// 文档是这么引入
+import useEcharts from "@mineadmin/echarts/dist/index.umd.js";
+// 实际开发是这么引入
+// import useEcharts from "@mineadmin/echarts";
 import {ref} from "vue";
 
 const echarts = ref()
