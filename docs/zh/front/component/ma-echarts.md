@@ -7,3 +7,4 @@
 :::
 
 ## 使用
+<DemoPreview dir="demos/ma-echarts" />

@@ -45,7 +45,7 @@ export default [
 这个提供了 `echarts` 组件的初始化，包括引入需要使用的 `echarts` 组件（默认并没有全量引入，后续可自己修改添加），
 以及将 `echarts` 绑定到 `Vue` 的 `globalProperties` 对象上: **$echarts**，还有黑暗模式下主题的注册等等。
 
-在 `vue` 页面里通过 `useGlobal().$echarts` 获取实例，具体如何使用可参考 [MaEcharts](/zh/front/component/echarts) 章节 
+在 `vue` 页面里通过 `useGlobal().$echarts` 获取实例，具体如何使用可参考 [MaEcharts](/zh/front/component/ma-echarts) 章节 
 
 
 ### plugins

@@ -22,7 +22,7 @@ const searchItem = ref<MaSearchItem>([
     :options="{ fold: true }"
     :form-options="{ labelWidth: '80px'}"
     :search-items="searchItem"
-    @search="(form) => {
+    @search="(form: any) => {
       ElMessage.success('提交的数据：' + JSON.stringify(form))
     }"
   />
