@@ -173,10 +173,6 @@ const sidebar:DefaultTheme.Sidebar = {
           text: 'MaEcharts',
           link: '/zh/front/component/ma-echarts'
         },
-        {
-          text: 'MaDialog',
-          link: '/zh/front/component/ma-dialog'
-        }
       ]
     }
   ],

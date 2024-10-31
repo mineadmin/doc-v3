@@ -36,6 +36,7 @@ import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 import './styles/var.css'
 import './styles/element.css'
 import { baiduPlugin } from "./plugin/baidu";
+import initEcharts from "./plugin/echarts";
 
 import "virtual:uno.css";
 
@@ -64,6 +65,7 @@ export default {
     app.component('DemoPreview', DemoPreview)
 
     baiduPlugin()
+    initEcharts(app)
   },
   extends: DefaultTheme,
   Layout,
