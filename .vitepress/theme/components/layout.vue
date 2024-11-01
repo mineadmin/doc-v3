@@ -30,9 +30,9 @@ giscusTalk({
 <template>
   <ElConfigProvider :locale="{ zhCn }">
     <div class="relative">
-      <div class="sticky top-65px z-999 hidden lg:block mx-auto text-center w-8/12">
+      <div class="sticky top-65px z-999 hidden lg:block mx-auto text-center w-full" v-if="route.path === '/'">
         <el-alert type="success" effect="dark" center>
-          ⭐ 开源不易，如果觉得本项目对您的工作还是有帮助的话，请帮忙在 <a target="_blank" href="https://github.com/mineadmin/mineadmin">GitHub</a> 点个会Star ⭐
+          ⭐ 开源不易，如果觉得本项目对您的工作还是有帮助的话，请帮忙在 <a target="_blank" href="https://github.com/mineadmin/mineadmin">GitHub</a> 点个Star ⭐
         </el-alert>
       </div>
       <Layout>
