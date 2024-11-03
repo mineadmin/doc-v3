@@ -121,7 +121,7 @@ const pluginConfig: Plugin.PluginConfig = {
   },
   // 插件基础信息，必须配置
   config: {
-    // 是否启用，也可以根据 import.meta.env 环境变量来确定是否启用，必须打包后不可使用。
+    // 是否启用，也可以根据 import.meta.env 环境变量来确定是否启用，比如打包后不可使用。
     enable: true, 
     // 基础信息
     info: {

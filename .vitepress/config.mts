@@ -124,6 +124,7 @@ export default defineConfigWithTheme ({
   },
   srcDir: 'docs',
   markdown:{
+    lineNumbers: true,
     config:(md:MarkdownRenderer)=>{
       md.use(demoPreviewPlugin)
       md.use(plantuml,{

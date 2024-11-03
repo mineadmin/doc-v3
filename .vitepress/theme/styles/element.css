@@ -33,3 +33,11 @@
 .el-table tr:nth-child(2n) {
   background-color: transparent;
 }
+
+.theme-blog-popover, .theme-blog-popover-close {
+  top: 120px !important;
+}
+
+.VPDoc.has-aside .content-container {
+  max-width: max-content !important;
+}
