@@ -1,15 +1,7 @@
 <script setup lang="tsx">
 import {onMounted, reactive, ref, inject, h} from 'vue'
-import { MaProTableSchema, MaProTableOptions, MaProTableExpose, useProTableToolbar } from '@mineadmin/pro-table'
+import { MaProTableSchema, MaProTableOptions, MaProTableExpose } from '@mineadmin/pro-table'
 import {ElMessage} from "element-plus";
-import TestTool from './TestTool.vue'
-
-useProTableToolbar().add({
-  name: 'test',
-  order: 0,
-  render: () => TestTool
-})
-
 
 const tableRef = ref<MaProTableExpose>()
 
