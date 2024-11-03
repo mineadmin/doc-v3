@@ -39,5 +39,5 @@
 }
 
 .VPDoc.has-aside .content-container {
-  max-width: max-content !important;
+  max-width: 100% !important;
 }
