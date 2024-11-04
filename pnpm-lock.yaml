@@ -18,14 +18,14 @@ importers:
         specifier: ^1.0.21
         version: 1.0.21(element-plus@2.8.3(vue@3.5.12))
       '@mineadmin/pro-table':
-        specifier: ^1.0.22
-        version: 1.0.22(element-plus@2.8.3(vue@3.5.12))
-      '@mineadmin/search':
-        specifier: ^1.0.20
-        version: 1.0.20(element-plus@2.8.3(vue@3.5.12))
-      '@mineadmin/table':
         specifier: ^1.0.25
         version: 1.0.25(element-plus@2.8.3(vue@3.5.12))
+      '@mineadmin/search':
+        specifier: ^1.0.21
+        version: 1.0.21(element-plus@2.8.3(vue@3.5.12))
+      '@mineadmin/table':
+        specifier: ^1.0.29
+        version: 1.0.29(element-plus@2.8.3(vue@3.5.12))
       '@vueuse/core':
         specifier: ^11.1.0
         version: 11.1.0(vue@3.5.12)
@@ -683,18 +683,18 @@ packages:
     peerDependencies:
       element-plus: ^2.0.0
 
-  '@mineadmin/pro-table@1.0.22':
-    resolution: {integrity: sha512-clx0VCW1uADnsFBGagUZydt/sFupJbzFRAWpig+wGF1Yi3tKaXiR5uMlgj5Ey+zRpRBBY7a+/WdWp4ucX8dSgw==}
+  '@mineadmin/pro-table@1.0.25':
+    resolution: {integrity: sha512-O5qBaohNE8NKf+P6ZwnfmTsqtmz/PSl+CZbiKmuKPI0o4qjT6esRU1WZ9hH6k9bPD7vJg0mkNRhoBBrf2TRW3Q==}
     peerDependencies:
       element-plus: ^2.0.0
 
-  '@mineadmin/search@1.0.20':
-    resolution: {integrity: sha512-C4UT/U/df3lp+NylI/uKFfm7vxsi0zOZIXEDIFREjbo76puxif+KwE/ISfOyOecHZp+SBXMEUZQBgxrYa4Jy9g==}
+  '@mineadmin/search@1.0.21':
+    resolution: {integrity: sha512-rqfX6PJ4XB87EMX8pPVyh3GyYT4ujNXV4HSp2RBeRcDkQ+tSxi7SHkNUgbIdA6c4cnRLHOuksOqtjQGUh9yJxg==}
     peerDependencies:
       element-plus: ^2.0.0
 
-  '@mineadmin/table@1.0.25':
-    resolution: {integrity: sha512-iPWhCVbTzE8pr21dQqrnXnwcdIM0LCjd1HbH9ZF04LOZn7+0U4LWZvoHy7bVq3yyQo7SGZBqV61Zajeyrddo7A==}
+  '@mineadmin/table@1.0.29':
+    resolution: {integrity: sha512-F5fqNMWPReH0pceTEs0Ivwd1aYbiBQ+4SuzTM2jrFDj3C0JgJaGiZA0Hhfr3twvz8DBoMRon6QSRnWL01Zkv/A==}
     peerDependencies:
       element-plus: ^2.0.0
 
@@ -2316,21 +2316,21 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@mineadmin/pro-table@1.0.22(element-plus@2.8.3(vue@3.5.12))':
+  '@mineadmin/pro-table@1.0.25(element-plus@2.8.3(vue@3.5.12))':
     dependencies:
       element-plus: 2.8.3(vue@3.5.12)
       vue: 3.5.12
     transitivePeerDependencies:
       - typescript
 
-  '@mineadmin/search@1.0.20(element-plus@2.8.3(vue@3.5.12))':
+  '@mineadmin/search@1.0.21(element-plus@2.8.3(vue@3.5.12))':
     dependencies:
       element-plus: 2.8.3(vue@3.5.12)
       vue: 3.5.12
     transitivePeerDependencies:
       - typescript
 
-  '@mineadmin/table@1.0.25(element-plus@2.8.3(vue@3.5.12))':
+  '@mineadmin/table@1.0.29(element-plus@2.8.3(vue@3.5.12))':
     dependencies:
       element-plus: 2.8.3(vue@3.5.12)
       vue: 3.5.12

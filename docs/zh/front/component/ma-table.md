@@ -35,6 +35,7 @@
 | `showOverflowTooltip` | <el-tooltip content="当内容过长被隐藏时显示 tooltip">`鼠标放上查看`</el-tooltip>       | `boolean`                                                                                       | `false`  | 1.0.0 |
 | `adaption` | 是否适应高度                                                                | `boolean`                                                                                       | `false`  | 1.0.0 |
 | `adaptionOffsetBottom` | 距离底部偏移量                                                               | `number`                                                                                        | `70`     | 1.0.0 |
+| `showPagination` | 是否显示分页                                                               | `boolean`                                                                                        | `true`     | 1.0.0 |
 | `pagination` | El分页原生属性、事件                                                           | [el-pageination文档](https://element-plus.org/zh-CN/component/pagination.html#%E5%B1%9E%E6%80%A7) | -        | 1.0.0 |
 | `on`      | `el-table` 表格事件集合                                                     | <el-tooltip content="Object: { onSelect: (args) => {}, .... }">`鼠标放上查看`</el-tooltip>            | -        | 1.0.0 |
 
