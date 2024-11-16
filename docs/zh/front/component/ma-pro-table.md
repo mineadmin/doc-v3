@@ -302,16 +302,19 @@ add({
 | `searchAfterActions`        | 搜索 `操作按钮` 后置内容插槽                                         | -  |
 
 ## Expose
-| 名称                | 说明                    | 参数                                                              | 返回值                   |
-|-------------------|-----------------------|-----------------------------------------------------------------|-----------------------|
-| `getSearchRef()`  | 获取 `ma-search` 的Ref   | -                                                               | `MaSearchExpose`      |
-| `getTableRef()`  | 获取 `ma-table` 的Ref    | -                                                               | `MaTableExpose`       |
-| `refresh()`  | 刷新表格数据                | `() => Promise<void>`                                           | `Promise<void>`       |
-| `requestData()`  | 请求表格数据                | `() => Promise<void>`                                           | `Promise<void>`       |
-| `changeApi()`  | 变更请求api               | `( api: () => any, isRequestNow: boolean ) => void`             | `void`                |
-| `setRequestParams()`  | 设置请求参数                | `( params: Record<string, any>, isRequestNow: boolean) => void` | `void`                |
-| `setSearchForm()`    | 设置搜索表单默认值             | `(form: Record<string, any>) => void`                           | `void`                |
-| `getSearchForm()`    | 获取搜索表单数据              | `() => Record<string, any>`                                     | `Record<string, any>`                |
-| `getProTableOptions()`    | 获取 `ma-pro-table` 的参数 | `() => Record<string, any>`                                     | `Record<string, any>`                |
-| `resizeHeight()`    | 重置表格高度                | `() => Promise<void>`                                           | `Promise<void>`                |
-| `getCurrentId()`    | 获取当前组件ID              | -                                                               | `string`                |**
+| 名称                     | 说明                    | 参数                                                              | 返回值                   |
+|------------------------|-----------------------|-----------------------------------------------------------------|-----------------------|
+| `getSearchRef()`       | 获取 `ma-search` 的Ref   | -                                                               | `MaSearchExpose`      |
+| `getTableRef()`        | 获取 `ma-table` 的Ref    | -                                                               | `MaTableExpose`       |
+| `setTableColumns()`    | 设置表格列                 | `(cols: MaProTableColumns[]) => void`                           | `void`                |
+| `getTableColumns()`    | 获取表格列                 | `() => MaProTableColumns[]`                                     | `MaProTableColumns[]`                |
+| `refresh()`            | 刷新表格数据                | `() => Promise<void>`                                           | `Promise<void>`       |
+| `requestData()`        | 请求表格数据                | `() => Promise<void>`                                           | `Promise<void>`       |
+| `changeApi()`          | 变更请求api               | `( api: () => any, isRequestNow: boolean ) => void`             | `void`                |
+| `setRequestParams()`   | 设置请求参数                | `( params: Record<string, any>, isRequestNow: boolean) => void` | `void`                |
+| `setSearchForm()`      | 设置搜索表单默认值             | `(form: Record<string, any>) => void`                           | `void`                |
+| `getSearchForm()`      | 获取搜索表单数据              | `() => Record<string, any>`                                     | `Record<string, any>` |
+| `setProTableOptions()` | 设置 `ma-pro-table` 的参数 | `(opts: MaProTableOptions) => void`                             | `void`                |
+| `getProTableOptions()` | 获取 `ma-pro-table` 的参数 | `() => MaProTableOptions`                                       | `MaProTableOptions` |
+| `resizeHeight()`       | 重置表格高度                | `() => Promise<void>`                                           | `Promise<void>`       |
+| `getCurrentId()`       | 获取当前组件ID              | -                                                               | `string`              |**

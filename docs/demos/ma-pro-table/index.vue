@@ -49,6 +49,7 @@ const options = reactive<MaProTableOptions>({
   },
 
   tableOptions: {
+    adaption: false,
     pagination: {
       total: 1000,
     }

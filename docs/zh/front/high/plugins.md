@@ -151,8 +151,8 @@ const pluginConfig: Plugin.PluginConfig = {
     getUserInfo: (userInfo) => {},
     // 在系统注册路由时被调用，传入了 `vue-router` 实例和路由原始数据。
     registerRoute: (router: Router, routesRaw) => {},
-    // 在页面跳转时被调用，传入了当前路由的数据。
-    routerRedirect: (route: RouteRecordRaw) => {},
+    // 在页面跳转时被调用，传入了原路由和新路由的数据、以及 `vue-router` 实例。注意：外链不生效
+    routerRedirect: ({ oldRoute: RouteRecordRaw, newRoute: RouteRecordRaw }, router: Router) => {},
     // 在网络请求时被调用，传入了原始的请求数据，可对数据加密之类的
     networkRequest: (request) => {},
     // 在服务器返回数据后被调用，传入了原始的响应数据。
