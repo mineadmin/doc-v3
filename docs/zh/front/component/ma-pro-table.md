@@ -178,19 +178,21 @@ add({
 | `schema`  | `ma-pro-table` 架构配置 | `MaProTableSchema` | 1.0.0 |
 
 ### MaProTableOptions
-| 参数                     | 说明                                        | 类型                         | 默认值    | 版本    |
-|------------------------|-------------------------------------------|----------------------------|--------|-------|
-| `tableOptions`         | `ma-table` 参数                             | `MaTableOptions`           | -      | 1.0.0 |
-| `searchOptions`        | `ma-search` 参数                            | `MaSearchOptions`          | -      | 1.0.0 |
-| `searchFormOptions`    | `ma-form` 参数                              | `MaFormOptions`            | -      | 1.0.0 |
-| -                      | -                                         | -                          | -      | -     |
-| `id`                   | 当前id，全局唯一，不指定则随机生成一个                      | `string`                   | -      | 1.0.0 |
-| `adaptionOffsetBottom` | 距离底部偏移量                                   | `number`                   | 0      | 1.0.0 |
-| `actionBtnPosition`    | 动作按钮放置位置，自动模式下，如果开启标题栏，则显示在标题栏，否则显示在表格左上方 | `auto, header, table`      | `auto` | 1.0.0 |
-| `header`               | 头部配置                                      | 查看 [参数配置](#headerconfig)   | -      | 1.0.0 |
-| `toolbar`              | 工具栏是否显示                                   | `boolean, (() => boolean)` | `true` | 1.0.0 |
-| `rowContextMenu`       | 右键配置                                      | 查看 [参数配置](#rowcontextmenu) | -      | 1.0.0 |
-| `requestOptions`       | 列表网络请求配置                                  | 查看 [参数配置](#requestoptions) | -      | 1.0.0 |
+| 参数                     | 说明                                        | 类型                                  | 默认值    | 版本    |
+|------------------------|-------------------------------------------|-------------------------------------|--------|-------|
+| `tableOptions`         | `ma-table` 参数                             | `MaTableOptions`                    | -      | 1.0.0 |
+| `searchOptions`        | `ma-search` 参数                            | `MaSearchOptions`                   | -      | 1.0.0 |
+| `searchFormOptions`    | `ma-form` 参数                              | `MaFormOptions`                     | -      | 1.0.0 |
+| -                      | -                                         | -                                   | -      | -     |
+| `id`                   | 当前id，全局唯一，不指定则随机生成一个                      | `string`                            | -      | 1.0.0 |
+| `adaptionOffsetBottom` | 距离底部偏移量                                   | `number`                            | 0      | 1.0.0 |
+| `actionBtnPosition`    | 动作按钮放置位置，自动模式下，如果开启标题栏，则显示在标题栏，否则显示在表格左上方 | `auto, header, table`               | `auto` | 1.0.0 |
+| `header`               | 头部配置                                      | 查看 [参数配置](#headerconfig)            | -      | 1.0.0 |
+| `toolbar`              | 工具栏是否显示                                   | `boolean, (() => boolean)`          | `true` | 1.0.0 |
+| `rowContextMenu`       | 右键配置                                      | 查看 [参数配置](#rowcontextmenu)          | -      | 1.0.0 |
+| `requestOptions`       | 列表网络请求配置                                  | 查看 [参数配置](#requestoptions)          | -      | 1.0.0 |
+| `onSearchSubmit`       | 搜索提交事件                                    | `(form: Record<string, any>) => void` | -      | 1.0.0 |
+| `onSearchReset`        | 搜索重置事件                                    | `(form: Record<string, any>) => void`          | -      | 1.0.0 |
 
 
 #### HeaderConfig
@@ -273,33 +275,37 @@ add({
 
 ## Event
 
-| 名称              | 说明       | 参数                           |
-|-----------------|----------|------------------------------|
-| `row-drag-sort`  | 拖动行排序事件  | `(tableData: any[]) => void` |
+| 名称              | 说明      | 参数                                                         |
+|-----------------|---------|------------------------------------------------------------|
+| `row-drag-sort` | 拖动行排序事件 | `(tableData: any[]) => void`                               |
+| `search-submit` | 搜索提交事件  | `(form: Record<string, any>) => Record<string, any>, void` |
+| `search-reset`  | 搜索重置事件  | `(form: Record<string, any>) => Record<string, any>, void`                              |
 
 ## Slot
 
-| 名称              | 说明                                                       | 参数 |
-|-----------------|----------------------------------------------------------|----|
-| `default`       | 默认插槽及 `el-table` 原生插槽    | -  |
-| `empty`         | 原生插槽，空数据时显示                            | -  |
-| `append`        | 原生插槽，表格最后一行                            | -  |
-| `pageLeft`      | 分页那行左边区域插槽                             |    |
-| `column-[prop]` | 表格列插槽，`prop` 为字段名                      |  scope  |
-| `header-[prop]` | 表格头插槽，`prop` 为字段名                      |  scope  |
-| `middle`        | 表格与搜索栏中间区域插槽                                             | -  |
-| `tableHeader`        | `header` 整个区域插槽                                          | -  |
-| `headerTitle`        | `header` 标题区域插槽                                          | -  |
-| `headerRight`        | `header` 右侧区域插槽                                          | -  |
-| `toolbarLeft`        | `toolbar` 左侧区域插槽                                         | -  |
-| `toolbar`        | `toolbar` 工具栏列表插槽，不建议使用，推荐[API扩展](#toolbarplugin-工具栏插件) | -  |
-| `beforeToolbar`        | `toolbar` 工具栏列表前置插槽                                      | -  |
-| `afterToolbar`        | `toolbar` 工具栏列表后置插槽                                      | -  |
-| `search`        | 搜索组件插槽，使用后，搜索项配置失效                                       | -  |
-| `searchActions`        | 搜索 `操作按钮` 内容插槽                                           | -  |
-| `searchBeforeActions`        | 搜索 `操作按钮` 前置内容插槽                                         | -  |
-| `searchAfterActions`        | 搜索 `操作按钮` 后置内容插槽                                         | -  |
-| `searchAfterActions`        | 搜索 `操作按钮` 后置内容插槽                                         | -  |
+| 名称                                             | 说明                                                      | 参数 |
+|------------------------------------------------|---------------------------------------------------------|----|
+| `default`                                      | 默认插槽及 `el-table` 原生插槽                                   | -  |
+| `empty`                                        | 原生插槽，空数据时显示                                             | -  |
+| `append`                                       | 原生插槽，表格最后一行                                             | -  |
+| `pageLeft`                                     | 分页那行左边区域插槽                                              |    |
+| `column-[prop]`                                | 表格列插槽，`prop` 为字段名                                       |  scope  |
+| `header-[prop]`                                | 表格头插槽，`prop` 为字段名                                       |  scope  |
+| `middle`                                       | 表格与搜索栏中间区域插槽                                            | -  |
+| `tableHeader`                                  | `header` 整个区域插槽                                         | -  |
+| `headerTitle`                                  | `header` 标题区域插槽                                         | -  |
+| `headerRight`                                  | `header` 右侧区域插槽                                         | -  |
+| `toolbarLeft`                                  | `toolbar` 左侧区域插槽                                        | -  |
+| `toolbar`                                      | `toolbar` 工具栏列表插槽，不建议使用，推荐[API扩展](#toolbarplugin-工具栏插件) | -  |
+| `beforeToolbar`                                | `toolbar` 工具栏列表前置插槽                                     | -  |
+| `afterToolbar`                                 | `toolbar` 工具栏列表后置插槽                                     | -  |
+| `tableTop`                                     | `table` 容器内顶部插槽，位于工具栏上方                                 | -  |
+| `tableCranny`         |  `table` 容器内表格与工具栏中间缝隙插槽                                | -  |
+| `search`                                       | 搜索组件插槽，使用后，搜索项配置失效                                      | -  |
+| `searchActions`                                | 搜索 `操作按钮` 内容插槽                                          | -  |
+| `searchBeforeActions`                          | 搜索 `操作按钮` 前置内容插槽                                        | -  |
+| `searchAfterActions`                           | 搜索 `操作按钮` 后置内容插槽                                        | -  |
+| `searchAfterActions`                           | 搜索 `操作按钮` 后置内容插槽                                        | -  |
 
 ## Expose
 | 名称                     | 说明                    | 参数                                                              | 返回值                   |
