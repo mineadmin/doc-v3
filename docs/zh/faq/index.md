@@ -9,6 +9,6 @@ Swow 安装请参考 [Swow 官方文档](https://docs.toast.run/swow-blog/chs/in
 :::
 
 1. copy 项目目录下的 `.github/ci/server.php` 覆盖 `config/autoload/server.php`
-2. copy 项目目录下的 `.github/ci/hyperf.php` 覆盖 `config/autoload/hyperf.php`
+2. copy 项目目录下的 `.github/ci/hyperf.php` 覆盖 `bin/hyperf.php`
 
 重新启动即可
