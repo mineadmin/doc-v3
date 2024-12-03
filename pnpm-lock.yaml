@@ -12,14 +12,14 @@ importers:
         specifier: ^1.4.2
         version: 1.4.2
       '@mineadmin/echarts':
-        specifier: ^1.0.1
-        version: 1.0.1(element-plus@2.8.3(vue@3.5.12))
+        specifier: ^1.0.5
+        version: 1.0.7(element-plus@2.8.3(vue@3.5.12))
       '@mineadmin/form':
         specifier: ^1.0.21
         version: 1.0.21(element-plus@2.8.3(vue@3.5.12))
       '@mineadmin/pro-table':
-        specifier: ^1.0.37
-        version: 1.0.37(element-plus@2.8.3(vue@3.5.12))
+        specifier: ^1.0.53
+        version: 1.0.53(element-plus@2.8.3(vue@3.5.12))
       '@mineadmin/search':
         specifier: ^1.0.25
         version: 1.0.25(element-plus@2.8.3(vue@3.5.12))
@@ -673,8 +673,8 @@ packages:
       markdown-it:
         optional: true
 
-  '@mineadmin/echarts@1.0.1':
-    resolution: {integrity: sha512-dVdJZReDsQyoi+lwcTl0SpVg86zBQyBmdEqu1ooyfQPgaWNa0MKoD0pno02GxUnVvOYoe+GzkcSBpFhNZvmZZQ==}
+  '@mineadmin/echarts@1.0.7':
+    resolution: {integrity: sha512-PxJdPClmwTP+X6YXNS57xREsS2Zkj+SMe53ozdsADQzolN+yCo+0A1ioPxuS9jxhQthLM3oPsLpFvTCN5gC9/g==}
     peerDependencies:
       element-plus: ^2.0.0
 
@@ -683,8 +683,8 @@ packages:
     peerDependencies:
       element-plus: ^2.0.0
 
-  '@mineadmin/pro-table@1.0.37':
-    resolution: {integrity: sha512-jj8nk51QweOIr+fN/SB6eiym5MIDkPF4b5nWSznNFlwXh3uvaE9CQfwireyVldcd7PIqfEw3AFUG0qbDGDYvaA==}
+  '@mineadmin/pro-table@1.0.53':
+    resolution: {integrity: sha512-sz6MzDCILTJh8Nb0QIsDYbBcCgHQCy67dalqypH9+vRuXgDd/DqdrwQ0zp3S4nuAocmP9DXzo/H2/DsXzr5iNA==}
     peerDependencies:
       element-plus: ^2.0.0
 
@@ -2300,7 +2300,7 @@ snapshots:
     dependencies:
       '@types/markdown-it': 14.1.2
 
-  '@mineadmin/echarts@1.0.1(element-plus@2.8.3(vue@3.5.12))':
+  '@mineadmin/echarts@1.0.7(element-plus@2.8.3(vue@3.5.12))':
     dependencies:
       '@vueuse/core': 10.11.1(vue@3.5.12)
       element-plus: 2.8.3(vue@3.5.12)
@@ -2316,7 +2316,7 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@mineadmin/pro-table@1.0.37(element-plus@2.8.3(vue@3.5.12))':
+  '@mineadmin/pro-table@1.0.53(element-plus@2.8.3(vue@3.5.12))':
     dependencies:
       element-plus: 2.8.3(vue@3.5.12)
       vue: 3.5.12

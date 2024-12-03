@@ -13,8 +13,6 @@ import {
   VisualMapComponent,
 } from 'echarts/components'
 
-import {App} from "vue"
-
 const { use } = echarts
 
 use([
@@ -35,6 +33,6 @@ use([
   VisualMapComponent,
 ])
 
-export default function initEcharts(app: App) {
+export default function initEcharts(app) {
   app.config.globalProperties.$echarts = echarts
 }
