@@ -241,6 +241,9 @@ add({
 |------|----------------------------|----------------------------------------------------|-----|-------|
 |`type`| `el-table` 原生基础上，增加 `operation`, `sort`，第一个为操作栏，可通过 `API 扩展`，第二个为`行拖动排序` | `string` | -   | 1.0.0 |
 |`cellRenderTo`| 渲染单元格为表格注册的插件                     | [查看下方类型](#cellrenderto-使用渲染插件)    | -   | 1.0.0 |
+|`isRender`| 是否渲染列，跟 `hide` 不同的是，不会在表格设置里显示此列                     | `boolean & () => boolean`    | -   | 1.0.55 |
+|`cellRenderPro`| `cellRender` 加强型，增加了第二个参数 `proxy: MaProTableExpose`                    | `(data, proxy) => VNode | string`    | -   | 1.0.55 |
+|`headerRenderPro`| `headerRenderPro` 加强型，增加了第二个参数 `proxy: MaProTableExpose`                     | `(data, proxy) => VNode | string`    | -   | 1.0.55 |
 |`operationConfigure`| 操作栏配置，只有 `type` 为 `operation` 生效  | [查看下方类型](#operationconfigure-操作栏)    | -   | 1.0.0 |
 
 ##### cellRenderTo 使用渲染插件
@@ -308,19 +311,20 @@ add({
 | `searchAfterActions`                           | 搜索 `操作按钮` 后置内容插槽                                        | -  |
 
 ## Expose
-| 名称                     | 说明                    | 参数                                                              | 返回值                   |
-|------------------------|-----------------------|-----------------------------------------------------------------|-----------------------|
-| `getSearchRef()`       | 获取 `ma-search` 的Ref   | -                                                               | `MaSearchExpose`      |
-| `getTableRef()`        | 获取 `ma-table` 的Ref    | -                                                               | `MaTableExpose`       |
-| `setTableColumns()`    | 设置表格列                 | `(cols: MaProTableColumns[]) => void`                           | `void`                |
-| `getTableColumns()`    | 获取表格列                 | `() => MaProTableColumns[]`                                     | `MaProTableColumns[]`                |
-| `refresh()`            | 刷新表格数据                | `() => Promise<void>`                                           | `Promise<void>`       |
-| `requestData()`        | 请求表格数据                | `() => Promise<void>`                                           | `Promise<void>`       |
-| `changeApi()`          | 变更请求api               | `( api: () => any, isRequestNow: boolean ) => void`             | `void`                |
-| `setRequestParams()`   | 设置请求参数                | `( params: Record<string, any>, isRequestNow: boolean) => void` | `void`                |
-| `setSearchForm()`      | 设置搜索表单默认值             | `(form: Record<string, any>) => void`                           | `void`                |
-| `getSearchForm()`      | 获取搜索表单数据              | `() => Record<string, any>`                                     | `Record<string, any>` |
-| `setProTableOptions()` | 设置 `ma-pro-table` 的参数 | `(opts: MaProTableOptions) => void`                             | `void`                |
-| `getProTableOptions()` | 获取 `ma-pro-table` 的参数 | `() => MaProTableOptions`                                       | `MaProTableOptions` |
-| `resizeHeight()`       | 重置表格高度                | `() => Promise<void>`                                           | `Promise<void>`       |
-| `getCurrentId()`       | 获取当前组件ID              | -                                                               | `string`              |**
+| 名称                     | 说明                           | 参数                                                              | 返回值                   |
+|------------------------|------------------------------|-----------------------------------------------------------------|-----------------------|
+| `getSearchRef()`       | 获取 `ma-search` 的Ref          | -                                                               | `MaSearchExpose`      |
+| `getTableRef()`        | 获取 `ma-table` 的Ref           | -                                                               | `MaTableExpose`       |
+| `getElTableStates()`   | 获取 `el-table` 的暴露的states属性列表 | -                                                               | `any`                 |
+| `setTableColumns()`    | 设置表格列                        | `(cols: MaProTableColumns[]) => void`                           | `void`                |
+| `getTableColumns()`    | 获取表格列                        | `() => MaProTableColumns[]`                                     | `MaProTableColumns[]` |
+| `refresh()`            | 刷新表格数据                       | `() => Promise<void>`                                           | `Promise<void>`       |
+| `requestData()`        | 请求表格数据                       | `() => Promise<void>`                                           | `Promise<void>`       |
+| `changeApi()`          | 变更请求api                      | `( api: () => any, isRequestNow: boolean ) => void`             | `void`                |
+| `setRequestParams()`   | 设置请求参数                       | `( params: Record<string, any>, isRequestNow: boolean) => void` | `void`                |
+| `setSearchForm()`      | 设置搜索表单默认值                    | `(form: Record<string, any>) => void`                           | `void`                |
+| `getSearchForm()`      | 获取搜索表单数据                     | `() => Record<string, any>`                                     | `Record<string, any>` |
+| `setProTableOptions()` | 设置 `ma-pro-table` 的参数        | `(opts: MaProTableOptions) => void`                             | `void`                |
+| `getProTableOptions()` | 获取 `ma-pro-table` 的参数        | `() => MaProTableOptions`                                       | `MaProTableOptions`   |
+| `resizeHeight()`       | 重置表格高度                       | `() => Promise<void>`                                           | `Promise<void>`       |
+| `getCurrentId()`       | 获取当前组件ID                     | -                                                               | `string`              |**
