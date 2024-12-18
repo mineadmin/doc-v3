@@ -12,17 +12,17 @@ importers:
         specifier: ^1.4.2
         version: 1.4.2
       '@mineadmin/echarts':
-        specifier: ^1.0.5
+        specifier: ^1.0.1
         version: 1.0.7(element-plus@2.8.3(vue@3.5.12))
       '@mineadmin/form':
         specifier: ^1.0.21
         version: 1.0.21(element-plus@2.8.3(vue@3.5.12))
       '@mineadmin/pro-table':
-        specifier: ^1.0.53
-        version: 1.0.53(element-plus@2.8.3(vue@3.5.12))
+        specifier: ^1.0.55
+        version: 1.0.55(element-plus@2.8.3(vue@3.5.12))
       '@mineadmin/search':
-        specifier: ^1.0.25
-        version: 1.0.25(element-plus@2.8.3(vue@3.5.12))
+        specifier: ^1.0.27
+        version: 1.0.27(element-plus@2.8.3(vue@3.5.12))
       '@mineadmin/table':
         specifier: ^1.0.29
         version: 1.0.29(element-plus@2.8.3(vue@3.5.12))
@@ -683,13 +683,13 @@ packages:
     peerDependencies:
       element-plus: ^2.0.0
 
-  '@mineadmin/pro-table@1.0.53':
-    resolution: {integrity: sha512-sz6MzDCILTJh8Nb0QIsDYbBcCgHQCy67dalqypH9+vRuXgDd/DqdrwQ0zp3S4nuAocmP9DXzo/H2/DsXzr5iNA==}
+  '@mineadmin/pro-table@1.0.55':
+    resolution: {integrity: sha512-6whDcfx3pcvd09/xQuH1qBJzW8/B7k3i9X7svm9jMLEHPyU4UwACzY/0hLISnmCTWKJJLHdmjUG0/SM74Jrndw==}
     peerDependencies:
       element-plus: ^2.0.0
 
-  '@mineadmin/search@1.0.25':
-    resolution: {integrity: sha512-zHvTKWXCJoTMLHfHp1Ksl+FKU9qwoTuLwJ8HNDTvmRipzKBukmsb9oZLK+f8Dj05Bz3uErHAkfkRNnsiS/UOdA==}
+  '@mineadmin/search@1.0.27':
+    resolution: {integrity: sha512-T6KunXWkiv0zhhB8UkZc673qExON77ocBehklOZxD7sV2apLXOAZRudy8hD5TKiC1m9Fjfrx4TpHoEU8mfUl3A==}
     peerDependencies:
       element-plus: ^2.0.0
 
@@ -2316,14 +2316,14 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@mineadmin/pro-table@1.0.53(element-plus@2.8.3(vue@3.5.12))':
+  '@mineadmin/pro-table@1.0.55(element-plus@2.8.3(vue@3.5.12))':
     dependencies:
       element-plus: 2.8.3(vue@3.5.12)
       vue: 3.5.12
     transitivePeerDependencies:
       - typescript
 
-  '@mineadmin/search@1.0.25(element-plus@2.8.3(vue@3.5.12))':
+  '@mineadmin/search@1.0.27(element-plus@2.8.3(vue@3.5.12))':
     dependencies:
       element-plus: 2.8.3(vue@3.5.12)
       vue: 3.5.12
