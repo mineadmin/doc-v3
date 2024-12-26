@@ -242,8 +242,8 @@ add({
 |`type`| `el-table` 原生基础上，增加 `operation`, `sort`，第一个为操作栏，可通过 `API 扩展`，第二个为`行拖动排序` | `string` | -   | 1.0.0 |
 |`cellRenderTo`| 渲染单元格为表格注册的插件                     | [查看下方类型](#cellrenderto-使用渲染插件)    | -   | 1.0.0 |
 |`isRender`| 是否渲染列，跟 `hide` 不同的是，不会在表格设置里显示此列                     | `boolean & () => boolean`    | -   | 1.0.55 |
-|`cellRenderPro`| `cellRender` 加强型，增加了第二个参数 `proxy: MaProTableExpose`                    | `(data, proxy) => VNode | string`    | -   | 1.0.55 |
-|`headerRenderPro`| `headerRenderPro` 加强型，增加了第二个参数 `proxy: MaProTableExpose`                     | `(data, proxy) => VNode | string`    | -   | 1.0.55 |
+|`cellRenderPro`| `cellRender` 加强型，增加了第二个参数 `proxy: MaProTableExpose`                    | `(data, proxy) => VNode & string`    | -   | 1.0.55 |
+|`headerRenderPro`| `headerRender` 加强型，增加了第二个参数 `proxy: MaProTableExpose`                     | `(data, proxy) => VNode & string`    | -   | 1.0.55 |
 |`operationConfigure`| 操作栏配置，只有 `type` 为 `operation` 生效  | [查看下方类型](#operationconfigure-操作栏)    | -   | 1.0.0 |
 
 ##### cellRenderTo 使用渲染插件
