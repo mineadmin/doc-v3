@@ -5,21 +5,7 @@
 
 ## 下载代码
 
-### Composer
-
-使用 [composer](https://getcomposer.org/doc/01-basic-usage.md#package-versions) 进行项目的下载。要求您的系统已经预先准备好了以下开发环境
-
-* [Node](https://nodejs.org/) (推荐 20.0)
-* [PHP](https://php.net) 同时要求安装了 [Swoole](https://swoole.com) 或 [Swow](https://github.com/swow/swow) (PHP 版本推荐 `8.1~8.3`)
-* [Composer](https://getcomposer.org/doc/01-basic-usage.md#package-versions) (推荐最新版)
-
-然后进入一个空的目录。执行以下命令。`YourProject` 是要新建的应用名称目录。如果不传则默认为 mineadmin
-
-```shell
-composer create-project mineadmin/mineadmin:3.x-dev YourProject
-```
-
-### git (推荐)
+### git
 
 使用 Git 工具进行本项目的安装。需要保证本地具有 [Git](https://git-scm.com/) 工具
 
