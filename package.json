@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build",
-    "preview": "vitepress preview"
+    "preview": "vitepress preview",
+    "docs:translate": "node bin/translate.js"
   },
   "dependencies": {
     "@imengyu/vue3-context-menu": "^1.4.2",
@@ -17,18 +18,19 @@
     "echarts": "^5.5.1",
     "element-plus": "^2.8.3",
     "lodash-es": "^4.17.21",
+    "openai": "^4.78.1",
     "radash": "^12.1.0",
     "sortablejs": "1.15.2",
     "vitepress-plugin-announcement": "^0.1.2"
   },
   "devDependencies": {
     "@mdit/plugin-plantuml": "^0.13.1",
+    "@vitejs/plugin-vue-jsx": "^4.0.1",
     "simple-git": "^3.27.0",
     "unocss": "^0.63.6",
     "vitepress": "^1.4.0",
-    "vue": "^3.5.12",
-    "@vitejs/plugin-vue-jsx": "^4.0.1",
     "vitepress-plugin-comment-with-giscus": "^1.1.15",
-    "vitepress-plugin-group-icons": "^1.2.4"
+    "vitepress-plugin-group-icons": "^1.2.4",
+    "vue": "^3.5.12"
   }
 }

@@ -1,0 +1,91 @@
+name: Translate Docs
+
+on:
+  push:
+    paths:
+      - 'docs/**'
+
+jobs:
+  translate:
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get All Changed Markdown Files
+        id: changed-markdown-files
+        uses: tj-actions/changed-files@v45
+        with:
+          # Avoid using single or double quotes for multiline patterns
+          files: |
+            docs/**.md
+
+      - name: List All Changed Markdown Files
+        if: steps.changed-markdown-files.outputs.any_changed == 'true'
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+        run: |
+          for file in ${ALL_CHANGED_FILES}; do
+            echo "$file was changed"
+          done
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          tools: phpize
+          extensions: swoole, redis
+          ini-values: extension=opencc
+
+      - name: Install OpenCC
+        run: |
+          sudo apt-get install libopencc-dev -y
+
+      - name: Build opencc4php
+        run: |
+          git clone https://github.com/nauxliu/opencc4php.git --depth 1
+          cd opencc4php
+          phpize
+          ./configure
+          make
+          sudo make install
+          php --ri opencc
+          cd ..
+          rm -rf opencc4php
+
+      - name: Install Packages
+        run: pnpm install
+
+      - name: Setup Dependencies
+        run: composer install
+
+      - name: Start Translate ZH
+        run: |
+          cp docs/index.md docs/zh/index.md
+          php bin/doc-translate
+
+      - name: Start Translate EN
+        if: steps.changed-markdown-files.outputs.any_changed == 'true'
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+        run: |
+          pnpm run docs:translate
+
+      - name: Commit Updated
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Update docs and translate

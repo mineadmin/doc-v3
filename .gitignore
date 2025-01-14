@@ -9,3 +9,5 @@ dist-ssr
 /.vitepress/.temp/
 /.vitepress/cache/
 /.vitepress/cache/deps/
+/vendor/
+composer.lock
