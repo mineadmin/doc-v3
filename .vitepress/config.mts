@@ -1,10 +1,22 @@
 import {defineConfigWithTheme, type MarkdownRenderer} from 'vitepress'
+
 import enGetNavs from "./src/en/nav";
-import zhGetNavs from "./src/zh/nav";
 import enGetConfig from "./src/en/config";
+import enGetSidebar from "./src/en/sidebars";
+
+import zhGetNavs from "./src/zh/nav";
 import zhGetConfig from "./src/zh/config";
 import zhGetSidebar from "./src/zh/sidebars";
-import enGetSidebar from "./src/en/sidebars";
+
+import hkConfig from "./src/zh-hk/config";
+import hkNav from "./src/zh-hk/nav";
+import hkSidebar from "./src/zh-hk/sidebars";
+
+import twConfig from "./src/zh-tw/config";
+import twNav from "./src/zh-tw/nav";
+import twSidebar from "./src/zh-tw/sidebars";
+
+
 import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
 import { plantuml } from "@mdit/plugin-plantuml";
 import { demoPreviewPlugin } from './plugins/previewPlugin'
@@ -41,6 +53,34 @@ export default defineConfigWithTheme ({
         logo: '/logo.svg',
         nav: enGetNavs,
         sidebar:enGetSidebar,
+        outline:{
+          level:[2 ,4],
+        },
+      }
+    },
+    "zh-hk":{
+      label:"繁體中文(香港)",
+      lang:"zh-hk",
+      link:"/zh-hk/index",
+      ...hkConfig,
+      themeConfig:{
+        logo: '/logo.svg',
+        nav: hkNav,
+        sidebar:hkSidebar,
+        outline:{
+          level:[2 ,4],
+        },
+      }
+    },
+    "zh-tw":{
+      label:"繁體中文(台灣)",
+      lang:"zh-tw",
+      link:"/zh-tw/index",
+      ...twConfig,
+      themeConfig:{
+        logo: '/logo.svg',
+        nav: twNav,
+        sidebar:twSidebar,
         outline:{
           level:[2 ,4],
         },
