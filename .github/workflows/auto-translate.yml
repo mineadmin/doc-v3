@@ -2,8 +2,6 @@ name: Translate Docs
 
 on:
   push:
-    paths:
-      - 'docs/**'
 
 permissions:
     contents: write
