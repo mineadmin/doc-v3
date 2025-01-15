@@ -5,6 +5,10 @@ on:
     paths:
       - 'docs/**'
 
+permissions:
+    contents: write
+    id-token: write
+
 jobs:
   translate:
     env:
