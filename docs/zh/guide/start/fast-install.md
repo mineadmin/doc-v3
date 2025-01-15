@@ -1,8 +1,5 @@
 # 快速开始
 
-自 `3.0` 版本起，前后端都放在了一个仓库，所以我们推荐先安装后端。前端源代码将随着后端
-的 `web` 目录一起下载到本地
-
 ## 下载代码
 
 ### git
@@ -15,18 +12,9 @@
 git clone https://github.com/mineadmin/MineAdmin.git
 ```
 
-## 安装系统并启动
+下载成功后复制项目目录下的 `.env.example` 文件为 `.env` 文件，并配置好数据库和 redis 的配置项
 
-在上面章节我们进行了项目的代码下载以及环境搭建的一些说明，接下来讲述一下如何配置系统，并且启动系统
-
-::: warning
-
-不管是哪种方式下载的系统代码，都需要 copy 根目录一份 `.env.example` 成 `.env`
-并且配置好 env 中关于数据库和 redis 的配置项。才能继续进入下一步操作
-
-:::
-
-## 后端安装
+## 后端环境安装
 
 ### Composer
 
@@ -36,14 +24,15 @@ git clone https://github.com/mineadmin/MineAdmin.git
 
 如果选择用 docker 开发，那么还需要几步进行环境的进一步搭建
 
-```shell
-docker-compose up -d
-```
-
 #### Docker-compose (推荐)
 
 MineAdmin 已经准备好了完善的 `docker-compose.yml` 文件，
 只需要在项目目录中执行以下命令即可完成环境的搭建
+
+
+```shell
+docker-compose up -d
+```
 
 #### Docker Build
 
