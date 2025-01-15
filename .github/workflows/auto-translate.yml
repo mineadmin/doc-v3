@@ -1,7 +1,7 @@
 name: Translate Docs
 
 on:
-  push:
+  pull_request:
 
 permissions:
     contents: write
