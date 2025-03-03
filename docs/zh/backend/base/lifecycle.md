@@ -87,4 +87,9 @@ endif
 
 随后，利用 refresh token 换取新的 access_token 与 refresh_token。
 
-倘若换 token 的接口同样返回 401 错误码，则意味着 acces
+倘若换 token 的接口同样返回 401 错误码，则意味着 access_token 与 refresh_token 均已过期，此时需清除本地缓存，并重定向至登录页面。
+
+若换 token 成功，则需更新本地 token，并重试之前失败的请求。
+
+---
+
