@@ -1,27 +1,44 @@
 # 应用发布
 
-打包应用并发布
-
----
+打包应用并发布到应用市场, 供其他用户下载使用。
 
 ## 应用打包
-应用开发完毕后，你可以上传到官方应用市场，其他人可以下载并使用。
 
-### 打包注意事项
+目前提供一种打包方式，将插件应用整个目录作为一个 git 仓库项目。可以托管到 `github`、`gitee` 等代码托管平台。
+也可以托管到 MineAdmin 自建的 GIT 服务器上。 http://git.mineadmin.com
 
-* 请在根目录压缩文件，即压缩包打开，就是文件列表，不要最外层有文件夹包裹一层，例如下面这个结构下打包
+
+### 打包步骤
+
+1. 将应用目录作为一个 git 仓库项目，提交到代码托管平台。
 
 ```shell
-xmo@XMo:/opt/www/plugin/mine-admin/app-store$ ls -l
-total 0
--rwxrwxrwx 1 xmo xmo   1 Apr 22 16:34 install.lock
--rwxrwxrwx 1 xmo xmo 420 May 27 10:11 mine.json
-drwxrwxrwx 1 xmo xmo 512 May 27 10:11 src
+cd 你的插件应用目录
+
+git init
+
+git add .
+
+git commit -m "first commit"
+
+git remote add origin 你的代码仓库地址
+
+git push -u origin master
 ```
+
+2. 进入 [MineAdmin 插件创建页](https://www.mineadmin.com/member/createApp) 输入代码仓库地址并提交
+
+<ElImage :preview-src-list="['/public/images/create_app.png']" src="/public/images/create_app.png"></ElImage>
+
+3. 等待 MineAdmin 审核通过后，应用会显示在应用市场中。
+
+::: warning 打包注意事项
 
 * 一定要将 `mine.json` 必填信息填写完整，否则应用无法正常发布。
 * 应用上传后，会经过我们审核，审核通过后，才会显示到应用市场，请知悉。
+* 请确保你的插件目录中不包含 `install.lock` 文件，否则会导致应用无法正常安装。
 
+:::
 
 ## 应用版本控制
 
