@@ -324,6 +324,7 @@ add({
 | `setRequestParams()`   | 设置请求参数                       | `( params: Record<string, any>, isRequestNow: boolean) => void` | `void`                |
 | `setSearchForm()`      | 设置搜索表单默认值                    | `(form: Record<string, any>) => void`                           | `void`                |
 | `getSearchForm()`      | 获取搜索表单数据                     | `() => Record<string, any>`                                     | `Record<string, any>` |
+| `search()`             | 搜索方法                         | `(form: Record<string, any>) => void`                           | `void`                |
 | `setProTableOptions()` | 设置 `ma-pro-table` 的参数        | `(opts: MaProTableOptions) => void`                             | `void`                |
 | `getProTableOptions()` | 获取 `ma-pro-table` 的参数        | `() => MaProTableOptions`                                       | `MaProTableOptions`   |
 | `resizeHeight()`       | 重置表格高度                       | `() => Promise<void>`                                           | `Promise<void>`       |

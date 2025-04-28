@@ -260,4 +260,4 @@ Inherits from `el-table-columns` and `ma-table`'s [extended columns configuratio
 :::
 | Parameter      | Description        | Type           | Default | Version    |
 |---------|-----------|--------------|-----|-------|
-| `type`  | Display mode, dropdown: `dropdown`, tile: `tile`  | `string`     | `
+| `type`  | Display mode, dropdown: `dropdown`, tile: `tile`  | `string`     |

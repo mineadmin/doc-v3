@@ -68,6 +68,8 @@
 | `render` | 渲染組件：<el-tooltip content="設置要渲染的組件，可設置 `element plus` 的所有 `form` 組件，例如：`input`, `datePicker`，也可以傳入 `tsx`, `jsx` 語法的虛擬dom，也可以傳入一個組件，函數式，例如：() => ElInput">`鼠標放上查看`</el-tooltip> | `string, (data) => any`                                                                            | -       | 1.0.0 |
 | `renderProps` | 被渲染組件的 `props` 屬性                                                                                                                                                              | `Record<string, any>`                                                                              | -       | 1.0.0 |
 | `renderSlots` | 被渲染組件的插槽                                                                                                                                                                       | `Record<string, (...args) => {}>`                                                                  | -       | 1.0.0 |
+| `children`    | 子配置項，支持無限嵌套，註：父組件如使用插槽，子配置項則失效                                                                                                                                                 | `MaFormItem[]`                                                                                     | -       | 1.0.33 |
+
 
 ## Slot
 

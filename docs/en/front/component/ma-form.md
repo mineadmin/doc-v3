@@ -68,6 +68,8 @@ These are the extended parameters of `ma-form` for `el-form`.
 | `render` | Render component: <el-tooltip content="Set the component to be rendered, can set all `form` components of `element plus`, such as: `input`, `datePicker`, can also pass in `tsx`, `jsx` syntax virtual dom, can also pass in a component, functional, such as: () => ElInput">`Hover to view`</el-tooltip> | `string, (data) => any`                                                                            | -       | 1.0.0 |
 | `renderProps` | `props` properties of the rendered component                                                                                                                                                              | `Record<string, any>`                                                                              | -       | 1.0.0 |
 | `renderSlots` | Slots of the rendered component                                                                                                                                                                       | `Record<string, (...args) => {}>`                                                                  | -       | 1.0.0 |
+| `children`    | Sub-configuration items support unlimited nesting. Note: If the parent component uses slots, the sub-configuration items will be ineffective.                                                                                                                                                 | `MaFormItem[]`                                                                                     | -       | 1.0.33 |
+
 
 ## Slot
 

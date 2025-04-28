@@ -311,20 +311,21 @@ add({
 | `searchAfterActions`                           | 搜索 `操作按鈕` 後置內容插槽                                        | -  |
 
 ## Expose
-| 名稱                     | 説明                           | 參數                                                              | 返回值                   |
-|------------------------|------------------------------|-----------------------------------------------------------------|-----------------------|
-| `getSearchRef()`       | 獲取 `ma-search` 的Ref          | -                                                               | `MaSearchExpose`      |
-| `getTableRef()`        | 獲取 `ma-table` 的Ref           | -                                                               | `MaTableExpose`       |
+| 名稱                     | 説明                         | 參數                                                              | 返回值                   |
+|------------------------|----------------------------|-----------------------------------------------------------------|-----------------------|
+| `getSearchRef()`       | 獲取 `ma-search` 的Ref        | -                                                               | `MaSearchExpose`      |
+| `getTableRef()`        | 獲取 `ma-table` 的Ref         | -                                                               | `MaTableExpose`       |
 | `getElTableStates()`   | 獲取 `el-table` 的暴露的states屬性列表 | -                                                               | `any`                 |
-| `setTableColumns()`    | 設置表格列                        | `(cols: MaProTableColumns[]) => void`                           | `void`                |
-| `getTableColumns()`    | 獲取表格列                        | `() => MaProTableColumns[]`                                     | `MaProTableColumns[]` |
-| `refresh()`            | 刷新表格數據                       | `() => Promise<void>`                                           | `Promise<void>`       |
-| `requestData()`        | 請求表格數據                       | `() => Promise<void>`                                           | `Promise<void>`       |
-| `changeApi()`          | 變更請求api                      | `( api: () => any, isRequestNow: boolean ) => void`             | `void`                |
-| `setRequestParams()`   | 設置請求參數                       | `( params: Record<string, any>, isRequestNow: boolean) => void` | `void`                |
-| `setSearchForm()`      | 設置搜索表單默認值                    | `(form: Record<string, any>) => void`                           | `void`                |
-| `getSearchForm()`      | 獲取搜索表單數據                     | `() => Record<string, any>`                                     | `Record<string, any>` |
-| `setProTableOptions()` | 設置 `ma-pro-table` 的參數        | `(opts: MaProTableOptions) => void`                             | `void`                |
-| `getProTableOptions()` | 獲取 `ma-pro-table` 的參數        | `() => MaProTableOptions`                                       | `MaProTableOptions`   |
-| `resizeHeight()`       | 重置表格高度                       | `() => Promise<void>`                                           | `Promise<void>`       |
-| `getCurrentId()`       | 獲取當前組件ID                     | -                                                               | `string`              |**
+| `setTableColumns()`    | 設置表格列                      | `(cols: MaProTableColumns[]) => void`                           | `void`                |
+| `getTableColumns()`    | 獲取表格列                      | `() => MaProTableColumns[]`                                     | `MaProTableColumns[]` |
+| `refresh()`            | 刷新表格數據                     | `() => Promise<void>`                                           | `Promise<void>`       |
+| `requestData()`        | 請求表格數據                     | `() => Promise<void>`                                           | `Promise<void>`       |
+| `changeApi()`          | 變更請求api                    | `( api: () => any, isRequestNow: boolean ) => void`             | `void`                |
+| `setRequestParams()`   | 設置請求參數                     | `( params: Record<string, any>, isRequestNow: boolean) => void` | `void`                |
+| `setSearchForm()`      | 設置搜索表單默認值                  | `(form: Record<string, any>) => void`                           | `void`                |
+| `getSearchForm()`      | 獲取搜索表單數據                   | `() => Record<string, any>`                                     | `Record<string, any>` |
+| `search()`             | 搜索                         | `(form: Record<string, any>) => void`                           | `void`                |
+| `setProTableOptions()` | 設置 `ma-pro-table` 的參數      | `(opts: MaProTableOptions) => void`                             | `void`                |
+| `getProTableOptions()` | 獲取 `ma-pro-table` 的參數      | `() => MaProTableOptions`                                       | `MaProTableOptions`   |
+| `resizeHeight()`       | 重置表格高度                     | `() => Promise<void>`                                           | `Promise<void>`       |
+| `getCurrentId()`       | 獲取當前組件ID                   | -                                                               | `string`              |**

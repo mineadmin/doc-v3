@@ -8,6 +8,12 @@
 
 首先需要先把代碼下載到本地，執行以下命令。`YourProject` 是要新建的應用名稱目錄。如果不傳則默認為 mineadmin
 
+## 分支介紹
+- `master` 分支，預設主分支，最常用的分支
+- `master-department` 部門分支，包含部門管理、崗位管理、數據權限設置等附加功能。
+
+請根據需要選擇不同的分支開發，以減少後續不必要的麻煩！！！
+
 ```sh [下載代碼]
 git clone https://github.com/mineadmin/MineAdmin.git
 ```

@@ -10,6 +10,12 @@ Use the Git tool to install this project. Ensure that you have the [Git](https:/
 
 First, download the code to your local machine by executing the following command. `YourProject` is the name of the new application directory. If not provided, it defaults to mineadmin.
 
+## Branch Introduction
+- `master` branch: The default main branch, the most commonly used branch
+- `master-department` branch: The department branch, includes additional features such as department management, position management, data permission settings, etc.
+
+Please choose different branches according to your needs to avoid unnecessary troubles in the future!!!
+
 ```sh [Download Code]
 git clone https://github.com/mineadmin/MineAdmin.git
 ```

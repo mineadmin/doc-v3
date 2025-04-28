@@ -8,6 +8,12 @@
 
 首先需要先把代码下载到本地，执行以下命令。`YourProject` 是要新建的应用名称目录。如果不传则默认为 mineadmin
 
+## 分支介绍
+- `master` 分支，默认主分支，最常用的分支
+- `master-department` 部门分支，包含部门管理、岗位管理、数据权限设置等附加功能。
+
+请根据需要选择不同的分支开发，以减少后续不必要的麻烦！！！
+
 ```sh [下载代码]
 git clone https://github.com/mineadmin/MineAdmin.git
 ```
