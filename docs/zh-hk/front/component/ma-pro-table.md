@@ -189,6 +189,7 @@ add({
 | `actionBtnPosition`    | 動作按鈕放置位置，自動模式下，如果開啓標題欄，則顯示在標題欄，否則顯示在表格左上方 | `auto, header, table`               | `auto` | 1.0.0 |
 | `header`               | 頭部配置                                      | 查看 [參數配置](#headerconfig)            | -      | 1.0.0 |
 | `toolbar`              | 工具欄是否顯示                                   | `boolean, (() => boolean)`          | `true` | 1.0.0 |
+| `toolStates`           | 因應需要設定工具顯示                                | { `[key:string]` : `boolean, (() => boolean)` | -      | 1.0.69 |
 | `rowContextMenu`       | 右鍵配置                                      | 查看 [參數配置](#rowcontextmenu)          | -      | 1.0.0 |
 | `requestOptions`       | 列表網絡請求配置                                  | 查看 [參數配置](#requestoptions)          | -      | 1.0.0 |
 | `onSearchSubmit`       | 搜索提交事件                                    | `(form: Record<string, any>) => void` | -      | 1.0.0 |

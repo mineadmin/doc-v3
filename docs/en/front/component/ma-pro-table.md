@@ -188,6 +188,7 @@ add({
 | `actionBtnPosition`    | Action button placement, in auto mode, if the header is enabled, it appears in the header, otherwise in the top-left of the table | `auto, header, table`               | `auto` | 1.0.0 |
 | `header`               | Header configuration                                      | See [Parameter Configuration](#headerconfig)            | -      | 1.0.0 |
 | `toolbar`              | Whether to show the toolbar                                   | `boolean, (() => boolean)`          | `true` | 1.0.0 |
+| `toolStates`           | Configure tool display on demand                                | { `[key:string]` : `boolean, (() => boolean)` | -      | 1.0.69 |
 | `rowContextMenu`       | Right-click configuration                                      | See [Parameter Configuration](#rowcontextmenu)          | -      | 1.0.0 |
 | `requestOptions`       | List network request configuration                                  | See [Parameter Configuration](#requestoptions)          | -      | 1.0.0 |
 | `onSearchSubmit`       | Search submit event                                    | `(form: Record<string, any>) => void` | -      | 1.0.0 |

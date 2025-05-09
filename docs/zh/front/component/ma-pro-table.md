@@ -178,21 +178,22 @@ add({
 | `schema`  | `ma-pro-table` 架构配置 | `MaProTableSchema` | 1.0.0 |
 
 ### MaProTableOptions
-| 参数                     | 说明                                        | 类型                                  | 默认值    | 版本    |
-|------------------------|-------------------------------------------|-------------------------------------|--------|-------|
-| `tableOptions`         | `ma-table` 参数                             | `MaTableOptions`                    | -      | 1.0.0 |
-| `searchOptions`        | `ma-search` 参数                            | `MaSearchOptions`                   | -      | 1.0.0 |
-| `searchFormOptions`    | `ma-form` 参数                              | `MaFormOptions`                     | -      | 1.0.0 |
-| -                      | -                                         | -                                   | -      | -     |
-| `id`                   | 当前id，全局唯一，不指定则随机生成一个                      | `string`                            | -      | 1.0.0 |
-| `adaptionOffsetBottom` | 距离底部偏移量                                   | `number`                            | 0      | 1.0.0 |
-| `actionBtnPosition`    | 动作按钮放置位置，自动模式下，如果开启标题栏，则显示在标题栏，否则显示在表格左上方 | `auto, header, table`               | `auto` | 1.0.0 |
-| `header`               | 头部配置                                      | 查看 [参数配置](#headerconfig)            | -      | 1.0.0 |
-| `toolbar`              | 工具栏是否显示                                   | `boolean, (() => boolean)`          | `true` | 1.0.0 |
-| `rowContextMenu`       | 右键配置                                      | 查看 [参数配置](#rowcontextmenu)          | -      | 1.0.0 |
-| `requestOptions`       | 列表网络请求配置                                  | 查看 [参数配置](#requestoptions)          | -      | 1.0.0 |
-| `onSearchSubmit`       | 搜索提交事件                                    | `(form: Record<string, any>) => void` | -      | 1.0.0 |
-| `onSearchReset`        | 搜索重置事件                                    | `(form: Record<string, any>) => void`          | -      | 1.0.0 |
+| 参数                     | 说明                                        | 类型                                          | 默认值    | 版本     |
+|------------------------|-------------------------------------------|---------------------------------------------|--------|--------|
+| `tableOptions`         | `ma-table` 参数                             | `MaTableOptions`                            | -      | 1.0.0  |
+| `searchOptions`        | `ma-search` 参数                            | `MaSearchOptions`                           | -      | 1.0.0  |
+| `searchFormOptions`    | `ma-form` 参数                              | `MaFormOptions`                             | -      | 1.0.0  |
+| -                      | -                                         | -                                           | -      | -      |
+| `id`                   | 当前id，全局唯一，不指定则随机生成一个                      | `string`                                    | -      | 1.0.0  |
+| `adaptionOffsetBottom` | 距离底部偏移量                                   | `number`                                    | 0      | 1.0.0  |
+| `actionBtnPosition`    | 动作按钮放置位置，自动模式下，如果开启标题栏，则显示在标题栏，否则显示在表格左上方 | `auto, header, table`                       | `auto` | 1.0.0  |
+| `header`               | 头部配置                                      | 查看 [参数配置](#headerconfig)                    | -      | 1.0.0  |
+| `toolbar`              | 工具栏是否显示                                   | `boolean, (() => boolean)`                  | `true` | 1.0.0  |
+| `toolStates`           | 按需设置工具是否显示                                | { `[key:string]` : `boolean, (() => boolean)` | -      | 1.0.69 |
+| `rowContextMenu`       | 右键配置                                      | 查看 [参数配置](#rowcontextmenu)                  | -      | 1.0.0  |
+| `requestOptions`       | 列表网络请求配置                                  | 查看 [参数配置](#requestoptions)                  | -      | 1.0.0  |
+| `onSearchSubmit`       | 搜索提交事件                                    | `(form: Record<string, any>) => void`       | -      | 1.0.0  |
+| `onSearchReset`        | 搜索重置事件                                    | `(form: Record<string, any>) => void`       | -      | 1.0.0  |
 
 
 #### HeaderConfig
