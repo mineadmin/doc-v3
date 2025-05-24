@@ -178,22 +178,22 @@ add({
 | `schema`  | `ma-pro-table` 架構配置 | `MaProTableSchema` | 1.0.0 |
 
 ### MaProTableOptions
-| 引數                     | 說明                                        | 型別                                  | 預設值    | 版本    |
-|------------------------|-------------------------------------------|-------------------------------------|--------|-------|
-| `tableOptions`         | `ma-table` 引數                             | `MaTableOptions`                    | -      | 1.0.0 |
-| `searchOptions`        | `ma-search` 引數                            | `MaSearchOptions`                   | -      | 1.0.0 |
-| `searchFormOptions`    | `ma-form` 引數                              | `MaFormOptions`                     | -      | 1.0.0 |
-| -                      | -                                         | -                                   | -      | -     |
-| `id`                   | 當前id，全域性唯一，不指定則隨機生成一個                      | `string`                            | -      | 1.0.0 |
-| `adaptionOffsetBottom` | 距離底部偏移量                                   | `number`                            | 0      | 1.0.0 |
-| `actionBtnPosition`    | 動作按鈕放置位置，自動模式下，如果開啟標題欄，則顯示在標題欄，否則顯示在表格左上方 | `auto, header, table`               | `auto` | 1.0.0 |
-| `header`               | 頭部配置                                      | 檢視 [引數配置](#headerconfig)            | -      | 1.0.0 |
-| `toolbar`              | 工具欄是否顯示                                   | `boolean, (() => boolean)`          | `true` | 1.0.0 |
-| `toolStates`           | 根據需求開關工具顯示                                | { `[key:string]` : `boolean, (() => boolean)` | -      | 1.0.69 |
-| `rowContextMenu`       | 右鍵配置                                      | 檢視 [引數配置](#rowcontextmenu)          | -      | 1.0.0 |
-| `requestOptions`       | 列表網路請求配置                                  | 檢視 [引數配置](#requestoptions)          | -      | 1.0.0 |
-| `onSearchSubmit`       | 搜尋提交事件                                    | `(form: Record<string, any>) => void` | -      | 1.0.0 |
-| `onSearchReset`        | 搜尋重置事件                                    | `(form: Record<string, any>) => void`          | -      | 1.0.0 |
+| 引數                     | 說明                                        | 型別                                          | 預設值    | 版本     |
+|------------------------|-------------------------------------------|---------------------------------------------|--------|--------|
+| `tableOptions`         | `ma-table` 引數                             | `MaTableOptions`                            | -      | 1.0.0  |
+| `searchOptions`        | `ma-search` 引數                            | `MaSearchOptions`                           | -      | 1.0.0  |
+| `searchFormOptions`    | `ma-form` 引數                              | `MaFormOptions`                             | -      | 1.0.0  |
+| -                      | -                                         | -                                           | -      | -      |
+| `id`                   | 當前id，全域性唯一，不指定則隨機生成一個                      | `string`                                    | -      | 1.0.0  |
+| `adaptionOffsetBottom` | 距離底部偏移量                                   | `number`                                    | 0      | 1.0.0  |
+| `actionBtnPosition`    | 動作按鈕放置位置，自動模式下，如果開啟標題欄，則顯示在標題欄，否則顯示在表格左上方 | `auto, header, table`                       | `auto` | 1.0.0  |
+| `header`               | 頭部配置                                      | 檢視 [引數配置](#headerconfig)                    | -      | 1.0.0  |
+| `toolbar`              | 工具欄是否顯示                                   | `boolean, (() => boolean)`                  | `true` | 1.0.0  |
+| `toolStates`           | 按需設定工具是否顯示                                | { `[key:string]` : `boolean, (() => boolean)` | -      | 1.0.69 |
+| `rowContextMenu`       | 右鍵配置                                      | 檢視 [引數配置](#rowcontextmenu)                  | -      | 1.0.0  |
+| `requestOptions`       | 列表網路請求配置                                  | 檢視 [引數配置](#requestoptions)                  | -      | 1.0.0  |
+| `onSearchSubmit`       | 搜尋提交事件                                    | `(form: Record<string, any>) => void`       | -      | 1.0.0  |
+| `onSearchReset`        | 搜尋重置事件                                    | `(form: Record<string, any>) => void`       | -      | 1.0.0  |
 
 
 #### HeaderConfig
@@ -325,7 +325,7 @@ add({
 | `setRequestParams()`   | 設定請求引數                       | `( params: Record<string, any>, isRequestNow: boolean) => void` | `void`                |
 | `setSearchForm()`      | 設定搜尋表單預設值                    | `(form: Record<string, any>) => void`                           | `void`                |
 | `getSearchForm()`      | 獲取搜尋表單資料                     | `() => Record<string, any>`                                     | `Record<string, any>` |
-| `search()`             | 搜尋                         | `(form: Record<string, any>) => void`                           | `void`                |
+| `search()`             | 搜尋方法                         | `(form: Record<string, any>) => void`                           | `void`                |
 | `setProTableOptions()` | 設定 `ma-pro-table` 的引數        | `(opts: MaProTableOptions) => void`                             | `void`                |
 | `getProTableOptions()` | 獲取 `ma-pro-table` 的引數        | `() => MaProTableOptions`                                       | `MaProTableOptions`   |
 | `resizeHeight()`       | 重置表格高度                       | `() => Promise<void>`                                           | `Promise<void>`       |
