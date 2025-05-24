@@ -208,6 +208,26 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/zh/backend/security/access"
         }
       ]
+    },{
+      text:"数据权限",
+      items:[
+        {
+          text: "核心概念",
+          link: "/zh/backend/data-permission/overview"
+        },
+        {
+          text: "权限配置与效果演示",
+          link: "/zh/backend/data-permission/config"
+        },
+        {
+          text: "使用示例",
+            link: "/zh/backend/data-permission/example"
+        },
+        {
+          text: "注意事项",
+            link: "/zh/backend/data-permission/notice"
+        }
+      ]
     }
   ],
   '/zh/plugin/':[
