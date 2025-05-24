@@ -92,6 +92,6 @@ php bin/hyperf.php mine-extension:create
 |---------------|---------|---------|------------------------------------|
 | path          | string | 無,必填    | 創建路徑,例如 zds/app-store              | 
 | --name        | string | example | 插件名稱                               |                        
-| --type        | string | mixed     | 插件類型 可選類型: mixed,frond,backend     |
+| --type        | string | mixed     | 插件類型 可選類型: mixed,frontend,backend     |
 | --author      | string| 無,可選    | 作者名稱，此值會填充到 minejson.author 中      |
 | --description | string| 無,可選    | 插件介紹，此值會填充到 minejson.description 中 |

@@ -208,6 +208,26 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/zh-tw/backend/security/access"
         }
       ]
+    },{
+      text:"資料許可權",
+      items:[
+        {
+          text: "核心概念",
+          link: "/zh-tw/backend/data-permission/overview"
+        },
+        {
+          text: "許可權配置與效果演示",
+          link: "/zh-tw/backend/data-permission/config"
+        },
+        {
+          text: "使用示例",
+            link: "/zh-tw/backend/data-permission/example"
+        },
+        {
+          text: "注意事項",
+            link: "/zh-tw/backend/data-permission/notice"
+        }
+      ]
     }
   ],
   '/zh-tw/plugin/':[
