@@ -34,7 +34,9 @@ if(如果找不到隔離策略) then (yes)
     :返回空策略;
 endif
 
-@end
+end
+
+@enduml
 ```
 
 邏輯程式碼為
@@ -128,7 +130,7 @@ a1、a2 的崗位是崗位1，a3 的崗位是崗位2，a4 沒有崗位。
 1. 隔離方式為僅根據建立人隔離。 則會拼接查詢條件為 `建立人為當前使用者 id`，也就是查詢到使用者 a3、a4。
 
 ```sql
-SELECT * FROM user WHERE created_by in (4,5)
+SELECT * FROM user WHERE created_by in (4,5);
 ```
 
 2. 隔離方式為僅根據部門隔離，則會拼接查詢條件為 `部門為當前使用者所在部門`，也就是查詢到使用者 a1、a3。
