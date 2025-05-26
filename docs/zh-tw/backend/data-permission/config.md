@@ -11,6 +11,60 @@
 * `部門`隔離以使用者當前所屬部門為依據，查詢資料時會自動新增部門過濾條件。
 * `建立人`隔離以資料建立人作為依據，查詢資料時會自動新增建立人過濾條件。
 
+## 優先順序
+
+目前支援`對指定使用者設定隔離策略`，`為使用者指定崗位，對崗位設定隔離策略`兩種方式
+如果使用者同時設定了隔離策略和崗位隔離策略，則會優先使用對指定使用者設定的隔離策略。
+
+```plantuml
+@startuml
+title 獲取資料隔離策略
+start
+:獲取當前使用者策略;
+if (使用者有隔離策略) then (yes)
+    :返回使用者隔離策略;
+else (no)
+    :獲取崗位隔離策略;
+    if (崗位有隔離策略) then (yes)
+        :返回崗位隔離策略;
+    endif
+endif
+
+if(如果找不到隔離策略) then (yes)
+    :返回空策略;
+endif
+
+@end
+```
+
+邏輯程式碼為
+
+```php
+// app/Model/Permission/User.php:167~186
+
+public function getPolicy(): ?Policy
+{
+    /**
+     * @var null|Policy $policy
+     */
+    $policy = $this->policy()->first();
+    if (! empty($policy)) {
+        return $policy;
+    }
+
+    $this->load('position');
+    $positionList = $this->position;
+    foreach ($positionList as $position) {
+        $current = $position->policy()->first();
+        if (! empty($current)) {
+            return $current;
+        }
+    }
+    return null;
+}
+
+```
+
 ## 示例
 
 以現在的表 `user` 為隔離表，假設有以下資料：
