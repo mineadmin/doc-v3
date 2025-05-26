@@ -11,6 +11,60 @@
 * `部门`隔离以用户当前所属部门为依据，查询数据时会自动添加部门过滤条件。
 * `创建人`隔离以数据创建人作为依据，查询数据时会自动添加创建人过滤条件。
 
+## 优先级
+
+目前支持`对指定用户设置隔离策略`，`为用户指定岗位，对岗位设置隔离策略`两种方式
+如果用户同时设置了隔离策略和岗位隔离策略，则会优先使用对指定用户设置的隔离策略。
+
+```plantuml
+@startuml
+title 获取数据隔离策略
+start
+:获取当前用户策略;
+if (用户有隔离策略) then (yes)
+    :返回用户隔离策略;
+else (no)
+    :获取岗位隔离策略;
+    if (岗位有隔离策略) then (yes)
+        :返回岗位隔离策略;
+    endif
+endif
+
+if(如果找不到隔离策略) then (yes)
+    :返回空策略;
+endif
+
+@end
+```
+
+逻辑代码为
+
+```php
+// app/Model/Permission/User.php:167~186
+
+public function getPolicy(): ?Policy
+{
+    /**
+     * @var null|Policy $policy
+     */
+    $policy = $this->policy()->first();
+    if (! empty($policy)) {
+        return $policy;
+    }
+
+    $this->load('position');
+    $positionList = $this->position;
+    foreach ($positionList as $position) {
+        $current = $position->policy()->first();
+        if (! empty($current)) {
+            return $current;
+        }
+    }
+    return null;
+}
+
+```
+
 ## 示例
 
 以现在的表 `user` 为隔离表，假设有以下数据：
