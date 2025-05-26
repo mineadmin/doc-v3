@@ -34,7 +34,9 @@ if(如果找不到隔离策略) then (yes)
     :返回空策略;
 endif
 
-@end
+end
+
+@enduml
 ```
 
 逻辑代码为
@@ -128,7 +130,7 @@ a1、a2 的岗位是岗位1，a3 的岗位是岗位2，a4 没有岗位。
 1. 隔离方式为仅根据创建人隔离。 则会拼接查询条件为 `创建人为当前用户 id`，也就是查询到用户 a3、a4。
 
 ```sql
-SELECT * FROM user WHERE created_by in (4,5)
+SELECT * FROM user WHERE created_by in (4,5);
 ```
 
 2. 隔离方式为仅根据部门隔离，则会拼接查询条件为 `部门为当前用户所在部门`，也就是查询到用户 a1、a3。
