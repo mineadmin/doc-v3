@@ -23,7 +23,7 @@ class User {}
 
 这样会使所有对 `User` 模型的查询都自动应用数据权限控制。
 
-### 对某个代码块进行数据权限控制
+## 对某个代码块进行数据权限控制
 
 得益于 Hyperf Aop 特性，我们可以在类或者类方法上使用 [DataScope](https://github.com/mineadmin/MineAdmin/blob/master-department/app/Library/DataPermission/Attribute/DataScope.php) 注解来对指定的代码块开启数据权限控制。 
 
@@ -44,3 +44,120 @@ class UserService
 ```
 
 这样在调用 `page` 方法时，数据权限会自动应用到查询中。
+
+
+## 对指定的 ORM Query 进行权限控制
+
+在某些特定场景中，需要更加细化的进行权限隔离。此时可以通过 `Factory::make()->build()` 方法来对指定的 Query 进行限制
+
+```php
+
+use App\Library\DataPermission\Factory;
+use App\Model\Permission\User;
+use App\Model\Permission\Wallet;
+
+class DemoService {
+
+    public function test(User $user): void{
+        $walletQuery = Wallet::query();
+        // 对 WalletQuery 单独进行数据隔离拼接
+        Factory::make()->build($user,$walletQuery->getQuery());
+    }
+}
+
+```
+
+## 指定其他字段作为隔离条件
+
+在某些情况下，业务表中可能会与默认的 `created_by` `dept_id` 字段名称不一致，或者在某些复杂 join 查询中。表名经过 `table as xxxx` 类似的操作。这个时候就需要指定新的隔离字段了。以下举几个例子方便理解在不同的使用方法中如何指定新的字段
+
+
+### 在使用注解隔离某个方法的时候
+
+自带的 `DataScope` 注解有一些参数可以很方便的我们指定新的字段
+
+```php
+<?php
+
+declare(strict_types=1);
+/**
+ * This file is part of MineAdmin.
+ *
+ * @link     https://www.mineadmin.com
+ * @document https://doc.mineadmin.com
+ * @contact  root@imoi.cn
+ * @license  https://github.com/mineadmin/MineAdmin/blob/master/LICENSE
+ */
+
+namespace App\Library\DataPermission\Attribute;
+
+use App\Library\DataPermission\ScopeType;
+use Hyperf\Di\Annotation\AbstractAnnotation;
+
+#[\Attribute(\Attribute::TARGET_CLASS | \Attribute::TARGET_METHOD)]
+final class DataScope extends AbstractAnnotation
+{
+    public function __construct(
+        // 指定部门字段名称
+        private readonly string $deptColumn = 'dept_id',
+        // 创建人字段名称
+        private readonly string $createdByColumn = 'created_by',
+        // 隔离方式
+        private readonly ScopeType $scopeType = ScopeType::DEPT_CREATED_BY,
+        // 只对指定的表进行隔离。为空则全部隔离
+        private readonly ?array $onlyTables = null
+    ) {}
+
+    public function getOnlyTables(): ?array
+    {
+        return $this->onlyTables;
+    }
+
+    public function getDeptColumn(): string
+    {
+        return $this->deptColumn;
+    }
+
+    public function getCreatedByColumn(): string
+    {
+        return $this->createdByColumn;
+    }
+
+    public function getScopeType(): ScopeType
+    {
+        return $this->scopeType;
+    }
+}
+
+
+```
+
+### 在手动使用 `Factory::make()->build` 时
+
+而在手动调用 `Factory` 实例进行条件拼接的时候。就需要使用 `App\Library\DataPermission\Context` 来进行配置了。
+
+```php
+
+use App\Library\DataPermission\Context as Ctx;
+use App\Library\DataPermission\Factory;
+
+// 只对 sss 表进行数据隔离
+Ctx::setOnlyTables(['sss']);
+// 设置部门字段名称
+Ctx::setDeptColumn('department_id');
+// 设置创建人字段名称
+Ctx::setCreatedByColumn('creator');
+// 设置隔离方式
+Ctx::setScopeType(ScopeType::DEPT_CREATED_BY);
+
+$query = XXXModel::query();
+
+Factory::make()->build($query->getQuery(),$user);
+
+```
+
+::: warning
+
+需要注意，不管哪种使用方式。如果新开一个协程。都要重新设置一遍才能起效
+
+:::
