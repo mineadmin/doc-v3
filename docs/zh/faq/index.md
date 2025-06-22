@@ -30,3 +30,9 @@ Swow 安装请参考 [Swow 官方文档](https://docs.toast.run/swow-blog/chs/in
 重新启动即可
 
 ---
+
+
+## 安装了插件后，提交到git后，线上部署拉取代码(或者其他人拉取代码)，前端访问插件的后端接口报not fund
+
+1. plugin/mine-admin下面的插件中install.lock 必须提交，否则插件的路由无法识别
+2. gitignore中有*.lock，去掉这行
