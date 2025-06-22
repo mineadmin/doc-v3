@@ -30,3 +30,9 @@ Swow 安裝請參考 [Swow 官方文件](https://docs.toast.run/swow-blog/chs/in
 重新啟動即可
 
 ---
+
+
+## 安裝了外掛後，提交到git後，線上部署拉取程式碼(或者其他人拉取程式碼)，前端訪問外掛的後端介面報not fund
+
+1. plugin/mine-admin下面的外掛中install.lock 必須提交，否則外掛的路由無法識別
+2. gitignore中有*.lock，去掉這行
