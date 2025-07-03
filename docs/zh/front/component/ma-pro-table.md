@@ -262,7 +262,8 @@ add({
 :::
 | 参数      | 说明        | 类型           | 默认值 | 版本    |
 |---------|-----------|--------------|-----|-------|
-| `type`  | 显示方式，下拉菜单：`dropdown`, 平铺：`tile`  | `string`     | `dropdown`   | 1.0.0 |
+| `type`  | 显示方式，自动模式：`auto`, 下拉菜单：`dropdown`, 平铺：`tile`  | `string`     | `auto`   | `auto` 所需 `1.0.75` |
+| `fold`  | 自动模式下，平铺几个后自动折叠，默认为：`1` 个  | `number`     | `1`   | 1.0.75 |
 | `actions` | 操作栏配置列表 | `OperationAction[]` | -   | 1.0.0 |
 
 ###### OperationAction 操作栏列表配置
