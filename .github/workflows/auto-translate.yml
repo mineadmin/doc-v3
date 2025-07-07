@@ -2,6 +2,9 @@ name: Translate Docs
 
 on:
   pull_request:
+    types: [opened, synchronize]
+    paths:
+      - 'docs/zh/**'
 
 permissions:
     contents: write
@@ -15,6 +18,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+      - name: Generate GitHub Token
+        id: generate-token
+        uses: tibdex/github-app-token@v2
+        with:
+          app_id: ${{ secrets.MINEADMIN_APP_ID }}
+          private_key: ${{ secrets.MINEADMIN_APP_PRIVATE_KEY }}
 
       - name: Get All Changed Markdown Files
         id: changed-markdown-files
@@ -90,4 +102,6 @@ jobs:
       - name: Commit Updated
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Update docs and translate
+          commit_message: "🌐 Auto-translated content"
+          branch: ${{ github.event.pull_request.head.ref }}
+          token: ${{ steps.generate-token.outputs.token }}
