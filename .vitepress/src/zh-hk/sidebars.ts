@@ -206,6 +206,10 @@ const sidebar:DefaultTheme.Sidebar = {
         {
           text: "用户授權(RBAC)",
           link: "/zh-hk/backend/security/access"
+        },
+        {
+          text: "獲取客户端 IP",
+          link: "/zh-hk/backend/security/client-ip"
         }
       ]
     },{

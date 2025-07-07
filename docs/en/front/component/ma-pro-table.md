@@ -261,4 +261,71 @@ Inherits from `el-table-columns` and `ma-table`'s [extended columns configuratio
 :::
 | Parameter      | Description        | Type           | Default | Version    |
 |---------|-----------|--------------|-----|-------|
-| `type`  | Display mode, dropdown: `dropdown`, tile: `tile`  | `string`     |
+| `type`  | Display mode, auto mode: `auto`, dropdown menu: `dropdown`, tile: `tile`  | `string`     | `auto`   | `auto` requires `1.0.75` |
+| `fold`  | In auto mode, the number of tiles before auto-collapsing, default: `1`  | `number`     | `1`   | 1.0.75 |
+| `actions` | Action bar configuration list | `OperationAction[]` | -   | 1.0.0 |
+
+###### OperationAction Action Bar Configuration
+| Parameter    | Description                     | Type                                                             | Default | Version |
+|-------------|--------------------------------|----------------------------------------------------------------|---------|---------|
+| `name`      | Action identifier              | `string`                                                       | -       | 1.0.0   |
+| `text`      | Text configuration             | `string, ((data: TableColumnRenderer) => string)`              | -       | 1.0.0   |
+| `icon`      | Icon configuration (rendered internally with `ma-svg-icon`) | `string, ((data: TableColumnRenderer) => string)`              | -       | 1.0.0   |
+| `order`     | Sort order (lower numbers appear first) | `number`                                                       | -       | 1.0.0   |
+| `disabled`  | Whether disabled               | `((data: TableColumnRenderer) => boolean)`                     | -       | 1.0.0   |
+| `show`      | Whether to show                | `((data: TableColumnRenderer) => boolean)`                     | -       | 1.0.0   |
+| `onClick`   | Click event handler            | `(data: TableColumnRenderer, proxy: MaProTableExpose) => void` | -       | 1.0.0   |
+| `linkProps` | `el-link` component props      | [LinkProps Documentation](https://element-plus.org/en-US/component/link.html#attributes) | -       | 1.0.0   |
+
+## Events
+
+| Name             | Description          | Parameters                                                     |
+|------------------|---------------------|---------------------------------------------------------------|
+| `row-drag-sort`  | Row drag sort event  | `(tableData: any[]) => void`                                  |
+| `search-submit`  | Search submit event  | `(form: Record<string, any>) => Record<string, any>, void`     |
+| `search-reset`   | Search reset event   | `(form: Record<string, any>) => Record<string, any>, void`    |
+
+## Slots
+
+| Name                    | Description                                                                 | Parameters |
+|-------------------------|-----------------------------------------------------------------------------|------------|
+| `default`               | Default slot and native `el-table` slots                                    | -          |
+| `empty`                 | Native slot displayed when data is empty                                     | -          |
+| `append`                | Native slot for the last row of the table                                   | -          |
+| `pageLeft`              | Slot for left area of pagination row                                        | -          |
+| `column-[prop]`         | Table column slot (`prop` is the field name)                                | scope      |
+| `header-[prop]`         | Table header slot (`prop` is the field name)                               | scope      |
+| `middle`                | Slot for area between table and search bar                                 | -          |
+| `tableHeader`           | Slot for entire header area                                                | -          |
+| `headerTitle`           | Slot for title area in header                                              | -          |
+| `headerRight`           | Slot for right area in header                                              | -          |
+| `toolbarLeft`           | Slot for left area of toolbar                                              | -          |
+| `toolbar`               | Slot for toolbar list (not recommended, prefer [API extension](#toolbarplugin-toolbar-plugin)) | -          |
+| `beforeToolbar`         | Pre-toolbar list slot                                                      | -          |
+| `afterToolbar`          | Post-toolbar list slot                                                     | -          |
+| `tableTop`              | Slot at top of table container (above toolbar)                             | -          |
+| `tableCranny`           | Slot for gap between table and toolbar in table container                 | -          |
+| `search`                | Search component slot (disables search item configuration when used)      | -          |
+| `searchActions`         | Slot for search action buttons content                                     | -          |
+| `searchBeforeActions`   | Slot for content before search action buttons                              | -          |
+| `searchAfterActions`    | Slot for content after search action buttons                               | -          |
+
+## Exposed Methods
+| Name                     | Description                           | Parameters                                                              | Return Type               |
+|--------------------------|--------------------------------------|------------------------------------------------------------------------|---------------------------|
+| `getSearchRef()`         | Get `ma-search` reference            | -                                                                     | `MaSearchExpose`          |
+| `getTableRef()`          | Get `ma-table` reference              | -                                                                     | `MaTableExpose`           |
+| `getElTableStates()`     | Get `el-table` exposed states         | -                                                                     | `any`                     |
+| `setTableColumns()`      | Set table columns                     | `(cols: MaProTableColumns[]) => void`                                 | `void`                    |
+| `getTableColumns()`      | Get table columns                     | `() => MaProTableColumns[]`                                           | `MaProTableColumns[]`      |
+| `refresh()`              | Refresh table data                    | `() => Promise<void>`                                                 | `Promise<void>`           |
+| `requestData()`          | Request table data                    | `() => Promise<void>`                                                 | `Promise<void>`           |
+| `changeApi()`            | Change request API                   | `(api: () => any, isRequestNow: boolean) => void`                     | `void`                    |
+| `setRequestParams()`     | Set request parameters               | `(params: Record<string, any>, isRequestNow: boolean) => void`       | `void`                    |
+| `setSearchForm()`        | Set search form default values        | `(form: Record<string, any>) => void`                                 | `void`                    |
+| `getSearchForm()`        | Get search form data                 | `() => Record<string, any>`                                           | `Record<string, any>`     |
+| `search()`               | Search method                        | `(form: Record<string, any>) => void`                                 | `void`                    |
+| `setProTableOptions()`   | Set `ma-pro-table` options           | `(opts: MaProTableOptions) => void`                                   | `void`                    |
+| `getProTableOptions()`   | Get `ma-pro-table` options           | `() => MaProTableOptions`                                             | `MaProTableOptions`       |
+| `resizeHeight()`         | Reset table height                   | `() => Promise<void>`                                                 | `Promise<void>`           |
+| `getCurrentId()`         | Get current component ID             | -                                                                     | `string`                  |
