@@ -21,9 +21,6 @@ hero:
     - theme: alt
       text: 下载源码
       link: https://github.com/mineadmin/mineadmin
-    - theme: alt
-      text: 一键安装工具
-      link: https://github.com/mineadmin/mine
 
 features:
   - icon: 🚀
