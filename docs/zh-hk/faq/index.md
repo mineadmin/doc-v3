@@ -36,21 +36,3 @@ Swow 安裝請參考 [Swow 官方文檔](https://docs.toast.run/swow-blog/chs/in
 
 1. plugin/mine-admin下面的插件中install.lock 必須提交，否則插件的路由無法識別
 2. gitignore中有*.lock，去掉這行
-
-
----
-
-
-## 上載圖片或檔案時出現 Not Found 問題
-
-1. 生產環境下，建議使用 nginx 作為代理伺服器。
-2. 開發環境中，請於 /config/autoload/server.php 設定如下：
-```php
-'settings' => [
-  // 开启外部可以访问
-  Constant::OPTION_ENABLE_STATIC_HANDLER => env('APP_DEBUG', false),
-  Constant::OPTION_DOCUMENT_ROOT => BASE_PATH . '/storage',
-  //...
-],
-```
-.env 檔案中把 APP_DEBUG 設為 true，設定後請重新啟動服務。
