@@ -44,6 +44,28 @@ Swow 安装请参考 [Swow 官方文档](https://docs.toast.run/swow-blog/chs/in
 ## 上传图片或文件，访问Not Found 问题
 
 1. 生产环境下，建议使用nginx代理。
+
+  使用Nginx 代理可以借鉴以下配置 （注意 env 配置 和上传目录权限）
+```nginx
+# 代理 uploads 中的图片资源
+location /uploads/ {
+    alias /mineadmin/storage/uploads/; # 本地存储目录
+    expires 30d;
+    add_header Cache-Control "public";
+    add_header Access-Control-Allow-Origin *;
+    
+    # 只允许图片文件
+    location ~* \.(jpg|jpeg|png|gif|webp|svg|ico|bmp)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+    
+    # 防止访问其他文件类型
+    location ~* \.(php|html|htm|js|css)$ {
+        deny all;
+    }
+}
+```
 2. 开发环境下，在/config/autoload/server.php，配置如下：
 ```php
 'settings' => [
