@@ -46,24 +46,14 @@ Swow 安装请参考 [Swow 官方文档](https://docs.toast.run/swow-blog/chs/in
 1. 生产环境下，建议使用nginx代理。
 
   使用Nginx 代理可以借鉴以下配置 （注意 env 配置 和上传目录权限）。请注意，以下路径仅为示例，需根据实际部署环境调整。
+  假设资源url 为 https://example.com/uploads/**/****.png
 ```nginx
 # 代理 uploads 中的图片资源
 location /uploads/ {
     alias /mineadmin/storage/uploads/; # 示例路径，请根据实际部署环境调整
-    expires 30d;
-    add_header Cache-Control "public";
-    add_header Access-Control-Allow-Origin https://example.com;
-    
-    # 只允许图片文件
-    location ~* \.(jpg|jpeg|png|gif|webp|svg|ico|bmp)$ {
-        expires 1y;
-        add_header Cache-Control "public, immutable";
-    }
-    
-    # 防止访问其他文件类型
-    location ~* \.(php|html|htm|js|css)$ {
-        deny all;
-    }
+    expires 7d;
+    add_header Cache-Control "public";  # 允许所有用户和中间缓存服务器（如CDN）缓存此资源，提高缓存效率
+    add_header Access-Control-Allow-Origin https://example.com;  # 只允许 https://example.com 域名的网页跨域请求本资源，提升安全性
 }
 ```
 2. 开发环境下，在/config/autoload/server.php，配置如下：
