@@ -45,11 +45,11 @@ Swow 安装请参考 [Swow 官方文档](https://docs.toast.run/swow-blog/chs/in
 
 1. 生产环境下，建议使用nginx代理。
 
-  使用Nginx 代理可以借鉴以下配置 （注意 env 配置 和上传目录权限）
+  使用Nginx 代理可以借鉴以下配置 （注意 env 配置 和上传目录权限）。请注意，以下路径仅为示例，需根据实际部署环境调整。
 ```nginx
 # 代理 uploads 中的图片资源
 location /uploads/ {
-    alias /mineadmin/storage/uploads/; # 本地存储目录
+    alias /mineadmin/storage/uploads/; # 示例路径，请根据实际部署环境调整
     expires 30d;
     add_header Cache-Control "public";
     add_header Access-Control-Allow-Origin *;
