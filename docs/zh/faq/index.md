@@ -52,7 +52,7 @@ location /uploads/ {
     alias /mineadmin/storage/uploads/; # 示例路径，请根据实际部署环境调整
     expires 30d;
     add_header Cache-Control "public";
-    add_header Access-Control-Allow-Origin *;
+    add_header Access-Control-Allow-Origin https://example.com;
     
     # 只允许图片文件
     location ~* \.(jpg|jpeg|png|gif|webp|svg|ico|bmp)$ {
