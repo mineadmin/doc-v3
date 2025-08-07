@@ -37,32 +37,12 @@ jobs:
         run: pnpm build
       - name: Push Image
         env:
-            DOCKER_USERNAME: ${{ secrets.CODING_USER }}
-            DOCKER_PASSWORD: ${{ secrets.CODING_PASS }}
-            DOCKER_REGISTRY: ${{ secrets.CODING_SERVER }}
+            DOCKER_USERNAME: ${{ secrets.ALIYUN_USERNAME }}
+            DOCKER_PASSWORD: ${{ secrets.ALIYUN_PASSWORD }}
+            DOCKER_REGISTRY: ${{ secrets.ALIYUN_REGISTRY }}
             SHA: ${{ github.sha }}
         run: |
           docker build . -t doc-v3:latest
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY
-          docker tag doc-v3:latest $DOCKER_REGISTRY/mineadmin/mineadmin/doc-v3:$SHA
-          docker push $DOCKER_REGISTRY/mineadmin/mineadmin/doc-v3:$SHA
-
-  # 部署工作
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    name: Deploy
-    steps:
-      - name: Build Server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          port: ${{ secrets.SERVER_PORT }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            export CODING_SERVER=${{ secrets.CODING_SERVER }}
-            export SHA=${{ github.sha }}
-            export CODING_USER=${{ secrets.CODING_USER }}
-            export CODING_PASS=${{ secrets.CODING_PASS }}
-            sh /opt/www/deploy-doc-v3.sh
+          docker tag doc-v3:latest $DOCKER_REGISTRY/mineadmins/docs:$SHA
+          docker push $DOCKER_REGISTRY/mineadmins/docs:$SHA
