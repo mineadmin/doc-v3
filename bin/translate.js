@@ -337,12 +337,11 @@ function showHelp() {
     console.log('  --check: 只检查翻译状态，生成报告但不执行翻译');
     console.log('');
     console.log('示例:');
-    console.log('  node bin/translate.js en           # 智能翻译英文(只翻译缺失文件)');
-    console.log('  node bin/translate.js ja --all     # 全量翻译日文');
-    console.log('  node bin/translate.js en ja --check # 检查英文和日文翻译状态');
-    console.log('  node bin/translate.js -l en -a     # 全量翻译英文');
-    console.log('  node bin/translate.js --check      # 检查所有语言翻译状态');
-    console.log('  node bin/translate.js              # 智能翻译所有语言');
+    console.log('  pnpm run docs:translate en               # 智能翻译英文(只翻译缺失文件)');
+    console.log('  pnpm run docs:translate en --all         # 全量翻译英文');
+    console.log('  pnpm run docs:translate en --check       # 检查英文翻译状态');
+    console.log('  pnpm run docs:translate --check          # 检查所有语言翻译状态');
+    console.log('  pnpm run docs:translate                  # 智能翻译所有语言');
 }
 
 /**
@@ -406,7 +405,7 @@ async function executeCheck(languages) {
         console.log(`\n💡 建议操作:`);
         incompleteLanguages.forEach(r => {
             if (r.overall.missing > 0 || r.overall.empty > 0) {
-                console.log(`   - 翻译 ${r.language.toUpperCase()}: node bin/translate.js ${r.language}`);
+                console.log(`   - 翻译 ${r.language.toUpperCase()}: pnpm docs:translate ${r.language}`);
             }
         });
     }
