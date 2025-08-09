@@ -4,7 +4,7 @@ import path from 'path';
 import process from "process";
 
 const endpoint = "https://api.deepseek.com";
-const token = 'sk-d6a2affa2acc4c389841daf4640384e5';
+const token = process.env["DEEPSEEK_API_KEY"];
 const MAX_CONCURRENT = 10; // 最大并发数
 const MAX_RETRIES = 3; // 最大重试次数
 
