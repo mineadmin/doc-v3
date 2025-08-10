@@ -180,5 +180,8 @@ export default defineConfigWithTheme ({
         fence:"plantuml",
       })
     }
+  },
+  sitemap:{
+    hostname: 'https://doc.mineadmin.com'
   }
 })
