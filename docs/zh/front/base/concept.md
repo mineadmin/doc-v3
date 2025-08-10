@@ -10,26 +10,24 @@
 
 本项目采用现代化的前端开发架构，基于 Vue 3 + TypeScript + Vite 构建，实现了模块化、插件化的开发模式。
 
-```mermaid
-graph TB
-    A[项目根目录 ./web] --> B[src 源码目录]
-    A --> C[types 全局类型]
-    A --> D[vite.config.ts 配置]
-    
-    B --> E[modules 模块系统]
-    B --> F[plugins 插件系统]
-    B --> G[components 全局组件]
-    B --> H[utils 工具函数]
-    
-    E --> I[base 基础模块]
-    E --> J[custom 自定义模块...]
-    
-    F --> K[独立应用]
-    F --> L[功能插件]
-    
-    I --> M[api 接口]
-    I --> N[views 视图]
-    I --> O[locales 国际化]
+```plantuml
+@startmindmap
+* 项目根目录 ./web
+** src 源码目录
+*** modules 模块系统
+**** base 基础模块
+***** api 接口
+***** views 视图
+***** locales 国际化
+**** custom 自定义模块...
+*** plugins 插件系统
+**** 独立应用
+**** 功能插件
+*** components 全局组件
+*** utils 工具函数
+** types 全局类型
+** vite.config.ts 配置
+@endmindmap
 ```
 
 ## 全局类型系统
@@ -78,24 +76,24 @@ interface ComponentProps {
 
 ### 模块结构设计
 
-```mermaid
-graph LR
-    A[modules 模块根目录] --> B[base 基础模块]
-    A --> C[user 用户模块]
-    A --> D[order 订单模块]
-    A --> E[... 其他业务模块]
-    
-    B --> F[api/ 接口层]
-    B --> G[views/ 视图层]
-    B --> H[locales/ 国际化]
-    B --> I[components/ 模块组件]
-    
-    F --> J[user.ts]
-    F --> K[menu.ts]
-    G --> L[dashboard/]
-    G --> M[login/]
-    H --> N[zh_CN.yaml]
-    H --> O[en.yaml]
+```plantuml
+@startmindmap
+* modules 模块根目录
+** base 基础模块
+*** api/ 接口层
+**** user.ts
+**** menu.ts
+*** views/ 视图层
+**** dashboard/
+**** login/
+*** locales/ 国际化
+**** zh_CN.yaml
+**** en.yaml
+*** components/ 模块组件
+** user 用户模块
+** order 订单模块
+** ... 其他业务模块
+@endmindmap
 ```
 
 ### 标准模块目录结构
@@ -133,20 +131,21 @@ graph LR
 
 ### 模块间通信
 
-```mermaid
-sequenceDiagram
-    participant A as 模块 A
-    participant S as 全局 Store
-    participant B as 模块 B
-    participant E as Event Bus
-    
-    A->>S: 更新全局状态
-    S->>B: 状态变更通知
-    
-    A->>E: 发送事件
-    E->>B: 事件监听响应
-    
-    A->>B: 直接调用公共 API
+```plantuml
+@startuml
+participant "模块 A" as A
+participant "全局 Store" as S
+participant "模块 B" as B
+participant "Event Bus" as E
+
+A -> S: 更新全局状态
+S -> B: 状态变更通知
+
+A -> E: 发送事件
+E -> B: 事件监听响应
+
+A -> B: 直接调用公共 API
+@enduml
 ```
 
 ### 模块使用示例
@@ -179,27 +178,21 @@ export default defineComponent({
 
 ### 插件架构设计
 
-```mermaid
-graph TD
-    A[插件系统] --> B[核心插件]
-    A --> C[功能插件]
-    A --> D[第三方插件]
-    
-    B --> E[路由插件]
-    B --> F[状态管理插件]
-    B --> G[国际化插件]
-    
-    C --> H[图表插件]
-    C --> I[编辑器插件]
-    C --> J[地图插件]
-    
-    D --> K[第三方组件库]
-    D --> L[外部服务集成]
-    
-    style A fill:#e1f5fe
-    style B fill:#f3e5f5
-    style C fill:#e8f5e8
-    style D fill:#fff3e0
+```plantuml
+@startmindmap
+* 插件系统
+** 核心插件
+*** 路由插件
+*** 状态管理插件
+*** 国际化插件
+** 功能插件
+*** 图表插件
+*** 编辑器插件
+*** 地图插件
+** 第三方插件
+*** 第三方组件库
+*** 外部服务集成
+@endmindmap
 ```
 
 ### 插件目录结构
@@ -224,20 +217,21 @@ graph TD
 
 ### 插件生命周期
 
-```mermaid
-sequenceDiagram
-    participant App as 应用主程序
-    participant PM as 插件管理器
-    participant P as 插件实例
-    
-    App->>PM: 初始化插件管理器
-    PM->>P: 加载插件
-    P->>PM: 注册插件信息
-    PM->>P: 调用 install 方法
-    P->>App: 注册组件/指令/服务
-    App->>P: 调用插件功能
-    App->>PM: 卸载插件
-    PM->>P: 调用 uninstall 方法
+```plantuml
+@startuml
+participant "应用主程序" as App
+participant "插件管理器" as PM
+participant "插件实例" as P
+
+App -> PM: 初始化插件管理器
+PM -> P: 加载插件
+P -> PM: 注册插件信息
+PM -> P: 调用 install 方法
+P -> App: 注册组件/指令/服务
+App -> P: 调用插件功能
+App -> PM: 卸载插件
+PM -> P: 调用 uninstall 方法
+@enduml
 ```
 
 ### 插件开发规范
@@ -449,33 +443,25 @@ import type { UserModuleState } from '~/user/types'
 
 ### 别名系统架构图
 
-```mermaid
-graph TB
-    A[项目根目录] --> B[@: ./src]
-    A --> C[#: ./types]
-    
-    B --> D[components/]
-    B --> E[utils/]
-    B --> F[$: plugins/]
-    B --> G[~: modules/]
-    
-    F --> H[charts/]
-    F --> I[editor/]
-    F --> J[map/]
-    
-    G --> K[base/]
-    G --> L[user/]
-    G --> M[order/]
-    
-    C --> N[global.d.ts]
-    C --> O[api.d.ts]
-    C --> P[components.d.ts]
-    
-    style A fill:#e1f5fe
-    style B fill:#f3e5f5
-    style C fill:#e8f5e8
-    style F fill:#fff3e0
-    style G fill:#fce4ec
+```plantuml
+@startmindmap
+* 项目根目录
+** @: ./src
+*** components/
+*** utils/
+*** $: plugins/
+**** charts/
+**** editor/
+**** map/
+*** ~: modules/
+**** base/
+**** user/
+**** order/
+** #: ./types
+*** global.d.ts
+*** api.d.ts
+*** components.d.ts
+@endmindmap
 ```
 
 ### 别名配置最佳实践
@@ -551,17 +537,17 @@ import UserForm from '~/user/components/UserForm.vue'
 
 ### 开发流程
 
-```mermaid
-flowchart LR
-    A[理解项目架构] --> B[配置开发环境]
-    B --> C[创建/选择模块]
-    C --> D[开发业务功能]
-    D --> E[配置类型定义]
-    E --> F[集成插件系统]
-    F --> G[测试与部署]
-    
-    style A fill:#e8f5e8
-    style G fill:#f3e5f5
+```plantuml
+@startuml
+(*) --> "理解项目架构"
+"理解项目架构" --> "配置开发环境"
+"配置开发环境" --> "创建/选择模块"
+"创建/选择模块" --> "开发业务功能"
+"开发业务功能" --> "配置类型定义"
+"配置类型定义" --> "集成插件系统"
+"集成插件系统" --> "测试与部署"
+"测试与部署" --> (*)
+@enduml
 ```
 
 ### 下一步
