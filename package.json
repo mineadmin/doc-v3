@@ -21,7 +21,8 @@
     "openai": "^4.78.1",
     "radash": "^12.1.0",
     "sortablejs": "1.15.2",
-    "vitepress-plugin-announcement": "^0.1.2"
+    "vitepress-plugin-announcement": "^0.1.2",
+    "vitepress-plugin-llms": "^1.7.2"
   },
   "devDependencies": {
     "@mdit/plugin-plantuml": "^0.13.1",

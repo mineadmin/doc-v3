@@ -22,6 +22,10 @@ import { plantuml } from "@mdit/plugin-plantuml";
 import { demoPreviewPlugin } from './plugins/previewPlugin'
 import UnoCSS from 'unocss/vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import llmstxt from 'vitepress-plugin-llms'
+import { copyOrDownloadAsMarkdownButtons } from 'vitepress-plugin-llms'
+
+
 
 // https://vitepress.dev/reference/site-config
 export default defineConfigWithTheme ({
@@ -34,7 +38,8 @@ export default defineConfigWithTheme ({
         body:[
           {type:"text",content:"官方QQ群: 150105478"}
         ]
-      })
+      }),
+      llmstxt()
     ]
   },
   ignoreDeadLinks: true,
@@ -93,6 +98,8 @@ export default defineConfigWithTheme ({
       label: '页面导航',
       level: [2, 4],
     },
+    aside: 'left', // 侧边栏位置优化
+    externalLinkIcon: true, // 显示外部链接图标
     editLink: {
       pattern: 'https://github.com/mineadmin/doc-v3/edit/main/docs/:path',
       text: '在Github上编辑此页面',
@@ -167,6 +174,7 @@ export default defineConfigWithTheme ({
     lineNumbers: true,
     config:(md:MarkdownRenderer)=>{
       md.use(demoPreviewPlugin)
+      md.use(copyOrDownloadAsMarkdownButtons)
       md.use(plantuml,{
         type:"fence",
         fence:"plantuml",
