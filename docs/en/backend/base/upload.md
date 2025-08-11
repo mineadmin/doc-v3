@@ -4,11 +4,11 @@
 
 ::: tip
 
-File upload is built by MineAdmin integrating the [mineadmin/upload](https://github.com/mineadmin/upload) component.
+File upload is implemented in MineAdmin using the [mineadmin/upload](https://github.com/mineadmin/upload) component.
 
 :::
 
-MineAdmin provides a default server-side file upload logic. The interface `/admin/attachment/upload` is used, and after successful upload, it is integrated into the resource manager.
+MineAdmin provides a default server-side file upload logic through the `/admin/attachment/upload` interface, which integrates with the resource manager upon successful upload.
 
 ::: code-group
 
@@ -83,7 +83,7 @@ final class AttachmentService extends IService
 
 ### Replace Local Storage with OSS Storage
 
-In daily business scenarios, files are usually stored on OSS. At this point, the default file upload processing needs to be replaced. Taking Alibaba Cloud as an example, first, we need to configure the `config/autoload/file.php` file. Add an Alibaba Cloud channel. Then, create a new `AliyunUploadSubscribe` to replace the default `UploadSubscribe` in `config/autoload/listeners.php` and specify the Alibaba Cloud channel.
+In typical business scenarios, files are usually stored on OSS. In this case, the default file upload handling needs to be replaced. Taking Alibaba Cloud as an example, first configure the `config/autoload/file.php` file to add an Alibaba Cloud channel. Then create an `AliyunUploadSubscribe` to replace the default `UploadSubscribe` in `config/autoload/listeners.php` and specify the Alibaba Cloud channel.
 
 ::: code-group
 
@@ -148,6 +148,8 @@ return [
             'domain' => '',
             'schema' => 'http://',
             'isCName' => false,
+            // OSS domain address; if left empty, path generation will fail
+            'public_url' => env('APP_URL') . '/uploads',
             // 'timeout'        => 3600,
             // 'connectTimeout' => 10,
             // 'token'          => '',
@@ -194,7 +196,7 @@ return [
     FailToHandleSubscriber::class,
     // Handle worker exit
     ResumeExitCoordinatorSubscriber::class,
-    // Handle queue
+    // Handle queues
     QueueHandleSubscriber::class,
     // Register new Blueprint macros
     RegisterBlueprintListener::class,
@@ -204,9 +206,9 @@ return [
 
 :::
 
-### Modify Default Upload File Naming and Directory Naming
+### Modify Default File Naming and Directory Naming
 
-The default file naming and directory naming are implemented by `Mine\Upload\Listener\UploadListener->generatorPath()` and `Mine\Upload\Listener\UploadListener->generatorId()`. All upload processing classes inherit from this class. Taking the previous example of replacing OSS storage, you only need to replace these two methods in your upload processing class.
+By default, file naming and directory naming are handled by `Mine\Upload\Listener\UploadListener->generatorPath()` and `Mine\Upload\Listener\UploadListener->generatorId()`. All upload handling classes inherit from this class. Taking the previous OSS storage replacement as an example, you only need to override these two methods in your upload handling class.
 
 ```php{22-32}
 <?php
@@ -232,7 +234,7 @@ final class UploadSubscriber extends AbstractUploadListener
 
     protected function generatorId(): string
     {
-        // Generate file name, random string length is 10
+        // Generate filename with random string of length 10
         return Str::random(10);
     }
 
@@ -246,35 +248,29 @@ final class UploadSubscriber extends AbstractUploadListener
 
 ```
 
-### Processing Flow
 
-`Frontend` calls the interface `/admin/attachment/upload`, passing the parameter `file`, which is of type file.
-The server-side file controller calls the file service to process the `file` passed from the frontend.
-The `file service` checks if the hash value of the uploaded file has been uploaded before.
-If it has, it queries the database and returns the information from the previous upload.
-If it hasn't, it `calls the UploadInterface instance to dispatch an UploadEvent`.
-After dispatching, it `checks if UploadEvent->isUploaded()` is successful.
-If the upload is successful, it returns the `Upload` upload instance.
-If the upload is not successful, it throws an upload failure exception.
+### Process Flow
+
+The `frontend` calls the `/admin/attachment/upload` interface, passing the `file` parameter (a file). The server-side file controller calls the file service to process the `file`. The `file service` checks if the uploaded file's hash has been uploaded before. If it has, it queries the database and returns the previous upload information. If not, it `calls the UploadInterface instance to dispatch an UploadEvent`. After dispatching, it `checks if UploadEvent->isUploaded()` returns true. If the upload is successful, it returns the `Upload` instance. If not, it throws an upload failure exception.
 
 #### Flowchart
 
 ```plantuml
 |Frontend|
 start
-:Call interface /admin/attachment/upload, pass file parameter file;
-|Server-side File Controller|
+:Call interface /admin/attachment/upload with file parameter;
+|Server File Controller|
 :Call file service to process file;
 |File Service|
-:Check if the hash value of the uploaded file has been uploaded before;
+:Check if file hash has been uploaded before;
 if (Uploaded before) then (Yes)
-    :Query database and return previous upload information;
+    :Query database and return previous upload info;
 else (No)
-    :Call UploadInterface instance to dispatch UploadEvent;
+    :Call UploadInterface to dispatch UploadEvent;
     |UploadEvent|
-    :Check if isUploaded() is successful;
+    :Check if isUploaded() is true;
     if (Upload successful) then (Yes)
-        :Return Upload upload instance;
+        :Return Upload instance;
     else (No)
         :Throw upload failure exception;
     endif
@@ -285,30 +281,30 @@ endif
 
 ```plantuml
 participant "Frontend" as Frontend
-participant "Server-side File Controller" as Controller
+participant "Server File Controller" as Controller
 participant "File Service" as FileService
 participant "UploadInterface" as Uploader
 participant "Database" as Database
 
-Frontend -> Controller : Call interface /admin/attachment/upload, pass file
+Frontend -> Controller : Call /admin/attachment/upload with file
 Controller -> FileService : Process file
-FileService -> FileService : Check if file hash value has been uploaded before
-alt Uploaded before
+FileService -> FileService : Check if file hash exists
+alt Exists
     FileService -> Database : Query database
-    Database -> FileService : Return previous upload information
-    FileService -> Controller : Return previous upload information
-    Controller -> Frontend : Return previous upload information
-else Not uploaded before
+    Database -> FileService : Return previous upload info
+    FileService -> Controller : Return previous upload info
+    Controller -> Frontend : Return previous upload info
+else Not exists
     FileService -> Uploader : Dispatch UploadEvent
-    Uploader -> Uploader : Check if isUploaded() is successful
+    Uploader -> Uploader : Check isUploaded()
     alt Upload successful
-        Uploader -> FileService : Return Upload upload instance
-        FileService -> Controller : Return Upload upload instance
-        Controller -> Frontend : Return Upload upload instance
+        Uploader -> FileService : Return Upload instance
+        FileService -> Controller : Return Upload instance
+        Controller -> Frontend : Return Upload instance
     else Upload failed
-        Uploader -> FileService : Throw upload failure exception
-        FileService -> Controller : Throw upload failure exception
-        Controller -> Frontend : Throw upload failure exception
+        Uploader -> FileService : Throw upload failure
+        FileService -> Controller : Throw upload failure
+        Controller -> Frontend : Throw upload failure
     end
 end
 ```

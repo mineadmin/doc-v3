@@ -1,14 +1,14 @@
-# Plugin Unit Testing
+# Plugin Unit Testing  
 
-A standard application directory structure explanation
+A standard application directory structure explanation  
 
----
+---  
 
-## Essentially, a plugin is also a Composer package, but Mine integrates more functionalities on top of it.
+## Essentially, a plugin is also a Composer package, but Mine integrates additional functionalities on top of it.  
 
-For developers who need to perform unit testing, please directly create a `composer.json` file in the plugin directory.
+For developers who need to perform unit testing, please directly create a `composer.json` file in the plugin directory.  
 
-However, please note the following:
+However, please note the following points:  
 
-1. Ensure that the PSR-4 namespaces in both `composer.json` and `mine.json` are consistent.
-2. Friendly reminder: [Do not install any plugins from non-official sources](#){style="color: red;"}, to avoid malicious damage to your application.
+1. Ensure that the PSR-4 namespaces in `composer.json` and `mine.json` are consistent.  
+2. Friendly reminder: [Installing any plugins outside of official sources is prohibited](#){style="color: red;"} to prevent malicious damage to your application.

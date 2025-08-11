@@ -1,8 +1,8 @@
-# Front-end Development Standards
+# Frontend Development Guidelines
 
 ---
 
-Taking the [Create Plugin Chapter](../create.md){style="color: green;" .custom-class #custom-id} as an example, the front-end directory should adhere to the following standards:
+Taking the [Create Plugin chapter](../create.md){style="color: green;" .custom-class #custom-id} as an example, the frontend directory should adhere to the following specifications:
 
-1. The `plugin/test/demo/web` directory is the front-end directory.
-2. All files in this directory will be copied (and overwritten if they already exist) to the specified front-end directory during plugin installation.
+1. The `plugin/test/demo/web` directory serves as the frontend directory
+2. All files within this directory will be copied (existing files will be overwritten) to the specified frontend directory during plugin installation

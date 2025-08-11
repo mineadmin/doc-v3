@@ -16,6 +16,10 @@ import twConfig from "./src/zh-tw/config";
 import twNav from "./src/zh-tw/nav";
 import twSidebar from "./src/zh-tw/sidebars";
 
+import jaConfig from "./src/ja/config";
+import jaNav from "./src/ja/nav";
+import jaSidebar from "./src/ja/sidebars";
+
 
 import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
 import { plantuml } from "@mdit/plugin-plantuml";
@@ -39,7 +43,13 @@ export default defineConfigWithTheme ({
           {type:"text",content:"官方QQ群: 150105478"}
         ]
       }),
-      llmstxt()
+      llmstxt({
+        domain:'https://doc.mineadmin.com',
+        workDir:'en',
+        experimental:{
+          depth:3
+        }
+      })
     ]
   },
   ignoreDeadLinks: true,
@@ -86,6 +96,20 @@ export default defineConfigWithTheme ({
         logo: '/logo.svg',
         nav: twNav,
         sidebar:twSidebar,
+        outline:{
+          level:[2 ,4],
+        },
+      }
+    },
+    "ja":{
+      label:"日本語",
+      lang:"ja",
+      link:"/ja/index",
+      ...jaConfig,
+      themeConfig:{
+        logo: '/logo.svg',
+        nav: jaNav,
+        sidebar:jaSidebar,
         outline:{
           level:[2 ,4],
         },
@@ -145,6 +169,22 @@ export default defineConfigWithTheme ({
                 footer: {
                   selectText: 'Select',
                   navigateText: 'Switch'
+                }
+              }
+            }
+          },
+          ja: {
+            translations: {
+              button: {
+                buttonText: 'ドキュメントを検索',
+                buttonAriaLabel: 'ドキュメントを検索'
+              },
+              modal: {
+                noResultsText: '関連する結果が見つかりません',
+                resetButtonTitle: 'クエリ条件をクリア',
+                footer: {
+                  selectText: '選択',
+                  navigateText: '切り替え'
                 }
               }
             }

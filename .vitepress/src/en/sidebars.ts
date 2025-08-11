@@ -1,3 +1,4 @@
+```typescript
 import {DefaultTheme} from "vitepress";
 
 const sidebar:DefaultTheme.Sidebar = {
@@ -63,7 +64,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/en/front/base/start'
         },
         {
-          text: 'Routing and Menus',
+          text: 'Routes & Menus',
           link: '/en/front/base/route-menu'
         },
         {
@@ -75,7 +76,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/en/front/base/icon'
         },
         {
-          text: 'Build and Preview',
+          text: 'Build & Preview',
           link: '/en/front/base/build-preview'
         }
       ]
@@ -92,11 +93,11 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/en/front/advanced/auto-import'
         },
         {
-          text: 'Requests and Interceptors',
+          text: 'Requests & Interceptors',
           link: '/en/front/advanced/request'
         },
         {
-          text: 'Login and Welcome Page',
+          text: 'Login & Welcome Page',
           link: '/en/front/advanced/login-welcome'
         },
         {
@@ -122,10 +123,10 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text: 'Advanced',
+      text: 'Expert',
       items: [
         {
-          text: 'Internationalization Configuration',
+          text: 'Internationalization',
           link: '/en/front/high/i18n'
         },
         {
@@ -145,7 +146,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/en/front/high/plugins'
         },
         {
-          text: 'JSX and TSX Development',
+          text: 'JSX & TSX Development',
           link: '/en/front/high/tsx'
         }
       ],
@@ -188,7 +189,7 @@ const sidebar:DefaultTheme.Sidebar = {
           text: "Lifecycle",
           link: "/en/backend/base/lifecycle"
         },
-        { text: "Routing and API Documentation",link: "/en/backend/base/router"},
+        { text: "Routes & API Documentation",link: "/en/backend/base/router"},
         { text: "Error Handling",link: "/en/backend/base/error-handler"},
         {text: "Logging",link: "/en/backend/base/logger"},
         {text: "Events",link: "/en/backend/base/event-handler"},
@@ -206,6 +207,30 @@ const sidebar:DefaultTheme.Sidebar = {
         {
           text: "User Authorization (RBAC)",
           link: "/en/backend/security/access"
+        },
+        {
+          text: "Client IP Retrieval",
+          link: "/en/backend/security/client-ip"
+        }
+      ]
+    },{
+      text:"Data Permissions",
+      items:[
+        {
+          text: "Core Concepts",
+          link: "/en/backend/data-permission/overview"
+        },
+        {
+          text: "Permission Configuration & Demo",
+          link: "/en/backend/data-permission/config"
+        },
+        {
+          text: "Usage Examples",
+            link: "/en/backend/data-permission/example"
+        },
+        {
+          text: "Notes",
+            link: "/en/backend/data-permission/notice"
         }
       ]
     }
@@ -232,11 +257,11 @@ const sidebar:DefaultTheme.Sidebar = {
               link:"/en/plugin/structure"
             },
             {
-              text:"mine.json Explanation and Example",
+              text:"mine.json Description & Examples",
               link:"/en/plugin/mineJson"
             },
             {
-            text:"ConfigProvider Explanation",
+            text:"ConfigProvider Guide",
             link:"/en/plugin/configProvider"
           }
           ]
@@ -264,14 +289,14 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text:"Application Publishing",
+      text:"Application Release",
       items:[
         {
-          text: "Application Release",
+          text: "Publishing Applications",
           link: "/en/plugin/develop/publish"
         },
         {
-          text: "Considerations",
+          text: "Notes",
           link: "/en/plugin/develop/question"
         }
       ]
@@ -280,3 +305,4 @@ const sidebar:DefaultTheme.Sidebar = {
 }
 
 export default sidebar
+```

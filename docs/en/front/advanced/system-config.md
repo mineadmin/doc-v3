@@ -4,7 +4,7 @@
 - Default configuration file: `src/provider/settings/index.ts`
 - Custom configuration file: `src/provider/settings/settings.config.ts`
 
-To modify the configuration, copy the default configuration to the `settings.config.ts` file and then make your changes. The system will automatically merge the configurations upon loading.
+To modify configurations, copy the default settings to `settings.config.ts` before making changes. The system will automatically merge them during loading.
 :::
 
 ## Default Configuration

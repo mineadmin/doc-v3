@@ -1,38 +1,37 @@
 # mine.json Explanation and Example
 
-A complete example and explanation of an application configuration file
+A complete example and description of an application configuration file.
 
 ---
 
-## Attribute List Explanation
+## Property List Explanation
 
-| Parameter               | Description                                    | Example                    |
-|-------------------------|-----------------------------------------------|----------------------------|
-| name                    | Composed of **user namespace/application identifier** | mine-admin/apps-store      |
-| description             | Application introduction                       | MineAdmin Application Market Visual Plugin |
-| version                 | Current version of the application             | 1.0.0                      |
-| type                    | Application type: mixed (full application), backend (backend), frontend (frontend) | mixed                      |
-| author                  | Application author information                 | -                          |
-| package.dependencies    | Frontend dependency configuration information, specifying the dependencies and versions required by the frontend, which will be installed during application installation | -                          |
-| composer                | Backend composer configuration, see detailed table below | -                          |
+| Parameter            | Description                                    | Example                    |
+|----------------------|-----------------------------------------------|----------------------------|
+| name                 | Composed of **user namespace/application identifier** | mine-admin/apps-store      | 
+| description          | Application introduction                      | MineAdmin App Market Visual Plugin |
+| version              | Current version of the application            | 1.0.0                      |
+| type                 | Application type: mixed (full application), backend (backend), frontend (frontend) | mixed                      |                                  | 1.0.0                 |
+| author               | Application author information                | -                          |
+| package.dependencies | Frontend dependency configuration, specifying required packages and versions, installed during application setup | -                          |
+| composer             | Backend composer configuration, see detailed table below | -                          |
 
 ## Composer Configuration Explanation
-
-| Parameter       | Description                    | Example                                             |
-|-----------------|-------------------------------|-----------------------------------------------------|
-| require         | Set backend dependencies and versions, which will be installed during application installation | "hyperf/async_queue": "3.1.*"  **Specifies async queue dependency and version** |
-| psr-4           | Set the namespace for the plugin code directory | "Plugin\\MineAdmin\\AppStore\\": "src"             |
-| script          | Script commands to execute     | For example, the following file executes the command to publish the async queue configuration file |
-| config          | Hyperf configuration file service provider | -                                                  |
+| Parameter  | Description                    | Example                                             |
+|------------|-------------------------------|-----------------------------------------------------|
+| require    | Sets backend dependencies and versions, installed during application setup | "hyperf/async_queue": "3.1.*"  **Specifies async queue dependency and version** | 
+| psr-4      | Sets the namespace for the plugin code directory | "Plugin\\MineAdmin\\AppStore\\": "src"              |
+| script     | Script commands to execute     | As shown in the example file, executes the command to publish async queue configuration files |
+| config     | Hyperf configuration file service provider | -                                                   |
 
 ## mine.json File Content
 
-Below is an example
+Below is an example:
 
-```json  [mine.json]
+```json [mine.json]
 {
   "name": "mine-admin/apps-store",
-  "description": "MineAdmin Application Market Visual Plugin",
+  "description": "MineAdmin App Market Visual Plugin",
   "version": "1.0.0",
   "type": "mixed",
   "author": [

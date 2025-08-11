@@ -1,54 +1,57 @@
-# Auto Import
+# Auto Import  
 
-## Explanation
-In previous versions like `2.x` and older, when using `Vue API`, it was necessary to write statements like `import { ref, ... } from 'vue'` within the files. Now, with the evolution of `vite`, the community plugins have become very rich. Based on this, we can simplify the code and improve development efficiency, thanks to the plugins provided by those great developers.
+## Description  
+In previous versions like `2.x` and older,  
 
-::: tip Note
-Now, when developing `*.vue`, `*.ts`, `*.tsx` files, there is no need to manually import the following `APIs` or components:
+when using `Vue APIs`, it was necessary to write statements like `import { ref, ... } from 'vue'` in files.  
+Now, with the evolution of `vite` and the rich ecosystem of community plugins, we can simplify the code and improve development efficiency—thanks to the plugins provided by those experts.  
 
-- All Vue APIs
-- VueRouter
-- Pinia
-- All `store` files: `./src/store/modules/*`
-- Auto-import directories under hooks: `./src/hooks/auto-imports/*`
-- All components under `./src/components/` (only `*.vue` type files do not need explicit imports)
-:::
+::: tip Note  
+Now, when developing `*.vue`, `*.ts`, or `*.tsx` files, there’s no need to manually import the following **APIs** or components:  
 
-## Custom Auto Import
+- All Vue APIs  
+- VueRouter  
+- Pinia  
+- All `store` files: `./src/store/modules/*`  
+- Auto-imported hooks directory: `./src/hooks/auto-imports/*`  
+- All components under `./src/components/` (`*.vue` files only, no explicit import required)  
+:::  
 
-In the `./vite` directory, there are two files: `auto-import.ts` and `components.ts` where you can define **packages, functions, components** for auto-import.
+## Custom Auto Import  
 
-### Auto Import Packages and Functions
+Under the `./vite` directory, there are two files: `auto-import.ts` and `components.ts`, which allow defining **packages, functions, and components** for auto-import.  
 
-In `./vite/auto-import.ts`, you can define packages or functions for auto-import, such as `vue-router`, `pinia`, `axios`, etc.
+### Auto-Import Packages or Functions  
 
-```ts{3-8,10-14}
-export default function createAutoImport() {
-  return autoImport({
-    // Custom imports can be defined here
-    imports: [
-      'vue',
-      'vue-router',
-      'pinia',
-    ],
-    dts: './types/auto-imports.d.ts',
-    // Custom function libraries or other ts files can be added here
-    dirs: [
-      './src/hooks/auto-imports/**',
-      './src/store/modules/**',
-    ],
-  })
-}
-```
+In `./vite/auto-import.ts`, you can define packages or functions for auto-import, such as `vue-router`, `pinia`, `axios`, etc.  
 
-### Auto Import Custom Component Libraries
+```ts{3-8,10-14}  
+export default function createAutoImport() {  
+  return autoImport({  
+    // Custom imports can be defined here  
+    imports: [  
+      'vue',  
+      'vue-router',  
+      'pinia',  
+    ],  
+    dts: './types/auto-imports.d.ts',  
+    // Custom function libraries or other TS files can be added here  
+    dirs: [  
+      './src/hooks/auto-imports/**',  
+      './src/store/modules/**',  
+    ],  
+  })  
+}  
+```  
 
-In `./vite/components.ts`, you can define directories for auto-importing component libraries. Components in the `./src/components` directory do not need to be explicitly imported.
+### Auto-Import Custom Component Libraries  
 
-```ts{2}
-  return components({
-  dirs: ['src/components'],
-  include: [/\.vue$/, /\.vue\?vue/, /\.tsx$/],
-  dts: './types/components.d.ts',
-})
+In `./vite/components.ts`, you can define directories for auto-importing component libraries. Components under `./src/components` in the system do not require explicit imports.  
+
+```ts{2}  
+  return components({  
+  dirs: ['src/components'],  
+  include: [/\.vue$/, /\.vue\?vue/, /\.tsx$/],  
+  dts: './types/components.d.ts',  
+})  
 ```

@@ -4,7 +4,9 @@
     "dev": "vitepress dev",
     "build": "vitepress build",
     "preview": "vitepress preview",
-    "docs:translate": "node bin/translate.js"
+    "docs:translate": "node bin/translate.js",
+    "docs:translate:enhanced": "node bin/translate-enhanced.js",
+    "docs:translate:full": "TARGET_LANGUAGES=en,ja FORCE_TRANSLATE_ALL=true node bin/translate-enhanced.js"
   },
   "dependencies": {
     "@imengyu/vue3-context-menu": "^1.4.2",
