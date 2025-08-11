@@ -1,21 +1,25 @@
 import type {DefaultTheme} from "vitepress";
 
 const sidebar:DefaultTheme.Sidebar = {
-  '/ja/guide/': [
+  '/zh/guide/': [
     {
       text: '紹介',
       items: [
         {
-          text: 'MineAdminについて',
-          link: '/ja/guide/introduce/mineadmin',
+          text: 'なぜ私たちを選ぶのか？',
+          link: '/zh/guide/introduce/mineadmin',
+        },
+        {
+          text: '更新履歴',
+          link: '/zh/guide/changelog',
         },
         {
           text: '免責事項',
-          link: '/ja/guide/introduce/declaration',
+          link: '/zh/guide/introduce/declaration',
         },
         {
           text: '謝辞',
-          link: '/ja/guide/introduce/thank',
+          link: '/zh/guide/introduce/thank',
         }
       ]
     },
@@ -24,11 +28,11 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: 'クイックインストール',
-          link: '/ja/guide/start/fast-install',
+          link: '/zh/guide/start/fast-install',
         },
         {
           text: "デプロイ",
-          link: "/ja/guide/start/deployment"
+          link: "/zh/guide/start/deployment"
         }
       ]
     },
@@ -37,46 +41,46 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text:"リリースノート",
-          link:'/ja/guide/releases'
+          link:'/zh/guide/releases'
         },
         {
           text:"アップグレードガイド",
-          link:"/ja/guide/upgrade"
+          link:"/zh/guide/upgrade"
         },
         {
-          text:"コントリビューションガイド",
-          link:"/ja/guide/contributions"
+          text:"貢献ガイド",
+          link:"/zh/guide/contributions"
         }
       ]
     }
   ],
-  '/ja/front/': [
+  '/zh/front/': [
     {
       text: '基礎',
       items: [
         {
           text: '基本概念',
-          link: '/ja/front/base/concept'
+          link: '/zh/front/base/concept'
         },
         {
           text: 'スタート',
-          link: '/ja/front/base/start'
+          link: '/zh/front/base/start'
         },
         {
           text: 'ルートとメニュー',
-          link: '/ja/front/base/route-menu'
+          link: '/zh/front/base/route-menu'
         },
         {
           text: '設定',
-          link: '/ja/front/base/configure'
+          link: '/zh/front/base/configure'
         },
         {
           text: 'アイコン',
-          link: '/ja/front/base/icon'
+          link: '/zh/front/base/icon'
         },
         {
           text: 'ビルドとプレビュー',
-          link: '/ja/front/base/build-preview'
+          link: '/zh/front/base/build-preview'
         }
       ]
     },
@@ -85,39 +89,39 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: 'システムパラメータ設定',
-          link: '/ja/front/advanced/system-config'
+          link: '/zh/front/advanced/system-config'
         },
         {
           text: '自動インポート',
-          link: '/ja/front/advanced/auto-import'
+          link: '/zh/front/advanced/auto-import'
         },
         {
           text: 'リクエストとインターセプター',
-          link: '/ja/front/advanced/request'
+          link: '/zh/front/advanced/request'
         },
         {
           text: 'ログインとウェルカムページ',
-          link: '/ja/front/advanced/login-welcome'
+          link: '/zh/front/advanced/login-welcome'
         },
         {
           text: 'モジュール化',
-          link: '/ja/front/advanced/module'
+          link: '/zh/front/advanced/module'
         },
         {
           text: 'レイアウト',
-          link: '/ja/front/advanced/layout'
+          link: '/zh/front/advanced/layout'
         },
         {
           text: 'ツールバー拡張',
-          link: '/ja/front/advanced/tools'
+          link: '/zh/front/advanced/tools'
         },
         {
           text: '権限',
-          link: '/ja/front/advanced/permission'
+          link: '/zh/front/advanced/permission'
         },
         {
           text: 'ページキャッシュ',
-          link: '/ja/front/advanced/cache'
+          link: '/zh/front/advanced/cache'
         }
       ]
     },
@@ -126,27 +130,27 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: '国際化設定',
-          link: '/ja/front/high/i18n'
+          link: '/zh/front/high/i18n'
         },
         {
           text: 'サービスプロバイダー',
-          link: '/ja/front/high/provider'
+          link: '/zh/front/high/provider'
         },
         {
           text: 'Hooks',
-          link: '/ja/front/high/hooks'
+          link: '/zh/front/high/hooks'
         },
         {
-          text: 'よく使うStore',
-          link: '/ja/front/high/store'
+          text: '常用Store',
+          link: '/zh/front/high/store'
         },
         {
           text: 'プラグインシステム',
-          link: '/ja/front/high/plugins'
+          link: '/zh/front/high/plugins'
         },
         {
           text: 'JSXとTSX開発',
-          link: '/ja/front/high/tsx'
+          link: '/zh/front/high/tsx'
         }
       ],
     },
@@ -155,45 +159,45 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: 'MaForm',
-          link: '/ja/front/component/ma-form'
+          link: '/zh/front/component/ma-form'
         },
         {
           text: 'MaTable',
-          link: '/ja/front/component/ma-table'
+          link: '/zh/front/component/ma-table'
         },
         {
           text: 'MaSearch',
-          link: '/ja/front/component/ma-search'
+          link: '/zh/front/component/ma-search'
         },
         {
           text: 'MaProTable',
-          link: '/ja/front/component/ma-pro-table'
+          link: '/zh/front/component/ma-pro-table'
         },
         {
           text: 'MaEcharts',
-          link: '/ja/front/component/ma-echarts'
+          link: '/zh/front/component/ma-echarts'
         },
       ]
     }
   ],
-  '/ja/backend/':[
+  '/zh/backend/':[
     {
       text:"応用",
       items:[
         {
           text: "ディレクトリ構造",
-          link: "/ja/backend/base/structure"
+          link: "/zh/backend/base/structure"
         },
         {
           text: "ライフサイクル",
-          link: "/ja/backend/base/lifecycle"
+          link: "/zh/backend/base/lifecycle"
         },
-        { text: "ルートとAPIドキュメント",link: "/ja/backend/base/router"},
-        { text: "エラーハンドリング",link: "/ja/backend/base/error-handler"},
-        {text: "ログ",link: "/ja/backend/base/logger"},
-        {text: "イベント",link: "/ja/backend/base/event-handler"},
-        {text: "ファイルアップロード",link: "/ja/backend/base/upload"},
-        {text: "多言語",link: "/ja/backend/base/lang"},
+        { text: "ルートとAPIドキュメント",link: "/zh/backend/base/router"},
+        { text: "エラー処理",link: "/zh/backend/base/error-handler"},
+        {text: "ログ",link: "/zh/backend/base/logger"},
+        {text: "イベント",link: "/zh/backend/base/event-handler"},
+        {text: "ファイルアップロード",link: "/zh/backend/base/upload"},
+        {text: "多言語",link: "/zh/backend/base/lang"},
       ]
     },
     {
@@ -201,15 +205,15 @@ const sidebar:DefaultTheme.Sidebar = {
       items:[
         {
           text: "ユーザー認証",
-          link: "/ja/backend/security/passport"
+          link: "/zh/backend/security/passport"
         },
         {
-          text: "ユーザー認可(RBAC)",
-          link: "/ja/backend/security/access"
+          text: "ユーザー権限(RBAC)",
+          link: "/zh/backend/security/access"
         },
         {
           text: "クライアントIP取得",
-          link: "/ja/backend/security/client-ip"
+          link: "/zh/backend/security/client-ip"
         }
       ]
     },{
@@ -217,51 +221,51 @@ const sidebar:DefaultTheme.Sidebar = {
       items:[
         {
           text: "コアコンセプト",
-          link: "/ja/backend/data-permission/overview"
+          link: "/zh/backend/data-permission/overview"
         },
         {
           text: "権限設定とデモ",
-          link: "/ja/backend/data-permission/config"
+          link: "/zh/backend/data-permission/config"
         },
         {
           text: "使用例",
-            link: "/ja/backend/data-permission/example"
+            link: "/zh/backend/data-permission/example"
         },
         {
           text: "注意事項",
-            link: "/ja/backend/data-permission/notice"
+            link: "/zh/backend/data-permission/notice"
         }
       ]
     }
   ],
-  '/ja/plugin/':[
+  '/zh/plugin/':[
     {
       text:"クイックスタート",
       items:
           [
             {
               text:"準備作業",
-              link:"/ja/plugin"
+              link:"/zh/plugin"
             },
             {
               text:"プラグインコマンド",
-              link:"/ja/plugin/command"
+              link:"/zh/plugin/command"
             },
             {
               text:"アプリ作成",
-              link:"/ja/plugin/create"
+              link:"/zh/plugin/create"
             },
             {
               text:"プラグインディレクトリ構造",
-              link:"/ja/plugin/structure"
+              link:"/zh/plugin/structure"
             },
             {
               text:"mine.json 説明と例",
-              link:"/ja/plugin/mineJson"
+              link:"/zh/plugin/mineJson"
             },
             {
             text:"ConfigProvider 説明",
-            link:"/ja/plugin/configProvider"
+            link:"/zh/plugin/configProvider"
           }
           ]
     },
@@ -270,11 +274,11 @@ const sidebar:DefaultTheme.Sidebar = {
       items:[
         {
           text: "データベースマイグレーション",
-          link: "/ja/plugin/backend/migrate"
+          link: "/zh/plugin/backend/migrate"
         },
         {
           text: "ユニットテスト",
-          link: "/ja/plugin/backend/unit-test"
+          link: "/zh/plugin/backend/unit-test"
         },
       ]
     },
@@ -283,7 +287,7 @@ const sidebar:DefaultTheme.Sidebar = {
       items:[
         {
           text: "フロントエンド開発規約",
-          link: "/ja/plugin/front/develop"
+          link: "/zh/plugin/front/develop"
         }
       ]
     },
@@ -292,11 +296,11 @@ const sidebar:DefaultTheme.Sidebar = {
       items:[
         {
           text: "アプリリリース",
-          link: "/ja/plugin/develop/publish"
+          link: "/zh/plugin/develop/publish"
         },
         {
           text: "注意事項",
-          link: "/ja/plugin/develop/question"
+          link: "/zh/plugin/develop/question"
         }
       ]
     }

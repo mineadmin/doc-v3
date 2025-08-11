@@ -35,17 +35,19 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v46
         with:
+          safe_output: false
+          separator: "\n"
           # Avoid using single or double quotes for multiline patterns
           files: |
             docs/zh/**/*.md
             .vitepress/src/zh/**/*.ts
 
-      - name: List All Changed Markdown Files
+      - name: List All Pr Changed Files
         if: steps.changed-files.outputs.any_changed == 'true'
         env:
           ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
-          for file in ${ALL_CHANGED_FILES}; do
+          echo "${ALL_CHANGED_FILES}" | while IFS= read -r file; do
             echo "$file was changed"
           done
 

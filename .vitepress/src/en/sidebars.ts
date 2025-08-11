@@ -1,21 +1,25 @@
-import {DefaultTheme} from "vitepress";
+import type {DefaultTheme} from "vitepress";
 
 const sidebar:DefaultTheme.Sidebar = {
-  '/en/guide/': [
+  '/zh/guide/': [
     {
       text: 'Introduction',
       items: [
         {
-          text: 'About MineAdmin',
-          link: '/en/guide/introduce/mineadmin',
+          text: 'Why Choose Us?',
+          link: '/zh/guide/introduce/mineadmin',
+        },
+        {
+          text: 'Changelog',
+          link: '/zh/guide/changelog',
         },
         {
           text: 'Disclaimer',
-          link: '/en/guide/introduce/declaration',
+          link: '/zh/guide/introduce/declaration',
         },
         {
           text: 'Acknowledgements',
-          link: '/en/guide/introduce/thank',
+          link: '/zh/guide/introduce/thank',
         }
       ]
     },
@@ -24,11 +28,11 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: 'Quick Installation',
-          link: '/en/guide/start/fast-install',
+          link: '/zh/guide/start/fast-install',
         },
         {
           text: "Deployment",
-          link: "/en/guide/start/deployment"
+          link: "/zh/guide/start/deployment"
         }
       ]
     },
@@ -37,46 +41,46 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text:"Release Notes",
-          link:'/en/guide/releases'
+          link:'/zh/guide/releases'
         },
         {
           text:"Upgrade Guide",
-          link:"/en/guide/upgrade"
+          link:"/zh/guide/upgrade"
         },
         {
           text:"Contribution Guide",
-          link:"/en/guide/contributions"
+          link:"/zh/guide/contributions"
         }
       ]
     }
   ],
-  '/en/front/': [
+  '/zh/front/': [
     {
       text: 'Basics',
       items: [
         {
           text: 'Basic Concepts',
-          link: '/en/front/base/concept'
+          link: '/zh/front/base/concept'
         },
         {
           text: 'Getting Started',
-          link: '/en/front/base/start'
+          link: '/zh/front/base/start'
         },
         {
           text: 'Routes & Menus',
-          link: '/en/front/base/route-menu'
+          link: '/zh/front/base/route-menu'
         },
         {
           text: 'Configuration',
-          link: '/en/front/base/configure'
+          link: '/zh/front/base/configure'
         },
         {
           text: 'Icons',
-          link: '/en/front/base/icon'
+          link: '/zh/front/base/icon'
         },
         {
           text: 'Build & Preview',
-          link: '/en/front/base/build-preview'
+          link: '/zh/front/base/build-preview'
         }
       ]
     },
@@ -84,40 +88,40 @@ const sidebar:DefaultTheme.Sidebar = {
       text: 'Advanced',
       items: [
         {
-          text: 'System Parameter Configuration',
-          link: '/en/front/advanced/system-config'
+          text: 'System Configuration',
+          link: '/zh/front/advanced/system-config'
         },
         {
           text: 'Auto Import',
-          link: '/en/front/advanced/auto-import'
+          link: '/zh/front/advanced/auto-import'
         },
         {
           text: 'Requests & Interceptors',
-          link: '/en/front/advanced/request'
+          link: '/zh/front/advanced/request'
         },
         {
           text: 'Login & Welcome Page',
-          link: '/en/front/advanced/login-welcome'
+          link: '/zh/front/advanced/login-welcome'
         },
         {
           text: 'Modularization',
-          link: '/en/front/advanced/module'
+          link: '/zh/front/advanced/module'
         },
         {
           text: 'Layout',
-          link: '/en/front/advanced/layout'
+          link: '/zh/front/advanced/layout'
         },
         {
           text: 'Toolbar Extensions',
-          link: '/en/front/advanced/tools'
+          link: '/zh/front/advanced/tools'
         },
         {
           text: 'Permissions',
-          link: '/en/front/advanced/permission'
+          link: '/zh/front/advanced/permission'
         },
         {
           text: 'Page Caching',
-          link: '/en/front/advanced/cache'
+          link: '/zh/front/advanced/cache'
         }
       ]
     },
@@ -125,28 +129,28 @@ const sidebar:DefaultTheme.Sidebar = {
       text: 'Expert',
       items: [
         {
-          text: 'Internationalization',
-          link: '/en/front/high/i18n'
+          text: 'i18n Configuration',
+          link: '/zh/front/high/i18n'
         },
         {
           text: 'Service Providers',
-          link: '/en/front/high/provider'
+          link: '/zh/front/high/provider'
         },
         {
           text: 'Hooks',
-          link: '/en/front/high/hooks'
+          link: '/zh/front/high/hooks'
         },
         {
           text: 'Common Stores',
-          link: '/en/front/high/store'
+          link: '/zh/front/high/store'
         },
         {
           text: 'Plugin System',
-          link: '/en/front/high/plugins'
+          link: '/zh/front/high/plugins'
         },
         {
           text: 'JSX & TSX Development',
-          link: '/en/front/high/tsx'
+          link: '/zh/front/high/tsx'
         }
       ],
     },
@@ -155,45 +159,45 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: 'MaForm',
-          link: '/en/front/component/ma-form'
+          link: '/zh/front/component/ma-form'
         },
         {
           text: 'MaTable',
-          link: '/en/front/component/ma-table'
+          link: '/zh/front/component/ma-table'
         },
         {
           text: 'MaSearch',
-          link: '/en/front/component/ma-search'
+          link: '/zh/front/component/ma-search'
         },
         {
           text: 'MaProTable',
-          link: '/en/front/component/ma-pro-table'
+          link: '/zh/front/component/ma-pro-table'
         },
         {
           text: 'MaEcharts',
-          link: '/en/front/component/ma-echarts'
+          link: '/zh/front/component/ma-echarts'
         },
       ]
     }
   ],
-  '/en/backend/':[
+  '/zh/backend/':[
     {
       text:"Advanced",
       items:[
         {
           text: "Directory Structure",
-          link: "/en/backend/base/structure"
+          link: "/zh/backend/base/structure"
         },
         {
           text: "Lifecycle",
-          link: "/en/backend/base/lifecycle"
+          link: "/zh/backend/base/lifecycle"
         },
-        { text: "Routes & API Documentation",link: "/en/backend/base/router"},
-        { text: "Error Handling",link: "/en/backend/base/error-handler"},
-        {text: "Logging",link: "/en/backend/base/logger"},
-        {text: "Events",link: "/en/backend/base/event-handler"},
-        {text: "File Upload",link: "/en/backend/base/upload"},
-        {text: "Multilingual",link: "/en/backend/base/lang"},
+        { text: "Routing & API Docs",link: "/zh/backend/base/router"},
+        { text: "Error Handling",link: "/zh/backend/base/error-handler"},
+        {text: "Logging",link: "/zh/backend/base/logger"},
+        {text: "Events",link: "/zh/backend/base/event-handler"},
+        {text: "File Upload",link: "/zh/backend/base/upload"},
+        {text: "i18n",link: "/zh/backend/base/lang"},
       ]
     },
     {
@@ -201,15 +205,15 @@ const sidebar:DefaultTheme.Sidebar = {
       items:[
         {
           text: "User Authentication",
-          link: "/en/backend/security/passport"
+          link: "/zh/backend/security/passport"
         },
         {
           text: "User Authorization (RBAC)",
-          link: "/en/backend/security/access"
+          link: "/zh/backend/security/access"
         },
         {
-          text: "Client IP Retrieval",
-          link: "/en/backend/security/client-ip"
+          text: "Client IP Detection",
+          link: "/zh/backend/security/client-ip"
         }
       ]
     },{
@@ -217,51 +221,51 @@ const sidebar:DefaultTheme.Sidebar = {
       items:[
         {
           text: "Core Concepts",
-          link: "/en/backend/data-permission/overview"
+          link: "/zh/backend/data-permission/overview"
         },
         {
-          text: "Permission Configuration & Demo",
-          link: "/en/backend/data-permission/config"
+          text: "Configuration & Demo",
+          link: "/zh/backend/data-permission/config"
         },
         {
           text: "Usage Examples",
-            link: "/en/backend/data-permission/example"
+            link: "/zh/backend/data-permission/example"
         },
         {
           text: "Notes",
-            link: "/en/backend/data-permission/notice"
+            link: "/zh/backend/data-permission/notice"
         }
       ]
     }
   ],
-  '/en/plugin/':[
+  '/zh/plugin/':[
     {
       text:"Quick Start",
       items:
           [
             {
-              text:"Preparation",
-              link:"/en/plugin"
+              text:"Prerequisites",
+              link:"/zh/plugin"
             },
             {
               text:"Plugin Commands",
-              link:"/en/plugin/command"
+              link:"/zh/plugin/command"
             },
             {
               text:"Create Application",
-              link:"/en/plugin/create"
+              link:"/zh/plugin/create"
             },
             {
-              text:"Plugin Directory Structure",
-              link:"/en/plugin/structure"
+              text:"Plugin Structure",
+              link:"/zh/plugin/structure"
             },
             {
-              text:"mine.json Description & Examples",
-              link:"/en/plugin/mineJson"
+              text:"mine.json Documentation",
+              link:"/zh/plugin/mineJson"
             },
             {
             text:"ConfigProvider Guide",
-            link:"/en/plugin/configProvider"
+            link:"/zh/plugin/configProvider"
           }
           ]
     },
@@ -269,12 +273,12 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"Backend Development",
       items:[
         {
-          text: "Database Migration",
-          link: "/en/plugin/backend/migrate"
+          text: "Database Migrations",
+          link: "/zh/plugin/backend/migrate"
         },
         {
           text: "Unit Testing",
-          link: "/en/plugin/backend/unit-test"
+          link: "/zh/plugin/backend/unit-test"
         },
       ]
     },
@@ -282,21 +286,21 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"Frontend Development",
       items:[
         {
-          text: "Frontend Development Standards",
-          link: "/en/plugin/front/develop"
+          text: "Frontend Standards",
+          link: "/zh/plugin/front/develop"
         }
       ]
     },
     {
-      text:"Application Release",
+      text:"Publishing",
       items:[
         {
-          text: "Publishing Applications",
-          link: "/en/plugin/develop/publish"
+          text: "Application Release",
+          link: "/zh/plugin/develop/publish"
         },
         {
           text: "Notes",
-          link: "/en/plugin/develop/question"
+          link: "/zh/plugin/develop/question"
         }
       ]
     }
