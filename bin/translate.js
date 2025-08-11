@@ -73,6 +73,8 @@ function replaceZhLinks(content, lang) {
     content = content.replace(/(\()\/zh\//g, `$1/${lang}/`);
     // HTML 属性: href="/zh/xxx" 或 to="/zh/xxx"
     content = content.replace(/(\b(?:href|to)=["'])\/zh\//g, `$1/${lang}/`);
+    // JS/TS 对象属性: link: '/zh/xxx'
+    content = content.replace(/(link:\s*['"])\/zh\//g, `$1${lang}/`);
     return content;
 }
 
@@ -144,6 +146,10 @@ async function handle() {
                 console.log(`    - 🗑️ Orphan files: ${orphanFiles.length}`);
                 console.log(`    - 🔄 Change files: ${changeInDirFiles.length}`);
                 console.log(`    - 📂 Total files to translate: ${files.length}`);
+
+                orphanFiles.map(file => {
+                    console.log(`    - 🗑️ Orphan file: ${file}`);
+                });
 
                 if (files.length === 0) {
                     console.log(`    - 🟢 No files to translate for ${lang}`);
