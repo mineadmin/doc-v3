@@ -38,8 +38,8 @@ web/src/modules/
 ```
 
 **源码位置：**
-- GitHub: [https://github.com/mineadmin/mineadmin/tree/main/web/src/modules](https://github.com/mineadmin/mineadmin/tree/main/web/src/modules)
-- 本地路径: `/Users/zhuzhu/project/mineadmin/web/src/modules`
+- GitHub: [https://github.com/mineadmin/mineadmin/tree/master/web/src/modules](https://github.com/mineadmin/mineadmin/tree/master/web/src/modules)
+- 本地路径: `mineadmin/web/src/modules`
 
 ## Base 模块详解
 
@@ -99,7 +99,7 @@ export function deleteByIds(ids: number[]): Promise<ResponseStruct<null>> {
 
 **源码位置：**
 - GitHub: [https://github.com/mineadmin/mineadmin/blob/master/web/src/modules/base/api/user.ts](https://github.com/mineadmin/mineadmin/blob/master/web/src/modules/base/api/user.ts)
-- 本地路径: `/Users/zhuzhu/project/mineadmin/web/src/modules/base/api/user.ts`
+- 本地路径: `mineadmin/web/src/modules/base/api/user.ts`
 
 ### 国际化支持
 
@@ -131,7 +131,7 @@ baseRoleManage:
 
 **源码位置：**
 - GitHub: [https://github.com/mineadmin/mineadmin/blob/master/web/src/modules/base/locales/zh_CN%5B%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%5D.yaml](https://github.com/mineadmin/mineadmin/blob/master/web/src/modules/base/locales/zh_CN%5B%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%5D.yaml)
-- 本地路径: `/Users/zhuzhu/project/mineadmin/web/src/modules/base/locales/zh_CN[简体中文].yaml`
+- 本地路径: `mineadmin/web/src/modules/base/locales/zh_CN[简体中文].yaml`
 
 ## 插件系统
 
@@ -197,7 +197,7 @@ export default pluginConfig
 
 **源码位置：**
 - GitHub: [https://github.com/mineadmin/mineadmin/blob/master/web/src/plugins/mine-admin/app-store/index.ts](https://github.com/mineadmin/mineadmin/blob/master/web/src/plugins/mine-admin/app-store/index.ts)
-- 本地路径: `/Users/zhuzhu/project/mineadmin/web/src/plugins/mine-admin/app-store/index.ts`
+- 本地路径: `mineadmin/web/src/plugins/mine-admin/app-store/index.ts`
 
 ### 插件注册机制
 
@@ -240,7 +240,7 @@ const provider: ProviderService.Provider = {
 
 **源码位置：**
 - GitHub: [https://github.com/mineadmin/mineadmin/blob/master/web/src/provider/plugins/index.ts](https://github.com/mineadmin/mineadmin/blob/master/web/src/provider/plugins/index.ts)
-- 本地路径: `/Users/zhuzhu/project/mineadmin/web/src/provider/plugins/index.ts`
+- 本地路径: `mineadmin/web/src/provider/plugins/index.ts`
 
 ## 模块开发规范
 
@@ -321,7 +321,7 @@ declare namespace Plugin {
 
 **源码位置：**
 - GitHub: [https://github.com/mineadmin/mineadmin/blob/master/web/types/global.d.ts](https://github.com/mineadmin/mineadmin/blob/master/web/types/global.d.ts)
-- 本地路径: `/Users/zhuzhu/project/mineadmin/web/types/global.d.ts`
+- 本地路径: `mineadmin/web/types/global.d.ts`
 
 ## 最佳实践
 
