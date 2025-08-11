@@ -1,13 +1,17 @@
 import type {DefaultTheme} from "vitepress";
 
 const sidebar:DefaultTheme.Sidebar = {
-  '/ja/guide/': [
+  '/zh/guide/': [
     {
       text: '紹介',
       items: [
         {
-          text: 'MineAdminについて',
+          text: 'なぜ私たちを選ぶのか?',
           link: '/ja/guide/introduce/mineadmin',
+        },
+        {
+          text: '更新履歴',
+          link: '/ja/guide/changelog',
         },
         {
           text: '免責事項',
@@ -20,7 +24,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text: 'スタート',
+      text: '開始',
       items: [
         {
           text: 'クイックインストール',
@@ -44,13 +48,13 @@ const sidebar:DefaultTheme.Sidebar = {
           link:"/ja/guide/upgrade"
         },
         {
-          text:"コントリビューションガイド",
+          text:"貢献ガイドライン",
           link:"/ja/guide/contributions"
         }
       ]
     }
   ],
-  '/ja/front/': [
+  '/zh/front/': [
     {
       text: '基礎',
       items: [
@@ -133,11 +137,11 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/ja/front/high/provider'
         },
         {
-          text: 'Hooks',
+          text: 'フック',
           link: '/ja/front/high/hooks'
         },
         {
-          text: 'よく使うStore',
+          text: '共通ストア',
           link: '/ja/front/high/store'
         },
         {
@@ -176,7 +180,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     }
   ],
-  '/ja/backend/':[
+  '/zh/backend/':[
     {
       text:"応用",
       items:[
@@ -189,7 +193,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/ja/backend/base/lifecycle"
         },
         { text: "ルートとAPIドキュメント",link: "/ja/backend/base/router"},
-        { text: "エラーハンドリング",link: "/ja/backend/base/error-handler"},
+        { text: "エラー処理",link: "/ja/backend/base/error-handler"},
         {text: "ログ",link: "/ja/backend/base/logger"},
         {text: "イベント",link: "/ja/backend/base/event-handler"},
         {text: "ファイルアップロード",link: "/ja/backend/base/upload"},
@@ -204,7 +208,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/ja/backend/security/passport"
         },
         {
-          text: "ユーザー認可(RBAC)",
+          text: "ユーザー権限(RBAC)",
           link: "/ja/backend/security/access"
         },
         {
@@ -220,7 +224,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/ja/backend/data-permission/overview"
         },
         {
-          text: "権限設定とデモ",
+          text: "権限設定と効果デモ",
           link: "/ja/backend/data-permission/config"
         },
         {
@@ -234,7 +238,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     }
   ],
-  '/ja/plugin/':[
+  '/zh/plugin/':[
     {
       text:"クイックスタート",
       items:
@@ -282,7 +286,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"フロントエンド開発",
       items:[
         {
-          text: "フロントエンド開発規約",
+          text: "フロントエンド開発規範",
           link: "/ja/plugin/front/develop"
         }
       ]

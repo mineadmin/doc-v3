@@ -1,13 +1,17 @@
-import {DefaultTheme} from "vitepress";
+import type {DefaultTheme} from "vitepress";
 
 const sidebar:DefaultTheme.Sidebar = {
-  '/en/guide/': [
+  '/zh/guide/': [
     {
       text: 'Introduction',
       items: [
         {
-          text: 'About MineAdmin',
+          text: 'Why Choose Us?',
           link: '/en/guide/introduce/mineadmin',
+        },
+        {
+          text: 'Changelog',
+          link: '/en/guide/changelog',
         },
         {
           text: 'Disclaimer',
@@ -50,7 +54,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     }
   ],
-  '/en/front/': [
+  '/zh/front/': [
     {
       text: 'Basics',
       items: [
@@ -84,7 +88,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text: 'Advanced',
       items: [
         {
-          text: 'System Parameter Configuration',
+          text: 'System Configuration',
           link: '/en/front/advanced/system-config'
         },
         {
@@ -176,7 +180,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     }
   ],
-  '/en/backend/':[
+  '/zh/backend/':[
     {
       text:"Advanced",
       items:[
@@ -193,7 +197,7 @@ const sidebar:DefaultTheme.Sidebar = {
         {text: "Logging",link: "/en/backend/base/logger"},
         {text: "Events",link: "/en/backend/base/event-handler"},
         {text: "File Upload",link: "/en/backend/base/upload"},
-        {text: "Multilingual",link: "/en/backend/base/lang"},
+        {text: "Internationalization",link: "/en/backend/base/lang"},
       ]
     },
     {
@@ -220,7 +224,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/en/backend/data-permission/overview"
         },
         {
-          text: "Permission Configuration & Demo",
+          text: "Configuration & Demo",
           link: "/en/backend/data-permission/config"
         },
         {
@@ -234,7 +238,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     }
   ],
-  '/en/plugin/':[
+  '/zh/plugin/':[
     {
       text:"Quick Start",
       items:
@@ -256,11 +260,11 @@ const sidebar:DefaultTheme.Sidebar = {
               link:"/en/plugin/structure"
             },
             {
-              text:"mine.json Description & Examples",
+              text:"mine.json Documentation & Examples",
               link:"/en/plugin/mineJson"
             },
             {
-            text:"ConfigProvider Guide",
+            text:"ConfigProvider Documentation",
             link:"/en/plugin/configProvider"
           }
           ]
@@ -269,7 +273,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"Backend Development",
       items:[
         {
-          text: "Database Migration",
+          text: "Database Migrations",
           link: "/en/plugin/backend/migrate"
         },
         {
@@ -288,7 +292,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text:"Application Release",
+      text:"Application Publishing",
       items:[
         {
           text: "Publishing Applications",

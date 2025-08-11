@@ -1,208 +1,594 @@
 # Plugin System
 
 ::: tip Plugin System Overview
-The `3.0` frontend natively supports a plugin system. Compared to `2.0`, which was not designed with plugin functionality in mind, modifying the system's interface or behavior required altering the source code. This led to difficulties in future upgrades and increasing divergence from the official codebase. Although an app store feature was later added to forcibly support plugins, plugins still had to modify the source code. Additionally, plugins could not extend initialization logic and had to modify `main.js` directly.
+The `3.0` frontend natively supports a plugin system at its core. Compared to `2.0` which wasn't designed with plugin functionality in mind, where modifying system interfaces or behaviors required source code changes—leading to upgrade difficulties and increasing divergence from official code—the later addition of an app store feature allowed forced plugin support, though plugins still had to modify source code. Moreover, plugins couldn't extend initialization points and had to modify `main.js` directly.
 
-**Now, all these issues are resolved. The frontend plugin system provides robust support, allowing seamless integration of interface replacements, feature additions, third-party components, or custom components into the system. It also offers various `hooks` that can even influence and alter the frontend's runtime behavior.**
+**Now all these issues are resolved. The frontend plugin system provides robust support, allowing seamless integration of interface replacements, feature additions, third-party components, or custom-developed components into the system. It also offers various `hooks` that can even influence and alter frontend operations.**
 :::
+
+## Plugin System Architecture Overview
+
+The plugin system is designed based on modern frontend architecture, providing complete lifecycle management and extension capabilities:
+
+```plantuml
+@startuml
+!theme plain
+
+package "MineAdmin Core" {
+  [Plugin Manager] as PM
+  [Hook System] as HS
+  [Route Manager] as RM
+  [Vue App Instance] as VAI
+}
+
+package "Plugin Ecosystem" {
+  [Plugin A] as PA
+  [Plugin B] as PB
+  [Plugin Config] as PC
+}
+
+package "Frontend Framework" {
+  [Vue Router] as VR
+  [Pinia Store] as PS
+  [Element Plus] as EP
+}
+
+PM --> HS : Manage hooks
+PM --> RM : Register routes
+PM --> VAI : Install plugins
+
+PA --> PM : Register
+PB --> PM : Register
+PC --> PM : Configure
+
+HS --> VR : Route hooks
+HS --> PS : State management hooks
+HS --> EP : Component hooks
+
+note right of PM : Plugin lifecycle management\nDynamic enable/disable control\nDependency handling
+note left of HS : Supports multiple hook types\nAsynchronous hook processing\nHook execution order control
+
+@enduml
+```
+
+### Core Features
+
+- **Zero-intrusion design**: Plugin development doesn't require modifying core code
+- **Dynamic loading**: Supports dynamic enabling and disabling of plugins
+- **Lifecycle management**: Complete plugin lifecycle hooks
+- **Type safety**: Comprehensive TypeScript type definitions
+- **Performance optimization**: Supports lazy loading and on-demand loading
+- **Error isolation**: Plugin errors don't affect main application operation
 
 ## Plugin Data Types Introduction
 
-::: info Type Definitions
-Type definitions are located in `types/global.d.ts`.
+::: info Type Definition File
+Type definitions are located in `types/global.d.ts`
 :::
 
-:::details Click to View Type Definitions
+:::details Click to view complete type definitions
 ```ts
 declare namespace Plugin {
-
   /**
    * Basic plugin information
    */
   interface Info {
+    /** Plugin name in format: author-namespace/plugin-name */
     name: string
+    /** Plugin version following semantic versioning */
     version: string
+    /** Plugin author */
     author: string
+    /** Plugin description */
     description: string
+    /** Plugin startup order - higher values start first (default: 0) */
     order?: number
+    /** Plugin dependencies list */
+    dependencies?: string[]
+    /** Plugin keywords for search */
+    keywords?: string[]
+    /** Plugin homepage URL */
+    homepage?: string
+    /** Plugin license */
+    license?: string
+    /** Minimum system version requirement */
+    minSystemVersion?: string
   }
 
+  /**
+   * Plugin configuration
+   */
   interface Config {
-    /**
-     * Plugin information
-     */
+    /** Basic plugin information */
     info: Info
-    /**
-     * Whether the plugin is enabled
-     */
+    /** Whether plugin is enabled */
     enable: boolean
+    /** Plugin development mode for debugging */
+    devMode?: boolean
+    /** Plugin custom settings */
+    settings?: Record<string, any>
   }
 
-  interface Views extends Route.RouteRecordRaw {}
-
-  interface PluginConfig {
-    install: (app: App) => void
-    config: Config
-    views?: Views[]
-    /**
-     * Plugin hooks
-     * Defined hooks will not trigger if the plugin is disabled
-     */
-    hooks?: {
-      // Triggered when the plugin starts, e.g., can set enable = false to prevent plugin startup
-      start?: (config: Config) => any | void
-      // Triggered after system initialization, can access Vue context, inject services, etc.
-      setup?: () => any | void
-      // Triggered when registering routes, allowing full manipulation of routes
-      registerRoute?: (router: Router, routesRaw: Route.RouteRecordRaw[] | Plugin.Views[] | MineRoute.routeRecord[]) => any | void
-      // Triggered on login
-      login?: (formInfo: any) => any | void
-      // Triggered on logout
-      logout?: () => any | void
-      // Triggered when fetching user info
-      getUserInfo?: (userInfo: any) => any | void
-      // Route navigation hook (does not apply to external links)
-      routerRedirect?: (route: RouteRecordRaw, router: Router) => any | void
-      // Network request hook
-      networkRequest?: (request: T) => any | void
-      // Network response hook
-      networkResponse?: (response: T) => any | void
+  /**
+   * Plugin view route definitions
+   */
+  interface Views extends Route.RouteRecordRaw {
+    /** Extended route meta information */
+    meta?: {
+      /** Page title */
+      title?: string
+      /** Internationalization key */
+      i18n?: string
+      /** Page icon */
+      icon?: string
+      /** Whether authentication is required */
+      requireAuth?: boolean
+      /** Required permissions list */
+      permissions?: string[]
+      /** Whether to cache the page */
+      keepAlive?: boolean
+      /** Whether the page is hidden */
+      hidden?: boolean
+      /** Menu order */
+      order?: number
     }
-    [key: string]: T
   }
+
+  /**
+   * Hook function type definitions
+   */
+  interface HookHandlers {
+    /** Plugin startup hook for initialization validation */
+    start?: (config: Config) => Promise<boolean | void> | boolean | void
+    /** System initialization complete hook with Vue context access */
+    setup?: () => Promise<void> | void
+    /** Route registration hook for modifying route configurations */
+    registerRoute?: (router: Router, routesRaw: Route.RouteRecordRaw[] | Views[] | MineRoute.routeRecord[]) => Promise<void> | void
+    /** User login hook */
+    login?: (formInfo: LoginFormData) => Promise<void> | void
+    /** User logout hook */
+    logout?: () => Promise<void> | void
+    /** Get user information hook */
+    getUserInfo?: (userInfo: UserInfo) => Promise<void> | void
+    /** Route redirect hook (external links invalid) */
+    routerRedirect?: (context: { from: RouteLocationNormalized, to: RouteLocationNormalized }, router: Router) => Promise<void> | void
+    /** Network request interception hook */
+    networkRequest?: <T = any>(request: AxiosRequestConfig) => Promise<AxiosRequestConfig> | AxiosRequestConfig
+    /** Network response interception hook */
+    networkResponse?: <T = any>(response: AxiosResponse<T>) => Promise<AxiosResponse<T>> | AxiosResponse<T>
+    /** Error handling hook */
+    error?: (error: Error, context?: string) => Promise<void> | void
+    /** Page load complete hook */
+    mounted?: () => Promise<void> | void
+    /** Page destruction hook */
+    beforeDestroy?: () => Promise<void> | void
+  }
+
+  /**
+   * Main plugin configuration interface
+   */
+  interface PluginConfig {
+    /** Plugin installation function - registers components, directives, etc. */
+    install: (app: App<Element>) => Promise<void> | void
+    /** Plugin configuration information */
+    config: Config
+    /** Plugin route definitions */
+    views?: Views[]
+    /** Plugin hook functions */
+    hooks?: HookHandlers
+    /** Plugin custom properties */
+    [key: string]: any
+  }
+
+  /**
+   * Plugin storage state
+   */
+  interface PluginStore {
+    /** List of installed plugins */
+    plugins: Map<string, PluginConfig>
+    /** Plugin enable status */
+    enabledPlugins: Set<string>
+    /** Plugin loading status */
+    loadingPlugins: Set<string>
+    /** Plugin error information */
+    pluginErrors: Map<string, Error>
+  }
+
+  /**
+   * Plugin manager interface
+   */
+  interface PluginManager {
+    /** Register plugin */
+    register(name: string, plugin: PluginConfig): Promise<boolean>
+    /** Uninstall plugin */
+    unregister(name: string): Promise<boolean>
+    /** Enable plugin */
+    enable(name: string): Promise<boolean>
+    /** Disable plugin */
+    disable(name: string): Promise<boolean>
+    /** Get plugin information */
+    getPlugin(name: string): PluginConfig | null
+    /** Get all plugins */
+    getAllPlugins(): Map<string, PluginConfig>
+    /** Check plugin dependencies */
+    checkDependencies(name: string): Promise<boolean>
+  }
+}
+
+/**
+ * Login form data type
+ */
+interface LoginFormData {
+  username: string
+  password: string
+  captcha?: string
+  remember?: boolean
+}
+
+/**
+ * User information type
+ */
+interface UserInfo {
+  id: number
+  username: string
+  nickname: string
+  email: string
+  avatar: string
+  roles: string[]
+  permissions: string[]
+  [key: string]: any
 }
 ```
 :::
 
-## Creating a Plugin
+## Creating Plugins
 
-### Directory Structure
-All plugins are placed under the `src/plugins` directory, with the alias `$` pointing to this directory. The plugin structure mirrors the backend, consisting of `developer-namespace/plugin-name`. The left side of the slash is the **developer namespace**, which can be configured on the [MineAdmin website](https://www.mineadmin.com). The right side is the **plugin name**, which must be unique within that namespace.
+### Directory Structure and Naming Conventions
 
-Example plugin directories:
-- `mine-admin/app-store`  Built-in app store plugin
-- `zhang-san/oss-uploader` Example plugin
+All plugins are placed in the `src/plugins` directory, with the alias `$` pointing to this directory. Plugins follow the same structure as the backend, consisting of `developer-namespace/plugin-name` to form the plugin directory. The left side of the slash is the **author namespace** (configurable on [MineAdmin website](https://www.mineadmin.com)), while the right side is the **plugin name**, which must be unique within that author namespace.
 
-::: tip Note
-Plugins created locally in the plugin directory can also be recognized and used. **However, they cannot be uploaded to the MineAdmin App Market!**
-:::
+#### Standard Plugin Directory Structure
 
-### File Structure
 ```bash
-# Example plugin, directory path: src/plugins
-- zhang-san/     # Developer namespace
--   demo/       # Plugin directory
--     config.ts # Plugin configuration file for distribution (allows customization without modifying plugin source).
--     index.ts  # Mandatory file for each plugin, containing basic info, enable status, and hook definitions.
+src/plugins/
+├── mine-admin/          # Official plugin namespace
+│   ├── app-store/       # App Store plugin
+│   ├── basic-ui/        # Basic UI library plugin
+│   └── demo/            # Official demo plugin
+├── author-name/         # Third-party developer namespace
+│   └── plugin-name/     # Specific plugin directory
+│       ├── index.ts     # Plugin entry file (required)
+│       ├── config.ts    # Plugin config file (optional)
+│       ├── package.json # Plugin package info (recommended)
+│       ├── README.md    # Plugin documentation (recommended)
+│       ├── views/       # Page components directory
+│       │   ├── index.vue
+│       │   └── components/
+│       ├── components/  # Reusable components
+│       ├── composables/ # Composable functions
+│       ├── utils/       # Utility functions
+│       ├── assets/      # Static assets
+│       ├── locales/     # Internationalization files
+│       │   ├── zh.json
+│       │   ├── en.json
+│       │   └── ja.json
+│       ├── types/       # TypeScript type definitions
+│       └── tests/       # Test files
 ```
 
-### `index.ts` Configuration
-This file exposes the plugin to the system, defining basic information, enable status, initialization, third-party component integration, and more.
+#### Naming Convention Suggestions
 
-Example configuration:
+- **Plugin name**: Use lowercase letters and hyphens, e.g., `file-manager`, `data-export`
+- **Author namespace**: Use lowercase letters and hyphens, avoid special characters
+- **File naming**: Follow kebab-case convention
+- **Component names**: Use PascalCase, e.g., `FileUploader.vue`
+
+::: tip Best Practices
+- Locally developed plugins can also be recognized by the system but cannot be uploaded to MineAdmin App Market
+- Adding a `package.json` is recommended for dependency and version management
+- Using TypeScript provides better type hints and error checking
+- Follow Vue 3 Composition API best practices
+:::
+
+::: warning Important Notes
+- Plugin names must be unique within the same author namespace
+- Avoid using system reserved words as plugin names
+- Avoid changing plugin directory names after creation
+:::
+
+### Plugin Lifecycle
+
+```plantuml
+@startuml
+!theme plain
+
+start
+
+:System startup;
+:Scan plugin directory;
+:Load plugin configuration;
+
+if (Plugin enabled?) then (yes)
+  :Check dependencies;
+  if (Dependencies met?) then (yes)
+    :Execute start hook;
+    if (Start successful?) then (yes)
+      :Execute install method;
+      :Register components and directives;
+      :Execute setup hook;
+      :Register routes;
+      :Execute registerRoute hook;
+      :Plugin initialization complete;
+    else (no)
+      :Mark plugin as failed to start;
+      stop
+    endif
+  else (no)
+    :Show dependency error;
+    stop
+  endif
+else (no)
+  :Skip plugin loading;
+  stop
+endif
+
+:Plugin running;
+
+note right: Runtime hooks\n- login\n- logout\n- getUserInfo\n- routerRedirect\n- networkRequest\n- networkResponse
+
+if (Plugin disabled?) then (yes)
+  :Execute beforeDestroy hook;
+  :Clean up resources;
+  :Remove routes;
+  :Uninstall components;
+  :Plugin stopped;
+  stop
+else (no)
+  :Continue running;
+endif
+
+@enduml
+```
+
+## Plugin Development Guide
+
+### Basic Plugin Example
+
+Let's examine a complete file manager plugin to understand the full plugin development process:
+
+#### 1. Create Plugin Entry File `index.ts`
+
 ```ts
-// Import required types
+// src/plugins/zhang-san/file-manager/index.ts
+import type { App } from 'vue'
 import type { Router, RouteRecordRaw } from 'vue-router'
-import type { MineToolbarExpose, Plugin } from '#/global'
+import type { Plugin } from '#/global'
+import { ElMessage, ElNotification } from 'element-plus'
 
-// Define the plugin
+// Import plugin components
+import FileManagerComponent from './components/FileManager.vue'
+import FileUploader from './components/FileUploader.vue'
+
+// Import utility functions
+import { formatFileSize, validateFileType } from './utils/fileUtils'
+
+// Plugin configuration
 const pluginConfig: Plugin.PluginConfig = {
-  // Mandatory installation method
-  install(app) {
-    // `app` is the current Vue instance
-    // Use `app` to call Vue's `use`, `component`, etc., to register components.
-    // This method executes only once when the plugin is enabled and does not re-run on re-enabling.
+  // Plugin installation method - register global components, directives, etc.
+  async install(app: App) {
+    try {
+      // Register global components
+      app.component('FileManager', FileManagerComponent)
+      app.component('FileUploader', FileUploader)
+      
+      // Register global directive
+      app.directive('file-drop', {
+        mounted(el, binding) {
+          el.addEventListener('dragover', (e: DragEvent) => {
+            e.preventDefault()
+            e.stopPropagation()
+          })
+          
+          el.addEventListener('drop', async (e: DragEvent) => {
+            e.preventDefault()
+            e.stopPropagation()
+            const files = Array.from(e.dataTransfer?.files || [])
+            await binding.value(files)
+          })
+        }
+      })
+      
+      // Add global properties
+      app.config.globalProperties.$fileUtils = {
+        formatSize: formatFileSize,
+        validateType: validateFileType
+      }
+      
+      console.log('File manager plugin installed successfully')
+    } catch (error) {
+      console.error('File manager plugin installation failed:', error)
+      throw error
+    }
   },
-  // Mandatory basic configuration
+
+  // Basic plugin configuration
   config: {
-    // Enable status. Can also use import.meta.env to control enablement (e.g., disable in production).
-    enable: true, 
-    // Basic info
+    enable: import.meta.env.NODE_ENV !== 'production', // Disable in production
+    devMode: import.meta.env.DEV,
     info: {
-      // Plugin name (matches directory structure)
-      name: 'zhang-san/demo',
-      // Plugin version
-      version: '1.0.0',
-      // Plugin author
-      author: '张三',
-      // Plugin description
-      description: '张三的演示插件',
-      // Plugin startup order (higher values execute first, including hooks)
-      order: 1
+      name: 'zhang-san/file-manager',
+      version: '2.1.0',
+      author: 'Zhang San',
+      description: 'Enterprise file management plugin with upload, download, preview, and permission control',
+      keywords: ['file management', 'file upload', 'permission control'],
+      homepage: 'https://github.com/zhang-san/file-manager',
+      license: 'MIT',
+      minSystemVersion: '3.0.0',
+      dependencies: ['mine-admin/basic-ui'],
+      order: 10 // Higher priority
     },
+    settings: {
+      maxFileSize: 50 * 1024 * 1024, // 50MB
+      allowedTypes: ['image/*', 'application/pdf', '.docx', '.xlsx'],
+      uploadChunkSize: 1024 * 1024, // 1MB
+      enablePreview: true,
+      enableVersionControl: false
+    }
   },
-  // Optional hooks
+
+  // Plugin hook functions
   hooks: {
-    // Triggered on plugin startup, receives the plugin's config object
-    start: (config) => {},
-    // Triggered during Vue's `setup` lifecycle
-    setup: () => {},
-    // Triggered on user login (receives username, token, etc.)
-    login: (formInfo) => {},
-    // Triggered on user logout
-    logout: () => {},
-    // Triggered after fetching user info (receives permissions, roles, etc.)
-    getUserInfo: (userInfo) => {},
-    // Triggered during route registration (receives `vue-router` instance and raw route data)
-    registerRoute: (router: Router, routesRaw) => {},
-    // Triggered on page navigation (receives old/new route data and `vue-router` instance; external links excluded)
-    routerRedirect: ({ oldRoute: RouteRecordRaw, newRoute: RouteRecordRaw }, router: Router) => {},
-    // Triggered on network requests (receives raw request data, e.g., for encryption)
-    networkRequest: (request) => {},
-    // Triggered on server response (receives raw response data)
-    networkResponse: (response) => {},
+    // Plugin startup validation
+    async start(config) {
+      console.log('File manager plugin starting...', config.info.name)
+      
+      // Check required permissions
+      const hasPermission = await checkFilePermissions()
+      if (!hasPermission) {
+        ElMessage.error('File manager plugin requires file operation permissions')
+        return false // Prevent plugin startup
+      }
+      
+      // Initialize plugin settings
+      await initializeSettings(config.settings)
+      return true
+    },
+
+    // Executed after system initialization
+    async setup() {
+      // Initialize file storage
+      await initFileStorage()
+      
+      // Register file type mappings
+      registerFileTypes()
+      
+      // Listen to system events
+      window.addEventListener('beforeunload', handleBeforeUnload)
+    },
+
+    // Route registration hook
+    async registerRoute(router: Router, routesRaw) {
+      // Dynamically add file management routes
+      const adminRoutes = routesRaw.find(route => route.path === '/admin')
+      if (adminRoutes && adminRoutes.children) {
+        adminRoutes.children.push({
+          path: 'files',
+          name: 'FileManagement',
+          component: () => import('./views/FileManagement.vue'),
+          meta: {
+            title: 'File Management',
+            icon: 'FolderOpened',
+            requireAuth: true,
+            permissions: ['file:read'],
+            keepAlive: true
+          }
+        })
+      }
+      
+      console.log('File management routes registered')
+    },
+
+    // Post-login hook
+    async login(formInfo) {
+      console.log('User logged in, initializing file permissions')
+      await refreshFilePermissions(formInfo.username)
+    },
+
+    // Logout hook
+    async logout() {
+      console.log('User logged out, cleaning file cache')
+      await clearFileCache()
+    },
+
+    // Post-user info hook
+    async getUserInfo(userInfo) {
+      // Set file permissions based on user roles
+      await setFilePermissions(userInfo.roles, userInfo.permissions)
+    },
+
+    // Network request interception
+    async networkRequest(config) {
+      // Special handling for file upload requests
+      if (config.url?.includes('/upload')) {
+        config.timeout = 300000 // 5-minute timeout
+        config.headers = {
+          ...config.headers,
+          'X-File-Plugin': 'zhang-san/file-manager'
+        }
+      }
+      return config
+    },
+
+    // Network response interception
+    async networkResponse(response) {
+      // Handle file download responses
+      if (response.headers['content-type']?.includes('application/octet-stream')) {
+        const contentDisposition = response.headers['content-disposition']
+        if (contentDisposition) {
+          const filename = extractFilename(contentDisposition)
+          response.metadata = { filename }
+        }
+      }
+      return response
+    },
+
+    // Error handling
+    async error(error, context) {
+      if (context === 'file-upload') {
+        ElNotification.error({
+          title: 'File upload failed',
+          message: error.message,
+          duration: 5000
+        })
+      }
+    },
+
+    // Pre-destruction cleanup
+    async beforeDestroy() {
+      console.log('File manager plugin about to destroy, cleaning resources...')
+      
+      // Cancel ongoing uploads
+      await cancelAllUploads()
+      
+      // Clean up event listeners
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+      
+      // Clean up temporary files
+      await cleanupTempFiles()
+    }
   },
-  // Plugin views (static routes auto-registered by the system; optional)
+
+  // Plugin route definitions
   views: [
     {
-      name: 'zhangsan:demo:index',
-      path: '/zhangsan/demo',
-      component: () => import('./views/index.vue'),
+      name: 'zhangsan:filemanager:index',
+      path: '/plugins/file-manager',
+      component: () => import('./views/FileManagerIndex.vue'),
       meta: {
-        title: '张三的演示插件',
-        i18n: 'Internationalization key',
+        title: 'File Manager',
+        i18n: 'plugin.fileManager.title',
+        icon: 'FolderOpened',
+        requireAuth: true,
+        permissions: ['file:read'],
+        keepAlive: true,
+        hidden: false
+      }
+    },
+    {
+      name: 'zhangsan:filemanager:upload',
+      path: '/plugins/file-manager/upload',
+      component: () => import('./views/FileUpload.vue'),
+      meta: {
+        title: 'File Upload',
+        i18n: 'plugin.fileManager.upload',
+        icon: 'Upload',
+        requireAuth: true,
+        permissions: ['file:create'],
+        keepAlive: false
       }
     }
   ]
 }
-```
 
-::: info All Set!
-Once the above steps are completed, the plugin is ready for use.
-:::
-
-### Publishing Plugin Configuration
-If a plugin has default configurations but you want to avoid source file modifications (which could complicate upgrades), use the plugin configuration publish command.
-```bash
-# In the ./web/ command line, run:
-
-pnpm plugin:publish zhang-san/demo
-```
-
-The plugin's configuration file will be published to `src/provider/plugins/config`. For the example above, the filename will be: `zhang-san.demo.config.ts`.
-
-Using the published configuration:
-```ts
-// Retrieve default configuration
-const config = useGlobal().$pluginsConfig['zhang-san/demo']
-```
-
-## Dynamically Enabling/Disabling Plugins
-Use `usePluginStore()` to dynamically control plugin enablement.
-
-```ts
-const { disabled, enabled } = usePluginStore()
-
-// Enable a plugin
-enbaled('zhang-san/demo')
-
-// Disable a plugin
-disabled('li-si/demo')
-```
-
-## Built-in Plugins
-Official plugins are located under `src/plugins/mine-admin`. Currently included:
-
-- `basic-ui`  Core UI library
-- `app-store`  App Market
-- `demo`  Demo plugin
+// Helper functions
+async function checkFilePermissions(): Promise<boolean>

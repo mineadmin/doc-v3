@@ -1,136 +1,540 @@
-# Permissions  
+# MineAdmin Permission Control System  
 
 ## Overview  
-:::tip Permission Summary  
-Access to route pages is determined by the backend-returned menu, while static routes are controlled by the frontend for accessibility. Currently, the frontend primarily controls whether `content` is displayed (`v-show`) or rendered (`v-if`). This content includes:  
-- Page elements  
-- Page components  
-- Buttons, etc.  
-:::
 
-## Granularity Introduction and Usage  
+MineAdmin provides a comprehensive frontend permission control system that implements fine-grained permission management. Permission control operates at two levels:  
 
-Currently, permissions are divided into three granularities:  
-- **Permission-based** (menu's `name` field)  
-- **Role-based** (role's `code` field)  
-- **User-based** (user's `username` field)  
+:::tip Permission Architecture Overview  
+- **Route-level permissions**: Controls page access based on menu data returned by the backend  
+- **Content-level permissions**: Controls the display/hiding of page content through helper functions, directives, and components  
 
-::: info  
-Each granularity has corresponding **helper functions** and **directives** to control content rendering. Additionally, permission-based granularity also supports **component-based** usage for content rendering control.  
-:::
+The permission system is deeply integrated with the backend Hyperf framework to ensure consistency between frontend and backend permission control.  
+:::  
 
-### Business Logic Usage  
-```vue  
-<script setup lang="ts">  
-// Permission-based helper function  
+### Permission Types  
+
+MineAdmin supports three types of fine-grained permission control:  
+
+| Permission Type | Judgment Basis | Application Scenario | Implementation Method |  
+|---------|---------|---------|---------|  
+| **Permission Code** | Menu's `name` field | Functional module permission control | Functions, directives, components |  
+| **Role Permission** | Role's `code` field | Role-based permission control | Functions, directives |  
+| **User Permission** | User's `username` field | Specific user permission control | Functions, directives |  
+
+::: info Implementation Principle  
+The permission system validates access to specific functionalities by comparing the current user's permission codes, role codes, and user identifiers against the permission data obtained after login. Permission data is stored in frontend state management for efficient permission verification.  
+:::  
+
+## Permission Helper Functions  
+
+### Function Import and Basic Usage  
+
+MineAdmin provides three core permission-checking functions located in the `web/src/utils/permission/` directory:  
+
+```javascript  
+// Permission code check function  
 import hasAuth from '@/utils/permission/hasAuth'  
-// Role-based helper function  
+// Role check function  
 import hasRole from '@/utils/permission/hasRole'  
-// User-based helper function  
+// User check function  
 import hasUser from '@/utils/permission/hasUser'  
-  
-// Permission check  
-if (hasAuth('permission') || hasAuth(['log', 'log:index'])) {  
-  // Permission granted  
+```  
+
+::: tip Function Location  
+**Source Path**:  
+- GitHub: `https://github.com/mineadmin/mineadmin/tree/master/web/src/utils/permission/`  
+- Local Development: `/web/src/utils/permission/`  
+
+These functions are globally registered and can be called directly in components.  
+:::  
+
+### Usage in Business Logic  
+
+```vue  
+<script setup>  
+// Permission code check - supports single permission or array  
+if (hasAuth('user:list') || hasAuth(['user:list', 'user:create'])) {  
+  // User management permission granted  
+  console.log('Has user management permission')  
 }  
 
-// Role check  
-if (hasRole('SuperAdmin') || hasRole(['ceo', 'cfo'])) {  
-  // Role granted  
+// Role check - supports single role or array  
+if (hasRole('SuperAdmin') || hasRole(['admin', 'manager'])) {  
+  // Administrator role granted  
+  console.log('Has admin permission')  
 }  
 
-// User check  
-if (hasUser('admin') || hasRole(['zhangSan', 'liSi'])) {  
-  // User granted  
+// User check - supports single username or array  
+if (hasUser('admin') || hasUser(['admin', 'root'])) {  
+  // Specific user granted  
+  console.log('Specific user verified')  
+}  
+
+// Composite permission check example  
+const canManageUsers = hasAuth(['user:list', 'user:create']) && hasRole('admin')  
+if (canManageUsers) {  
+  // Both permission and role requirements met  
 }  
 </script>  
 ```  
 
-### API Usage  
+### Usage in Templates  
+
 ```vue  
-<script setup lang="ts">  
-// Permission-based helper function  
+<script setup>  
+// Import permission functions  
 import hasAuth from '@/utils/permission/hasAuth'  
-// Role-based helper function  
 import hasRole from '@/utils/permission/hasRole'  
-// User-based helper function  
 import hasUser from '@/utils/permission/hasUser'  
 </script>  
 
 <template>  
   <div>  
-    <div v-if="hasAuth('permission') || hasAuth(['log', 'log:index'])">  
-      Permission granted, content visible  
+    <!-- Permission code check -->  
+    <div v-if="hasAuth('user:list') || hasAuth(['user:list', 'user:create'])">  
+      <el-button type="primary">User Management</el-button>  
     </div>  
-      
-    <div v-if="hasRole('SuperAdmin') || hasRole(['ceo', 'cfo'])">  
-      Role granted, content visible  
+    
+    <!-- Role check -->  
+    <div v-if="hasRole('SuperAdmin') || hasRole(['admin', 'manager'])">  
+      <el-button type="danger">System Settings</el-button>  
     </div>  
 
-    <div v-if="hasUser('admin') || hasRole(['zhangSan', 'liSi'])">  
-      User granted, content visible  
+    <!-- User check -->  
+    <div v-if="hasUser('admin') || hasUser(['root', 'administrator'])">  
+      <el-button type="warning">Advanced Features</el-button>  
+    </div>  
+
+    <!-- Composite condition check -->  
+    <div v-if="hasAuth('role:manage') && hasRole('admin')">  
+      <el-button>Role Management</el-button>  
     </div>  
   </div>  
 </template>  
 ```  
+
+### Function Parameters  
+
+All permission functions support the following parameter formats:  
+
+```javascript  
+// String format - single permission check  
+hasAuth('user:list')  
+hasRole('admin')  
+hasUser('admin')  
+
+// Array format - multiple permission check (OR logic)  
+hasAuth(['user:list', 'user:create', 'user:edit'])  
+hasRole(['admin', 'manager', 'supervisor'])  
+hasUser(['admin', 'root', 'system'])  
+```  
+
+::: warning Notes  
+- Array parameters use **OR logic**—returns `true` if any condition is met  
+- For **AND logic**, combine multiple function calls: `hasAuth('a') && hasAuth('b')`  
+- Permission codes should follow `module:operation` naming convention (e.g., `user:list`, `role:create`)  
+:::  
+
+### Route Permission Parameter  
+
+Permission functions support an optional second parameter `checkRoute` to determine whether to check route permissions:  
+
+```javascript  
+// Default false - checks only functional permissions  
+hasAuth('user:list', false)  
+
+// Set to true - checks both functional and route permissions  
+hasAuth('user:list', true)  
+```  
+
+## Permission Directives  
+
+MineAdmin provides three permission directives to simplify permission control in templates. The directives are located in `web/src/directives/permission/`:  
+
+::: tip Directive Source Location  
+**GitHub Path**:  
+- `https://github.com/mineadmin/mineadmin/tree/master/web/src/directives/permission/auth/`  
+- `https://github.com/mineadmin/mineadmin/tree/master/web/src/directives/permission/role/`  
+- `https://github.com/mineadmin/mineadmin/tree/master/web/src/directives/permission/user/`  
+
+**Local Path**: `/web/src/directives/permission/`  
+:::  
 
 ### Directive Usage  
 
-String input is also supported, but for simplicity, only array input is demonstrated here.  
-
 ```vue  
 <template>  
   <div>  
-    <div v-auth="['log', 'log:index']">  
-      Permission granted, content visible  
+    <!-- Permission code directive - supports string and array -->  
+    <div v-auth="'user:list'">  
+      Single permission control  
     </div>  
-      
-    <div v-role="['ceo', 'cfo']">  
-      Role granted, content visible  
+    <div v-auth="['user:list', 'user:create']">  
+      Multiple permission control (OR logic)  
+    </div>  
+    
+    <!-- Role directive -->  
+    <div v-role="'admin'">  
+      Single role control  
+    </div>  
+    <div v-role="['admin', 'manager']">  
+      Multiple role control (OR logic)  
     </div>  
 
-    <div v-user="['zhangSan', 'liSi']">  
-      User granted, content visible  
+    <!-- User directive -->  
+    <div v-user="'admin'">  
+      Single user control  
+    </div>  
+    <div v-user="['admin', 'root']">  
+      Multiple user control (OR logic)  
+    </div>  
+
+    <!-- Practical examples -->  
+    <el-button v-auth="'user:create'" type="primary">  
+      Add User  
+    </el-button>  
+    
+    <el-button v-role="'SuperAdmin'" type="danger">  
+      Delete Data  
+    </el-button>  
+    
+    <div v-auth="['log:operation', 'log:login']" class="log-panel">  
+      Log View Panel  
     </div>  
   </div>  
 </template>  
 ```  
-::: tip Note  
-The `hasAuth`, `hasRole`, and `hasUser` functions also accept a second parameter to determine whether **route permissions** should be checked as well.  
-:::
 
-### Permission Component Usage  
+### Directives vs. Functions  
 
-Compared to other methods, the component approach is more user-friendly and convenient for controlling large sections of content. By wrapping the content to be displayed with the component and passing the required permissions, you can easily manage visibility. Additionally, the component provides a slot for customizing the "no permission" message.  
+| Method | Advantages | Use Case | Example |  
+|------|------|----------|------|  
+| **Directives** | Concise, automatically controls element visibility | Simple permission control, static checks | `v-auth="'user:list'"` |  
+| **Functions** | High flexibility, supports complex logic | Business logic permission checks, dynamic checks | `v-if="hasAuth('a') && hasRole('b')"` |  
 
-:::info Component Location  
-**`src/components/ma-auth/index.vue`**  
-
-The component is globally registered and does not require manual import.  
+::: warning Directive Notes  
+- Directives use **OR logic**—element shows if any condition is met  
+- Directives control DOM element visibility (unrendered if no permission)  
+- Complex permission logic should use functions instead of directives  
 :::  
+
+## MaAuth Permission Component  
+
+### Component Introduction  
+
+The `MaAuth` component is MineAdmin's permission control component, suitable for large-scale content permission control. Compared to functions and directives, the component approach is better for complex permission display logic.  
+
+::: info Component Source Location  
+**GitHub Path**: `https://github.com/mineadmin/mineadmin/tree/master/web/src/components/ma-auth/index.vue`  
+
+**Local Path**: `/web/src/components/ma-auth/index.vue`  
+
+The component is globally registered and can be used directly in any Vue component without manual import.  
+:::  
+
+### Basic Usage  
 
 ```vue  
 <template>  
-  <!-- Users with user and menu management permissions can see the content -->  
-  <ma-auth :value="['permission:user', 'permission:menu']">  
-    Permission granted, content visible  
+  <!-- Single permission control -->  
+  <ma-auth :value="'user:list'">  
+    <div class="user-management">  
+      <h3>User Management Panel</h3>  
+      <p>You have user list view permission</p>  
+    </div>  
+  </ma-auth>  
+
+  <!-- Multiple permission control (OR logic) -->  
+  <ma-auth :value="['user:list', 'user:create', 'user:edit']">  
+    <div class="user-operations">  
+      <el-button type="primary">Add User</el-button>  
+      <el-button type="success">Edit User</el-button>  
+      <el-button type="danger">Delete User</el-button>  
+    </div>  
+  </ma-auth>  
+</template>  
+```  
+
+### No-Permission Hint  
+
+The component provides a `#notAuth` slot for customizing no-permission content:  
+
+```vue  
+<template>  
+  <ma-auth :value="['admin:system', 'admin:config']">  
+    <!-- Content with permission -->  
+    <div class="admin-panel">  
+      <h2>System Management</h2>  
+      <el-form>  
+        <el-form-item label="System Configuration">  
+          <el-input placeholder="Configuration" />  
+        </el-form-item>  
+      </el-form>  
+    </div>  
     
-    <!-- Slot for no-permission message -->  
+    <!-- No-permission content -->  
     <template #notAuth>  
-      Sorry, you do not have permission to view this content.  
+      <el-alert  
+        title="Insufficient Permission"  
+        description="You don't have system management permission. Contact the administrator to request access."  
+        type="warning"  
+        :closable="false"  
+        show-icon  
+      />  
     </template>  
   </ma-auth>  
 </template>  
 ```  
 
-## Static Route Access Control  
+### Advanced Usage  
 
-Static route access control only applies to routes with component pages, not buttons or similar elements. Buttons should be controlled using the methods described above.  
+#### Nested Permission Control  
 
-::: tip Usage Instructions  
-Using static route access control is straightforward. Simply configure the `auth`, `role`, or `user` properties in the route's `meta` attribute. The frontend will check accessibility during route navigation.  
+```vue  
+<template>  
+  <ma-auth :value="'module:access'">  
+    <!-- Module-level permission -->  
+    <div class="module-container">  
+      <h2>Business Module</h2>  
+      
+      <!-- Feature-level permission -->  
+      <ma-auth :value="'feature:read'">  
+        <div class="read-section">  
+          <p>Read-only content area</p>  
+        </div>  
+        <template #notAuth>  
+          <p class="text-gray">No read permission</p>  
+        </template>  
+      </ma-auth>  
 
-If access is denied, a `403 page` is displayed. If granted, normal access is permitted. To disable access control, omit these properties or set their values to `[]`.  
+      <!-- Operation-level permission -->  
+      <ma-auth :value="['feature:create', 'feature:edit']">  
+        <div class="action-buttons">  
+          <el-button>Create</el-button>  
+          <el-button>Edit</el-button>  
+        </div>  
+        <template #notAuth>  
+          <p class="text-muted">No operation permission</p>  
+        </template>  
+      </ma-auth>  
+    </div>  
+    
+    <template #notAuth>  
+      <el-empty description="You don't have access to this module" />  
+    </template>  
+  </ma-auth>  
+</template>  
+```  
 
-Note: All three properties are of type `string[]`.  
-:::
+#### Integration with Other Components  
+
+```vue  
+<template>  
+  <!-- Table action permission control -->  
+  <el-table :data="tableData">  
+    <el-table-column label="Name" prop="name" />  
+    <el-table-column label="Actions">  
+      <template #default="{ row }">  
+        <ma-auth :value="'user:edit'">  
+          <el-button size="small" @click="editUser(row)">Edit</el-button>  
+          <template #notAuth>  
+            <el-button size="small" disabled>No Permission</el-button>  
+          </template>  
+        </ma-auth>  
+        
+        <ma-auth :value="'user:delete'">  
+          <el-button size="small" type="danger" @click="deleteUser(row)">  
+            Delete  
+          </el-button>  
+        </ma-auth>  
+      </template>  
+    </el-table-column>  
+  </el-table>  
+</template>  
+```  
+
+### Component Props  
+
+| Prop | Type | Default | Description |  
+|------|------|--------|------|  
+| `value` | `string \| string[]` | `[]` | Permission code(s) to validate (string or array) |  
+
+### Component Slots  
+
+| Slot | Description | Props |  
+|--------|------|------|  
+| `default` | Content shown with permission | - |  
+| `notAuth` | Content shown without permission | - |  
+
+### Component vs. Other Methods  
+
+| Method | Use Case | Advantages | Disadvantages |  
+|------|----------|------|------|  
+| **MaAuth Component** | Large content blocks, no-permission hints | Supports slots, clear structure | Slightly verbose |  
+| **Directives** | Simple element control | Concise | No no-permission hint |  
+| **Functions** | Complex business logic | Most flexible | Manual visibility control |  
+
+## Route Permission Control  
+
+### Static Route Permission Configuration  
+
+MineAdmin supports route-level permission control by configuring permission parameters in the route's `meta` property.  
+
+::: tip Route Permission Mechanism  
+**Scope**: Only applies to component-based routes (not buttons/page elements)  
+
+**Check Timing**: Automatically checked during route navigation  
+
+**Failed Check**: Shows 403 page  
+
+**Source Location**: `/web/src/router/` - Route configuration and permission guard logic  
+:::  
+
+### Route Permission Syntax  
+
+Configure permission parameters in the route file's `meta` object:  
+
+```javascript  
+// Example route configuration  
+const routes = [  
+  {  
+    path: '/user',  
+    name: 'User',  
+    component: () => import('@/views/user/index.vue'),  
+    meta: {  
+      // Permission code control - requires user management permission  
+      auth: ['user:list', 'user:manage'],  
+      
+      // Role control - requires admin or super admin role  
+      role: ['admin', 'SuperAdmin'],  
+      
+      // User control - specific users only  
+      user: ['admin', 'root']  
+    }  
+  },  
+  {  
+    path: '/system',  
+    name: 'System',  
+    component: () => import('@/views/system/index.vue'),  
+    meta: {  
+      // Only permission code required  
+      auth: ['system:config']  
+    }  
+  },  
+  {  
+    path: '/public',  
+    name: 'Public',  
+    component: () => import('@/views/public/index.vue'),  
+    meta: {  
+      // No permission restrictions if unset or empty array  
+      auth: []  
+    }  
+  }  
+]  
+```  
+
+### Permission Parameters  
+
+| Parameter | Type | Description | Logic |  
+|------|------|------|----------|  
+| `auth` | `string[]` | Permission codes (menu-based) | OR (any permission suffices) |  
+| `role` | `string[]` | Role codes (user role-based) | OR (any role suffices) |  
+| `user` | `string[]` | Usernames (specific users) | OR (any user suffices) |  
+
+::: warning Configuration Notes  
+- All permission parameters must be `string[]` (string arrays)  
+- Multiple permission types can be combined (AND logic)  
+- Unset or empty array `[]` means no restrictions  
+- Failed checks redirect to 403 page  
+:::  
+
+### Practical Examples  
+
+#### User Management Module  
+
+```javascript  
+// User management routes  
+const userRoutes = [  
+  {  
+    path: '/user',  
+    name: 'UserManagement',  
+    component: () => import('@/views/user/index.vue'),  
+    meta: {  
+      title: 'User Management',  
+      auth: ['user:list'] // Requires user list permission  
+    },  
+    children: [  
+      {  
+        path: 'create',  
+        name: 'UserCreate',  
+        component: () => import('@/views/user/create.vue'),  
+        meta: {  
+          title: 'Add User',  
+          auth: ['user:create'] // Requires user creation permission  
+        }  
+      },  
+      {  
+        path: 'edit/:id',  
+        name: 'UserEdit',  
+        component: () => import('@/views/user/edit.vue'),  
+        meta: {  
+          title: 'Edit User',  
+          auth: ['user:edit'] // Requires user edit permission  
+        }  
+      }  
+    ]  
+  }  
+]  
+```  
+
+#### System Management Module  
+
+```javascript  
+// System management - requires multiple permissions  
+const systemRoutes = [  
+  {  
+    path: '/system',  
+    name: 'SystemManagement',  
+    component: () => import('@/views/system/index.vue'),  
+    meta: {  
+      title: 'System Management',  
+      auth: ['system:config'], // Requires system config permission  
+      role: ['SuperAdmin']     // AND super admin role  
+    }  
+  },  
+  {  
+    path: '/logs',  
+    name: 'SystemLogs',  
+    component: () => import('@/views/logs/index.vue'),  
+    meta: {  
+      title: 'System Logs',  
+      auth: ['log:operation', 'log:login'], // Requires operation/login log permission  
+      role: ['admin', 'auditor']            // AND admin/auditor role  
+    }  
+  }  
+]  
+```  
+
+#### Special Permission Control  
+
+```javascript  
+// Dev tools - specific users only  
+const devRoutes = [  
+  {  
+    path: '/dev-tools',  
+    name: 'DevTools',  
+    component: () => import('@/views/dev/index.vue'),  
+    meta: {  
+      title: 'Development Tools',  
+      user: ['admin', 'developer'], // Only admin/developer users  
+      auth: ['dev:tools']          // AND dev tools permission  
+    }  
+  }  
+]  
+```  
+
+### Permission Verification Flow  
+
+```mermaid  
+graph TD  
+    A[User accesses route] --> B{Does route have

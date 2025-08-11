@@ -1,105 +1,468 @@
 # 服務提供器
 
+## 概述
 
-## 説明
-::: tip 前言
-服務提供器在後端很常見，`3.0`的前端也增加了類似功能，但屬於簡略版，它的作用也是提供一系列服務，比如：
-- 註冊全局數據到 `Vue` 的 `globalProperties` 或 `provide` 裏去
-- 實現註冊組件，對組件初始化
-- 提供插件默認配置文件
-- 等等由自己去發掘
+### 核心作用
+服務提供器（Provider）是 MineAdmin 3.0 前端架構的核心特性之一，借鑑了後端服務提供器的設計理念，為前端應用提供了模塊化的服務註冊和管理機制。
 
-服務提供器在前端初始化時已被自動掃描註冊，無需關心引入的，你只需要關心如何向 `Vue` 的對象綁定、註冊數據即可。
+::: tip 主要功能
+- **全局服務註冊**: 將服務註冊到 Vue 的 `globalProperties` 或 `provide/inject` 系統
+- **組件初始化**: 自動初始化和配置全局組件
+- **插件配置管理**: 提供插件的默認配置和參數管理
+- **依賴注入**: 實現服務之間的依賴關係管理
+- **模塊化架構**: 支持按功能模塊組織服務
 :::
 
-::: danger 注意
-服務提供器初始化的環節早於 `pinia`、`vue-router`、`vue-i18n` 以上在服務提供器無法使用，需要注意。
+### 初始化順序
+::: danger 重要提示
+服務提供器在應用初始化的早期階段加載，**早於** `pinia`、`vue-router`、`vue-i18n` 等庫的初始化。因此在服務提供器中無法直接使用這些庫的功能。
+
+**初始化順序**:
+1. 服務提供器掃描和註冊 ⚡
+2. Pinia 狀態管理初始化
+3. Vue Router 路由初始化
+4. Vue I18n 國際化初始化
+5. 應用主體啓動
 :::
 
-## 默認服務提供器
+## 架構設計
 
-::: info 存放位置
+### 目錄結構
+```
+src/provider/
+├── dictionary/          # 字典服務提供器
+│   ├── index.ts        # 服務提供器主文件
+│   └── data/           # 字典數據文件
+├── echarts/            # 圖表服務提供器
+│   └── index.ts
+├── plugins/            # 插件配置服務提供器
+│   └── index.ts
+├── mine-core/          # 核心組件服務提供器
+│   └── index.ts
+├── settings/           # 系統配置服務提供器
+│   ├── index.ts
+│   └── settings.config.ts
+└── toolbars/           # 工具欄服務提供器
+    └── index.ts
+```
 
-所有服務提供都在 **`src/provider`** 目錄下存放着，以歸類為原則，自主考慮是否建立目錄來區分不同服務提供器。
+### 自動發現機制
+系統啓動時會自動掃描 `src/provider/` 目錄下的所有子目錄，每個子目錄的 `index.ts` 文件都會被識別為一個服務提供器並自動註冊。
 
-:::
+## 系統內置服務
 
-### dictionary (字典)
-這個服務提供了**字典數據**存放功能，`3.0` 後端不自帶字典功能，後續通過插件來支持，但前端需要提供一個完整的解決方案來解決現在及後續的支持。
+### Dictionary（字典服務）
 
-在 `src/provider/dictionary/data` 下，存放着一個個數據字典文件，一個文件對應一個集合。文件名就是**字典名**，文件內容就是**字典數據**
+**功能説明**: 提供統一的數據字典管理功能，支持多語言和主題配色。
 
-比如 `system-status.ts` 文件，定義了名為 `系統狀態` 的數據集合，包含兩個數據，**啓用和禁用**
-定義好之後，我們不需要關心如何引入、如何運作，只關心如何使用即可，使用的話參考後面的組件教程章節。
+**源碼位置**: 
+- GitHub: [src/provider/dictionary/](https://github.com/mineadmin/mineadmin/tree/master/web/src/provider/dictionary)
+- 本地: `/Users/zhuzhu/project/mineadmin/web/src/provider/dictionary/`
 
+**核心特性**:
+- 支持多語言國際化標識
+- 內置主題色彩系統
+- 自動類型推導
+- 響應式數據更新
+
+**字典數據示例** (`src/provider/dictionary/data/system-status.ts`):
 ```ts
 import type { Dictionary } from '#/global'
 
 export default [
-  { label: '啓用', value: 1, i18n: 'dictionary.system.statusEnabled', color: 'primary' },
-  { label: '禁用', value: 2, i18n: 'dictionary.system.statusDisabled', color: 'danger' },
+  { 
+    label: '啓用', 
+    value: 1, 
+    i18n: 'dictionary.system.statusEnabled', 
+    color: 'primary' 
+  },
+  { 
+    label: '禁用', 
+    value: 2, 
+    i18n: 'dictionary.system.statusDisabled', 
+    color: 'danger' 
+  },
 ] as Dictionary[]
 ```
 
-### echarts
-這個提供了 `echarts` 組件的初始化，包括引入需要使用的 `echarts` 組件（默認並沒有全量引入，後續可自己修改添加），
-以及將 `echarts` 綁定到 `Vue` 的 `globalProperties` 對象上: **$echarts**，還有黑暗模式下主題的註冊等等。
-
-在 `vue` 頁面裏通過 `useGlobal().$echarts` 獲取實例，具體如何使用可參考 [MaEcharts](/zh-hk/front/component/ma-echarts) 章節 
-
-
-### plugins
-這個對 `MineAdmin插件系統` 提供了默認參數的註冊，方便插件後續使用默認參數，也方便後續開發者在這裏修改插件的參數，而非插件源碼。
-這裏不詳細講解如何發佈插件配置文件，可以參考 [插件系統](/zh-hk/front/high/plugins) 章節。
-
-### mine-core
-這個是對 `MineAdmin` 下的 **ma-table、ma-search、ma-form、ma-pro-table** 核心組件初始化，
-並掛載全局參數和全局配置，可引入與局部配置一起使用。
-
-在 `vue` 頁面裏通過 `useGlobal().$mineCore` 調取配置
-
-### settings
-這個裏面提供了整個前端的配置參數，不要在默認的 `index.ts` 裏修改參數，請複製裏面的參數到 `settings.config.ts` 裏修改，
-
-## 創建服務提供器
-
-### 服務提供器類型
+**使用方法**:
 ```ts
-declare namespace ProviderService {
-  interface Provider {
-    name: string
-    init?: () => any | void
-    setProvider: (app: App) => any | void
-    getProvider: () => T
+// 在組件中使用字典數據
+import { useDictionary } from '@/composables/useDictionary'
+
+const { getDictionary } = useDictionary()
+const statusDict = getDictionary('system-status')
+```
+
+### ECharts（圖表服務）
+
+**功能説明**: 提供 ECharts 圖表庫的初始化、配置和主題管理功能。
+
+**源碼位置**:
+- GitHub: [src/provider/echarts/](https://github.com/mineadmin/mineadmin/tree/master/web/src/provider/echarts)
+- 本地: `/Users/zhuzhu/project/mineadmin/web/src/provider/echarts/`
+
+**核心特性**:
+- 按需引入圖表組件，減少包體積
+- 自動適配系統主題（明暗模式）
+- 全局實例註冊到 Vue
+- 響應式圖表尺寸調整
+
+**使用方法**:
+```ts
+// 在組件中獲取 ECharts 實例
+import { useGlobal } from '@/composables/useGlobal'
+
+const { $echarts } = useGlobal()
+
+// 初始化圖表
+const chartInstance = $echarts.init(chartRef.value)
+```
+
+參考組件: [MaEcharts](/zh-hk/front/component/ma-echarts)
+
+### Plugins（插件配置服務）
+
+**功能説明**: 為 MineAdmin 插件系統提供默認配置管理，支持插件參數的統一配置和管理。
+
+**源碼位置**:
+- GitHub: [src/provider/plugins/](https://github.com/mineadmin/mineadmin/tree/master/web/src/provider/plugins)
+- 本地: `/Users/zhuzhu/project/mineadmin/web/src/provider/plugins/`
+
+**核心特性**:
+- 插件配置集中管理
+- 默認參數註冊
+- 配置熱更新支持
+- 插件依賴關係管理
+
+參考文檔: [插件系統](/zh-hk/front/high/plugins)
+
+### MineCore（核心組件服務）
+
+**功能説明**: 初始化 MineAdmin 核心組件庫，提供全局配置和組件註冊服務。
+
+**源碼位置**:
+- GitHub: [src/provider/mine-core/](https://github.com/mineadmin/mineadmin/tree/master/web/src/provider/mine-core)
+- 本地: `/Users/zhuzhu/project/mineadmin/web/src/provider/mine-core/`
+
+**管理的組件**:
+- `ma-table` - 數據表格組件
+- `ma-search` - 搜索表單組件
+- `ma-form` - 表單組件
+- `ma-pro-table` - 高級表格組件
+
+**使用方法**:
+```ts
+import { useGlobal } from '@/composables/useGlobal'
+
+const { $mineCore } = useGlobal()
+const tableConfig = $mineCore.table
+```
+
+### Settings（系統配置服務）
+
+**功能説明**: 提供前端應用的全局配置參數管理，支持開發和生產環境的配置分離。
+
+**源碼位置**:
+- GitHub: [src/provider/settings/](https://github.com/mineadmin/mineadmin/tree/master/web/src/provider/settings)
+- 本地: `/Users/zhuzhu/project/mineadmin/web/src/provider/settings/`
+
+**配置文件**:
+- `index.ts` - 默認配置（請勿直接修改）
+- `settings.config.ts` - 用户自定義配置文件
+
+**配置示例**:
+```ts
+// settings.config.ts
+export default {
+  // 系統基礎配置
+  app: {
+    name: 'MineAdmin',
+    version: '3.0.0',
+    logo: '/logo.png'
+  },
+  // API 配置
+  api: {
+    baseUrl: process.env.NODE_ENV === 'development' 
+      ? 'http://localhost:9501' 
+      : 'https://api.example.com',
+    timeout: 10000
+  },
+  // 主題配置
+  theme: {
+    primaryColor: '#409eff',
+    darkMode: 'auto'
   }
 }
 ```
-每個服務提供器，需要創建一個目錄，目錄下必須存在 `index.ts` 文件，切必須要實現 `ProviderService` 下的 `Provider` 接口，並導出。
 
-```ts
-// src/provider/demo/index.ts
-import type { ProviderService } from '#/global'
+## 開發指南
 
-const provider: ProviderService.Provider = {
-  // 實例名稱，必須配置，且唯一。
-  name: 'demoProvider',
-  // init 方法可有可無，
-  init: () => {},
-  // 必須實現的方法，設置服務。
-  setProvider(app: App): void {
-    app.config.globalProperties.$demo = 'demo 服務提供器'
-  },
-  // 獲取服務，必須實現的方法。但這個獲取服務目前基本用不到
-  // 因為可在外部直接使用 useGlobal() 獲取，但為了規範還是定義一下比較好。
-  getProvider() {
-    return useGlobal().$demo
-  },
-}
+### 創建基礎服務提供器
 
-// 導出配置
-export default provider as ProviderService.Provider
+**步驟 1**: 創建服務目錄
+```bash
+mkdir src/provider/my-service
 ```
 
-## 移除服務提供器
+**步驟 2**: 創建服務提供器文件 (`src/provider/my-service/index.ts`)
+```ts
+import type { App } from 'vue'
+import type { ProviderService } from '#/global'
 
-如果需要移除的話，把某個提供器的目錄刪除即可。
+// 定義服務接口
+interface MyService {
+  version: string
+  getName: () => string
+  setConfig: (config: any) => void
+}
+
+const provider: ProviderService.Provider<MyService> = {
+  name: 'myService',
+  
+  init() {
+    console.log('MyService 正在初始化...')
+  },
+  
+  setProvider(app: App) {
+    const service: MyService = {
+      version: '1.0.0',
+      getName: () => 'My Custom Service',
+      setConfig: (config) => {
+        console.log('配置已更新:', config)
+      }
+    }
+    
+    // 註冊到全局屬性
+    app.config.globalProperties.$myService = service
+    
+    // 或者使用 provide/inject
+    app.provide('myService', service)
+  },
+  
+  getProvider() {
+    return useGlobal().$myService
+  }
+}
+
+export default provider
+```
+
+### 創建帶配置的高級服務提供器
+
+```ts
+import type { App } from 'vue'
+import type { ProviderService } from '#/global'
+
+// 服務配置接口
+interface ServiceConfig {
+  apiUrl: string
+  timeout: number
+  retries: number
+}
+
+// 服務實例接口
+interface AdvancedService {
+  config: ServiceConfig
+  request: (url: string) => Promise<any>
+  updateConfig: (newConfig: Partial<ServiceConfig>) => void
+}
+
+const provider: ProviderService.Provider<AdvancedService> = {
+  name: 'advancedService',
+  
+  config: {
+    enabled: true,
+    priority: 10,
+    dependencies: ['settings'] // 依賴 settings 服務
+  },
+  
+  async init() {
+    // 異步初始化邏輯
+    await this.loadExternalLibrary()
+  },
+  
+  setProvider(app: App) {
+    const defaultConfig: ServiceConfig = {
+      apiUrl: '/api/v1',
+      timeout: 5000,
+      retries: 3
+    }
+    
+    const service: AdvancedService = {
+      config: { ...defaultConfig },
+      
+      async request(url: string) {
+        // 實現請求邏輯
+        return fetch(`${this.config.apiUrl}${url}`, {
+          timeout: this.config.timeout
+        })
+      },
+      
+      updateConfig(newConfig) {
+        Object.assign(this.config, newConfig)
+      }
+    }
+    
+    app.config.globalProperties.$advancedService = service
+  },
+  
+  getProvider() {
+    return useGlobal().$advancedService
+  },
+  
+  async loadExternalLibrary() {
+    // 加載外部依賴庫的邏輯
+  }
+}
+
+export default provider
+```
+
+### 使用服務提供器
+
+**在 Vue 組件中使用**:
+```vue
+<template>
+  <div>
+    <h3>{{ serviceName }}</h3>
+    <p>版本: {{ version }}</p>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { useGlobal } from '@/composables/useGlobal'
+
+const { $myService } = useGlobal()
+
+const serviceName = $myService.getName()
+const version = $myService.version
+
+// 更新配置
+$myService.setConfig({ theme: 'dark' })
+</script>
+```
+
+**在 Composable 中使用**:
+```ts
+// composables/useMyService.ts
+import { useGlobal } from '@/composables/useGlobal'
+
+export function useMyService() {
+  const { $myService } = useGlobal()
+  
+  const updateServiceConfig = (config: any) => {
+    $myService.setConfig(config)
+  }
+  
+  return {
+    service: $myService,
+    updateServiceConfig
+  }
+}
+```
+
+## 最佳實踐
+
+### 1. 命名規範
+- 服務提供器名稱使用 **camelCase** 格式
+- 目錄名使用 **kebab-case** 格式
+- 全局屬性使用 `$` 前綴
+
+### 2. 類型安全
+```ts
+// 擴展全局屬性類型
+declare module '@vue/runtime-core' {
+  interface ComponentCustomProperties {
+    $myService: MyService
+  }
+}
+```
+
+### 3. 依賴管理
+```ts
+const provider: ProviderService.Provider = {
+  name: 'dependentService',
+  config: {
+    dependencies: ['settings', 'dictionary']
+  },
+  // ...其他配置
+}
+```
+
+### 4. 錯誤處理
+```ts
+setProvider(app: App) {
+  try {
+    // 服務初始化邏輯
+    app.config.globalProperties.$service = createService()
+  } catch (error) {
+    console.error(`服務 ${this.name} 初始化失敗:`, error)
+    // 提供降級方案
+    app.config.globalProperties.$service = createFallbackService()
+  }
+}
+```
+
+## 服務管理
+
+### 禁用服務提供器
+```ts
+const provider: ProviderService.Provider = {
+  name: 'optionalService',
+  config: {
+    enabled: false // 禁用該服務
+  },
+  // ...其他配置
+}
+```
+
+### 移除服務提供器
+刪除對應的服務提供器目錄即可：
+```bash
+rm -rf src/provider/unwanted-service
+```
+
+### 調試服務提供器
+```ts
+const provider: ProviderService.Provider = {
+  name: 'debugService',
+  
+  init() {
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`[Provider] ${this.name} 初始化完成`)
+    }
+  },
+  
+  setProvider(app: App) {
+    // 開發環境下添加調試信息
+    if (process.env.NODE_ENV === 'development') {
+      window.__DEBUG_PROVIDERS__ = window.__DEBUG_PROVIDERS__ || {}
+      window.__DEBUG_PROVIDERS__[this.name] = this
+    }
+    
+    // 正常的服務註冊邏輯
+  }
+}
+```
+
+## 常見問題
+
+| 問題 | 原因 | 解決方案 |
+|------|------|----------|
+| 服務未註冊成功 | 缺少 `index.ts` 文件或未實現必要接口 | 檢查文件存在性和接口實現 |
+| 無法使用 Pinia | 服務提供器初始化早於 Pinia | 將 Pinia 相關邏輯移至組件或 Composable 中 |
+| 服務依賴衝突 | 循環依賴或依賴順序錯誤 | 重新設計依賴關係或使用事件總線 |
+| 類型推導錯誤 | 全局屬性類型未正確擴展 | 添加 TypeScript 模塊聲明 |
+| 熱更新失效 | 服務緩存問題 | 重啓開發服務器 |
+
+## 相關資源
+
+**源碼參考**:
+- GitHub 倉庫: [MineAdmin 源碼](https://github.com/mineadmin/mineadmin)
+- 服務提供器目錄: [web/src/provider/](https://github.com/mineadmin/mineadmin/tree/master/web/src/provider)
+- 本地源碼: `/Users/zhuzhu/project/mineadmin/web/src/provider/`
+
+**相關文檔**:
+- [插件系統](/zh-hk/front/high/plugins)
+- [MaEcharts 組件](/zh-hk/front/component/ma-echarts)

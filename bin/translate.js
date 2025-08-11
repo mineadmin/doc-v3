@@ -9,7 +9,7 @@ const endpoint = "https://api.deepseek.com";
 const token = process.env["DEEPSEEK_API_KEY"] || '';
 const MAX_CONCURRENT = 10; // 最大并发数
 const MAX_RETRIES = 3; // 最大重试次数
-const CHANGE_FILES = process.env["CHANGE_FILES"]?.split('\n') ||  [];
+const CHANGE_FILES = process.env["ALL_CHANGED_FILES"]?.split('\n') ||  [];
 const SOURCE_DIRS = ['docs', '.vitepress/src'];
 const SOURCE_LANG = 'zh'; // 源语言
 
@@ -73,6 +73,8 @@ function replaceZhLinks(content, lang) {
     content = content.replace(/(\()\/zh\//g, `$1/${lang}/`);
     // HTML 属性: href="/zh/xxx" 或 to="/zh/xxx"
     content = content.replace(/(\b(?:href|to)=["'])\/zh\//g, `$1/${lang}/`);
+    // JS/TS 对象属性: link: '/zh/xxx'
+    content = content.replace(/(link:\s*['"])\/zh\//g, `$1/${lang}/`);   
     return content;
 }
 
@@ -94,6 +96,8 @@ async function processFile(srcPath, destPath, targetLang = 'en') {
     } else {
         systemContent = langConfig.systemPrompt.md; // 默认使用md提示
     }
+
+    await new Promise(resolve => setTimeout(resolve, 1000)); // 延迟1秒
 
     const translatedContent = await translateWithRetry(content, 0, systemContent);
     const finalContent = replaceZhLinks(translatedContent, targetLang);
@@ -142,12 +146,15 @@ async function handle() {
 
                 console.log(`    - 📝 Untranslated files: ${filesToTranslate.length}`);
                 console.log(`    - 🗑️ Orphan files: ${orphanFiles.length}`);
+                orphanFiles.map(file => {
+                    console.log(`        - 🗑️ Orphan file (no source): ${path.join(target_lang_dir, file)}`);
+                })
                 console.log(`    - 🔄 Change files: ${changeInDirFiles.length}`);
-                console.log(`    - 📂 Total files to translate: ${files.length}`);
-
                 if (files.length === 0) {
                     console.log(`    - 🟢 No files to translate for ${lang}`);
                     continue;
+                } else {
+                    console.log(`    - 📂 Total files to translate: ${files.length}`);
                 }
 
                 // 将文件分批处理
@@ -157,11 +164,16 @@ async function handle() {
                         const srcPath = path.join(source_lang_dir, file);
                         const destPath = path.join(target_lang_dir, file);
                         return processFile(srcPath, destPath, lang).catch(error => {
-                            console.error(`❌ translating ${file}:`, error);
+                            throw error;
                         });
                     });
 
                     await Promise.all(promises);
+
+                    if (i + MAX_CONCURRENT < files.length) {
+                        console.log(`    - 🕒 Waiting 3 seconds before processing the next batch...`);
+                        await new Promise(resolve => setTimeout(resolve, 3000)); // 批次之间等待3秒
+                    }
                 }
                 console.log(`✅ ${lang} translations completed!`);
 
@@ -183,6 +195,14 @@ async function main() {
         await handle();
     } catch (error) {
         console.error('❌ Error:', error.message);
+        // 打印更详细的错误信息
+        if (error.response) {
+            console.error('Detailed Error Information:', JSON.stringify(error.response.data, null, 2));
+        } else if (error.cause) {
+            console.error('Error Cause:', error.cause);
+        }
+        // 打印完整错误堆栈
+        console.error('Error Stack:', error.stack);
         process.exit(1);
     }
 }
