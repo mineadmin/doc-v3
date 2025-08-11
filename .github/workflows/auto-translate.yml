@@ -5,6 +5,8 @@ on:
     types: [opened, synchronize]
     paths:
       - 'docs/zh/**'
+      - '.vitepress/src/zh/**'
+      - '.github/workflows/auto-translate.yml'
   workflow_dispatch:
 
 permissions:
@@ -33,6 +35,7 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v45
         with:
+          separator: "\n"
           # Avoid using single or double quotes for multiline patterns
           files: |
             docs/zh/**/*.md
