@@ -5,6 +5,7 @@ on:
     types: [opened, synchronize]
     paths:
       - 'docs/zh/**'
+      - '.github/workflows/auto-translate.yml'
 
 permissions:
     contents: write
