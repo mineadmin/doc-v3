@@ -2,7 +2,7 @@
 
 ## Overview  
 :::tip Permission Summary  
-Access to route pages is determined by the backend-returned menu, while static routes are controlled by the frontend for access permissions. Currently, the frontend primarily controls whether `content` is displayed (`v-show`) or rendered (`v-if`). This content includes:  
+Access to route pages is determined by the backend-returned menu, while static routes are controlled by the frontend for accessibility. Currently, the frontend primarily controls whether `content` is displayed (`v-show`) or rendered (`v-if`). This content includes:  
 - Page elements  
 - Page components  
 - Buttons, etc.  
@@ -16,7 +16,7 @@ Currently, permissions are divided into three granularities:
 - **User-based** (user's `username` field)  
 
 ::: info  
-Each granularity has **helper functions** and **directives** to control content rendering. Additionally, permission-based granularity also supports **component-based** usage for controlling content rendering.  
+Each granularity has corresponding **helper functions** and **directives** to control content rendering. Additionally, permission-based granularity also supports **component-based** usage for content rendering control.  
 :::
 
 ### Business Logic Usage  
@@ -39,7 +39,7 @@ if (hasRole('SuperAdmin') || hasRole(['ceo', 'cfo'])) {
   // Role granted  
 }  
 
-// Username check  
+// User check  
 if (hasUser('admin') || hasRole(['zhangSan', 'liSi'])) {  
   // User granted  
 }  
@@ -62,7 +62,7 @@ import hasUser from '@/utils/permission/hasUser'
     <div v-if="hasAuth('permission') || hasAuth(['log', 'log:index'])">  
       Permission granted, content visible  
     </div>  
-    
+      
     <div v-if="hasRole('SuperAdmin') || hasRole(['ceo', 'cfo'])">  
       Role granted, content visible  
     </div>  
@@ -76,7 +76,7 @@ import hasUser from '@/utils/permission/hasUser'
 
 ### Directive Usage  
 
-String input is also supported, but for simplicity, it is omitted here.  
+String input is also supported, but for simplicity, only array input is demonstrated here.  
 
 ```vue  
 <template>  
@@ -84,7 +84,7 @@ String input is also supported, but for simplicity, it is omitted here.
     <div v-auth="['log', 'log:index']">  
       Permission granted, content visible  
     </div>  
-    
+      
     <div v-role="['ceo', 'cfo']">  
       Role granted, content visible  
     </div>  
@@ -96,17 +96,17 @@ String input is also supported, but for simplicity, it is omitted here.
 </template>  
 ```  
 ::: tip Note  
-The `hasAuth`, `hasRole`, and `hasUser` functions include a second parameter to optionally check **permissions in the route**.  
+The `hasAuth`, `hasRole`, and `hasUser` functions also accept a second parameter to determine whether **route permissions** should be checked as well.  
 :::
 
 ### Permission Component Usage  
 
-Compared to other methods, the component approach is more user-friendly and convenient for controlling large sections of content. By wrapping the content to be displayed and passing the required permissions, the component handles the rest. Additionally, it provides a slot for customizing the "no permission" message.  
+Compared to other methods, the component approach is more user-friendly and convenient for controlling large sections of content. By wrapping the content to be displayed with the component and passing the required permissions, you can easily manage visibility. Additionally, the component provides a slot for customizing the "no permission" message.  
 
 :::info Component Location  
 **`src/components/ma-auth/index.vue`**  
 
-The component is globally registered and does not require manual importing.  
+The component is globally registered and does not require manual import.  
 :::  
 
 ```vue  
@@ -125,12 +125,12 @@ The component is globally registered and does not require manual importing.
 
 ## Static Route Access Control  
 
-Static route access control only applies to routes with component pages, not buttons or similar elements. Such elements should be controlled using the methods described above.  
+Static route access control only applies to routes with component pages, not buttons or similar elements. Buttons should be controlled using the methods described above.  
 
 ::: tip Usage Instructions  
-Using static route access control is straightforward. Simply configure the `auth`, `role`, or `user` properties in the route's `meta` attribute. The frontend will check access permissions during route navigation.  
+Using static route access control is straightforward. Simply configure the `auth`, `role`, or `user` properties in the route's `meta` attribute. The frontend will check accessibility during route navigation.  
 
-If access is denied, a `403 page` is displayed. If granted, normal access proceeds. To disable access control, omit these properties or set their values to `[]`.  
+If access is denied, a `403 page` is displayed. If granted, normal access is permitted. To disable access control, omit these properties or set their values to `[]`.  
 
 Note: All three properties are of type `string[]`.  
 :::

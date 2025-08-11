@@ -1,13 +1,11 @@
 # Auto Import  
 
 ## Description  
-In previous versions like `2.x` and older,  
-
-when using `Vue APIs`, it was necessary to write statements like `import { ref, ... } from 'vue'` in files.  
+In previous versions like `2.x` and older, when using `Vue APIs`, it was necessary to write statements like `import { ref, ... } from 'vue'` in files.  
 Now, with the evolution of `vite` and the rich ecosystem of community plugins, we can simplify the code and improve development efficiency—thanks to the plugins provided by those experts.  
 
 ::: tip Note  
-Now, when developing `*.vue`, `*.ts`, or `*.tsx` files, there’s no need to manually import the following **APIs** or components:  
+When developing `*.vue`, `*.ts`, or `*.tsx` files, there is no need to manually import the following `APIs` or components:  
 
 - All Vue APIs  
 - VueRouter  
@@ -19,16 +17,16 @@ Now, when developing `*.vue`, `*.ts`, or `*.tsx` files, there’s no need to man
 
 ## Custom Auto Import  
 
-Under the `./vite` directory, there are two files: `auto-import.ts` and `components.ts`, which allow defining **packages, functions, and components** for auto-import.  
+Under the `./vite` directory, there are two files: `auto-import.ts` and `components.ts`, which define auto-imported **packages, functions, components**, etc.  
 
-### Auto-Import Packages or Functions  
+### Auto-Importing Packages and Functions  
 
-In `./vite/auto-import.ts`, you can define packages or functions for auto-import, such as `vue-router`, `pinia`, `axios`, etc.  
+In `./vite/auto-import.ts`, you can define auto-imported packages or functions, such as `vue-router`, `pinia`, `axios`, etc.  
 
 ```ts{3-8,10-14}  
 export default function createAutoImport() {  
   return autoImport({  
-    // Custom imports can be defined here  
+    // Custom imports can be added here  
     imports: [  
       'vue',  
       'vue-router',  
@@ -44,9 +42,9 @@ export default function createAutoImport() {
 }  
 ```  
 
-### Auto-Import Custom Component Libraries  
+### Auto-Importing Custom Component Libraries  
 
-In `./vite/components.ts`, you can define directories for auto-importing component libraries. Components under `./src/components` in the system do not require explicit imports.  
+In `./vite/components.ts`, you can define directories for auto-imported components. Components under `./src/components` do not require explicit imports.  
 
 ```ts{2}  
   return components({  

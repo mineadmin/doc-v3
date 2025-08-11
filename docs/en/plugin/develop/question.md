@@ -14,16 +14,16 @@ The following is a list of application types prohibited from being listed on Min
 
 ## Prohibited List
 
-- Treasure hunting
-- Cashback
+- Prize-winning games
+- Cashback/rewards
 - Crowdfunding
-- Lending
+- Lending/borrowing
 - Auctions
 - Cryptocurrency
 - Blockchain
-- Cross-border payments
+- Overseas payments
 - Personal payments
-- Lotteries
-- Game cards
+- Lottery
+- Game point cards
 - Forums
 - Data scraping

@@ -55,7 +55,7 @@ The parameters for `form` and `form-item` are consistent with those in `ma-form`
 | `span`   | Column span                  | `number`                  | 1 | 1.0.0 |
 | `offset` | Offset size                   | `number`                  | 0 | 1.0.0 |
 | `hide`   | Whether to hide                   | `boolean & () => boolean` | false | 1.0.0 |
-| ...      | Other parameters are from `ma-form-item` | -                         | - | 1.0.0 |
+| ...      | Other parameters are `ma-form-item` properties | -                         | - | 1.0.0 |
 
 ## Event
 
@@ -69,10 +69,10 @@ The parameters for `form` and `form-item` are consistent with those in `ma-form`
 
 | Name              | Description                                   | Parameters |
 |-----------------|--------------------------------------|----|
-| `default`       | Default slot, can write native tags `<el-form-item>`, auto-configuration will be disabled | -  |
+| `default`       | Default slot, can write native `<el-form-item>` tags, automatic configuration will be disabled | -  |
 | `actions`        | Override the built-in `Search` and `Reset` buttons               | -  |
-| `beforeActions`        | Insert content before the action buttons                      | -  |
-| `afterActions`        | Append content after the action buttons                      | -  |
+| `beforeActions`        | Insert content before the `action buttons`                      | -  |
+| `afterActions`        | Append content after the `action buttons`                      | -  |
 
 ## Expose
 | Name                | Description                 | Parameters                    | Return Value                   |
@@ -82,8 +82,8 @@ The parameters for `form` and `form-item` are consistent with those in `ma-form`
 | `getFold()`       | Get the fold state             | -                     | `boolean`             |
 | `setSearchForm()` | Set the search form value            | `(form: any) => void` | -                     |
 | `getSearchForm()` | Get the search form value            | -                     | `Record<string, any>` |
-| `setShowState()`  | Set whether the search is visible           | (boolean) => void     | -                     |
-| `getShowState()`  | Get the search visibility state           | -                     | `boolean`             |
+| `setShowState()`  | Set whether the search is displayed           | (boolean) => void     | -                     |
+| `getShowState()`  | Get the search display state           | -                     | `boolean`             |
 | `setOptions()`    | Set `ma-search` parameters  | `(MaSearchOptions)`   | -                     |
 | `getOptions()`    | Get `ma-search` parameters  | -                     | `MaSearchOptions`     |
 | `setFormOptions()`      | Set `ma-form` parameters    | `(MaFormOptions)`     | -                     |

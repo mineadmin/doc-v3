@@ -1,94 +1,97 @@
-# Plugin Commands  
+# Plugin Commands
 
-## Plugin Extension Initialization Command  
+## Plugin Extension Initialization Command
 
----  
+---
 
-::: danger  
+::: danger
 
-MineAdmin 2.0 already includes plugin extensions and initialization actions by default. Do not repeat the initialization process.  
+ MineAdmin 2.0 already includes the plugin extension and initialization by default. No need to repeat the initialization process.
 
-:::  
+:::
 
-> This command will publish the configuration and language files for `app-store`.  
 
-```shell  
-php bin/hyperf.php mine-extension:initial  
-```  
+> This command will publish the configuration and language files for app-store.
 
----  
+```shell
+php bin/hyperf.php mine-extension:initial
+```
 
-## Query Remote Plugin List (from MineAdmin Official Extension Source)  
+---
 
-```shell  
-php bin/hyperf.php mine-extension:list  
-```  
+## Query Remote Plugin List (from MineAdmin Official Extension Source)
 
-### Parameters  
+```shell
+php bin/hyperf.php mine-extension:list
+```
 
-| Parameter | Type    | Default | Remarks |  
-|----------|---------|---------|---------|  
-| --type   | string  | all     | Filter by extension type |  
-| --name   | string  | none    | Filter by extension name |  
+### Parameters
 
----  
+| Parameter      | Type      | Default  | Remarks |
+|---------|---------|------| ---|
+| --type  | string  | all  | Filter by extension type | 
+| --name | string | None | Filter by extension name |
 
-## Query All Local Plugins (Including Uninstalled Ones)  
+---
 
-```shell  
-php bin/hyperf.php mine-extension:local-list  
-```  
+## Query All Local Plugins (including uninstalled ones)
 
-## Download Remote Plugin to Local  
+```shell
+php bin/hyperf.php mine-extension:local-list
+```
 
-```shell  
-php bin/hyperf.php mine-extension:download  
-```  
+## Download Remote Plugin to Local
 
-### Parameters  
+```shell
+php bin/hyperf.php mine-extension:download
+```
 
-| Parameter | Type    | Default | Remarks |  
-|----------|---------|---------|---------|  
-| --name   | string  | none    | Required |  
+### Parameters
 
-## Install Specified Plugin  
+| Parameter      | Type      | Default | Remarks |
+|---------|---------|-----| ---|
+| --name | string | None   | Required |
 
-```shell  
-php bin/hyperf.php mine-extension:install {path} --yes  
-```  
+## Install Specified Plugin
 
-### Parameters  
+```shell
+php bin/hyperf.php mine-extension:install {path} --yes
+```
 
-| Parameter | Type    | Default | Remarks |  
-|----------|---------|---------|---------|  
-| path     | string  | none    | Required, plugin directory |  
-| --yes    | bool    | false   | Disable installation confirmation |  
+### Parameters
 
-## Uninstall Specified Plugin  
+| Parameter      | Type      | Default | Remarks        |
+|---------|---------|-----|-----------|
+| path | string | None | Required, plugin directory |
+| --yes | bool | false | Disable installation confirmation  |
 
-```shell  
-php bin/hyperf.php mine-extension:uninstall {path} --yes  
-```  
 
-### Parameters  
+## Uninstall Specified Plugin
 
-| Parameter | Type    | Default | Remarks |  
-|----------|---------|---------|---------|  
-| path     | string  | none    | Required, plugin directory |  
-| --yes    | bool    | false   | Disable uninstallation confirmation |  
+```shell
+php bin/hyperf.php mine-extension:uninstall {path} --yes
+```
 
-## Create a Plugin  
+### Parameters
 
-```shell  
-php bin/hyperf.php mine-extension:create  
-```  
+| Parameter      | Type      | Default | Remarks        |
+|---------|---------|-----|-----------|
+| path | string | None | Required, plugin directory |
+| --yes | bool | false | Disable uninstallation confirmation  |
 
-### Parameters  
 
-| Parameter       | Type    | Default     | Remarks |  
-|----------------|---------|-------------|---------|  
-| path           | string  | Required    | Creation path, e.g., `zds/app-store` |  
-| --name         | string  | example     | Plugin name |  
-| --type         | string  | mixed       | Plugin type (options: `mixed`, `frontend`, `backend`) |  
-| --author       | string  | Optional    | Author name (fills `minejson.author`) |  
-| --description  | string  | Optional    | Plugin description (fills `minejson.description`) |
+## Create a Plugin
+
+```shell
+php bin/hyperf.php mine-extension:create
+```
+
+### Parameters
+
+| Parameter            | Type      | Default     | Remarks                                 |
+|---------------|---------|---------|------------------------------------|
+| path          | string | Required    | Creation path, e.g., zds/app-store              | 
+| --name        | string | example | Plugin name                               |                        
+| --type        | string | mixed     | Plugin type, options: mixed, frontend, backend     |
+| --author      | string| Optional    | Author name, fills into minejson.author      |
+| --description | string| Optional    | Plugin description, fills into minejson.description |

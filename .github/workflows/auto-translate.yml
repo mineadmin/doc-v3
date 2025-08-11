@@ -99,7 +99,7 @@ jobs:
           ALL_CHANGED_FILES: ${{ steps.changed-markdown-files.outputs.all_changed_files }}
           TARGET_LANGUAGES: "en,ja"
         run: |
-          node bin/translate-enhanced.js
+          pnpm do
 
       - name: Commit Updated
         uses: stefanzweifel/git-auto-commit-action@v5

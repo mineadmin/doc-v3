@@ -1,18 +1,18 @@
 # Layout  
 
-The layout differs significantly from `2.0`, no longer categorizing different layout forms into separate directories. Instead, everything is consolidated in `src/layouts/index.tsx`.  
-This section explains some `layout-related APIs` and how to modify the widths of the main sidebar, sub-sidebar, header, etc., through `global CSS`.  
+The layout has significant differences from `2.0`, no longer separating directories to construct different layout forms. Instead, everything is consolidated in `src/layouts/index.tsx`.  
+This section explains some `layout-related APIs` and `global CSS` for modifying the widths of the main sidebar, sub-sidebar, header, and more.  
 
 ## Layout-Related APIs  
 
-In `useSettingStore()`, several APIs related to frontend settings are defined. The following pertain to the layout—others can be viewed in the source code or under [Common Stores](/en/front/high/store).  
+In `useSettingStore()`, the APIs for the entire frontend settings are defined. The following are related to layouts. For others, you can check the source code or refer to [Common Stores](/en/front/high/store).  
 
-- `isMixedLayout()` – Whether it is a mixed layout.  
-- `isColumnsLayout()` – Whether it is a columnar layout.  
-- `isClassicLayout()` – Whether it is a classic layout.  
-- `getFixedAsideState()` – Gets whether the sub-sidebar is in a fixed state.  
-- `getMenuCollapseState()` – Gets whether the menu is collapsed.  
-- `getMobileState()` – Whether it is in mobile mode.  
+- `isMixedLayout()` – Whether it is a mixed layout  
+- `isColumnsLayout()` – Whether it is a column layout  
+- `isClassicLayout()` – Whether it is a classic layout  
+- `getFixedAsideState()` – Gets whether the sub-sidebar is in a fixed state  
+- `getMenuCollapseState()` – Gets whether the menu is collapsed  
+- `getMobileState()` – Whether it is in mobile mode  
 
 ## Global Default CSS  
 
@@ -20,30 +20,30 @@ In `useSettingStore()`, several APIs related to frontend settings are defined. T
 File path: `src/assets/styles/global.scss`  
 :::  
 
-You can set default layout properties such as height and width here.  
+You can set default heights, widths, etc., for the layout here.  
 
-```css
-/* Variable definitions */  
+```css  
+/* Variable Definitions */  
 :root {  
-  /* Header height */  
+  /* Header Height */  
   --mine-g-header-height: 55px;  
-  /* Footer height */  
+  /* Footer Height */  
   --mine-g-footer-height: 50px;  
-  /* Main sidebar menu width */  
+  /* Main Sidebar Width */  
   --mine-g-main-aside-width: 80px;  
-  /* Expanded sub-sidebar menu width */  
+  /* Expanded Sub-Sidebar Width */  
   --mine-g-sub-aside-width: 200px;  
-  /* Collapsed sub-sidebar menu width */  
+  /* Collapsed Sub-Sidebar Width */  
   --mine-g-sub-aside-collapse-width: 65px;  
-  /* Menu indentation width */  
+  /* Menu Indentation Width */  
   --mine-g-menu-retract-width: 15px;  
-  /* Toolbar height */  
+  /* Toolbar Height */  
   --mine-g-toolbar-height: 55px;  
-  /* Tab bar height */  
+  /* Tab Bar Height */  
   --mine-g-tabbar-height: 40px;  
-  /* Box shadow */  
+  /* Box Shadow */  
   --mine-g-box-shadow-color: rgb(0 0 0 / 18%);  
-  /* Primary color */  
+  /* Primary Color */  
   --el-color-primary: --ui-primery;  
 }  
 ```

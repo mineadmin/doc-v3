@@ -4,9 +4,9 @@
     "dev": "vitepress dev",
     "build": "vitepress build",
     "preview": "vitepress preview",
-    "docs:translate": "node bin/translate.js",
-    "docs:translate:enhanced": "node bin/translate-enhanced.js",
-    "docs:translate:full": "TARGET_LANGUAGES=en,ja FORCE_TRANSLATE_ALL=true node bin/translate-enhanced.js"
+    "docs:translate": "tsx bin/translate.ts",
+    "docs:translate:enhanced": "tsx bin/translate-enhanced.ts",
+    "docs:translate:full": "TARGET_LANGUAGES=en,ja FORCE_TRANSLATE_ALL=true tsx bin/translate-enhanced.ts"
   },
   "dependencies": {
     "@imengyu/vue3-context-menu": "^1.4.2",
@@ -28,8 +28,11 @@
   },
   "devDependencies": {
     "@mdit/plugin-plantuml": "^0.13.1",
+    "@types/node": "^22.17.1",
     "@vitejs/plugin-vue-jsx": "^4.0.1",
     "simple-git": "^3.27.0",
+    "tsx": "^4.19.1",
+    "typescript": "^5.9.2",
     "unocss": "^0.63.6",
     "vitepress": "^1.4.0",
     "vitepress-plugin-comment-with-giscus": "^1.1.15",

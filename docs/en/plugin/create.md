@@ -4,7 +4,7 @@ Create a MineAdmin Application
 
 ## [Command Creation](./command.md#create-a-plugin)  
 
-MineAdmin allows you to create an application via the command line. First, navigate your command line to the project's root directory, then enter the following command:  
+MineAdmin allows you to create an application via the command line. First, navigate your command line to the root directory of the project, then enter the following command:  
 
 ```shell  
 php bin/hyperf.php mine-extension:create test/demo --name test --type mix --author zds --description This is a mixed plugin  

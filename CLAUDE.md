@@ -14,7 +14,9 @@ This is a VitePress-powered documentation site for MineAdmin, an enterprise-leve
 - `pnpm run preview` - Preview the built documentation locally
 
 ### Translation
-- `pnpm run docs:translate` - Translate Chinese markdown files to English using OpenAI API (requires `DEEPSEEK_API_KEY` environment variable)
+- `pnpm run docs:translate` - Translate Chinese markdown files to English using DeepSeek API (requires `DEEPSEEK_API_KEY` environment variable)
+- `pnpm run docs:translate:enhanced` - Enhanced translation tool supporting multiple languages (English and Japanese by default)
+- `pnpm run docs:translate:full` - Force translate all files to all configured languages
 
 ## Architecture and Structure
 
@@ -41,9 +43,23 @@ The project follows a multilingual documentation pattern:
 - Demo components located in `/docs/demos/`
 
 #### Translation System
-- Automated translation via `bin/translate.js` using DeepSeek API
-- Supports incremental translation based on `ALL_CHANGED_FILES` environment variable
-- Handles both `.md` and `.ts` files with appropriate system prompts
+- **Core Library**: `bin/lib/translation-core.ts` - Shared TypeScript library with strong typing
+- **Basic Translation**: `bin/translate.ts` - Simple English translation tool
+- **Enhanced Translation**: `bin/translate-enhanced.ts` - Multi-language translation with advanced features
+- **Supported Languages**: English (en), Japanese (ja), Korean (ko), Spanish (es), French (fr), German (de), Russian (ru)
+- **API Integration**: DeepSeek API for high-quality translations
+- **Features**:
+  - Concurrent translation processing with rate limiting
+  - Incremental translation based on changed files
+  - Strong TypeScript typing for code stability
+  - Comprehensive error handling and retry mechanisms
+  - Progress tracking and detailed statistics
+- **Configuration**:
+  - `DEEPSEEK_API_KEY` - Required API key
+  - `TARGET_LANGUAGES` - Comma-separated language codes (default: "en,ja")
+  - `MAX_CONCURRENT` - Maximum concurrent translations (default: 10)
+  - `FORCE_TRANSLATE_ALL` - Force translate all files (default: false)
+  - `ALL_CHANGED_FILES` - Specific files to translate (used by CI/CD)
 
 ### Content Categories
 Documentation is organized into:
@@ -64,10 +80,44 @@ Documentation is organized into:
 
 ## Working with Translations
 
-When making changes to Chinese documentation (`/docs/zh/`), run the translation command to update English versions. The system:
-1. Detects changed files via git or environment variable
-2. Uses AI to translate content while preserving markdown formatting
-3. Automatically updates path references from `/zh/` to `/en/`
+The translation system has been upgraded to TypeScript with enhanced features:
+
+### Quick Commands
+```bash
+# Basic English translation
+pnpm run docs:translate
+
+# Multi-language translation (English + Japanese)
+pnpm run docs:translate:enhanced
+
+# Force translate all files to all languages
+pnpm run docs:translate:full
+
+# Custom language selection
+TARGET_LANGUAGES="en,ja,ko" pnpm run docs:translate:enhanced
+
+# High concurrency translation
+MAX_CONCURRENT=20 pnpm run docs:translate:enhanced
+```
+
+### Translation Process
+1. **File Detection**: Automatically detects changed files via git or `ALL_CHANGED_FILES` environment variable
+2. **Language Processing**: Translates to multiple languages concurrently with rate limiting
+3. **Content Preservation**: Maintains markdown formatting and updates path references
+4. **Error Handling**: Implements retry mechanisms and detailed error reporting
+5. **Statistics**: Provides comprehensive translation statistics and performance metrics
+
+### Language Support
+The system supports the following languages out-of-the-box:
+- English (en) - `/en/`
+- Japanese (ja) - `/ja/`
+- Korean (ko) - `/ko/`
+- Spanish (es) - `/es/`
+- French (fr) - `/fr/`
+- German (de) - `/de/`
+- Russian (ru) - `/ru/`
+
+Additional languages can be added by extending the `LanguageConfigFactory` in `bin/lib/translation-core.ts`.
 
 ## Component Development
 

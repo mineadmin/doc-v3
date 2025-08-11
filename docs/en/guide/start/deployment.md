@@ -1,213 +1,221 @@
 # Deployment
 
-This article will explain how to deploy the frontend and backend applications of MineAdmin in a production environment.
+This article explains how to deploy MineAdmin's frontend and backend applications in a production environment.
 
 ## Backend
 
 ### Service Deployment
 
-Generally, in modern server-side applications, deployment is typically handled using Docker. MineAdmin also provides an out-of-the-box [Dockerfile](https://github.com/mineadmin/MineAdmin/blob/master/Dockerfile) to enable quick service deployment. In some cases, bare-metal deployment on a server may be required. Below are two deployment methods for quick setup.
+Generally, for modern server-side applications, Docker is the preferred method for service deployment.  
+MineAdmin provides an out-of-the-box [Dockerfile](https://github.com/mineadmin/MineAdmin/blob/master/Dockerfile) to facilitate quick service deployment.  
+In some cases, bare-metal server deployment may be necessary. Below, we introduce two deployment methods for a smooth setup.
 
 #### Direct Deployment on a Server
 
-If you need to deploy MineAdmin directly on a server, the server must meet the following system requirements:
+If you need to deploy MineAdmin directly on a server, ensure the server meets the following system requirements:
 
-::: tip
-Please refer to other tutorials for PHP and extension installations, as they are not covered here.
+::: tip  
+For PHP and extension installation, please refer to relevant tutorials as they are not covered here.  
 :::
 
-* PHP >= 8.1
-* cURL PHP Extension
-* Fileinfo PHP Extension
-* OpenSSL PHP Extension
-* PDO Extension
-* Redis Extension
-* Json Extension
-* PDO_MYSQL Extension (Optional)
-* PDO_PGSQL Extension (Optional)
-* Swoole >= 5.1 Extension (Optional)
-* Swow >= 1.5 or develop (Optional)
+* PHP >= 8.1  
+* cURL PHP Extension  
+* Fileinfo PHP Extension  
+* OpenSSL PHP Extension  
+* PDO Extension  
+* Redis Extension  
+* Json Extension  
+* PDO_MYSQL Extension (Optional)  
+* PDO_PGSQL Extension (Optional)  
+* Swoole >= 5.1 Extension (Optional)  
+* Swow >= 1.5 or develop (Optional)  
 
-Navigate to the project directory and execute:
+Navigate to the project directory and execute:  
 
-```shell
-php bin/hyperf.php start
-```
+```shell  
+php bin/hyperf.php start  
+```  
 
-The service will start successfully.
+This will start the service successfully.  
 
-By default, the application does not support daemon processes. We recommend using third-party tools like [supervisord](http://www.supervisord.org/) to ensure the application runs persistently. For usage, refer to the [Hyperf Documentation](https://hyperf.wiki).
+By default, the application does not support daemon processes. We recommend using third-party tools like [supervisord](http://www.supervisord.org/) for persistent process management.  
+For usage details, refer to the [Hyperf Documentation](https://hyperf.wiki).  
 
-#### Containerized Deployment (Recommended)
+#### Containerized Deployment (Recommended)  
 
-If you prefer deploying the application as a containerized service, you can use the project's Dockerfile. The process is straightforward.
+If you prefer deploying as a containerized service, use the provided Dockerfile in the project.  
 
-First, ensure Docker is installed on your server. Then, navigate to your project directory:
+First, ensure Docker is installed on your server.  
 
-```shell
-cd yourProject
-```
+Then, navigate to your project directory:  
 
-Execute `docker build . -t mineadmin` to build the image:
+```shell  
+cd yourProject  
+```  
 
-```shell
-# For details on the `-t` parameter, please search online as it is not explained here.
-docker build . -t mineadmin
-```
+Execute `docker build . -t mineadmin` to build the image:  
 
-Next, run the container using `docker run`:
+```shell  
+# For -t parameter details, refer to Docker documentation.  
+docker build . -t mineadmin  
+```  
 
-```shell
-docker run -d --name mineadmin mineadmin
-```
+Next, start a container with `docker run`:  
 
-This completes the backend deployment.
+```shell  
+docker run -d --name mineadmin mineadmin  
+```  
 
----
+This completes the backend service deployment.  
 
-::: tip
-Both deployment methods assume the <el-tag type="danger">.env</el-tag> file has already been configured.
-:::
+---  
 
-### Reverse Proxy
+::: tip  
+Both deployment methods assume the <el-tag type="danger">.env</el-tag> file is properly configured.  
+:::  
 
-<el-alert type="warning">It is never advisable to expose the application directly to the public internet. Always use a reverse proxy.</el-alert>
+### Reverse Proxy  
 
-Below are examples of reverse proxy configurations.
+<el-alert type="warning">Never expose the application directly to the public network. Always use a reverse proxy.</el-alert>  
 
-#### Nginx
+Below are reverse proxy configuration examples.  
 
-If the application is deployed on a server running Nginx, you can use the following configuration as a starting point:
+#### Nginx  
 
-```nginx
-#PROXY-START/server
+If deploying on an Nginx server, use the following configuration as a starting point:  
 
-location ^~ /
-{
-    # Application port
-    proxy_pass http://127.0.0.1:9501/;
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header REMOTE-HOST $remote_addr;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection $connection_upgrade;
-    proxy_http_version 1.1;
-    # proxy_hide_header Upgrade;
+```nginx  
+#PROXY-START/server  
 
-    add_header X-Cache $upstream_cache_status;
-    #Set Nginx Cache
+location ^~ /  
+{  
+    # Application port  
+    proxy_pass http://127.0.0.1:9501/;  
+    proxy_set_header Host $host;  
+    proxy_set_header X-Real-IP $remote_addr;  
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;  
+    proxy_set_header REMOTE-HOST $remote_addr;  
+    proxy_set_header Upgrade $http_upgrade;  
+    proxy_set_header Connection $connection_upgrade;  
+    proxy_http_version 1.1;  
+    # proxy_hide_header Upgrade;  
 
-    set $static_fileyqrHU0ll 0;
-    if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
-    {
-        set $static_fileyqrHU0ll 1;
-        expires 1m;
-    }
-    if ( $static_fileyqrHU0ll = 0 )
-    {
-        add_header Cache-Control no-cache;
-    }
-}
-#PROXY-END/
-```
+    add_header X-Cache $upstream_cache_status;  
+    #Set Nginx Cache  
 
-#### K8s Ingress
+    set $static_fileyqrHU0ll 0;  
+    if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )  
+    {  
+        set $static_fileyqrHU0ll 1;  
+        expires 1m;  
+    }  
+    if ( $static_fileyqrHU0ll = 0 )  
+    {  
+        add_header Cache-Control no-cache;  
+    }  
+}  
+#PROXY-END/  
+```  
 
-If the application is deployed in a Kubernetes cluster, refer to the following configurations.
+#### K8s Ingress  
 
-##### Create a Service
+If deploying in a Kubernetes cluster, refer to the following configurations.  
 
-```yaml
-# Kubernetes API version
-apiVersion: v1
-# Resource type is Service
-kind: Service
-# Service metadata
-metadata:
-  # Name of the service
-  name: mineadmin-service
-# Service specification
-spec:
-  # Selector for associated Pods
-  selector:
-    app: mineadmin-server
-  # Exposed ports
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 9501
-```
+##### Create a Service  
 
-##### Create an Ingress Resource
+```yaml  
+# Kubernetes API version  
+apiVersion: v1  
+# Resource type: Service  
+kind: Service  
+# Service metadata  
+metadata:  
+  # Service name  
+  name: mineadmin-service  
+# Service specification  
+spec:  
+  # Selector for associated Pods  
+  selector:  
+    app: mineadmin-server  
+  # Exposed ports  
+  ports:  
+    - protocol: TCP  
+      port: 80  
+      targetPort: 9501  
+```  
 
-```yaml
-apiVersion: networking.k8s.io/v1
-# Resource type is Ingress
-kind: Ingress
-metadata:
-  # Name of the Ingress resource
-  name: mineadmin-ingress
-  annotations:
-    # Rewrite target path
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  # Ingress routing rules
-  rules:
-      # For requests with hostname www.mineadmin.com
-    - host: www.mineadmin.com
-      # Handle HTTP requests
-      http:
-        paths:
-          # Match root path
-          - path: /
-            # Path matching type is Prefix
-            pathType: Prefix
-            # Backend service for routing
-            backend:
-              # Backend is a Kubernetes service
-              service:
-                # Name of the backend service
-                name: mineadmin-service
-                # Port number for the backend service
-                port:
-                  number: 80
-```
+##### Create an Ingress Resource  
 
-### Debug Mode
+```yaml  
+apiVersion: networking.k8s.io/v1  
+# Resource type: Ingress  
+kind: Ingress  
+metadata:  
+  # Ingress name  
+  name: mineadmin-ingress  
+  annotations:  
+    # Rewrite target path  
+    nginx.ingress.kubernetes.io/rewrite-target: /  
+spec:  
+  # Ingress routing rules  
+  rules:  
+      # For hostname www.mineadmin.com  
+    - host: www.mineadmin.com  
+      # HTTP request handling  
+      http:  
+        paths:  
+          # Match root path  
+          - path: /  
+            # Path match type: Prefix  
+            pathType: Prefix  
+            # Backend service for routing  
+            backend:  
+              # Kubernetes service backend  
+              service:  
+                # Backend service name  
+                name: mineadmin-service  
+                # Backend service port  
+                port:  
+                  number: 80  
+```  
 
-In the `config/config.php` configuration file, the debug option determines how much error information is displayed to users. By default, this option follows the value of the environment variable `APP_DEBUG`, which is stored in your project's `.env` file.
+### Debug Mode  
 
-::: warning
-In production, this value should always be `false`. Setting it to `true` in production risks exposing sensitive information to users.
-:::
+In the `config/config.php` file, the debug option determines how much error information is displayed to users. By default, this setting follows the `APP_DEBUG` environment variable stored in your `.env` file.  
 
-## Frontend
+::: warning  
+In production, this value must always be `false`. Setting it to `true` risks exposing sensitive information to users.  
+:::  
 
-### Service Deployment
+## Frontend  
 
-#### Direct Deployment on a Server
+### Service Deployment  
 
-If you want to deploy the MineAdmin frontend on a server, using Nginx as an example:
+#### Direct Deployment on a Server  
 
-First, generate static resources by running `pnpm build` in your project's `web` directory. This can be done on the server or locally in advance.
+To deploy the MineAdmin frontend on a server (e.g., using Nginx):  
 
-Place the static resources in your site directory to complete the installation.
+1. Generate static resources by running `pnpm build` in the `web` directory of your project.  
+   - This can be done on the server or locally in advance.  
 
-#### Containerized Deployment (Recommended)
+2. Place the static resources in the site directory to complete the setup.  
 
-Similar to the backend, we provide a Dockerfile for frontend deployment. Navigate to your `application/web` directory and execute:
+#### Containerized Deployment (Recommended)  
 
-```shell
-docker build . -t frontend
-```
+Similar to the backend, we provide a Dockerfile for frontend deployment.  
 
-This will build an Nginx image.
+Navigate to your `application/web` directory and execute:  
 
-Start a container service using this image:
+```shell  
+docker build . -t frontend  
+```  
 
-```shell
-docker run -d --name frontend frontend
-```
+This builds an Nginx image.  
 
-Configure the site's reverse proxy to `[Container IP:80]` to complete the deployment.
+Start a container service using:  
+
+```shell  
+docker run -d --name frontend frontend  
+```  
+
+Configure the site's reverse proxy to `[container IP:80]` to complete deployment.

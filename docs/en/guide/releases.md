@@ -2,11 +2,11 @@
 
 ## Versioning Scheme
 
-Starting from version `>=3.0`, MineAdmin adopts [Semantic Versioning](https://semver.org/) for its version control scheme.  
+Starting from `>=3.0`, MineAdmin adopts [Semantic Versioning](https://semver.org/) for its version control scheme.  
 Major releases are issued annually, while smaller patches are released `weekly or monthly`.
 
 <el-alert type="warning">
-This means that in your applications, you should use version constraints like <el-tag type="danger">~3.0</el-tag> whenever possible.
+This means your application should ideally use version constraints like <el-tag type="danger">~3.0</el-tag>.
 </el-alert>
 
 ## Named Parameters
@@ -22,20 +22,22 @@ The current official naming conventions are as follows:
 
 ## Support Policy
 
-For all MineAdmin versions, `bug fixes` are supported for 18 months, and `security fixes` are supported for two years.
+For all MineAdmin versions, `bug fixes` are supported for 18 months, while `security fixes` receive two years of support.
 
-<el-alert type="warning">Due to historical reasons, security maintenance for <el-tag type="danger">2.0</el-tag> will end with the <a href="https://www.php.net/supported-versions.php">lifecycle termination</a> of PHP 8.3.</el-alert>
+<el-alert type="warning">Due to historical reasons, security maintenance for <el-tag type="danger">2.0</el-tag> will end when php8.3 reaches its <a href="https://www.php.net/supported-versions.php">end-of-life</a>.</el-alert>
 
-| Version | PHP(*)  | Hyperf(*) | Release Date | Bug Fixes Until | Security Fixes Until |
-|---------|---------|-----------|--------------|-----------------|----------------------|
-| 0.4     | 8.0     | 2.2       | 2021-01      | 2024-01         | 2024-01              |
-| 1.4     | 8.0     | 2.2       | 2022-07      | 2024-07         | 2024-07              |
-| 2.0     | 8.1~8.3 | 3.1       | 2023-12      | 2027-12         | 2027-12              |
-| 3.0     | 8.1~8.3 | >=3.1     | 2024-10      | 2026-04         | 2026-10              |
+
+| Version | PHP(*)  | Hyperf(*) | Release Date | Bug Fix Until | Security Fix Until |
+|---------|---------|-----------|--------------|---------------|--------------------|
+| 0.4     | 8.0     | 2.2       | 2021-01      | 2024-01       | 2024-01            |
+| 1.4     | 8.0     | 2.2       | 2022-07      | 2024-07       | 2024-07            |
+| 2.0     | 8.1~8.3 | 3.1       | 2023-12      | 2027-12       | 2027-12            |
+| 3.0     | 8.1~8.3 | >=3.1     | 2024-10      | 2026-04       | 2026-10            |
+
 
 ## MineAdmin 3.0
 
-MineAdmin 3.0 makes development more convenient by introducing a simplified application structure.
+MineAdmin 3.0 simplifies development by introducing a streamlined application structure.
 
 ## PHP 8.1
 

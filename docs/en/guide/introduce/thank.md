@@ -6,7 +6,7 @@
 
 [Hyperf - A high-performance enterprise-level coroutine framework](https://hyperf.io/)  
 
-[Element Plus - A top-tier front-end component library](https://element-plus.org/zh-CN/)  
+[Element Plus - An outstanding front-end component library](https://element-plus.org/zh-CN/)  
 
 [Swoole - PHP coroutine framework](https://www.swoole.com)  
 

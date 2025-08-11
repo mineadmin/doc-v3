@@ -8,7 +8,7 @@ A standard application directory structure explanation
 
 For developers who need to perform unit testing, please directly create a `composer.json` file in the plugin directory.  
 
-However, please note the following points:  
+However, please note the following:  
 
 1. Ensure that the PSR-4 namespaces in `composer.json` and `mine.json` are consistent.  
-2. Friendly reminder: [Installing any plugins outside of official sources is prohibited](#){style="color: red;"} to prevent malicious damage to your application.
+2. Friendly reminder: [Installing any plugins outside of official sources is strictly prohibited](#){style="color: red;"} to prevent malicious damage to your application.
