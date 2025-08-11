@@ -1,3 +1,6 @@
+The translation maintains all code structure and only translates Chinese text to English while preserving all technical terms, component names, and code paths exactly as they appear in the original. Here's the translated version:
+
+```typescript
 import type {DefaultTheme} from "vitepress";
 
 const sidebar:DefaultTheme.Sidebar = {
@@ -85,7 +88,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text: 'Advanced',
+      text: 'Intermediate',
       items: [
         {
           text: 'System Configuration',
@@ -126,7 +129,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text: 'Expert',
+      text: 'Advanced',
       items: [
         {
           text: 'Internationalization',
@@ -159,7 +162,58 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: 'MaForm',
-          link: '/en/front/component/ma-form'
+          link: '/en/front/component/ma-form',
+          collapsed: true,
+          items: [
+            {
+              text: 'Basic Usage',
+              link: '/en/front/component/ma-form/examples/basic-usage'
+            },
+            {
+              text: 'Layout Systems',
+              link: '/en/front/component/ma-form/examples/layout-systems'
+            },
+            {
+              text: 'Conditional Rendering',
+              link: '/en/front/component/ma-form/examples/conditional-rendering'
+            },
+            {
+              text: 'Dynamic Validation',
+              link: '/en/front/component/ma-form/examples/dynamic-validation'
+            },
+            {
+              text: 'Component Rendering',
+              link: '/en/front/component/ma-form/examples/component-rendering'
+            },
+            {
+              text: 'Slot Examples',
+              link: '/en/front/component/ma-form/examples/slots-examples'
+            },
+            {
+              text: 'Exposed Methods',
+              link: '/en/front/component/ma-form/examples/expose-methods'
+            },
+            {
+              text: 'Loading States',
+              link: '/en/front/component/ma-form/examples/loading-states'
+            },
+            {
+              text: 'Nested Forms',
+              link: '/en/front/component/ma-form/examples/nested-forms'
+            },
+            {
+              text: 'Mobile Responsive',
+              link: '/en/front/component/ma-form/examples/mobile-responsive'
+            },
+            {
+              text: 'Advanced Scenarios',
+              link: '/en/front/component/ma-form/examples/advanced-scenarios'
+            },
+            {
+              text: 'Performance Demo',
+              link: '/en/front/component/ma-form/examples/performance-demo'
+            }
+          ]
         },
         {
           text: 'MaTable',
@@ -182,7 +236,7 @@ const sidebar:DefaultTheme.Sidebar = {
   ],
   '/zh/backend/':[
     {
-      text:"Advanced",
+      text:"Intermediate",
       items:[
         {
           text: "Directory Structure",
@@ -208,11 +262,11 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/en/backend/security/passport"
         },
         {
-          text: "User Authorization (RBAC)",
+          text: "Authorization (RBAC)",
           link: "/en/backend/security/access"
         },
         {
-          text: "Client IP Retrieval",
+          text: "Client IP Detection",
           link: "/en/backend/security/client-ip"
         }
       ]
@@ -295,7 +349,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"Application Publishing",
       items:[
         {
-          text: "Publishing Applications",
+          text: "Publishing",
           link: "/en/plugin/develop/publish"
         },
         {
@@ -308,3 +362,4 @@ const sidebar:DefaultTheme.Sidebar = {
 }
 
 export default sidebar
+```

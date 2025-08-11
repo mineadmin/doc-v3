@@ -6,7 +6,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text: '紹介',
       items: [
         {
-          text: 'なぜ私たちを選ぶのか?',
+          text: 'なぜ私たちを選ぶのか？',
           link: '/ja/guide/introduce/mineadmin',
         },
         {
@@ -24,7 +24,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text: '開始',
+      text: 'スタート',
       items: [
         {
           text: 'クイックインストール',
@@ -48,7 +48,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link:"/ja/guide/upgrade"
         },
         {
-          text:"貢献ガイドライン",
+          text:"貢献ガイド",
           link:"/ja/guide/contributions"
         }
       ]
@@ -137,11 +137,11 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/ja/front/high/provider'
         },
         {
-          text: 'フック',
+          text: 'Hooks',
           link: '/ja/front/high/hooks'
         },
         {
-          text: '共通ストア',
+          text: '常用Store',
           link: '/ja/front/high/store'
         },
         {
@@ -159,7 +159,58 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: 'MaForm',
-          link: '/ja/front/component/ma-form'
+          link: '/ja/front/component/ma-form',
+          collapsed: true,
+          items: [
+            {
+              text: '基本使用法',
+              link: '/ja/front/component/ma-form/examples/basic-usage'
+            },
+            {
+              text: 'レイアウトシステム',
+              link: '/ja/front/component/ma-form/examples/layout-systems'
+            },
+            {
+              text: '条件付きレンダリング',
+              link: '/ja/front/component/ma-form/examples/conditional-rendering'
+            },
+            {
+              text: '動的バリデーション',
+              link: '/ja/front/component/ma-form/examples/dynamic-validation'
+            },
+            {
+              text: 'コンポーネントレンダリング',
+              link: '/ja/front/component/ma-form/examples/component-rendering'
+            },
+            {
+              text: 'スロット例',
+              link: '/ja/front/component/ma-form/examples/slots-examples'
+            },
+            {
+              text: '公開メソッド',
+              link: '/ja/front/component/ma-form/examples/expose-methods'
+            },
+            {
+              text: 'ローディング状態',
+              link: '/ja/front/component/ma-form/examples/loading-states'
+            },
+            {
+              text: 'ネストされたフォーム',
+              link: '/ja/front/component/ma-form/examples/nested-forms'
+            },
+            {
+              text: 'モバイル対応',
+              link: '/ja/front/component/ma-form/examples/mobile-responsive'
+            },
+            {
+              text: '高度なシナリオ',
+              link: '/ja/front/component/ma-form/examples/advanced-scenarios'
+            },
+            {
+              text: 'パフォーマンスデモ',
+              link: '/ja/front/component/ma-form/examples/performance-demo'
+            }
+          ]
         },
         {
           text: 'MaTable',
@@ -208,7 +259,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/ja/backend/security/passport"
         },
         {
-          text: "ユーザー権限(RBAC)",
+          text: "ユーザー認可(RBAC)",
           link: "/ja/backend/security/access"
         },
         {
@@ -252,7 +303,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link:"/ja/plugin/command"
             },
             {
-              text:"アプリ作成",
+              text:"アプリケーション作成",
               link:"/ja/plugin/create"
             },
             {
@@ -286,16 +337,16 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"フロントエンド開発",
       items:[
         {
-          text: "フロントエンド開発規範",
+          text: "フロントエンド開発規約",
           link: "/ja/plugin/front/develop"
         }
       ]
     },
     {
-      text:"アプリ公開",
+      text:"アプリケーション公開",
       items:[
         {
-          text: "アプリリリース",
+          text: "アプリケーションリリース",
           link: "/ja/plugin/develop/publish"
         },
         {
