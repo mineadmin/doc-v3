@@ -16,12 +16,20 @@ import twConfig from "./src/zh-tw/config";
 import twNav from "./src/zh-tw/nav";
 import twSidebar from "./src/zh-tw/sidebars";
 
+import jaConfig from "./src/ja/config";
+import jaNav from "./src/ja/nav";
+import jaSidebar from "./src/ja/sidebars";
+
 
 import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
 import { plantuml } from "@mdit/plugin-plantuml";
 import { demoPreviewPlugin } from './plugins/previewPlugin'
 import UnoCSS from 'unocss/vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import llmstxt from 'vitepress-plugin-llms'
+import { copyOrDownloadAsMarkdownButtons } from 'vitepress-plugin-llms'
+
+
 
 // https://vitepress.dev/reference/site-config
 export default defineConfigWithTheme ({
@@ -34,6 +42,10 @@ export default defineConfigWithTheme ({
         body:[
           {type:"text",content:"官方QQ群: 150105478"}
         ]
+      }),
+      llmstxt({
+        domain:'https://doc.mineadmin.com',
+        workDir:'en',
       })
     ]
   },
@@ -85,6 +97,20 @@ export default defineConfigWithTheme ({
           level:[2 ,4],
         },
       }
+    },
+    "ja":{
+      label:"日本語",
+      lang:"ja",
+      link:"/ja/index",
+      ...jaConfig,
+      themeConfig:{
+        logo: '/logo.svg',
+        nav: jaNav,
+        sidebar:jaSidebar,
+        outline:{
+          level:[2 ,4],
+        },
+      }
     }
   },
   themeConfig: {
@@ -93,6 +119,8 @@ export default defineConfigWithTheme ({
       label: '页面导航',
       level: [2, 4],
     },
+    aside: 'left', // 侧边栏位置优化
+    externalLinkIcon: true, // 显示外部链接图标
     editLink: {
       pattern: 'https://github.com/mineadmin/doc-v3/edit/main/docs/:path',
       text: '在Github上编辑此页面',
@@ -141,6 +169,22 @@ export default defineConfigWithTheme ({
                 }
               }
             }
+          },
+          ja: {
+            translations: {
+              button: {
+                buttonText: 'ドキュメントを検索',
+                buttonAriaLabel: 'ドキュメントを検索'
+              },
+              modal: {
+                noResultsText: '関連する結果が見つかりません',
+                resetButtonTitle: 'クエリ条件をクリア',
+                footer: {
+                  selectText: '選択',
+                  navigateText: '切り替え'
+                }
+              }
+            }
           }
         }
       }
@@ -167,10 +211,14 @@ export default defineConfigWithTheme ({
     lineNumbers: true,
     config:(md:MarkdownRenderer)=>{
       md.use(demoPreviewPlugin)
+      md.use(copyOrDownloadAsMarkdownButtons)
       md.use(plantuml,{
         type:"fence",
         fence:"plantuml",
       })
     }
+  },
+  sitemap:{
+    hostname: 'https://doc.mineadmin.com'
   }
 })

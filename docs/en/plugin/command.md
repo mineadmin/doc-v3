@@ -6,11 +6,12 @@
 
 ::: danger
 
-MineAdmin 2.0 version already includes the plugin extension and initialization actions by default, no need to repeat the initialization.
+ MineAdmin 2.0 already includes the plugin extension and initialization by default. No need to repeat the initialization process.
 
 :::
 
-> This command will publish the configuration files and language files for app-store.
+
+> This command will publish the configuration and language files for app-store.
 
 ```shell
 php bin/hyperf.php mine-extension:initial
@@ -18,7 +19,7 @@ php bin/hyperf.php mine-extension:initial
 
 ---
 
-## Query Remote Plugin List (From MineAdmin Official Extension Source)
+## Query Remote Plugin List (from MineAdmin Official Extension Source)
 
 ```shell
 php bin/hyperf.php mine-extension:list
@@ -26,14 +27,14 @@ php bin/hyperf.php mine-extension:list
 
 ### Parameters
 
-| Parameter | Type    | Default | Remarks |
-|-----------|---------|---------|---------|
-| --type    | string  | all     | Filter extension type |
-| --name    | string  | none    | Filter extension name |
+| Parameter      | Type      | Default  | Remarks |
+|---------|---------|------| ---|
+| --type  | string  | all  | Filter by extension type | 
+| --name | string | None | Filter by extension name |
 
 ---
 
-## Query All Local Plugins (Including Uninstalled Ones)
+## Query All Local Plugins (including uninstalled ones)
 
 ```shell
 php bin/hyperf.php mine-extension:local-list
@@ -47,9 +48,9 @@ php bin/hyperf.php mine-extension:download
 
 ### Parameters
 
-| Parameter | Type    | Default | Remarks |
-|-----------|---------|---------|---------|
-| --name    | string  | none    | Required |
+| Parameter      | Type      | Default | Remarks |
+|---------|---------|-----| ---|
+| --name | string | None   | Required |
 
 ## Install Specified Plugin
 
@@ -59,10 +60,11 @@ php bin/hyperf.php mine-extension:install {path} --yes
 
 ### Parameters
 
-| Parameter | Type    | Default | Remarks |
-|-----------|---------|---------|---------|
-| path      | string  | none    | Required, plugin directory |
-| --yes     | bool    | false   | Whether to disable installation prompt |
+| Parameter      | Type      | Default | Remarks        |
+|---------|---------|-----|-----------|
+| path | string | None | Required, plugin directory |
+| --yes | bool | false | Disable installation confirmation  |
+
 
 ## Uninstall Specified Plugin
 
@@ -72,10 +74,11 @@ php bin/hyperf.php mine-extension:uninstall {path} --yes
 
 ### Parameters
 
-| Parameter | Type    | Default | Remarks |
-|-----------|---------|---------|---------|
-| path      | string  | none    | Required, plugin directory |
-| --yes     | bool    | false   | Whether to disable installation prompt |
+| Parameter      | Type      | Default | Remarks        |
+|---------|---------|-----|-----------|
+| path | string | None | Required, plugin directory |
+| --yes | bool | false | Disable uninstallation confirmation  |
+
 
 ## Create a Plugin
 
@@ -85,10 +88,10 @@ php bin/hyperf.php mine-extension:create
 
 ### Parameters
 
-| Parameter       | Type    | Default     | Remarks |
-|-----------------|---------|-------------|---------|
-| path            | string  | none, required | Creation path, e.g., zds/app-store |
-| --name          | string  | example     | Plugin name |
-| --type          | string  | mixed       | Plugin type, options: mixed, frond, backend |
-| --author        | string  | none, optional | Author name, this value will be filled in minejson.author |
-| --description   | string  | none, optional | Plugin description, this value will be filled in minejson.description |
+| Parameter            | Type      | Default     | Remarks                                 |
+|---------------|---------|---------|------------------------------------|
+| path          | string | Required    | Creation path, e.g., zds/app-store              | 
+| --name        | string | example | Plugin name                               |                        
+| --type        | string | mixed     | Plugin type, options: mixed, frontend, backend     |
+| --author      | string| Optional    | Author name, fills into minejson.author      |
+| --description | string| Optional    | Plugin description, fills into minejson.description |

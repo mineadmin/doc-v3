@@ -1,31 +1,32 @@
 # Toolbar Extension
 
-:::tip Tip
-The row of icon buttons in the top-right corner is the toolbar. The system provides an interface to extend the toolbar.
+:::tip Note
+The row of icon buttons in the upper right corner is the toolbar. The system provides an interface to extend the toolbar.
 :::
 ![Toolbar](https://s21.ax1x.com/2024/10/24/pAwKsvq.jpg)
 
-## Obtain the Toolbar Helper Function Instance
+## Get Toolbar Helper Function Instance
 
 ::: code-group
 
 ```vue [useGlobal() Method]
-<!-- How to obtain it within the `setup()` lifecycle or code that can access the `Vue context` -->
+<!-- How to get it in `setup()` lifecycle or code where `Vue context` is accessible -->
 <script setup lang="ts">
 const toolbar = useGlobal().$toolbars
 </script>
 ```
 
-```ts [Obtain via Vue Instance]
-// Obtain via the current instance
+```ts [Get via Vue Instance]
+// Get through the current instance
 const { appContext } = getCurrentInstance()
 const toolbar = appContext.config.globalProperties.$toolbars
+
 ```
 
-```ts [Obtain within a Plugin]
+```ts [Method for Plugins]
 /**
- * The `install` method of the system plugin, where the Vue instance is passed externally, and then the toolbar is obtained.
- * Refer to `src/plugins/mine-admin/demo/index.ts` for an example.
+ * The system plugin's `install` method, where the Vue instance is passed externally to get the toolbar
+ * Refer to `src/plugins/mine-admin/demo/index.ts`
  **/
 install(app: App) {
   const toolbar = app.config.globalProperties.$toolbars
@@ -34,10 +35,10 @@ install(app: App) {
 :::
 
 ## Toolbar API List
-|       API        |                Type               |     Description     |       Return Value       |
-|:----------------:|:------------------------------:|:------------------:|:----------------------:|
-|  getShowToolbar  |            Function            | Get the list of enabled tools  | MineToolbar[]  |
-|     toolbars     |       Ref<MineToolbar[]>       |  List of registered tools   | MineToolbar[]  |
+|       API        |                Type               |     Description     |      Return Value       |
+|:----------------:|:------------------------------:|:---------------:|:--------------:|
+|  getShowToolbar  |            Function            | Get enabled tool list  | MineToolbar[]  |
+|     toolbars     |       Ref<MineToolbar[]>       |  Registered tool list   | MineToolbar[]  |
 |  add  | Function(toolbar: MineToolbar) | Register a new tool in the toolbar  |      void      |
 |  remove  |     Function(name: string)     | Remove a registered tool from the toolbar |      void      |
 
@@ -56,7 +57,7 @@ interface MineToolbar {
 ## Register a New Tool
 
 :::tip
-The `handle` event and the `component` property conflict, and only one will take effect, with `handle` having higher priority.
+The `handle` event and `component` property conflict—only one will take effect, with `handle` having higher priority.  
 If using `component`, do not define `handle` or comment it out.
 :::
 
@@ -67,13 +68,13 @@ toolbar.add({
   title: 'Test',
   show: true,
   icon: 'heroicons:archive-box',
-  // When the tool is clicked, the handle method is triggered, which can be used for simple pop-up prompts, etc.
+  // When the tool is clicked, the `handle` method is triggered, useful for simple popups, etc.
   handle: () => alert('I am a newly registered tool'),
   /**
-   * Specify a component to render and display entirely through the component.
-   * The icon property above will not be rendered, and the handle method will also be invalid.
+   * Specify a component to render entirely through the component
+   * The `icon` property above will not be rendered, and the `handle` method will also be invalid
    * 
-   * Note: In actual development, after using component, make sure to comment out handle.
+   * Note: In actual development, after using `component`, comment out `handle`
    **/
   component: () => import('@/modules/demo/views/demo.vue')
 })

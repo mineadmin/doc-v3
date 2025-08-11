@@ -5,6 +5,7 @@ on:
     types: [opened, synchronize]
     paths:
       - 'docs/zh/**'
+  workflow_dispatch:
 
 permissions:
     contents: write

@@ -1,9 +1,9 @@
 # Common Stores
 
 ::: tip Note
-Due to space constraints, only the following commonly used `stores` are listed. For others, please refer to the source code for more details.
+Due to space limitations, only the commonly used `stores` are listed below. For others, please refer to the source code directly.
 
-Hint: The `src/store/modules` directory in the frontend is configured for automatic import, so there's no need for explicit imports.
+Tip: The `src/store/modules` directory in the frontend is configured for automatic imports, so no explicit imports are needed.
 :::
 
 ## useUserStore()

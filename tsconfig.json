@@ -25,7 +25,8 @@
   "include": [
     "**/.vitepress/**/*.ts",
     "**/.vitepress/**/*.mts",
-    "**/.vitepress/**/*.vue"
+    "**/.vitepress/**/*.vue",
+    "bin/**/*.ts"
   ],
   "exclude": [
     "node_modules"

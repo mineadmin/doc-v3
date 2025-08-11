@@ -10,6 +10,10 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/zh-hk/guide/introduce/mineadmin',
         },
         {
+          text: '更新日誌',
+          link: '/zh-hk/guide/changelog',
+        },
+        {
           text: '免責聲明',
           link: '/zh-hk/guide/introduce/declaration',
         },
