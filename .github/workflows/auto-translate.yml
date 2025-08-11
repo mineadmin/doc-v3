@@ -29,18 +29,19 @@ jobs:
           app_id: ${{ secrets.MINEADMIN_APP_ID }}
           private_key: ${{ secrets.MINEADMIN_APP_PRIVATE_KEY }}
 
-      - name: Get All Changed Markdown Files
-        id: changed-markdown-files
+      - name: Get All Pr Changed Files
+        id: changed-files
         uses: tj-actions/changed-files@v45
         with:
           # Avoid using single or double quotes for multiline patterns
           files: |
-            docs/**.md
+            docs/zh/**/*.md
+            .vitepress/src/zh/**/*.ts
 
       - name: List All Changed Markdown Files
-        if: steps.changed-markdown-files.outputs.any_changed == 'true'
+        if: steps.changed-files.outputs.any_changed == 'true'
         env:
-          ALL_CHANGED_FILES: ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
           for file in ${ALL_CHANGED_FILES}; do
             echo "$file was changed"
@@ -95,7 +96,7 @@ jobs:
 
       - name: Start AI Translate (EN, JA)
         env:
-          ALL_CHANGED_FILES: ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
           pnpm run docs:translate
 
