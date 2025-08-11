@@ -144,16 +144,15 @@ async function handle() {
 
                 console.log(`    - 📝 Untranslated files: ${filesToTranslate.length}`);
                 console.log(`    - 🗑️ Orphan files: ${orphanFiles.length}`);
-                console.log(`    - 🔄 Change files: ${changeInDirFiles.length}`);
-                console.log(`    - 📂 Total files to translate: ${files.length}`);
-
                 orphanFiles.map(file => {
-                    console.log(`    - 🗑️ Orphan file: ${file}`);
-                });
-
+                    console.log(`        - 🗑️ Orphan file (no source): ${path.join(target_lang_dir, file)}`);
+                })
+                console.log(`    - 🔄 Change files: ${changeInDirFiles.length}`);
                 if (files.length === 0) {
                     console.log(`    - 🟢 No files to translate for ${lang}`);
                     continue;
+                } else {
+                    console.log(`    - 📂 Total files to translate: ${files.length}`);
                 }
 
                 // 将文件分批处理
@@ -163,8 +162,7 @@ async function handle() {
                         const srcPath = path.join(source_lang_dir, file);
                         const destPath = path.join(target_lang_dir, file);
                         return processFile(srcPath, destPath, lang).catch(error => {
-                            console.error(`❌ translating ${file}:`, error);
-                            process.exit(1);
+                            throw error;
                         });
                     });
 
