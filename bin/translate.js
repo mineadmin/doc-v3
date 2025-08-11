@@ -74,7 +74,7 @@ function replaceZhLinks(content, lang) {
     // HTML 属性: href="/zh/xxx" 或 to="/zh/xxx"
     content = content.replace(/(\b(?:href|to)=["'])\/zh\//g, `$1/${lang}/`);
     // JS/TS 对象属性: link: '/zh/xxx'
-    content = content.replace(/(link:\s*['"])\/zh\//g, `$1${lang}/`);
+    content = content.replace(/(link:\s*['"])\/zh\//g, `$1/${lang}/`);   
     return content;
 }
 
