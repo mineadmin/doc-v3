@@ -9,6 +9,7 @@
     "docs:translate:full": "TARGET_LANGUAGES=en,ja FORCE_TRANSLATE_ALL=true tsx bin/translate-enhanced.ts"
   },
   "dependencies": {
+    "@iconify/vue": "^5.0.0",
     "@imengyu/vue3-context-menu": "^1.4.2",
     "@mineadmin/echarts": "^1.0.1",
     "@mineadmin/form": "^1.0.21",
@@ -27,6 +28,7 @@
     "vitepress-plugin-llms": "^1.7.2"
   },
   "devDependencies": {
+    "@iconify/json": "^2.2.369",
     "@mdit/plugin-plantuml": "^0.13.1",
     "@types/node": "^22.17.1",
     "@vitejs/plugin-vue-jsx": "^4.0.1",
