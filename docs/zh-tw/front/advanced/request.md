@@ -1,64 +1,300 @@
 # 請求與攔截器
-MineAdmin基於 [axios](https://github.com/axios/axios) 作為請求庫，同時提供了請求攔截器，方便開發者對請求進行統一處理。
 
-## 請求
+MineAdmin 基於 [axios](https://github.com/axios/axios) 作為請求庫，提供了完整的請求攔截器和響應處理機制，支援自動 Token 重新整理、錯誤處理、載入狀態管理等功能。
 
-### 說明
+## 概述
 
-系統內封裝了兩種請求處理：
-- 一種僅對 `MineAdmin` 後端的請求封裝，只適合 `MineAdmin` 的**後端**。
-- 一種是可請求外部網路或者其他後端介面的封裝。
+### 雙重請求架構
 
-### 使用
-在前端全域性任何位置，且無需顯性載入，即可使用 `useHttp()`，注意，這個方式僅對 `MineAdmin` 後端有效
+系統提供兩種請求處理方式，滿足不同的使用場景：
+
+1. **內部請求** - 專門用於 MineAdmin 後端 API 的請求封裝
+   - 自動處理 JWT Token 認證
+   - 內建錯誤處理和使用者提示
+   - 支援 Token 自動重新整理機制
+   - 整合載入狀態管理
+
+2. **外部請求** - 用於第三方 API 或其他後端服務的通用請求
+   - 支援自定義 baseURL 和請求配置
+   - 可獨立配置攔截器和錯誤處理
+   - 靈活的引數傳遞方式
+
+### 請求處理流程
+
+```plantuml
+@startuml
+!define RECTANGLE class
+
+participant "前端元件" as Frontend
+participant "useHttp()" as UseHttp
+participant "Request攔截器" as RequestInterceptor
+participant "Response攔截器" as ResponseInterceptor
+participant "MineAdmin後端" as Backend
+participant "Token重新整理服務" as TokenRefresh
+
+Frontend -> UseHttp: 發起請求
+UseHttp -> RequestInterceptor: 新增Authorization頭
+RequestInterceptor -> Backend: 傳送HTTP請求
+
+alt 請求成功
+    Backend -> ResponseInterceptor: 返回成功響應
+    ResponseInterceptor -> Frontend: 返回資料
+else Token過期 (401)
+    Backend -> ResponseInterceptor: 返回401錯誤
+    ResponseInterceptor -> TokenRefresh: 重新整理Access Token
+    alt Token重新整理成功
+        TokenRefresh -> ResponseInterceptor: 返回新Token
+        ResponseInterceptor -> Backend: 重新發送原請求
+        Backend -> ResponseInterceptor: 返回成功響應
+        ResponseInterceptor -> Frontend: 返回資料
+    else Token重新整理失敗
+        TokenRefresh -> ResponseInterceptor: 重新整理失敗
+        ResponseInterceptor -> Frontend: 跳轉登入頁面
+    end
+else 其他錯誤
+    Backend -> ResponseInterceptor: 返回錯誤響應
+    ResponseInterceptor -> Frontend: 顯示錯誤資訊
+end
+@enduml
+```
+
+## 內部請求 (useHttp)
+
+### 基本用法
+
+在專案的任意位置都可以直接使用 `useHttp()` 函式，無需手動匯入：
 
 ```ts
 // 獲取請求例項
 const http = useHttp()
 
-// get 請求
-http.get('/xxxx?id=1')
-// post 請求
-http.post('/xxxx', { username: 'test' })
-// put 請求
-http.put('/xxxx/1', { other: 'update' })
-// delete 請求
-http.delete('/xxxx/2')
+// GET 請求 - 獲取使用者列表
+const getUserList = async (params?: any) => {
+  return await http.get('/admin/user/index', params)
+}
 
+// POST 請求 - 建立新使用者
+const createUser = async (userData: any) => {
+  return await http.post('/admin/user/save', userData)
+}
 
+// PUT 請求 - 更新使用者資訊
+const updateUser = async (id: number, userData: any) => {
+  return await http.put(`/admin/user/update/${id}`, userData)
+}
+
+// DELETE 請求 - 刪除使用者
+const deleteUser = async (id: number) => {
+  return await http.delete(`/admin/user/destroy/${id}`)
+}
 ```
 
-以上請求，系統會自動處理 `token`、`error` 等，開發者無需關心，
-如果需要傳入其他配置，例如: `header`，`timeout` 等引數，只需要在後面加引數傳入即可。
+### 高階配置
 
-### token重新整理
-`useHttp()` 內部已經封裝了自動續期 `token` 功能，具體原理可檢視 [後端文件](/zh-tw/backend/security/passport.md) 這裡不再贅述。
+支援傳入額外的 axios 配置引數：
 
-### 請求外部網路
-以上都是針對 `MineAdmin` 後端請求的說明，外部網路請求方式如下：
+```ts
+const http = useHttp()
+
+// 設定請求超時時間
+const result = await http.get('/admin/user/index', {}, {
+  timeout: 10000, // 10秒超時
+  headers: {
+    'X-Custom-Header': 'CustomValue'
+  }
+})
+
+// 上傳檔案請求
+const uploadFile = async (file: File) => {
+  const formData = new FormData()
+  formData.append('file', file)
+  
+  return await http.post('/admin/upload/image', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+    timeout: 60000 // 上傳超時設為60秒
+  })
+}
+
+// 下載檔案
+const downloadFile = async (fileId: string) => {
+  return await http.get(`/admin/file/download/${fileId}`, {}, {
+    responseType: 'blob' // 二進位制資料
+  })
+}
+```
+
+### 實際使用示例
+
+在元件中的完整使用示例：
+
+```vue
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import { ElMessage } from 'element-plus'
+
+const http = useHttp()
+const users = ref([])
+const loading = ref(false)
+
+// 獲取使用者列表
+const fetchUsers = async () => {
+  try {
+    loading.value = true
+    const response = await http.get('/admin/user/index', {
+      page: 1,
+      size: 20
+    })
+    
+    users.value = response.data.items
+    ElMessage.success('使用者列表載入成功')
+  } catch (error) {
+    ElMessage.error('載入使用者列表失敗')
+    console.error('獲取使用者列表錯誤:', error)
+  } finally {
+    loading.value = false
+  }
+}
+
+// 刪除使用者
+const handleDeleteUser = async (userId: number) => {
+  try {
+    await http.delete(`/admin/user/destroy/${userId}`)
+    ElMessage.success('使用者刪除成功')
+    fetchUsers() // 重新載入列表
+  } catch (error) {
+    ElMessage.error('刪除使用者失敗')
+  }
+}
+
+onMounted(() => {
+  fetchUsers()
+})
+</script>
+```
+
+## Token 重新整理機制
+
+### 自動重新整理原理
+
+MineAdmin 實現了基於雙 Token 的無感重新整理機制：
+
+1. **Access Token** - 用於業務 API 認證，過期時間較短（預設1小時）
+2. **Refresh Token** - 用於重新整理 Access Token，過期時間較長（預設2小時）
+
+```plantuml
+@startuml
+!define RECTANGLE class
+
+state "正常請求" as Normal
+state "Token驗證" as Verify
+state "Token過期" as Expired
+state "重新整理Token" as Refresh
+state "重新請求" as Retry
+state "登入頁面" as Login
+
+[*] -> Normal: 發起API請求
+Normal -> Verify: 後端驗證Token
+Verify -> Normal: Token有效
+Verify -> Expired: Token過期(401)
+Expired -> Refresh: 使用Refresh Token
+Refresh -> Retry: 重新整理成功
+Refresh -> Login: 重新整理失敗
+Retry -> Normal: 使用新Token重試
+Normal -> [*]: 返回結果
+Login -> [*]: 使用者重新登入
+@enduml
+```
+
+### 併發請求處理
+
+當有多個併發請求時，系統會智慧處理 Token 重新整理：
+
+```ts
+// 併發場景示例
+const [users, roles, permissions] = await Promise.all([
+  http.get('/admin/user/index'),
+  http.get('/admin/role/index'), 
+  http.get('/admin/permission/index')
+])
+
+// 如果 Token 過期，只會重新整理一次，其他請求會等待
+// 重新整理完成後，所有請求會使用新 Token 重新發送
+```
+
+具體重新整理機制詳情可參考 [使用者認證文件](/zh-tw/backend/security/passport.md)。
+
+## 外部請求
+
+### 基本用法
+
+用於請求第三方 API 或非 MineAdmin 後端服務：
+
 ```ts
 import request from '@/utils/http'
 
 const { createHttp } = request
 
-// 設定baseurl 和 其他引數
-const http = createHttp('https://www.baidu.com', {
-  header: {
-    'user-agent': 'Windows NT',
-  }
+// 建立第三方API請求例項
+const thirdPartyHttp = createHttp('https://api.example.com', {
+  headers: {
+    'User-Agent': 'MineAdmin/1.0',
+    'X-API-Key': 'your-api-key'
+  },
+  timeout: 15000
 })
 
-const requestHome = async () => {
-  return await http.get('/')
+// 使用第三方API
+const getExternalData = async () => {
+  try {
+    const response = await thirdPartyHttp.get('/users')
+    return response.data
+  } catch (error) {
+    console.error('第三方API請求失敗:', error)
+    throw error
+  }
 }
-
-console.log(requestHome())
 ```
 
-## 攔截器
+### 多個外部服務
 
-`MineAdmin` 已經封裝了攔截器，但需要說明只適配 `MineAdmin` 的後端介面，如果需要調整、修改，開啟 `src/utils/http.ts` 檔案
-找到下面這段程式碼：
+可以為不同的外部服務建立多個請求例項：
+
+```ts
+// 地圖服務API
+const mapHttp = createHttp('https://api.map.com', {
+  headers: { 'Authorization': 'Bearer map-token' }
+})
+
+// 支付服務API  
+const paymentHttp = createHttp('https://api.payment.com', {
+  headers: { 'Authorization': 'Bearer payment-token' }
+})
+
+// 簡訊服務API
+const smsHttp = createHttp('https://api.sms.com', {
+  headers: { 'X-API-Key': 'sms-api-key' }
+})
+
+// 使用示例
+const sendSms = async (phone: string, message: string) => {
+  return await smsHttp.post('/send', { phone, message })
+}
+```
+
+## 攔截器詳解
+
+### 響應攔截器原始碼分析
+
+MineAdmin 的響應攔截器位於 `src/utils/http.ts` 檔案中，主要處理以下場景：
+
+1. **成功響應處理**
+2. **Token 過期自動重新整理**  
+3. **錯誤狀態碼處理**
+4. **檔案下載響應處理**
+#### 核心攔截器邏輯
+
 ```ts:line-numbers
 http.interceptors.response.use(
   async (response: AxiosResponse): Promise<any> => {
@@ -66,6 +302,8 @@ http.interceptors.response.use(
     const userStore = useUserStore()
     await usePluginStore().callHooks('networkResponse', response)
     const config = response.config
+    
+    // 處理檔案下載響應
     if ((response.request.responseType === 'blob'
         || response.request.responseType === 'arraybuffer')
       && !/^application\/json/.test(response.headers['content-type'])
@@ -74,12 +312,15 @@ http.interceptors.response.use(
       return Promise.resolve(response.data)
     }
 
+    // 處理成功響應
     if (response?.data?.code === ResultCode.SUCCESS) {
       return Promise.resolve(response.data)
     }
     else {
+      // 根據不同錯誤碼進行處理
       switch (response?.data?.code) {
         case ResultCode.UNAUTHORIZED: {
+          // Token 過期處理邏輯
           const logout = useDebounceFn(
             async () => {
               Message.error('登入狀態已過期，需要重新登入', { zIndex: 9999 })
@@ -88,7 +329,8 @@ http.interceptors.response.use(
             3000,
             { maxWait: 5000 },
           )
-          // 檢查token是否需要重新整理
+          
+          // 檢查是否需要重新整理 Token
           if (userStore.isLogin && !isRefreshToken.value) {
             isRefreshToken.value = true
             if (!cache.get('refresh_token')) {
@@ -97,6 +339,7 @@ http.interceptors.response.use(
             }
 
             try {
+              // 使用 Refresh Token 重新整理 Access Token
               const refreshTokenResponse = await createHttp(null, {
                 headers: {
                   Authorization: `Bearer ${cache.get('refresh_token')}`,
@@ -108,6 +351,7 @@ http.interceptors.response.use(
                 break
               }
               else {
+                // 更新 Token 並重新發送請求
                 const { data } = refreshTokenResponse.data
                 userStore.token = data.access_token
                 cache.set('token', data.access_token)
@@ -117,10 +361,9 @@ http.interceptors.response.use(
                 config.headers!.Authorization = `Bearer ${userStore.token}`
                 requestList.value.map((cb: any) => cb())
                 requestList.value = []
-                return http(config)
+                return http(config) // 重新發送原請求
               }
             }
-              // eslint-disable-next-line unused-imports/no-unused-vars
             catch (e: any) {
               requestList.value.map((cb: any) => cb())
               await logout()
@@ -132,6 +375,7 @@ http.interceptors.response.use(
             }
           }
           else {
+            // 如果正在重新整理 Token，將請求加入佇列等待
             return new Promise((resolve) => {
               requestList.value.push(() => {
                 config.headers!.Authorization = `Bearer ${cache.get('token')}`
@@ -160,6 +404,7 @@ http.interceptors.response.use(
       return Promise.reject(response.data ? response.data : null)
     }
   },
+  // 網路錯誤處理
   async (error: any) => {
     isLoading.value = false
     const serverError = useDebounceFn(async () => {
@@ -171,4 +416,250 @@ http.interceptors.response.use(
     return Promise.reject(error)
   },
 )
+```
+
+### 狀態碼處理機制
+
+系統對不同的 HTTP 狀態碼和業務錯誤碼進行了統一處理：
+
+| 狀態碼 | 說明 | 處理方式 |
+|--------|------|----------|
+| `200` (SUCCESS) | 請求成功 | 直接返回資料 |
+| `401` (UNAUTHORIZED) | Token 過期或無效 | 自動重新整理 Token 或跳轉登入 |
+| `403` (FORBIDDEN) | 許可權不足 | 顯示許可權錯誤提示 |
+| `404` (NOT_FOUND) | 資源不存在 | 顯示資源不存在提示 |
+| `405` (METHOD_NOT_ALLOWED) | 請求方法不允許 | 顯示方法錯誤提示 |
+| `500` (INTERNAL_ERROR) | 伺服器內部錯誤 | 顯示伺服器錯誤提示 |
+
+### 自定義攔截器
+
+如果需要為外部請求自定義攔截器，可以這樣做：
+
+```ts
+import request from '@/utils/http'
+
+const { createHttp } = request
+
+// 建立帶自定義攔截器的請求例項
+const customHttp = createHttp('https://api.custom.com')
+
+// 新增請求攔截器
+customHttp.interceptors.request.use(
+  (config) => {
+    // 在傳送請求之前做一些處理
+    config.headers['X-Timestamp'] = Date.now()
+    console.log('傳送請求:', config)
+    return config
+  },
+  (error) => {
+    console.error('請求錯誤:', error)
+    return Promise.reject(error)
+  }
+)
+
+// 新增響應攔截器
+customHttp.interceptors.response.use(
+  (response) => {
+    // 處理響應資料
+    console.log('收到響應:', response)
+    if (response.data.status === 'error') {
+      throw new Error(response.data.message)
+    }
+    return response
+  },
+  (error) => {
+    // 處理響應錯誤
+    console.error('響應錯誤:', error)
+    return Promise.reject(error)
+  }
+)
+```
+
+## 最佳實踐
+
+### 1. 錯誤處理
+
+建議在元件中統一處理錯誤：
+
+```ts
+// composables/useApi.ts
+export const useApi = () => {
+  const http = useHttp()
+  
+  const handleError = (error: any, defaultMessage = '操作失敗') => {
+    const message = error?.message || error?.data?.message || defaultMessage
+    ElMessage.error(message)
+    console.error('API錯誤:', error)
+  }
+  
+  const safeRequest = async <T>(requestFn: () => Promise<T>, errorMessage?: string): Promise<T | null> => {
+    try {
+      return await requestFn()
+    } catch (error) {
+      handleError(error, errorMessage)
+      return null
+    }
+  }
+  
+  return { http, handleError, safeRequest }
+}
+```
+
+### 2. 型別定義
+
+為 API 響應定義明確的型別：
+
+```ts
+// types/api.ts
+export interface ApiResponse<T = any> {
+  code: number
+  message: string
+  data: T
+}
+
+export interface PaginatedResponse<T> {
+  items: T[]
+  total: number
+  page: number
+  size: number
+}
+
+export interface User {
+  id: number
+  username: string
+  email: string
+  status: number
+}
+
+// 使用示例
+const getUserList = async (): Promise<ApiResponse<PaginatedResponse<User>>> => {
+  return await http.get('/admin/user/index')
+}
+```
+
+### 3. 請求封裝
+
+將常用的 API 請求封裝成可複用的服務：
+
+```ts
+// services/userService.ts
+export class UserService {
+  private http = useHttp()
+  
+  async getList(params: any) {
+    return await this.http.get('/admin/user/index', params)
+  }
+  
+  async create(user: Partial<User>) {
+    return await this.http.post('/admin/user/save', user)
+  }
+  
+  async update(id: number, user: Partial<User>) {
+    return await this.http.put(`/admin/user/update/${id}`, user)
+  }
+  
+  async delete(id: number) {
+    return await this.http.delete(`/admin/user/destroy/${id}`)
+  }
+  
+  async batchDelete(ids: number[]) {
+    return await this.http.post('/admin/user/destroy', { ids })
+  }
+}
+
+// 建立服務例項
+export const userService = new UserService()
+```
+
+### 4. 載入狀態管理
+
+合理使用載入狀態提升使用者體驗：
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const loading = ref(false)
+const data = ref([])
+
+const fetchData = async () => {
+  loading.value = true
+  try {
+    const response = await http.get('/admin/data')
+    data.value = response.data
+  } catch (error) {
+    console.error('資料載入失敗:', error)
+  } finally {
+    loading.value = false
+  }
+}
+</script>
+
+<template>
+  <div v-loading="loading">
+    <!-- 資料展示內容 -->
+  </div>
+</template>
+```
+
+## 常見問題
+
+### Q: Token 重新整理期間的併發請求如何處理？
+
+A: 系統會將所有需要 Token 的請求暫存在佇列中，等待 Token 重新整理完成後統一使用新 Token 重新發送。
+
+### Q: 如何處理檔案上傳進度？
+
+A: 可以使用 axios 的 `onUploadProgress` 配置：
+
+```ts
+const uploadWithProgress = async (file: File, onProgress?: (progress: number) => void) => {
+  const formData = new FormData()
+  formData.append('file', file)
+  
+  return await http.post('/admin/upload', formData, {
+    onUploadProgress: (progressEvent) => {
+      if (progressEvent.total && onProgress) {
+        const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100)
+        onProgress(progress)
+      }
+    }
+  })
+}
+```
+
+### Q: 如何取消正在進行的請求？
+
+A: 使用 axios 的取消令牌：
+
+```ts
+import { ref, onUnmounted } from 'vue'
+
+const controller = ref<AbortController>()
+
+const fetchData = async () => {
+  // 取消之前的請求
+  controller.value?.abort()
+  
+  // 建立新的控制器
+  controller.value = new AbortController()
+  
+  try {
+    const response = await http.get('/admin/data', {}, {
+      signal: controller.value.signal
+    })
+    return response
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      console.log('請求已取消')
+    } else {
+      throw error
+    }
+  }
+}
+
+// 元件解除安裝時取消請求
+onUnmounted(() => {
+  controller.value?.abort()
+})
 ```
