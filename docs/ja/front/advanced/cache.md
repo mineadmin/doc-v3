@@ -1,31 +1,31 @@
 # フロントエンドキャッシュシステム
 
-MineAdmin フロントエンドは、ページキャッシュ、データキャッシュ、ブラウザストレージキャッシュなど、多層的なキャッシュ戦略を提供しています。適切にキャッシュメカニズムを使用することで、アプリケーションのパフォーマンスとユーザーエクスペリエンスを大幅に向上させることができます。
+MineAdmin フロントエンドは、ページキャッシュ、データキャッシュ、ブラウザストレージキャッシュなど、多層のキャッシュ戦略を提供しています。適切にキャッシュメカニズムを使用することで、アプリケーションのパフォーマンスとユーザーエクスペリエンスを大幅に向上させることができます。
 
 ## キャッシュタイプ概要
 
-- **ページキャッシュ**: Vue の `keep-alive` メカニズムに基づき、ページコンポーネントの状態をキャッシュ
-- **データキャッシュ**: API リクエスト結果やユーザーデータをキャッシュ
+- **ページキャッシュ**: Vue の `keep-alive` メカニズムに基づく、ページコンポーネントの状態キャッシュ
+- **データキャッシュ**: API リクエスト結果とユーザーデータのキャッシュ
 - **ストレージキャッシュ**: localStorage/sessionStorage に基づく永続化キャッシュ
-- **ルートキャッシュ**: ルート状態とタブ情報をキャッシュ
+- **ルートキャッシュ**: ルート状態とタブ情報のキャッシュ
 
 ## ページキャッシュ (Keep-Alive)
 
-ページキャッシュは Vue の `keep-alive` メカニズムを利用して実装されており、ページコンポーネントの状態をキャッシュし、再レンダリングやデータリクエストを回避します。
+ページキャッシュは Vue の `keep-alive` メカニズムを使用して実装されており、ページコンポーネントの状態をキャッシュし、再レンダリングやデータリクエストを回避します。
 
-### ページキャッシュを有効にする
+### ページキャッシュの有効化
 
 ページキャッシュを有効にするには、以下の3つの条件を満たす必要があります：
 
 1. **ルートメタ情報の設定**: ルートの `meta.cache` プロパティを `true` に設定
 2. **コンポーネント名の定義**: ページコンポーネントで `defineOptions` を使用してコンポーネント名を定義
-3. **単一ルートノードの維持**: ページテンプレートは必ず1つのルートノードを持つ必要がある
+3. **単一ルートノードの維持**: ページテンプレートは単一のルートノードを持っている必要があります
 
 ### 実装例
 
 ```vue
 <script setup lang="ts">
-// コンポーネント名を定義（ルートの name プロパティと一致させる必要あり）
+// コンポーネント名を定義（ルートの name 属性と一致させる必要があります）
 defineOptions({ 
   name: 'UserManagement' // ルート name: 'UserManagement' に対応
 })
@@ -34,11 +34,11 @@ defineOptions({
 const userList = ref([])
 const searchForm = ref({})
 
-// ページデータはキャッシュされ、ユーザーがタブを切り替えて戻ってきた際に以前の状態が保持される
+// ページデータはキャッシュされ、ユーザーがタブを切り替えて戻ってきたときに以前の状態が保持されます
 </script>
 
 <template>
-  <!-- 必ず単一ルートノードを維持 -->
+  <!-- 単一ルートノードを維持する必要があります -->
   <div class="user-management-page">
     <ma-table 
       ref="tableRef"
@@ -70,21 +70,21 @@ export default {
 
 #### 動的ルート（メニュー管理）
 
-バックエンドのメニュー管理から生成される動的ルートの場合、メニュー管理画面でキャッシュプロパティを設定できます：
+バックエンドのメニュー管理から生成される動的ルートの場合、メニュー管理画面でキャッシュ属性を設定できます：
 
 1. **システム管理** → **メニュー管理** に移動
 2. 対応するメニュー項目を編集
-3. フォーム内で **キャッシュするか** スイッチを探す
+3. フォーム内で **キャッシュするかどうか** スイッチを探す
 4. 有効にして保存
 
-メニューフォーム実装の参考：[menu-form.vue#L175](https://github.com/mineadmin/mineadmin/blob/master/web/src/modules/base/views/permission/menu/menu-form.vue#L175)
+メニューフォーム実装の参照：[menu-form.vue#L175](https://github.com/mineadmin/mineadmin/blob/master/web/src/modules/base/views/permission/menu/menu-form.vue#L175)
 
 ### キャッシュメカニズムの原理
 
 システムは以下の方法でページキャッシュを実装しています：
 
-1. **ルートガード検出**: `router.afterEach` でルートの `meta.cache` プロパティを検出
-2. **コンポーネント名収集**: ページコンポーネントの `name` プロパティを取得し、キャッシュリストに追加
+1. **ルートガードの検出**: `router.afterEach` でルートの `meta.cache` プロパティを検出
+2. **コンポーネント名の収集**: ページコンポーネントの `name` プロパティを取得してキャッシュリストに追加
 3. **Keep-Alive ラップ**: レイアウトコンポーネントで `<KeepAlive>` を使用してルートビューをラップ
 
 コア実装コード：
@@ -94,7 +94,7 @@ export default {
 router.afterEach(async (to) => {
   const keepAliveStore = useKeepAliveStore()
   
-  // キャッシュが必要か確認（iframeページは除く）
+  // キャッシュが必要かどうかをチェック（iframeページではない場合）
   if (to.meta.cache && to.meta.type !== 'I') {
     const componentName = to.matched.at(-1)?.components?.default!.name
     if (componentName) {
@@ -125,45 +125,45 @@ router.afterEach(async (to) => {
 
 #### ページキャッシュの無効化
 
-ページキャッシュを無効化する方法は複数あります：
+ページキャッシュを無効にする方法は複数あります：
 
-1. **キャッシュプロパティを設定しない（推奨）**
+1. **キャッシュ属性を設定しない（推奨）**
 ```typescript
 // ルート設定で cache を設定しないか false に設定
 meta: {
   title: '一時ページ',
-  cache: false // またはこのプロパティを設定しない
+  cache: false // またはこの属性を設定しない
 }
 ```
 
 2. **コンポーネント名を定義しない**
 ```vue
 <script setup lang="ts">
-// defineOptions でコンポーネント名を定義しない
-// ルートで cache: true が設定されていてもキャッシュされない
+// defineOptions を使用してコンポーネント名を定義しない
+// ルートで cache: true が設定されていてもキャッシュされません
 </script>
 ```
 
 #### ページキャッシュのクリア
 
-システムは複数のキャッシュクリア方法を提供しています：
+システムは複数の方法でキャッシュをクリアする機能を提供しています：
 
 ```typescript
 // keep-alive ストアインスタンスを取得
 const keepAliveStore = useKeepAliveStore()
 
-// 1. 指定ページキャッシュを削除
+// 1. 指定したページキャッシュを削除
 keepAliveStore.remove('UserManagement')
 
-// 2. 複数ページキャッシュを削除
+// 2. 複数のページキャッシュを削除
 keepAliveStore.remove(['UserManagement', 'RoleManagement'])
 
-// 3. 全てのページキャッシュをクリア
+// 3. すべてのページキャッシュをクリア
 keepAliveStore.clean()
 
 // 4. キャッシュを一時的に非表示（ページリフレッシュ用）
 keepAliveStore.hidden()
-// キャッシュ表示を復元
+// キャッシュを再表示
 keepAliveStore.display()
 ```
 
@@ -177,7 +177,7 @@ const tabStore = useTabStore()
 // 現在のタブをリフレッシュ（キャッシュをクリアして再ロード）
 await tabStore.refreshTab()
 
-// タブを閉じる際に対応するページキャッシュを自動クリア
+// タブを閉じるときに対応するページキャッシュを自動的にクリア
 tabStore.closeTab(targetTab)
 
 // 他のタブを閉じる（固定タブと現在のタブのキャッシュを保持）
@@ -186,11 +186,11 @@ await tabStore.closeOtherTab(currentTab)
 
 ## データキャッシュ (Web Storage)
 
-ページキャッシュに加え、MineAdmin は強力なデータキャッシュシステムを提供し、API データやユーザー設定などの情報をキャッシュします。
+ページキャッシュに加えて、MineAdmin は強力なデータキャッシュシステムを提供し、API データやユーザー設定などの情報をキャッシュします。
 
 ### useCache Hook
 
-システムは `useCache` Hook を提供し、ブラウザストレージを一元管理します：
+システムは `useCache` Hook を提供し、ブラウザストレージを統一管理します：
 
 ```typescript
 import useCache from '@/hooks/useCache'
@@ -202,7 +202,7 @@ const localStorage = useCache('localStorage')
 const sessionStorage = useCache('sessionStorage')
 ```
 
-### 基本使用法
+### 基本的な使用方法
 
 ```typescript
 const cache = useCache()
@@ -224,7 +224,7 @@ const tempData = cache.get('tempData', null) // デフォルト値を提供
 // データを削除
 cache.remove('tempData')
 
-// 全ての期限切れデータを削除
+// すべての期限切れデータを削除
 cache.removeAllExpires()
 
 // データの有効期限を更新
@@ -234,10 +234,10 @@ cache.touch('userInfo', 7200) // 2時間延長
 ### 高度な機能
 
 #### 自動プレフィックス
-全てのキャッシュキーには自動的にアプリケーションプレフィックスが付加され、他のアプリケーションとの衝突を防ぎます：
+すべてのキャッシュキーには自動的にアプリケーションプレフィックスが追加され、他のアプリケーションとの衝突を回避します：
 
 ```typescript
-// 実際に保存されるキー名：VITE_APP_STORAGE_PREFIX + 'userInfo'
+// 実際に保存されるキー名: VITE_APP_STORAGE_PREFIX + 'userInfo'
 cache.set('userInfo', data)
 ```
 
@@ -247,11 +247,11 @@ cache.set('userInfo', data)
 ```typescript
 cache.set('largeData', data, {
   exp: 3600,
-  force: true // 容量不足時、期限切れデータを強制的にクリアしてから保存
+  force: true // 容量不足時に期限切れデータを強制的にクリアしてから保存
 })
 ```
 
-### HTTP リクエストでの応用
+### HTTP リクエストでの使用例
 
 システムは HTTP インターセプターでキャッシュを使用してユーザー認証情報を保存します：
 
@@ -275,20 +275,20 @@ if (!cache.get('refresh_token')) {
 
 ### 1. ページキャッシュの適切な使用
 
-- **キャッシュに適したページ**: リストページ、フォームページ、詳細閲覧ページ
+- **キャッシュに適したページ**: リストページ、フォームページ、詳細表示ページ
 - **キャッシュに不適なページ**: ログインページ、エラーページ、一時ポップアップページ
-- **注意事項**: コンポーネント名を一意にし、キャッシュ衝突を回避
+- **注意事項**: コンポーネント名が一意であることを確認し、キャッシュの衝突を回避
 
 ### 2. データキャッシュ戦略
 
 ```typescript
-// 辞書データをキャッシュ（長期有効）
+// 辞書データをキャッシュ（長期間有効）
 cache.set('dictData', dictList, { exp: 24 * 3600 }) // 24時間
 
 // ユーザー設定をキャッシュ（永続化）
 cache.set('userSettings', settings) // 有効期限なし
 
-// 一時状態をキャッシュ（短期有効）
+// 一時状態をキャッシュ（短期間有効）
 cache.set('searchForm', formData, { exp: 1800 }) // 30分
 ```
 
@@ -315,20 +315,20 @@ setInterval(() => {
 ### 4. パフォーマンス最適化の推奨事項
 
 - 大きなデータオブジェクトをキャッシュしない
-- メモリリークを防ぐため、適切な有効期限を設定
+- メモリリークを避けるために有効期限を適切に設定
 - 頻繁に更新されるデータには sessionStorage の使用を検討
-- キャッシュ使用状況を監視し、不要なキャッシュを適時クリア
+- キャッシュ使用状況を監視し、不要なキャッシュをタイムリーにクリア
 
 ## よくある質問
 
 ### 問題1：ページキャッシュが有効にならない
 
-**考えられる原因**:
-- コンポーネントに `name` プロパティが定義されていない
+**考えられる原因**：
+- コンポーネントに `name` 属性が定義されていない
 - ルート `meta.cache` が `true` に設定されていない
 - ページテンプレートに複数のルートノードがある
 
-**解決策**:
+**解決策**：
 ```vue
 <!-- 誤った例：複数のルートノード -->
 <template>
@@ -348,7 +348,7 @@ setInterval(() => {
 ### 問題2：キャッシュデータの期限切れ
 
 ```typescript
-// データが存在し、期限切れでないか確認
+// データが存在し、期限切れでないかをチェック
 const cachedData = cache.get('userData')
 if (!cachedData) {
   // データを再取得
@@ -357,7 +357,7 @@ if (!cachedData) {
 }
 ```
 
-### 問題3：キャッシュが容量を占有しすぎる
+### 問題3：キャッシュが容量を過剰に使用
 
 ```typescript
 // 定期的にキャッシュ使用状況を監視・クリア
@@ -376,7 +376,7 @@ function monitorCacheUsage() {
 }
 ```
 
-## ソースコードリファレンス
+## ソースコード参照
 
 - [useCache Hook](https://github.com/mineadmin/mineadmin/blob/master/web/src/hooks/useCache.ts) - データキャッシュツール
 - [useKeepAliveStore](https://github.com/mineadmin/mineadmin/blob/master/web/src/store/modules/useKeepAliveStore.ts) - ページキャッシュ状態管理

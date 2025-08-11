@@ -1,10 +1,10 @@
 # Hooks
 
-MineAdmin provides a series of powerful custom Hooks that encapsulate commonly used functionalities and logic, enabling developers to easily reuse code in Vue 3 components. This document details the usage, parameters, return values, and practical application scenarios of each Hook.
+MineAdmin provides a series of powerful custom Hooks that encapsulate commonly used functionalities and logic, enabling developers to easily reuse code in Vue 3 components. This documentation details the usage, parameters, return values, and practical application scenarios for each Hook.
 
 ## useCache()
 
-A Hook for browser cache operations, supporting localStorage and sessionStorage with expiration time settings.
+A Hook for browser cache operations, supporting localStorage and sessionStorage, with expiration time configuration.
 
 **Source Path:** `/web/src/hooks/useCache.ts`  
 **GitHub Link:** [View Source](https://github.com/mineadmin/mineadmin/blob/master/web/src/hooks/useCache.ts)
@@ -17,12 +17,12 @@ export type CacheType = 'localStorage' | 'sessionStorage'
 export interface CacheOptions {
   /**
    * Timeout in seconds.
-   * Defaults to infinity.
+   * Defaults to unlimited.
    */
   exp?: number
 
   /**
-   * When true: If insertion fails due to exceeding maximum capacity, clears expired cache before retrying.
+   * When true: If insertion fails due to exceeding maximum capacity, clears expired cache entries before retrying.
    * Defaults to true.
    */
   force?: boolean
@@ -33,7 +33,7 @@ export interface CacheOptions {
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| type | CacheType | 'localStorage' | Cache type, either 'localStorage' or 'sessionStorage' |
+| type | CacheType | 'localStorage' | Cache type, either localStorage or sessionStorage |
 
 ### Return Values
 
@@ -44,7 +44,7 @@ export interface CacheOptions {
 | set | Function | Set cache |
 | get | Function | Get cache |
 | remove | Function | Remove cache |
-| removeAllExpires | Function | Remove all expired cache |
+| removeAllExpires | Function | Remove all expired cache entries |
 | touch | Function | Update cache expiration time |
 
 ### Usage Example
@@ -77,10 +77,10 @@ removeAllExpires()
 touch('userInfo', 60)
 ```
 
-### Practical Application
+### Practical Application Scenario
 
 ```typescript
-// Usage in user login component
+// In user login component
 const { set, get } = useCache()
 
 // Save user login info
@@ -183,14 +183,14 @@ export default defineComponent({
 })
 ```
 
-### Practical Application
+### Practical Application Scenario
 
 ```vue
 <template>
   <div>
     <el-button @click="editUser">Edit User</el-button>
     <Dialog>
-      <div>User edit form content</div>
+      <div>Edit user form content</div>
     </Dialog>
   </div>
 </template>
@@ -285,7 +285,7 @@ export default defineComponent({
 })
 ```
 
-### Practical Application
+### Practical Application Scenario
 
 ```vue
 <template>
@@ -379,7 +379,7 @@ export default defineComponent({
 })
 ```
 
-### Practical Application
+### Practical Application Scenario
 
 ```vue
 <template>
@@ -413,7 +413,7 @@ const handleSubmit = async () => {
     const formInstance = await useForm('userForm')
     
     // Form submission logic
-    console.log('Form submitted')
+    console.log('Form submission')
   } catch (error) {
     console.error('Submission failed:', error)
   }
@@ -469,7 +469,7 @@ export default defineComponent({
 })
 ```
 
-### Practical Application
+### Practical Application Scenario
 
 ```vue
 <template>
@@ -510,7 +510,7 @@ const deleteSelected = async () => {
       return
     }
     
-    await ElMessageBox.confirm('Confirm deletion of selected users?')
+    await ElMessageBox.confirm('Confirm to delete selected users?')
     
     const ids = selectedRows.map(row => row.id)
     await deleteUsers(ids)
@@ -542,8 +542,8 @@ A Hook for localization translation, providing translation functionality based o
 
 ### Return Values
 
-- When `key` is null, returns translation function `ComposerTranslation`
-- When `key` has value, returns translated string
+- When `key` is null: Returns translation function `ComposerTranslation`
+- When `key` has value: Returns translated string
 
 ### Usage Example
 
@@ -578,7 +578,7 @@ export default defineComponent({
 })
 ```
 
-### Practical Application
+### Practical Application Scenario
 
 ```vue
 <template>
@@ -666,9 +666,9 @@ export default defineComponent({
     const handleDelete = async () => {
       try {
         await message.delConfirm()
-        console.log('Perform delete operation')
+        console.log('Perform deletion')
       } catch {
-        console.log('Delete canceled')
+        console.log('Cancel deletion')
       }
     }
 
@@ -682,7 +682,7 @@ export default defineComponent({
 })
 ```
 
-### Practical Application
+### Practical Application Scenario
 
 ```vue
 <template>
@@ -695,4 +695,4 @@ export default defineComponent({
 
 <script setup>
 import { useMessage } from '@/hooks/useMessage'
-import { saveUserData, deleteUserById
+import { saveUserData,

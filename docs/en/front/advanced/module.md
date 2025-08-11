@@ -1,21 +1,21 @@
 # Frontend Modular System
 
 ::: tip Note
-MineAdmin's frontend adopts a modular architecture, organizing **view files, API interfaces, internationalization files**, etc., by functionality for clear code structure.
+MineAdmin's frontend adopts a modular architecture, managing **view files, API interfaces, internationalization files**, etc., by functionality to provide a clear code organization structure.
 :::
 
-## Modular System Architecture
+## Module System Architecture
 
-MineAdmin's frontend modular system is divided into two main layers:
+MineAdmin's frontend module system is primarily divided into two levels:
 
-1. **Core Module System** (`src/modules/`) - Business functional modules  
-2. **Plugin System** (`src/plugins/`) - Extensible plugin modules  
+1. **Core Module System** (`src/modules/`) - Business functional modules
+2. **Plugin System** (`src/plugins/`) - Extensible plugin modules
 
 ### Core Module Directory Structure
 
 ```
 web/src/modules/
-└── base/                    # Core base module
+└── base/                    # Base core module
     ├── api/                 # API interface definitions
     │   ├── attachment.ts    # Attachment management interface
     │   ├── log.ts          # Log management interface  
@@ -43,7 +43,7 @@ web/src/modules/
 
 ## Base Module Details
 
-The `base` module is the core foundational module of the system, containing all basic functionalities of MineAdmin: login authentication, permission management, user management, menu management, log monitoring, etc.
+The `base` module is the core foundational module of the system, containing all of MineAdmin's basic functionalities: login authentication, permission management, user management, menu management, log monitoring, etc.
 
 ### API Layer Design
 
@@ -118,7 +118,7 @@ baseUserManage:
   role: Role
   signed: Personal Signature
   mainTitle: User Management
-  subTitle: Provides user addition, editing, and deletion functions. Super admin cannot be modified.
+  subTitle: Provides user addition, editing, and deletion functions; super admin cannot be modified.
 
 baseRoleManage:
   mainTitle: Role Management
@@ -246,7 +246,7 @@ const provider: ProviderService.Provider = {
 
 ### 1. Creating New Modules
 
-When developing new features, it's recommended to create independent modules rather than adding to the `base` module:
+When developing new features, it is recommended to create independent modules rather than adding under the `base` module:
 
 ```bash
 web/src/modules/
@@ -283,11 +283,11 @@ Each module's API interfaces should:
 - Use Vue 3 Composition API
 - Support responsive design
 - Follow Element Plus design standards
-- Components should maintain good maintainability
+- Components should be maintainable
 
 ## TypeScript Type Support
 
-The system provides complete TypeScript type definitions, including plugin configurations, route meta information, etc.:
+The system provides complete TypeScript type definitions, including plugin configuration, route meta information, etc.:
 
 ```typescript
 // types/global.d.ts
@@ -326,16 +326,16 @@ declare namespace Plugin {
 ## Best Practices
 
 ::: tip Development Recommendations
-1. **Single Responsibility for Modules**: Each module focuses on a specific business domain  
-2. **Unified API Interfaces**: Use standardized interface design patterns  
-3. **Complete Internationalization**: Provide multilingual support for all text content  
-4. **Type Safety**: Fully utilize the TypeScript type system  
-5. **Plugins First**: For optional features, prioritize plugin implementation  
+1. **Single Responsibility for Modules**: Each module focuses on a specific business domain
+2. **Unified API Interfaces**: Use standardized interface design patterns
+3. **Complete Internationalization**: Provide multilingual support for all text content
+4. **Type Safety**: Make full use of TypeScript's type system
+5. **Plugins First**: For optional features, prioritize plugin implementation
 :::
 
 ::: warning Notes
-- Avoid adding business-specific features to the `base` module  
-- New modules should maintain independence and reduce coupling with other modules  
-- Enabling/disabling plugins should not affect core system functionality  
-- All modules should support internationalization  
+- Avoid adding business-specific features in the `base` module
+- New modules should maintain independence and reduce coupling with other modules
+- Enabling/disabling plugins should not affect core system functionality
+- All modules should support internationalization
 :::

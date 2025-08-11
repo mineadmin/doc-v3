@@ -3,26 +3,26 @@
 ## Overview
 
 ### Core Functionality
-Service Providers (Providers) are one of the core features of MineAdmin 3.0's frontend architecture, inspired by the design philosophy of backend service providers, providing a modular service registration and management mechanism for frontend applications.
+Service Providers (Providers) are a core feature of MineAdmin 3.0's frontend architecture, inspired by backend service provider design principles, providing modular service registration and management mechanisms for frontend applications.
 
 ::: tip Key Features
 - **Global Service Registration**: Register services to Vue's `globalProperties` or `provide/inject` system
 - **Component Initialization**: Automatically initialize and configure global components
 - **Plugin Configuration Management**: Provide default configurations and parameter management for plugins
-- **Dependency Injection**: Implement dependency relationship management between services
+- **Dependency Injection**: Manage dependencies between services
 - **Modular Architecture**: Support organizing services by functional modules
 :::
 
 ### Initialization Sequence
 ::: danger Important Note
-Service providers load during the early stages of application initialization, **before** the initialization of libraries like `pinia`, `vue-router`, and `vue-i18n`. Therefore, these libraries' functionalities cannot be directly used within service providers.
+Service providers load during the early stages of application initialization, **before** libraries like `pinia`, `vue-router`, and `vue-i18n` are initialized. Therefore, these library features cannot be directly used within service providers.
 
-**Initialization Order**:
+**Initialization Sequence**:
 1. Service provider scanning and registration ⚡
 2. Pinia state management initialization
 3. Vue Router initialization
 4. Vue I18n internationalization initialization
-5. Main application launch
+5. Main application startup
 :::
 
 ## Architecture Design
@@ -53,7 +53,7 @@ During system startup, all subdirectories under `src/provider/` are automaticall
 
 ### Dictionary Service
 
-**Description**: Provides unified data dictionary management functionality, supporting multilingual and theme color schemes.
+**Description**: Provides unified data dictionary management functionality, supporting multilingualism and theme color schemes.
 
 **Source Location**: 
 - GitHub: [src/provider/dictionary/](https://github.com/mineadmin/mineadmin/tree/master/web/src/provider/dictionary)
@@ -96,7 +96,7 @@ const statusDict = getDictionary('system-status')
 
 ### ECharts Service
 
-**Description**: Provides initialization, configuration, and theme management for the ECharts library.
+**Description**: Provides initialization, configuration, and theme management for ECharts library.
 
 **Source Location**:
 - GitHub: [src/provider/echarts/](https://github.com/mineadmin/mineadmin/tree/master/web/src/provider/echarts)
@@ -104,7 +104,7 @@ const statusDict = getDictionary('system-status')
 
 **Key Features**:
 - On-demand chart component loading to reduce bundle size
-- Automatic adaptation to system themes (light/dark mode)
+- Automatic system theme adaptation (light/dark mode)
 - Global instance registration with Vue
 - Responsive chart resizing
 
@@ -115,7 +115,7 @@ import { useGlobal } from '@/composables/useGlobal'
 
 const { $echarts } = useGlobal()
 
-// Initializing charts
+// Initializing chart
 const chartInstance = $echarts.init(chartRef.value)
 ```
 
@@ -123,7 +123,7 @@ Reference component: [MaEcharts](/en/front/component/ma-echarts)
 
 ### Plugins Service
 
-**Description**: Provides default configuration management for MineAdmin's plugin system, supporting unified configuration and management of plugin parameters.
+**Description**: Provides default configuration management for MineAdmin plugin system, supporting unified plugin parameter configuration.
 
 **Source Location**:
 - GitHub: [src/provider/plugins/](https://github.com/mineadmin/mineadmin/tree/master/web/src/provider/plugins)
@@ -132,14 +132,14 @@ Reference component: [MaEcharts](/en/front/component/ma-echarts)
 **Key Features**:
 - Centralized plugin configuration management
 - Default parameter registration
-- Hot update support
+- Hot-reload support
 - Plugin dependency management
 
 Reference documentation: [Plugin System](/en/front/high/plugins)
 
 ### MineCore Service
 
-**Description**: Initializes MineAdmin's core component library, providing global configuration and component registration services.
+**Description**: Initializes MineAdmin core component library, providing global configuration and component registration services.
 
 **Source Location**:
 - GitHub: [src/provider/mine-core/](https://github.com/mineadmin/mineadmin/tree/master/web/src/provider/mine-core)
@@ -198,7 +198,7 @@ export default {
 
 ## Development Guide
 
-### Creating a Basic Service Provider
+### Creating Basic Service Providers
 
 **Step 1**: Create service directory
 ```bash
@@ -248,7 +248,7 @@ const provider: ProviderService.Provider<MyService> = {
 export default provider
 ```
 
-### Creating an Advanced Service Provider with Configuration
+### Creating Advanced Service Providers with Configuration
 
 ```ts
 import type { App } from 'vue'
@@ -278,7 +278,7 @@ const provider: ProviderService.Provider<AdvancedService> = {
   },
   
   async init() {
-    // Asynchronous initialization logic
+    // Async initialization logic
     await this.loadExternalLibrary()
   },
   
@@ -365,8 +365,8 @@ export function useMyService() {
 ## Best Practices
 
 ### 1. Naming Conventions
-- Service provider names use **camelCase** format
-- Directory names use **kebab-case** format
+- Service provider names use **camelCase**
+- Directory names use **kebab-case**
 - Global properties use `$` prefix
 
 ### 2. Type Safety
@@ -398,7 +398,7 @@ setProvider(app: App) {
     app.config.globalProperties.$service = createService()
   } catch (error) {
     console.error(`Service ${this.name} initialization failed:`, error)
-    // Provide fallback solution
+    // Provide fallback
     app.config.globalProperties.$service = createFallbackService()
   }
 }
@@ -406,7 +406,7 @@ setProvider(app: App) {
 
 ## Service Management
 
-### Disabling a Service Provider
+### Disabling Service Providers
 ```ts
 const provider: ProviderService.Provider = {
   name: 'optionalService',
@@ -417,7 +417,7 @@ const provider: ProviderService.Provider = {
 }
 ```
 
-### Removing a Service Provider
+### Removing Service Providers
 Delete the corresponding service provider directory:
 ```bash
 rm -rf src/provider/unwanted-service
@@ -435,7 +435,7 @@ const provider: ProviderService.Provider = {
   },
   
   setProvider(app: App) {
-    // Add debug information in development environment
+    // Add debug info in development
     if (process.env.NODE_ENV === 'development') {
       window.__DEBUG_PROVIDERS__ = window.__DEBUG_PROVIDERS__ || {}
       window.__DEBUG_PROVIDERS__[this.name] = this
@@ -450,18 +450,18 @@ const provider: ProviderService.Provider = {
 
 | Issue | Cause | Solution |
 |------|------|----------|
-| Service not registered | Missing `index.ts` file or unimplemented required interfaces | Check file existence and interface implementation |
-| Cannot use Pinia | Service provider initialized before Pinia | Move Pinia-related logic to components or composables |
-| Service dependency conflict | Circular dependency or incorrect dependency order | Redesign dependencies or use event bus |
-| Type inference error | Global property types not properly extended | Add TypeScript module declaration |
-| Hot reload not working | Service caching issue | Restart development server |
+| Service not registered | Missing `index.ts` file or unimplemented interfaces | Check file existence and interface implementation |
+| Cannot use Pinia | Service providers initialize before Pinia | Move Pinia-related logic to components or composables |
+| Service dependency conflicts | Circular dependencies or wrong order | Redesign dependencies or use event bus |
+| Type inference errors | Global property types not properly extended | Add TypeScript module declarations |
+| Hot-reload not working | Service caching issue | Restart development server |
 
 ## Related Resources
 
 **Source Code References**:
-- GitHub Repository: [MineAdmin Source Code](https://github.com/mineadmin/mineadmin)
-- Service Providers Directory: [web/src/provider/](https://github.com/mineadmin/mineadmin/tree/master/web/src/provider)
-- Local Source Code: `/Users/zhuzhu/project/mineadmin/web/src/provider/`
+- GitHub Repository: [MineAdmin Source](https://github.com/mineadmin/mineadmin)
+- Service Provider Directory: [web/src/provider/](https://github.com/mineadmin/mineadmin/tree/master/web/src/provider)
+- Local Source: `/Users/zhuzhu/project/mineadmin/web/src/provider/`
 
 **Related Documentation**:
 - [Plugin System](/en/front/high/plugins)

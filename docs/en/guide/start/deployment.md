@@ -1,6 +1,6 @@
 # Deployment
 
-This article will explain how to deploy MineAdmin's frontend and backend applications in various environments, including best practices for development, testing, and production environments.
+This document explains how to deploy MineAdmin's frontend and backend applications across various environments, including best practices for development, testing, and production environments.
 
 ## Deployment Architecture Overview
 
@@ -192,7 +192,7 @@ php bin/hyperf.php db:seed
 
 ### 3. Direct Server Deployment
 
-#### Using Supervisord Process Management
+#### Using Supervisord for Process Management
 
 Create Supervisor configuration file `/etc/supervisor/conf.d/mineadmin.conf`:
 
@@ -267,7 +267,7 @@ sudo journalctl -u mineadmin -f
 
 #### Single Container Deployment
 
-Based on the [`Dockerfile`](https://github.com/mineadmin/MineAdmin/blob/master/Dockerfile) in the project root directory:
+Based on the [`Dockerfile`](https://github.com/mineadmin/MineAdmin/blob/master/Dockerfile) in the project root:
 
 ```shell
 # Build the image
@@ -623,4 +623,4 @@ server {
     location / {
         proxy_pass http://mineadmin_backend;
         proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade
+        proxy_set_header Upgrade $http_upgrade;

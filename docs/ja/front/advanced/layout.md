@@ -48,7 +48,7 @@ MineAdminは3つの主要なレイアウトモードをサポートしていま�
 
 ### 2. ミックスレイアウト (Mixed Layout)
 - **特徴**: トップメニュー + 左サブメニューの組み合わせレイアウト
-- **適用シナリオ**: 多階層メニューナビゲーションを必要とする複雑なアプリケーション
+- **適用シナリオ**: 多階層メニューナビゲーションが必要な複雑なアプリケーション
 - **コンポーネント構造**: トップメインメニュー、左現在カテゴリのサブメニュー
 
 ### 3. カラムレイアウト (Columns Layout)
@@ -66,7 +66,7 @@ MineAdminは3つの主要なレイアウトモードをサポートしていま�
 | `isColumnsLayout()` | `boolean` | 現在がカラムレイアウトモードかどうかを判定 | `store.isColumnsLayout()` |
 | `isClassicLayout()` | `boolean` | 現在がクラシックレイアウトモードかどうかを判定 | `store.isClassicLayout()` |
 | `getFixedAsideState()` | `boolean` | サブサイドバーが固定状態かどうかを取得 | `store.getFixedAsideState()` |
-| `getMenuCollapseState()` | `boolean` | メニューが折りたたまれているかどうかを取得 | `store.getMenuCollapseState()` |
+| `getMenuCollapseState()` | `boolean` | メニューが折りたたみ状態かどうかを取得 | `store.getMenuCollapseState()` |
 | `getMobileState()` | `boolean` | 現在がモバイル状態かどうかを判定 | `store.getMobileState()` |
 
 ::: tip API ソース位置
@@ -93,7 +93,7 @@ export default defineComponent({
     const isMenuCollapsed = computed(() => settingStore.getMenuCollapseState())
     const isAsideFixed = computed(() => settingStore.getFixedAsideState())
     
-    // レスポンシブデバイスタイプ判定
+    // レスポンシブでデバイスタイプを判定
     const isMobile = computed(() => settingStore.getMobileState())
     
     return {
@@ -260,10 +260,10 @@ export const useLayoutStore = defineStore('layout', {
 
 ## パフォーマンス最適化
 
-### レイアウトコンポーネントの遅延読み込み
+### レイアウトコンポーネントの遅延ロード
 
 ```typescript
-// レイアウトコンポーネントの非同期読み込み
+// レイアウトコンポーネントの非同期ロード
 import { defineAsyncComponent } from 'vue'
 
 export const LayoutComponents = {
@@ -345,7 +345,7 @@ const isDesktop = breakpoints.greater('desktop')
 
 ## 関連ドキュメント
 
-- [よく使うStore](/ja/front/high/store) - 状態管理関連ドキュメント
+- [よく使う Store](/ja/front/high/store) - 状態管理関連ドキュメント
 
 ::: tip ソースコード参照
 完全なレイアウトシステムのソースコードは以下の場所で確認できます：

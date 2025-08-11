@@ -1,12 +1,12 @@
-# フロントエンドモジュールシステム
+# フロントエンドモジュール化システム
 
 ::: tip 説明
-MineAdminのフロントエンドはモジュール化アーキテクチャを採用しており、**ビューファイル、APIインターフェース、国際化ファイル**などを機能ごとにモジュール管理し、明確なコード構造を提供します。
+MineAdminのフロントエンドはモジュール化アーキテクチャを採用し、**ビューファイル、APIインターフェース、国際化ファイル**などを機能ごとにモジュール管理し、明確なコード構造を提供します。
 :::
 
 ## モジュールシステムアーキテクチャ
 
-MineAdminのフロントエンドモジュールシステムは主に2つの層に分かれています：
+MineAdminのフロントエンドモジュールシステムは主に2つの層に分かれます：
 
 1. **コアモジュールシステム** (`src/modules/`) - 業務機能モジュール
 2. **プラグインシステム** (`src/plugins/`) - 拡張可能なプラグインモジュール
@@ -16,7 +16,7 @@ MineAdminのフロントエンドモジュールシステムは主に2つの層�
 ```
 web/src/modules/
 └── base/                    # 基本コアモジュール
-    ├── api/                 # APIインターフェース定義
+    ├── api/                 # API インターフェース定義
     │   ├── attachment.ts    # 添付ファイル管理インターフェース
     │   ├── log.ts          # ログ管理インターフェース  
     │   ├── menu.ts         # メニュー管理インターフェース
@@ -41,13 +41,13 @@ web/src/modules/
 - GitHub: [https://github.com/mineadmin/mineadmin/tree/master/web/src/modules](https://github.com/mineadmin/mineadmin/tree/master/web/src/modules)
 - ローカルパス: `mineadmin/web/src/modules`
 
-## Baseモジュールの詳細
+## Base モジュールの詳細
 
-`base`モジュールはシステムのコア基本モジュールで、MineAdminのすべての基本機能を含んでいます：ログイン認証、権限管理、ユーザー管理、メニュー管理、ログ監視など。
+`base` モジュールはシステムのコア基本モジュールで、MineAdminのすべての基本機能を含みます：ログイン認証、権限管理、ユーザー管理、メニュー管理、ログ監視など。
 
-### APIインターフェース層設計
+### API インターフェース層設計
 
-ユーザー管理APIを例に、標準的なインターフェース設計パターンを示します：
+ユーザー管理APIを例に、標準的なインターフェース設計パターンを表示：
 
 ```typescript
 // web/src/modules/base/api/user.ts
@@ -79,7 +79,7 @@ export interface UserSearchVo {
   status?: number
 }
 
-// 標準CRUDインターフェース
+// 標準 CRUD インターフェース
 export function page(data: UserSearchVo): Promise<ResponseStruct<PageList<UserVo>>> {
   return useHttp().get('/admin/user/list', { params: data })
 }
@@ -103,7 +103,7 @@ export function deleteByIds(ids: number[]): Promise<ResponseStruct<null>> {
 
 ### 国際化サポート
 
-モジュール内の国際化ファイルはYAML形式を使用し、多言語をサポートします：
+モジュール内の国際化ファイルはYAML形式を使用し、多言語をサポート：
 
 ```yaml
 # web/src/modules/base/locales/zh_CN[簡体字中国語].yaml
@@ -111,7 +111,7 @@ baseUserManage:
   avatar: アバター
   username: ユーザー名
   nickname: ニックネーム
-  phone: 電話番号
+  phone: 電話
   email: メール
   password: パスワード
   userType: ユーザータイプ
@@ -122,7 +122,7 @@ baseUserManage:
 
 baseRoleManage:
   mainTitle: ロール管理
-  subTitle: ユーザーロールと権限設定を提供します
+  subTitle: ユーザーロールと権限設定を提供
   name: ロール名
   code: ロール識別子
   permission: 権限メニュー
@@ -135,7 +135,7 @@ baseRoleManage:
 
 ## プラグインシステム
 
-MineAdminは強力なプラグインシステムも提供しており、`src/plugins/`ディレクトリに配置されます。プラグインシステムにより、開発者は独立した機能モジュールを作成できます。
+MineAdminは強力なプラグインシステムも提供し、`src/plugins/`ディレクトリに配置されます。プラグインシステムにより、開発者は独立した機能モジュールを作成できます。
 
 ### プラグインディレクトリ構造
 
@@ -145,7 +145,7 @@ web/src/plugins/
     ├── app-store/          # アプリストアプラグイン
     │   ├── api/           # プラグインAPI
     │   ├── views/         # プラグインビュー
-    │   ├── utils/         # プラグインユーティリティ
+    │   ├── utils/         # プラグインツール
     │   ├── style/         # プラグインスタイル
     │   └── index.ts       # プラグインエントリ
     ├── basic-ui/          # 基本UIコンポーネントライブラリ
@@ -168,7 +168,7 @@ const pluginConfig: Plugin.PluginConfig = {
       name: 'mine-admin/app-store',
       version: '1.0.0',
       author: 'X.Mo',
-      description: 'アプリストア機能を提供します',
+      description: 'アプリストア機能を提供',
     },
   },
   views: [
@@ -201,13 +201,13 @@ export default pluginConfig
 
 ### プラグイン登録メカニズム
 
-システムはProviderサービスを通じて自動的にプラグインをスキャンし登録します：
+システムはProviderサービスで自動的にプラグインをスキャンし登録：
 
 ```typescript
 // web/src/provider/plugins/index.ts
 const pluginList = {}
 async function getPluginList() {
-  // プラグインディレクトリを自動スキャン
+  // 自動的にプラグインディレクトリをスキャン
   const plugins = import.meta.glob('../../plugins/*/*/index.ts')
   const sortedPlugins: any[] = []
   
@@ -244,14 +244,14 @@ const provider: ProviderService.Provider = {
 
 ## モジュール開発規範
 
-### 1. 新しいモジュールの作成
+### 1. 新規モジュール作成
 
-新機能を開発する際は、`base`モジュールに追加するのではなく、独立したモジュールを作成することを推奨します：
+新機能を開発する際は、`base`モジュールに追加するのではなく、独立したモジュールを作成することを推奨：
 
 ```bash
 web/src/modules/
 └── your-module/
-    ├── api/                 # APIインターフェース定義
+    ├── api/                 # API インターフェース定義
     │   └── index.ts
     ├── locales/            # 国際化ファイル
     │   ├── en[English].yaml
@@ -259,35 +259,35 @@ web/src/modules/
     │   └── zh_TW[繁体字中国語].yaml
     ├── views/              # ビューコンポーネント
     │   └── index.vue
-    └── types/              # 型定義（オプション）
+    └── types/              # タイプ定義（オプション）
         └── index.ts
 ```
 
-### 2. APIインターフェース規範
+### 2. API インターフェース規範
 
-各モジュールのAPIインターフェースは以下を満たすべきです：
-- 明確なTypeScriptインターフェース型を定義する
-- 統一された`useHttp()`メソッドを使用する
+各モジュールのAPIインターフェースは以下を満たすべき：
+- 明確なTypeScriptインターフェースタイプを定義
+- 統一された`useHttp()`メソッドを使用
 - RESTful API設計原則に従う
 - 完全なCRUD操作を含む
 
 ### 3. 国際化規範
 
-- YAML形式を使用する
-- 階層構造で翻訳キーを整理する
-- サポートする各言語に対応するファイルを作成する
-- 翻訳キーの命名はキャメルケースを使用する
+- YAML形式を使用
+- 階層構造で翻訳キーを整理
+- サポートする各言語に対応するファイルを作成
+- 翻訳キー名はキャメルケースを使用
 
 ### 4. ビューコンポーネント規範
 
-- Vue 3 Composition APIを使用する
-- レスポンシブデザインをサポートする
+- Vue 3 Composition APIを使用
+- レスポンシブデザインをサポート
 - Element Plusデザイン規範に従う
 - コンポーネントは良好な保守性を持つべき
 
-## TypeScript型サポート
+## TypeScript タイプサポート
 
-システムは完全なTypeScript型定義を提供し、プラグイン設定、ルートメタ情報などが含まれます：
+システムは完全なTypeScriptタイプ定義を提供し、プラグイン設定、ルートメタ情報などを含む：
 
 ```typescript
 // types/global.d.ts
@@ -326,16 +326,16 @@ declare namespace Plugin {
 ## ベストプラクティス
 
 ::: tip 開発アドバイス
-1. **モジュールの単一責任**：各モジュールは特定の業務領域に集中する
-2. **APIインターフェースの統一**：標準化されたインターフェース設計パターンを使用する
-3. **国際化の完全性**：すべてのテキストコンテンツに多言語サポートを提供する
-4. **型安全性**：TypeScript型システムを十分に活用する
-5. **プラグイン優先**：オプション機能については、プラグイン方式での実装を優先的に検討する
+1. **モジュールの単一責任**：各モジュールは特定の業務領域に集中
+2. **APIインターフェースの統一**：標準化されたインターフェース設計パターンを使用
+3. **国際化の完全性**：すべてのテキストコンテンツに多言語サポートを提供
+4. **タイプセーフティ**：TypeScriptタイプシステムを十分に活用
+5. **プラグイン優先**：オプション機能についてはプラグイン方式を優先的に検討
 :::
 
 ::: warning 注意事項
 - `base`モジュールに業務固有の機能を追加しない
 - 新しいモジュールは独立性を保ち、他のモジュールとの結合を減らす
 - プラグインの有効化/無効化はシステムコア機能に影響を与えない
-- すべてのモジュールは国際化をサポートするべき
+- すべてのモジュールは国際化をサポートすべき
 :::

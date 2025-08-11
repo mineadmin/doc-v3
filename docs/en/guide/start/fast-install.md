@@ -2,7 +2,7 @@
 
 ## Overview
 
-MineAdmin is an enterprise-level backend management system based on the Hyperf framework, adopting a frontend-backend separation architecture. This guide will walk you through the quick installation and configuration of MineAdmin, helping you set up a fully functional management system in the shortest time possible.
+MineAdmin is an enterprise-level backend management system based on the Hyperf framework, adopting a frontend-backend separation architecture. This guide will walk you through the quick installation and configuration of MineAdmin, helping you set up a fully functional management system in minimal time.
 
 ### System Architecture
 
@@ -30,20 +30,20 @@ MineAdmin is an enterprise-level backend management system based on the Hyperf f
 - **Docker Compose**: ≥ 2.0
 
 ::: tip Environment Selection Advice
-- **New Users**: Recommended to use Docker Compose for simpler environment setup
+- **Beginners**: Recommended to use Docker Compose for simpler environment setup
 - **Developers**: Can choose between local or Docker environment as needed
 - **Production Environment**: Recommended to deploy using Docker
 :::
 
-## Installation Method Selection
+## Installation Options
 
 Choose the appropriate installation method based on your use case:
 
 | Use Case | Recommended Method | Advantages | Target Users |
 |---------|---------|------|---------|
 | Quick Trial/Learning | Docker Compose | One-click deployment, isolated environment | Beginners |
-| Development Debugging | Local Environment | High flexibility, easy debugging | Developers |
-| Production Deployment | Docker Build | Customizable, easily scalable | Operations Staff |
+| Development/Debugging | Local Environment | High flexibility, easy debugging | Developers |
+| Production Deployment | Docker Build | Customizable, easily extensible | Operations Staff |
 
 ## Quick Start
 
@@ -51,10 +51,10 @@ Choose the appropriate installation method based on your use case:
 
 #### Using Git Clone (Recommended)
 
-Ensure you have [Git](https://git-scm.com/) installed, then execute the following command:
+Ensure you have [Git](https://git-scm.com/) installed, then execute the following commands:
 
 ```bash
-# Clone the main branch (standard version)
+# Clone main branch (standard version)
 git clone https://github.com/mineadmin/MineAdmin.git
 
 # Or clone to a specified directory
@@ -63,15 +63,15 @@ git clone https://github.com/mineadmin/MineAdmin.git your-project-name
 
 #### Branch Selection Guide
 
-MineAdmin offers two main branches. Choose according to your needs:
+MineAdmin offers two main branches. Choose based on your requirements:
 
 | Branch Name | Feature Description | Use Case |
 |---------|---------|---------|
 | `master` | Standard version with core features | Most application scenarios |
-| `master-department` | Enhanced version with department management, position management, data permissions, and other advanced features | Enterprise applications requiring complex permission management |
+| `master-department` | Enhanced version with department management, position management, data permissions, etc. | Enterprise applications requiring complex permission management |
 
 ```bash
-# Switch to the enhanced version branch
+# Switch to enhanced version branch
 git checkout master-department
 ```
 
@@ -82,10 +82,10 @@ Determine the required branch before starting the project to avoid unnecessary m
 #### Basic Configuration After Download
 
 ```bash
-# Enter the project directory
+# Enter project directory
 cd MineAdmin  # or your-project-name
 
-# Copy the environment configuration file
+# Copy environment configuration file
 cp .env.example .env
 ```
 
@@ -115,7 +115,7 @@ REDIS_AUTH=
 REDIS_PORT=6379
 REDIS_DB=0
 
-# JWT Configuration (needs to be manually generated)
+# JWT Configuration (requires manual generation)
 JWT_SECRET=your_jwt_secret_key
 ```
 
@@ -132,8 +132,8 @@ JWT_SECRET=your_jwt_secret_key
 This is the simplest installation method, ideal for quick trials and development environments.
 
 #### Advantages
-- Environment isolation, no pollution to the host machine
-- One-click start for all services
+- Environment isolation, no pollution of host machine
+- One-click startup for all services
 - Unified versions, avoiding environment discrepancies
 
 #### Installation Steps
@@ -148,9 +148,9 @@ docker-compose up -d
 docker-compose ps
 ```
 
-2. **Wait for Services to Be Ready**
+2. **Wait for Services to Initialize**
 
-The first startup requires downloading images. Please be patient. You can check the logs with:
+The first startup requires downloading images. Be patient. You can view logs with:
 
 ```bash
 # View logs for all services
@@ -160,10 +160,10 @@ docker-compose logs -f
 docker-compose logs -f mineadmin
 ```
 
-3. **Enter Container to Perform Initialization**
+3. **Initialize Inside Container**
 
 ```bash
-# Enter the application container
+# Enter application container
 docker-compose exec mineadmin bash
 
 # Install backend dependencies
@@ -176,15 +176,15 @@ php bin/hyperf.php migrate
 php bin/hyperf.php db:seed
 ```
 
-### Method 2: Docker Self-Build
+### Method 2: Docker Custom Build
 
 Suitable for advanced users needing custom images.
 
 ```bash
-# Build the image
+# Build image
 docker build -t mineadmin:latest .
 
-# Start the container
+# Start container
 docker run -d \
   --name mineadmin \
   -p 9501:9501 \
@@ -199,11 +199,11 @@ docker run -d \
 
 ### Method 3: Local Environment Installation
 
-Suitable for developers needing in-depth development and debugging.
+Suitable for developers needing deep development and debugging.
 
 #### Prerequisite Checks
 
-Before starting the installation, confirm that the environment meets the requirements:
+Before starting installation, verify that your environment meets the requirements:
 
 ```bash
 # Check PHP version
@@ -237,7 +237,7 @@ composer install --no-dev --optimize-autoloader
 2. **Database Initialization**
 
 ```bash
-# Create database (optional, can also be done manually)
+# Create database (optional, can be done manually)
 mysql -u root -p -e "CREATE DATABASE mineadmin CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 
 # Execute database migration
@@ -258,27 +258,27 @@ php bin/hyperf.php start
 
 1. **Environment Preparation**
 
-Recommended to use [nvm](https://github.com/nvm-sh/nvm) to manage Node.js versions:
+Recommended to use [nvm](https://github.com/nvm-sh/nvm) for Node.js version management:
 
 ```bash
-# Install and use the recommended Node.js version
+# Install and use recommended Node.js version
 nvm install 18
 nvm use 18
 
-# Globally install pnpm (if not already installed)
+# Install pnpm globally (if not already installed)
 npm install -g pnpm
 ```
 
 2. **Install Frontend Dependencies**
 
 ```bash
-# Enter the frontend directory
+# Enter frontend directory
 cd web
 
 # Install dependencies
 pnpm install
 
-# Start the development server
+# Start development server
 pnpm dev
 ```
 
@@ -315,18 +315,18 @@ php bin/hyperf.php db:show
 
 ### Login to System
 
-After installation, use the following default account to log in:
+After installation, use the following default credentials to log in:
 
 - **Admin Account**: admin
 - **Default Password**: 123456
 
 ::: warning Security Reminder
-Change the default password immediately after the first login to ensure system security.
+Change the default password immediately after first login to ensure system security.
 :::
 
-## Common Issue Resolution
+## Troubleshooting
 
-### Common Errors During Installation
+### Common Installation Errors
 
 #### 1. Composer Dependency Installation Failure
 
@@ -340,7 +340,7 @@ Your requirements could not be resolved to an installable set of packages.
 # Clear Composer cache
 composer clear-cache
 
-# Update Composer to the latest version
+# Update Composer to latest version
 composer self-update
 
 # Reinstall
@@ -355,7 +355,7 @@ SQLSTATE[HY000] [2002] Connection refused
 ```
 
 **Solution**:
-1. Check if the database service is running
+1. Check if database service is running
 2. Verify database configuration in `.env` file
 3. Confirm database user permissions
 
@@ -399,9 +399,9 @@ npm install -g cnpm --registry=https://registry.npmmirror.com
 cnpm install
 ```
 
-#### 5. Port Occupancy Issue
+#### 5. Port Conflicts
 
-**Check Port Occupancy**:
+**Check Port Usage**:
 ```bash
 # Check port 9501 (backend)
 lsof -i :9501
@@ -413,10 +413,10 @@ netstat -tulpn | grep :3000
 ```
 
 **Solution**:
-- Stop the process occupying the port
-- Or modify the configuration file to use another port
+- Stop processes using the ports
+- Or modify configuration to use different ports
 
-### Performance Optimization Suggestions
+### Performance Optimization Tips
 
 #### Development Environment Optimization
 
@@ -431,7 +431,7 @@ echo "memory_limit=512M" >> /etc/php/8.1/cli/conf.d/99-memory.ini
 #### Production Environment Optimization
 
 ```bash
-# Use production environment configuration
+# Use production configuration
 composer install --no-dev --optimize-autoloader
 
 # Clear configuration cache

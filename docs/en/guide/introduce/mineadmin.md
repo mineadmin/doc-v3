@@ -1,28 +1,28 @@
 # About MineAdmin
 
-MineAdmin is an enterprise-level backend management system based on the Hyperf framework, specifically designed for modern application development. If you are conducting research or technical evaluation related to backend frameworks, this article will help you fully understand MineAdmin's core advantages, technical features, and comprehensive functional system.
+MineAdmin is an enterprise-level backend management system based on the Hyperf framework, specifically designed for modern application development. If you're conducting research or technical selection for backend frameworks, this article will help you fully understand MineAdmin's core advantages, technical features, and comprehensive functional system.
 
 ## Project Overview
 
-MineAdmin is a modern, high-performance backend management system solution that adopts a frontend-backend separation architecture. It is committed to providing developers with an out-of-the-box enterprise-level application development platform. The system features complete permission management, modular design, and rich business components, significantly improving development efficiency.
+MineAdmin is a modern, high-performance backend management system solution that adopts a frontend-backend separation architecture, dedicated to providing developers with an out-of-the-box enterprise application development platform. The system features complete permission management, modular design, and rich business components, significantly improving development efficiency.
 
 ## Long-term and Stable
 
 <script setup>
 import { computed } from 'vue'
 
-// The date MineAdmin started development (October 14, 2021)
+// The start date of MineAdmin development (October 14, 2021)
 const startDate = new Date('2021-10-14')
 const currentDate = new Date()
 
-// Calculate the difference in days
+// Calculate the days difference
 const daysPassed = computed(() => {
   const timeDiff = currentDate.getTime() - startDate.getTime()
   return Math.floor(timeDiff / (1000 * 3600 * 24))
 })
 </script>
 
-Since its initial release on [October 14, 2021](https://github.com/mineadmin/MineAdmin/commit/670f6439ba2a6fe8181bbf138c247bfb1d26601c), MineAdmin has undergone {{ daysPassed }} days of development. We remain committed to a long-term and stable development path, strictly controlling code quality to ensure each version is thoroughly tested and validated.
+Since its initial release on [October 14, 2021](https://github.com/mineadmin/MineAdmin/commit/670f6439ba2a6fe8181bbf138c247bfb1d26601c), MineAdmin has undergone {{ daysPassed }} days of development. We consistently adhere to a long-term and stable development path, strictly controlling code quality to ensure each version undergoes thorough testing and validation.
 
 **Stability Commitment:**
 - Continuous version iteration and maintenance
@@ -32,22 +32,22 @@ Since its initial release on [October 14, 2021](https://github.com/mineadmin/Min
 - Active community support
 
 ::: tip Why Choose MineAdmin
-We are dedicated to providing individual developers and enterprise teams with a modern, concise, and efficient backend management system. With the following core advantages, we help you achieve twice the results with half the effort in project development:
+We are committed to providing individual developers and enterprise teams with a modern, concise, and efficient backend management system. With the following core advantages, we help you achieve more with less in project development:
 
 **Technical Advancement**
 - Adopts the latest technology stack: Hyperf 3.x, PHP 8.x, Vue 3.x, Vite 5.x, etc., ensuring your project remains technologically advanced
 - High-performance architecture based on Swoole coroutines, supporting high-concurrency business scenarios
-- Full-stack TypeScript support for better type safety and development experience
+- Full-stack TypeScript support, providing better type safety and development experience
 
 **Code Quality Assurance**
-- Strict adherence to PSR standards and best practices
-- Modular architecture design ensuring code consistency and maintainability
+- Strict adherence to PSR standards and best practice norms
+- Modular architecture design, ensuring code consistency and maintainability
 - Comprehensive error handling and logging mechanisms
 
-**Flexibility and Adaptability**
+**Flexible Adaptability**
 - Supports lightweight applications for individual developers and rapid setup for startup projects
-- Meets complex business needs and customization requirements for enterprise-level applications
-- Enables a complete development cycle of rapid development, deployment, and iteration
+- Meets complex business needs and customization requirements of enterprise-level applications
+- Enables rapid development, deployment, and iteration in a complete development cycle
 :::
 
 ## Technical Architecture
@@ -62,24 +62,24 @@ We are dedicated to providing individual developers and enterprise teams with a 
 
 ### Frontend Technology Stack
 - **Core Framework**: Vue 3.x - Composition API and reactive system
-- **Build Tool**: Vite 5.x - Ultra-fast frontend build tool
+- **Build Tool**: Vite 5.x - Lightning-fast frontend build tool
 - **UI Component Library**: Element Plus - Enterprise-level component library
 - **State Management**: Pinia - Lightweight state management solution
 - **Routing System**: Vue Router 4.x - Official routing solution
-- **Type Support**: TypeScript - Full type system support
+- **Type Support**: TypeScript - Comprehensive type system support
 
 ## Core Features
 
 ### User and Permission Management
 - **User Management**: Complete user lifecycle management, including registration, authentication, profile maintenance, etc.
-- **Role Management**: Flexible role definition and permission assignment, supporting menu and data permissions
-- **Menu Management**: Dynamic menu configuration with frontend routing and button-level permission control
-- **Department Management**: Tree-structured department hierarchy with data permission control
+- **Role Management**: Flexible role definition and permission assignment, supporting menu permissions and data permissions
+- **Menu Management**: Dynamic menu configuration, supporting frontend routing and button-level permission control
+- **Department Management**: Tree-structured department hierarchy, supporting hierarchical data permission control
 
 ### System Monitoring and Logging
-- **Operation Logs**: Detailed records of user actions for audit and traceability
+- **Operation Logs**: Detailed recording of user operations, supporting audit tracing
 - **Login Logs**: User login records and security monitoring
-- **System Monitoring**: Server performance and application status monitoring
+- **System Monitoring**: Server performance monitoring and application status monitoring
 - **Exception Monitoring**: System exception capture and alert mechanisms
 
 ### Development Tools and Extensions
@@ -89,9 +89,9 @@ We are dedicated to providing individual developers and enterprise teams with a 
 - **System Configuration**: Visual system parameter configuration management
 
 ### Application Ecosystem
-- **Plugin Market**: Rich plugin ecosystem for rapid integration of functional modules
-- **Template System**: Various business templates to accelerate project initialization
-- **User Center**: Independent user service module supporting personal information management and extended features
+- **Plugin Marketplace**: Rich plugin ecosystem, supporting rapid integration of functional modules
+- **Template System**: Various business templates, accelerating project initialization
+- **User Center**: Independent user service module, supporting personal information management and extended functionality
 
 ## Development History and Version Evolution
 
@@ -102,25 +102,25 @@ We are dedicated to providing individual developers and enterprise teams with a 
 - **v2.x-v3.x**: Upgraded with Hyperf 3.x, introducing more modern features
 - **Current Version**: Comprehensive refactoring based on the latest technology stack
 
-**Frontend Technology Evolution**
-- **Early Versions**: Rapid prototypes based on the SCUI open-source project
+**Frontend Technology Transition**
+- **Early Versions**: Rapid prototyping based on the SCUI open-source project
 - **Mid-term Development**: Self-developed frontend framework based on Arco Design
-- **Modern Version**: Modern architecture using Vue 3 + Vite + TypeScript
+- **Modern Version**: Modern architecture adopting Vue 3 + Vite + TypeScript
 
 ### Architecture Optimization History
 
-We continuously optimize the architecture and streamline features during system development:
+Throughout the system's development, we have continuously optimized the architecture and streamlined functionality:
 
 1. **Code Refactoring**: Comprehensive refactoring of frontend and backend code to improve quality and maintainability
-2. **Feature Streamlining**: Removing redundant features to focus on core business scenarios
+2. **Function Streamlining**: Removal of redundant features, focusing on core business scenarios
 3. **Performance Optimization**: Performance tuning based on real-world usage scenarios
-4. **User Experience Enhancement**: Continuous improvement of interface design and interaction
+4. **User Experience Enhancement**: Continuous improvement of interface design and interaction experience
 
 ### Development Vision
 
 Our goal is to create a platform that enables developers to:
-- **Get Started Quickly**: Lower the learning curve with comprehensive documentation and examples
-- **Focus on Business**: Reduce infrastructure development to concentrate on business logic implementation
+- **Quickly Get Started**: Lower the learning curve with comprehensive documentation and examples
+- **Focus on Business**: Reduce infrastructure development, focusing on business logic implementation
 - **Create Value**: Provide stable and reliable technical support for enterprises and brands
 
 ## Applicable Scenarios

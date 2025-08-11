@@ -1,22 +1,22 @@
 # State Management (Store)
 
-MineAdmin uses [Pinia](https://pinia.vuejs.org/) as its state management library, providing a complete state management solution. The system comes with multiple built-in Store modules covering core functionalities such as user management, tabs, plugin system, dictionary data, and more.
+MineAdmin uses [Pinia](https://pinia.vuejs.org/) as its state management library, providing a comprehensive solution for state management. The system comes with several built-in Store modules covering core functionalities such as user management, tabs, plugin systems, dictionary data, and more.
 
-::: tip Auto-Import Note
-All Stores under the frontend `src/store/modules` directory are configured for automatic import and can be used directly without explicit importing.
+::: tip Auto-import Note
+All Stores in the frontend `src/store/modules` directory are configured for automatic import and can be used directly without explicit imports.
 
 **Auto-import configuration location**: `dirs: ['./src/store/modules/**']` in `vite/auto-import.ts`
 :::
 
 ## useUserStore()
 
-User state management Store, responsible for core functionalities like user authentication, permission management, and user information maintenance.
+User state management Store, responsible for core functionalities such as user authentication, permission management, and user information maintenance.
 
-**Source code location**:
+**Source locations**:
 - **Local path**: `web/src/store/modules/useUserStore.ts`  
 - **GitHub URL**: [mineadmin/web/src/store/modules/useUserStore.ts](https://github.com/mineadmin/mineadmin/blob/master/web/src/store/modules/useUserStore.ts)
 
-### Main State Properties
+### Key State Properties
 
 | Property | Type | Description |
 |--------|------|------|
@@ -96,7 +96,7 @@ if (userStore.isLogin) {
       <el-button @click="handleLogout">Logout</el-button>
     </div>
     <div v-else>
-      <el-button @click="toLogin">Login</el-button>
+      <el-button @click="toLogin">Go to Login</el-button>
     </div>
   </div>
 </template>
@@ -145,16 +145,16 @@ const hasRole = (role: string) => {
 
 Tab state management Store, responsible for managing multi-tab navigation, tab caching, and page state persistence.
 
-**Source code location**:
+**Source locations**:
 - **Local path**: `web/src/store/modules/useTabStore.ts`  
 - **GitHub URL**: [mineadmin/web/src/store/modules/useTabStore.ts](https://github.com/mineadmin/mineadmin/blob/master/web/src/store/modules/useTabStore.ts)
 
-### Main State Properties
+### Key State Properties
 
 | Property | Type | Description |
 |--------|------|------|
 | `tabs` | `MineTabbar[]` | List of currently open tabs |
-| `activeTab` | `string` | Name of currently active tab |
+| `activeTab` | `string` | Name of the currently active tab |
 
 ### Core Methods
 
@@ -164,7 +164,7 @@ Adds a new tab
 ```typescript
 const tabStore = useTabStore()
 
-// Add new tab
+// Add a new tab
 tabStore.addTab({
   name: 'user-list',
   title: 'User List',
@@ -175,10 +175,10 @@ tabStore.addTab({
 ```
 
 #### closeTab(targetTab: MineTabbar)
-Closes specified tab
+Closes the specified tab
 
 ```typescript
-// Close tab
+// Close a tab
 const targetTab = tabStore.tabs.find(tab => tab.name === 'user-list')
 if (targetTab) {
   tabStore.closeTab(targetTab)
@@ -186,10 +186,10 @@ if (targetTab) {
 ```
 
 #### refreshTab()
-Refreshes current tab
+Refreshes the current tab
 
 ```typescript
-// Refresh current tab (reloads page component)
+// Refresh current tab (reloads page components)
 await tabStore.refreshTab()
 ```
 
@@ -205,7 +205,7 @@ if (currentTab) {
 ```
 
 #### clearTab()
-Clears all tabs (preserves fixed tabs)
+Clears all tabs (retains fixed tabs)
 
 ```typescript
 // Clear all tabs
@@ -250,7 +250,7 @@ const closeAllTabs = async () => {
 </script>
 ```
 
-#### Using in Route Navigation
+#### Using in Programmatic Navigation
 ```typescript
 import { useRouter } from 'vue-router'
 
@@ -270,11 +270,11 @@ const navigateToPage = (routeName: string, routeParams?: any) => {
 
 Plugin system state management Store, responsible for dynamic plugin loading, enable/disable control, and hook invocation.
 
-**Source code location**:
+**Source locations**:
 - **Local path**: `web/src/store/modules/usePluginStore.ts`  
 - **GitHub URL**: [mineadmin/web/src/store/modules/usePluginStore.ts](https://github.com/mineadmin/mineadmin/blob/master/web/src/store/modules/usePluginStore.ts)
 
-### Main State Properties
+### Key State Properties
 
 | Property | Type | Description |
 |--------|------|------|
@@ -284,7 +284,7 @@ Plugin system state management Store, responsible for dynamic plugin loading, en
 ### Core Methods
 
 #### enabled(pluginName: string)
-Enables specified plugin
+Enables the specified plugin
 
 ```typescript
 const pluginStore = usePluginStore()
@@ -294,7 +294,7 @@ pluginStore.enabled('mine-admin/app-store')
 ```
 
 #### disabled(pluginName: string)
-Disables specified plugin
+Disables the specified plugin
 
 ```typescript
 // Disable plugin
@@ -302,7 +302,7 @@ pluginStore.disabled('mine-admin/demo')
 ```
 
 #### callHooks(hookName: string, ...args: any[])
-Invokes specified hook for all enabled plugins
+Invokes the specified hook for all enabled plugins
 
 ```typescript
 // Call login hook
@@ -382,11 +382,11 @@ http.interceptors.response.use(async (response) => {
 
 Dictionary data state management Store, responsible for caching, querying, and updating system dictionary data.
 
-**Source code location**:
+**Source locations**:
 - **Local path**: `web/src/store/modules/useDictStore.ts`  
 - **GitHub URL**: [mineadmin/web/src/store/modules/useDictStore.ts](https://github.com/mineadmin/mineadmin/blob/master/web/src/store/modules/useDictStore.ts)
 
-### Main State Properties
+### Key State Properties
 
 | Property | Type | Description |
 |--------|------|------|
@@ -402,14 +402,14 @@ interface DictItem {
   color?: string   // Color indicator
   status?: number  // Status (1: enabled, 0: disabled)
   sort?: number    // Sort order
-  remark?: string  // Remark
+  remark?: string  // Remarks
 }
 ```
 
 ### Core Methods
 
 #### getDict(dictCode: string): Promise<DictItem[]>
-Gets dictionary data for specified code
+Gets dictionary data for the specified code
 
 ```typescript
 const dictStore = useDictStore()
@@ -418,18 +418,18 @@ const dictStore = useDictStore()
 const userStatusDict = await dictStore.getDict('user_status')
 console.log(userStatusDict)
 // [
-//   { label: 'Normal', value: 1, color: 'success' },
+//   { label: 'Active', value: 1, color: 'success' },
 //   { label: 'Disabled', value: 0, color: 'danger' }
 // ]
 ```
 
 #### getDictLabel(dictCode: string, value: any): string
-Gets corresponding label for dictionary value
+Gets the corresponding label for a dictionary value
 
 ```typescript
 // Get label for status value
 const statusLabel = await dictStore.getDictLabel('user_status', 1)
-console.log(statusLabel) // 'Normal'
+console.log(statusLabel) // 'Active'
 ```
 
 #### refreshDict(dictCode?: string)
@@ -445,7 +445,7 @@ await dictStore.refreshDict()
 
 ### Usage Examples
 
-#### Using Dictionary in Forms
+#### Using Dictionaries in Forms
 ```vue
 <template>
   <el-form :model="form">
@@ -512,7 +512,7 @@ const getStatusTagType = (status: number) => {
 </script>
 ```
 
-#### Creating Dictionary Select Component
+#### Creating a Dictionary Select Component
 ```vue
 <!-- DictSelect.vue -->
 <template>
@@ -553,7 +553,7 @@ watch(
 
 ## Other Store Modules
 
-In addition to the core Stores above, the system provides other auxiliary Store modules:
+In addition to the core Stores mentioned above, the system provides other auxiliary Store modules:
 
 ### useKeepAliveStore()
 Page caching management, see [Frontend Cache System](/en/front/advanced/cache.md#page-caching-keep-alive)
@@ -660,4 +660,3 @@ const { userInfo, isLogin } = userStore // Will lose reactivity
 
 ## Related Documentation
 
-- [Auto-Import Configuration](/en/front/advanced/auto-

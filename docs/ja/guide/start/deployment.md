@@ -1,10 +1,10 @@
 # デプロイ
 
-この記事では、MineAdminのフロントエンドとバックエンドアプリケーションをさまざまな環境（開発、テスト、本番環境）にデプロイする方法について説明します。
+このドキュメントでは、MineAdminのフロントエンドとバックエンドアプリケーションを様々な環境（開発、テスト、本番環境）にデプロイする方法とベストプラクティスについて説明します。
 
 ## デプロイアーキテクチャ概要
 
-MineAdminはフロントエンドとバックエンドを分離したアーキテクチャを採用しており、以下の技術スタックを使用しています：
+MineAdminはフロントエンドとバックエンドが分離されたアーキテクチャを採用しており、以下の技術スタックを使用しています：
 - **バックエンド**: PHP 8.1+ + Hyperfフレームワーク + Swoole拡張
 - **フロントエンド**: Vue 3 + TypeScript + Vite
 - **データベース**: MySQL 5.7+ / PostgreSQL (オプション)
@@ -91,7 +91,7 @@ date.timezone = Asia/Tokyo
 
 #### 環境設定ファイルの作成
 
-環境ファイルをコピーして設定します。[`mineadmin/.env.example`](https://github.com/mineadmin/MineAdmin/blob/master/.env.example)を参照：
+環境ファイルをコピーして設定します。[`mineadmin/.env.example`](https://github.com/mineadmin/MineAdmin/blob/master/.env.example) を参照：
 
 ```shell
 cp .env.example .env
@@ -192,7 +192,7 @@ php bin/hyperf.php db:seed
 
 ### 3. 直接サーバーデプロイ
 
-#### Supervisordプロセス管理を使用
+#### Supervisordプロセス管理の使用
 
 Supervisor設定ファイル `/etc/supervisor/conf.d/mineadmin.conf` を作成:
 
@@ -223,7 +223,7 @@ sudo supervisorctl start mineadmin
 sudo supervisorctl status mineadmin
 ```
 
-#### Systemdサービス管理を使用
+#### Systemdサービス管理の使用
 
 システムサービスファイル `/etc/systemd/system/mineadmin.service` を作成:
 
@@ -265,7 +265,7 @@ sudo journalctl -u mineadmin -f
 
 ### 4. コンテナ化デプロイ (推奨)
 
-#### 単一コンテナデプロイ
+#### シングルコンテナデプロイ
 
 プロジェクトルートディレクトリの [`Dockerfile`](https://github.com/mineadmin/MineAdmin/blob/master/Dockerfile) に基づく:
 
@@ -546,7 +546,7 @@ spec:
 
 ### 5. リバースプロキシとロードバランシング
 
-<el-alert type="warning">アプリケーションを直接公開することは推奨されません。常にリバースプロキシを介してトラフィックを転送してください</el-alert>
+<el-alert type="warning">アプリケーションを直接公開ネットワークに公開することは決して推奨されません。リバースプロキシを介してトラフィックを転送するのが最善です</el-alert>
 
 [`mineadmin/config/autoload/server.php`](https://github.com/mineadmin/MineAdmin/blob/master/config/autoload/server.php) のサーバー設定に基づき、アプリケーションはデフォルトで9501ポートをリッスンします。
 
@@ -585,6 +585,4 @@ server {
     ssl_certificate_key /etc/ssl/private/mineadmin.key;
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers HIGH:!aNULL:!MD5;
-    ssl_prefer_server_ciphers on;
-    ssl_session_cache shared:SSL:10m;
-    ssl
+    ssl_prefer_server

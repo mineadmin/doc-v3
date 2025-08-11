@@ -1,9 +1,9 @@
 # Plugin System
 
 ::: tip Plugin System Overview
-The `3.0` frontend provides core-level support for the plugin system. Compared to `2.0` which wasn't designed with plugin functionality in mind, where modifying system interfaces or behaviors required source code changes—leading to upgrade difficulties and increasing divergence from official code—the later addition of an app store feature allowed forced plugin support. However, plugins still had to modify source code, and initialization points couldn't be extended by plugins, requiring modifications to `main.js`.
+The `3.0` frontend natively supports a plugin system at its core. Compared to `2.0` which wasn't designed with plugin functionality in mind, where modifying system interfaces or behaviors required source code changes—leading to upgrade difficulties and increasing divergence from official code—the later addition of an app store feature allowed forced plugin support, though plugins still had to modify source code. Moreover, plugins couldn't extend initialization points and had to modify `main.js` directly.
 
-**Now all these issues are resolved. The frontend plugin system provides robust support, allowing seamless integration of interface replacements, feature additions, third-party components, or custom components into the system. It also offers various `hooks` that can even influence and alter frontend operations.**
+**Now all these issues are resolved. The frontend plugin system provides robust support, allowing seamless integration of interface replacements, feature additions, third-party components, or custom-developed components into the system. It also offers various `hooks` that can even influence and alter frontend operations.**
 :::
 
 ## Plugin System Architecture Overview
@@ -53,14 +53,14 @@ note left of HS : Supports multiple hook types\nAsynchronous hook processing\nHo
 
 ### Core Features
 
-- **Zero-intrusion design**: Plugin development requires no core code modifications
+- **Zero-intrusion design**: Plugin development doesn't require modifying core code
 - **Dynamic loading**: Supports dynamic enabling and disabling of plugins
 - **Lifecycle management**: Complete plugin lifecycle hooks
-- **Type safety**: Full TypeScript type definitions
+- **Type safety**: Comprehensive TypeScript type definitions
 - **Performance optimization**: Supports lazy loading and on-demand loading
 - **Error isolation**: Plugin errors don't affect main application operation
 
-## Plugin Data Type Introduction
+## Plugin Data Types Introduction
 
 ::: info Type Definition File
 Type definitions are located in `types/global.d.ts`
@@ -81,9 +81,9 @@ declare namespace Plugin {
     author: string
     /** Plugin description */
     description: string
-    /** Plugin startup order - higher values start earlier, default 0 */
+    /** Plugin startup order - higher values start first (default: 0) */
     order?: number
-    /** Plugin dependency list */
+    /** Plugin dependencies list */
     dependencies?: string[]
     /** Plugin keywords for search */
     keywords?: string[]
@@ -113,7 +113,7 @@ declare namespace Plugin {
    * Plugin view route definitions
    */
   interface Views extends Route.RouteRecordRaw {
-    /** Route meta information extensions */
+    /** Extended route meta information */
     meta?: {
       /** Page title */
       title?: string
@@ -125,9 +125,9 @@ declare namespace Plugin {
       requireAuth?: boolean
       /** Required permissions list */
       permissions?: string[]
-      /** Whether to cache page */
+      /** Whether to cache the page */
       keepAlive?: boolean
-      /** Whether page is hidden */
+      /** Whether the page is hidden */
       hidden?: boolean
       /** Menu order */
       order?: number
@@ -138,17 +138,17 @@ declare namespace Plugin {
    * Hook function type definitions
    */
   interface HookHandlers {
-    /** Plugin startup hook - can be used for initialization validation */
+    /** Plugin startup hook for initialization validation */
     start?: (config: Config) => Promise<boolean | void> | boolean | void
-    /** System initialization complete hook - can access Vue context */
+    /** System initialization complete hook with Vue context access */
     setup?: () => Promise<void> | void
-    /** Route registration hook - can modify route configuration */
+    /** Route registration hook for modifying route configurations */
     registerRoute?: (router: Router, routesRaw: Route.RouteRecordRaw[] | Views[] | MineRoute.routeRecord[]) => Promise<void> | void
     /** User login hook */
     login?: (formInfo: LoginFormData) => Promise<void> | void
     /** User logout hook */
     logout?: () => Promise<void> | void
-    /** Get user info hook */
+    /** Get user information hook */
     getUserInfo?: (userInfo: UserInfo) => Promise<void> | void
     /** Route redirect hook (external links invalid) */
     routerRedirect?: (context: { from: RouteLocationNormalized, to: RouteLocationNormalized }, router: Router) => Promise<void> | void
@@ -160,7 +160,7 @@ declare namespace Plugin {
     error?: (error: Error, context?: string) => Promise<void> | void
     /** Page load complete hook */
     mounted?: () => Promise<void> | void
-    /** Page destroy hook */
+    /** Page destruction hook */
     beforeDestroy?: () => Promise<void> | void
   }
 
@@ -168,7 +168,7 @@ declare namespace Plugin {
    * Main plugin configuration interface
    */
   interface PluginConfig {
-    /** Plugin install function - registers components, directives etc. */
+    /** Plugin installation function - registers components, directives, etc. */
     install: (app: App<Element>) => Promise<void> | void
     /** Plugin configuration information */
     config: Config
@@ -186,7 +186,7 @@ declare namespace Plugin {
   interface PluginStore {
     /** List of installed plugins */
     plugins: Map<string, PluginConfig>
-    /** Plugin enabled status */
+    /** Plugin enable status */
     enabledPlugins: Set<string>
     /** Plugin loading status */
     loadingPlugins: Set<string>
@@ -245,7 +245,7 @@ interface UserInfo {
 
 ### Directory Structure and Naming Conventions
 
-All plugins are placed in the `src/plugins` directory, with the alias `$` pointing to this directory. The plugin structure mirrors the backend, consisting of `developer-namespace/plugin-name` as the plugin directory. The left side of the slash is the **author namespace** which can be set on the [MineAdmin official website](https://www.mineadmin.com), while the right side is the **plugin name**, which must be unique within that author namespace.
+All plugins are placed in the `src/plugins` directory, with the alias `$` pointing to this directory. Plugins follow the same structure as the backend, consisting of `developer-namespace/plugin-name` to form the plugin directory. The left side of the slash is the **author namespace** (configurable on [MineAdmin website](https://www.mineadmin.com)), while the right side is the **plugin name**, which must be unique within that author namespace.
 
 #### Standard Plugin Directory Structure
 
@@ -284,7 +284,7 @@ src/plugins/
 - **Component names**: Use PascalCase, e.g., `FileUploader.vue`
 
 ::: tip Best Practices
-- Locally developed plugins can also be recognized by the system but cannot be uploaded to the MineAdmin app market
+- Locally developed plugins can also be recognized by the system but cannot be uploaded to MineAdmin App Market
 - Adding a `package.json` is recommended for dependency and version management
 - Using TypeScript provides better type hints and error checking
 - Follow Vue 3 Composition API best practices
@@ -293,7 +293,7 @@ src/plugins/
 ::: warning Important Notes
 - Plugin names must be unique within the same author namespace
 - Avoid using system reserved words as plugin names
-- Avoid renaming plugin directories after creation
+- Avoid changing plugin directory names after creation
 :::
 
 ### Plugin Lifecycle
@@ -310,7 +310,7 @@ start
 
 if (Plugin enabled?) then (yes)
   :Check dependencies;
-  if (Dependencies satisfied?) then (yes)
+  if (Dependencies met?) then (yes)
     :Execute start hook;
     if (Start successful?) then (yes)
       :Execute install method;
@@ -320,7 +320,7 @@ if (Plugin enabled?) then (yes)
       :Execute registerRoute hook;
       :Plugin initialization complete;
     else (no)
-      :Mark plugin startup failed;
+      :Mark plugin as failed to start;
       stop
     endif
   else (no)
@@ -354,7 +354,7 @@ endif
 
 ### Basic Plugin Example
 
-Let's understand the complete plugin development process through a comprehensive file management plugin:
+Let's examine a complete file manager plugin to understand the full plugin development process:
 
 #### 1. Create Plugin Entry File `index.ts`
 
@@ -374,7 +374,7 @@ import { formatFileSize, validateFileType } from './utils/fileUtils'
 
 // Plugin configuration
 const pluginConfig: Plugin.PluginConfig = {
-  // Plugin install method - register global components, directives, etc.
+  // Plugin installation method - register global components, directives, etc.
   async install(app: App) {
     try {
       // Register global components
@@ -413,14 +413,14 @@ const pluginConfig: Plugin.PluginConfig = {
 
   // Basic plugin configuration
   config: {
-    enable: import.meta.env.NODE_ENV !== 'production', // Disabled in production
+    enable: import.meta.env.NODE_ENV !== 'production', // Disable in production
     devMode: import.meta.env.DEV,
     info: {
       name: 'zhang-san/file-manager',
       version: '2.1.0',
       author: 'Zhang San',
-      description: 'Enterprise file management plugin with upload, download, preview, permission control features',
-      keywords: ['File management', 'File upload', 'Permission control'],
+      description: 'Enterprise file management plugin with upload, download, preview, and permission control',
+      keywords: ['file management', 'file upload', 'permission control'],
       homepage: 'https://github.com/zhang-san/file-manager',
       license: 'MIT',
       minSystemVersion: '3.0.0',
@@ -468,7 +468,7 @@ const pluginConfig: Plugin.PluginConfig = {
 
     // Route registration hook
     async registerRoute(router: Router, routesRaw) {
-      // Dynamically add file management related routes
+      // Dynamically add file management routes
       const adminRoutes = routesRaw.find(route => route.path === '/admin')
       if (adminRoutes && adminRoutes.children) {
         adminRoutes.children.push({
@@ -488,19 +488,19 @@ const pluginConfig: Plugin.PluginConfig = {
       console.log('File management routes registered')
     },
 
-    // After user login hook
+    // Post-login hook
     async login(formInfo) {
       console.log('User logged in, initializing file permissions')
       await refreshFilePermissions(formInfo.username)
     },
 
-    // User logout hook
+    // Logout hook
     async logout() {
       console.log('User logged out, cleaning file cache')
       await clearFileCache()
     },
 
-    // After getting user info hook
+    // Post-user info hook
     async getUserInfo(userInfo) {
       // Set file permissions based on user roles
       await setFilePermissions(userInfo.roles, userInfo.permissions)
@@ -508,7 +508,7 @@ const pluginConfig: Plugin.PluginConfig = {
 
     // Network request interception
     async networkRequest(config) {
-      // Add special handling for file upload requests
+      // Special handling for file upload requests
       if (config.url?.includes('/upload')) {
         config.timeout = 300000 // 5-minute timeout
         config.headers = {
@@ -543,11 +543,11 @@ const pluginConfig: Plugin.PluginConfig = {
       }
     },
 
-    // Cleanup before plugin destruction
+    // Pre-destruction cleanup
     async beforeDestroy() {
-      console.log('File manager plugin about to be destroyed, cleaning resources...')
+      console.log('File manager plugin about to destroy, cleaning resources...')
       
-      // Cancel ongoing upload tasks
+      // Cancel ongoing uploads
       await cancelAllUploads()
       
       // Clean up event listeners
@@ -591,5 +591,4 @@ const pluginConfig: Plugin.PluginConfig = {
 }
 
 // Helper functions
-async function checkFilePermissions(): Promise<boolean> {
- 
+async function checkFilePermissions(): Promise<boolean>

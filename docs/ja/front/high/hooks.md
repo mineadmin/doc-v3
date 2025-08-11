@@ -1,6 +1,6 @@
 # Hooks
 
-MineAdmin は、一連の強力なカスタム Hooks を提供しています。これらの Hooks は、よく使われる機能とロジックをカプセル化しており、開発者が Vue 3 コンポーネントでコードを簡単に再利用できるようにします。このドキュメントでは、各 Hook の使用方法、パラメータ、戻り値、および実際の適用シナリオについて詳しく説明します。
+MineAdmin は、一連の強力なカスタム Hooks を提供しています。これらの Hooks は、よく使われる機能とロジックをカプセル化しており、開発者が Vue 3 コンポーネントでコードを簡単に再利用できるようにします。このドキュメントでは、各 Hook の使い方、パラメータ、戻り値、および実際の適用シナリオについて詳しく説明します。
 
 ## useCache()
 
@@ -17,13 +17,13 @@ export type CacheType = 'localStorage' | 'sessionStorage'
 export interface CacheOptions {
   /**
    * タイムアウト時間（秒）。
-   * デフォルトは無限。
+   * デフォルトは無制限。
    */
   exp?: number
 
   /**
-   * trueの場合：最大容量を超えてデータ挿入操作が続けられない場合、キャッシュ内のタイムアウト済みコンテンツをクリアしてからデータ挿入操作を試みます。
-   * デフォルトはtrue。
+   * true の場合：最大容量を超えてデータの挿入操作ができなくなったとき、キャッシュ内のタイムアウト済みコンテンツをクリアしてから再度データ挿入操作を試みます。
+   * デフォルトは true。
    */
   force?: boolean
 }
@@ -31,13 +31,13 @@ export interface CacheOptions {
 
 ### パラメータ
 
-| パラメータ | タイプ | デフォルト値 | 説明 |
+| パラメータ | 型 | デフォルト値 | 説明 |
 |------|------|--------|------|
-| type | CacheType | 'localStorage' | キャッシュタイプ。localStorage または sessionStorage を選択可能 |
+| type | CacheType | 'localStorage' | キャッシュタイプ。'localStorage' または 'sessionStorage' を選択可能 |
 
 ### 戻り値
 
-| プロパティ | タイプ | 説明 |
+| プロパティ | 型 | 説明 |
 |------|------|------|
 | cache | WebStorageCache | 基盤となる WebStorageCache インスタンス |
 | prefix | string | キャッシュキー名のプレフィックス |
@@ -96,7 +96,7 @@ const getUserInfo = () => {
 
 ## useDialog()
 
-ダイアログ作成に使用する Hook で、完全なダイアログライフサイクル管理を提供し、カスタムタイトル、プロパティ、およびイベントコールバックをサポートします。
+ダイアログを作成するための Hook で、ダイアログのライフサイクル管理を完全にサポートし、カスタムタイトル、プロパティ、およびイベントコールバックを提供します。
 
 **ソースコードパス:** `/web/src/hooks/useDialog.ts`  
 **GitHub リンク:** [ソースコードを表示](https://github.com/mineadmin/mineadmin/blob/master/web/src/hooks/useDialog.ts)
@@ -119,13 +119,13 @@ export interface UseDialogExpose {
 
 ### パラメータ
 
-| パラメータ | タイプ | デフォルト値 | 説明 |
+| パラメータ | 型 | デフォルト値 | 説明 |
 |------|------|--------|------|
 | dialogProps | Record<string, any> \| null | null | ダイアログの初期プロパティ設定 |
 
 ### 戻り値
 
-| プロパティ | タイプ | 説明 |
+| プロパティ | 型 | 説明 |
 |------|------|------|
 | on | Object | イベントコールバック設定 |
 | Dialog | Component | ダイアログコンポーネント |
@@ -149,13 +149,13 @@ export default defineComponent({
 
     // イベントコールバックを設定
     on.ok = () => {
-      console.log('ユーザーがOKをクリック')
+      console.log('ユーザーがOKをクリックしました')
       close()
     }
 
     on.cancel = () => {
-      console.log('ユーザーがキャンセルをクリック')
-      return true // trueを返すと閉じることを許可
+      console.log('ユーザーがキャンセルをクリックしました')
+      return true // trueを返すと閉じることが許可されます
     }
 
     // ダイアログを開く
@@ -175,7 +175,7 @@ export default defineComponent({
       <div>
         <el-button onClick={this.openDialog}>ダイアログを開く</el-button>
         <Dialog title="デフォルトタイトル">
-          <div>ここにダイアログの内容</div>
+          <div>ここにダイアログの内容が表示されます</div>
         </Dialog>
       </div>
     )
@@ -219,14 +219,14 @@ const handleSubmit = async (formData) => {
     close()
     // ここでフォーム送信ロジックを処理
   } catch (error) {
-    console.error('送信失敗:', error)
+    console.error('送信に失敗しました:', error)
   }
 }
 
 // イベントを設定
 on.ok = () => {
-  // ここでフォーム送信をトリガー
-  return false // デフォルトの閉じる動作を防止
+  // ここでフォーム送信をトリガーできます
+  return false // デフォルトの閉じる動作を阻止
 }
 </script>
 ```
@@ -240,7 +240,7 @@ ECharts ライブラリを統合するための Hook で、テーマ切り替え
 
 ### エクスポート関数
 
-| 関数 | タイプ | 説明 |
+| 関数 | 型 | 説明 |
 |------|------|------|
 | useEcharts | Function | @mineadmin/echarts の useEcharts 関数 |
 | themeMode | Function | 現在のテーマモードを取得 |
@@ -332,14 +332,14 @@ onMounted(async () => {
 
 ## useForm()
 
-フォーム操作に使用する Hook で、フォームインスタンスの取得と操作機能を提供します。
+フォーム操作のための Hook で、フォームインスタンスの取得と操作機能を提供します。
 
 **ソースコードパス:** `/web/src/hooks/useForm.ts`  
 **GitHub リンク:** [ソースコードを表示](https://github.com/mineadmin/mineadmin/blob/master/web/src/hooks/useForm.ts)
 
 ### パラメータ
 
-| パラメータ | タイプ | 説明 |
+| パラメータ | 型 | 説明 |
 |------|------|------|
 | refName | string | フォーム参照名 |
 
@@ -367,7 +367,7 @@ export default defineComponent({
         
         console.log('フォームデータ:', formData)
       } catch (error) {
-        console.error('フォーム検証失敗:', error)
+        console.error('フォーム検証に失敗しました:', error)
       }
     }
 
@@ -401,7 +401,7 @@ const formColumns = [
     rules: [{ required: true, message: 'ユーザー名を入力してください' }]
   },
   {
-    title: 'メール',
+    title: 'メールアドレス',
     dataIndex: 'email',
     formType: 'input',
     rules: [{ required: true, type: 'email', message: '正しいメールアドレスを入力してください' }]
@@ -413,9 +413,9 @@ const handleSubmit = async () => {
     const formInstance = await useForm('userForm')
     
     // フォーム送信ロジック
-    console.log('フォーム送信')
+    console.log('フォームを送信')
   } catch (error) {
-    console.error('送信失敗:', error)
+    console.error('送信に失敗しました:', error)
   }
 }
 </script>
@@ -423,14 +423,14 @@ const handleSubmit = async () => {
 
 ## useTable()
 
-テーブル操作に使用する Hook で、テーブルインスタンスの取得と操作機能を提供します。
+テーブル操作のための Hook で、テーブルインスタンスの取得と操作機能を提供します。
 
 **ソースコードパス:** `/web/src/hooks/useTable.ts`  
 **GitHub リンク:** [ソースコードを表示](https://github.com/mineadmin/mineadmin/blob/master/web/src/hooks/useTable.ts)
 
 ### パラメータ
 
-| パラメータ | タイプ | 説明 |
+| パラメータ | 型 | 説明 |
 |------|------|------|
 | refName | string | テーブル参照名 |
 
@@ -460,7 +460,7 @@ export default defineComponent({
         // 選択をクリア
         tableInstance.clearSelection()
       } catch (error) {
-        console.error('テーブルインスタンスの取得に失敗:', error)
+        console.error('テーブルインスタンスの取得に失敗しました:', error)
       }
     }
 
@@ -488,7 +488,7 @@ const userTableRef = ref()
 const tableColumns = [
   { title: 'ID', dataIndex: 'id', width: 80 },
   { title: 'ユーザー名', dataIndex: 'username' },
-  { title: 'メール', dataIndex: 'email' },
+  { title: 'メールアドレス', dataIndex: 'email' },
   { title: 'ステータス', dataIndex: 'status' }
 ]
 
@@ -496,7 +496,7 @@ const tableColumns = [
 const refreshTable = async () => {
   const tableInstance = await useTable('userTable')
   await tableInstance.refresh()
-  ElMessage.success('更新成功')
+  ElMessage.success('更新しました')
 }
 
 // 選択されたユーザーを削除
@@ -515,13 +515,13 @@ const deleteSelected = async () => {
     const ids = selectedRows.map(row => row.id)
     await deleteUsers(ids)
     
-    // テーブルを更新し、選択をクリア
+    // テーブルを更新して選択をクリア
     await tableInstance.refresh()
     tableInstance.clearSelection()
     
-    ElMessage.success('削除成功')
+    ElMessage.success('削除しました')
   } catch (error) {
-    ElMessage.error('削除失敗')
+    ElMessage.error('削除に失敗しました')
   }
 }
 </script>
@@ -529,21 +529,21 @@ const deleteSelected = async () => {
 
 ## useLocalTrans()
 
-ローカライゼーション翻訳に使用する Hook で、vue-i18n ベースの翻訳機能を提供します。
+ローカライゼーション翻訳のための Hook で、vue-i18n に基づく翻訳機能を提供します。
 
 **ソースコードパス:** `/web/src/hooks/useLocalTrans.ts`  
 **GitHub リンク:** [ソースコードを表示](https://github.com/mineadmin/mineadmin/blob/master/web/src/hooks/useLocalTrans.ts)
 
 ### パラメータ
 
-| パラメータ | タイプ | デフォルト値 | 説明 |
+| パラメータ | 型 | デフォルト値 | 説明 |
 |------|------|--------|------|
-| key | any \| null | null | 翻訳キー名。null の場合は翻訳関数を返す |
+| key | any \| null | null | 翻訳キー名。null の場合は翻訳関数を返します |
 
 ### 戻り値
 
-- `key` が null の場合、翻訳関数 `ComposerTranslation` を返す
-- `key` に値がある場合、翻訳された文字列を返す
+- `key` が null の場合、翻訳関数 `ComposerTranslation` を返します
+- `key` に値がある場合、翻訳された文字列を返します
 
 ### 使用例
 
@@ -569,6 +569,4 @@ export default defineComponent({
   render() {
     return (
       <div>
-        <h1>{this.title}</h1>
-        <p>{this.message}</p>
-       
+        <

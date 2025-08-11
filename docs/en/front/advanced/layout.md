@@ -53,10 +53,10 @@ MineAdmin supports three main layout modes:
 
 ### 3. Columns Layout
 - **Features**: Multi-column menu layout
-- **Use Case**: Large applications with numerous menu categories
+- **Use Case**: Large applications with many menu categories
 - **Component Structure**: Left main menu column, middle submenu column, right content area
 
-## Layout-Related APIs
+## Layout Related APIs
 
 ### useSettingStore API Reference
 
@@ -65,9 +65,9 @@ MineAdmin supports three main layout modes:
 | `isMixedLayout()` | `boolean` | Check if current mode is mixed layout | `store.isMixedLayout()` |
 | `isColumnsLayout()` | `boolean` | Check if current mode is columns layout | `store.isColumnsLayout()` |
 | `isClassicLayout()` | `boolean` | Check if current mode is classic layout | `store.isClassicLayout()` |
-| `getFixedAsideState()` | `boolean` | Get whether sub sidebar is fixed | `store.getFixedAsideState()` |
-| `getMenuCollapseState()` | `boolean` | Get whether menu is collapsed | `store.getMenuCollapseState()` |
-| `getMobileState()` | `boolean` | Check if current device is mobile | `store.getMobileState()` |
+| `getFixedAsideState()` | `boolean` | Get sub sidebar fixed state | `store.getFixedAsideState()` |
+| `getMenuCollapseState()` | `boolean` | Get menu collapse state | `store.getMenuCollapseState()` |
+| `getMobileState()` | `boolean` | Check if current is mobile state | `store.getMobileState()` |
 
 ::: tip API Source Location
 - **GitHub**: [useSettingStore.ts](https://github.com/mineadmin/MineAdmin/blob/master/web/src/store/modules/useSettingStore.ts)
@@ -89,7 +89,7 @@ export default defineComponent({
     const isMixed = computed(() => settingStore.isMixedLayout())
     const isColumns = computed(() => settingStore.isColumnsLayout())
     
-    // Get menu state
+    // Get menu states
     const isMenuCollapsed = computed(() => settingStore.getMenuCollapseState())
     const isAsideFixed = computed(() => settingStore.getFixedAsideState())
     
@@ -260,10 +260,10 @@ export const useLayoutStore = defineStore('layout', {
 
 ## Performance Optimization
 
-### Lazy Loading of Layout Components
+### Lazy Loading Layout Components
 
 ```typescript
-// Async loading of layout components
+// Async loading layout components
 import { defineAsyncComponent } from 'vue'
 
 export const LayoutComponents = {

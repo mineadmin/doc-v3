@@ -15,7 +15,7 @@
 
 ### 初期化順序
 ::: danger 重要注意
-サービスプロバイダはアプリケーション初期化の早い段階で読み込まれ、`pinia`、`vue-router`、`vue-i18n` などのライブラリの初期化**よりも前**に行われます。そのためサービスプロバイダ内ではこれらのライブラリ機能を直接使用できません。
+サービスプロバイダはアプリケーション初期化の早い段階でロードされ、`pinia`、`vue-router`、`vue-i18n` などのライブラリの初期化**よりも前**に行われます。そのためサービスプロバイダ内ではこれらのライブラリ機能を直接使用できません。
 
 **初期化順序**:
 1. サービスプロバイダのスキャンと登録 ⚡
@@ -53,7 +53,7 @@ src/provider/
 
 ### Dictionary（辞書サービス）
 
-**機能説明**: 統一されたデータ辞書管理機能を提供し、多言語対応とテーマカラー設定をサポートします。
+**機能説明**: 統一されたデータ辞書管理機能を提供し、多言語とテーマカラーをサポートします。
 
 **ソース位置**: 
 - GitHub: [src/provider/dictionary/](https://github.com/mineadmin/mineadmin/tree/master/web/src/provider/dictionary)
@@ -103,14 +103,14 @@ const statusDict = getDictionary('system-status')
 - ローカル: `/Users/zhuzhu/project/mineadmin/web/src/provider/echarts/`
 
 **コア機能**:
-- 必要なチャートコンポーネントのみをインポートし、バンドルサイズを削減
-- システムテーマ（ライト/ダークモード）への自動適応
+- オンデマンドでチャートコンポーネントをインポートし、バンドルサイズを削減
+- システムテーマ（明暗モード）への自動適応
 - Vue へのグローバルインスタンス登録
-- レスポンシブなチャートサイズ調整
+- リアクティブなチャートサイズ調整
 
 **使用方法**:
 ```ts
-// コンポーネントでEChartsインスタンスを取得
+// コンポーネントで ECharts インスタンスを取得
 import { useGlobal } from '@/composables/useGlobal'
 
 const { $echarts } = useGlobal()
@@ -168,7 +168,7 @@ const tableConfig = $mineCore.table
 - ローカル: `/Users/zhuzhu/project/mineadmin/web/src/provider/settings/`
 
 **設定ファイル**:
-- `index.ts` - デフォルト設定（直接編集しないでください）
+- `index.ts` - デフォルト設定（直接変更しないでください）
 - `settings.config.ts` - ユーザーカスタマイズ設定ファイル
 
 **設定例**:
@@ -181,7 +181,7 @@ export default {
     version: '3.0.0',
     logo: '/logo.png'
   },
-  // API設定
+  // API 設定
   api: {
     baseUrl: process.env.NODE_ENV === 'development' 
       ? 'http://localhost:9501' 
@@ -274,7 +274,7 @@ const provider: ProviderService.Provider<AdvancedService> = {
   config: {
     enabled: true,
     priority: 10,
-    dependencies: ['settings'] // settingsサービスに依存
+    dependencies: ['settings'] // settings サービスに依存
   },
   
   async init() {
@@ -312,7 +312,7 @@ const provider: ProviderService.Provider<AdvancedService> = {
   },
   
   async loadExternalLibrary() {
-    // 外部依存ライブラリのロードロジック
+    // 外部ライブラリをロードするロジック
   }
 }
 
@@ -321,7 +321,7 @@ export default provider
 
 ### サービスプロバイダの使用
 
-**Vueコンポーネントで使用**:
+**Vue コンポーネントでの使用**:
 ```vue
 <template>
   <div>
@@ -343,7 +343,7 @@ $myService.setConfig({ theme: 'dark' })
 </script>
 ```
 
-**Composableで使用**:
+**Composable での使用**:
 ```ts
 // composables/useMyService.ts
 import { useGlobal } from '@/composables/useGlobal'
@@ -369,7 +369,7 @@ export function useMyService() {
 - ディレクトリ名は **kebab-case** 形式を使用
 - グローバルプロパティは `$` プレフィックスを使用
 
-### 2. 型安全
+### 2. 型安全性
 ```ts
 // グローバルプロパティ型を拡張
 declare module '@vue/runtime-core' {
@@ -435,7 +435,7 @@ const provider: ProviderService.Provider = {
   },
   
   setProvider(app: App) {
-    // 開発環境でデバッグ情報を追加
+    // 開発環境下でデバッグ情報を追加
     if (process.env.NODE_ENV === 'development') {
       window.__DEBUG_PROVIDERS__ = window.__DEBUG_PROVIDERS__ || {}
       window.__DEBUG_PROVIDERS__[this.name] = this
@@ -451,10 +451,10 @@ const provider: ProviderService.Provider = {
 | 問題 | 原因 | 解決策 |
 |------|------|----------|
 | サービスが登録されていない | `index.ts` ファイルがないか必要なインターフェースが実装されていない | ファイルの存在とインターフェース実装を確認 |
-| Piniaが使用できない | サービスプロバイダ初期化がPiniaより早い | Pinia関連ロジックをコンポーネントまたはComposableに移動 |
-| サービス依存関係の競合 | 循環依存または依存順序エラー | 依存関係を再設計するかイベントバスを使用 |
-| 型推論エラー | グローバルプロパティ型が正しく拡張されていない | TypeScriptモジュール宣言を追加 |
-| ホットアップデートが機能しない | サービスキャッシュの問題 | 開発サーバーを再起動 |
+| Pinia が使用できない | サービスプロバイダ初期化が Pinia より早い | Pinia 関連ロジックをコンポーネントまたは Composable に移動 |
+| サービス依存関係の競合 | 循環依存または依存順序の誤り | 依存関係を再設計するかイベントバスを使用 |
+| 型推論エラー | グローバルプロパティ型が正しく拡張されていない | TypeScript モジュール宣言を追加 |
+| ホットアップデートが効かない | サービスのキャッシュ問題 | 開発サーバーを再起動 |
 
 ## 関連リソース
 
