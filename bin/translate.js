@@ -158,6 +158,7 @@ async function handle() {
                         const destPath = path.join(target_lang_dir, file);
                         return processFile(srcPath, destPath, lang).catch(error => {
                             console.error(`❌ translating ${file}:`, error);
+                            process.exit(1);
                         });
                     });
 
