@@ -1,6 +1,6 @@
 # Frontend Caching System
 
-MineAdmin's frontend provides a comprehensive caching system, including multi-layer caching strategies such as page caching, data caching, and browser storage caching. Proper use of caching mechanisms can significantly improve application performance and user experience.
+MineAdmin's frontend provides a comprehensive caching system, including multi-layer caching strategies such as page caching, data caching, and browser storage caching. Proper use of the caching mechanism can significantly improve application performance and user experience.
 
 ## Cache Type Overview
 
@@ -25,7 +25,7 @@ To enable page caching, the following three conditions must be met:
 
 ```vue
 <script setup lang="ts">
-// Define component name, must match the route's name property
+// Define the component name, which must match the route's name property
 defineOptions({ 
   name: 'UserManagement' // Corresponds to route name: 'UserManagement'
 })
@@ -34,7 +34,7 @@ defineOptions({
 const userList = ref([])
 const searchForm = ref({})
 
-// Page data will be cached, maintaining its state when users switch tabs and return
+// Page data will be cached, maintaining previous state when users switch tabs and return
 </script>
 
 <template>
@@ -70,12 +70,12 @@ export default {
 
 #### Dynamic Routes (Menu Management)
 
-For dynamic routes generated through backend menu management, caching properties can be set in the menu management interface:
+For dynamic routes generated through backend menu management, the caching property can be set in the menu management interface:
 
 1. Navigate to **System Management** → **Menu Management**
 2. Edit the corresponding menu item
 3. Find the **Enable Caching** toggle in the form
-4. Enable and save
+4. Enable it and save
 
 Reference menu form implementation: [menu-form.vue#L175](https://github.com/mineadmin/mineadmin/blob/master/web/src/modules/base/views/permission/menu/menu-form.vue#L175)
 
@@ -84,8 +84,8 @@ Reference menu form implementation: [menu-form.vue#L175](https://github.com/mine
 The system implements page caching through the following methods:
 
 1. **Route Guard Detection**: Checks the `meta.cache` property in `router.afterEach`
-2. **Component Name Collection**: Collects the page component's `name` property and adds it to the cache list
-3. **Keep-Alive Wrapping**: Uses `<KeepAlive>` to wrap the route view in the layout component
+2. **Component Name Collection**: Collects the `name` property of page components and adds it to the cache list
+3. **Keep-Alive Wrapping**: Uses `<KeepAlive>` to wrap route views in the layout component
 
 Core implementation code:
 
@@ -94,13 +94,13 @@ Core implementation code:
 router.afterEach(async (to) => {
   const keepAliveStore = useKeepAliveStore()
   
-  // Check if caching is needed and not an iframe page
+  // Check if caching is needed and it's not an iframe page
   if (to.meta.cache && to.meta.type !== 'I') {
     const componentName = to.matched.at(-1)?.components?.default!.name
     if (componentName) {
       keepAliveStore.add(componentName) // Add to cache list
     } else {
-      console.warn(`Component page has no component name set and will not be cached`)
+      console.warn(`Component page does not have a defined component name and will not be cached`)
     }
   }
 })
@@ -140,7 +140,7 @@ meta: {
 ```vue
 <script setup lang="ts">
 // Do not use defineOptions to define component name
-// Even if route sets cache: true, it will not be cached
+// Even if route has cache: true, it won't be cached
 </script>
 ```
 
@@ -180,7 +180,7 @@ await tabStore.refreshTab()
 // Automatically clears corresponding page cache when closing tab
 tabStore.closeTab(targetTab)
 
-// Close other tabs (preserves fixed tabs and current tab caches)
+// Close other tabs (preserves fixed tabs and current tab cache)
 await tabStore.closeOtherTab(currentTab)
 ```
 
@@ -214,7 +214,7 @@ cache.set('userInfo', {
   roles: ['admin']
 })
 
-// Store data with expiration (in seconds)
+// Store data with expiration time (in seconds)
 cache.set('tempData', { value: 'temp' }, { exp: 3600 }) // Expires in 1 hour
 
 // Get data
@@ -247,13 +247,13 @@ When storage capacity is insufficient, the system automatically cleans expired d
 ```typescript
 cache.set('largeData', data, {
   exp: 3600,
-  force: true // When capacity is insufficient, forcibly clean expired data before storing
+  force: true // Force clean expired data before storing when capacity is low
 })
 ```
 
 ### Application in HTTP Requests
 
-The system uses caching in HTTP interceptors to store user authentication information:
+The system uses cache to store user authentication information in HTTP interceptors:
 
 ```typescript
 // src/utils/http.ts
@@ -275,8 +275,8 @@ if (!cache.get('refresh_token')) {
 
 ### 1. Proper Use of Page Caching
 
-- **Suitable for Caching**: List pages, form pages, detail view pages
-- **Not Suitable for Caching**: Login pages, error pages, temporary popup pages
+- **Suitable for caching**: List pages, form pages, detail pages
+- **Not suitable for caching**: Login pages, error pages, temporary popup pages
 - **Notes**: Ensure component names are unique to avoid cache conflicts
 
 ### 2. Data Caching Strategies
@@ -295,18 +295,18 @@ cache.set('searchForm', formData, { exp: 1800 }) // 30 minutes
 ### 3. Cache Cleaning Strategies
 
 ```typescript
-// Clean sensitive data when user logs out
+// Clear sensitive data when user logs out
 function logout() {
   cache.remove('token')
   cache.remove('refresh_token')
   cache.remove('userInfo')
   
-  // Clean page caches
+  // Clear page cache
   keepAliveStore.clean()
   tabStore.clearTab()
 }
 
-// Periodically clean expired data
+// Regularly clean expired data
 setInterval(() => {
   cache.removeAllExpires()
 }, 60 * 60 * 1000) // Clean every hour
@@ -314,12 +314,12 @@ setInterval(() => {
 
 ### 4. Performance Optimization Suggestions
 
-- Avoid caching excessively large data objects
+- Avoid caching overly large data objects
 - Set reasonable expiration times to avoid memory leaks
 - Consider using sessionStorage for frequently updated data
 - Monitor cache usage and clean unnecessary caches promptly
 
-## Frequently Asked Questions
+## Common Issues
 
 ### Issue 1: Page Caching Not Working
 
@@ -330,13 +330,13 @@ setInterval(() => {
 
 **Solution**:
 ```vue
-<!-- Incorrect Example: Multiple root nodes -->
+<!-- Incorrect example: Multiple root nodes -->
 <template>
   <div>Content 1</div>
   <div>Content 2</div>
 </template>
 
-<!-- Correct Example: Single root node -->
+<!-- Correct example: Single root node -->
 <template>
   <div>
     <div>Content 1</div>
@@ -360,7 +360,7 @@ if (!cachedData) {
 ### Issue 3: Excessive Cache Usage
 
 ```typescript
-// Periodically clean and monitor cache usage
+// Regularly clean and monitor cache usage
 function monitorCacheUsage() {
   try {
     const used = JSON.stringify(localStorage).length
@@ -376,10 +376,10 @@ function monitorCacheUsage() {
 }
 ```
 
-## Source Code References
+## Source Code Reference
 
 - [useCache Hook](https://github.com/mineadmin/mineadmin/blob/master/web/src/hooks/useCache.ts) - Data caching utility
 - [useKeepAliveStore](https://github.com/mineadmin/mineadmin/blob/master/web/src/store/modules/useKeepAliveStore.ts) - Page cache state management
 - [useTabStore](https://github.com/mineadmin/mineadmin/blob/master/web/src/store/modules/useTabStore.ts) - Tab cache management
 - [Router Configuration](https://github.com/mineadmin/mineadmin/blob/master/web/src/router/index.ts) - Route caching logic
-- [Layout Implementation](https://github.com/mineadmin/mineadmin/blob/master/web/src/layouts/index.tsx) - Keep-Alive implementation
+- [Layout](https://github.com/mineadmin/mineadmin/blob/master/web/src/layouts/index.tsx) - Keep-Alive implementation

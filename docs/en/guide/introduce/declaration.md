@@ -17,7 +17,7 @@ This document is legally binding. By using MineAdmin, you acknowledge that you h
 
 ---
 
-::: tip QUICK LINKS TO COMMON QUESTIONS
+::: tip QUICK NAVIGATION TO COMMON QUESTIONS
 - 🤔 [Can it be used commercially?](#21-software-nature)
 - ⚖️ [Who is responsible for issues?](#4-disclaimer)
 - 📝 [How to use it compliantly?](#3-user-responsibilities-and-compliance-requirements)
@@ -28,7 +28,7 @@ This document is legally binding. By using MineAdmin, you acknowledge that you h
 
 | Aspect | Key Points | Detailed Terms |
 |--------|------------|----------------|
-| Usage Rights | Open-source, free for commercial use | [§2.1](#21-software-nature) |
+| Usage Rights | Open-source and free, commercial use allowed | [§2.1](#21-software-nature) |
 | User Responsibilities | Legal and compliant use | [§3.1](#31-compliance-obligations) |
 | Team Responsibilities | Limited warranty | [§4.1](#41-liability-limitations) |
 | Intellectual Property | Owned by MineAdmin Team | [§5.1](#51-rights-ownership) |
@@ -37,13 +37,13 @@ This document is legally binding. By using MineAdmin, you acknowledge that you h
 
 ## 1. Preface and User Notice
 
-::: warning MUST-READ BEFORE USE
-Before using the backend permission management system and frontend templates (hereinafter referred to as "**MineAdmin**") developed by the **MineAdmin Team** (hereinafter referred to as "the Team"), please carefully read and fully understand this notice.
+::: warning MUST READ BEFORE USE
+Before using the backend permission management system and frontend templates (hereinafter referred to as "**MineAdmin**") developed by the **MineAdmin Team** (hereinafter referred to as "the Team"), please carefully read and thoroughly understand this notice.
 :::
 
 ### 1.1 Binding Effect of the Notice
 
-You may choose not to use MineAdmin. However, once you use MineAdmin, your usage will be deemed as acceptance and acknowledgment of all the terms herein.
+You may choose not to use MineAdmin. However, once you use MineAdmin, your usage will be deemed as acknowledgment and acceptance of all contents of this notice.
 
 ### 1.2 Scope of Application
 
@@ -59,7 +59,7 @@ This notice applies to:
 
 ### 2.1 Software Nature
 
-**MineAdmin** is an open-source, free-to-use backend permission management system that can be used commercially, primarily designed for streamlined backend management development.
+**MineAdmin** is an open-source, free-to-use backend permission management system that can be used commercially, primarily for the development of convenient backend management functionalities.
 
 ::: info FUNCTIONAL DESCRIPTION
 **Core Features:**
@@ -68,17 +68,17 @@ This notice applies to:
 - ✅ Development tools and documentation
 
 **Functional Limitations:**
-- ❌ MineAdmin does not include specific business module functionalities
+- ❌ MineAdmin itself does not include specific business module functionalities
 - ❌ Does not contain industry-specific business logic
 :::
 
-### 2.2 Open-Source Licensing
+### 2.2 Open-Source License
 
 MineAdmin adopts a dual-license model:
 
 ::: details LICENSE DETAILS
 **Apache 2.0 License**
-- Suitable for enterprise use
+- Suitable for enterprise-level use
 - Provides patent protection
 - Requires retention of copyright notices
 
@@ -106,7 +106,7 @@ You agree to use MineAdmin in a lawful and reasonable manner and undertake the f
 
 ::: warning PROHIBITED ACTIONS
 - ❌ Do not use MineAdmin for any illegal activities
-- ❌ Do not infringe on others' legal rights
+- ❌ Do not infringe upon others' legal rights
 - ❌ Do not engage in any malicious behavior
 - ❌ Do not use MineAdmin for web platforms that violate laws and regulations
 :::
@@ -114,11 +114,12 @@ You agree to use MineAdmin in a lawful and reasonable manner and undertake the f
 #### 3.1.2 Compliance Checklist
 
 Before using MineAdmin, ensure your project:
+
 - [x] Complies with local laws and regulations
 - [x] Does not involve illegal content or services
 - [x] Has obtained necessary operational permits
 - [x] Respects others' intellectual property
-- [x] Adheres to open-source license requirements
+- [x] Follows open-source license requirements
 
 ---
 
@@ -127,15 +128,15 @@ Before using MineAdmin, ensure your project:
 ### 4.1 Liability Limitations
 
 ::: danger IMPORTANT DISCLAIMER
-The Team shall **not be held legally liable** for any losses incurred by any individual or entity due to downloading or using MineAdmin.
+The Team shall **not bear any legal liability** for any losses incurred by any individual or entity due to downloading or using MineAdmin.
 :::
 
 #### 4.1.1 Scope of Disclaimer
 
 Includes but is not limited to losses caused by:
-- 🔸 **Unexpected Events** - System failures, data loss, etc.
-- 🔸 **Negligence** - Configuration errors, operational mistakes, etc.
-- 🔸 **Contract Issues** - Commercial disputes, etc.
+- 🔸 **Accidents** - System failures, data loss, etc.
+- 🔸 **Negligence** - Configuration errors, operational mistakes, etc.  
+- 🔸 **Contract Issues** - Commercial contract disputes, etc.
 - 🔸 **Reputation Damage** - Defamation, malicious dissemination, etc.
 - 🔸 **Intellectual Property** - Copyright or patent infringements, etc.
 
@@ -143,14 +144,14 @@ Includes but is not limited to losses caused by:
 
 Disclaimer covers all types of losses:
 - **Direct Losses** - Direct economic losses
-- **Indirect Losses** - Loss of profits, reputational damage
-- **Incidental Losses** - Other consequential losses
+- **Indirect Losses** - Loss of profits, damage to goodwill  
+- **Incidental Losses** - Other consequential losses  
 - **Derivative Losses** - Subsequent losses
 
 ### 4.2 User Risk Assumption
 
 ::: warning USER RESPONSIBILITY
-Users explicitly agree to all terms listed in this notice and acknowledge that all risks and consequences arising from the use of MineAdmin shall **be borne solely by the user**, and the Team shall not bear any legal liability.
+Users explicitly agree to all contents of this notice and acknowledge that any risks and consequences arising from the use of MineAdmin shall be **solely borne by the user**, and the Team shall not bear any legal liability.
 :::
 
 ---
@@ -166,30 +167,30 @@ The Team retains full intellectual property rights to MineAdmin, protected by re
 #### 5.1.1 Protection Scope
 
 Intellectual property includes but is not limited to:
-- 🏷️ **Trademarks** - MineAdmin brand identifiers
-- 📋 **Patents** - Technical inventions and innovations
-- 📄 **Copyrights** - Source code and documentation
+- 🏷️ **Trademark Rights** - MineAdmin brand identifiers
+- 📋 **Patent Rights** - Technical inventions and innovations
+- 📄 **Copyright** - Source code and documentation
 
 #### 5.1.2 Usage Restrictions
 
 Under compliance with open-source licenses:
 - ✅ Code may be used and modified
-- ✅ May be used in commercial projects
-- ❌ Must not be maliciously plagiarized or misappropriated
+- ✅ May be used for commercial projects
+- ❌ Malicious plagiarism or misuse is prohibited
 
 ---
 
 ## 6. Terms Management
 
-### 6.1 Modification Rights
+### 6.1 Amendment Rights
 
-::: warning TERMS CHANGES
+::: warning TERMS MODIFICATION
 The Team reserves the right to unilaterally modify the terms of this notice and its attachments at any time.
 :::
 
 #### 6.1.1 Notification Methods
 
-Changes will be announced via:
+Modifications will be announced via:
 - 📱 Push notifications
 - 🌐 Official website announcements
 - 📧 Email notifications (for registered users)
@@ -212,16 +213,16 @@ If any part of this notice is deemed invalid or unenforceable:
 
 #### 6.2.2 Integrity Protection
 
-This notice constitutes the complete legal document. Any verbal commitments or other documents shall not modify or replace the content herein.
+This notice constitutes the complete legal document. No oral commitments or other documents may modify or replace its contents.
 
 ---
 
 ## Contact Information
 
-For inquiries regarding this notice, please contact us via:
+For questions regarding this notice, please contact us via:
 
 - 📧 **Email:** [261091613@qq.com](mailto:261091613@qq.com) or [satan.kali.two@gmail.com](mailto:satan.kali.two@gmail.com)
-- 🌐 **Official Website:** [https://www.mineadmin.com](https://www.mineadmin.com)
+- 🌐 **Website:** [https://www.mineadmin.com](https://www.mineadmin.com)
 - 📚 **Documentation:** [https://doc.mineadmin.com](https://doc.mineadmin.com)
 - 💬 **Community:** [GitHub Issues](https://github.com/mineadmin/mineadmin/issues)
 

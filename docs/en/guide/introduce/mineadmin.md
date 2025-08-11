@@ -1,10 +1,10 @@
 # About MineAdmin
 
-MineAdmin is an enterprise-level backend management system based on the Hyperf framework, specifically designed for modern application development. If you're conducting research or technical selection for backend frameworks, this article will help you fully understand MineAdmin's core advantages, technical features, and comprehensive functional system.
+MineAdmin is an enterprise-level backend management system based on the Hyperf framework, specifically designed for modern application development. If you are conducting research or technical evaluation related to backend frameworks, this article will help you fully understand MineAdmin's core advantages, technical features, and comprehensive functional system.
 
 ## Project Overview
 
-MineAdmin is a modern, high-performance backend management system solution that adopts a frontend-backend separation architecture. It is dedicated to providing developers with an out-of-the-box enterprise application development platform. The system features complete permission management, modular design, and rich business components, significantly improving development efficiency.
+MineAdmin is a modern, high-performance backend management system solution that adopts a frontend-backend separation architecture. It is committed to providing developers with an out-of-the-box enterprise-level application development platform. The system features complete permission management, modular design, and rich business components, significantly improving development efficiency.
 
 ## Long-term and Stable
 
@@ -22,13 +22,13 @@ const daysPassed = computed(() => {
 })
 </script>
 
-Since its initial release on [October 14, 2021](https://github.com/mineadmin/MineAdmin/commit/670f6439ba2a6fe8181bbf138c247bfb1d26601c), MineAdmin has undergone {{ daysPassed }} days of development. We remain committed to a long-term, stable development path, strictly controlling code quality to ensure each version is thoroughly tested and validated.
+Since its initial release on [October 14, 2021](https://github.com/mineadmin/MineAdmin/commit/670f6439ba2a6fe8181bbf138c247bfb1d26601c), MineAdmin has undergone {{ daysPassed }} days of development. We remain committed to a long-term and stable development path, strictly controlling code quality to ensure each version is thoroughly tested and validated.
 
-**Stability Commitments:**
+**Stability Commitment:**
 - Continuous version iteration and maintenance
-- Strict code review mechanisms
+- Strict code review mechanism
 - Comprehensive unit test coverage
-- Backward compatibility assurance
+- Backward compatibility guarantee
 - Active community support
 
 ::: tip Why Choose MineAdmin
@@ -47,22 +47,22 @@ We are dedicated to providing individual developers and enterprise teams with a 
 **Flexibility and Adaptability**
 - Supports lightweight applications for individual developers and rapid setup for startup projects
 - Meets complex business needs and customization requirements for enterprise-level applications
-- Enables rapid development, deployment, and iteration for a complete development cycle
+- Enables a complete development cycle of rapid development, deployment, and iteration
 :::
 
 ## Technical Architecture
 
 ### Backend Technology Stack
-- **Core Framework**: Hyperf 3.x - A high-performance PHP framework based on Swoole
+- **Framework Core**: Hyperf 3.x - A high-performance PHP framework based on Swoole
 - **Language Version**: PHP 8.1+ - Supports the latest language features
 - **Database**: MySQL 8.0+ / PostgreSQL - Supports mainstream relational databases
-- **Caching System**: Redis - High-performance caching and session storage
+- **Cache System**: Redis - High-performance caching and session storage
 - **Permission Control**: RBAC permission management based on Casbin
-- **API Documentation**: Swagger/OpenAPI auto-generation
+- **API Documentation**: Swagger/OpenAPI automatic generation
 
 ### Frontend Technology Stack
 - **Core Framework**: Vue 3.x - Composition API and reactive system
-- **Build Tool**: Vite 5.x - Lightning-fast frontend build tool
+- **Build Tool**: Vite 5.x - Ultra-fast frontend build tool
 - **UI Component Library**: Element Plus - Enterprise-level component library
 - **State Management**: Pinia - Lightweight state management solution
 - **Routing System**: Vue Router 4.x - Official routing solution
@@ -71,7 +71,7 @@ We are dedicated to providing individual developers and enterprise teams with a 
 ## Core Features
 
 ### User and Permission Management
-- **User Management**: Complete user lifecycle management, including registration, authentication, and profile maintenance
+- **User Management**: Complete user lifecycle management, including registration, authentication, profile maintenance, etc.
 - **Role Management**: Flexible role definition and permission assignment, supporting menu and data permissions
 - **Menu Management**: Dynamic menu configuration with frontend routing and button-level permission control
 - **Department Management**: Tree-structured department hierarchy with data permission control
@@ -83,13 +83,13 @@ We are dedicated to providing individual developers and enterprise teams with a 
 - **Exception Monitoring**: System exception capture and alert mechanisms
 
 ### Development Tools and Extensions
-- **Code Generator**: Auto-generates CRUD code (frontend and backend) based on database table structures
-- **API Documentation**: Auto-generated and maintained API interface documentation
+- **Code Generator**: Automatically generates CRUD code (frontend and backend) based on database table structures
+- **API Documentation**: Automatically generated and maintained API interface documentation
 - **Data Dictionary**: Unified data dictionary management and maintenance
 - **System Configuration**: Visual system parameter configuration management
 
 ### Application Ecosystem
-- **Plugin Marketplace**: Rich plugin ecosystem for rapid module integration
+- **Plugin Market**: Rich plugin ecosystem for rapid integration of functional modules
 - **Template System**: Various business templates to accelerate project initialization
 - **User Center**: Independent user service module supporting personal information management and extended features
 
@@ -102,24 +102,24 @@ We are dedicated to providing individual developers and enterprise teams with a 
 - **v2.x-v3.x**: Upgraded with Hyperf 3.x, introducing more modern features
 - **Current Version**: Comprehensive refactoring based on the latest technology stack
 
-**Frontend Technology Transition**
-- **Early Versions**: Rapid prototyping based on the SCUI open-source project
-- **Mid-Stage Development**: Self-developed frontend framework based on Arco Design
+**Frontend Technology Evolution**
+- **Early Versions**: Rapid prototypes based on the SCUI open-source project
+- **Mid-term Development**: Self-developed frontend framework based on Arco Design
 - **Modern Version**: Modern architecture using Vue 3 + Vite + TypeScript
 
 ### Architecture Optimization History
 
-Throughout the system's development, we have continuously optimized the architecture and streamlined features:
+We continuously optimize the architecture and streamline features during system development:
 
 1. **Code Refactoring**: Comprehensive refactoring of frontend and backend code to improve quality and maintainability
-2. **Feature Streamlining**: Removal of redundant features to focus on core business scenarios
+2. **Feature Streamlining**: Removing redundant features to focus on core business scenarios
 3. **Performance Optimization**: Performance tuning based on real-world usage scenarios
 4. **User Experience Enhancement**: Continuous improvement of interface design and interaction
 
 ### Development Vision
 
 Our goal is to create a platform that enables developers to:
-- **Quickly Get Started**: Lower the learning curve with comprehensive documentation and examples
+- **Get Started Quickly**: Lower the learning curve with comprehensive documentation and examples
 - **Focus on Business**: Reduce infrastructure development to concentrate on business logic implementation
 - **Create Value**: Provide stable and reliable technical support for enterprises and brands
 
@@ -131,6 +131,6 @@ MineAdmin is suitable for the following typical scenarios:
 - **Content Management Platforms**: Website backends, content publishing systems
 - **Data Analysis Platforms**: Reporting systems, data visualization platforms
 - **E-commerce Management Systems**: Product management, order processing, user management
-- **Multi-Tenant SaaS Applications**: Cloud service applications supporting multi-tenant architectures
+- **Multi-tenant SaaS Applications**: Cloud service applications supporting multi-tenant architectures
 
-With MineAdmin, you can quickly build fully functional, high-performance modern management systems, focusing on business innovation rather than infrastructure development.
+With MineAdmin, you can quickly build feature-rich, high-performance modern management systems, focusing on business innovation rather than infrastructure development.

@@ -1,6 +1,6 @@
 # Deployment
 
-This article explains how to deploy MineAdmin's frontend and backend applications in various environments, including best practices for development, testing, and production environments.
+This article will explain how to deploy MineAdmin's frontend and backend applications in various environments, including best practices for development, testing, and production environments.
 
 ## Deployment Architecture Overview
 
@@ -70,7 +70,7 @@ Based on the configuration in [`mineadmin/Dockerfile`](https://github.com/minead
 **Optional Extensions:**
 - PDO_MYSQL (MySQL support)
 - PDO_PGSQL (PostgreSQL support)  
-- Swoole >= 5.1 (High-performance mode)
+- Swoole >= 5.1 (high-performance mode)
 - Swow >= 1.5 
 - XlsWriter (Excel file support)
 
@@ -121,7 +121,7 @@ REDIS_AUTH=
 REDIS_PORT=6379
 REDIS_DB=0
 
-# JWT Secret Key (Generate a new key)
+# JWT Secret Key (generate a new key)
 JWT_SECRET=your_jwt_secret_key_here
 ```
 
@@ -132,7 +132,7 @@ APP_ENV=prod
 APP_DEBUG=false
 APP_URL=https://your-domain.com
 
-# Database Configuration (Use internal IP)
+# Database Configuration (use internal IP)
 DB_DRIVER=mysql
 DB_HOST=10.0.0.10
 DB_PORT=3306
@@ -143,7 +143,7 @@ DB_CHARSET=utf8mb4
 DB_COLLATION=utf8mb4_unicode_ci
 DB_PREFIX=
 
-# Redis Configuration (Use internal IP, enable password)
+# Redis Configuration (use internal IP, enable password)
 REDIS_HOST=10.0.0.11
 REDIS_AUTH=redis_password_here
 REDIS_PORT=6379
@@ -167,7 +167,7 @@ php -r "echo base64_encode(random_bytes(64)) . PHP_EOL;"
 Execute database migrations based on the migration files in [`mineadmin/databases/migrations/`](https://github.com/mineadmin/MineAdmin/tree/master/databases/migrations):
 
 ```shell
-# Run database migration
+# Run database migrations
 php bin/hyperf.php migrate
 
 # Check migration status
@@ -192,7 +192,7 @@ php bin/hyperf.php db:seed
 
 ### 3. Direct Server Deployment
 
-#### Using Supervisord for Process Management
+#### Using Supervisord Process Management
 
 Create Supervisor configuration file `/etc/supervisor/conf.d/mineadmin.conf`:
 
@@ -267,13 +267,13 @@ sudo journalctl -u mineadmin -f
 
 #### Single Container Deployment
 
-Based on the [`Dockerfile`](https://github.com/mineadmin/MineAdmin/blob/master/Dockerfile) in the project root:
+Based on the [`Dockerfile`](https://github.com/mineadmin/MineAdmin/blob/master/Dockerfile) in the project root directory:
 
 ```shell
 # Build the image
 docker build -t mineadmin:latest .
 
-# Run the container (Development environment)
+# Run the container (development environment)
 docker run -d \
   --name mineadmin \
   -p 9501:9501 \
@@ -287,7 +287,7 @@ docker ps -a
 docker logs mineadmin
 ```
 
-#### Docker Compose Deployment (Full Environment)
+#### Docker Compose Deployment (Complete Environment)
 
 Use the provided [`docker-compose.yml`](https://github.com/mineadmin/MineAdmin/blob/master/docker-compose.yml) configuration:
 
@@ -546,7 +546,7 @@ spec:
 
 ### 5. Reverse Proxy and Load Balancing
 
-<el-alert type="warning">It is never recommended to expose the application directly to the public internet; always use a reverse proxy for traffic forwarding</el-alert>
+<el-alert type="warning">It is never recommended to expose the application directly to the public internet; always use a reverse proxy for traffic forwarding.</el-alert>
 
 Based on the server configuration in [`mineadmin/config/autoload/server.php`](https://github.com/mineadmin/MineAdmin/blob/master/config/autoload/server.php), the application listens on port 9501 by default.
 
@@ -555,7 +555,7 @@ Based on the server configuration in [`mineadmin/config/autoload/server.php`](ht
 **Production Environment Nginx Configuration** (`/etc/nginx/sites-available/mineadmin`):
 
 ```nginx
-# Upstream server configuration (Load balancing)
+# Upstream server configuration (load balancing)
 upstream mineadmin_backend {
     # Weighted round-robin
     server 127.0.0.1:9501 weight=1 max_fails=3 fail_timeout=30s;
@@ -623,4 +623,4 @@ server {
     location / {
         proxy_pass http://mineadmin_backend;
         proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Upgrade $http_upgrade

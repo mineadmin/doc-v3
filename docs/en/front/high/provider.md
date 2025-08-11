@@ -1,100 +1,468 @@
 # Service Providers
 
-## Description  
-::: tip Preface  
-Service providers are common in backend development. The frontend in `3.0` has also introduced a similar but simplified feature. Its purpose is to provide a range of services, such as:  
-- Registering global data into Vue's `globalProperties` or `provide`  
-- Implementing component registration and initialization  
-- Providing default configuration files for plugins  
-- And more to be explored  
+## Overview
 
-Service providers are automatically scanned and registered during frontend initialization, so you don't need to worry about importing them. You only need to focus on how to bind and register data to Vue objects.  
-:::  
+### Core Functionality
+Service Providers (Providers) are one of the core features of MineAdmin 3.0's frontend architecture, inspired by the design philosophy of backend service providers, providing a modular service registration and management mechanism for frontend applications.
 
-::: danger Note  
-Service providers are initialized before `pinia`, `vue-router`, and `vue-i18n`, so these cannot be used within service providers. Be mindful of this.  
-:::  
+::: tip Key Features
+- **Global Service Registration**: Register services to Vue's `globalProperties` or `provide/inject` system
+- **Component Initialization**: Automatically initialize and configure global components
+- **Plugin Configuration Management**: Provide default configurations and parameter management for plugins
+- **Dependency Injection**: Implement dependency relationship management between services
+- **Modular Architecture**: Support organizing services by functional modules
+:::
 
-## Default Service Providers  
+### Initialization Sequence
+::: danger Important Note
+Service providers load during the early stages of application initialization, **before** the initialization of libraries like `pinia`, `vue-router`, and `vue-i18n`. Therefore, these libraries' functionalities cannot be directly used within service providers.
 
-::: info Location  
+**Initialization Order**:
+1. Service provider scanning and registration ⚡
+2. Pinia state management initialization
+3. Vue Router initialization
+4. Vue I18n internationalization initialization
+5. Main application launch
+:::
 
-All service providers are stored in the **`src/provider`** directory. They are categorized for clarity, and you may create subdirectories to distinguish different service providers as needed.  
+## Architecture Design
 
-:::  
+### Directory Structure
+```
+src/provider/
+├── dictionary/          # Dictionary service provider
+│   ├── index.ts        # Service provider main file
+│   └── data/           # Dictionary data files
+├── echarts/            # Chart service provider
+│   └── index.ts
+├── plugins/            # Plugin configuration service provider
+│   └── index.ts
+├── mine-core/          # Core component service provider
+│   └── index.ts
+├── settings/           # System configuration service provider
+│   ├── index.ts
+│   └── settings.config.ts
+└── toolbars/           # Toolbar service provider
+    └── index.ts
+```
 
-### Dictionary  
-This service provides **dictionary data** storage functionality. The `3.0` backend does not include built-in dictionary support, which will be added via plugins later. However, the frontend requires a complete solution to address current and future needs.  
+### Auto-Discovery Mechanism
+During system startup, all subdirectories under `src/provider/` are automatically scanned. Each subdirectory's `index.ts` file is recognized as a service provider and automatically registered.
 
-Under `src/provider/dictionary/data`, individual dictionary files are stored, where each file corresponds to a dataset. The filename serves as the **dictionary name**, and the file content represents the **dictionary data**.  
+## Built-in Services
 
-For example, the `system-status.ts` file defines a dataset named **System Status**, containing two entries: **Enabled** and **Disabled**. Once defined, you don’t need to worry about how it’s imported or how it works—just focus on how to use it. Usage instructions can be found in the later component tutorial section.  
+### Dictionary Service
 
-```ts  
-import type { Dictionary } from '#/global'  
+**Description**: Provides unified data dictionary management functionality, supporting multilingual and theme color schemes.
 
-export default [  
-  { label: 'Enabled', value: 1, i18n: 'dictionary.system.statusEnabled', color: 'primary' },  
-  { label: 'Disabled', value: 2, i18n: 'dictionary.system.statusDisabled', color: 'danger' },  
-] as Dictionary[]  
-```  
+**Source Location**: 
+- GitHub: [src/provider/dictionary/](https://github.com/mineadmin/mineadmin/tree/master/web/src/provider/dictionary)
+- Local: `/Users/zhuzhu/project/mineadmin/web/src/provider/dictionary/`
 
-### ECharts  
-This service initializes the `ECharts` component, including importing the required `ECharts` modules (not all are imported by default; you can modify or add more later). It also binds `ECharts` to Vue’s `globalProperties` object as **$echarts** and registers themes for dark mode, among other tasks.  
+**Key Features**:
+- Supports multilingual internationalization identifiers
+- Built-in theme color system
+- Automatic type inference
+- Reactive data updates
 
-In a Vue page, you can access the instance via `useGlobal().$echarts`. For specific usage, refer to the [MaEcharts](/en/front/component/ma-echarts) section.  
+**Dictionary Data Example** (`src/provider/dictionary/data/system-status.ts`):
+```ts
+import type { Dictionary } from '#/global'
 
-### Plugins  
-This service registers default parameters for the `MineAdmin Plugin System`, making it easier for plugins to use default settings and for developers to modify plugin parameters without altering the plugin source code.  
-This section does not detail how to publish plugin configuration files. Refer to the [Plugin System](/en/front/high/plugins) section for more information.  
+export default [
+  { 
+    label: 'Enabled', 
+    value: 1, 
+    i18n: 'dictionary.system.statusEnabled', 
+    color: 'primary' 
+  },
+  { 
+    label: 'Disabled', 
+    value: 2, 
+    i18n: 'dictionary.system.statusDisabled', 
+    color: 'danger' 
+  },
+] as Dictionary[]
+```
 
-### Mine-Core  
-This service initializes **ma-table, ma-search, ma-form, ma-pro-table** core components under `MineAdmin`, mounts global parameters and configurations, and allows them to be imported and used alongside local configurations.  
+**Usage**:
+```ts
+// Using dictionary data in components
+import { useDictionary } from '@/composables/useDictionary'
 
-In a Vue page, you can access the configuration via `useGlobal().$mineCore`.  
+const { getDictionary } = useDictionary()
+const statusDict = getDictionary('system-status')
+```
 
-### Settings  
-This service provides configuration parameters for the entire frontend. Do not modify parameters in the default `index.ts` file. Instead, copy the parameters to `settings.config.ts` and make changes there.  
+### ECharts Service
 
-## Creating a Service Provider  
+**Description**: Provides initialization, configuration, and theme management for the ECharts library.
 
-### Service Provider Type  
-```ts  
-declare namespace ProviderService {  
-  interface Provider {  
-    name: string  
-    init?: () => any | void  
-    setProvider: (app: App) => any | void  
-    getProvider: () => T  
-  }  
-}  
-```  
-Each service provider must create a directory with an `index.ts` file that implements the `Provider` interface under `ProviderService` and exports it.  
+**Source Location**:
+- GitHub: [src/provider/echarts/](https://github.com/mineadmin/mineadmin/tree/master/web/src/provider/echarts)
+- Local: `/Users/zhuzhu/project/mineadmin/web/src/provider/echarts/`
 
-```ts  
-// src/provider/demo/index.ts  
-import type { ProviderService } from '#/global'  
+**Key Features**:
+- On-demand chart component loading to reduce bundle size
+- Automatic adaptation to system themes (light/dark mode)
+- Global instance registration with Vue
+- Responsive chart resizing
 
-const provider: ProviderService.Provider = {  
-  // The instance name, which must be configured and unique.  
-  name: 'demoProvider',  
-  // The init method is optional.  
-  init: () => {},  
-  // Required method to set up the service.  
-  setProvider(app: App): void {  
-    app.config.globalProperties.$demo = 'Demo Service Provider'  
-  },  
-  // Required method to get the service. This is rarely used externally  
-  // since you can directly use useGlobal() to access it, but it’s defined for standardization.  
-  getProvider() {  
-    return useGlobal().$demo  
-  },  
-}  
+**Usage**:
+```ts
+// Getting ECharts instance in components
+import { useGlobal } from '@/composables/useGlobal'
 
-// Export the configuration  
-export default provider as ProviderService.Provider  
-```  
+const { $echarts } = useGlobal()
 
-## Removing a Service Provider  
+// Initializing charts
+const chartInstance = $echarts.init(chartRef.value)
+```
 
-To remove a service provider, simply delete its directory.
+Reference component: [MaEcharts](/en/front/component/ma-echarts)
+
+### Plugins Service
+
+**Description**: Provides default configuration management for MineAdmin's plugin system, supporting unified configuration and management of plugin parameters.
+
+**Source Location**:
+- GitHub: [src/provider/plugins/](https://github.com/mineadmin/mineadmin/tree/master/web/src/provider/plugins)
+- Local: `/Users/zhuzhu/project/mineadmin/web/src/provider/plugins/`
+
+**Key Features**:
+- Centralized plugin configuration management
+- Default parameter registration
+- Hot update support
+- Plugin dependency management
+
+Reference documentation: [Plugin System](/en/front/high/plugins)
+
+### MineCore Service
+
+**Description**: Initializes MineAdmin's core component library, providing global configuration and component registration services.
+
+**Source Location**:
+- GitHub: [src/provider/mine-core/](https://github.com/mineadmin/mineadmin/tree/master/web/src/provider/mine-core)
+- Local: `/Users/zhuzhu/project/mineadmin/web/src/provider/mine-core/`
+
+**Managed Components**:
+- `ma-table` - Data table component
+- `ma-search` - Search form component
+- `ma-form` - Form component
+- `ma-pro-table` - Advanced table component
+
+**Usage**:
+```ts
+import { useGlobal } from '@/composables/useGlobal'
+
+const { $mineCore } = useGlobal()
+const tableConfig = $mineCore.table
+```
+
+### Settings Service
+
+**Description**: Provides global configuration parameter management for frontend applications, supporting separate configurations for development and production environments.
+
+**Source Location**:
+- GitHub: [src/provider/settings/](https://github.com/mineadmin/mineadmin/tree/master/web/src/provider/settings)
+- Local: `/Users/zhuzhu/project/mineadmin/web/src/provider/settings/`
+
+**Configuration Files**:
+- `index.ts` - Default configuration (do not modify directly)
+- `settings.config.ts` - User custom configuration file
+
+**Configuration Example**:
+```ts
+// settings.config.ts
+export default {
+  // System basic configuration
+  app: {
+    name: 'MineAdmin',
+    version: '3.0.0',
+    logo: '/logo.png'
+  },
+  // API configuration
+  api: {
+    baseUrl: process.env.NODE_ENV === 'development' 
+      ? 'http://localhost:9501' 
+      : 'https://api.example.com',
+    timeout: 10000
+  },
+  // Theme configuration
+  theme: {
+    primaryColor: '#409eff',
+    darkMode: 'auto'
+  }
+}
+```
+
+## Development Guide
+
+### Creating a Basic Service Provider
+
+**Step 1**: Create service directory
+```bash
+mkdir src/provider/my-service
+```
+
+**Step 2**: Create service provider file (`src/provider/my-service/index.ts`)
+```ts
+import type { App } from 'vue'
+import type { ProviderService } from '#/global'
+
+// Define service interface
+interface MyService {
+  version: string
+  getName: () => string
+  setConfig: (config: any) => void
+}
+
+const provider: ProviderService.Provider<MyService> = {
+  name: 'myService',
+  
+  init() {
+    console.log('MyService initializing...')
+  },
+  
+  setProvider(app: App) {
+    const service: MyService = {
+      version: '1.0.0',
+      getName: () => 'My Custom Service',
+      setConfig: (config) => {
+        console.log('Configuration updated:', config)
+      }
+    }
+    
+    // Register to global properties
+    app.config.globalProperties.$myService = service
+    
+    // Or use provide/inject
+    app.provide('myService', service)
+  },
+  
+  getProvider() {
+    return useGlobal().$myService
+  }
+}
+
+export default provider
+```
+
+### Creating an Advanced Service Provider with Configuration
+
+```ts
+import type { App } from 'vue'
+import type { ProviderService } from '#/global'
+
+// Service configuration interface
+interface ServiceConfig {
+  apiUrl: string
+  timeout: number
+  retries: number
+}
+
+// Service instance interface
+interface AdvancedService {
+  config: ServiceConfig
+  request: (url: string) => Promise<any>
+  updateConfig: (newConfig: Partial<ServiceConfig>) => void
+}
+
+const provider: ProviderService.Provider<AdvancedService> = {
+  name: 'advancedService',
+  
+  config: {
+    enabled: true,
+    priority: 10,
+    dependencies: ['settings'] // Depends on settings service
+  },
+  
+  async init() {
+    // Asynchronous initialization logic
+    await this.loadExternalLibrary()
+  },
+  
+  setProvider(app: App) {
+    const defaultConfig: ServiceConfig = {
+      apiUrl: '/api/v1',
+      timeout: 5000,
+      retries: 3
+    }
+    
+    const service: AdvancedService = {
+      config: { ...defaultConfig },
+      
+      async request(url: string) {
+        // Implement request logic
+        return fetch(`${this.config.apiUrl}${url}`, {
+          timeout: this.config.timeout
+        })
+      },
+      
+      updateConfig(newConfig) {
+        Object.assign(this.config, newConfig)
+      }
+    }
+    
+    app.config.globalProperties.$advancedService = service
+  },
+  
+  getProvider() {
+    return useGlobal().$advancedService
+  },
+  
+  async loadExternalLibrary() {
+    // Logic for loading external dependencies
+  }
+}
+
+export default provider
+```
+
+### Using Service Providers
+
+**In Vue Components**:
+```vue
+<template>
+  <div>
+    <h3>{{ serviceName }}</h3>
+    <p>Version: {{ version }}</p>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { useGlobal } from '@/composables/useGlobal'
+
+const { $myService } = useGlobal()
+
+const serviceName = $myService.getName()
+const version = $myService.version
+
+// Update configuration
+$myService.setConfig({ theme: 'dark' })
+</script>
+```
+
+**In Composables**:
+```ts
+// composables/useMyService.ts
+import { useGlobal } from '@/composables/useGlobal'
+
+export function useMyService() {
+  const { $myService } = useGlobal()
+  
+  const updateServiceConfig = (config: any) => {
+    $myService.setConfig(config)
+  }
+  
+  return {
+    service: $myService,
+    updateServiceConfig
+  }
+}
+```
+
+## Best Practices
+
+### 1. Naming Conventions
+- Service provider names use **camelCase** format
+- Directory names use **kebab-case** format
+- Global properties use `$` prefix
+
+### 2. Type Safety
+```ts
+// Extend global property types
+declare module '@vue/runtime-core' {
+  interface ComponentCustomProperties {
+    $myService: MyService
+  }
+}
+```
+
+### 3. Dependency Management
+```ts
+const provider: ProviderService.Provider = {
+  name: 'dependentService',
+  config: {
+    dependencies: ['settings', 'dictionary']
+  },
+  // ...other configurations
+}
+```
+
+### 4. Error Handling
+```ts
+setProvider(app: App) {
+  try {
+    // Service initialization logic
+    app.config.globalProperties.$service = createService()
+  } catch (error) {
+    console.error(`Service ${this.name} initialization failed:`, error)
+    // Provide fallback solution
+    app.config.globalProperties.$service = createFallbackService()
+  }
+}
+```
+
+## Service Management
+
+### Disabling a Service Provider
+```ts
+const provider: ProviderService.Provider = {
+  name: 'optionalService',
+  config: {
+    enabled: false // Disable this service
+  },
+  // ...other configurations
+}
+```
+
+### Removing a Service Provider
+Delete the corresponding service provider directory:
+```bash
+rm -rf src/provider/unwanted-service
+```
+
+### Debugging Service Providers
+```ts
+const provider: ProviderService.Provider = {
+  name: 'debugService',
+  
+  init() {
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`[Provider] ${this.name} initialization complete`)
+    }
+  },
+  
+  setProvider(app: App) {
+    // Add debug information in development environment
+    if (process.env.NODE_ENV === 'development') {
+      window.__DEBUG_PROVIDERS__ = window.__DEBUG_PROVIDERS__ || {}
+      window.__DEBUG_PROVIDERS__[this.name] = this
+    }
+    
+    // Normal service registration logic
+  }
+}
+```
+
+## FAQ
+
+| Issue | Cause | Solution |
+|------|------|----------|
+| Service not registered | Missing `index.ts` file or unimplemented required interfaces | Check file existence and interface implementation |
+| Cannot use Pinia | Service provider initialized before Pinia | Move Pinia-related logic to components or composables |
+| Service dependency conflict | Circular dependency or incorrect dependency order | Redesign dependencies or use event bus |
+| Type inference error | Global property types not properly extended | Add TypeScript module declaration |
+| Hot reload not working | Service caching issue | Restart development server |
+
+## Related Resources
+
+**Source Code References**:
+- GitHub Repository: [MineAdmin Source Code](https://github.com/mineadmin/mineadmin)
+- Service Providers Directory: [web/src/provider/](https://github.com/mineadmin/mineadmin/tree/master/web/src/provider)
+- Local Source Code: `/Users/zhuzhu/project/mineadmin/web/src/provider/`
+
+**Related Documentation**:
+- [Plugin System](/en/front/high/plugins)
+- [MaEcharts Component](/en/front/component/ma-echarts)

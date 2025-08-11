@@ -1,7 +1,7 @@
 # ツールバー拡張
 
 :::tip ヒント
-右上隅の一連のアイコンボタンがツールバーです。システムはツールバーを拡張するためのインターフェースを提供しています。ツールバーシステムはコンポーネントベースのアーキテクチャを採用しており、各種ツールの動的な追加、削除、管理をサポートしています。
+右上隅の一連のアイコンボタンがツールバーです。システムはツールバーを拡張するためのインターフェースを提供しています。ツールバーシステムはコンポーネントベースのアーキテクチャで、各種ツールの動的な追加、削除、管理をサポートしています。
 :::
 
 ![ツールバー](https://s21.ax1x.com/2024/10/24/pAwKsvq.jpg)
@@ -54,7 +54,7 @@ import type { App } from 'vue'
 import type { MineToolbarExpose } from '#/global'
 
 /**
- * システムプラグイン `install` メソッド。外部からVueインスタンスが渡され、toolbarを取得
+ * システムプラグイン `install` メソッド、外部からVueインスタンスが渡され、toolbarを取得
  * 参考: web/src/plugins/mine-admin/demo/index.ts
  **/
 function install(app: App) {
@@ -75,10 +75,10 @@ interface MineToolbarExpose {
   state: Ref<boolean>                    // ツールバー状態
   defaultToolbars: Ref<MineToolbar[]>    // デフォルトツールバーリスト
   toolbars: Ref<MineToolbar[]>          // 現在のツールバーリスト
-  getShowToolbar: () => MineToolbar[]   // 表示中のツールバーを取得
-  add: (toolbar: MineToolbar) => void   // ツールバーを追加
-  remove: (name: string) => void        // ツールバーを削除
-  render: () => Promise<any[]>          // ツールバーをレンダリング
+  getShowToolbar: () => MineToolbar[]   // 表示中のツールバー取得
+  add: (toolbar: MineToolbar) => void   // ツールバー追加
+  remove: (name: string) => void        // ツールバー削除
+  render: () => Promise<any[]>          // ツールバーレンダリング
 }
 ```
 
@@ -89,7 +89,7 @@ interface MineToolbarExpose {
 | `state` | `Ref<boolean>` | ツールバー全体の表示状態 | `boolean` |
 | `defaultToolbars` | `Ref<MineToolbar[]>` | システムデフォルトツールバー（読み取り専用） | `MineToolbar[]` |
 | `toolbars` | `Ref<MineToolbar[]>` | 現在登録されている全てのツールバー | `MineToolbar[]` |
-| `getShowToolbar()` | `Function` | 現在有効かつ表示中のツールバーを取得 | `MineToolbar[]` |
+| `getShowToolbar()` | `Function` | 現在有効で表示中のツールバーを取得 | `MineToolbar[]` |
 | `add(toolbar)` | `Function` | ツールバーに新規ツールを登録 | `void` |
 | `remove(name)` | `Function` | 指定名称のツールバーを削除 | `void` |
 | `render()` | `Function` | ツールバーコンポーネントをレンダリング（内部使用） | `Promise<any[]>` |
@@ -102,7 +102,7 @@ interface MineToolbarExpose {
 interface MineToolbar {
   name: string                          // ツール一意識別子
   icon: string                          // アイコン名（複数アイコンライブラリ対応）
-  title: string | (() => string)        // ツールタイトル、関数による動的返却可能
+  title: string | (() => string)        // ツールチップテキスト、関数で動的返却可能
   show: boolean                         // 当該ツールを表示するか
   className?: string | (() => string)   // カスタムCSSクラス名
   component?: () => any                 // カスタムコンポーネント（handleと排他）
@@ -113,42 +113,42 @@ interface MineToolbar {
 ### 属性説明
 
 - **name**: ツールの一意識別、管理用
-- **icon**: アイコン名、heroicons、mingcute等のアイコンライブラリをサポート
+- **icon**: アイコン名、heroicons、mingcuteなどのアイコンライブラリ対応
 - **title**: ツールチップテキスト、国際化関数対応
-- **show**: ツールバー内での表示制御
+- **show**: ツールバーにツールを表示するか制御
 - **className**: オプションのCSSクラス名、カスタムスタイル用
-- **component**: 複雑なツール実装用のカスタムVueコンポーネント
-- **handle**: 簡易クリック処理関数、クイック機能実装用
+- **component**: カスタムVueコンポーネント、複雑なツール実装用
+- **handle**: シンプルなクリック処理関数、簡易機能実装用
 
 :::warning 注意
-`handle` と `component` 属性は排他的です。両方定義された場合、`handle` が優先され、`component` は無視されます。
+`handle` と `component` 属性は排他的です。両方定義した場合、`handle` が優先され、`component` は無視されます。
 :::
 
 ## ツールバー拡張
 
-### 簡易ツール拡張
+### シンプルツール拡張
 
-クリックイベント付きの簡易ツールを追加：
+シンプルなクリックイベント付きツールを追加：
 
 ```ts
 const toolbar = useGlobal().$toolbars
 
-// 簡易アラートツールを追加
+// シンプルなアラートツールを追加
 toolbar.add({
   name: 'simple-alert',
-  title: '簡易アラート',
+  title: 'シンプルアラート',
   show: true,
   icon: 'heroicons:information-circle',
   handle: (toolbar) => {
-    console.log('ツールがクリックされました:', toolbar.name)
-    alert('これは簡易ツール拡張です！')
+    console.log('ツールをクリック:', toolbar.name)
+    alert('これはシンプルなツール拡張です！')
   }
 })
 ```
 
 ### コンポーネント化ツール拡張
 
-カスタムコンポーネントを使用した複雑なツールを追加：
+カスタムコンポーネントを使用する複雑なツールを追加：
 
 ```ts
 const toolbar = useGlobal().$toolbars
@@ -159,14 +159,14 @@ toolbar.add({
   title: 'カスタムコンポーネント',
   show: true,
   icon: 'heroicons:puzzle-piece',
-  // 注意：component使用時はhandleを定義しない
+  // 注意：component 使用時は handle を定義しない
   component: () => import('@/components/custom-toolbar-item.vue')
 })
 ```
 
-### 動的ツールバー
+### ダイナミックツールバー
 
-条件に基づき動的にツールを表示：
+条件に基づいてツールを動的に表示：
 
 ```ts
 const toolbar = useGlobal().$toolbars
@@ -192,7 +192,7 @@ toolbar.add({
 
 ### プラグイン内のツールバー拡張
 
-プラグイン開発でのツールバー拡張（参考：[`web/src/plugins/mine-admin/demo/index.ts#L19-26`](https://github.com/mineadmin/mineadmin/blob/master/web/src/plugins/mine-admin/demo/index.ts#L19-26)）：
+プラグイン開発でツールバーを拡張（参考：[`web/src/plugins/mine-admin/demo/index.ts#L19-26`](https://github.com/mineadmin/mineadmin/blob/master/web/src/plugins/mine-admin/demo/index.ts#L19-26)）：
 
 ```ts
 import type { Plugin, MineToolbarExpose } from '#/global'
@@ -202,7 +202,7 @@ const pluginConfig: Plugin.PluginConfig = {
   install(app) {
     const $toolbars = app.config.globalProperties.$toolbars as MineToolbarExpose
     
-    // プラグイン拡張ツールバー
+    // プラグイン拡張のツールバー
     $toolbars.add({
       name: 'plugin-demo',
       title: 'プラグインデモ',
@@ -227,13 +227,13 @@ const toolbar = useGlobal().$toolbars
 toolbar.remove('test')
 ```
 
-### 一括ツール削除
+### バッチツール削除
 
 ```ts
 const toolbar = useGlobal().$toolbars
 const toolsToRemove = ['tool1', 'tool2', 'tool3']
 
-// 一括削除
+// バッチ削除
 toolsToRemove.forEach(name => {
   toolbar.remove(name)
 })
@@ -243,7 +243,7 @@ toolsToRemove.forEach(name => {
 
 ### 命名規則
 
-- 意味のある名称を使用：`user-profile` ではなく `tool1`
+- 意味のある名前を使用：`user-profile` ではなく `tool1`
 - ハイフン区切りを使用：`admin-panel` ではなく `adminPanel`
 - システムデフォルトツールとの重複を避ける
 
@@ -257,12 +257,12 @@ toolsToRemove.forEach(name => {
 ### パフォーマンス考慮
 
 - `component` 使用時、動的インポートでコード分割を活用
-- `handle` 関数内での重い処理を避ける
+- `handle` 関数で重い処理を実行しない
 - `show` 属性を適切に設定し、不要なレンダリングを削減
 
 ### ユーザーエクスペリエンス
 
-- 機能を明確に説明する `title` を提供
+- 明確な `title` で機能を説明
 - 一貫したアイコンスタイルを使用
 - 異なる権限ユーザーの使用シナリオを考慮
 
@@ -283,14 +283,14 @@ toolsToRemove.forEach(name => {
 
 **A**: ブラウザ開発者ツールで：
 ```js
-// 現在の全ツールバーを表示
+// 現在の全てのツールバーを表示
 console.log(window.__vue_app__.config.globalProperties.$toolbars.toolbars.value)
 
 // 表示中のツールバーを表示
 console.log(window.__vue_app__.config.globalProperties.$toolbars.getShowToolbar())
 ```
 
-### Q: ツールバーの権限制御？
+### Q: ツールバー権限制御？
 
 **A**: `show` 属性と権限システムを活用：
 ```ts

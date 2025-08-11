@@ -1,13 +1,13 @@
 # Hooks
 
-MineAdmin は、Vue 3 コンポーネントでコードを簡単に再利用できるように、一般的な機能とロジックをカプセル化した強力なカスタム Hooks を提供しています。このドキュメントでは、各 Hook の使用方法、パラメータ、戻り値、および実際のアプリケーションシナリオについて詳しく説明します。
+MineAdmin は、一連の強力なカスタム Hooks を提供しています。これらの Hooks は、よく使われる機能とロジックをカプセル化しており、開発者が Vue 3 コンポーネントでコードを簡単に再利用できるようにします。このドキュメントでは、各 Hook の使用方法、パラメータ、戻り値、および実際の適用シナリオについて詳しく説明します。
 
 ## useCache()
 
-ブラウザのキャッシュ操作に使用する Hook で、localStorage と sessionStorage をサポートし、有効期限設定機能を提供します。
+ブラウザのキャッシュ操作に使用する Hook で、localStorage と sessionStorage をサポートし、有効期限の設定機能を提供します。
 
-**ソースパス:** `/web/src/hooks/useCache.ts`  
-**GitHub リンク:** [ソースを表示](https://github.com/mineadmin/mineadmin/blob/master/web/src/hooks/useCache.ts)
+**ソースコードパス:** `/web/src/hooks/useCache.ts`  
+**GitHub リンク:** [ソースコードを表示](https://github.com/mineadmin/mineadmin/blob/master/web/src/hooks/useCache.ts)
 
 ### 型定義
 
@@ -17,12 +17,12 @@ export type CacheType = 'localStorage' | 'sessionStorage'
 export interface CacheOptions {
   /**
    * タイムアウト時間（秒）。
-   * デフォルトは無制限。
+   * デフォルトは無限。
    */
   exp?: number
 
   /**
-   * trueの場合：最大容量を超えてデータを挿入できない場合、キャッシュ内の期限切れコンテンツをクリアしてからデータ挿入操作を再試行します。
+   * trueの場合：最大容量を超えてデータ挿入操作が続けられない場合、キャッシュ内のタイムアウト済みコンテンツをクリアしてからデータ挿入操作を試みます。
    * デフォルトはtrue。
    */
   force?: boolean
@@ -33,7 +33,7 @@ export interface CacheOptions {
 
 | パラメータ | タイプ | デフォルト値 | 説明 |
 |------|------|--------|------|
-| type | CacheType | 'localStorage' | キャッシュタイプ。'localStorage' または 'sessionStorage' を選択可能 |
+| type | CacheType | 'localStorage' | キャッシュタイプ。localStorage または sessionStorage を選択可能 |
 
 ### 戻り値
 
@@ -77,7 +77,7 @@ removeAllExpires()
 touch('userInfo', 60)
 ```
 
-### 実際のアプリケーションシナリオ
+### 実際の適用シナリオ
 
 ```typescript
 // ユーザーログインコンポーネントで使用
@@ -96,10 +96,10 @@ const getUserInfo = () => {
 
 ## useDialog()
 
-ダイアログを作成するための Hook で、完全なダイアログライフサイクル管理を提供し、カスタムタイトル、プロパティ、およびイベントコールバックをサポートします。
+ダイアログ作成に使用する Hook で、完全なダイアログライフサイクル管理を提供し、カスタムタイトル、プロパティ、およびイベントコールバックをサポートします。
 
-**ソースパス:** `/web/src/hooks/useDialog.ts`  
-**GitHub リンク:** [ソースを表示](https://github.com/mineadmin/mineadmin/blob/master/web/src/hooks/useDialog.ts)
+**ソースコードパス:** `/web/src/hooks/useDialog.ts`  
+**GitHub リンク:** [ソースコードを表示](https://github.com/mineadmin/mineadmin/blob/master/web/src/hooks/useDialog.ts)
 
 ### 型定義
 
@@ -131,8 +131,8 @@ export interface UseDialogExpose {
 | Dialog | Component | ダイアログコンポーネント |
 | open | Function | ダイアログを開く |
 | close | Function | ダイアログを閉じる |
-| setTitle | Function | ダイアログタイトルを設定 |
-| setAttr | Function | ダイアログプロパティを設定 |
+| setTitle | Function | ダイアログのタイトルを設定 |
+| setAttr | Function | ダイアログのプロパティを設定 |
 
 ### 使用例
 
@@ -175,7 +175,7 @@ export default defineComponent({
       <div>
         <el-button onClick={this.openDialog}>ダイアログを開く</el-button>
         <Dialog title="デフォルトタイトル">
-          <div>ここにダイアログコンテンツ</div>
+          <div>ここにダイアログの内容</div>
         </Dialog>
       </div>
     )
@@ -183,14 +183,14 @@ export default defineComponent({
 })
 ```
 
-### 実際のアプリケーションシナリオ
+### 実際の適用シナリオ
 
 ```vue
 <template>
   <div>
     <el-button @click="editUser">ユーザーを編集</el-button>
     <Dialog>
-      <div>ユーザー編集フォームコンテンツ</div>
+      <div>ユーザー編集フォームの内容</div>
     </Dialog>
   </div>
 </template>
@@ -235,8 +235,8 @@ on.ok = () => {
 
 ECharts ライブラリを統合するための Hook で、テーマ切り替えとチャート初期化機能を提供します。
 
-**ソースパス:** `/web/src/hooks/useEcharts.ts`  
-**GitHub リンク:** [ソースを表示](https://github.com/mineadmin/mineadmin/blob/master/web/src/hooks/useEcharts.ts)
+**ソースコードパス:** `/web/src/hooks/useEcharts.ts`  
+**GitHub リンク:** [ソースコードを表示](https://github.com/mineadmin/mineadmin/blob/master/web/src/hooks/useEcharts.ts)
 
 ### エクスポート関数
 
@@ -285,7 +285,7 @@ export default defineComponent({
 })
 ```
 
-### 実際のアプリケーションシナリオ
+### 実際の適用シナリオ
 
 ```vue
 <template>
@@ -332,10 +332,10 @@ onMounted(async () => {
 
 ## useForm()
 
-フォーム操作のための Hook で、フォームインスタンスの取得と操作機能を提供します。
+フォーム操作に使用する Hook で、フォームインスタンスの取得と操作機能を提供します。
 
-**ソースパス:** `/web/src/hooks/useForm.ts`  
-**GitHub リンク:** [ソースを表示](https://github.com/mineadmin/mineadmin/blob/master/web/src/hooks/useForm.ts)
+**ソースコードパス:** `/web/src/hooks/useForm.ts`  
+**GitHub リンク:** [ソースコードを表示](https://github.com/mineadmin/mineadmin/blob/master/web/src/hooks/useForm.ts)
 
 ### パラメータ
 
@@ -379,11 +379,11 @@ export default defineComponent({
 })
 ```
 
-### 実際のアプリケーションシナリオ
+### 実際の適用シナリオ
 
 ```vue
 <template>
-  <div>フォームコンテンツ</div>
+  <div>フォーム内容</div>
   <el-button @click="handleSubmit">送信</el-button>
 </template>
 
@@ -423,10 +423,10 @@ const handleSubmit = async () => {
 
 ## useTable()
 
-テーブル操作のための Hook で、テーブルインスタンスの取得と操作機能を提供します。
+テーブル操作に使用する Hook で、テーブルインスタンスの取得と操作機能を提供します。
 
-**ソースパス:** `/web/src/hooks/useTable.ts`  
-**GitHub リンク:** [ソースを表示](https://github.com/mineadmin/mineadmin/blob/master/web/src/hooks/useTable.ts)
+**ソースコードパス:** `/web/src/hooks/useTable.ts`  
+**GitHub リンク:** [ソースコードを表示](https://github.com/mineadmin/mineadmin/blob/master/web/src/hooks/useTable.ts)
 
 ### パラメータ
 
@@ -469,14 +469,14 @@ export default defineComponent({
 })
 ```
 
-### 実際のアプリケーションシナリオ
+### 実際の適用シナリオ
 
 ```vue
 <template>
   <div>
     <el-button @click="refreshTable">更新</el-button>
     <el-button @click="deleteSelected">選択を削除</el-button>
-    <div>テーブルコンテンツ</div>
+    <div>テーブル内容</div>
   </div>
 </template>
 
@@ -515,7 +515,7 @@ const deleteSelected = async () => {
     const ids = selectedRows.map(row => row.id)
     await deleteUsers(ids)
     
-    // テーブルを更新して選択をクリア
+    // テーブルを更新し、選択をクリア
     await tableInstance.refresh()
     tableInstance.clearSelection()
     
@@ -529,10 +529,10 @@ const deleteSelected = async () => {
 
 ## useLocalTrans()
 
-ローカライゼーション翻訳のための Hook で、vue-i18n に基づく翻訳機能を提供します。
+ローカライゼーション翻訳に使用する Hook で、vue-i18n ベースの翻訳機能を提供します。
 
-**ソースパス:** `/web/src/hooks/useLocalTrans.ts`  
-**GitHub リンク:** [ソースを表示](https://github.com/mineadmin/mineadmin/blob/master/web/src/hooks/useLocalTrans.ts)
+**ソースコードパス:** `/web/src/hooks/useLocalTrans.ts`  
+**GitHub リンク:** [ソースコードを表示](https://github.com/mineadmin/mineadmin/blob/master/web/src/hooks/useLocalTrans.ts)
 
 ### パラメータ
 
@@ -571,4 +571,4 @@ export default defineComponent({
       <div>
         <h1>{this.title}</h1>
         <p>{this.message}</p>
-        <p>{this.t("user.description")}</p
+       

@@ -30,9 +30,9 @@ MineAdmin is an enterprise-level backend management system based on the Hyperf f
 - **Docker Compose**: ≥ 2.0
 
 ::: tip Environment Selection Advice
-- **Beginner Users**: Recommended to use Docker Compose for simpler environment setup
-- **Developers**: Can choose between local environment or Docker environment as needed
-- **Production Environment**: Recommended to use Docker for deployment
+- **New Users**: Recommended to use Docker Compose for simpler environment setup
+- **Developers**: Can choose between local or Docker environment as needed
+- **Production Environment**: Recommended to deploy using Docker
 :::
 
 ## Installation Method Selection
@@ -41,8 +41,8 @@ Choose the appropriate installation method based on your use case:
 
 | Use Case | Recommended Method | Advantages | Target Users |
 |---------|---------|------|---------|
-| Quick Experience/Learning | Docker Compose | One-click deployment, isolated environment | Beginners |
-| Development/Debugging | Local Environment | High flexibility, easy debugging | Developers |
+| Quick Trial/Learning | Docker Compose | One-click deployment, isolated environment | Beginners |
+| Development Debugging | Local Environment | High flexibility, easy debugging | Developers |
 | Production Deployment | Docker Build | Customizable, easily scalable | Operations Staff |
 
 ## Quick Start
@@ -54,7 +54,7 @@ Choose the appropriate installation method based on your use case:
 Ensure you have [Git](https://git-scm.com/) installed, then execute the following command:
 
 ```bash
-# Clone main branch (standard version)
+# Clone the main branch (standard version)
 git clone https://github.com/mineadmin/MineAdmin.git
 
 # Or clone to a specified directory
@@ -63,29 +63,29 @@ git clone https://github.com/mineadmin/MineAdmin.git your-project-name
 
 #### Branch Selection Guide
 
-MineAdmin provides two main branches. Choose according to your needs:
+MineAdmin offers two main branches. Choose according to your needs:
 
 | Branch Name | Feature Description | Use Case |
 |---------|---------|---------|
 | `master` | Standard version with core features | Most application scenarios |
-| `master-department` | Enhanced version with department management, position management, data permissions, etc. | Enterprise applications requiring complex permission management |
+| `master-department` | Enhanced version with department management, position management, data permissions, and other advanced features | Enterprise applications requiring complex permission management |
 
 ```bash
-# Switch to enhanced version branch
+# Switch to the enhanced version branch
 git checkout master-department
 ```
 
 ::: warning Important Reminder
-Determine your required branch before starting the project to avoid unnecessary migration efforts later. The two branches differ in database structure and functionality.
+Determine the required branch before starting the project to avoid unnecessary migration issues later. The database structures and features differ between the two branches.
 :::
 
 #### Basic Configuration After Download
 
 ```bash
-# Enter project directory
+# Enter the project directory
 cd MineAdmin  # or your-project-name
 
-# Copy environment configuration file
+# Copy the environment configuration file
 cp .env.example .env
 ```
 
@@ -94,12 +94,12 @@ cp .env.example .env
 Open the `.env` file and configure the following key parameters:
 
 ```ini
-# Application configuration
+# Application Configuration
 APP_NAME=MineAdmin
 APP_ENV=local
 APP_DEBUG=true
 
-# Database configuration
+# Database Configuration
 DB_DRIVER=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -109,17 +109,17 @@ DB_PASSWORD=your_password
 DB_CHARSET=utf8mb4
 DB_COLLATION=utf8mb4_unicode_ci
 
-# Redis configuration
+# Redis Configuration
 REDIS_HOST=127.0.0.1
 REDIS_AUTH=
 REDIS_PORT=6379
 REDIS_DB=0
 
-# JWT configuration (requires manual generation)
+# JWT Configuration (needs to be manually generated)
 JWT_SECRET=your_jwt_secret_key
 ```
 
-::: tip Configuration Suggestions
+::: tip Configuration Advice
 - For production environments, always set `APP_DEBUG=false`
 - Use strong passwords and change database passwords regularly
 - JWT_SECRET should be a randomly generated complex string
@@ -129,11 +129,11 @@ JWT_SECRET=your_jwt_secret_key
 
 ### Method 1: Docker Compose Installation (Recommended for Beginners)
 
-The simplest installation method, ideal for quick experience and development environments.
+This is the simplest installation method, ideal for quick trials and development environments.
 
 #### Advantages
-- Isolated environment, doesn't pollute the host machine
-- One-click startup for all services
+- Environment isolation, no pollution to the host machine
+- One-click start for all services
 - Unified versions, avoiding environment discrepancies
 
 #### Installation Steps
@@ -148,22 +148,22 @@ docker-compose up -d
 docker-compose ps
 ```
 
-2. **Wait for Services to Initialize**
+2. **Wait for Services to Be Ready**
 
-The first startup requires downloading images. Be patient. You can view logs with:
+The first startup requires downloading images. Please be patient. You can check the logs with:
 
 ```bash
-# View all service logs
+# View logs for all services
 docker-compose logs -f
 
-# View specific service logs
+# View logs for a specific service
 docker-compose logs -f mineadmin
 ```
 
-3. **Enter Container for Initialization**
+3. **Enter Container to Perform Initialization**
 
 ```bash
-# Enter application container
+# Enter the application container
 docker-compose exec mineadmin bash
 
 # Install backend dependencies
@@ -176,15 +176,15 @@ php bin/hyperf.php migrate
 php bin/hyperf.php db:seed
 ```
 
-### Method 2: Docker Custom Build
+### Method 2: Docker Self-Build
 
 Suitable for advanced users needing custom images.
 
 ```bash
-# Build image
+# Build the image
 docker build -t mineadmin:latest .
 
-# Start container
+# Start the container
 docker run -d \
   --name mineadmin \
   -p 9501:9501 \
@@ -203,7 +203,7 @@ Suitable for developers needing in-depth development and debugging.
 
 #### Prerequisite Checks
 
-Before starting installation, verify environment requirements:
+Before starting the installation, confirm that the environment meets the requirements:
 
 ```bash
 # Check PHP version
@@ -258,27 +258,27 @@ php bin/hyperf.php start
 
 1. **Environment Preparation**
 
-Recommended to use [nvm](https://github.com/nvm-sh/nvm) for Node.js version management:
+Recommended to use [nvm](https://github.com/nvm-sh/nvm) to manage Node.js versions:
 
 ```bash
-# Install and use recommended Node.js version
+# Install and use the recommended Node.js version
 nvm install 18
 nvm use 18
 
-# Global pnpm installation (if not already installed)
+# Globally install pnpm (if not already installed)
 npm install -g pnpm
 ```
 
 2. **Install Frontend Dependencies**
 
 ```bash
-# Enter frontend directory
+# Enter the frontend directory
 cd web
 
 # Install dependencies
 pnpm install
 
-# Start development server
+# Start the development server
 pnpm dev
 ```
 
@@ -315,22 +315,22 @@ php bin/hyperf.php db:show
 
 ### Login to System
 
-After installation, use the following default credentials to log in:
+After installation, use the following default account to log in:
 
 - **Admin Account**: admin
 - **Default Password**: 123456
 
 ::: warning Security Reminder
-Change the default password immediately after first login to ensure system security.
+Change the default password immediately after the first login to ensure system security.
 :::
 
-## Common Issues & Solutions
+## Common Issue Resolution
 
-### Common Installation Errors
+### Common Errors During Installation
 
 #### 1. Composer Dependency Installation Failure
 
-**Error Message**:
+**Error**:
 ```
 Your requirements could not be resolved to an installable set of packages.
 ```
@@ -340,7 +340,7 @@ Your requirements could not be resolved to an installable set of packages.
 # Clear Composer cache
 composer clear-cache
 
-# Update Composer to latest version
+# Update Composer to the latest version
 composer self-update
 
 # Reinstall
@@ -349,13 +349,13 @@ composer install --ignore-platform-reqs
 
 #### 2. Database Connection Failure
 
-**Error Message**:
+**Error**:
 ```
 SQLSTATE[HY000] [2002] Connection refused
 ```
 
 **Solution**:
-1. Check if database service is running
+1. Check if the database service is running
 2. Verify database configuration in `.env` file
 3. Confirm database user permissions
 
@@ -366,7 +366,7 @@ mysql -h 127.0.0.1 -P 3306 -u root -p
 
 #### 3. Redis Connection Failure
 
-**Error Message**:
+**Error**:
 ```
 Connection refused [tcp://127.0.0.1:6379]
 ```
@@ -399,9 +399,9 @@ npm install -g cnpm --registry=https://registry.npmmirror.com
 cnpm install
 ```
 
-#### 5. Port Conflicts
+#### 5. Port Occupancy Issue
 
-**Check Port Usage**:
+**Check Port Occupancy**:
 ```bash
 # Check port 9501 (backend)
 lsof -i :9501
@@ -413,8 +413,8 @@ netstat -tulpn | grep :3000
 ```
 
 **Solution**:
-- Stop processes occupying the ports
-- Or modify configuration to use different ports
+- Stop the process occupying the port
+- Or modify the configuration file to use another port
 
 ### Performance Optimization Suggestions
 

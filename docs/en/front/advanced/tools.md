@@ -1,7 +1,7 @@
 # Toolbar Extension
 
 :::tip Note
-The row of icon buttons in the upper right corner is the toolbar. The system provides interfaces for extending the toolbar. The toolbar system is based on a componentized architecture, supporting dynamic addition, removal, and management of various tools.
+The row of icon buttons in the upper right corner constitutes the toolbar. The system provides an interface for extending the toolbar. The toolbar system is based on a componentized architecture, supporting dynamic addition, removal, and management of various tools.
 :::
 
 ![Toolbar](https://s21.ax1x.com/2024/10/24/pAwKsvq.jpg)
@@ -22,18 +22,18 @@ The system includes the following default toolbar items:
 | Tool Name | Description | Icon | Component Location |
 |---------|---------|------|----------|
 | search | Global Search | `heroicons:magnifying-glass-20-solid` | `@/layouts/components/bars/toolbar/components/search.tsx` |
-| notification | Notifications | `heroicons:bell` | `@/layouts/components/bars/toolbar/components/notification.tsx` |
+| notification | Message Notifications | `heroicons:bell` | `@/layouts/components/bars/toolbar/components/notification.tsx` |
 | translate | Language Switch | `heroicons:language-20-solid` | `@/layouts/components/bars/toolbar/components/translate.tsx` |
 | fullscreen | Fullscreen Toggle | `mingcute:fullscreen-line` | `@/layouts/components/bars/toolbar/components/fullscreen.tsx` |
 | switchMode | Theme Switch | `lets-icons:color-mode-light` | `@/layouts/components/bars/toolbar/components/switch-mode.tsx` |
 | settings | System Settings | `heroicons:cog-solid` | `@/layouts/components/bars/toolbar/components/settings.tsx` |
 
-## Getting Toolbar Instance
+## Obtaining Toolbar Instance
 
 ::: code-group
 
-```vue [useGlobal() Method]
-<!-- Access method within `setup()` lifecycle or code that can obtain Vue context -->
+```vue [via useGlobal()]
+<!-- How to obtain within `setup()` lifecycle or code that can access Vue context -->
 <script setup lang="ts">
 import { useGlobal } from '@/hooks/useGlobal'
 
@@ -41,20 +41,20 @@ const toolbar = useGlobal().$toolbars
 </script>
 ```
 
-```ts [Via Vue Instance]
+```ts [via Vue Instance]
 import { getCurrentInstance } from 'vue'
 
-// Get through current instance
+// Obtain through current instance
 const { appContext } = getCurrentInstance()
 const toolbar = appContext.config.globalProperties.$toolbars
 ```
 
-```ts [Plugin Access Method]
+```ts [Obtaining in Plugins]
 import type { App } from 'vue'
 import type { MineToolbarExpose } from '#/global'
 
 /**
- * System plugin `install` method, Vue instance will be passed externally to get toolbar
+ * System plugin `install` method, where the Vue instance is passed externally to obtain toolbar
  * Reference: web/src/plugins/mine-admin/demo/index.ts
  **/
 function install(app: App) {
@@ -68,14 +68,14 @@ function install(app: App) {
 
 ### MineToolbarExpose Type
 
-Complete toolbar API interface definition (Source: [`web/types/global.d.ts#L329-336`](https://github.com/mineadmin/mineadmin/blob/master/web/types/global.d.ts#L329-336)):
+Complete toolbar API interface definition (source: [`web/types/global.d.ts#L329-336`](https://github.com/mineadmin/mineadmin/blob/master/web/types/global.d.ts#L329-336)):
 
 ```ts
 interface MineToolbarExpose {
   state: Ref<boolean>                    // Toolbar state
   defaultToolbars: Ref<MineToolbar[]>    // Default toolbar list (read-only)
   toolbars: Ref<MineToolbar[]>          // Current toolbar list
-  getShowToolbar: () => MineToolbar[]   // Get displayed toolbars
+  getShowToolbar: () => MineToolbar[]   // Get visible toolbars
   add: (toolbar: MineToolbar) => void   // Add toolbar
   remove: (name: string) => void        // Remove toolbar
   render: () => Promise<any[]>          // Render toolbar (internal use)
@@ -88,22 +88,22 @@ interface MineToolbarExpose {
 |-----|------|------|--------|
 | `state` | `Ref<boolean>` | Overall toolbar visibility state | `boolean` |
 | `defaultToolbars` | `Ref<MineToolbar[]>` | System default toolbars (read-only) | `MineToolbar[]` |
-| `toolbars` | `Ref<MineToolbar[]>` | All currently registered toolbars | `MineToolbar[]` |
+| `toolbars` | `Ref<MineToolbar[]>` | Currently registered toolbars | `MineToolbar[]` |
 | `getShowToolbar()` | `Function` | Get currently enabled and visible toolbars | `MineToolbar[]` |
-| `add(toolbar)` | `Function` | Register new toolbar item | `void` |
+| `add(toolbar)` | `Function` | Register new tool to toolbar | `void` |
 | `remove(name)` | `Function` | Remove toolbar by name | `void` |
 | `render()` | `Function` | Render toolbar components (internal use) | `Promise<any[]>` |
 
 ## MineToolbar Type Definition
 
-Complete toolbar item type definition (Source: [`web/types/global.d.ts#L319-327`](https://github.com/mineadmin/mineadmin/blob/master/web/types/global.d.ts#L319-327)):
+Complete toolbar item type definition (source: [`web/types/global.d.ts#L319-327`](https://github.com/mineadmin/mineadmin/blob/master/web/types/global.d.ts#L319-327)):
 
 ```ts
 interface MineToolbar {
-  name: string                          // Unique identifier
+  name: string                          // Unique tool identifier
   icon: string                          // Icon name (supports multiple icon libraries)
   title: string | (() => string)        // Tooltip text, supports dynamic function return
-  show: boolean                         // Whether to display the tool
+  show: boolean                         // Whether to display this tool
   className?: string | (() => string)   // Custom CSS class
   component?: () => any                 // Custom component (mutually exclusive with handle)
   handle?: (toolbar: MineToolbar) => any // Click handler (mutually exclusive with component)
@@ -112,19 +112,19 @@ interface MineToolbar {
 
 ### Property Explanation
 
-- **name**: Unique identifier for the tool
+- **name**: Unique identifier for tool management
 - **icon**: Icon name, supports heroicons, mingcute and other icon libraries
 - **title**: Tooltip text, supports i18n functions
-- **show**: Controls whether the tool is displayed
+- **show**: Controls tool visibility in toolbar
 - **className**: Optional CSS class for custom styling
 - **component**: Custom Vue component for complex tool implementations
 - **handle**: Simple click handler for quick functionality
 
 :::warning Note
-The `handle` and `component` properties are mutually exclusive. If both are defined, `handle` takes precedence and `component` will be ignored.
+`handle` and `component` properties are mutually exclusive. If both are defined, `handle` takes precedence and `component` will be ignored.
 :::
 
-## Extending the Toolbar
+## Extending Toolbar
 
 ### Simple Tool Extension
 
@@ -146,7 +146,7 @@ toolbar.add({
 })
 ```
 
-### Component-Based Tool Extension
+### Component-based Tool Extension
 
 Add a complex tool using custom component:
 
@@ -159,14 +159,14 @@ toolbar.add({
   title: 'Custom Component',
   show: true,
   icon: 'heroicons:puzzle-piece',
-  // Note: Do not define handle when using component
+  // Note: When using component, do not define handle
   component: () => import('@/components/custom-toolbar-item.vue')
 })
 ```
 
 ### Dynamic Toolbar
 
-Show tools conditionally:
+Dynamically display tools based on conditions:
 
 ```ts
 const toolbar = useGlobal().$toolbars
@@ -184,7 +184,7 @@ toolbar.add({
       // Open admin panel
       router.push('/admin/panel')
     } else {
-      message.warning('You don't have admin privileges')
+      message.warning('You lack admin permissions')
     }
   }
 })
@@ -192,7 +192,7 @@ toolbar.add({
 
 ### Toolbar Extension in Plugins
 
-Extend toolbar in plugin development (Reference: [`web/src/plugins/mine-admin/demo/index.ts#L19-26`](https://github.com/mineadmin/mineadmin/blob/master/web/src/plugins/mine-admin/demo/index.ts#L19-26)):
+Extending toolbar in plugin development (reference: [`web/src/plugins/mine-admin/demo/index.ts#L19-26`](https://github.com/mineadmin/mineadmin/blob/master/web/src/plugins/mine-admin/demo/index.ts#L19-26)):
 
 ```ts
 import type { Plugin, MineToolbarExpose } from '#/global'
@@ -208,7 +208,7 @@ const pluginConfig: Plugin.PluginConfig = {
       title: 'Plugin Demo',
       show: true,
       icon: 'heroicons:archive-box',
-      handle: () => Message.info('I am a toolbar extended in a plugin!')
+      handle: () => Message.info('I am a toolbar extended in plugin!')
     })
   }
 }
@@ -264,9 +264,9 @@ System supports multiple icon libraries, recommended:
 
 - Provide clear `title` describing tool functionality
 - Use consistent icon styles
-- Consider different permission scenarios
+- Consider usage scenarios for different permission levels
 
-## Frequently Asked Questions
+## FAQ
 
 ### Q: Toolbar not showing?
 
@@ -286,20 +286,20 @@ System supports multiple icon libraries, recommended:
 // View all current toolbars
 console.log(window.__vue_app__.config.globalProperties.$toolbars.toolbars.value)
 
-// View displayed toolbars
+// View visible toolbars
 console.log(window.__vue_app__.config.globalProperties.$toolbars.getShowToolbar())
 ```
 
 ### Q: Toolbar permission control?
 
-**A**: Use `show` property with permission system:
+**A**: Utilize `show` property with permission system:
 ```ts
 const userStore = useUserStore()
 
 toolbar.add({
   name: 'admin-only',
   title: 'Admin Feature',
-  show: userStore.hasRole('admin'), // Permission-based display
+  show: userStore.hasRole('admin'), // Display based on permission
   icon: 'heroicons:shield-check',
   handle: () => { /* Admin feature */ }
 })
