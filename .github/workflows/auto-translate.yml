@@ -94,7 +94,6 @@ jobs:
           php bin/doc-translate
 
       - name: Start AI Translate (EN, JA)
-        if: steps.changed-markdown-files.outputs.any_changed == 'true'
         env:
           ALL_CHANGED_FILES: ${{ steps.changed-markdown-files.outputs.all_changed_files }}
         run: |
