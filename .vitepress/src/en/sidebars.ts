@@ -129,7 +129,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text: 'Expert',
       items: [
         {
-          text: 'i18n Configuration',
+          text: 'Internationalization',
           link: '/zh/front/high/i18n'
         },
         {
@@ -192,12 +192,12 @@ const sidebar:DefaultTheme.Sidebar = {
           text: "Lifecycle",
           link: "/zh/backend/base/lifecycle"
         },
-        { text: "Routing & API Docs",link: "/zh/backend/base/router"},
+        { text: "Routes & API Docs",link: "/zh/backend/base/router"},
         { text: "Error Handling",link: "/zh/backend/base/error-handler"},
         {text: "Logging",link: "/zh/backend/base/logger"},
         {text: "Events",link: "/zh/backend/base/event-handler"},
         {text: "File Upload",link: "/zh/backend/base/upload"},
-        {text: "i18n",link: "/zh/backend/base/lang"},
+        {text: "Internationalization",link: "/zh/backend/base/lang"},
       ]
     },
     {
@@ -208,7 +208,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/zh/backend/security/passport"
         },
         {
-          text: "User Authorization (RBAC)",
+          text: "Authorization (RBAC)",
           link: "/zh/backend/security/access"
         },
         {
@@ -256,15 +256,15 @@ const sidebar:DefaultTheme.Sidebar = {
               link:"/zh/plugin/create"
             },
             {
-              text:"Plugin Structure",
+              text:"Plugin Directory Structure",
               link:"/zh/plugin/structure"
             },
             {
-              text:"mine.json Documentation",
+              text:"mine.json Documentation & Examples",
               link:"/zh/plugin/mineJson"
             },
             {
-            text:"ConfigProvider Guide",
+            text:"ConfigProvider Documentation",
             link:"/zh/plugin/configProvider"
           }
           ]
@@ -286,16 +286,16 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"Frontend Development",
       items:[
         {
-          text: "Frontend Standards",
+          text: "Frontend Development Standards",
           link: "/zh/plugin/front/develop"
         }
       ]
     },
     {
-      text:"Publishing",
+      text:"Application Publishing",
       items:[
         {
-          text: "Application Release",
+          text: "Publishing",
           link: "/zh/plugin/develop/publish"
         },
         {

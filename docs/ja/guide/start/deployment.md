@@ -1,10 +1,10 @@
 # デプロイ
 
-このドキュメントでは、MineAdminのフロントエンドとバックエンドアプリケーションを様々な環境（開発、テスト、本番環境）にデプロイする方法とベストプラクティスについて説明します。
+この記事では、MineAdminのフロントエンドとバックエンドアプリケーションをさまざまな環境（開発、テスト、本番環境）にデプロイする方法について説明します。
 
 ## デプロイアーキテクチャ概要
 
-MineAdminはフロントエンドとバックエンドが分離されたアーキテクチャを採用しており、以下の技術スタックを使用しています：
+MineAdminはフロントエンドとバックエンドを分離したアーキテクチャを採用しており、以下の技術スタックを使用しています：
 - **バックエンド**: PHP 8.1+ + Hyperfフレームワーク + Swoole拡張
 - **フロントエンド**: Vue 3 + TypeScript + Vite
 - **データベース**: MySQL 5.7+ / PostgreSQL (オプション)
@@ -76,7 +76,7 @@ API --> Data
 
 **PHP設定最適化:**
 ```ini
-# /etc/php/8.1/php.ini または対応バージョンのパス
+# /etc/php/8.1/php.ini または対応するバージョンのパス
 upload_max_filesize = 128M
 post_max_size = 128M
 memory_limit = 1G
@@ -164,7 +164,7 @@ php -r "echo base64_encode(random_bytes(64)) . PHP_EOL;"
 
 #### データベースマイグレーション
 
-[`mineadmin/databases/migrations/`](https://github.com/mineadmin/MineAdmin/tree/master/databases/migrations)ディレクトリ内のマイグレーションファイルに基づいてデータベースマイグレーションを実行：
+[`mineadmin/databases/migrations/`](https://github.com/mineadmin/MineAdmin/tree/master/databases/migrations) ディレクトリ内のマイグレーションファイルに基づいてデータベースマイグレーションを実行：
 
 ```shell
 # データベースマイグレーションを実行
@@ -259,7 +259,7 @@ sudo systemctl start mineadmin
 # サービス状態を確認
 sudo systemctl status mineadmin
 
-# ログを表示
+# ログを確認
 sudo journalctl -u mineadmin -f
 ```
 
@@ -396,7 +396,7 @@ docker-compose --env-file .env.prod up -d
 # サービス状態を確認
 docker-compose ps
 
-# ログを表示
+# ログを確認
 docker-compose logs -f app
 ```
 
@@ -546,9 +546,9 @@ spec:
 
 ### 5. リバースプロキシとロードバランシング
 
-<el-alert type="warning">アプリケーションを直接公衆ネットワークに公開することは推奨されません。リバースプロキシを介してトラフィックを転送するのが最善です</el-alert>
+<el-alert type="warning">アプリケーションを直接公開することは推奨されません。常にリバースプロキシを介してトラフィックを転送してください</el-alert>
 
-[`mineadmin/config/autoload/server.php`](https://github.com/mineadmin/MineAdmin/blob/master/config/autoload/server.php)のサーバー設定に基づき、アプリケーションはデフォルトで9501ポートをリッスンします。
+[`mineadmin/config/autoload/server.php`](https://github.com/mineadmin/MineAdmin/blob/master/config/autoload/server.php) のサーバー設定に基づき、アプリケーションはデフォルトで9501ポートをリッスンします。
 
 #### Nginxリバースプロキシ
 
@@ -561,7 +561,7 @@ upstream mineadmin_backend {
     server 127.0.0.1:9501 weight=1 max_fails=3 fail_timeout=30s;
     server 127.0.0.1:9502 weight=1 max_fails=3 fail_timeout=30s backup;
     
-    # セッション維持
+    # セッション持続性
     ip_hash;
     
     # ヘルスチェック (nginx_upstream_check_moduleが必要)
@@ -586,4 +586,5 @@ server {
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers HIGH:!aNULL:!MD5;
     ssl_prefer_server_ciphers on;
-    ssl_session_cache
+    ssl_session_cache shared:SSL:10m;
+    ssl

@@ -220,11 +220,11 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"データ権限",
       items:[
         {
-          text: "コアコンセプト",
+          text: "コア概念",
           link: "/zh/backend/data-permission/overview"
         },
         {
-          text: "権限設定とデモ",
+          text: "権限設定と効果デモ",
           link: "/zh/backend/data-permission/config"
         },
         {
@@ -252,7 +252,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link:"/zh/plugin/command"
             },
             {
-              text:"アプリ作成",
+              text:"アプリケーション作成",
               link:"/zh/plugin/create"
             },
             {

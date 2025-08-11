@@ -66,7 +66,7 @@ MineAdminは3つの主要なレイアウトモードをサポートしていま�
 | `isColumnsLayout()` | `boolean` | 現在がカラムレイアウトモードかどうかを判定 | `store.isColumnsLayout()` |
 | `isClassicLayout()` | `boolean` | 現在がクラシックレイアウトモードかどうかを判定 | `store.isClassicLayout()` |
 | `getFixedAsideState()` | `boolean` | サブサイドバーが固定状態かどうかを取得 | `store.getFixedAsideState()` |
-| `getMenuCollapseState()` | `boolean` | メニューが折りたたみ状態かどうかを取得 | `store.getMenuCollapseState()` |
+| `getMenuCollapseState()` | `boolean` | メニューが折りたたまれているかどうかを取得 | `store.getMenuCollapseState()` |
 | `getMobileState()` | `boolean` | 現在がモバイル状態かどうかを判定 | `store.getMobileState()` |
 
 ::: tip API ソース位置
@@ -283,7 +283,7 @@ export const LayoutComponents = {
   will-change: transform, width, margin;
 }
 
-/* 不要な再描画を削減 */
+/* 不必要な再描画を削減 */
 .layout-aside {
   contain: layout style paint;
   transform: translateZ(0); /* ハードウェアアクセラレーションを有効化 */
@@ -345,9 +345,9 @@ const isDesktop = breakpoints.greater('desktop')
 
 ## 関連ドキュメント
 
-- [よく使うストア](/ja/front/high/store) - 状態管理関連ドキュメント
+- [よく使うStore](/ja/front/high/store) - 状態管理関連ドキュメント
 
-::: tip ソースコードリファレンス
+::: tip ソースコード参照
 完全なレイアウトシステムのソースコードは以下の場所で確認できます：
 - **GitHub**: [web/src/layouts](https://github.com/mineadmin/mineadmin/tree/master/web/src/layouts)
 - **ローカルパス**: `mineadmin/web/src/layouts/`

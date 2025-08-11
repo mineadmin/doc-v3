@@ -43,17 +43,17 @@ MineAdmin supports three main layout modes:
 
 ### 1. Classic Layout
 - **Features**: Traditional left sidebar + main content area layout
-- **Use Cases**: Standard backend management interfaces
+- **Use Case**: Standard backend management interface
 - **Component Structure**: Fixed left menu, right content area
 
 ### 2. Mixed Layout
-- **Features**: Combination of top menu + left submenu layout
-- **Use Cases**: Complex applications requiring multi-level menu navigation
+- **Features**: Combination of top menu + left submenu
+- **Use Case**: Complex applications requiring multi-level menu navigation
 - **Component Structure**: Top main menu, left submenu for current category
 
 ### 3. Columns Layout
 - **Features**: Multi-column menu layout
-- **Use Cases**: Large applications with numerous menu categories
+- **Use Case**: Large applications with numerous menu categories
 - **Component Structure**: Left main menu column, middle submenu column, right content area
 
 ## Layout-Related APIs
@@ -61,13 +61,13 @@ MineAdmin supports three main layout modes:
 ### useSettingStore API Reference
 
 | Method Name | Return Type | Description | Usage Example |
-|------------|-------------|-------------|---------------|
-| `isMixedLayout()` | `boolean` | Checks if current mode is mixed layout | `store.isMixedLayout()` |
-| `isColumnsLayout()` | `boolean` | Checks if current mode is columns layout | `store.isColumnsLayout()` |
-| `isClassicLayout()` | `boolean` | Checks if current mode is classic layout | `store.isClassicLayout()` |
-| `getFixedAsideState()` | `boolean` | Gets whether sub sidebar is fixed | `store.getFixedAsideState()` |
-| `getMenuCollapseState()` | `boolean` | Gets whether menu is collapsed | `store.getMenuCollapseState()` |
-| `getMobileState()` | `boolean` | Checks if current device is mobile | `store.getMobileState()` |
+|-------------|-------------|-------------|---------------|
+| `isMixedLayout()` | `boolean` | Check if current mode is mixed layout | `store.isMixedLayout()` |
+| `isColumnsLayout()` | `boolean` | Check if current mode is columns layout | `store.isColumnsLayout()` |
+| `isClassicLayout()` | `boolean` | Check if current mode is classic layout | `store.isClassicLayout()` |
+| `getFixedAsideState()` | `boolean` | Get whether sub sidebar is fixed | `store.getFixedAsideState()` |
+| `getMenuCollapseState()` | `boolean` | Get whether menu is collapsed | `store.getMenuCollapseState()` |
+| `getMobileState()` | `boolean` | Check if current device is mobile | `store.getMobileState()` |
 
 ::: tip API Source Location
 - **GitHub**: [useSettingStore.ts](https://github.com/mineadmin/MineAdmin/blob/master/web/src/store/modules/useSettingStore.ts)
@@ -274,10 +274,10 @@ export const LayoutComponents = {
 }
 ```
 
-### Layout Transition Optimization
+### Layout Switching Animation Optimization
 
 ```scss
-/* Layout transition optimization */
+/* Layout switching animation optimization */
 .layout-transition {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, width, margin;
@@ -290,9 +290,9 @@ export const LayoutComponents = {
 }
 ```
 
-## Common Issue Solutions
+## Common Issue Resolution
 
-### 1. Mobile Layout Adaptation
+### 1. Mobile Layout Adaptation Issues
 
 ```typescript
 // Mobile adaptation solution
@@ -309,7 +309,7 @@ const isTablet = breakpoints.between('tablet', 'desktop')
 const isDesktop = breakpoints.greater('desktop')
 ```
 
-### 2. Layout Flickering
+### 2. Layout Flickering Issues
 
 ```scss
 /* Prevent layout flickering */
@@ -326,7 +326,7 @@ const isDesktop = breakpoints.greater('desktop')
 ### 3. Sidebar Scrolling Issues
 
 ```scss
-/* Sidebar scroll optimization */
+/* Sidebar scrolling optimization */
 .layout-aside {
   overflow-y: auto;
   scrollbar-width: thin;
