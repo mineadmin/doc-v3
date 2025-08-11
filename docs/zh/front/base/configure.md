@@ -326,5 +326,5 @@ location / {
 ```
 
 ::: tip 提示
-更多部署相关问题，请参考 [部署指南](/zh/guide/deploy) 章节。
+更多部署相关问题，请参考 [部署指南](../../guide/start/deployment.md) 章节。
 :::
