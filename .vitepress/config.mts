@@ -46,9 +46,6 @@ export default defineConfigWithTheme ({
       llmstxt({
         domain:'https://doc.mineadmin.com',
         workDir:'en',
-        experimental:{
-          depth:3
-        }
       })
     ]
   },
