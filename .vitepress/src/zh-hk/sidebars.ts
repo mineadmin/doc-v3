@@ -1,4 +1,4 @@
-import {DefaultTheme} from "vitepress";
+import type {DefaultTheme} from "vitepress";
 
 const sidebar:DefaultTheme.Sidebar = {
   '/zh-hk/guide/': [
@@ -6,7 +6,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text: '介紹',
       items: [
         {
-          text: '關於 MineAdmin',
+          text: '為什麼選擇我們?',
           link: '/zh-hk/guide/introduce/mineadmin',
         },
         {
