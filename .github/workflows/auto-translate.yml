@@ -14,7 +14,6 @@ jobs:
   translate:
     env:
       DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-      FORCE_TRANSLATE_ALL: false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -93,17 +92,16 @@ jobs:
           cp docs/index.md docs/zh/index.md
           php bin/doc-translate
 
-      - name: Start Translate EN & JA
+      - name: Start AI Translate (EN, JA)
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
         env:
           ALL_CHANGED_FILES: ${{ steps.changed-markdown-files.outputs.all_changed_files }}
-          TARGET_LANGUAGES: "en,ja"
         run: |
-          pnpm do
+          pnpm run docs:translate
 
       - name: Commit Updated
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "🌐 Auto-translated content (EN/JA)"
+          commit_message: "🌐 Auto-translated content"
           branch: ${{ github.event.pull_request.head.ref }}
           token: ${{ steps.generate-token.outputs.token }}

@@ -1,5 +1,6 @@
 {
   "name": "@mineadmin/doc",
+  "type": "module",
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build",
