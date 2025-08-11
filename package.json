@@ -5,9 +5,7 @@
     "dev": "vitepress dev",
     "build": "vitepress build",
     "preview": "vitepress preview",
-    "docs:translate": "tsx bin/translate.ts",
-    "docs:translate:enhanced": "tsx bin/translate-enhanced.ts",
-    "docs:translate:full": "TARGET_LANGUAGES=en,ja FORCE_TRANSLATE_ALL=true tsx bin/translate-enhanced.ts"
+    "docs:translate": "node bin/translate.js"
   },
   "dependencies": {
     "@iconify/vue": "^5.0.0",
