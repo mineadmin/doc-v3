@@ -9,7 +9,7 @@ const endpoint = "https://api.deepseek.com";
 const token = process.env["DEEPSEEK_API_KEY"] || '';
 const MAX_CONCURRENT = 10; // 最大并发数
 const MAX_RETRIES = 3; // 最大重试次数
-const CHANGE_FILES = process.env["CHANGE_FILES"]?.split('\n') ||  [];
+const CHANGE_FILES = process.env["ALL_CHANGED_FILES"]?.split('\n') ||  [];
 const SOURCE_DIRS = ['docs', '.vitepress/src'];
 const SOURCE_LANG = 'zh'; // 源语言
 
