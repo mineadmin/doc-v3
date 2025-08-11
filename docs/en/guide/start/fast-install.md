@@ -1,84 +1,442 @@
-# Quick Start
+# MineAdmin Quick Installation Guide
 
-## Download the Code
+## Overview
 
-### Git
+MineAdmin is an enterprise-level backend management system based on the Hyperf framework, adopting a frontend-backend separation architecture. This guide will walk you through the quick installation and configuration of MineAdmin, helping you set up a fully functional management system in the shortest time possible.
 
-Use Git to install this project. Ensure you have the [Git](https://git-scm.com/) tool installed locally.
+### System Architecture
 
-First, download the code to your local machine by executing the following command. `YourProject` is the name of the new application directory. If not specified, it defaults to `mineadmin`.
+- **Backend**: PHP framework based on Hyperf
+- **Frontend**: Modern single-page application based on Vue.js
+- **Database**: Supports MySQL, PostgreSQL, etc.
+- **Cache**: Supports Redis
+- **Containerization**: Supports Docker and Docker Compose
 
-## Branch Introduction
-- `master` branch: The default main branch, the most commonly used branch.
-- `master-department` branch: Includes additional features such as department management, position management, and data permission settings.
+## System Requirements
 
-Please choose the appropriate branch for development based on your needs to avoid unnecessary complications later!!!
+### Software Environment
 
-```sh [Download Code]
+#### Local Development Environment
+- **PHP**: ≥ 8.1
+- **Composer**: ≥ 2.0
+- **Node.js**: ≥ 16.0 (LTS version recommended)
+- **pnpm**: ≥ 7.0
+- **MySQL**: ≥ 5.7 or **PostgreSQL**: ≥ 10
+- **Redis**: ≥ 5.0
+- **Git**: For version control
+
+#### Docker Environment (Recommended)
+- **Docker**: ≥ 20.0
+- **Docker Compose**: ≥ 2.0
+
+::: tip Environment Selection Advice
+- **Beginner Users**: Recommended to use Docker Compose for simpler environment setup
+- **Developers**: Can choose between local environment or Docker environment as needed
+- **Production Environment**: Recommended to use Docker for deployment
+:::
+
+## Installation Method Selection
+
+Choose the appropriate installation method based on your use case:
+
+| Use Case | Recommended Method | Advantages | Target Users |
+|---------|---------|------|---------|
+| Quick Experience/Learning | Docker Compose | One-click deployment, isolated environment | Beginners |
+| Development/Debugging | Local Environment | High flexibility, easy debugging | Developers |
+| Production Deployment | Docker Build | Customizable, easily scalable | Operations Staff |
+
+## Quick Start
+
+### Step 1: Download Source Code
+
+#### Using Git Clone (Recommended)
+
+Ensure you have [Git](https://git-scm.com/) installed, then execute the following command:
+
+```bash
+# Clone main branch (standard version)
 git clone https://github.com/mineadmin/MineAdmin.git
+
+# Or clone to a specified directory
+git clone https://github.com/mineadmin/MineAdmin.git your-project-name
 ```
 
-After downloading, copy the `.env.example` file in the project directory to `.env` and configure the database and Redis settings.
+#### Branch Selection Guide
 
-## Backend Environment Setup
+MineAdmin provides two main branches. Choose according to your needs:
 
-### Composer
+| Branch Name | Feature Description | Use Case |
+|---------|---------|---------|
+| `master` | Standard version with core features | Most application scenarios |
+| `master-department` | Enhanced version with department management, position management, data permissions, etc. | Enterprise applications requiring complex permission management |
 
-If you are using a local environment, after configuring the `.env` file, you can proceed to [Backend Installation](#backend-installation).
+```bash
+# Switch to enhanced version branch
+git checkout master-department
+```
 
-### Docker
+::: warning Important Reminder
+Determine your required branch before starting the project to avoid unnecessary migration efforts later. The two branches differ in database structure and functionality.
+:::
 
-If you choose to develop with Docker, a few additional steps are required to complete the environment setup.
+#### Basic Configuration After Download
 
-#### Docker-compose (Recommended)
+```bash
+# Enter project directory
+cd MineAdmin  # or your-project-name
 
-MineAdmin provides a complete `docker-compose.yml` file. Simply execute the following command in the project directory to set up the environment:
+# Copy environment configuration file
+cp .env.example .env
+```
 
-```shell
+### Step 2: Environment Configuration
+
+Open the `.env` file and configure the following key parameters:
+
+```ini
+# Application configuration
+APP_NAME=MineAdmin
+APP_ENV=local
+APP_DEBUG=true
+
+# Database configuration
+DB_DRIVER=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=mineadmin
+DB_USERNAME=root
+DB_PASSWORD=your_password
+DB_CHARSET=utf8mb4
+DB_COLLATION=utf8mb4_unicode_ci
+
+# Redis configuration
+REDIS_HOST=127.0.0.1
+REDIS_AUTH=
+REDIS_PORT=6379
+REDIS_DB=0
+
+# JWT configuration (requires manual generation)
+JWT_SECRET=your_jwt_secret_key
+```
+
+::: tip Configuration Suggestions
+- For production environments, always set `APP_DEBUG=false`
+- Use strong passwords and change database passwords regularly
+- JWT_SECRET should be a randomly generated complex string
+:::
+
+## Detailed Installation Methods
+
+### Method 1: Docker Compose Installation (Recommended for Beginners)
+
+The simplest installation method, ideal for quick experience and development environments.
+
+#### Advantages
+- Isolated environment, doesn't pollute the host machine
+- One-click startup for all services
+- Unified versions, avoiding environment discrepancies
+
+#### Installation Steps
+
+1. **Start Services**
+
+```bash
+# Start all services in the background
 docker-compose up -d
+
+# Check service status
+docker-compose ps
 ```
 
-#### Docker Build
+2. **Wait for Services to Initialize**
 
-If you prefer to build your own container image, we have prepared a Dockerfile for you. Execute the following commands in the project directory to complete the environment setup:
+The first startup requires downloading images. Be patient. You can view logs with:
 
-```shell
-# Build the image
-docker build . -t mineadmin
+```bash
+# View all service logs
+docker-compose logs -f
 
-# Start a container
-docker run -d --name mineadmin -p 9501:9501 -v .:/opt/www mineadmin 
+# View specific service logs
+docker-compose logs -f mineadmin
 ```
 
-### Backend System Installation
+3. **Enter Container for Initialization**
 
-Execute the following commands:
+```bash
+# Enter application container
+docker-compose exec mineadmin bash
 
-::: code-group
+# Install backend dependencies
+composer install --no-dev --optimize-autoloader
 
-```shell[Reinstall Vendor]
-composer install -vvv
-```
-
-```shell [Database Migration]
+# Database migration
 php bin/hyperf.php migrate
-```
 
-```shell [Data Seeding]
+# Data seeding
 php bin/hyperf.php db:seed
 ```
 
+### Method 2: Docker Custom Build
+
+Suitable for advanced users needing custom images.
+
+```bash
+# Build image
+docker build -t mineadmin:latest .
+
+# Start container
+docker run -d \
+  --name mineadmin \
+  -p 9501:9501 \
+  -v $(pwd):/opt/www \
+  -e DB_HOST=your_db_host \
+  -e DB_DATABASE=mineadmin \
+  -e DB_USERNAME=your_username \
+  -e DB_PASSWORD=your_password \
+  -e REDIS_HOST=your_redis_host \
+  mineadmin:latest
+```
+
+### Method 3: Local Environment Installation
+
+Suitable for developers needing in-depth development and debugging.
+
+#### Prerequisite Checks
+
+Before starting installation, verify environment requirements:
+
+```bash
+# Check PHP version
+php --version
+
+# Check Composer version
+composer --version
+
+# Check extensions
+php -m | grep -E "(swoole|redis|pdo_mysql)"
+
+# Check Node.js version
+node --version
+
+# Check pnpm version
+pnpm --version
+```
+
+#### Backend Installation
+
+1. **Install PHP Dependencies**
+
+```bash
+# Install dependency packages (development environment)
+composer install -vvv
+
+# Production environment installation (optional)
+composer install --no-dev --optimize-autoloader
+```
+
+2. **Database Initialization**
+
+```bash
+# Create database (optional, can also be done manually)
+mysql -u root -p -e "CREATE DATABASE mineadmin CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+
+# Execute database migration
+php bin/hyperf.php migrate
+
+# Seed initial data
+php bin/hyperf.php db:seed
+```
+
+3. **Start Backend Service**
+
+```bash
+# Start Hyperf service
+php bin/hyperf.php start
+```
+
+#### Frontend Installation
+
+1. **Environment Preparation**
+
+Recommended to use [nvm](https://github.com/nvm-sh/nvm) for Node.js version management:
+
+```bash
+# Install and use recommended Node.js version
+nvm install 18
+nvm use 18
+
+# Global pnpm installation (if not already installed)
+npm install -g pnpm
+```
+
+2. **Install Frontend Dependencies**
+
+```bash
+# Enter frontend directory
+cd web
+
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+```
+
+## Verification
+
+### Check Service Status
+
+1. **Backend Service Verification**
+
+```bash
+# Check if Hyperf service started normally
+curl http://localhost:9501/health
+
+# Or access via browser
+# http://localhost:9501
+```
+
+2. **Frontend Service Verification**
+
+```bash
+# Frontend runs on port 3000 by default
+curl http://localhost:3000
+
+# Or access via browser
+# http://localhost:3000
+```
+
+3. **Database Connection Verification**
+
+```bash
+# Check database connection
+php bin/hyperf.php db:show
+```
+
+### Login to System
+
+After installation, use the following default credentials to log in:
+
+- **Admin Account**: admin
+- **Default Password**: 123456
+
+::: warning Security Reminder
+Change the default password immediately after first login to ensure system security.
 :::
 
-## Frontend Installation
+## Common Issues & Solutions
 
-We recommend using [nvm](https://github.com/nvm-sh/nvm) for local Node version management.
+### Common Installation Errors
 
-Navigate to `your-project-path/web` and execute:
+#### 1. Composer Dependency Installation Failure
 
-```shell
-# Install frontend dependencies
-pnpm i 
-# Start the local development server
-pnpm dev
+**Error Message**:
+```
+Your requirements could not be resolved to an installable set of packages.
+```
+
+**Solution**:
+```bash
+# Clear Composer cache
+composer clear-cache
+
+# Update Composer to latest version
+composer self-update
+
+# Reinstall
+composer install --ignore-platform-reqs
+```
+
+#### 2. Database Connection Failure
+
+**Error Message**:
+```
+SQLSTATE[HY000] [2002] Connection refused
+```
+
+**Solution**:
+1. Check if database service is running
+2. Verify database configuration in `.env` file
+3. Confirm database user permissions
+
+```bash
+# Test database connection
+mysql -h 127.0.0.1 -P 3306 -u root -p
+```
+
+#### 3. Redis Connection Failure
+
+**Error Message**:
+```
+Connection refused [tcp://127.0.0.1:6379]
+```
+
+**Solution**:
+```bash
+# Check Redis service status
+redis-cli ping
+
+# Start Redis service (varies by system)
+# Ubuntu/Debian
+sudo systemctl start redis-server
+
+# CentOS/RHEL
+sudo systemctl start redis
+
+# macOS
+brew services start redis
+```
+
+#### 4. Slow Frontend Dependency Installation
+
+**Solution**:
+```bash
+# Use Taobao mirror
+pnpm config set registry https://registry.npmmirror.com
+
+# Or use cnpm
+npm install -g cnpm --registry=https://registry.npmmirror.com
+cnpm install
+```
+
+#### 5. Port Conflicts
+
+**Check Port Usage**:
+```bash
+# Check port 9501 (backend)
+lsof -i :9501
+netstat -tulpn | grep :9501
+
+# Check port 3000 (frontend)
+lsof -i :3000
+netstat -tulpn | grep :3000
+```
+
+**Solution**:
+- Stop processes occupying the ports
+- Or modify configuration to use different ports
+
+### Performance Optimization Suggestions
+
+#### Development Environment Optimization
+
+```bash
+# Enable OPcache (PHP configuration)
+echo "opcache.enable=1" >> /etc/php/8.1/cli/conf.d/99-opcache.ini
+
+# Increase PHP memory limit
+echo "memory_limit=512M" >> /etc/php/8.1/cli/conf.d/99-memory.ini
+```
+
+#### Production Environment Optimization
+
+```bash
+# Use production environment configuration
+composer install --no-dev --optimize-autoloader
+
+# Clear configuration cache
+php bin/hyperf.php config:clear
+
+# Build frontend production version
+cd web && pnpm build
 ```
