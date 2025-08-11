@@ -97,6 +97,8 @@ async function processFile(srcPath, destPath, targetLang = 'en') {
         systemContent = langConfig.systemPrompt.md; // 默认使用md提示
     }
 
+    await new Promise(resolve => setTimeout(resolve, 1000)); // 延迟1秒
+
     const translatedContent = await translateWithRetry(content, 0, systemContent);
     const finalContent = replaceZhLinks(translatedContent, targetLang);
     await writeFile(destPath, finalContent);
@@ -167,6 +169,11 @@ async function handle() {
                     });
 
                     await Promise.all(promises);
+
+                    if (i + MAX_CONCURRENT < files.length) {
+                        console.log(`    - 🕒 Waiting 3 seconds before processing the next batch...`);
+                        await new Promise(resolve => setTimeout(resolve, 3000)); // 批次之间等待3秒
+                    }
                 }
                 console.log(`✅ ${lang} translations completed!`);
 
@@ -188,6 +195,14 @@ async function main() {
         await handle();
     } catch (error) {
         console.error('❌ Error:', error.message);
+        // 打印更详细的错误信息
+        if (error.response) {
+            console.error('Detailed Error Information:', JSON.stringify(error.response.data, null, 2));
+        } else if (error.cause) {
+            console.error('Error Cause:', error.cause);
+        }
+        // 打印完整错误堆栈
+        console.error('Error Stack:', error.stack);
         process.exit(1);
     }
 }
