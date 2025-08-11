@@ -46,6 +46,7 @@ export default defineConfigWithTheme ({
       llmstxt({
         domain:'https://doc.mineadmin.com',
         workDir:'en',
+        ignoreFiles:['guide/changelog.md']
       })
     ]
   },
