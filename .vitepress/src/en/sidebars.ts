@@ -1,3 +1,4 @@
+```typescript
 import type {DefaultTheme} from "vitepress";
 
 const sidebar:DefaultTheme.Sidebar = {
@@ -67,7 +68,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/en/front/base/start'
         },
         {
-          text: 'Routes & Menus',
+          text: 'Routing & Menus',
           link: '/en/front/base/route-menu'
         },
         {
@@ -85,7 +86,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text: 'Advanced',
+      text: 'Intermediate',
       items: [
         {
           text: 'System Configuration',
@@ -126,10 +127,10 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text: 'Expert',
+      text: 'Advanced',
       items: [
         {
-          text: 'i18n Configuration',
+          text: 'Internationalization',
           link: '/en/front/high/i18n'
         },
         {
@@ -243,12 +244,12 @@ const sidebar:DefaultTheme.Sidebar = {
           text: "Lifecycle",
           link: "/en/backend/base/lifecycle"
         },
-        { text: "Routes & API Docs",link: "/en/backend/base/router"},
+        { text: "Routing & API Docs",link: "/en/backend/base/router"},
         { text: "Error Handling",link: "/en/backend/base/error-handler"},
         {text: "Logging",link: "/en/backend/base/logger"},
         {text: "Events",link: "/en/backend/base/event-handler"},
-        {text: "File Uploads",link: "/en/backend/base/upload"},
-        {text: "i18n",link: "/en/backend/base/lang"},
+        {text: "File Upload",link: "/en/backend/base/upload"},
+        {text: "Internationalization",link: "/en/backend/base/lang"},
       ]
     },
     {
@@ -359,3 +360,4 @@ const sidebar:DefaultTheme.Sidebar = {
 }
 
 export default sidebar
+```

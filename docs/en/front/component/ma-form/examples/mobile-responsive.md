@@ -1,6 +1,6 @@
 # Mobile Responsiveness
 
-Demonstrates MaForm's responsive features on mobile devices, including breakpoint adaptation, mobile optimization, touch interaction, and device-specific configurations.
+Demonstrates MaForm's responsive features on mobile devices, including breakpoint adaptation, mobile optimization, touch interactions, and device-specific configurations.
 
 <DemoPreview dir="demos/ma-form/mobile-responsive" />
 
@@ -9,7 +9,7 @@ Demonstrates MaForm's responsive features on mobile devices, including breakpoin
 - **Breakpoint Responsiveness**: Automatically adapts layout based on screen size
 - **Mobile Optimization**: Special optimizations for mobile devices
 - **Touch-Friendly**: Interaction design optimized for touch operations
-- **Device Detection**: Automatically identifies mobile devices and applies corresponding configurations
+- **Device Recognition**: Automatically detects mobile devices and applies corresponding configurations
 - **Flexible Configuration**: Supports mobile-specific field configurations
 
 ## Responsive Breakpoint System
@@ -58,7 +58,7 @@ const responsiveFormItems = [
     }
   },
   {
-    label: 'Email',
+    label: 'Email Address',
     prop: 'email',
     render: 'input',
     renderProps: {
@@ -73,7 +73,7 @@ const responsiveFormItems = [
     }
   },
   {
-    label: 'Phone',
+    label: 'Phone Number',
     prop: 'phone',
     render: 'input',
     cols: {
@@ -99,7 +99,7 @@ const responsiveFormItems = [
 ```typescript
 const mobileOptimizedFields = [
   {
-    label: 'Mobile',
+    label: 'Mobile Number',
     prop: 'mobile',
     render: 'input',
     renderProps: {
@@ -222,7 +222,7 @@ const mobileLayoutConfig = {
   }
 }
 
-// Manually control mobile layout
+// Manual control of mobile layout
 const isMobileLayout = computed(() => {
   return formRef.value?.isMobileState() || false
 })
@@ -252,7 +252,7 @@ const mobileSizedFields = [
       size: 'default'  // Default size on desktop
     },
     mobileProps: {
-      size: 'large'    // Larger size on mobile for better touch
+      size: 'large'    // Large size on mobile for better touch
     }
   },
   {
@@ -292,7 +292,7 @@ const mobileSizedFields = [
 ```typescript
 const touchFriendlyFields = [
   {
-    label: 'Slider',
+    label: 'Slider Control',
     prop: 'slider',
     render: 'slider',
     renderProps: {
@@ -423,7 +423,7 @@ const adaptFormToDevice = () => {
 ### 2. Screen Orientation Change Handling
 
 ```typescript
-// Listen for orientation changes
+// Listen for screen orientation changes
 const handleOrientationChange = () => {
   const isPortrait = window.innerHeight > window.innerWidth
   
@@ -433,7 +433,7 @@ const handleOrientationChange = () => {
       ...options,
       responsiveConfig: {
         ...options.responsiveConfig,
-        mobileHideLabels: isPortrait,  // Hide labels in portrait
+        mobileHideLabels: isPortrait,  // Hide labels in portrait mode
         mobileSingleColumn: true
       }
     }))
@@ -466,7 +466,7 @@ const pwaFormConfig = {
     enabled: true,
     mobileSingleColumn: true,
     breakpoints: {
-      xs: 320,   // Smallest phone screen
+      xs: 320,   // Minimum phone screen
       sm: 768,   // Tablet portrait
       md: 1024,  // Tablet landscape
       lg: 1440,  // Desktop
@@ -549,7 +549,7 @@ const mobilePerformanceOptimization = {
       })
     })
     
-    // Observe images in form
+    // Observe images in the form
     const images = document.querySelectorAll('img[data-src]')
     images.forEach(img => observer.observe(img))
   }
@@ -600,5 +600,5 @@ const responsiveTestUtils = {
 ## Related Links
 
 - [Layout System - Responsive Configuration](/en/front/component/ma-form/examples/layout-systems#responsive-system)
-- [ResponsiveConfig Settings](/en/front/component/ma-form#responsiveconfig-settings)
+- [ResponsiveConfig Settings](/en/front/component/ma-form#responsiveconfig-responsive-configuration)
 - [Mobile Configuration Options](/en/front/component/ma-form#mobile-configuration)

@@ -1,6 +1,6 @@
-# 条件レンダリング
+# 条件付きレンダリング
 
-フォームデータに基づいてフィールドの表示/非表示を動的に制御する条件レンダリング機能を紹介します。連動表示や複雑な条件判定も含みます。
+フォームデータに基づいてフィールドの表示・非表示を動的に制御する条件付きレンダリング機能を紹介します。連動表示や複雑な条件判定を含みます。
 
 <DemoPreview dir="demos/ma-form/conditional-rendering" />
 
@@ -8,13 +8,13 @@
 
 - **動的表示制御**: フォームデータに基づいてフィールドの表示/非表示を制御
 - **依存関係管理**: dependenciesでフィールド間の依存関係を宣言
-- **複雑条件サポート**: 複数条件の組み合わせ判定に対応
+- **複雑条件対応**: 複数条件の組み合わせ判定をサポート
 - **パフォーマンス最適化**: 依存フィールド変更時のみ条件を再計算
 - **2つのレンダリング方式**: showとhide属性で異なる表示制御戦略を提供
 
-## 条件レンダリング方法
+## 条件付きレンダリング方法
 
-MaFormでは2種類の条件レンダリング方法を提供しています:
+MaFormでは2種類の条件付きレンダリング方法を提供しています:
 
 ### show属性（推奨）
 
@@ -34,7 +34,7 @@ MaFormでは2種類の条件レンダリング方法を提供しています:
 - ✅ DOMをレンダリングしないため最高のパフォーマンス
 - ✅ ページスペースを占有しない
 - ✅ ほとんどのシナリオに適している
-- ⚠️ 初期化時にわずかなちらつきが発生する可能性あり
+- ⚠️ 初期化時に軽微なちらつきが発生する可能性あり
 
 ### hide属性
 
@@ -161,7 +161,7 @@ const notificationFields = [
     readonly: true,
     placeholder: 'パスワード強度: 弱'
   },
-  // レイアウトジャンプを防ぐためhideを使用
+  // hideを使用してレイアウトジャンプを防止
   hide: (item, model) => !model.password || model.password.length === 0,
   dependencies: ['password']
 }
@@ -186,7 +186,7 @@ const notificationFields = [
 }
 ```
 
-### 2. カスケード条件レンダリング
+### 2. 連鎖条件レンダリング
 
 ```typescript
 const cascadeFields = [
@@ -206,7 +206,7 @@ const cascadeFields = [
     label: '都道府県',
     prop: 'province',
     render: 'select',
-    // カスケード条件: 住所が必要かつ中国を選択
+    // 連鎖条件: 住所が必要かつ中国を選択
     show: (item, model) => model.needAddress && model.country === 'china',
     dependencies: ['needAddress', 'country']
   },
@@ -214,17 +214,17 @@ const cascadeFields = [
     label: '市区町村',
     prop: 'city',
     render: 'select',
-    // より複雑なカスケード: 住所が必要かつ都道府県を選択
+    // より複雑な連鎖: 住所が必要かつ都道府県が選択済み
     show: (item, model) => model.needAddress && !!model.province,
     dependencies: ['needAddress', 'province']
   }
 ]
 ```
 
-### 3. 動的条件計算
+### 3. 動的計算条件
 
 ```typescript
-// 計算プロパティを使用して複雑な条件を最適化
+// 計算プロパティを使用して複雑条件を最適化
 const isAdvancedUser = computed(() => {
   return formData.value.userLevel >= 10 && 
          formData.value.vipStatus === 'active' &&
@@ -258,7 +258,7 @@ const advancedField = {
 }
 ```
 
-### 2. 循環依存を避ける
+### 2. 循環依存の回避
 
 ```typescript
 // ❌ 誤り: 循環依存の可能性あり
@@ -275,7 +275,7 @@ const advancedField = {
   dependencies: ['fieldA']  // 循環依存
 }
 
-// ✅ 正解: 共通の制御フィールドを使用
+// ✅ 正しい: 共通の制御フィールドを使用
 {
   label: '制御スイッチ',
   prop: 'enableFeatures',
@@ -311,10 +311,10 @@ const advancedField = {
 }
 ```
 
-### 2. 複雑な計算をキャッシュ
+### 2. 複雑計算のキャッシュ
 
 ```typescript
-// 複雑な条件計算には計算プロパティを使用
+// 複雑条件計算には計算プロパティを使用
 const complexCondition = computed(() => {
   const { userLevel, subscription, accountAge } = formData.value
   return userLevel >= 5 && 
@@ -331,7 +331,7 @@ const field = {
 }
 ```
 
-### 3. 依存関係数を削減
+### 3. 依存関係数の削減
 
 ```typescript
 // ✅ 関連ロジックを統合、依存関係を削減
@@ -377,7 +377,7 @@ const field = {
 }
 ```
 
-### 2. 依存関係追跡
+### 2. 依存関係の追跡
 
 ```typescript
 // デバッグ用ユーティリティ関数を作成
@@ -422,9 +422,9 @@ const createDebugShow = (conditionFn: Function, debugName: string) => {
 
 - 表示に実際に影響するフィールドのみを依存関係として宣言
 - 過剰な依存関係や循環依存を避ける
-- 複雑な条件には計算プロパティを使用してキャッシュ
+- 計算プロパティを使用して複雑条件をキャッシュ
 
-### 3. ユーザーエクスペリエンスを考慮
+### 3. ユーザーエクスペリエンスの考慮
 
 - 頻繁に切り替わるシナリオではhide属性を使用してレイアウトジャンプを防止
 - 一度きりの表示シナリオではshow属性を使用してパフォーマンスを最適化
@@ -433,5 +433,5 @@ const createDebugShow = (conditionFn: Function, debugName: string) => {
 ## 関連リンク
 
 - [MaFormItem 設定詳細](/ja/front/component/ma-form#maformitem-設定詳細)
-- [高度な機能 - 条件レンダリング](/ja/front/component/ma-form#条件レンダリング)
+- [高度な機能 - 条件付きレンダリング](/ja/front/component/ma-form#条件付きレンダリング)
 - [ネストされたフォーム構造](/ja/front/component/ma-form/examples/nested-forms)

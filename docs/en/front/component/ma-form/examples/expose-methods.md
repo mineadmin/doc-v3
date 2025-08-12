@@ -1,293 +1,113 @@
 # Exposed Methods
 
-Displays all API methods exposed by the MaForm component through defineExpose, including state management, configuration management, form item management, validation, and other functionalities.
+Showcases all API methods exposed by the MaForm component through defineExpose, including loading state control, reactive state management, instance access, and other functionalities.
 
 <DemoPreview dir="demos/ma-form/expose-methods" />
 
 ## Features
 
-- **State Management**: Loading state, responsive state control
-- **Configuration Management**: Dynamic modification of form configuration options
-- **Form Item Management**: CRUD operations for form item configurations
-- **Validation Control**: Form and field validation management
-- **Data Operations**: Reading and setting form data
-- **Instance Access**: Accessing underlying Element Plus instances
+- **Loading State Control**: Set form loading state
+- **Reactive State Management**: Mobile state detection
+- **Form Item Management**: Dynamically modify form item configurations
+- **Instance Access**: Access underlying Element Plus Form instance for advanced operations
 
-## State Management Methods
+## Detailed Explanation of MaForm Exposed Methods
+
+### State Management Methods
 
 ### Loading State Control
 
 ```typescript
 // Set loading state
-formRef.value.setLoadingState(true)
+formRef.value?.setLoadingState(true)
 
 // Get current loading state
-const isLoading = formRef.value.getLoadingState()
+const isLoading = formRef.value?.getLoadingState?.()
 
 // Toggle loading state
 const toggleLoading = () => {
-  const currentState = formRef.value.getLoadingState()
-  formRef.value.setLoadingState(!currentState)
+  const currentState = formRef.value?.getLoadingState?.() || false
+  formRef.value?.setLoadingState(!currentState)
+}
+
+// Simulate loading state during submission
+const handleSubmit = async () => {
+  try {
+    formRef.value?.setLoadingState(true)
+    
+    // Perform form validation
+    await formRef.value?.getElFormRef()?.validate()
+    
+    // Simulate async submission
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    
+    ElMessage.success('Submission successful')
+  } catch (error) {
+    ElMessage.error('Submission failed')
+  } finally {
+    formRef.value?.setLoadingState(false)
+  }
 }
 ```
 
-### Responsive State Management
+### Reactive State Management
 
 ```typescript
 // Check mobile state
-const isMobile = formRef.value.isMobileState()
+const isMobile = formRef.value?.isMobileState?.()
 
-// Manually update responsive state (when window size changes)
+// Manually update reactive state (when window resizes)
 window.addEventListener('resize', () => {
-  formRef.value.updateResponsiveState()
-})
-```
-
-## Configuration Management Methods
-
-### Set Form Configuration
-
-```typescript
-// Completely replace configuration
-formRef.value.setOptions({
-  layout: 'grid',
-  loading: true,
-  labelWidth: '120px'
+  formRef.value?.updateResponsiveState?.()
 })
 
-// Get current configuration
-const currentOptions = formRef.value.getOptions()
-console.log('Current configuration:', currentOptions)
-
-// Modify configuration via update function
-formRef.value.updateOptions(options => ({
-  ...options,
-  layout: options.layout === 'flex' ? 'grid' : 'flex',
-  loading: false
-}))
-```
-
-### Batch Configuration Updates
-
-```typescript
-// Batch update configuration based on condition
-const updateConfigByCondition = (condition: string) => {
-  const updates = {
-    mobile: {
-      layout: 'grid',
-      responsiveConfig: { mobileSingleColumn: true }
-    },
-    desktop: {
-      layout: 'flex', 
-      flex: { gutter: 20 }
-    }
-  }
-  
-  formRef.value.updateOptions(options => ({
-    ...options,
-    ...updates[condition]
-  }))
-}
-```
-
-## Form Item Management Methods
-
-### Add Form Items
-
-```typescript
-// Append form item at the end
-const appendNewField = () => {
-  formRef.value.appendItem({
-    label: `New Field ${Date.now()}`,
-    prop: `field_${Date.now()}`,
-    render: 'input',
-    renderProps: {
-      placeholder: 'Dynamically added field'
-    }
-  })
-}
-
-// Insert form item at specified position
-const insertField = (index: number) => {
-  formRef.value.appendItem({
-    label: 'Inserted Field',
-    prop: `inserted_field_${Date.now()}`,
-    render: 'input'
-  }, index)
-}
-
-// Prepend form item at the beginning
-const prependField = () => {
-  formRef.value.prependItem({
-    label: 'First Field',
-    prop: `first_field_${Date.now()}`,
-    render: 'input',
-    cols: { span: 24 }
-  })
-}
-```
-
-### Remove Form Items
-
-```typescript
-// Remove form item by prop
-const removeField = (prop: string) => {
-  const success = formRef.value.removeItem(prop)
-  if (success) {
-    ElMessage.success(`Field ${prop} removed successfully`)
+// Adjust form layout based on device state
+const adjustFormLayout = () => {
+  const isMobile = formRef.value?.isMobileState?.()
+  if (isMobile) {
+    // Use single-column layout for mobile
+    console.log('Mobile detected, using responsive layout')
   } else {
-    ElMessage.error(`Field ${prop} does not exist`)
+    // Use multi-column layout for desktop
+    console.log('Desktop detected, using standard layout')
   }
-}
-
-// Batch remove form items
-const removeMultipleFields = (props: string[]) => {
-  const results = props.map(prop => ({
-    prop,
-    success: formRef.value.removeItem(prop)
-  }))
-  
-  const successCount = results.filter(r => r.success).length
-  ElMessage.info(`Successfully removed ${successCount} fields`)
 }
 ```
 
-### Update Form Items
+## Element Plus Form Instance Access
+
+### Access Native Form Instance
+
+One of MaForm's most important exposed methods is `getElFormRef()`, which allows accessing the underlying Element Plus Form instance to use all native form methods:
 
 ```typescript
-// Update single form item
-const updateField = (prop: string, updates: Partial<MaFormItem>) => {
-  const success = formRef.value.updateItem(prop, updates)
-  if (success) {
-    ElMessage.success('Field updated successfully')
-  }
-}
-
-// Dynamically update field properties
-const toggleFieldDisabled = (prop: string) => {
-  const item = formRef.value.getItemByProp(prop)
-  if (item) {
-    formRef.value.updateItem(prop, {
-      renderProps: {
-        ...item.renderProps,
-        disabled: !item.renderProps?.disabled
-      }
-    })
-  }
-}
-
-// Batch update fields
-const updateMultipleFields = (updates: Record<string, Partial<MaFormItem>>) => {
-  Object.entries(updates).forEach(([prop, update]) => {
-    formRef.value.updateItem(prop, update)
-  })
-}
-```
-
-### Replace Form Items
-
-```typescript
-// Completely replace form items array
-const replaceAllItems = () => {
-  const newItems = [
-    {
-      label: 'New Username',
-      prop: 'newUsername',
-      render: 'input'
-    },
-    {
-      label: 'New Email',
-      prop: 'newEmail', 
-      render: 'input',
-      renderProps: { type: 'email' }
-    }
-  ]
-  
-  formRef.value.setItems(newItems)
-}
-
-// Get all current form items
-const getAllItems = () => {
-  const items = formRef.value.getItems()
-  console.log('Current form items:', items)
-  return items
-}
-```
-
-## Form Item Query Methods
-
-### Single Query
-
-```typescript
-// Find form item by prop
-const findFieldByProp = (prop: string) => {
-  const item = formRef.value.getItemByProp(prop)
-  if (item) {
-    console.log(`Found field ${prop}:`, item)
+// Get Element Plus el-form instance
+const getElFormInstance = () => {
+  const elFormInstance = formRef.value?.getElFormRef()
+  if (elFormInstance) {
+    console.log('Element Plus form instance:', elFormInstance)
+    return elFormInstance
   } else {
-    console.log(`Field ${prop} does not exist`)
-  }
-  return item
-}
-```
-
-### Conditional Query
-
-```typescript
-// Find all hidden fields
-const findHiddenFields = () => {
-  const hiddenFields = formRef.value.getItemsByCondition(item => 
-    item.hide === true || (typeof item.hide === 'function' && item.hide(formData.value, item))
-  )
-  console.log('Hidden fields:', hiddenFields)
-  return hiddenFields
-}
-
-// Find fields by render type
-const findFieldsByRender = (renderType: string) => {
-  return formRef.value.getItemsByCondition(item => item.render === renderType)
-}
-
-// Find required fields
-const findRequiredFields = () => {
-  return formRef.value.getItemsByCondition(item => 
-    item.itemProps?.rules?.some(rule => rule.required === true)
-  )
-}
-```
-
-### Visibility Query
-
-```typescript
-// Get all visible fields
-const getVisibleFields = () => {
-  const visibleItems = formRef.value.getVisibleItems()
-  console.log('Visible field count:', visibleItems.length)
-  return visibleItems
-}
-
-// Get field statistics
-const getFieldStats = () => {
-  const allItems = formRef.value.getItems()
-  const visibleItems = formRef.value.getVisibleItems()
-  
-  return {
-    total: allItems.length,
-    visible: visibleItems.length,
-    hidden: allItems.length - visibleItems.length
+    console.warn('Form instance not initialized')
+    return null
   }
 }
 ```
 
-## Validation Control Methods
+### Form Validation via Instance
 
-### Form Validation
+The instance obtained through `getElFormRef()` can call all native validation methods of Element Plus forms:
 
 ```typescript
 // Validate entire form
 const validateForm = async () => {
   try {
-    const isValid = await formRef.value.validate()
+    const elFormRef = formRef.value?.getElFormRef()
+    if (!elFormRef) {
+      throw new Error('Form instance not found')
+    }
+    
+    const isValid = await elFormRef.validate()
     if (isValid) {
       ElMessage.success('Form validation passed')
       return true
@@ -299,42 +119,15 @@ const validateForm = async () => {
   }
 }
 
-// Form validation with error handling
-const validateFormWithErrorHandling = async () => {
-  const loadingInstance = ElLoading.service({ text: 'Validating...' })
-  
-  try {
-    const isValid = await formRef.value.validate()
-    loadingInstance.close()
-    
-    if (isValid) {
-      ElMessage.success('Validation passed, ready to submit')
-      return true
-    }
-  } catch (error) {
-    loadingInstance.close()
-    ElMessage.error('Please check form inputs')
-    
-    // Scroll to first error field
-    const firstErrorField = document.querySelector('.el-form-item.is-error')
-    if (firstErrorField) {
-      firstErrorField.scrollIntoView({ behavior: 'smooth' })
-    }
-    
-    return false
-  }
-}
-```
-
-### Field Validation
-
-```typescript
 // Validate single field
 const validateSingleField = async (prop: string) => {
   try {
-    const isValid = await formRef.value.validateField(prop)
-    console.log(`Field ${prop} validation result:`, isValid)
-    return isValid
+    const elFormRef = formRef.value?.getElFormRef()
+    if (!elFormRef) return false
+    
+    await elFormRef.validateField(prop)
+    console.log(`Field ${prop} validation passed`)
+    return true
   } catch (error) {
     console.error(`Field ${prop} validation failed:`, error)
     return false
@@ -343,189 +136,326 @@ const validateSingleField = async (prop: string) => {
 
 // Batch validate specified fields
 const validateMultipleFields = async (props: string[]) => {
-  const results = await Promise.allSettled(
-    props.map(async prop => ({
-      prop,
-      valid: await formRef.value.validateField(prop)
-    }))
-  )
+  const elFormRef = formRef.value?.getElFormRef()
+  if (!elFormRef) return false
   
-  const validResults = results.filter(r => r.status === 'fulfilled')
-  const invalidCount = validResults.filter(r => !r.value.valid).length
-  
-  console.log(`Validation complete, ${validResults.length - invalidCount}/${validResults.length} fields passed`)
-  return invalidCount === 0
+  try {
+    const results = await Promise.allSettled(
+      props.map(prop => elFormRef.validateField(prop))
+    )
+    
+    const failedCount = results.filter(r => r.status === 'rejected').length
+    const successCount = results.length - failedCount
+    
+    console.log(`Validation complete, ${successCount}/${results.length} fields passed`)
+    return failedCount === 0
+  } catch (error) {
+    console.error('Batch validation failed:', error)
+    return false
+  }
 }
 ```
 
-### Validation State Management
+### Form Reset via Instance
 
 ```typescript
 // Reset form validation state
 const resetValidation = () => {
-  formRef.value.resetFields()
-  ElMessage.info('Form reset')
+  const elFormRef = formRef.value?.getElFormRef()
+  if (elFormRef) {
+    elFormRef.resetFields()
+    ElMessage.info('Form reset')
+  }
 }
 
 // Reset specified fields
 const resetSpecificFields = (props: string[]) => {
-  formRef.value.resetFields(props)
-  ElMessage.info(`Fields ${props.join(', ')} reset`)
+  const elFormRef = formRef.value?.getElFormRef()
+  if (elFormRef) {
+    elFormRef.resetFields(props)
+    ElMessage.info(`Reset ${props.join(', ')} fields`)
+  }
 }
 
 // Clear validation errors
 const clearValidationErrors = () => {
-  formRef.value.clearValidate()
-  ElMessage.info('Validation errors cleared')
+  const elFormRef = formRef.value?.getElFormRef()
+  if (elFormRef) {
+    elFormRef.clearValidate()
+    ElMessage.info('Validation errors cleared')
+  }
 }
 
 // Clear specified field errors  
 const clearFieldErrors = (props: string[]) => {
-  formRef.value.clearValidate(props)
+  const elFormRef = formRef.value?.getElFormRef()
+  if (elFormRef) {
+    elFormRef.clearValidate(props)
+    console.log(`Cleared validation errors for ${props.join(', ')} fields`)
+  }
 }
 ```
 
-## Data Operation Methods
-
-### Data Retrieval
+### Advanced Instance Operations
 
 ```typescript
-// Get form data
-const getFormData = () => {
-  const data = formRef.value.getFormData()
-  console.log('Current form data:', data)
-  return data
+// Scroll to specified field
+const scrollToField = (prop: string) => {
+  const elFormRef = formRef.value?.getElFormRef()
+  if (elFormRef) {
+    elFormRef.scrollToField(prop)
+    console.log(`Scrolled to field: ${prop}`)
+  }
 }
 
-// Get specified field data
-const getFieldValue = (prop: string) => {
-  const data = formRef.value.getFormData()
-  return data[prop]
+// Get field instance
+const getFieldInstance = (prop: string) => {
+  const elFormRef = formRef.value?.getElFormRef()
+  if (elFormRef) {
+    // Get field instance via DOM query
+    const fieldElement = document.querySelector(`[data-field="${prop}"]`)
+    return fieldElement
+  }
+  return null
 }
+```
 
-// Get changed data
-const getChangedData = () => {
-  const currentData = formRef.value.getFormData()
-  const initialData = initialFormData.value
+## Practical Application Scenarios
+
+### Form Submission Flow
+
+Combining all exposed methods to implement a complete form submission flow:
+
+```typescript
+const handleFormSubmit = async () => {
+  try {
+    // 1. Set loading state
+    formRef.value?.setLoadingState(true)
+    
+    // 2. Perform form validation
+    const elFormRef = formRef.value?.getElFormRef()
+    if (!elFormRef) {
+      throw new Error('Form instance not initialized')
+    }
+    
+    await elFormRef.validate()
+    
+    // 3. Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    
+    // 4. Handle successful submission
+    ElMessage.success('Submission successful')
+    
+    // 5. Reset form (optional)
+    elFormRef.resetFields()
+    
+  } catch (error) {
+    // Handle validation failure or submission error
+    ElMessage.error('Submission failed, please check the form')
+    console.error('Submission error:', error)
+    
+    // Scroll to first error field
+    const firstErrorField = document.querySelector('.el-form-item.is-error')
+    if (firstErrorField) {
+      firstErrorField.scrollIntoView({ behavior: 'smooth' })
+    }
+  } finally {
+    // 6. Clear loading state
+    formRef.value?.setLoadingState(false)
+  }
+}
+```
+
+### Responsive Layout Adaptation
+
+Utilize reactive state management for optimal experience across devices:
+
+```typescript
+const handleResponsiveLayout = () => {
+  const isMobile = formRef.value?.isMobileState?.()
   
-  const changes = {}
-  Object.keys(currentData).forEach(key => {
-    if (currentData[key] !== initialData[key]) {
-      changes[key] = {
-        from: initialData[key],
-        to: currentData[key]
+  if (isMobile) {
+    // Mobile optimization: Show compact layout hint
+    ElMessage({
+      message: 'Switched to mobile layout mode',
+      type: 'info',
+      duration: 2000
+    })
+    
+    // Logic that may require special handling on mobile
+    console.log('Mobile mode detected, using single-column layout')
+  } else {
+    // Desktop layout
+    console.log('Desktop mode detected, using multi-column layout')
+  }
+}
+
+// Listen for window resize
+window.addEventListener('resize', () => {
+  formRef.value?.updateResponsiveState?.()
+  handleResponsiveLayout()
+})
+```
+
+### Error Handling and UX Optimization
+
+```typescript
+// Smart form operation handler
+const smartFormHandler = {
+  // Safe form validation
+  safeValidate: async (showLoading = true) => {
+    try {
+      if (showLoading) {
+        formRef.value?.setLoadingState(true)
+      }
+      
+      const elFormRef = formRef.value?.getElFormRef()
+      if (!elFormRef) {
+        throw new Error('Form instance not ready')
+      }
+      
+      const isValid = await elFormRef.validate()
+      return { success: true, valid: isValid }
+    } catch (error) {
+      return { success: false, error, valid: false }
+    } finally {
+      if (showLoading) {
+        formRef.value?.setLoadingState(false)
       }
     }
-  })
+  },
   
-  return changes
-}
-```
-
-### Data Setting
-
-```typescript
-// Set form data
-const setFormData = (data: Record<string, any>) => {
-  formRef.value.setFormData(data)
-  ElMessage.success('Data set successfully')
-}
-
-// Batch set field values
-const setMultipleFields = (fieldValues: Record<string, any>) => {
-  const currentData = formRef.value.getFormData()
-  formRef.value.setFormData({
-    ...currentData,
-    ...fieldValues
-  })
-}
-
-// Reset to initial data
-const resetToInitialData = () => {
-  formRef.value.resetFormData()
-  ElMessage.info('Data reset to initial state')
-}
-```
-
-## Element Plus Instance Access
-
-### Get Native Instance
-
-```typescript
-// Get Element Plus el-form instance
-const getElFormInstance = () => {
-  const elFormInstance = formRef.value.getElFormRef()
-  if (elFormInstance) {
-    console.log('Element Plus form instance:', elFormInstance)
-    // Can call native el-form methods
-    return elFormInstance
-  }
-}
-
-// Use native instance methods
-const useElFormMethods = () => {
-  const elForm = formRef.value.getElFormRef()
-  if (elForm) {
-    // Call native el-form methods
-    elForm.scrollToField('username')
-    elForm.clearValidate(['email'])
+  // Smart reset
+  smartReset: (clearValidation = true) => {
+    const elFormRef = formRef.value?.getElFormRef()
+    if (elFormRef) {
+      elFormRef.resetFields()
+      if (clearValidation) {
+        elFormRef.clearValidate()
+      }
+      ElMessage.info('Form reset')
+    }
+  },
+  
+  // Get current status info
+  getStatus: () => {
+    return {
+      loading: formRef.value?.getLoadingState?.() || false,
+      mobile: formRef.value?.isMobileState?.() || false,
+      formReady: !!formRef.value?.getElFormRef()
+    }
   }
 }
 ```
 
-## Comprehensive Usage Examples
-
-### Form Dynamic Management
+### Debugging and Development Tools
 
 ```typescript
-const formManager = {
-  // Add field group
-  addFieldGroup: (groupName: string, fields: MaFormItem[]) => {
-    fields.forEach((field, index) => {
-      field.prop = `${groupName}.${field.prop}`
-      formRef.value.appendItem(field, index)
-    })
-  },
-  
-  // Remove field group
-  removeFieldGroup: (groupName: string) => {
-    const items = formRef.value.getItems()
-    const toRemove = items
-      .filter(item => item.prop?.startsWith(`${groupName}.`))
-      .map(item => item.prop)
-    
-    toRemove.forEach(prop => formRef.value.removeItem(prop))
-  },
-  
-  // Toggle field state
-  toggleFieldState: (prop: string, state: 'disabled' | 'hidden' | 'readonly') => {
-    const updates = {
-      disabled: { renderProps: { disabled: true } },
-      hidden: { hide: true },
-      readonly: { renderProps: { readonly: true } }
+// Development debugging tools
+const devTools = {
+  // Print status of all exposed methods
+  debug: () => {
+    const status = {
+      loadingState: formRef.value?.getLoadingState?.(),
+      mobileState: formRef.value?.isMobileState?.(),
+      formInstance: !!formRef.value?.getElFormRef(),
+      methods: [
+        'setLoadingState',
+        'getLoadingState', 
+        'getElFormRef',
+        'isMobileState',
+        'updateResponsiveState'
+      ]
     }
     
-    formRef.value.updateItem(prop, updates[state])
+    console.group('🔧 MaForm Debug Info')
+    console.log('Status info:', status)
+    console.log('Available methods:', Object.keys(formRef.value || {}))
+    console.groupEnd()
+    
+    return status
   },
   
-  // Switch form mode
-  switchMode: (mode: 'create' | 'edit' | 'view') => {
-    const configs = {
-      create: { disabled: false, loading: false },
-      edit: { disabled: false, loading: false },
-      view: { disabled: true, loading: false }
-    }
+  // Test all methods
+  testMethods: async () => {
+    console.log('📋 Testing MaForm exposed methods...')
     
-    formRef.value.updateOptions(options => ({
-      ...options,
-      ...configs[mode]
-    }))
+    // Test loading state
+    const initialLoading = formRef.value?.getLoadingState?.()
+    console.log('Initial loading state:', initialLoading)
+    
+    formRef.value?.setLoadingState(true)
+    console.log('Set loading state to true')
+    
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    
+    formRef.value?.setLoadingState(false)
+    console.log('Set loading state to false')
+    
+    // Test responsive state
+    const isMobile = formRef.value?.isMobileState?.()
+    console.log('Current mobile state:', isMobile)
+    
+    formRef.value?.updateResponsiveState?.()
+    console.log('Responsive state updated')
+    
+    // Test form instance
+    const elFormRef = formRef.value?.getElFormRef()
+    console.log('Form instance available:', !!elFormRef)
+    
+    console.log('✅ All method tests completed')
   }
 }
 ```
+
+## API Method Summary
+
+### Methods Exposed by MaForm
+
+| Method | Parameters | Return Value | Description |
+|-------|-----|-------|-----|
+| `setLoadingState` | `loading: boolean` | `void` | Set global loading state of form |
+| `setOptions` | `opts: MaFormOptions` | `void` | Set form configuration options |
+| `getOptions` | - | `MaFormOptions` | Get current form configuration |
+| `setItems` | `items: MaFormItem[]` | `void` | Set form item array |
+| `getItems` | - | `MaFormItem[]` | Get current form items array |
+| `appendItem` | `item: MaFormItem` | `void` | Add a form item |
+| `removeItem` | `prop: string` | `void` | Remove form item by prop |
+| `getItemByProp` | `prop: string` | `MaFormItem \| null` | Get form item by prop |
+| `getElFormRef` | - | `FormInstance \| undefined` | Get Element Plus Form instance |
+| `isMobileState` | - | `boolean` | Check if currently in mobile state |
+
+### Unavailable Methods
+
+The following methods do not exist in the current version:
+
+| Method | Description |
+|-------|----- |
+| `getLoadingState` | Get current loading state (please maintain loading state yourself) |
+| `updateResponsiveState` | Manually trigger responsive state update (form handles this automatically) |
+
+### Element Plus Form Instance Methods
+
+The instance obtained via `getElFormRef()` supports these common methods:
+
+| Method | Parameters | Return Value | Description |
+|-------|-----|-------|-----|
+| `validate` | `callback?: Function` | `Promise<boolean>` | Validate entire form |
+| `validateField` | `props: string \| string[]` | `Promise<void>` | Validate specified fields |
+| `resetFields` | `props?: string \| string[]` | `void` | Reset field values and validation state |
+| `clearValidate` | `props?: string \| string[]` | `void` | Clear validation state |
+| `scrollToField` | `prop: string` | `void` | Scroll to specified field |
+
+## Notes
+
+1. **Safe Calls**: Use optional chaining (`?.`) to safely call methods and avoid errors when component is not mounted
+2. **Timing**: Ensure methods are called after component is mounted
+3. **Error Handling**: Implement proper error handling for async methods (like `validate`)
+4. **Type Safety**: When using TypeScript, import correct type definitions
 
 ## Related Links
 
-- [Exposed Methods Details](/en/front/component/ma-form#暴露方法-expose)
-- [MaFormExpose Type Definition](/en/front/component/ma-form#maformexpose)
-- [Form Validation Methods](/en/front/component/ma-form#表单验证)
+- [MaForm Basic Usage](/en/front/component/ma-form/examples/basic-usage)
+- [Form Validation Examples](/en/front/component/ma-form/examples/dynamic-validation)
+- [Loading State Demo](/en/front/component/ma-form/examples/loading-states)
+- [Element Plus Form Documentation](https://element-plus.org/zh-CN/component/form.html)

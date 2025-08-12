@@ -9,7 +9,7 @@ MaFormのモバイル端末向けレスポンシブ機能を紹介します。�
 - **ブレークポイントレスポンシブ**: 画面サイズに基づいて自動的にレイアウトを適応
 - **モバイル最適化**: モバイルデバイス向けの特別な最適化
 - **タッチフレンドリー**: タッチ操作に適したインタラクションデザイン
-- **デバイス認識**: 自動的にモバイルデバイスを認識し対応する設定を適用
+- **デバイス認識**: モバイルデバイスを自動認識し対応する設定を適用
 - **柔軟な設定**: モバイル専用のフィールド設定をサポート
 
 ## レスポンシブブレークポイントシステム
@@ -249,10 +249,10 @@ const mobileSizedFields = [
     prop: 'username',
     render: 'input',
     renderProps: {
-      size: 'default'  // デスクトップデフォルトサイズ
+      size: 'default'  // デスクトップでデフォルトサイズ
     },
     mobileProps: {
-      size: 'large'    // モバイル大サイズ、タッチ操作に便利
+      size: 'large'    // モバイルで大サイズ、タッチ操作しやすく
     }
   },
   {
@@ -264,7 +264,7 @@ const mobileSizedFields = [
     },
     mobileProps: {
       size: 'large',
-      teleported: false  // モバイルでポータルを使用せず、マスク問題を回避
+      teleported: false  // モバイルでポータルを使用しない（オーバーレイ問題回避）
     }
   },
   {
@@ -318,7 +318,7 @@ const touchFriendlyFields = [
     },
     mobileProps: {
       allowHalf: false,
-      size: 'large',    // 星のサイズを拡大
+      size: 'large',    // 星のサイズを大きく
       textColor: '#ff9900'
     }
   },
@@ -330,7 +330,7 @@ const touchFriendlyFields = [
       size: 'default'
     },
     mobileProps: {
-      size: 'large',    // スイッチサイズを拡大、クリックしやすく
+      size: 'large',    // スイッチサイズを大きく、クリックしやすく
       width: 60
     }
   }
@@ -517,7 +517,7 @@ const mobilePerformanceOptimization = {
     const criticalFields = fields.filter(field => field.priority === 'high')
     const nonCriticalFields = fields.filter(field => field.priority !== 'high')
     
-    // 重要フィールドを先にロード
+    // まず重要フィールドをロード
     formRef.value?.setItems(criticalFields)
     
     // 非重要フィールドを遅延ロード

@@ -7,14 +7,14 @@ MaFormの動的バリデーション機能を紹介します。カスタム同�
 ## 機能特徴
 
 - **多層バリデーション**：Element Plusネイティブルール、カスタム同期バリデーション、非同期バリデーションをサポート
-- **連動バリデーション**：フィールド間の依存関係を持つバリデーションロジック
+- **連動バリデーション**：フィールド間の依存関係のあるバリデーションロジック
 - **リアルタイムバリデーション**：入力中の即時バリデーションフィードバック
 - **非同期バリデーション**：サーバーサイドバリデーション（一意性チェックなど）をサポート
-- **カスタムエラーメッセージ**：柔軟なエラー表示カスタマイズ
+- **カスタムエラーメッセージ**：柔軟なエラーメッセージカスタマイズ
 
 ## バリデーションレベル
 
-### 1. Element Plus ネイティブバリデーションルール
+### 1. Element Plusネイティブバリデーションルール
 
 ```typescript
 {
@@ -24,8 +24,8 @@ MaFormの動的バリデーション機能を紹介します。カスタム同�
   itemProps: {
     rules: [
       { required: true, message: 'ユーザー名を入力してください', trigger: 'blur' },
-      { min: 3, max: 15, message: '3～15文字で入力してください', trigger: 'blur' },
-      { pattern: /^[a-zA-Z0-9_]+$/, message: '英数字とアンダースコアのみ使用可能', trigger: 'blur' }
+      { min: 3, max: 15, message: '3〜15文字で入力してください', trigger: 'blur' },
+      { pattern: /^[a-zA-Z0-9_]+$/, message: '英字、数字、アンダースコアのみ使用可能', trigger: 'blur' }
     ]
   }
 }
@@ -75,7 +75,7 @@ MaFormの動的バリデーション機能を紹介します。カスタム同�
       throw new Error('有効なメールアドレスを入力してください')
     }
     
-    // 非同期でメールアドレスの存在確認
+    // 非同期でメールアドレスの存在チェック
     try {
       const exists = await checkEmailExists(value)
       if (exists) {
@@ -85,7 +85,7 @@ MaFormの動的バリデーション機能を紹介します。カスタム同�
       if (error.message.includes('既に登録')) {
         throw error
       }
-      throw new Error('メールアドレスの確認に失敗しました。後ほど再試行してください')
+      throw new Error('メールアドレス確認に失敗しました。後ほど再試行してください')
     }
   }
 }
@@ -169,7 +169,7 @@ const linkedValidationFields = [
     const isRequired = userType === 'individual'
     
     if (isRequired && !value) {
-      callback(new Error('個人ユーザーは電話番号を入力必須です'))
+      callback(new Error('個人ユーザーは電話番号を入力する必要があります'))
       return
     }
     
@@ -203,21 +203,21 @@ const linkedValidationFields = [
     }
     
     if (value <= 0) {
-      callback(new Error('商品価格は0より大きい必要があります'))
+      callback(new Error('商品価格は0より大きくなければなりません'))
       return
     }
     
-    // ビジネスルール：VIP商品は100未満不可
+    // ビジネスルール：VIP商品の価格は100以上
     const isVipProduct = formData.isVipProduct
     if (isVipProduct && value < 100) {
-      callback(new Error('VIP商品は100円未満に設定できません'))
+      callback(new Error('VIP商品の価格は100元以上でなければなりません'))
       return
     }
     
-    // ビジネスルール：プロモーション商品は1000超不可
+    // ビジネスルール：プロモーション商品の価格は1000以下
     const isPromotional = formData.isPromotional  
     if (isPromotional && value > 1000) {
-      callback(new Error('プロモーション商品は1000円を超えて設定できません'))
+      callback(new Error('プロモーション商品の価格は1000円以下でなければなりません'))
       return
     }
     
@@ -261,7 +261,7 @@ const debouncedUsernameCheck = debounce(async (username) => {
     
     const exists = await debouncedUsernameCheck(value)
     if (exists) {
-      throw new Error('このユーザー名は既に使用されています')
+      throw new Error('ユーザー名は既に存在します')
     }
   }
 }
@@ -290,7 +290,7 @@ const debouncedUsernameCheck = debounce(async (username) => {
     try {
       const exists = await checkUsernameExists(value)
       if (exists) {
-        throw new Error('このユーザー名は既に使用されています')
+        throw new Error('ユーザー名は既に存在します')
       }
     } finally {
       // ローディング状態を非表示
@@ -302,7 +302,7 @@ const debouncedUsernameCheck = debounce(async (username) => {
 }
 ```
 
-### 3. エラーハンドリング
+### 3. エラー処理
 
 ```typescript
 {
@@ -314,9 +314,9 @@ const debouncedUsernameCheck = debounce(async (username) => {
       const response = await fetch(`/api/check-email?email=${value}`)
       
       if (!response.ok) {
-        // HTTPエラーハンドリング
+        // HTTPエラー処理
         if (response.status === 429) {
-          throw new Error('リクエストが多すぎます。しばらく待ってから再試行してください')
+          throw new Error('リクエストが多すぎます。しばらくしてから再試行してください')
         }
         throw new Error('バリデーションサービスが利用できません')
       }
@@ -329,7 +329,7 @@ const debouncedUsernameCheck = debounce(async (username) => {
     } catch (error) {
       if (error.name === 'TypeError') {
         // ネットワークエラー
-        throw new Error('ネットワーク接続に失敗しました。設定を確認してください')
+        throw new Error('ネットワーク接続に失敗しました。ネットワーク設定を確認してください')
       }
       throw error
     }
@@ -339,7 +339,7 @@ const debouncedUsernameCheck = debounce(async (username) => {
 
 ## バリデーションタイミング制御
 
-### 1. トリガー設定
+### 1. トリガー方法設定
 
 ```typescript
 {

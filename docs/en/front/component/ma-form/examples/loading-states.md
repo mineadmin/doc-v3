@@ -347,7 +347,7 @@ const simulateProgressLoading = async () => {
 >
   <template #loading="{ loading }">
     <div v-if="loading" class="skeleton-loading">
-      <!-- Simulate form structure skeleton -->
+      <!-- Simulated form structure skeleton -->
       <div class="skeleton-item" v-for="n in 4" :key="n">
         <div class="skeleton-label"></div>
         <div class="skeleton-input"></div>

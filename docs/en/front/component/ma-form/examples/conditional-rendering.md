@@ -1,13 +1,13 @@
 # Conditional Rendering
 
-Demonstrates the conditional rendering functionality that dynamically controls field visibility based on form data, including linked displays and complex conditional judgments.
+Demonstrates the conditional rendering functionality for dynamically controlling field visibility based on form data, including linked displays and complex conditional judgments.
 
 <DemoPreview dir="demos/ma-form/conditional-rendering" />
 
 ## Features
 
-- **Dynamic Display Control**: Controls field show/hide based on form data
-- **Dependency Management**: Declares field dependencies through dependencies
+- **Dynamic Visibility Control**: Control field show/hide based on form data
+- **Dependency Management**: Declare field dependencies through dependencies
 - **Complex Condition Support**: Supports multi-condition combination judgments
 - **Performance Optimization**: Recalculates conditions only when dependent fields change
 - **Two Rendering Modes**: show and hide properties provide different display control strategies
@@ -32,13 +32,13 @@ Does not render DOM when conditions are not met, offering optimal performance fo
 
 **Characteristics:**
 - ✅ No DOM rendering, best performance
-- ✅ Does not occupy page space
+- ✅ Doesn't occupy page space
 - ✅ Suitable for most scenarios
 - ⚠️ Slight flicker possible during initialization
 
 ### hide Property
 
-Hides DOM when conditions are not met but still renders, suitable for frequently toggled scenarios:
+Hides but still renders DOM when conditions aren't met, suitable for frequently toggled scenarios:
 
 ```typescript
 {
@@ -56,11 +56,11 @@ Hides DOM when conditions are not met but still renders, suitable for frequently
 - ❌ Still renders DOM
 - ❌ Occupies page space
 
-## Use Case Comparisons
+## Usage Scenario Comparison
 
 ### show Property Use Cases
 
-**1. Display Different Fields Based on User Type**
+**1. Display different fields based on user type**
 
 ```typescript
 const userTypeFields = [
@@ -90,7 +90,7 @@ const userTypeFields = [
 ]
 ```
 
-**2. Permission Level Control**
+**2. Permission level control**
 
 ```typescript
 const permissionFields = [
@@ -123,7 +123,7 @@ const permissionFields = [
 
 ### hide Property Use Cases
 
-**1. Frequently Toggled Feature Switches**
+**1. Frequently toggled feature switches**
 
 ```typescript
 const notificationFields = [
@@ -136,7 +136,7 @@ const notificationFields = [
     label: 'Email Notifications',
     prop: 'emailNotifications',
     render: 'switch',
-    // Use hide to maintain layout stability with smooth transitions
+    // Using hide maintains layout stability with smoother transitions
     hide: (item, model) => !model.enableNotifications,
     dependencies: ['enableNotifications']
   },
@@ -150,7 +150,7 @@ const notificationFields = [
 ]
 ```
 
-**2. Form Validation Hints**
+**2. Form validation hints**
 
 ```typescript
 {
@@ -161,7 +161,7 @@ const notificationFields = [
     readonly: true,
     placeholder: 'Password Strength: Weak'
   },
-  // Use hide to avoid layout jumps
+  // Using hide prevents layout jumps
   hide: (item, model) => !model.password || model.password.length === 0,
   dependencies: ['password']
 }
@@ -224,7 +224,7 @@ const cascadeFields = [
 ### 3. Dynamic Condition Calculation
 
 ```typescript
-// Use computed properties to optimize complex conditions
+// Using computed properties to optimize complex conditions
 const isAdvancedUser = computed(() => {
   return formData.value.userLevel >= 10 && 
          formData.value.vipStatus === 'active' &&
@@ -295,7 +295,7 @@ const advancedField = {
 }
 ```
 
-## Performance Optimization Recommendations
+## Performance Optimization Tips
 
 ### 1. Prefer show Property
 
@@ -305,7 +305,7 @@ const advancedField = {
   show: (item, model) => model.userType === 'admin'
 }
 
-// ⚠️ Use with caution: Use hide, still renders but hides
+// ⚠️ Use with caution: Uses hide, still renders but hides
 {  
   hide: (item, model) => model.userType !== 'admin'
 }
@@ -362,7 +362,7 @@ const field = {
   show: (item, model) => {
     const condition = model.userType === 'admin'
     
-    // Debug information in development environment
+    // Debug info in development environment
     if (process.env.NODE_ENV === 'development') {
       console.log(`Field ${item.prop} display condition:`, {
         userType: model.userType,
@@ -377,7 +377,7 @@ const field = {
 }
 ```
 
-### 2. Dependency Tracing
+### 2. Dependency Tracking
 
 ```typescript
 // Create debug utility function
@@ -398,7 +398,7 @@ const createDebugShow = (conditionFn: Function, debugName: string) => {
   }
 }
 
-// Use debug utility
+// Using debug utility
 {
   label: 'Test Field',
   prop: 'testField',
@@ -415,7 +415,7 @@ const createDebugShow = (conditionFn: Function, debugName: string) => {
 
 ### 1. Clear Use Cases
 
-- **show property**: Suitable for most conditional rendering scenarios with best performance
+- **show property**: Suitable for most conditional rendering scenarios, best performance
 - **hide property**: Suitable for frequently toggled scenarios requiring layout stability
 
 ### 2. Reasonable Dependency Design
@@ -426,7 +426,7 @@ const createDebugShow = (conditionFn: Function, debugName: string) => {
 
 ### 3. Consider User Experience
 
-- For frequently toggled scenarios, use hide property to avoid layout jumps
+- For frequently toggled scenarios, use hide property to prevent layout jumps
 - For one-time display scenarios, use show property to save performance
 - Provide appropriate transition animations to enhance experience
 

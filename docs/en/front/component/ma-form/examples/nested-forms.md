@@ -9,7 +9,7 @@ Demonstrates the implementation of MaForm's nested form structure, including hie
 - **Hierarchical Structure**: Supports multi-level nested form structures
 - **Dynamic Nesting**: Allows dynamic addition and removal of nested form items
 - **Object Arrays**: Supports complex data structures in object array format
-- **Independent Validation**: Each nesting level has independent validation mechanisms
+- **Independent Validation**: Each nested level has independent validation mechanisms
 - **Flexible Configuration**: Supports personalized configuration for nested items
 
 ## Basic Nested Structure
@@ -56,7 +56,7 @@ const nestedFormItems = [
 ]
 ```
 
-### 2. Multi-level Nesting
+### 2. Multi-Level Nesting
 
 ```typescript
 const multiLevelNested = [
@@ -233,7 +233,7 @@ const conditionalNestedItems = [
     dependencies: ['accountType'],
     children: [
       {
-        label: 'ID Card Number',
+        label: 'ID Card',
         prop: 'personalInfo.idCard',
         render: 'input',
         show: (model) => model.accountType === 'personal',
@@ -356,7 +356,7 @@ const addEducationItem = () => {
       label: () => {
         return h('div', { class: 'education-header' }, [
           h('span', `Education ${index + 1}`),
-          h('el-tag', { size: 'small', type: 'info' }, 'Removable')
+          h('el-tag', { size: 'small', type: 'info' }, 'Deletable')
         ])
       }
     }
@@ -558,7 +558,7 @@ const nestedValidationItems = [
             itemProps: {
               rules: [
                 { required: true, message: 'Please enter username', trigger: 'blur' },
-                { min: 3, max: 20, message: 'Username length should be 3-20 characters', trigger: 'blur' }
+                { min: 3, max: 20, message: 'Username length 3-20 characters', trigger: 'blur' }
               ]
             }
           }
@@ -577,7 +577,7 @@ const nestedValidationItems = [
               if (!value) {
                 callback(new Error('Please enter email address'))
               } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-                callback(new Error('Please enter a valid email address'))
+                callback(new Error('Please enter valid email address'))
               } else {
                 callback()
               }
@@ -641,9 +641,11 @@ const validateNestedObject = async (objectProp: string) => {
   
   const results = await Promise.allSettled(
     nestedProps.map(prop => formRef.value.validateField(prop))
+  )
   
   return results.every(result => result.status === 'fulfilled')
 }
 ```
 
 ## Data Processing Utilities
+

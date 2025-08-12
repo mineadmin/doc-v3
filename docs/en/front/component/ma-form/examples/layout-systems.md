@@ -1,6 +1,6 @@
 # Layout System
 
-Demonstrates MaForm's two layout systems: Flex grid layout and Grid spacing layout, along with responsive design implementation.
+Demonstrates two layout systems in MaForm: Flex grid layout and Grid spacing layout, along with responsive design implementation.
 
 <DemoPreview dir="demos/ma-form/layout-systems" />
 
@@ -9,12 +9,12 @@ Demonstrates MaForm's two layout systems: Flex grid layout and Grid spacing layo
 - **Dual Layout Systems**: Supports both Flex and Grid layout methods
 - **Responsive Grid**: Responsive layout based on Element Plus grid system
 - **Breakpoint Adaptation**: Supports five breakpoints: xs, sm, md, lg, xl
-- **Flexible Configuration**: Each form item can have individual layout properties
-- **Mobile Optimization**: Automatically switches to single-column layout on mobile
+- **Flexible Configuration**: Each form item can be individually configured with layout properties
+- **Mobile Optimization**: Automatically switches to single-column layout on mobile devices
 
 ## Flex Layout (Default)
 
-Grid system implemented using Element Plus's `el-row` and `el-col`:
+Grid system implemented based on Element Plus's `el-row` and `el-col`:
 
 ### Basic Configuration
 ```typescript
@@ -45,16 +45,16 @@ const formItem = {
     // Responsive configuration
     xs: 24,          // Extra small screens: full width
     sm: 12,          // Small screens: half width
-    md: 8,           // Medium screens: one-third
-    lg: 6,           // Large screens: one-quarter
-    xl: 4            // Extra large screens: one-sixth
+    md: 8,           // Medium screens: one-third width
+    lg: 6,           // Large screens: one-quarter width
+    xl: 4            // Extra large screens: one-sixth width
   }
 }
 ```
 
 ## Grid Layout
 
-Spacing layout implemented using Element Plus's `el-space`:
+Spacing layout implemented based on Element Plus's `el-space`:
 
 ### Basic Configuration
 ```typescript
@@ -74,19 +74,19 @@ const formOptions = {
 ### Use Cases
 - **Vertical Forms**: Simple forms with few fields
 - **Dynamic Forms**: Forms with uncertain number of fields
-- **Compact Layouts**: Space-saving scenarios
+- **Compact Layouts**: Scenarios requiring space saving
 
 ## Responsive System
 
 ### Breakpoint Definitions
 
 | Breakpoint | Device Type | Width Range | Recommended Columns |
-|------------|-------------|-------------|---------------------|
-| `xs` | Mobile Portrait | < 768px | 1 column |
-| `sm` | Mobile Landscape/Small Tablet | ≥ 768px | 1-2 columns |
+|------------|------------|-------------|---------------------|
+| `xs` | Mobile portrait | < 768px | 1 column |
+| `sm` | Mobile landscape/small tablet | ≥ 768px | 1-2 columns |
 | `md` | Tablet | ≥ 992px | 2-3 columns |
-| `lg` | Small Desktop | ≥ 1200px | 3-4 columns |
-| `xl` | Large Desktop | ≥ 1920px | 4+ columns |
+| `lg` | Small desktop | ≥ 1200px | 3-4 columns |
+| `xl` | Large desktop | ≥ 1920px | 4+ columns |
 
 ### Responsive Configuration Example
 
@@ -99,10 +99,10 @@ const responsiveField = {
   cols: {
     // Mobile-first
     xs: { span: 24 },                    // Mobile: full width
-    sm: { span: 12, offset: 0 },         // Small screens: two columns
-    md: { span: 8, offset: 0 },          // Medium screens: three columns  
-    lg: { span: 6, offset: 0 },          // Large screens: four columns
-    xl: { span: 4, offset: 2 }           // Extra large: six columns with left margin
+    sm: { span: 12, offset: 0 },         // Small screens: two columns per row
+    md: { span: 8, offset: 0 },          // Medium screens: three columns per row  
+    lg: { span: 6, offset: 0 },          // Large screens: four columns per row
+    xl: { span: 4, offset: 2 }           // Extra large: six columns per row with left margin
   }
 }
 
@@ -125,7 +125,7 @@ const formOptions = {
 
 ## Layout Best Practices
 
-### 1. Choose the Right Layout System
+### 1. Choose the Appropriate Layout System
 
 ```typescript
 // Complex forms → Use Flex layout
@@ -141,7 +141,7 @@ const simpleForm = {
 }
 ```
 
-### 2. Plan Grids Properly
+### 2. Plan Grids Reasonably
 
 ```typescript
 // Standard three-column layout

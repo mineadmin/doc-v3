@@ -1,13 +1,13 @@
 # Component Rendering
 
-Demonstrates all Element Plus component rendering methods supported by MaForm, including input types, selection types, date types, and special components.
+Demonstrates all Element Plus component rendering methods supported by MaForm, including input, selection, date, and special components.
 
 <DemoPreview dir="demos/ma-form/component-rendering" />
 
 ## Features
 
 - **Comprehensive Support**: Supports all Element Plus form components
-- **Multiple Rendering Methods**: Three rendering methods - string, component, and function
+- **Multiple Rendering Methods**: String, component, and function rendering approaches
 - **Slot Support**: Complete slot system support
 - **Property Passing**: Pass component properties via renderProps
 - **Event Handling**: Supports all native component events
@@ -30,7 +30,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 }
 ```
 
-### InputNumber Field
+### Number Input
 ```typescript
 {
   label: 'Quantity',
@@ -47,7 +47,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 }
 ```
 
-### Textarea Field
+### Textarea
 ```typescript
 {
   label: 'Description',
@@ -66,7 +66,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 
 ## Selection Components
 
-### Select Field
+### Select
 ```typescript
 {
   label: 'City',
@@ -90,7 +90,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 }
 ```
 
-### Cascader Field
+### Cascader
 ```typescript
 {
   label: 'Region',
@@ -119,7 +119,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 }
 ```
 
-### RadioGroup Field
+### Radio Group
 ```typescript
 {
   label: 'Gender',
@@ -140,7 +140,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 }
 ```
 
-### CheckboxGroup Field
+### Checkbox Group
 ```typescript
 {
   label: 'Hobbies',
@@ -163,7 +163,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 
 ## Date & Time Components
 
-### DatePicker Field
+### Date Picker
 ```typescript
 {
   label: 'Birth Date',
@@ -195,7 +195,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 }
 ```
 
-### TimePicker Field
+### Time Picker
 ```typescript
 {
   label: 'Time',
@@ -211,7 +211,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 }
 ```
 
-### DateTimePicker Field
+### DateTime Picker
 ```typescript
 {
   label: 'Appointment Time',
@@ -231,7 +231,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 
 ## Special Components
 
-### Switch Field
+### Switch
 ```typescript
 {
   label: 'Enabled Status',
@@ -255,7 +255,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 }
 ```
 
-### Rate Field
+### Rate
 ```typescript
 {
   label: 'Rating',
@@ -273,7 +273,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 }
 ```
 
-### Slider Field
+### Slider
 ```typescript
 {
   label: 'Progress',
@@ -299,7 +299,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 }
 ```
 
-### Upload Field
+### Upload
 ```typescript
 {
   label: 'File Upload',
@@ -397,7 +397,7 @@ import CustomComponent from './CustomComponent.vue'
     <div class="jsx-field">
       <el-input
         v-model={model[item.prop]}
-        placeholder="JSX rendered input"
+        placeholder="JSX rendering"
         clearable
         v-slots={{
           append: () => <el-button icon="Search">Search</el-button>
@@ -422,13 +422,13 @@ import CustomComponent from './CustomComponent.vue'
       console.log('Selection changed:', value)
     },
     onFocus: () => {
-      console.log('Got focus')
+      console.log('Focused')
     },
     onBlur: () => {
-      console.log('Lost focus')
+      console.log('Blurred')
     },
     onClear: () => {
-      console.log('Selection cleared')
+      console.log('Cleared')
     }
   }
 }

@@ -1,21 +1,21 @@
 # Slot System
 
-Demonstrates MaForm's slot system, including global slots, form-item level slots, dynamic slot naming, and nested component slot usage.
+Demonstrates MaForm's slot system, including global slots, form item-level slots, dynamic slot naming, and nested component slot usage.
 
 <DemoPreview dir="demos/ma-form/slots-examples" />
 
 ## Features
 
-- **Multi-level slots**: Supports global, form-item, and component level slots
+- **Multi-level slots**: Supports global, form item, and component-level slots
 - **Dynamic slot naming**: Dynamic slot naming mechanism based on props
 - **Configurable slots**: Define slot content through configuration
-- **Template slots**: Supports template-based slot usage
-- **Scoped slots**: Provides rich scoped data
+- **Template slots**: Support template-based slot usage
+- **Scoped slots**: Provide rich scoped data
 
 ## Global Slots
 
 ### 1. Default Slot
-When using the default slot, the configuration method will automatically become invalid and fully use the template approach:
+When using the default slot, the configuration method will automatically become invalid, completely using the template approach:
 
 ```vue
 <ma-form v-model="formData" :options="formOptions">
@@ -172,14 +172,14 @@ Define form item slots through configuration:
       ])
     },
     
-    // Help information
+    // Help text
     help: ({ item, model }) => {
       return h('div', { class: 'help-text' }, [
-        h('el-text', { type: 'info', size: 'small' }, 'Help information')
+        h('el-text', { type: 'info', size: 'small' }, 'This is help text')
       ])
     },
     
-    // Error information
+    // Error message
     error: ({ error }) => {
       return h('div', { class: 'custom-error' }, [
         h('el-icon', { color: '#F56C6C' }, [h('WarningFilled')]),
@@ -223,7 +223,7 @@ Define form item slots through configuration:
     
     help: ({ item, model }) => {
       return h('div', { class: 'upload-help' }, [
-        h('el-text', { type: 'info', size: 'small' }, 'Supports JPG, PNG formats, file size not exceeding 2MB')
+        h('el-text', { type: 'info', size: 'small' }, 'Supports JPG, PNG format, file size no more than 2MB')
       ])
     }
   }
@@ -285,9 +285,9 @@ Configure slots for rendered components:
       h('div', { style: 'margin-top: 8px;' }, 'Click or drag to upload')
     ]),
     
-    // Hint information
+    // Hint text
     tip: () => h('div', { class: 'upload-tip' }, [
-      h('el-text', { type: 'info', size: 'small' }, 'Supports PDF, Word formats, single file not exceeding 10MB')
+      h('el-text', { type: 'info', size: 'small' }, 'Supports PDF, Word format, single file no more than 10MB')
     ]),
     
     // File list
@@ -308,7 +308,7 @@ Configure slots for rendered components:
 }
 ```
 
-## Slot Scoped Data
+## Slot Scope Data
 
 ### FormItemScope Interface
 Scoped data for form item slots:
@@ -425,7 +425,7 @@ itemSlots: {
       const isMobile = window.innerWidth < 768
       return h('div', { 
         class: isMobile ? 'mobile-help' : 'desktop-help' 
-      }, 'Responsive help information')
+      }, 'Responsive help text')
     }
   }
 }

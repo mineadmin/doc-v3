@@ -1,6 +1,6 @@
 # レイアウトシステム
 
-MaFormの2つのレイアウトシステム：FlexグリッドレイアウトとGridスペースレイアウト、およびレスポンシブデザインの実装を紹介します。
+MaFormの2つのレイアウトシステム：FlexグリッドレイアウトとGridスペーシングレイアウト、およびレスポンシブデザインの実装を紹介します。
 
 <DemoPreview dir="demos/ma-form/layout-systems" />
 
@@ -8,13 +8,13 @@ MaFormの2つのレイアウトシステム：Flexグリッドレイアウトと
 
 - **デュアルレイアウトシステム**：FlexとGridの2つのレイアウト方式をサポート
 - **レスポンシブグリッド**：Element Plusグリッドシステムに基づくレスポンシブレイアウト
-- **ブレークポイント対応**：xs、sm、md、lg、xlの5つのブレークポイントをサポート
+- **ブレークポイント適応**：xs、sm、md、lg、xlの5つのブレークポイントをサポート
 - **柔軟な設定**：各フォーム項目ごとにレイアウトプロパティを個別に設定可能
-- **モバイル最適化**：モバイル端末では自動的にシングルカラムレイアウトに切り替え
+- **モバイル最適化**：モバイル端末では自動的に単一カラムレイアウトに切り替え
 
 ## Flexレイアウト（デフォルト）
 
-Element Plusの`el-row`と`el-col`を利用したグリッドシステム：
+Element Plusの`el-row`と`el-col`をベースに実装されたグリッドシステム：
 
 ### 基本設定
 ```typescript
@@ -36,25 +36,25 @@ const formItem = {
   prop: 'title',
   render: 'input',
   cols: {
-    span: 12,        // 12列を占有（合計24列）
-    offset: 0,       // 左側のオフセット列数
-    push: 0,         // 右方向への移動列数
-    pull: 0,         // 左方向への移動列数
+    span: 12,        // 12グリッドを占有（合計24グリッド）
+    offset: 0,       // 左側の間隔グリッド数
+    push: 0,         // 右方向への移動グリッド数
+    pull: 0,         // 左方向への移動グリッド数
     order: 1,        // ソート優先順位
     
     // レスポンシブ設定
-    xs: 24,          // 超小画面：1行占有
-    sm: 12,          // 小画面：半分を占有
-    md: 8,           // 中画面：3分の1を占有
-    lg: 6,           // 大画面：4分の1を占有
-    xl: 4            // 超大画面：6分の1を占有
+    xs: 24,          // 超小型画面：1行を占有
+    sm: 12,          // 小型画面：半分を占有
+    md: 8,           // 中型画面：3分の1を占有
+    lg: 6,           // 大型画面：4分の1を占有
+    xl: 4            // 超大型画面：6分の1を占有
   }
 }
 ```
 
 ## Gridレイアウト
 
-Element Plusの`el-space`を利用したスペースレイアウト：
+Element Plusの`el-space`をベースに実装されたスペーシングレイアウト：
 
 ### 基本設定
 ```typescript
@@ -64,7 +64,7 @@ const formOptions = {
     direction: 'vertical',    // 配置方向
     size: 'large',           // スペースサイズ：small | default | large
     wrap: true,              // 折り返し有無
-    fill: true,              // コンテナ幅を埋めるかどうか
+    fill: true,              // コンテナ幅を埋めるか
     fillRatio: 30,           // 埋め込み比率
     alignment: 'start'       // 配置方法
   }
@@ -72,9 +72,9 @@ const formOptions = {
 ```
 
 ### 適用シナリオ
-- **垂直フォーム**：項目が少ないシンプルなフォーム
-- **動的フォーム**：項目数が不定のフォーム
-- **コンパクトレイアウト**：スペースを節約したい場面
+- **垂直フォーム**：項目数の少ないシンプルなフォーム
+- **動的フォーム**：項目数が不確定なフォーム
+- **コンパクトレイアウト**：スペース節約が必要な場面
 
 ## レスポンシブシステム
 
@@ -98,11 +98,11 @@ const responsiveField = {
   render: 'input',
   cols: {
     // モバイルファースト
-    xs: { span: 24 },                    // スマートフォン：1行占有
-    sm: { span: 12, offset: 0 },         // 小画面：1行2列
-    md: { span: 8, offset: 0 },          // 中画面：1行3列  
-    lg: { span: 6, offset: 0 },          // 大画面：1行4列
-    xl: { span: 4, offset: 2 }           // 超大画面：1行6列、左マージン
+    xs: { span: 24 },                    // スマートフォン：1行を占有
+    sm: { span: 12, offset: 0 },         // 小型画面：1行2列
+    md: { span: 8, offset: 0 },          // 中型画面：1行3列  
+    lg: { span: 6, offset: 0 },          // 大型画面：1行4列
+    xl: { span: 4, offset: 2 }           // 超大型画面：1行6列、左マージン
   }
 }
 
@@ -110,7 +110,7 @@ const responsiveField = {
 const formOptions = {
   responsiveConfig: {
     enabled: true,
-    mobileSingleColumn: true,      // モバイル端末で強制1列
+    mobileSingleColumn: true,      // モバイル端末で強制単一カラム
     mobileHideLabels: false,       // モバイル端末でラベルを非表示にするか
     breakpoints: {
       xs: 576,
@@ -148,10 +148,10 @@ const simpleForm = {
 const threeColumnLayout = {
   cols: {
     xs: 24,    // モバイル：1列
-    sm: 24,    // 小画面：1列
-    md: 8,     // 中画面：3列
-    lg: 8,     // 大画面：3列
-    xl: 8      // 超大画面：3列
+    sm: 24,    // 小型画面：1列
+    md: 8,     // 中型画面：3列
+    lg: 8,     // 大型画面：3列
+    xl: 8      // 超大型画面：3列
   }
 }
 
@@ -172,7 +172,7 @@ const mobileOptimized = {
   mobileBreakpoint: 768,
   responsiveConfig: {
     enabled: true,
-    mobileSingleColumn: true,      // モバイルで1列
+    mobileSingleColumn: true,      // モバイル端末で単一カラム
     mobileHideLabels: false        // ラベル表示を保持
   }
 }
@@ -182,4 +182,4 @@ const mobileOptimized = {
 
 - [レイアウトシステム詳細](/ja/front/component/ma-form#レイアウトシステム詳細)
 - [レスポンシブ設定](/ja/front/component/ma-form#responsiveconfig-レスポンシブ設定)
-- [モバイル対応](/ja/front/component/ma-form/examples/mobile-responsive)
+- [モバイル適応](/ja/front/component/ma-form/examples/mobile-responsive)

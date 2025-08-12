@@ -1,33 +1,52 @@
 # 暴露方法
 
-展示 MaForm 元件透過 defineExpose 暴露的所有 API 方法，包括狀態管理、配置管理、表單項管理、驗證等功能。
+展示 MaForm 元件透過 defineExpose 暴露的所有 API 方法，包括載入狀態控制、響應式狀態管理、例項訪問等功能。
 
 <DemoPreview dir="demos/ma-form/expose-methods" />
 
 ## 功能特性
 
-- **狀態管理**：載入狀態、響應式狀態控制
-- **配置管理**：動態修改表單配置選項
-- **表單項管理**：增刪改查表單項配置
-- **驗證控制**：表單和欄位驗證管理
-- **資料操作**：表單資料的讀取和設定
-- **例項訪問**：獲取底層 Element Plus 例項
+- **載入狀態控制**：設定表單載入狀態
+- **響應式狀態管理**：移動端狀態檢測
+- **表單項管理**：動態修改表單項配置
+- **例項訪問**：獲取底層 Element Plus Form 例項進行高階操作
 
-## 狀態管理方法
+## MaForm 暴露方法詳解
+
+### 狀態管理方法
 
 ### 載入狀態控制
 
 ```typescript
 // 設定載入狀態
-formRef.value.setLoadingState(true)
+formRef.value?.setLoadingState(true)
 
 // 獲取當前載入狀態
-const isLoading = formRef.value.getLoadingState()
+const isLoading = formRef.value?.getLoadingState?.()
 
 // 切換載入狀態
 const toggleLoading = () => {
-  const currentState = formRef.value.getLoadingState()
-  formRef.value.setLoadingState(!currentState)
+  const currentState = formRef.value?.getLoadingState?.() || false
+  formRef.value?.setLoadingState(!currentState)
+}
+
+// 模擬提交過程中的載入狀態
+const handleSubmit = async () => {
+  try {
+    formRef.value?.setLoadingState(true)
+    
+    // 執行表單驗證
+    await formRef.value?.getElFormRef()?.validate()
+    
+    // 模擬非同步提交
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    
+    ElMessage.success('提交成功')
+  } catch (error) {
+    ElMessage.error('提交失敗')
+  } finally {
+    formRef.value?.setLoadingState(false)
+  }
 }
 ```
 
@@ -35,259 +54,60 @@ const toggleLoading = () => {
 
 ```typescript
 // 檢查是否為移動端狀態
-const isMobile = formRef.value.isMobileState()
+const isMobile = formRef.value?.isMobileState?.()
 
 // 手動更新響應式狀態（視窗大小改變時）
 window.addEventListener('resize', () => {
-  formRef.value.updateResponsiveState()
-})
-```
-
-## 配置管理方法
-
-### 設定表單配置
-
-```typescript
-// 完全替換配置
-formRef.value.setOptions({
-  layout: 'grid',
-  loading: true,
-  labelWidth: '120px'
+  formRef.value?.updateResponsiveState?.()
 })
 
-// 獲取當前配置
-const currentOptions = formRef.value.getOptions()
-console.log('當前配置:', currentOptions)
-
-// 透過更新函式修改配置
-formRef.value.updateOptions(options => ({
-  ...options,
-  layout: options.layout === 'flex' ? 'grid' : 'flex',
-  loading: false
-}))
-```
-
-### 批次配置更新
-
-```typescript
-// 根據條件批次更新配置
-const updateConfigByCondition = (condition: string) => {
-  const updates = {
-    mobile: {
-      layout: 'grid',
-      responsiveConfig: { mobileSingleColumn: true }
-    },
-    desktop: {
-      layout: 'flex', 
-      flex: { gutter: 20 }
-    }
-  }
-  
-  formRef.value.updateOptions(options => ({
-    ...options,
-    ...updates[condition]
-  }))
-}
-```
-
-## 表單項管理方法
-
-### 新增表單項
-
-```typescript
-// 在末尾新增表單項
-const appendNewField = () => {
-  formRef.value.appendItem({
-    label: `新欄位 ${Date.now()}`,
-    prop: `field_${Date.now()}`,
-    render: 'input',
-    renderProps: {
-      placeholder: '動態新增的欄位'
-    }
-  })
-}
-
-// 在指定位置插入表單項
-const insertField = (index: number) => {
-  formRef.value.appendItem({
-    label: '插入欄位',
-    prop: `inserted_field_${Date.now()}`,
-    render: 'input'
-  }, index)
-}
-
-// 在開頭新增表單項
-const prependField = () => {
-  formRef.value.prependItem({
-    label: '首位欄位',
-    prop: `first_field_${Date.now()}`,
-    render: 'input',
-    cols: { span: 24 }
-  })
-}
-```
-
-### 刪除表單項
-
-```typescript
-// 根據 prop 刪除表單項
-const removeField = (prop: string) => {
-  const success = formRef.value.removeItem(prop)
-  if (success) {
-    ElMessage.success(`欄位 ${prop} 刪除成功`)
+// 根據裝置狀態調整表單佈局
+const adjustFormLayout = () => {
+  const isMobile = formRef.value?.isMobileState?.()
+  if (isMobile) {
+    // 移動端使用單列布局
+    console.log('當前為移動端，使用響應式佈局')
   } else {
-    ElMessage.error(`欄位 ${prop} 不存在`)
+    // 桌面端使用多列布局
+    console.log('當前為桌面端，使用標準佈局')
   }
-}
-
-// 批次刪除表單項
-const removeMultipleFields = (props: string[]) => {
-  const results = props.map(prop => ({
-    prop,
-    success: formRef.value.removeItem(prop)
-  }))
-  
-  const successCount = results.filter(r => r.success).length
-  ElMessage.info(`成功刪除 ${successCount} 個欄位`)
 }
 ```
 
-### 更新表單項
+## Element Plus Form 例項訪問
+
+### 獲取原生表單例項
+
+MaForm 最重要的暴露方法之一是 `getElFormRef()`，它允許你訪問底層的 Element Plus Form 例項，從而使用所有原生表單方法：
 
 ```typescript
-// 更新單個表單項
-const updateField = (prop: string, updates: Partial<MaFormItem>) => {
-  const success = formRef.value.updateItem(prop, updates)
-  if (success) {
-    ElMessage.success('欄位更新成功')
-  }
-}
-
-// 動態更新欄位屬性
-const toggleFieldDisabled = (prop: string) => {
-  const item = formRef.value.getItemByProp(prop)
-  if (item) {
-    formRef.value.updateItem(prop, {
-      renderProps: {
-        ...item.renderProps,
-        disabled: !item.renderProps?.disabled
-      }
-    })
-  }
-}
-
-// 批次更新欄位
-const updateMultipleFields = (updates: Record<string, Partial<MaFormItem>>) => {
-  Object.entries(updates).forEach(([prop, update]) => {
-    formRef.value.updateItem(prop, update)
-  })
-}
-```
-
-### 替換表單項
-
-```typescript
-// 完全替換表單項陣列
-const replaceAllItems = () => {
-  const newItems = [
-    {
-      label: '新使用者名稱',
-      prop: 'newUsername',
-      render: 'input'
-    },
-    {
-      label: '新郵箱',
-      prop: 'newEmail', 
-      render: 'input',
-      renderProps: { type: 'email' }
-    }
-  ]
-  
-  formRef.value.setItems(newItems)
-}
-
-// 獲取當前所有表單項
-const getAllItems = () => {
-  const items = formRef.value.getItems()
-  console.log('當前表單項:', items)
-  return items
-}
-```
-
-## 表單項查詢方法
-
-### 單個查詢
-
-```typescript
-// 根據 prop 查詢表單項
-const findFieldByProp = (prop: string) => {
-  const item = formRef.value.getItemByProp(prop)
-  if (item) {
-    console.log(`找到欄位 ${prop}:`, item)
+// 獲取 Element Plus el-form 例項
+const getElFormInstance = () => {
+  const elFormInstance = formRef.value?.getElFormRef()
+  if (elFormInstance) {
+    console.log('Element Plus 表單例項:', elFormInstance)
+    return elFormInstance
   } else {
-    console.log(`欄位 ${prop} 不存在`)
-  }
-  return item
-}
-```
-
-### 條件查詢
-
-```typescript
-// 查詢所有隱藏欄位
-const findHiddenFields = () => {
-  const hiddenFields = formRef.value.getItemsByCondition(item => 
-    item.hide === true || (typeof item.hide === 'function' && item.hide(formData.value, item))
-  )
-  console.log('隱藏欄位:', hiddenFields)
-  return hiddenFields
-}
-
-// 查詢指定型別的欄位
-const findFieldsByRender = (renderType: string) => {
-  return formRef.value.getItemsByCondition(item => item.render === renderType)
-}
-
-// 查詢必填欄位
-const findRequiredFields = () => {
-  return formRef.value.getItemsByCondition(item => 
-    item.itemProps?.rules?.some(rule => rule.required === true)
-  )
-}
-```
-
-### 可見性查詢
-
-```typescript
-// 獲取所有可見欄位
-const getVisibleFields = () => {
-  const visibleItems = formRef.value.getVisibleItems()
-  console.log('可見欄位數量:', visibleItems.length)
-  return visibleItems
-}
-
-// 統計欄位狀態
-const getFieldStats = () => {
-  const allItems = formRef.value.getItems()
-  const visibleItems = formRef.value.getVisibleItems()
-  
-  return {
-    total: allItems.length,
-    visible: visibleItems.length,
-    hidden: allItems.length - visibleItems.length
+    console.warn('表單例項尚未初始化')
+    return null
   }
 }
 ```
 
-## 驗證控制方法
+### 透過例項進行表單驗證
 
-### 表單驗證
+透過 `getElFormRef()` 獲取的例項可以呼叫所有 Element Plus 表單的原生驗證方法：
 
 ```typescript
 // 驗證整個表單
 const validateForm = async () => {
   try {
-    const isValid = await formRef.value.validate()
+    const elFormRef = formRef.value?.getElFormRef()
+    if (!elFormRef) {
+      throw new Error('表單例項未找到')
+    }
+    
+    const isValid = await elFormRef.validate()
     if (isValid) {
       ElMessage.success('表單驗證透過')
       return true
@@ -299,42 +119,15 @@ const validateForm = async () => {
   }
 }
 
-// 帶錯誤處理的表單驗證
-const validateFormWithErrorHandling = async () => {
-  const loadingInstance = ElLoading.service({ text: '驗證中...' })
-  
-  try {
-    const isValid = await formRef.value.validate()
-    loadingInstance.close()
-    
-    if (isValid) {
-      ElMessage.success('驗證透過，可以提交')
-      return true
-    }
-  } catch (error) {
-    loadingInstance.close()
-    ElMessage.error('請檢查表單填寫')
-    
-    // 定位到第一個錯誤欄位
-    const firstErrorField = document.querySelector('.el-form-item.is-error')
-    if (firstErrorField) {
-      firstErrorField.scrollIntoView({ behavior: 'smooth' })
-    }
-    
-    return false
-  }
-}
-```
-
-### 欄位驗證
-
-```typescript
 // 驗證單個欄位
 const validateSingleField = async (prop: string) => {
   try {
-    const isValid = await formRef.value.validateField(prop)
-    console.log(`欄位 ${prop} 驗證結果:`, isValid)
-    return isValid
+    const elFormRef = formRef.value?.getElFormRef()
+    if (!elFormRef) return false
+    
+    await elFormRef.validateField(prop)
+    console.log(`欄位 ${prop} 驗證透過`)
+    return true
   } catch (error) {
     console.error(`欄位 ${prop} 驗證失敗:`, error)
     return false
@@ -343,189 +136,326 @@ const validateSingleField = async (prop: string) => {
 
 // 批次驗證指定欄位
 const validateMultipleFields = async (props: string[]) => {
-  const results = await Promise.allSettled(
-    props.map(async prop => ({
-      prop,
-      valid: await formRef.value.validateField(prop)
-    }))
-  )
+  const elFormRef = formRef.value?.getElFormRef()
+  if (!elFormRef) return false
   
-  const validResults = results.filter(r => r.status === 'fulfilled')
-  const invalidCount = validResults.filter(r => !r.value.valid).length
-  
-  console.log(`驗證完成，${validResults.length - invalidCount}/${validResults.length} 個欄位透過`)
-  return invalidCount === 0
+  try {
+    const results = await Promise.allSettled(
+      props.map(prop => elFormRef.validateField(prop))
+    )
+    
+    const failedCount = results.filter(r => r.status === 'rejected').length
+    const successCount = results.length - failedCount
+    
+    console.log(`驗證完成，${successCount}/${results.length} 個欄位透過`)
+    return failedCount === 0
+  } catch (error) {
+    console.error('批次驗證失敗:', error)
+    return false
+  }
 }
 ```
 
-### 驗證狀態管理
+### 透過例項進行表單重置
 
 ```typescript
 // 重置表單驗證狀態
 const resetValidation = () => {
-  formRef.value.resetFields()
-  ElMessage.info('表單已重置')
+  const elFormRef = formRef.value?.getElFormRef()
+  if (elFormRef) {
+    elFormRef.resetFields()
+    ElMessage.info('表單已重置')
+  }
 }
 
 // 重置指定欄位
 const resetSpecificFields = (props: string[]) => {
-  formRef.value.resetFields(props)
-  ElMessage.info(`已重置 ${props.join(', ')} 欄位`)
+  const elFormRef = formRef.value?.getElFormRef()
+  if (elFormRef) {
+    elFormRef.resetFields(props)
+    ElMessage.info(`已重置 ${props.join(', ')} 欄位`)
+  }
 }
 
 // 清除驗證錯誤
 const clearValidationErrors = () => {
-  formRef.value.clearValidate()
-  ElMessage.info('驗證錯誤已清除')
+  const elFormRef = formRef.value?.getElFormRef()
+  if (elFormRef) {
+    elFormRef.clearValidate()
+    ElMessage.info('驗證錯誤已清除')
+  }
 }
 
 // 清除指定欄位驗證錯誤  
 const clearFieldErrors = (props: string[]) => {
-  formRef.value.clearValidate(props)
+  const elFormRef = formRef.value?.getElFormRef()
+  if (elFormRef) {
+    elFormRef.clearValidate(props)
+    console.log(`已清除 ${props.join(', ')} 欄位的驗證錯誤`)
+  }
 }
 ```
 
-## 資料操作方法
-
-### 資料讀取
+### 高階例項操作
 
 ```typescript
-// 獲取表單資料
-const getFormData = () => {
-  const data = formRef.value.getFormData()
-  console.log('當前表單資料:', data)
-  return data
+// 滾動到指定欄位
+const scrollToField = (prop: string) => {
+  const elFormRef = formRef.value?.getElFormRef()
+  if (elFormRef) {
+    elFormRef.scrollToField(prop)
+    console.log(`已滾動到欄位: ${prop}`)
+  }
 }
 
-// 獲取指定欄位資料
-const getFieldValue = (prop: string) => {
-  const data = formRef.value.getFormData()
-  return data[prop]
+// 獲取欄位例項
+const getFieldInstance = (prop: string) => {
+  const elFormRef = formRef.value?.getElFormRef()
+  if (elFormRef) {
+    // 透過 DOM 查詢獲取欄位例項
+    const fieldElement = document.querySelector(`[data-field="${prop}"]`)
+    return fieldElement
+  }
+  return null
 }
+```
 
-// 獲取變更的資料
-const getChangedData = () => {
-  const currentData = formRef.value.getFormData()
-  const initialData = initialFormData.value
+## 實際應用場景
+
+### 表單提交流程
+
+結合所有暴露的方法，我們可以實現一個完整的表單提交流程：
+
+```typescript
+const handleFormSubmit = async () => {
+  try {
+    // 1. 設定載入狀態
+    formRef.value?.setLoadingState(true)
+    
+    // 2. 執行表單驗證
+    const elFormRef = formRef.value?.getElFormRef()
+    if (!elFormRef) {
+      throw new Error('表單例項未初始化')
+    }
+    
+    await elFormRef.validate()
+    
+    // 3. 模擬 API 呼叫
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    
+    // 4. 提交成功處理
+    ElMessage.success('提交成功')
+    
+    // 5. 重置表單（可選）
+    elFormRef.resetFields()
+    
+  } catch (error) {
+    // 驗證失敗或提交錯誤處理
+    ElMessage.error('提交失敗，請檢查表單')
+    console.error('提交錯誤:', error)
+    
+    // 滾動到第一個錯誤欄位
+    const firstErrorField = document.querySelector('.el-form-item.is-error')
+    if (firstErrorField) {
+      firstErrorField.scrollIntoView({ behavior: 'smooth' })
+    }
+  } finally {
+    // 6. 清除載入狀態
+    formRef.value?.setLoadingState(false)
+  }
+}
+```
+
+### 響應式佈局適配
+
+利用響應式狀態管理來實現不同裝置下的最佳體驗：
+
+```typescript
+const handleResponsiveLayout = () => {
+  const isMobile = formRef.value?.isMobileState?.()
   
-  const changes = {}
-  Object.keys(currentData).forEach(key => {
-    if (currentData[key] !== initialData[key]) {
-      changes[key] = {
-        from: initialData[key],
-        to: currentData[key]
+  if (isMobile) {
+    // 移動端最佳化：顯示緊湊佈局提示
+    ElMessage({
+      message: '已切換到移動端佈局模式',
+      type: 'info',
+      duration: 2000
+    })
+    
+    // 移動端可能需要特殊處理的邏輯
+    console.log('當前為移動端模式，使用單列布局')
+  } else {
+    // 桌面端佈局
+    console.log('當前為桌面端模式，使用多列布局')
+  }
+}
+
+// 監聽視窗大小變化
+window.addEventListener('resize', () => {
+  formRef.value?.updateResponsiveState?.()
+  handleResponsiveLayout()
+})
+```
+
+### 錯誤處理和使用者體驗最佳化
+
+```typescript
+// 智慧表單操作處理器
+const smartFormHandler = {
+  // 安全的表單驗證
+  safeValidate: async (showLoading = true) => {
+    try {
+      if (showLoading) {
+        formRef.value?.setLoadingState(true)
+      }
+      
+      const elFormRef = formRef.value?.getElFormRef()
+      if (!elFormRef) {
+        throw new Error('表單例項未就緒')
+      }
+      
+      const isValid = await elFormRef.validate()
+      return { success: true, valid: isValid }
+    } catch (error) {
+      return { success: false, error, valid: false }
+    } finally {
+      if (showLoading) {
+        formRef.value?.setLoadingState(false)
       }
     }
-  })
+  },
   
-  return changes
-}
-```
-
-### 資料設定
-
-```typescript
-// 設定表單資料
-const setFormData = (data: Record<string, any>) => {
-  formRef.value.setFormData(data)
-  ElMessage.success('資料設定成功')
-}
-
-// 批次設定欄位值
-const setMultipleFields = (fieldValues: Record<string, any>) => {
-  const currentData = formRef.value.getFormData()
-  formRef.value.setFormData({
-    ...currentData,
-    ...fieldValues
-  })
-}
-
-// 重置到初始資料
-const resetToInitialData = () => {
-  formRef.value.resetFormData()
-  ElMessage.info('資料已重置到初始狀態')
-}
-```
-
-## Element Plus 例項訪問
-
-### 獲取原生例項
-
-```typescript
-// 獲取 Element Plus el-form 例項
-const getElFormInstance = () => {
-  const elFormInstance = formRef.value.getElFormRef()
-  if (elFormInstance) {
-    console.log('Element Plus 表單例項:', elFormInstance)
-    // 可以呼叫 el-form 的原生方法
-    return elFormInstance
-  }
-}
-
-// 使用原生例項方法
-const useElFormMethods = () => {
-  const elForm = formRef.value.getElFormRef()
-  if (elForm) {
-    // 呼叫 el-form 原生方法
-    elForm.scrollToField('username')
-    elForm.clearValidate(['email'])
+  // 智慧重置
+  smartReset: (clearValidation = true) => {
+    const elFormRef = formRef.value?.getElFormRef()
+    if (elFormRef) {
+      elFormRef.resetFields()
+      if (clearValidation) {
+        elFormRef.clearValidate()
+      }
+      ElMessage.info('表單已重置')
+    }
+  },
+  
+  // 獲取當前狀態資訊
+  getStatus: () => {
+    return {
+      loading: formRef.value?.getLoadingState?.() || false,
+      mobile: formRef.value?.isMobileState?.() || false,
+      formReady: !!formRef.value?.getElFormRef()
+    }
   }
 }
 ```
 
-## 綜合應用示例
-
-### 表單動態管理
+### 除錯和開發工具
 
 ```typescript
-const formManager = {
-  // 新增欄位組
-  addFieldGroup: (groupName: string, fields: MaFormItem[]) => {
-    fields.forEach((field, index) => {
-      field.prop = `${groupName}.${field.prop}`
-      formRef.value.appendItem(field, index)
-    })
-  },
-  
-  // 刪除欄位組
-  removeFieldGroup: (groupName: string) => {
-    const items = formRef.value.getItems()
-    const toRemove = items
-      .filter(item => item.prop?.startsWith(`${groupName}.`))
-      .map(item => item.prop)
-    
-    toRemove.forEach(prop => formRef.value.removeItem(prop))
-  },
-  
-  // 欄位狀態切換
-  toggleFieldState: (prop: string, state: 'disabled' | 'hidden' | 'readonly') => {
-    const updates = {
-      disabled: { renderProps: { disabled: true } },
-      hidden: { hide: true },
-      readonly: { renderProps: { readonly: true } }
+// 開發時的除錯工具
+const devTools = {
+  // 列印所有暴露方法的狀態
+  debug: () => {
+    const status = {
+      loadingState: formRef.value?.getLoadingState?.(),
+      mobileState: formRef.value?.isMobileState?.(),
+      formInstance: !!formRef.value?.getElFormRef(),
+      methods: [
+        'setLoadingState',
+        'getLoadingState', 
+        'getElFormRef',
+        'isMobileState',
+        'updateResponsiveState'
+      ]
     }
     
-    formRef.value.updateItem(prop, updates[state])
+    console.group('🔧 MaForm Debug Info')
+    console.log('狀態資訊:', status)
+    console.log('可用方法:', Object.keys(formRef.value || {}))
+    console.groupEnd()
+    
+    return status
   },
   
-  // 表單模式切換
-  switchMode: (mode: 'create' | 'edit' | 'view') => {
-    const configs = {
-      create: { disabled: false, loading: false },
-      edit: { disabled: false, loading: false },
-      view: { disabled: true, loading: false }
-    }
+  // 測試所有方法
+  testMethods: async () => {
+    console.log('📋 測試 MaForm 暴露方法...')
     
-    formRef.value.updateOptions(options => ({
-      ...options,
-      ...configs[mode]
-    }))
+    // 測試載入狀態
+    const initialLoading = formRef.value?.getLoadingState?.()
+    console.log('初始載入狀態:', initialLoading)
+    
+    formRef.value?.setLoadingState(true)
+    console.log('設定載入狀態為 true')
+    
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    
+    formRef.value?.setLoadingState(false)
+    console.log('設定載入狀態為 false')
+    
+    // 測試響應式狀態
+    const isMobile = formRef.value?.isMobileState?.()
+    console.log('當前移動端狀態:', isMobile)
+    
+    formRef.value?.updateResponsiveState?.()
+    console.log('已更新響應式狀態')
+    
+    // 測試表單例項
+    const elFormRef = formRef.value?.getElFormRef()
+    console.log('表單例項是否可用:', !!elFormRef)
+    
+    console.log('✅ 所有方法測試完成')
   }
 }
 ```
+
+## API 方法總結
+
+### MaForm 暴露的方法
+
+| 方法名 | 引數 | 返回值 | 說明 |
+|-------|-----|-------|-----|
+| `setLoadingState` | `loading: boolean` | `void` | 設定表單的全域性載入狀態 |
+| `setOptions` | `opts: MaFormOptions` | `void` | 設定表單配置選項 |
+| `getOptions` | - | `MaFormOptions` | 獲取當前表單配置 |
+| `setItems` | `items: MaFormItem[]` | `void` | 設定表單項陣列 |
+| `getItems` | - | `MaFormItem[]` | 獲取當前表單項陣列 |
+| `appendItem` | `item: MaFormItem` | `void` | 新增一個表單項 |
+| `removeItem` | `prop: string` | `void` | 根據 prop 刪除表單項 |
+| `getItemByProp` | `prop: string` | `MaFormItem \| null` | 根據 prop 獲取表單項 |
+| `getElFormRef` | - | `FormInstance \| undefined` | 獲取 Element Plus Form 例項 |
+| `isMobileState` | - | `boolean` | 檢查當前是否為移動端狀態 |
+
+### 不可用的方法
+
+以下方法在當前版本中不存在：
+
+| 方法名 | 說明 |
+|-------|----- |
+| `getLoadingState` | 獲取當前的載入狀態（請自行維護載入狀態） |
+| `updateResponsiveState` | 手動觸發響應式狀態更新（表單會自動處理） |
+
+### Element Plus Form 例項方法
+
+透過 `getElFormRef()` 獲取的例項支援以下常用方法：
+
+| 方法名 | 引數 | 返回值 | 說明 |
+|-------|-----|-------|-----|
+| `validate` | `callback?: Function` | `Promise<boolean>` | 驗證整個表單 |
+| `validateField` | `props: string \| string[]` | `Promise<void>` | 驗證指定欄位 |
+| `resetFields` | `props?: string \| string[]` | `void` | 重置欄位值和驗證狀態 |
+| `clearValidate` | `props?: string \| string[]` | `void` | 清除驗證狀態 |
+| `scrollToField` | `prop: string` | `void` | 滾動到指定欄位 |
+
+## 注意事項
+
+1. **安全呼叫**：使用可選鏈運算子 (`?.`) 來安全呼叫方法，避免在元件未掛載時出錯
+2. **時機把握**：確保在元件掛載完成後再呼叫這些方法
+3. **錯誤處理**：對非同步方法（如 `validate`）要做好錯誤處理
+4. **型別安全**：配合 TypeScript 使用時，匯入正確的型別定義
 
 ## 相關連結
 
-- [暴露方法詳解](/zh-tw/front/component/ma-form#暴露方法-expose)
-- [MaFormExpose 型別定義](/zh-tw/front/component/ma-form#maformexpose)
-- [表單驗證方法](/zh-tw/front/component/ma-form#表單驗證)
+- [MaForm 基礎用法](/zh-tw/front/component/ma-form/examples/basic-usage)
+- [表單驗證示例](/zh-tw/front/component/ma-form/examples/dynamic-validation)
+- [載入狀態演示](/zh-tw/front/component/ma-form/examples/loading-states)
+- [Element Plus Form 文件](https://element-plus.org/zh-CN/component/form.html)

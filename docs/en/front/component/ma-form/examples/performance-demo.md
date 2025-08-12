@@ -7,11 +7,11 @@ Demonstrates MaForm's performance optimization strategies for large forms and co
 ## Features
 
 - **Large Form Optimization**: Performance optimizations for handling hundreds of form items
-- **Virtual Scrolling**: Virtual scrolling implementation for long lists of form items
-- **Lazy Loading Mechanism**: On-demand loading of form items and data
+- **Virtual Scrolling**: Implementation of virtual scrolling for long lists of form items
+- **Lazy Loading**: On-demand loading of form items and data
 - **Caching Strategy**: Intelligent caching to improve response speed
-- **Rendering Optimization**: Reduced unnecessary re-renders
-- **Memory Management**: Effective memory usage control
+- **Rendering Optimization**: Reduced unnecessary re-rendering
+- **Memory Management**: Effective control of memory usage
 
 ## Large Form Performance Optimization
 
@@ -90,7 +90,7 @@ const largeFormManager = {
     })
     
     this.loadedPages.add(page)
-    console.log(`Loaded page ${page}, containing ${pageItems.length} form items`)
+    console.log(`Loaded page ${page} with ${pageItems.length} form items`)
   },
   
   // Load more on scroll
@@ -113,7 +113,7 @@ const largeFormManager = {
   }
 }
 
-// Scroll listener for infinite loading
+// Implement infinite loading with scroll listener
 const setupInfiniteLoading = () => {
   const scrollContainer = document.querySelector('.ma-form-container')
   if (!scrollContainer) return
@@ -198,7 +198,7 @@ const virtualScrollManager = {
     const target = event.target as HTMLElement
     this.config.value.scrollTop = target.scrollTop
     
-    // Use requestAnimationFrame for scroll performance optimization
+    // Optimize scroll performance with requestAnimationFrame
     requestAnimationFrame(() => {
       this.updateVisibleItems()
     })
@@ -260,7 +260,7 @@ const lazyLoadManager = {
       this.updateFieldWithLazyData(fieldProp, data)
       
     } catch (error) {
-      console.error(`Field ${fieldProp} lazy loading failed:`, error)
+      console.error(`Lazy loading failed for field ${fieldProp}:`, error)
     } finally {
       config.loading = false
       formRef.value?.updateItem(fieldProp, {
@@ -295,7 +295,7 @@ const lazyLoadManager = {
   }
 }
 
-// Lazy loading field example
+// Example lazy loading fields
 const createLazyLoadFields = (): MaFormItem[] => [
   {
     label: 'City Selection',
@@ -421,7 +421,7 @@ class MultiLevelCache {
   private l1Cache = new Map<string, CacheItem>()  // Memory cache (fast)
   private l2Cache: LocalStorage                   // Local storage cache (persistent)
   private maxL1Size = 100                         // Max L1 cache entries
-  private defaultTTL = 5 * 60 * 1000             // Default 5 minutes TTL
+  private defaultTTL = 5 * 60 * 1000             // Default 5 minute TTL
   
   constructor() {
     this.l2Cache = {
@@ -433,14 +433,14 @@ class MultiLevelCache {
   
   // Get cached data
   async get<T>(key: string): Promise<T | null> {
-    // First check L1 cache
+    // Check L1 cache first
     const l1Item = this.l1Cache.get(key)
     if (l1Item && !this.isExpired(l1Item)) {
       l1Item.hitCount++
       return l1Item.data
     }
     
-    // Then check L2 cache
+    // Check L2 cache next
     const l2Data = this.l2Cache.getItem(key)
     if (l2Data) {
       try {
@@ -451,7 +451,7 @@ class MultiLevelCache {
           return l2Item.data
         }
       } catch (error) {
-        console.warn(`L2 cache parse failed: ${key}`, error)
+        console.warn(`Failed to parse L2 cache: ${key}`, error)
       }
     }
     
@@ -474,7 +474,7 @@ class MultiLevelCache {
     try {
       this.l2Cache.setItem(key, JSON.stringify(cacheItem))
     } catch (error) {
-      console.warn(`L2 cache set failed: ${key}`, error)
+      console.warn(`Failed to set L2 cache: ${key}`, error)
     }
   }
   
@@ -563,14 +563,14 @@ const formCache = new MultiLevelCache()
 
 ```typescript
 const smartPreCache = {
-  // Pre-caching configuration
+  // Pre-cache configuration
   preCacheRules: new Map<string, {
     condition: (context: any) => boolean
     loader: () => Promise<any>
     priority: number
   }>(),
   
-  // Register pre-caching rule
+  // Register pre-cache rule
   registerPreCacheRule(key: string, rule: {
     condition: (context: any) => boolean
     loader: () => Promise<any>
@@ -594,10 +594,10 @@ const smartPreCache = {
           const data = await rule.loader()
           await formCache.set(key, data, 10 * 60 * 1000) // 10 minute cache
         } catch (error) {
-          console.warn(`Pre-caching failed: ${key}`, error)
+          console.warn(`Pre-cache failed: ${key}`, error)
         }
       })
     
     await Promise.all(highPriorityTasks)
     
-    // Sequentially execute low
+    //

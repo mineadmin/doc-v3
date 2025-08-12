@@ -1,531 +1,458 @@
 # 公開メソッド
 
-MaFormコンポーネントがdefineExposeを通じて公開するすべてのAPIメソッドを紹介します。状態管理、設定管理、フォーム項目管理、バリデーションなどの機能が含まれます。
+MaFormコンポーネントがdefineExposeを通じて公開するすべてのAPIメソッドを紹介します。これにはローディング状態の制御、リアクティブな状態管理、インスタンスアクセスなどの機能が含まれます。
 
 <DemoPreview dir="demos/ma-form/expose-methods" />
 
 ## 機能特徴
 
-- **状態管理**: ローディング状態、レスポンシブ状態制御
-- **設定管理**: フォーム設定オプションの動的変更
-- **フォーム項目管理**: フォーム項目設定の追加・削除・更新・検索
-- **バリデーション制御**: フォームとフィールドのバリデーション管理
-- **データ操作**: フォームデータの読み取りと設定
-- **インスタンスアクセス**: 基盤となるElement Plusインスタンスの取得
+- **ローディング状態制御**: フォームのローディング状態を設定
+- **リアクティブ状態管理**: モバイル状態の検出
+- **フォームアイテム管理**: 動的にフォームアイテム設定を変更
+- **インスタンスアクセス**: 基盤のElement Plus Formインスタンスを取得して高度な操作を実行
 
-## 状態管理メソッド
+## MaForm公開メソッド詳細
+
+### 状態管理メソッド
 
 ### ローディング状態制御
 
 ```typescript
 // ローディング状態を設定
-formRef.value.setLoadingState(true)
+formRef.value?.setLoadingState(true)
 
 // 現在のローディング状態を取得
-const isLoading = formRef.value.getLoadingState()
+const isLoading = formRef.value?.getLoadingState?.()
 
 // ローディング状態を切り替え
 const toggleLoading = () => {
-  const currentState = formRef.value.getLoadingState()
-  formRef.value.setLoadingState(!currentState)
+  const currentState = formRef.value?.getLoadingState?.() || false
+  formRef.value?.setLoadingState(!currentState)
+}
+
+// 送信処理中のローディング状態をシミュレート
+const handleSubmit = async () => {
+  try {
+    formRef.value?.setLoadingState(true)
+    
+    // フォームバリデーションを実行
+    await formRef.value?.getElFormRef()?.validate()
+    
+    // 非同期送信をシミュレート
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    
+    ElMessage.success('送信成功')
+  } catch (error) {
+    ElMessage.error('送信失敗')
+  } finally {
+    formRef.value?.setLoadingState(false)
+  }
 }
 ```
 
-### レスポンシブ状態管理
+### リアクティブ状態管理
 
 ```typescript
-// モバイル状態かどうかを確認
-const isMobile = formRef.value.isMobileState()
+// モバイル状態かどうかをチェック
+const isMobile = formRef.value?.isMobileState?.()
 
-// 手動でレスポンシブ状態を更新（ウィンドウサイズ変更時）
+// 手動でリアクティブ状態を更新（ウィンドウサイズ変更時）
 window.addEventListener('resize', () => {
-  formRef.value.updateResponsiveState()
-})
-```
-
-## 設定管理メソッド
-
-### フォーム設定の設定
-
-```typescript
-// 設定を完全に置き換え
-formRef.value.setOptions({
-  layout: 'grid',
-  loading: true,
-  labelWidth: '120px'
+  formRef.value?.updateResponsiveState?.()
 })
 
-// 現在の設定を取得
-const currentOptions = formRef.value.getOptions()
-console.log('現在の設定:', currentOptions)
-
-// 更新関数で設定を変更
-formRef.value.updateOptions(options => ({
-  ...options,
-  layout: options.layout === 'flex' ? 'grid' : 'flex',
-  loading: false
-}))
-```
-
-### 一括設定更新
-
-```typescript
-// 条件に基づいて設定を一括更新
-const updateConfigByCondition = (condition: string) => {
-  const updates = {
-    mobile: {
-      layout: 'grid',
-      responsiveConfig: { mobileSingleColumn: true }
-    },
-    desktop: {
-      layout: 'flex', 
-      flex: { gutter: 20 }
-    }
-  }
-  
-  formRef.value.updateOptions(options => ({
-    ...options,
-    ...updates[condition]
-  }))
-}
-```
-
-## フォーム項目管理メソッド
-
-### フォーム項目の追加
-
-```typescript
-// 末尾にフォーム項目を追加
-const appendNewField = () => {
-  formRef.value.appendItem({
-    label: `新規フィールド ${Date.now()}`,
-    prop: `field_${Date.now()}`,
-    render: 'input',
-    renderProps: {
-      placeholder: '動的に追加されたフィールド'
-    }
-  })
-}
-
-// 指定位置にフォーム項目を挿入
-const insertField = (index: number) => {
-  formRef.value.appendItem({
-    label: '挿入フィールド',
-    prop: `inserted_field_${Date.now()}`,
-    render: 'input'
-  }, index)
-}
-
-// 先頭にフォーム項目を追加
-const prependField = () => {
-  formRef.value.prependItem({
-    label: '先頭フィールド',
-    prop: `first_field_${Date.now()}`,
-    render: 'input',
-    cols: { span: 24 }
-  })
-}
-```
-
-### フォーム項目の削除
-
-```typescript
-// propに基づいてフォーム項目を削除
-const removeField = (prop: string) => {
-  const success = formRef.value.removeItem(prop)
-  if (success) {
-    ElMessage.success(`フィールド ${prop} の削除に成功`)
+// デバイス状態に応じてフォームレイアウトを調整
+const adjustFormLayout = () => {
+  const isMobile = formRef.value?.isMobileState?.()
+  if (isMobile) {
+    // モバイルではシングルカラムレイアウトを使用
+    console.log('現在モバイルモードです。レスポンシブレイアウトを使用します')
   } else {
-    ElMessage.error(`フィールド ${prop} は存在しません`)
+    // デスクトップではマルチカラムレイアウトを使用
+    console.log('現在デスクトップモードです。標準レイアウトを使用します')
   }
-}
-
-// 複数フォーム項目を削除
-const removeMultipleFields = (props: string[]) => {
-  const results = props.map(prop => ({
-    prop,
-    success: formRef.value.removeItem(prop)
-  }))
-  
-  const successCount = results.filter(r => r.success).length
-  ElMessage.info(`${successCount} 個のフィールドを削除しました`)
 }
 ```
 
-### フォーム項目の更新
+## Element Plus Formインスタンスアクセス
+
+### ネイティブフォームインスタンスの取得
+
+MaFormで最も重要な公開メソッドの1つが`getElFormRef()`で、基盤のElement Plus Formインスタンスにアクセスし、すべてのネイティブフォームメソッドを使用できます:
 
 ```typescript
-// 単一フォーム項目を更新
-const updateField = (prop: string, updates: Partial<MaFormItem>) => {
-  const success = formRef.value.updateItem(prop, updates)
-  if (success) {
-    ElMessage.success('フィールドの更新に成功')
-  }
-}
-
-// フィールド属性を動的に更新
-const toggleFieldDisabled = (prop: string) => {
-  const item = formRef.value.getItemByProp(prop)
-  if (item) {
-    formRef.value.updateItem(prop, {
-      renderProps: {
-        ...item.renderProps,
-        disabled: !item.renderProps?.disabled
-      }
-    })
-  }
-}
-
-// 複数フィールドを更新
-const updateMultipleFields = (updates: Record<string, Partial<MaFormItem>>) => {
-  Object.entries(updates).forEach(([prop, update]) => {
-    formRef.value.updateItem(prop, update)
-  })
-}
-```
-
-### フォーム項目の置換
-
-```typescript
-// フォーム項目配列を完全に置換
-const replaceAllItems = () => {
-  const newItems = [
-    {
-      label: '新規ユーザー名',
-      prop: 'newUsername',
-      render: 'input'
-    },
-    {
-      label: '新規メール',
-      prop: 'newEmail', 
-      render: 'input',
-      renderProps: { type: 'email' }
-    }
-  ]
-  
-  formRef.value.setItems(newItems)
-}
-
-// 現在のすべてのフォーム項目を取得
-const getAllItems = () => {
-  const items = formRef.value.getItems()
-  console.log('現在のフォーム項目:', items)
-  return items
-}
-```
-
-## フォーム項目検索メソッド
-
-### 単一検索
-
-```typescript
-// propに基づいてフォーム項目を検索
-const findFieldByProp = (prop: string) => {
-  const item = formRef.value.getItemByProp(prop)
-  if (item) {
-    console.log(`フィールド ${prop} を検出:`, item)
+// Element Plus el-formインスタンスを取得
+const getElFormInstance = () => {
+  const elFormInstance = formRef.value?.getElFormRef()
+  if (elFormInstance) {
+    console.log('Element Plusフォームインスタンス:', elFormInstance)
+    return elFormInstance
   } else {
-    console.log(`フィールド ${prop} は存在しません`)
-  }
-  return item
-}
-```
-
-### 条件検索
-
-```typescript
-// すべての非表示フィールドを検索
-const findHiddenFields = () => {
-  const hiddenFields = formRef.value.getItemsByCondition(item => 
-    item.hide === true || (typeof item.hide === 'function' && item.hide(formData.value, item))
-  )
-  console.log('非表示フィールド:', hiddenFields)
-  return hiddenFields
-}
-
-// 指定タイプのフィールドを検索
-const findFieldsByRender = (renderType: string) => {
-  return formRef.value.getItemsByCondition(item => item.render === renderType)
-}
-
-// 必須フィールドを検索
-const findRequiredFields = () => {
-  return formRef.value.getItemsByCondition(item => 
-    item.itemProps?.rules?.some(rule => rule.required === true)
-  )
-}
-```
-
-### 可視性検索
-
-```typescript
-// すべての可視フィールドを取得
-const getVisibleFields = () => {
-  const visibleItems = formRef.value.getVisibleItems()
-  console.log('可視フィールド数:', visibleItems.length)
-  return visibleItems
-}
-
-// フィールド状態を統計
-const getFieldStats = () => {
-  const allItems = formRef.value.getItems()
-  const visibleItems = formRef.value.getVisibleItems()
-  
-  return {
-    total: allItems.length,
-    visible: visibleItems.length,
-    hidden: allItems.length - visibleItems.length
+    console.warn('フォームインスタンスが初期化されていません')
+    return null
   }
 }
 ```
 
-## バリデーション制御メソッド
+### インスタンスを使用したフォームバリデーション
 
-### フォームバリデーション
+`getElFormRef()`で取得したインスタンスでElement Plusフォームのすべてのネイティブバリデーションメソッドを呼び出せます:
 
 ```typescript
 // フォーム全体をバリデーション
 const validateForm = async () => {
   try {
-    const isValid = await formRef.value.validate()
+    const elFormRef = formRef.value?.getElFormRef()
+    if (!elFormRef) {
+      throw new Error('フォームインスタンスが見つかりません')
+    }
+    
+    const isValid = await elFormRef.validate()
     if (isValid) {
-      ElMessage.success('フォームバリデーションに成功')
+      ElMessage.success('フォームバリデーション成功')
       return true
     }
   } catch (error) {
-    ElMessage.error('フォームバリデーションに失敗')
+    ElMessage.error('フォームバリデーション失敗')
     console.error('バリデーションエラー:', error)
     return false
   }
 }
 
-// エラーハンドリング付きフォームバリデーション
-const validateFormWithErrorHandling = async () => {
-  const loadingInstance = ElLoading.service({ text: 'バリデーション中...' })
-  
-  try {
-    const isValid = await formRef.value.validate()
-    loadingInstance.close()
-    
-    if (isValid) {
-      ElMessage.success('バリデーション成功、送信可能')
-      return true
-    }
-  } catch (error) {
-    loadingInstance.close()
-    ElMessage.error('フォーム入力を確認してください')
-    
-    // 最初のエラーフィールドにスクロール
-    const firstErrorField = document.querySelector('.el-form-item.is-error')
-    if (firstErrorField) {
-      firstErrorField.scrollIntoView({ behavior: 'smooth' })
-    }
-    
-    return false
-  }
-}
-```
-
-### フィールドバリデーション
-
-```typescript
 // 単一フィールドをバリデーション
 const validateSingleField = async (prop: string) => {
   try {
-    const isValid = await formRef.value.validateField(prop)
-    console.log(`フィールド ${prop} バリデーション結果:`, isValid)
-    return isValid
+    const elFormRef = formRef.value?.getElFormRef()
+    if (!elFormRef) return false
+    
+    await elFormRef.validateField(prop)
+    console.log(`フィールド ${prop} バリデーション成功`)
+    return true
   } catch (error) {
     console.error(`フィールド ${prop} バリデーション失敗:`, error)
     return false
   }
 }
 
-// 複数フィールドをバリデーション
+// 複数フィールドを一括バリデーション
 const validateMultipleFields = async (props: string[]) => {
-  const results = await Promise.allSettled(
-    props.map(async prop => ({
-      prop,
-      valid: await formRef.value.validateField(prop)
-    }))
-  )
+  const elFormRef = formRef.value?.getElFormRef()
+  if (!elFormRef) return false
   
-  const validResults = results.filter(r => r.status === 'fulfilled')
-  const invalidCount = validResults.filter(r => !r.value.valid).length
-  
-  console.log(`バリデーション完了、${validResults.length - invalidCount}/${validResults.length} フィールドが成功`)
-  return invalidCount === 0
+  try {
+    const results = await Promise.allSettled(
+      props.map(prop => elFormRef.validateField(prop))
+    )
+    
+    const failedCount = results.filter(r => r.status === 'rejected').length
+    const successCount = results.length - failedCount
+    
+    console.log(`バリデーション完了，${successCount}/${results.length} フィールド成功`)
+    return failedCount === 0
+  } catch (error) {
+    console.error('一括バリデーション失敗:', error)
+    return false
+  }
 }
 ```
 
-### バリデーション状態管理
+### インスタンスを使用したフォームリセット
 
 ```typescript
 // フォームバリデーション状態をリセット
 const resetValidation = () => {
-  formRef.value.resetFields()
-  ElMessage.info('フォームをリセットしました')
+  const elFormRef = formRef.value?.getElFormRef()
+  if (elFormRef) {
+    elFormRef.resetFields()
+    ElMessage.info('フォームをリセットしました')
+  }
 }
 
 // 指定フィールドをリセット
 const resetSpecificFields = (props: string[]) => {
-  formRef.value.resetFields(props)
-  ElMessage.info(`${props.join(', ')} フィールドをリセットしました`)
+  const elFormRef = formRef.value?.getElFormRef()
+  if (elFormRef) {
+    elFormRef.resetFields(props)
+    ElMessage.info(`${props.join(', ')} フィールドをリセットしました`)
+  }
 }
 
 // バリデーションエラーをクリア
 const clearValidationErrors = () => {
-  formRef.value.clearValidate()
-  ElMessage.info('バリデーションエラーをクリアしました')
+  const elFormRef = formRef.value?.getElFormRef()
+  if (elFormRef) {
+    elFormRef.clearValidate()
+    ElMessage.info('バリデーションエラーをクリアしました')
+  }
 }
 
-// 指定フィールドのエラーをクリア  
+// 指定フィールドのバリデーションエラーをクリア  
 const clearFieldErrors = (props: string[]) => {
-  formRef.value.clearValidate(props)
+  const elFormRef = formRef.value?.getElFormRef()
+  if (elFormRef) {
+    elFormRef.clearValidate(props)
+    console.log(`${props.join(', ')} フィールドのバリデーションエラーをクリアしました`)
+  }
 }
 ```
 
-## データ操作メソッド
-
-### データ読み取り
+### 高度なインスタンス操作
 
 ```typescript
-// フォームデータを取得
-const getFormData = () => {
-  const data = formRef.value.getFormData()
-  console.log('現在のフォームデータ:', data)
-  return data
+// 指定フィールドまでスクロール
+const scrollToField = (prop: string) => {
+  const elFormRef = formRef.value?.getElFormRef()
+  if (elFormRef) {
+    elFormRef.scrollToField(prop)
+    console.log(`フィールド ${prop} までスクロールしました`)
+  }
 }
 
-// 指定フィールドデータを取得
-const getFieldValue = (prop: string) => {
-  const data = formRef.value.getFormData()
-  return data[prop]
+// フィールドインスタンスを取得
+const getFieldInstance = (prop: string) => {
+  const elFormRef = formRef.value?.getElFormRef()
+  if (elFormRef) {
+    // DOMクエリでフィールドインスタンスを取得
+    const fieldElement = document.querySelector(`[data-field="${prop}"]`)
+    return fieldElement
+  }
+  return null
 }
+```
 
-// 変更されたデータを取得
-const getChangedData = () => {
-  const currentData = formRef.value.getFormData()
-  const initialData = initialFormData.value
+## 実際の使用シナリオ
+
+### フォーム送信フロー
+
+公開メソッドをすべて組み合わせて、完全なフォーム送信フローを実装できます:
+
+```typescript
+const handleFormSubmit = async () => {
+  try {
+    // 1. ローディング状態を設定
+    formRef.value?.setLoadingState(true)
+    
+    // 2. フォームバリデーションを実行
+    const elFormRef = formRef.value?.getElFormRef()
+    if (!elFormRef) {
+      throw new Error('フォームインスタンスが初期化されていません')
+    }
+    
+    await elFormRef.validate()
+    
+    // 3. API呼び出しをシミュレート
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    
+    // 4. 送信成功処理
+    ElMessage.success('送信成功')
+    
+    // 5. フォームをリセット（オプション）
+    elFormRef.resetFields()
+    
+  } catch (error) {
+    // バリデーション失敗または送信エラー処理
+    ElMessage.error('送信失敗。フォームを確認してください')
+    console.error('送信エラー:', error)
+    
+    // 最初のエラーフィールドまでスクロール
+    const firstErrorField = document.querySelector('.el-form-item.is-error')
+    if (firstErrorField) {
+      firstErrorField.scrollIntoView({ behavior: 'smooth' })
+    }
+  } finally {
+    // 6. ローディング状態をクリア
+    formRef.value?.setLoadingState(false)
+  }
+}
+```
+
+### レスポンシブレイアウト適応
+
+リアクティブ状態管理を使用して、異なるデバイスでの最適な体験を実現:
+
+```typescript
+const handleResponsiveLayout = () => {
+  const isMobile = formRef.value?.isMobileState?.()
   
-  const changes = {}
-  Object.keys(currentData).forEach(key => {
-    if (currentData[key] !== initialData[key]) {
-      changes[key] = {
-        from: initialData[key],
-        to: currentData[key]
+  if (isMobile) {
+    // モバイル最適化: コンパクトレイアウト通知を表示
+    ElMessage({
+      message: 'モバイルレイアウトモードに切り替えました',
+      type: 'info',
+      duration: 2000
+    })
+    
+    // モバイルで特別な処理が必要なロジック
+    console.log('現在モバイルモードです。シングルカラムレイアウトを使用します')
+  } else {
+    // デスクトップレイアウト
+    console.log('現在デスクトップモードです。マルチカラムレイアウトを使用します')
+  }
+}
+
+// ウィンドウサイズ変更を監視
+window.addEventListener('resize', () => {
+  formRef.value?.updateResponsiveState?.()
+  handleResponsiveLayout()
+})
+```
+
+### エラー処理とユーザー体験最適化
+
+```typescript
+// インテリジェントフォーム操作ハンドラ
+const smartFormHandler = {
+  // 安全なフォームバリデーション
+  safeValidate: async (showLoading = true) => {
+    try {
+      if (showLoading) {
+        formRef.value?.setLoadingState(true)
+      }
+      
+      const elFormRef = formRef.value?.getElFormRef()
+      if (!elFormRef) {
+        throw new Error('フォームインスタンスが準備できていません')
+      }
+      
+      const isValid = await elFormRef.validate()
+      return { success: true, valid: isValid }
+    } catch (error) {
+      return { success: false, error, valid: false }
+    } finally {
+      if (showLoading) {
+        formRef.value?.setLoadingState(false)
       }
     }
-  })
+  },
   
-  return changes
-}
-```
-
-### データ設定
-
-```typescript
-// フォームデータを設定
-const setFormData = (data: Record<string, any>) => {
-  formRef.value.setFormData(data)
-  ElMessage.success('データ設定に成功')
-}
-
-// 複数フィールド値を一括設定
-const setMultipleFields = (fieldValues: Record<string, any>) => {
-  const currentData = formRef.value.getFormData()
-  formRef.value.setFormData({
-    ...currentData,
-    ...fieldValues
-  })
-}
-
-// 初期データにリセット
-const resetToInitialData = () => {
-  formRef.value.resetFormData()
-  ElMessage.info('データを初期状態にリセットしました')
-}
-```
-
-## Element Plusインスタンスアクセス
-
-### ネイティブインスタンスの取得
-
-```typescript
-// Element Plus el-formインスタンスを取得
-const getElFormInstance = () => {
-  const elFormInstance = formRef.value.getElFormRef()
-  if (elFormInstance) {
-    console.log('Element Plusフォームインスタンス:', elFormInstance)
-    // el-formのネイティブメソッドを呼び出し可能
-    return elFormInstance
-  }
-}
-
-// ネイティブメソッドの使用
-const useElFormMethods = () => {
-  const elForm = formRef.value.getElFormRef()
-  if (elForm) {
-    // el-formネイティブメソッドを呼び出し
-    elForm.scrollToField('username')
-    elForm.clearValidate(['email'])
+  // インテリジェントリセット
+  smartReset: (clearValidation = true) => {
+    const elFormRef = formRef.value?.getElFormRef()
+    if (elFormRef) {
+      elFormRef.resetFields()
+      if (clearValidation) {
+        elFormRef.clearValidate()
+      }
+      ElMessage.info('フォームをリセットしました')
+    }
+  },
+  
+  // 現在の状態情報を取得
+  getStatus: () => {
+    return {
+      loading: formRef.value?.getLoadingState?.() || false,
+      mobile: formRef.value?.isMobileState?.() || false,
+      formReady: !!formRef.value?.getElFormRef()
+    }
   }
 }
 ```
 
-## 統合アプリケーション例
-
-### フォーム動的管理
+### デバッグと開発ツール
 
 ```typescript
-const formManager = {
-  // フィールドグループを追加
-  addFieldGroup: (groupName: string, fields: MaFormItem[]) => {
-    fields.forEach((field, index) => {
-      field.prop = `${groupName}.${field.prop}`
-      formRef.value.appendItem(field, index)
-    })
-  },
-  
-  // フィールドグループを削除
-  removeFieldGroup: (groupName: string) => {
-    const items = formRef.value.getItems()
-    const toRemove = items
-      .filter(item => item.prop?.startsWith(`${groupName}.`))
-      .map(item => item.prop)
-    
-    toRemove.forEach(prop => formRef.value.removeItem(prop))
-  },
-  
-  // フィールド状態を切り替え
-  toggleFieldState: (prop: string, state: 'disabled' | 'hidden' | 'readonly') => {
-    const updates = {
-      disabled: { renderProps: { disabled: true } },
-      hidden: { hide: true },
-      readonly: { renderProps: { readonly: true } }
+// 開発時のデバッグツール
+const devTools = {
+  // すべての公開メソッドの状態を出力
+  debug: () => {
+    const status = {
+      loadingState: formRef.value?.getLoadingState?.(),
+      mobileState: formRef.value?.isMobileState?.(),
+      formInstance: !!formRef.value?.getElFormRef(),
+      methods: [
+        'setLoadingState',
+        'getLoadingState', 
+        'getElFormRef',
+        'isMobileState',
+        'updateResponsiveState'
+      ]
     }
     
-    formRef.value.updateItem(prop, updates[state])
+    console.group('🔧 MaFormデバッグ情報')
+    console.log('状態情報:', status)
+    console.log('利用可能なメソッド:', Object.keys(formRef.value || {}))
+    console.groupEnd()
+    
+    return status
   },
   
-  // フォームモードを切り替え
-  switchMode: (mode: 'create' | 'edit' | 'view') => {
-    const configs = {
-      create: { disabled: false, loading: false },
-      edit: { disabled: false, loading: false },
-      view: { disabled: true, loading: false }
-    }
+  // すべてのメソッドをテスト
+  testMethods: async () => {
+    console.log('📋 MaForm公開メソッドをテスト中...')
     
-    formRef.value.updateOptions(options => ({
-      ...options,
-      ...configs[mode]
-    }))
+    // ローディング状態をテスト
+    const initialLoading = formRef.value?.getLoadingState?.()
+    console.log('初期ローディング状態:', initialLoading)
+    
+    formRef.value?.setLoadingState(true)
+    console.log('ローディング状態をtrueに設定')
+    
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    
+    formRef.value?.setLoadingState(false)
+    console.log('ローディング状態をfalseに設定')
+    
+    // リアクティブ状態をテスト
+    const isMobile = formRef.value?.isMobileState?.()
+    console.log('現在のモバイル状態:', isMobile)
+    
+    formRef.value?.updateResponsiveState?.()
+    console.log('リアクティブ状態を更新しました')
+    
+    // フォームインスタンスをテスト
+    const elFormRef = formRef.value?.getElFormRef()
+    console.log('フォームインスタンスが利用可能か:', !!elFormRef)
+    
+    console.log('✅ すべてのメソッドテスト完了')
   }
 }
 ```
+
+## APIメソッドまとめ
+
+### MaForm公開メソッド
+
+| メソッド名 | パラメータ | 戻り値 | 説明 |
+|-------|-----|-------|-----|
+| `setLoadingState` | `loading: boolean` | `void` | フォームのグローバルローディング状態を設定 |
+| `setOptions` | `opts: MaFormOptions` | `void` | フォーム設定オプションを設定 |
+| `getOptions` | - | `MaFormOptions` | 現在のフォーム設定を取得 |
+| `setItems` | `items: MaFormItem[]` | `void` | フォームアイテム配列を設定 |
+| `getItems` | - | `MaFormItem[]` | 現在のフォームアイテム配列を取得 |
+| `appendItem` | `item: MaFormItem` | `void` | フォームアイテムを追加 |
+| `removeItem` | `prop: string` | `void` | propでフォームアイテムを削除 |
+| `getItemByProp` | `prop: string` | `MaFormItem \| null` | propでフォームアイテムを取得 |
+| `getElFormRef` | - | `FormInstance \| undefined` | Element Plus Formインスタンスを取得 |
+| `isMobileState` | - | `boolean` | 現在がモバイル状態かどうかをチェック |
+
+### 利用不可のメソッド
+
+現在のバージョンでは以下のメソッドは利用できません:
+
+| メソッド名 | 説明 |
+|-------|----- |
+| `getLoadingState` | 現在のローディング状態を取得（ローディング状態は自身で管理してください） |
+| `updateResponsiveState` | 手動でリアクティブ状態を更新（フォームが自動的に処理します） |
+
+### Element Plus Formインスタンスメソッド
+
+`getElFormRef()`で取得したインスタンスで以下の一般的なメソッドが利用可能:
+
+| メソッド名 | パラメータ | 戻り値 | 説明 |
+|-------|-----|-------|-----|
+| `validate` | `callback?: Function` | `Promise<boolean>` | フォーム全体をバリデーション |
+| `validateField` | `props: string \| string[]` | `Promise<void>` | 指定フィールドをバリデーション |
+| `resetFields` | `props?: string \| string[]` | `void` | フィールド値とバリデーション状態をリセット |
+| `clearValidate` | `props?: string \| string[]` | `void` | バリデーション状態をクリア |
+| `scrollToField` | `prop: string` | `void` | 指定フィールドまでスクロール |
+
+## 注意事項
+
+1. **安全な呼び出し**: コンポーネントがマウントされていない場合のエラーを避けるため、オプショナルチェーン(`?.`)を使用して安全にメソッドを呼び出してください
+2. **タイミング**: コンポーネントがマウント完了後にこれらのメソッドを呼び出すようにしてください
+3. **エラー処理**: `validate`などの非同期メソッドでは適切なエラー処理を行ってください
+4. **型安全**: TypeScriptを使用する場合は、正しい型定義をインポートしてください
 
 ## 関連リンク
 
-- [公開メソッド詳細](/ja/front/component/ma-form#公開メソッド-expose)
-- [MaFormExpose 型定義](/ja/front/component/ma-form#maformexpose)
-- [フォームバリデーションメソッド](/ja/front/component/ma-form#フォームバリデーション)
+- [MaForm 基本使用法](/ja/front/component/ma-form/ex

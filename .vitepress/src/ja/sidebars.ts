@@ -6,7 +6,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text: '紹介',
       items: [
         {
-          text: 'なぜ私たちを選ぶのか?',
+          text: 'なぜ私たちを選ぶのか？',
           link: '/ja/guide/introduce/mineadmin',
         },
         {
@@ -48,7 +48,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link:"/ja/guide/upgrade"
         },
         {
-          text:"コントリビューションガイド",
+          text:"貢献ガイドライン",
           link:"/ja/guide/contributions"
         }
       ]
@@ -133,7 +133,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/ja/front/high/i18n'
         },
         {
-          text: 'サービスプロバイダ',
+          text: 'サービスプロバイダー',
           link: '/ja/front/high/provider'
         },
         {
@@ -195,7 +195,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/ja/front/component/ma-form/examples/loading-states'
             },
             {
-              text: 'ネストフォーム',
+              text: 'ネストされたフォーム',
               link: '/ja/front/component/ma-form/examples/nested-forms'
             },
             {

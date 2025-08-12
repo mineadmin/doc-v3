@@ -1,6 +1,6 @@
 # Basic Usage
 
-Demonstration of MaForm's basic usage, including common form control configurations and core functionality.
+Demonstration of MaForm's basic usage, including configuration methods for common form controls and core functionality features.
 
 <DemoPreview dir="demos/ma-form/basic-usage" />
 
@@ -8,17 +8,17 @@ Demonstration of MaForm's basic usage, including common form control configurati
 
 - **Multiple Input Types**: Text input, password field, number input, etc.
 - **Automatic Data Binding**: Two-way form data binding without manual handling
-- **Basic Validation Rules**: Supports required fields, length, format and other common validations
+- **Basic Validation Rules**: Supports common validations like required fields, length, and format
 - **Simple Component Configuration**: Quickly build forms through declarative configuration
 - **Native Compatibility**: Fully compatible with Element Plus native properties and events
 
 ## Core Concepts
 
 ### Declarative Development
-Configure form items through the `items` array, each configuration object contains:
+Configure form items through the `items` array, where each configuration object contains:
 - `label`: Form item label
 - `prop`: Bound data field name
-- `render`: Component type to render
+- `render`: Type of component to render
 - `renderProps`: Properties passed to the component
 
 ### Data Binding
@@ -29,7 +29,7 @@ Use `v-model` for two-way data binding:
 
 ## Common Configuration Examples
 
-### Basic Input
+### Basic Input Field
 ```typescript
 {
   label: 'Username',
@@ -42,7 +42,7 @@ Use `v-model` for two-way data binding:
 }
 ```
 
-### Password Input
+### Password Input Field
 ```typescript
 {
   label: 'Password',
@@ -56,7 +56,7 @@ Use `v-model` for two-way data binding:
 }
 ```
 
-### Number Input
+### Number Input Field
 ```typescript
 {
   label: 'Age',

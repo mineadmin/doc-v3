@@ -169,7 +169,7 @@ const linkedValidationFields = [
     const isRequired = userType === 'individual'
     
     if (isRequired && !value) {
-      callback(new Error('Individual users must provide phone number'))
+      callback(new Error('Phone number is required for individual users'))
       return
     }
     
@@ -343,7 +343,7 @@ const debouncedUsernameCheck = debounce(async (username) => {
 
 ```typescript
 {
-  label: 'Real-time Validation Field',
+  label: 'Realtime Validation Field',
   prop: 'realtime',
   render: 'input',
   itemProps: {

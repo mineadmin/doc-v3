@@ -1,6 +1,6 @@
 # ネストフォーム
 
-MaFormのネストフォーム構造の実装を展示します。階層フォーム、動的ネスト、オブジェクト配列フォーム、複雑なデータ構造処理を含みます。
+MaFormのネストフォーム構造の実装を紹介します。階層フォーム、動的ネスト、オブジェクト配列フォーム、複雑なデータ構造処理を含みます。
 
 <DemoPreview dir="demos/ma-form/nested-forms" />
 
@@ -82,7 +82,7 @@ const multiLevelNested = [
             render: 'datePicker',
             renderProps: {
               type: 'date',
-              placeholder: '設立日を選択してください'
+              placeholder: '設立日を選択'
             }
           }
         ]
@@ -98,7 +98,7 @@ const multiLevelNested = [
             renderProps: {
               rows: 3,
               placeholder: '詳細な住所を入力してください'
-          }
+            }
           },
           {
             label: '電話番号',
@@ -117,12 +117,12 @@ const multiLevelNested = [
 
 ## 動的ネストフォーム
 
-### 1. 動的追加/削除
+### 1. 動的子項目追加/削除
 
 ```typescript
 // ネストフォーム項目の動的管理
 const dynamicNestedManagement = {
-  // 子項目追加
+  // 子フォーム項目を追加
   addChildItem: (parentProp: string, childItem: MaFormItem) => {
     const parentItem = formRef.value.getItemByProp(parentProp)
     if (parentItem) {
@@ -133,7 +133,7 @@ const dynamicNestedManagement = {
     }
   },
 
-  // 子項目削除
+  // 子フォーム項目を削除
   removeChildItem: (parentProp: string, childIndex: number) => {
     const parentItem = formRef.value.getItemByProp(parentProp)
     if (parentItem && parentItem.children) {
@@ -144,7 +144,7 @@ const dynamicNestedManagement = {
     }
   },
 
-  // 子項目一括更新
+  // 子フォーム項目を一括更新
   updateChildrenItems: (parentProp: string, children: MaFormItem[]) => {
     formRef.value.updateItem(parentProp, { children })
   }
@@ -171,7 +171,7 @@ const contactFormItems = [
   }
 ]
 
-// 連絡先追加
+// 連絡先を追加
 const addContact = () => {
   const contactIndex = contactCount.value++
   const newContactFields = [
@@ -283,7 +283,7 @@ const arrayFormItems = [
   {
     label: '学歴',
     prop: 'education',
-    children: [], // 動的に生成
+    children: [], // 動的に配列項目を生成
     itemSlots: {
       append: () => {
         return h('el-button', {
@@ -296,7 +296,7 @@ const arrayFormItems = [
   }
 ]
 
-// 動的配列管理
+// 配列項目の動的管理
 const educationArray = ref([])
 
 const addEducationItem = () => {
@@ -308,7 +308,7 @@ const addEducationItem = () => {
     endDate: ''
   })
   
-  // 動的フォーム項目追加
+  // フォーム項目を動的に追加
   const newEducationItem = {
     label: `学歴 ${index + 1}`,
     prop: `education.${index}`,
@@ -367,13 +367,13 @@ const addEducationItem = () => {
 
 const removeEducationItem = (index: number) => {
   educationArray.value.splice(index, 1)
-  // フォーム項目再構築
+  // フォーム項目を再構築
   rebuildEducationItems()
 }
 
 const rebuildEducationItems = () => {
   const educationItems = educationArray.value.map((_, index) => ({
-    // ... フォーム項目設定再構築
+    // ... フォーム項目設定を再構築
   }))
   
   dynamicNestedManagement.updateChildrenItems('education', educationItems)
@@ -387,7 +387,7 @@ const complexArrayForm = [
   {
     label: 'プロジェクト経験',
     prop: 'projects',
-    children: [], // 動的生成
+    children: [], // 動的に生成
     itemSlots: {
       label: ({ item }) => {
         return h('div', { class: 'section-header' }, [
@@ -396,7 +396,7 @@ const complexArrayForm = [
             type: 'primary',
             size: 'small',
             onClick: () => addProject()
-          }, 'プロジェクト追加')
+          }, 'プロジェクトを追加')
         ])
       }
     }
@@ -473,7 +473,7 @@ const addProject = () => {
             return h('el-button', {
               size: 'small',
               onClick: () => addProjectMember(projectIndex)
-            }, 'メンバー追加')
+            }, 'メンバーを追加')
           }
         }
       }
@@ -483,7 +483,7 @@ const addProject = () => {
   dynamicNestedManagement.addChildItem('projects', projectFormItem)
 }
 
-// プロジェクトメンバー追加（3階層ネスト）
+// プロジェクトメンバーを追加（3階層ネスト）
 const addProjectMember = (projectIndex: number) => {
   const memberIndex = projectsArray.value[projectIndex].members.length
   projectsArray.value[projectIndex].members.push({ name: '', role: '' })
@@ -591,7 +591,7 @@ const nestedValidationItems = [
               if (value) {
                 const isValid = await validatePhoneNumber(value)
                 if (!isValid) {
-                  throw new Error('電話番号形式が正しくありません')
+                  throw new Error('電話番号の形式が正しくありません')
                 }
               }
             }
@@ -606,6 +606,4 @@ const nestedValidationItems = [
 ### 2. 配列項目検証
 
 ```typescript
-// 全配列項目検証
-const validateArrayItems = async (arrayProp: string) => {
-  const arrayData = get(formData.value
+// 全ての配列項目を検証

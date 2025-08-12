@@ -1,27 +1,27 @@
 # パフォーマンス最適化デモ
 
-MaFormの大規模フォームや複雑なシナリオにおけるパフォーマンス最適化戦略を紹介します。仮想スクロール、遅延読み込み、キャッシュメカニズムなどの高性能機能を含みます。
+MaFormの大規模フォームや複雑なシナリオにおけるパフォーマンス最適化戦略を紹介。仮想スクロール、遅延読み込み、キャッシュメカニズムなどの高性能機能を展示。
 
 <DemoPreview dir="demos/ma-form/performance-demo" />
 
 ## 機能特徴
 
-- **大規模フォーム最適化**：数百のフォーム項目を処理するためのパフォーマンス最適化
+- **大規模フォーム最適化**：数百のフォーム項目を処理するパフォーマンス最適化
 - **仮想スクロール**：長いリストフォームの仮想スクロール実装
-- **遅延読み込みメカニズム**：必要に応じてフォーム項目とデータを読み込み
-- **キャッシュ戦略**：インテリジェントキャッシュによる応答速度向上
+- **遅延読み込みメカニズム**：オンデマンドでフォーム項目とデータを読み込み
+- **キャッシュ戦略**：インテリジェントキャッシュで応答速度向上
 - **レンダリング最適化**：不要な再レンダリングを削減
 - **メモリ管理**：メモリ使用を効果的に制御
 
 ## 大規模フォームのパフォーマンス最適化
 
-### 1. ページ分割読み込み戦略
+### 1. ページング読み込み戦略
 
 ```typescript
 interface FormPageConfig {
   pageSize: number        // 1ページあたりのフォーム項目数
   currentPage: number     // 現在のページ番号
-  totalItems: number      // フォーム項目総数
+  totalItems: number      // 総フォーム項目数
   preloadPages: number    // プリロードするページ数
 }
 
@@ -55,7 +55,7 @@ const largeFormManager = {
         prop: `field_${i}`,
         render: this.getRandomRenderType(),
         renderProps: {
-          placeholder: `フィールド ${i} を入力してください`,
+          placeholder: `フィールド ${i}を入力してください`,
           clearable: true
         },
         cols: { xs: 24, sm: 12, md: 8, lg: 6 },
@@ -90,7 +90,7 @@ const largeFormManager = {
     })
     
     this.loadedPages.add(page)
-    console.log(`ページ ${page} を読み込みました。${pageItems.length} 個のフォーム項目を含みます`)
+    console.log(`ページ ${page} を読み込みました、${pageItems.length} フォーム項目を含む`)
   },
   
   // スクロールでさらに読み込み
@@ -113,7 +113,7 @@ const largeFormManager = {
   }
 }
 
-// 無限読み込みのスクロール監視を設定
+// 無限読み込みのためのスクロール監視
 const setupInfiniteLoading = () => {
   const scrollContainer = document.querySelector('.ma-form-container')
   if (!scrollContainer) return
@@ -141,12 +141,12 @@ const setupInfiniteLoading = () => {
 }
 ```
 
-### 2. 仮想スクロールの実装
+### 2. 仮想スクロール実装
 
 ```typescript
 interface VirtualScrollConfig {
   itemHeight: number      // 各項目の高さ
-  visibleCount: number    // 表示項目数
+  visibleCount: number    // 表示可能な項目数
   bufferSize: number      // バッファサイズ
   scrollTop: number       // スクロール位置
 }
@@ -215,7 +215,7 @@ const virtualScrollManager = {
 }
 ```
 
-## 遅延読み込みの最適化
+## 遅延読み込み最適化
 
 ### 1. フィールドの遅延読み込み
 
@@ -260,7 +260,7 @@ const lazyLoadManager = {
       this.updateFieldWithLazyData(fieldProp, data)
       
     } catch (error) {
-      console.error(`フィールド ${fieldProp} の遅延読み込みに失敗しました:`, error)
+      console.error(`フィールド ${fieldProp} の遅延読み込みに失敗:`, error)
     } finally {
       config.loading = false
       formRef.value?.updateItem(fieldProp, {
@@ -414,7 +414,7 @@ interface CacheItem<T = any> {
   data: T
   timestamp: number
   ttl: number           // 生存時間（ミリ秒）
-  hitCount: number      // ヒット数
+  hitCount: number      // ヒット回数
 }
 
 class MultiLevelCache {
@@ -451,7 +451,7 @@ class MultiLevelCache {
           return l2Item.data
         }
       } catch (error) {
-        console.warn(`L2キャッシュの解析に失敗しました: ${key}`, error)
+        console.warn(`L2キャッシュの解析に失敗: ${key}`, error)
       }
     }
     
@@ -474,7 +474,7 @@ class MultiLevelCache {
     try {
       this.l2Cache.setItem(key, JSON.stringify(cacheItem))
     } catch (error) {
-      console.warn(`L2キャッシュの設定に失敗しました: ${key}`, error)
+      console.warn(`L2キャッシュの設定に失敗: ${key}`, error)
     }
   }
   
@@ -493,7 +493,7 @@ class MultiLevelCache {
     })
   }
   
-  // L1キャッシュのエビクション戦略（LFU - 最も使用頻度が低いもの）
+  // L1キャッシュのエビクション戦略（LFU - 最少使用頻度）
   private evictL1Cache() {
     let minHitCount = Infinity
     let evictKey = ''
@@ -529,4 +529,6 @@ class MultiLevelCache {
     // L2の期限切れキャッシュをクリア
     for (let i = localStorage.length - 1; i >= 0; i--) {
       const key = localStorage.key(i)
-     
+      if (key) {
+        try {
+          const item =

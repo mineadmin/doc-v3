@@ -1,17 +1,17 @@
 # Advanced Application Scenarios
 
-Demonstrates complex applications of MaForm in real business scenarios, including multi-step forms, data dictionary integration, permission control, internationalization, and other advanced features.
+Demonstrates MaForm's complex applications in real business scenarios, including multi-step forms, data dictionary integration, permission control, internationalization, and other advanced features.
 
 <DemoPreview dir="demos/ma-form/advanced-scenarios" />
 
-## Feature Highlights
+## Features
 
-- **Multi-step Forms**: Complex form workflows divided into steps
-- **Data Dictionary Integration**: Integration with backend dictionary systems
+- **Multi-step Forms**: Complex form processes divided into steps
+- **Data Dictionary Integration**: Integration with backend data dictionary systems
 - **Permission Control**: Form field control based on user permissions
 - **Internationalization Support**: Multi-language form configuration
 - **Business Rule Engine**: Complex business logic processing
-- **Data Linkage**: Multi-level data relationships and dependencies
+- **Data Linkage**: Multi-level data linkage and dependencies
 
 ## Multi-step Forms
 
@@ -44,7 +44,7 @@ const stepFormConfig = {
     {
       title: 'Additional Information',
       key: 'additional',
-      description: 'Supplement other details',
+      description: 'Supplement other information',
       icon: 'Document'
     }
   ]
@@ -76,7 +76,7 @@ const getStepFormItems = (currentStep: number): MaFormItem[] => {
         cols: { xs: 24, sm: 12 }
       },
       {
-        label: 'Date of Birth',
+        label: 'Birth Date',
         prop: 'basic.birthDate',
         render: 'datePicker',
         renderProps: {
@@ -138,12 +138,12 @@ const getStepFormItems = (currentStep: number): MaFormItem[] => {
     ],
     2: [ // Additional information step
       {
-        label: 'Bio',
+        label: 'Biography',
         prop: 'additional.bio',
         render: 'textarea',
         renderProps: {
           rows: 4,
-          placeholder: 'Enter bio',
+          placeholder: 'Enter biography',
           maxlength: 500,
           showWordLimit: true
         },
@@ -194,7 +194,7 @@ const stepFormController = {
     }
   },
   
-  // Jump to specific step
+  // Go to specific step
   goToStep: async (targetStep: number) => {
     // Validate current step
     const isValid = await formRef.value.validate()
@@ -266,7 +266,7 @@ const stepValidationStrategy = {
 
 ## Data Dictionary Integration
 
-### 1. Dictionary Management
+### 1. Data Dictionary Management
 
 ```typescript
 interface DictionaryItem {
@@ -372,7 +372,7 @@ const createDictionaryField = (config: {
       loading: true  // Initial loading state
     },
     renderSlots: {
-      default: () => [] // Initially empty, dynamically updated
+      default: () => [] // Initially empty, updated dynamically
     },
     
     // Load dictionary data when field mounts
@@ -631,7 +631,7 @@ const userFormPermissions: FieldPermission[] = [
     field: 'salary',
     permissions: { view: true, edit: true, required: false },
     conditions: {
-      roles: ['admin', 'hr'],  // Only admins and HR can edit salary
+      roles: ['admin', 'hr'],  // Only admin and HR can edit salary
     }
   },
   {
