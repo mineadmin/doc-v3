@@ -4,14 +4,14 @@ MaFormコンポーネントがdefineExposeを通じて公開するすべてのAP
 
 <DemoPreview dir="demos/ma-form/expose-methods" />
 
-## 機能特徴
+## 機能特性
 
 - **状態管理**: ローディング状態、レスポンシブ状態制御
 - **設定管理**: フォーム設定オプションの動的変更
 - **フォーム項目管理**: フォーム項目設定の追加・削除・更新・検索
 - **バリデーション制御**: フォームとフィールドのバリデーション管理
 - **データ操作**: フォームデータの読み取りと設定
-- **インスタンスアクセス**: 基盤のElement Plusインスタンス取得
+- **インスタンスアクセス**: 基盤となるElement Plusインスタンスの取得
 
 ## 状態管理メソッド
 
@@ -37,7 +37,7 @@ const toggleLoading = () => {
 // モバイル状態かどうかをチェック
 const isMobile = formRef.value.isMobileState()
 
-// レスポンシブ状態を手動更新（ウィンドウサイズ変更時）
+// 手動でレスポンシブ状態を更新（ウィンドウサイズ変更時）
 window.addEventListener('resize', () => {
   formRef.value.updateResponsiveState()
 })
@@ -45,10 +45,10 @@ window.addEventListener('resize', () => {
 
 ## 設定管理メソッド
 
-### フォーム設定を設定
+### フォーム設定の設定
 
 ```typescript
-// 設定を完全置換
+// 設定を完全に置き換え
 formRef.value.setOptions({
   layout: 'grid',
   loading: true,
@@ -92,7 +92,7 @@ const updateConfigByCondition = (condition: string) => {
 
 ## フォーム項目管理メソッド
 
-### フォーム項目を追加
+### フォーム項目の追加
 
 ```typescript
 // 末尾にフォーム項目を追加
@@ -127,20 +127,20 @@ const prependField = () => {
 }
 ```
 
-### フォーム項目を削除
+### フォーム項目の削除
 
 ```typescript
 // propに基づいてフォーム項目を削除
 const removeField = (prop: string) => {
   const success = formRef.value.removeItem(prop)
   if (success) {
-    ElMessage.success(`フィールド ${prop} 削除成功`)
+    ElMessage.success(`フィールド ${prop} の削除に成功`)
   } else {
     ElMessage.error(`フィールド ${prop} は存在しません`)
   }
 }
 
-// 複数フォーム項目を一括削除
+// 複数フォーム項目を削除
 const removeMultipleFields = (props: string[]) => {
   const results = props.map(prop => ({
     prop,
@@ -152,14 +152,14 @@ const removeMultipleFields = (props: string[]) => {
 }
 ```
 
-### フォーム項目を更新
+### フォーム項目の更新
 
 ```typescript
 // 単一フォーム項目を更新
 const updateField = (prop: string, updates: Partial<MaFormItem>) => {
   const success = formRef.value.updateItem(prop, updates)
   if (success) {
-    ElMessage.success('フィールド更新成功')
+    ElMessage.success('フィールドの更新に成功')
   }
 }
 
@@ -176,7 +176,7 @@ const toggleFieldDisabled = (prop: string) => {
   }
 }
 
-// 複数フィールドを一括更新
+// 複数フィールドを更新
 const updateMultipleFields = (updates: Record<string, Partial<MaFormItem>>) => {
   Object.entries(updates).forEach(([prop, update]) => {
     formRef.value.updateItem(prop, update)
@@ -184,10 +184,10 @@ const updateMultipleFields = (updates: Record<string, Partial<MaFormItem>>) => {
 }
 ```
 
-### フォーム項目を置換
+### フォーム項目の置換
 
 ```typescript
-// フォーム項目配列を完全置換
+// フォーム項目配列を完全に置換
 const replaceAllItems = () => {
   const newItems = [
     {
@@ -333,15 +333,15 @@ const validateFormWithErrorHandling = async () => {
 const validateSingleField = async (prop: string) => {
   try {
     const isValid = await formRef.value.validateField(prop)
-    console.log(`フィールド ${prop} バリデーション結果:`, isValid)
+    console.log(`フィールド ${prop} のバリデーション結果:`, isValid)
     return isValid
   } catch (error) {
-    console.error(`フィールド ${prop} バリデーション失敗:`, error)
+    console.error(`フィールド ${prop} のバリデーション失敗:`, error)
     return false
   }
 }
 
-// 複数フィールドを一括バリデーション
+// 複数フィールドをバリデーション
 const validateMultipleFields = async (props: string[]) => {
   const results = await Promise.allSettled(
     props.map(async prop => ({
@@ -379,7 +379,7 @@ const clearValidationErrors = () => {
   ElMessage.info('バリデーションエラーをクリアしました')
 }
 
-// 指定フィールドのエラーをクリア  
+// 指定フィールドのバリデーションエラーをクリア  
 const clearFieldErrors = (props: string[]) => {
   formRef.value.clearValidate(props)
 }
@@ -428,10 +428,10 @@ const getChangedData = () => {
 // フォームデータを設定
 const setFormData = (data: Record<string, any>) => {
   formRef.value.setFormData(data)
-  ElMessage.success('データ設定成功')
+  ElMessage.success('データ設定に成功')
 }
 
-// 複数フィールドの値を一括設定
+// 複数フィールドの値を設定
 const setMultipleFields = (fieldValues: Record<string, any>) => {
   const currentData = formRef.value.getFormData()
   formRef.value.setFormData({
@@ -449,7 +449,7 @@ const resetToInitialData = () => {
 
 ## Element Plusインスタンスアクセス
 
-### ネイティブインスタンスを取得
+### ネイティブインスタンスの取得
 
 ```typescript
 // Element Plus el-formインスタンスを取得
@@ -462,7 +462,7 @@ const getElFormInstance = () => {
   }
 }
 
-// ネイティブメソッドを使用
+// ネイティブインスタンスメソッドを使用
 const useElFormMethods = () => {
   const elForm = formRef.value.getElFormRef()
   if (elForm) {
@@ -473,7 +473,7 @@ const useElFormMethods = () => {
 }
 ```
 
-## 総合応用例
+## 総合アプリケーション例
 
 ### フォーム動的管理
 
@@ -527,5 +527,5 @@ const formManager = {
 ## 関連リンク
 
 - [公開メソッド詳細](/ja/front/component/ma-form#公開メソッド-expose)
-- [MaFormExpose 型定義](/ja/front/component/ma-form#maformexpose)
+- [MaFormExpose型定義](/ja/front/component/ma-form#maformexpose)
 - [フォームバリデーションメソッド](/ja/front/component/ma-form#フォームバリデーション)

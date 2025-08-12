@@ -1,21 +1,21 @@
-# 条件レンダリング
+# 条件付きレンダリング
 
-フォームデータに基づいてフィールドの表示/非表示を動的に制御する条件レンダリング機能を紹介します。連動表示や複雑な条件判定も含みます。
+フォームデータに基づいてフィールドの表示/非表示を動的に制御する条件付きレンダリング機能を紹介します。連動表示や複雑な条件判断を含みます。
 
 <DemoPreview dir="demos/ma-form/conditional-rendering" />
 
 ## 機能特徴
 
-- **動的表示制御**: フォームデータに基づいてフィールドの表示/非表示を制御
-- **依存関係管理**: dependenciesでフィールド間の依存関係を宣言
-- **複雑条件対応**: 複数条件の組み合わせ判定をサポート
-- **パフォーマンス最適化**: 依存フィールド変更時のみ条件再計算
-- **show vs hide**: 2種類の制御方式を提供
+- **動的表示制御**：フォームデータに基づいてフィールドの表示/非表示を制御
+- **依存関係管理**：dependenciesでフィールド間の依存関係を宣言
+- **複雑条件サポート**：複数条件の組み合わせ判断をサポート
+- **パフォーマンス最適化**：依存フィールド変更時のみ条件を再計算
+- **show vs hide**：2種類の制御方式を提供
 
-## 条件レンダリング方法
+## 条件付きレンダリング方法
 
 ### 1. show属性（推奨）
-条件不満時はコンポーネントをレンダリングせず、DOMスペースも占有しないためパフォーマンス向上:
+条件を満たさない場合コンポーネントをレンダリングせず、DOMスペースを占有しないためパフォーマンス向上：
 
 ```typescript
 {
@@ -28,7 +28,7 @@
 ```
 
 ### 2. hide属性
-条件不満時は非表示にするが、DOMスペースは占有:
+条件を満たさない場合コンポーネントを非表示にするが、DOMスペースは占有：
 
 ```typescript
 {
@@ -41,7 +41,7 @@
 ```
 
 ### 3. when条件関数
-より柔軟な条件判定方式:
+より柔軟な条件判断方式：
 
 ```typescript
 {
@@ -76,7 +76,7 @@ const userTypeFields = [
     }
   },
   {
-    label: '氏名',
+    label: '本名',
     prop: 'realName',
     render: 'input',
     show: (model) => model.userType === 'personal',
@@ -99,7 +99,7 @@ const userTypeFields = [
 ]
 ```
 
-### 2. 権限制御
+### 2. 権限レベル制御
 
 ```typescript
 const permissionFields = [
@@ -132,7 +132,7 @@ const permissionFields = [
 ]
 ```
 
-### 3. 複数条件判定
+### 3. 複雑な複数条件判断
 
 ```typescript
 const complexConditionField = {
@@ -140,24 +140,24 @@ const complexConditionField = {
   prop: 'specialFeature',
   render: 'input',
   when: (model, item) => {
-    // 複数条件判定
+    // 複数条件判断
     const hasPermission = model.userLevel >= 5
     const isSubscribed = model.subscription === 'premium'
-    const isEligible = model.accountAge > 365 // アカウント年数1年以上
+    const isEligible = model.accountAge > 365 // アカウント年齢1年以上
     
-    // 組み合わせ条件: 権限、サブスク状態、アカウント年数すべて満たす必要あり
+    // 組み合わせ条件：権限、購読状態、アカウント年齢すべて満たす必要あり
     return hasPermission && isSubscribed && isEligible
   },
   dependencies: ['userLevel', 'subscription', 'accountAge']
 }
 ```
 
-### 4. ネスト条件レンダリング
+### 4. ネストした条件レンダリング
 
 ```typescript
 const nestedConditionFields = [
   {
-    label: '詳細機能有効化',
+    label: '詳細機能を有効化',
     prop: 'enableAdvanced',
     render: 'switch'
   },
@@ -191,8 +191,8 @@ const nestedConditionFields = [
 
 ## 依存関係最適化
 
-### 1. 依存フィールド宣言
-`dependencies`配列でフィールド依存関係を宣言し、正確な更新を実現:
+### 1. 依存フィールドの宣言
+`dependencies`配列でフィールド依存関係を宣言し、正確な更新を実現：
 
 ```typescript
 {
@@ -204,31 +204,31 @@ const nestedConditionFields = [
 }
 ```
 
-### 2. 過剰依存回避
+### 2. 過剰な依存を避ける
 
 ```typescript
-// ❌ 非推奨: 依存フィールドが多すぎる
+// ❌ 非推奨：依存フィールドが多すぎる
 {
   dependencies: ['field1', 'field2', 'field3', 'field4', 'field5']
 }
 
-// ✅ 推奨: 正確な依存関係
+// ✅ 推奨：正確な依存関係
 {
-  dependencies: ['userType']  // 表示に影響するフィールドのみ
+  dependencies: ['userType']  // 表示に実際に影響するフィールドのみ依存
 }
 ```
 
-## パフォーマンス考慮
+## パフォーマンス考慮事項
 
 ### 1. hideではなくshowを使用
 
 ```typescript
-// ✅ 推奨: showを使用し、非表示要素はレンダリングしない
+// ✅ 推奨：showを使用し、非表示要素をレンダリングしない
 {
   show: (model) => model.userType === 'admin'
 }
 
-// ❌ 非推奨: hideを使用するとレンダリングはされるが非表示
+// ❌ 避ける：hideを使用するとレンダリングはされるが非表示
 {  
   hide: (model) => model.userType !== 'admin'
 }
@@ -253,9 +253,9 @@ const field = {
 }
 ```
 
-## デバッグ技法
+## デバッグテクニック
 
-### 1. 条件関数デバッグ
+### 1. 条件関数のデバッグ
 
 ```typescript
 {
@@ -274,7 +274,7 @@ const field = {
 }
 ```
 
-### 2. 依存関係追跡
+### 2. 依存関係の追跡
 
 ```typescript
 {
@@ -295,5 +295,5 @@ const field = {
 ## 関連リンク
 
 - [MaFormItem 設定詳細](/ja/front/component/ma-form#maformitem-設定詳細)
-- [高度な機能 - 条件レンダリング](/ja/front/component/ma-form#条件レンダリング)
-- [ネストフォーム構造](/ja/front/component/ma-form/examples/nested-forms)
+- [高度な機能 - 条件付きレンダリング](/ja/front/component/ma-form#条件付きレンダリング)
+- [ネストしたフォーム構造](/ja/front/component/ma-form/examples/nested-forms)

@@ -7,7 +7,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 ## Features
 
 - **Comprehensive Support**: Supports all Element Plus form components
-- **Multiple Rendering Methods**: Three rendering methods - string, component, and function
+- **Multiple Rendering Methods**: String, component, and function-based rendering
 - **Slot Support**: Complete slot system support
 - **Property Passing**: Pass component properties via renderProps
 - **Event Handling**: Supports all native component events
@@ -102,8 +102,8 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
         value: 'guangdong',
         label: 'Guangdong Province',
         children: [
-          { value: 'guangzhou', label: 'Guangzhou City' },
-          { value: 'shenzhen', label: 'Shenzhen City' }
+          { value: 'guangzhou', label: 'Guangzhou' },
+          { value: 'shenzhen', label: 'Shenzhen' }
         ]
       }
     ],
@@ -234,7 +234,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 ### Switch
 ```typescript
 {
-  label: 'Enabled Status',
+  label: 'Enabled',
   prop: 'enabled',
   render: 'switch',
   renderProps: {
@@ -267,7 +267,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
     showText: true,
     showScore: true,
     scoreTemplate: '{value} points',
-    texts: ['Very Bad', 'Disappointed', 'Average', 'Satisfied', 'Surprised'],
+    texts: ['Terrible', 'Disappointed', 'Normal', 'Satisfied', 'Surprised'],
     colors: ['#99A9BF', '#F7BA2A', '#FF9900']
   }
 }

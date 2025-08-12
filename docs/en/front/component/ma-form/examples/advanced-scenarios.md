@@ -1,6 +1,6 @@
-# Advanced Use Cases
+# Advanced Application Scenarios
 
-Demonstrates the complex applications of MaForm in real business scenarios, including multi-step forms, data dictionary integration, permission control, internationalization, and other advanced features.
+Demonstrates complex applications of MaForm in real business scenarios, including multi-step forms, data dictionary integration, permission control, internationalization, and other advanced features.
 
 <DemoPreview dir="demos/ma-form/advanced-scenarios" />
 
@@ -11,7 +11,7 @@ Demonstrates the complex applications of MaForm in real business scenarios, incl
 - **Permission Control**: Form field control based on user permissions
 - **Internationalization Support**: Multi-language form configuration
 - **Business Rule Engine**: Complex business logic processing
-- **Data Linkage**: Multi-level data linkage and dependencies
+- **Data Linkage**: Multi-level data relationships and dependencies
 
 ## Multi-step Forms
 
@@ -36,15 +36,15 @@ const stepFormConfig = {
       icon: 'User'
     },
     {
-      title: 'Contact Information',
+      title: 'Contact Details',
       key: 'contact', 
-      description: 'Fill in contact details',
+      description: 'Fill in contact information',
       icon: 'Phone'
     },
     {
       title: 'Additional Information',
       key: 'additional',
-      description: 'Supplement other information',
+      description: 'Provide supplementary information',
       icon: 'Document'
     }
   ]
@@ -59,7 +59,7 @@ const getStepFormItems = (currentStep: number): MaFormItem[] => {
         prop: 'basic.name',
         render: 'input',
         itemProps: {
-          rules: [{ required: true, message: 'Please enter your name', trigger: 'blur' }]
+          rules: [{ required: true, message: 'Please enter name', trigger: 'blur' }]
         },
         cols: { xs: 24, sm: 12 }
       },
@@ -87,7 +87,7 @@ const getStepFormItems = (currentStep: number): MaFormItem[] => {
         cols: { xs: 24, sm: 12 }
       }
     ],
-    1: [ // Contact information step
+    1: [ // Contact details step
       {
         label: 'Phone Number',
         prop: 'contact.phone',
@@ -143,7 +143,7 @@ const getStepFormItems = (currentStep: number): MaFormItem[] => {
         render: 'textarea',
         renderProps: {
           rows: 4,
-          placeholder: 'Enter your biography',
+          placeholder: 'Enter personal bio',
           maxlength: 500,
           showWordLimit: true
         },
@@ -341,7 +341,7 @@ const dictionaryService = {
   // Clear dictionary cache
   clearCache: (code?: string) => {
     if (code) {
-      // Clear cache for specified dictionary
+      // Clear cache for specific dictionary
       const keysToDelete = Array.from(this.cache.keys()).filter(key => key.startsWith(code))
       keysToDelete.forEach(key => this.cache.delete(key))
     } else {
@@ -496,7 +496,7 @@ const cascadeDictionaryFields = [
     prop: 'city',
     render: 'select',
     renderProps: {
-      placeholder: 'Please select province first',
+      placeholder: 'Select province first',
       clearable: true,
       disabled: true  // Initially disabled
     },
@@ -660,4 +660,5 @@ const dynamicPermissionManager = {
       },
       { deep: true }
     )
- 
+  },
+  

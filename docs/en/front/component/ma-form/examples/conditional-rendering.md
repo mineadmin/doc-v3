@@ -1,6 +1,6 @@
 # Conditional Rendering
 
-Demonstrates the conditional rendering functionality for dynamically controlling field visibility based on form data, including linked displays and complex conditional judgments.
+Demonstrates the conditional rendering functionality that dynamically controls field visibility based on form data, including linked displays and complex conditional judgments.
 
 <DemoPreview dir="demos/ma-form/conditional-rendering" />
 
@@ -8,8 +8,8 @@ Demonstrates the conditional rendering functionality for dynamically controlling
 
 - **Dynamic Visibility Control**: Show/hide fields based on form data
 - **Dependency Management**: Declare field dependencies through dependencies
-- **Complex Condition Support**: Support for multi-condition combination judgments
-- **Performance Optimization**: Recalculate conditions only when dependent fields change
+- **Complex Condition Support**: Supports multi-condition combination judgments
+- **Performance Optimization**: Only recalculates conditions when dependent fields change
 - **show vs hide**: Provides two different control methods
 
 ## Conditional Rendering Methods
@@ -32,7 +32,7 @@ Hides the component when conditions are not met, but still occupies DOM space:
 
 ```typescript
 {
-  label: 'Personal Information', 
+  label: 'Personal Info', 
   prop: 'personalInfo',
   render: 'input',
   hide: (model, item) => model.userType === 'company',
@@ -71,7 +71,7 @@ const userTypeFields = [
     renderSlots: {
       default: () => [
         h('el-option', { label: 'Individual User', value: 'personal' }),
-        h('el-option', { label: 'Corporate User', value: 'company' })
+        h('el-option', { label: 'Enterprise User', value: 'company' })
       ]
     }
   },
@@ -145,7 +145,7 @@ const complexConditionField = {
     const isSubscribed = model.subscription === 'premium'
     const isEligible = model.accountAge > 365 // Account age > 1 year
     
-    // Combined condition: requires permission, subscription status, and account age
+    // Combined condition: requires permission, subscription status and account age
     return hasPermission && isSubscribed && isEligible
   },
   dependencies: ['userLevel', 'subscription', 'accountAge']
@@ -175,7 +175,7 @@ const nestedConditionFields = [
         dependencies: ['enableAdvanced']
       },
       {
-        label: 'Cache Timeout (Hours)',
+        label: 'Cache Timeout (hours)',
         prop: 'cacheTimeout',
         render: 'inputNumber',
         show: (model) => {
@@ -191,8 +191,8 @@ const nestedConditionFields = [
 
 ## Dependency Optimization
 
-### 1. Declaring Dependent Fields
-Use the `dependencies` array to declare field dependencies for precise updates:
+### 1. Declare Dependent Fields
+Use `dependencies` array to declare field dependencies for precise updates:
 
 ```typescript
 {
@@ -204,7 +204,7 @@ Use the `dependencies` array to declare field dependencies for precise updates:
 }
 ```
 
-### 2. Avoiding Excessive Dependencies
+### 2. Avoid Excessive Dependencies
 
 ```typescript
 // ❌ Not recommended: Too many dependencies
@@ -214,7 +214,7 @@ Use the `dependencies` array to declare field dependencies for precise updates:
 
 // ✅ Recommended: Precise dependencies
 {
-  dependencies: ['userType']  // Only depends on fields that truly affect visibility
+  dependencies: ['userType']  // Only depends on fields that actually affect visibility
 }
 ```
 
@@ -228,13 +228,13 @@ Use the `dependencies` array to declare field dependencies for precise updates:
   show: (model) => model.userType === 'admin'
 }
 
-// ❌ Avoid: Use hide, still renders but hides
+// ❌ Avoid: Using hide still renders but hides elements
 {  
   hide: (model) => model.userType !== 'admin'
 }
 ```
 
-### 2. Caching Condition Calculation Results
+### 2. Cache Condition Calculation Results
 
 ```typescript
 // Complex condition calculations can use computed properties for caching
@@ -278,11 +278,11 @@ const field = {
 
 ```typescript
 {
-  label: 'Tracking Field',
+  label: 'Track Field',
   prop: 'trackField',
   render: 'input',
   show: (model, item) => {
-    console.log(`Dependent field changes:`, {
+    console.log(`Dependency field changes:`, {
       dependencies: item.dependencies,
       values: item.dependencies?.map(dep => ({ [dep]: model[dep] }))
     })
@@ -296,4 +296,4 @@ const field = {
 
 - [MaFormItem Configuration Details](/en/front/component/ma-form#maformitem-configuration-details)
 - [Advanced Features - Conditional Rendering](/en/front/component/ma-form#conditional-rendering)
-- [Nested Form Structures](/en/front/component/ma-form/examples/nested-forms)
+- [Nested Form Structure](/en/front/component/ma-form/examples/nested-forms)

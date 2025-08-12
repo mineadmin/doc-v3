@@ -7,15 +7,15 @@ Demonstrates MaForm's performance optimization strategies for large forms and co
 ## Features
 
 - **Large Form Optimization**: Performance optimizations for handling hundreds of form items
-- **Virtual Scrolling**: Virtual scrolling implementation for long lists of form items
+- **Virtual Scrolling**: Virtual scrolling implementation for long lists in forms
 - **Lazy Loading**: On-demand loading of form items and data
 - **Caching Strategy**: Intelligent caching to improve response speed
-- **Rendering Optimization**: Minimizes unnecessary re-renders
-- **Memory Management**: Efficient control of memory usage
+- **Rendering Optimization**: Reduced unnecessary re-rendering
+- **Memory Management**: Effective memory usage control
 
 ## Large Form Performance Optimization
 
-### 1. Paginated Loading Strategy
+### 1. Pagination Loading Strategy
 
 ```typescript
 interface FormPageConfig {
@@ -113,7 +113,7 @@ const largeFormManager = {
   }
 }
 
-// Scroll listener for infinite loading
+// Infinite scroll implementation
 const setupInfiniteLoading = () => {
   const scrollContainer = document.querySelector('.ma-form-container')
   if (!scrollContainer) return
@@ -145,7 +145,7 @@ const setupInfiniteLoading = () => {
 
 ```typescript
 interface VirtualScrollConfig {
-  itemHeight: number      // Height per item
+  itemHeight: number      // Height of each item
   visibleCount: number    // Number of visible items
   bufferSize: number      // Buffer size
   scrollTop: number       // Scroll position
@@ -198,7 +198,7 @@ const virtualScrollManager = {
     const target = event.target as HTMLElement
     this.config.value.scrollTop = target.scrollTop
     
-    // Optimize scroll performance with requestAnimationFrame
+    // Use requestAnimationFrame to optimize scroll performance
     requestAnimationFrame(() => {
       this.updateVisibleItems()
     })
@@ -256,7 +256,7 @@ const lazyLoadManager = {
       config.data = data
       config.loaded = true
       
-      // Update field configuration with lazy data
+      // Update field with lazy data
       this.updateFieldWithLazyData(fieldProp, data)
       
     } catch (error) {
@@ -269,7 +269,7 @@ const lazyLoadManager = {
     }
   },
   
-  // Update field with lazy loaded data
+  // Update field with lazy data
   updateFieldWithLazyData(fieldProp: string, data: any) {
     const item = formRef.value?.getItemByProp(fieldProp)
     if (!item) return
@@ -419,7 +419,7 @@ interface CacheItem<T = any> {
 
 class MultiLevelCache {
   private l1Cache = new Map<string, CacheItem>()  // Memory cache (fast)
-  private l2Cache: LocalStorage                   // Local storage cache (persistent)
+  private l2Cache: LocalStorage                   // Persistent storage cache
   private maxL1Size = 100                         // Max L1 cache entries
   private defaultTTL = 5 * 60 * 1000             // Default 5 minutes TTL
   
@@ -456,7 +456,7 @@ class MultiLevelCache {
     }
     
     return null
-  }
+  },
   
   // Set cached data
   async set<T>(key: string, data: T, ttl = this.defaultTTL) {
@@ -476,7 +476,7 @@ class MultiLevelCache {
     } catch (error) {
       console.warn(`Failed to set L2 cache: ${key}`, error)
     }
-  }
+  },
   
   // Set L1 cache
   private setL1Cache<T>(key: string, data: T, ttl: number) {
@@ -491,7 +491,7 @@ class MultiLevelCache {
       ttl,
       hitCount: 0
     })
-  }
+  },
   
   // L1 cache eviction strategy (LFU - Least Frequently Used)
   private evictL1Cache() {
@@ -508,12 +508,12 @@ class MultiLevelCache {
     if (evictKey) {
       this.l1Cache.delete(evictKey)
     }
-  }
+  },
   
   // Check if expired
   private isExpired(item: CacheItem): boolean {
     return Date.now() - item.timestamp > item.ttl
-  }
+  },
   
   // Clear expired cache
   clearExpired() {
@@ -540,7 +540,7 @@ class MultiLevelCache {
         }
       }
     }
-  }
+  },
   
   // Get cache statistics
   getStats() {
@@ -592,7 +592,7 @@ const smartPreCache = {
       .map(async ([key, rule]) => {
         try {
           const data = await rule.loader()
-          await formCache.set(key, data, 10 * 60 * 1000) // 10 minute cache
+          await formCache.set(key, data, 10 * 60 * 1000) // 10 minutes cache
         } catch (error) {
           console.warn(`Pre-caching failed: ${key}`, error)
         }
@@ -600,4 +600,4 @@ const smartPreCache = {
     
     await Promise.all(highPriorityTasks)
     
-    //
+    // Sequentially execute low priority pre-caching (

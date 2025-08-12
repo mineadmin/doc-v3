@@ -3,10 +3,10 @@
 A secondary encapsulation of the `Form` component based on `Element Plus`, supporting all native form parameters, events, slots, and syntax, as well as configuration-based implementation.  
 Additionally, it supports layout planning for forms based on `el-row` and `el-space`, featuring responsive design and mobile adaptation capabilities.
 
-::: tip Note
-Since it fully supports all parameters, events, and slots of the native `el-form`, this documentation primarily focuses on extended features.
+::: tip Note  
+Since it fully supports all parameters, events, and slots of the native `el-form`, this documentation primarily focuses on extended features.  
 
-For official form parameters, refer to the [Element Plus](https://element-plus.org/en-US/component/form.html) documentation.
+For official form parameters, please refer to the [Element Plus](https://element-plus.org/en-US/component/form.html) documentation.  
 :::
 
 ## Quick Start
@@ -18,37 +18,37 @@ For official form parameters, refer to the [Element Plus](https://element-plus.o
 <DemoPreview dir="demos/ma-form/template" />
 
 ### Getting `Component` and `el-form-item` `Refs`
-:::tip Note
-This method is for **configuration mode**. In `template` mode, you can define `ref` yourself.
+:::tip Tip  
+This method is for **configuration mode**. In `template` mode, you can define `ref` yourself.  
 :::
 
 <DemoPreview dir="demos/ma-form/getRef" />
 
 ## Complete Examples
 
-:::info Example Navigation
-The following examples demonstrate various usage scenarios and advanced features of MaForm, from basic usage to complex applications. It is recommended to learn them in order for the best results.
+:::info Example Navigation  
+The following examples demonstrate various usages and advanced features of MaForm, from basic usage to complex scenarios. It is recommended to learn them in order for the best results.  
 :::
 
-### Basic Functionality Examples
-- [Basic Usage](/en/front/component/ma-form/examples/basic-usage) - Common form controls and their basic configuration and usage.
-- [Layout Systems](/en/front/component/ma-form/examples/layout-systems) - Responsive design with Flex and Grid layouts.
-- [Component Rendering](/en/front/component/ma-form/examples/component-rendering) - Showcase of all supported Element Plus components.
+### Basic Function Examples
+- [Basic Usage](/en/front/component/ma-form/examples/basic-usage) - Common form controls and basic configuration methods  
+- [Layout System](/en/front/component/ma-form/examples/layout-systems) - Responsive design with Flex and Grid layouts  
+- [Component Rendering](/en/front/component/ma-form/examples/component-rendering) - Display of all supported Element Plus components  
 
-### Advanced Functionality Examples
-- [Conditional Rendering](/en/front/component/ma-form/examples/conditional-rendering) - Controlling field visibility based on form data.
-- [Dynamic Validation](/en/front/component/ma-form/examples/dynamic-validation) - Custom validation rules and asynchronous validation.
-- [Slot System](/en/front/component/ma-form/examples/slots-examples) - Flexible usage of multi-level slots.
+### Advanced Function Examples
+- [Conditional Rendering](/en/front/component/ma-form/examples/conditional-rendering) - Field display control based on form data  
+- [Dynamic Validation](/en/front/component/ma-form/examples/dynamic-validation) - Custom validation rules and asynchronous validation  
+- [Slot System](/en/front/component/ma-form/examples/slots-examples) - Flexible usage of multi-level slots  
 
 ### Feature Demonstration Examples
-- [Exposed Methods](/en/front/component/ma-form/examples/expose-methods) - Demonstration of all API methods.
-- [Loading States](/en/front/component/ma-form/examples/loading-states) - Handling various loading scenarios.
-- [Nested Forms](/en/front/component/ma-form/examples/nested-forms) - Managing complex hierarchical form structures.
+- [Exposed Methods](/en/front/component/ma-form/examples/expose-methods) - Demonstration of all API methods  
+- [Loading States](/en/front/component/ma-form/examples/loading-states) - Handling various loading scenarios  
+- [Nested Forms](/en/front/component/ma-form/examples/nested-forms) - Handling complex hierarchical form structures  
 
 ### Practical Application Examples
-- [Mobile Adaptation](/en/front/component/ma-form/examples/mobile-responsive) - Responsive design and mobile optimization.
-- [Advanced Scenarios](/en/front/component/ma-form/examples/advanced-scenarios) - Multi-step workflows and complex business logic.
-- [Performance Optimization](/en/front/component/ma-form/examples/performance-demo) - Strategies for optimizing large forms.
+- [Mobile Adaptation](/en/front/component/ma-form/examples/mobile-responsive) - Responsive design and mobile optimization  
+- [Advanced Scenarios](/en/front/component/ma-form/examples/advanced-scenarios) - Multi-step workflows and complex business logic  
+- [Performance Optimization](/en/front/component/ma-form/examples/performance-demo) - Strategies for optimizing large forms  
 
 ## TypeScript Type Definitions
 
@@ -239,8 +239,8 @@ interface MaFormExpose {
 
 ### Extended Configuration for MaFormOptions
 
-::: tip Note
-These are extended parameters of `ma-form` for `el-form`, fully compatible with native Element Plus parameters.
+::: tip Note  
+These are extended parameters for `ma-form` on top of `el-form`, fully compatible with native Element Plus parameters.  
 :::
 
 | Parameter | Description | Type | Default | Version |
@@ -253,7 +253,7 @@ These are extended parameters of `ma-form` for `el-form`, fully compatible with 
 | `grid` | Grid layout configuration, based on `el-space` component | `ElSpaceProps` | `{}` | 1.0.0 |
 | `footerSlot` | Configuration-based footer slot, can return VNode or VNode array | `() => VNode \| VNode[]` | - | 1.0.0 |
 | `responsiveConfig` | Responsive configuration options | `ResponsiveConfig` | - | 1.0.0 |
-| `mobileBreakpoint` | Mobile breakpoint in pixels | `number` | `768` | 1.0.0 |
+| `mobileBreakpoint` | Mobile breakpoint pixel value | `number` | `768` | 1.0.0 |
 
 #### ResponsiveConfig Configuration
 
@@ -289,7 +289,7 @@ Detailed configuration options for loading animation:
 | `background` | Background mask color | `string` | `'rgba(0, 0, 0, 0.8)'` | 1.0.0 |
 | `customClass` | Custom style class name | `string` | - | 1.0.0 |
 | `lock` | Whether to lock scrolling | `boolean` | `true` | 1.0.0 |
-| `fullscreen` | Whether to display in full screen | `boolean` | `false` | 1.0.0 |
+| `fullscreen` | Whether to display in fullscreen | `boolean` | `false` | 1.0.0 |
 
 ### Detailed Configuration for MaFormItem
 
@@ -302,21 +302,21 @@ Complete configuration options for form items:
 | `label` | Form item label, supports string or function return value | `string \| (() => string)` | - | 1.0.0 |
 | `prop` | Form item field name, supports string or function return value, used for data binding and validation | `string \| (() => string)` | - | 1.0.0 |
 | `hide` | Whether to hide the item (hidden but retains data), supports dynamic control | `boolean \| ((item: MaFormItem, model: Record<string, any>) => boolean)` | `false` | 1.0.0 |
-| `show` | Whether to show the item (not rendered and no data if not shown), supports dynamic control | `boolean \| ((item: MaFormItem, model: Record<string, any>) => boolean)` | `true` | 1.0.0 |
+| `show` | Whether to show the item (not rendered if not shown and no data), supports dynamic control | `boolean \| ((item: MaFormItem, model: Record<string, any>) => boolean)` | `true` | 1.0.0 |
 
 #### Layout Configuration
 
 | Parameter | Description | Type | Default | Version |
 |-----------|-------------|------|---------|---------|
 | `cols` | Grid layout configuration, effective when `layout` is `flex`, supports responsive configuration | `ColsConfiguration` | - | 1.0.0 |
-| `itemProps` | Native properties of Element Plus `el-form-item` | `ElFormItemProps` | `{}` | 1.0.0 |
+| `itemProps` | Native properties for Element Plus `el-form-item` | `ElFormItemProps` | `{}` | 1.0.0 |
 | `itemSlots` | Native slot configuration for Element Plus `el-form-item` | `Record<string, (...args: any[]) => VNode \| VNode[]>` | `{}` | 1.0.0 |
 
 #### Rendering Configuration
 
 | Parameter | Description | Type | Default | Version |
 |-----------|-------------|------|---------|---------|
-| `render` | Component rendering type: can be Element Plus component name (e.g., `'input'`, `'select'`), Vue component, or render function | `RenderType` | - | 1.0.0 |
+| `render` | Rendered component type: can be Element Plus component name (e.g., `'input'`, `'select'`), Vue component, or render function | `RenderType` | - | 1.0.0 |
 | `renderProps` | Props configuration for the rendered component | `Record<string, any>` | `{}` | 1.0.0 |
 | `renderSlots` | Slot configuration for the rendered component | `Record<string, (...args: any[]) => VNode \| VNode[]>` | `{}` | 1.0.0 |
 
@@ -348,10 +348,10 @@ MaForm provides a flexible slot system supporting multi-level content customizat
 
 ### Global Slots
 
-| Name | Description | Scope Variables | Example |
-|------|-------------|----------------|---------|
-| `default` | Default slot, can write native `<el-form-item>` tags, configuration mode automatically disabled when used | - | `<ma-form><el-form-item>...</el-form-item></ma-form>` |
-| `footer` | Form footer slot for action elements like submit buttons | `{ formRef, model, loading }` | `<template #footer="{ formRef }">` |
+| Name | Description | Scoped Variables | Example |
+|------|-------------|------------------|---------|
+| `default` | Default slot, can write native `<el-form-item>` tags, configuration mode becomes invalid when used | - | `<ma-form><el-form-item>...</el-form-item></ma-form>` |
+| `footer` | Form footer slot for placing submit buttons and other action elements | `{ formRef, model, loading }` | `<template #footer="{ formRef }">` |
 | `loading` | Custom loading state content | `{ loading }` | `<template #loading="{ loading }">` |
 
 ### Form Item Level Slots
@@ -384,7 +384,7 @@ interface FormItemScope {
 
 ### Dynamic Slot Naming
 
-Supports dynamic slot naming based on `prop` in the format: `item-{prop}`
+Supports dynamic slot naming based on `prop`, format: `item-{prop}`
 
 ```vue
 <ma-form :items="items">
@@ -395,4 +395,4 @@ Supports dynamic slot naming based on `prop` in the format: `item-{prop}`
   
   <!-- Custom label for item with prop 'password' -->
   <template #label-password>
-    <span style="color: red;">* Password</span>
+    <span style="color: red

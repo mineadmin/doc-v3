@@ -4,9 +4,9 @@ MaFormの実際のビジネスシナリオにおける複雑な応用を紹介�
 
 <DemoPreview dir="demos/ma-form/advanced-scenarios" />
 
-## 機能特徴
+## 機能特性
 
-- **マルチステップフォーム**: ステップ分けされた複雑なフォームプロセス
+- **マルチステップフォーム**: ステップごとの複雑なフォームプロセス
 - **データ辞書統合**: バックエンドのデータ辞書システムとの統合
 - **権限制御**: ユーザー権限に基づくフォームフィールド制御
 - **国際化サポート**: 多言語フォーム設定
@@ -50,7 +50,7 @@ const stepFormConfig = {
   ]
 }
 
-// ステップフォーム項目設定
+// ステップフォームアイテム設定
 const getStepFormItems = (currentStep: number): MaFormItem[] => {
   const stepConfigs = {
     0: [ // 基本情報ステップ
@@ -89,17 +89,17 @@ const getStepFormItems = (currentStep: number): MaFormItem[] => {
     ],
     1: [ // 連絡先ステップ
       {
-        label: '電話番号',
+        label: '携帯電話',
         prop: 'contact.phone',
         render: 'input',
         renderProps: {
-          placeholder: '電話番号を入力'
+          placeholder: '携帯電話番号を入力'
         },
         customValidator: (rule, value, callback) => {
           if (!value) {
-            callback(new Error('電話番号を入力してください'))
+            callback(new Error('携帯電話番号を入力してください'))
           } else if (!/^1[3-9]\d{9}$/.test(value)) {
-            callback(new Error('有効な電話番号を入力してください'))
+            callback(new Error('有効な携帯電話番号を入力してください'))
           } else {
             callback()
           }
@@ -196,7 +196,7 @@ const stepFormController = {
   
   // 指定ステップへ移動
   goToStep: async (targetStep: number) => {
-    // 現在ステップを検証
+    // 現在のステップを検証
     const isValid = await formRef.value.validate()
     if (isValid || targetStep < stepFormController.currentStep.value) {
       stepFormController.currentStep.value = targetStep
@@ -205,7 +205,7 @@ const stepFormController = {
   }
 }
 
-// フォーム項目更新
+// フォームアイテムを更新
 const updateFormItems = () => {
   const items = getStepFormItems(stepFormController.currentStep.value)
   formRef.value.setItems(items)
@@ -216,13 +216,13 @@ const updateFormItems = () => {
 
 ```typescript
 const stepValidationStrategy = {
-  // ステップ検証
+  // ステップごとの検証
   validateStep: async (stepIndex: number): Promise<boolean> => {
     const stepKey = stepFormConfig.steps[stepIndex].key
     const stepProps = Object.keys(stepFormController.stepData.value[stepKey])
     
     try {
-      // 現在ステップの全フィールドを検証
+      // 現在のステップの全フィールドを検証
       const validationPromises = stepProps.map(prop => 
         formRef.value.validateField(`${stepKey}.${prop}`)
       )
@@ -234,7 +234,7 @@ const stepValidationStrategy = {
     }
   },
   
-  // 全ステップ検証
+  // 全ステップの検証
   validateAllSteps: async (): Promise<{ isValid: boolean; invalidSteps: number[] }> => {
     const invalidSteps: number[] = []
     
@@ -251,7 +251,7 @@ const stepValidationStrategy = {
     }
   },
   
-  // ステップ状態取得
+  // ステップの完了状態を取得
   getStepStatus: (stepIndex: number): 'wait' | 'process' | 'finish' | 'error' => {
     if (stepIndex < stepFormController.currentStep.value) {
       return 'finish'
@@ -280,8 +280,8 @@ interface DictionaryItem {
 interface DictionaryConfig {
   code: string          // 辞書コード
   label: string         // 辞書名
-  cache: boolean        // キャッシュ有無
-  cascade?: boolean     // カスケード有無
+  cache: boolean        // キャッシュするか
+  cascade?: boolean     // カスケードするか
   parentField?: string  // 親フィールド（カスケード時使用）
 }
 
@@ -289,9 +289,9 @@ const dictionaryService = {
   // 辞書データキャッシュ
   cache: new Map<string, DictionaryItem[]>(),
   
-  // 辞書データ取得
+  // 辞書データを取得
   async getDictionary(config: DictionaryConfig): Promise<DictionaryItem[]> {
-    // キャッシュチェック
+    // キャッシュをチェック
     if (config.cache && this.cache.has(config.code)) {
       return this.cache.get(config.code)!
     }
@@ -300,14 +300,14 @@ const dictionaryService = {
       const response = await fetch(`/api/dictionary/${config.code}`)
       const data = await response.json()
       
-      // データキャッシュ
+      // データをキャッシュ
       if (config.cache) {
         this.cache.set(config.code, data)
       }
       
       return data
     } catch (error) {
-      console.error(`辞書 ${config.code} 取得失敗:`, error)
+      console.error(`辞書 ${config.code} の取得に失敗:`, error)
       return []
     }
   },
@@ -333,25 +333,25 @@ const dictionaryService = {
       
       return data
     } catch (error) {
-      console.error(`カスケード辞書 ${config.code} 取得失敗:`, error)
+      console.error(`カスケード辞書 ${config.code} の取得に失敗:`, error)
       return []
     }
   },
   
-  // 辞書キャッシュクリア
+  // 辞書キャッシュをクリア
   clearCache: (code?: string) => {
     if (code) {
-      // 指定辞書のキャッシュクリア
+      // 指定辞書のキャッシュをクリア
       const keysToDelete = Array.from(this.cache.keys()).filter(key => key.startsWith(code))
       keysToDelete.forEach(key => this.cache.delete(key))
     } else {
-      // 全キャッシュクリア
+      // 全キャッシュをクリア
       this.cache.clear()
     }
   }
 }
 
-// 辞書フォーム項目ファクトリ
+// 辞書フォームアイテムファクトリ
 const createDictionaryField = (config: {
   label: string
   prop: string
@@ -380,7 +380,7 @@ const createDictionaryField = (config: {
       try {
         const dictData = await dictionaryService.getDictionary(dictConfig)
         
-        // フィールドオプション更新
+        // フィールドオプションを更新
         const slots = createDictSlots(dictData, renderType)
         formRef.value?.updateItem(prop, {
           renderProps: { loading: false },
@@ -388,7 +388,7 @@ const createDictionaryField = (config: {
         })
         
       } catch (error) {
-        console.error(`辞書データロード失敗: ${dictConfig.code}`, error)
+        console.error(`辞書データのロードに失敗: ${dictConfig.code}`, error)
         formRef.value?.updateItem(prop, {
           renderProps: { loading: false }
         })
@@ -397,7 +397,7 @@ const createDictionaryField = (config: {
   }
 }
 
-// 辞書オプションスロット作成
+// 辞書オプションスロットを作成
 const createDictSlots = (data: DictionaryItem[], renderType: string) => {
   return () => {
     switch (renderType) {
@@ -457,7 +457,7 @@ const cascadeDictionaryFields = [
         )
       }
     },
-    // 都道府県変更時に市区町村オプション更新
+    // 都道府県変更時に市区町村オプションを更新
     onChange: async (value: string) => {
       // 市区町村と区をクリア
       formRef.value.setFormData({
@@ -467,7 +467,7 @@ const cascadeDictionaryFields = [
       })
       
       if (value) {
-        // 市区町村データロード
+        // 市区町村データをロード
         formRef.value.updateItem('city', {
           renderProps: { loading: true }
         })
@@ -496,17 +496,17 @@ const cascadeDictionaryFields = [
     prop: 'city',
     render: 'select',
     renderProps: {
-      placeholder: 'まず都道府県を選択',
+      placeholder: '先に都道府県を選択',
       clearable: true,
       disabled: true  // 初期は無効
     },
     show: (model) => !!model.province,
     dependencies: ['province'],
     onChange: async (value: string) => {
-      // 同様に区の連動ロジック
+      // 同様の区連動ロジック
       const formData = formRef.value.getFormData()
       if (value && formData.province) {
-        // 区データロード...
+        // 区データをロード...
       }
     }
   }
@@ -521,13 +521,13 @@ const cascadeDictionaryFields = [
 interface FieldPermission {
   field: string
   permissions: {
-    view: boolean      // 表示可否
-    edit: boolean      // 編集可否
-    required: boolean  // 必須可否
+    view: boolean      // 表示可能か
+    edit: boolean      // 編集可能か
+    required: boolean  // 必須か
   }
   conditions?: {
     roles?: string[]           // ロール条件
-    departments?: string[]     // 部署条件
+    departments?: string[]     // 部門条件
     customCheck?: () => boolean // カスタム条件
   }
 }
@@ -542,7 +542,7 @@ interface UserContext {
 const permissionService = {
   userContext: ref<UserContext | null>(null),
   
-  // フィールド権限チェック
+  // フィールド権限をチェック
   checkFieldPermission(fieldPermission: FieldPermission): {
     visible: boolean
     editable: boolean
@@ -566,7 +566,7 @@ const permissionService = {
         edit = false
       }
       
-      // 部署チェック
+      // 部門チェック
       if (departments && !departments.includes(user.department)) {
         view = false
         edit = false
@@ -586,7 +586,7 @@ const permissionService = {
     }
   },
   
-  // 権限をフォーム項目に適用
+  // 権限をフォームアイテムに適用
   applyPermissionsToItems(items: MaFormItem[], permissions: FieldPermission[]): MaFormItem[] {
     return items.map(item => {
       const permission = permissions.find(p => p.field === item.prop)
@@ -597,11 +597,4 @@ const permissionService = {
       return {
         ...item,
         show: visible,
-        renderProps: {
-          ...item.renderProps,
-          disabled: !editable
-        },
-        itemProps: {
-          ...item.itemProps,
-          rules: required ? [
-            ...(item.itemProps?.rules
+        renderProps

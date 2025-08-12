@@ -1,15 +1,15 @@
 # モバイルレスポンシブ
 
-MaFormのモバイル端末におけるレスポンシブ特性を展示します。ブレークポイント適応、モバイル最適化、タッチ操作、デバイス固有の設定を含みます。
+MaFormのモバイル端末向けレスポンシブ機能を紹介します。ブレークポイント適応、モバイル最適化、タッチ操作、デバイス固有の設定などが含まれます。
 
 <DemoPreview dir="demos/ma-form/mobile-responsive" />
 
-## 機能特性
+## 機能特徴
 
 - **ブレークポイントレスポンシブ**: 画面サイズに基づいて自動的にレイアウトを適応
 - **モバイル最適化**: モバイルデバイス向けの特別な最適化
-- **タッチフレンドリー**: タッチ操作に適したインタラクションデザイン
-- **デバイス認識**: 自動的にモバイルデバイスを認識し対応する設定を適用
+- **タッチ操作対応**: タッチ操作に適したインタラクションデザイン
+- **デバイス認識**: モバイルデバイスを自動認識し適切な設定を適用
 - **柔軟な設定**: モバイル専用のフィールド設定をサポート
 
 ## レスポンシブブレークポイントシステム
@@ -50,11 +50,11 @@ const responsiveFormItems = [
       span: 12,
       
       // レスポンシブ設定
-      xs: 24,    // 超小画面: 行全体を占有
-      sm: 24,    // 小画面: 行全体を占有
-      md: 12,    // 中画面: 半分を占有
-      lg: 8,     // 大画面: 3分の1を占有
-      xl: 6      // 超大画面: 4分の1を占有
+      xs: 24,    // 超小画面：1行全体
+      sm: 24,    // 小画面：1行全体
+      md: 12,    // 中画面：半分
+      lg: 8,     // 大画面：3分の1
+      xl: 6      // 超大画面：4分の1
     }
   },
   {
@@ -177,7 +177,7 @@ const adaptiveVisibilityFields = [
     mobileHide: true
   },
   {
-    label: '備考情報',
+    label: '備考',
     prop: 'remark',
     render: 'input',
     renderProps: {
@@ -187,7 +187,7 @@ const adaptiveVisibilityFields = [
     mobileHide: (model) => !model.showAdvanced
   },
   {
-    label: '詳細オプション',
+    label: '高度なオプション',
     prop: 'advanced',
     render: 'switch',
     // モバイルで簡略化バージョンを表示
@@ -227,7 +227,7 @@ const isMobileLayout = computed(() => {
   return formRef.value?.isMobileState() || false
 })
 
-// モバイル状態に応じてフォーム設定を調整
+// モバイル状態に基づいてフォーム設定を調整
 watch(isMobileLayout, (isMobile) => {
   if (formRef.value) {
     formRef.value.updateOptions(options => ({
@@ -252,7 +252,7 @@ const mobileSizedFields = [
       size: 'default'  // デスクトップデフォルトサイズ
     },
     mobileProps: {
-      size: 'large'    // モバイル大サイズ、タッチ操作に最適
+      size: 'large'    // モバイルで大サイズ、タッチ操作に適応
     }
   },
   {
@@ -264,7 +264,7 @@ const mobileSizedFields = [
     },
     mobileProps: {
       size: 'large',
-      teleported: false  // モバイルでポータルを使用しない、オーバーレイ問題を回避
+      teleported: false  // モバイルでポータルを使用せず、マスク問題を回避
     }
   },
   {
@@ -287,7 +287,7 @@ const mobileSizedFields = [
 
 ## タッチ操作最適化
 
-### 1. タッチフレンドリーなコンポーネント設定
+### 1. タッチ操作対応コンポーネント設定
 
 ```typescript
 const touchFriendlyFields = [
@@ -303,7 +303,7 @@ const touchFriendlyFields = [
     },
     mobileProps: {
       showInput: false,
-      height: 6,        // スライダー高さを増加、タッチ操作に最適化
+      height: 6,        // スライダーの高さを増加、タッチ操作に適応
       showTooltip: true,
       tooltipClass: 'mobile-slider-tooltip'
     }
@@ -330,7 +330,7 @@ const touchFriendlyFields = [
       size: 'default'
     },
     mobileProps: {
-      size: 'large',    // スイッチサイズを拡大、タップしやすく
+      size: 'large',    // スイッチサイズを拡大、クリックしやすく
       width: 60
     }
   }
@@ -363,7 +363,7 @@ const mobileUploadField = {
         type: 'primary',
         size: isMobile ? 'large' : 'default',
         icon: isMobile ? 'Camera' : 'Upload'
-      }, isMobile ? '写真を撮る/選択' : 'ファイルを選択')
+      }, isMobile ? '写真撮影/画像選択' : 'ファイル選択')
     }
   }
 }
@@ -380,12 +380,12 @@ const deviceDetection = {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
   },
   
-  // タッチデバイスかどうかを検出
+  // タッチデバイスか検出
   isTouchDevice: () => {
     return 'ontouchstart' in window || navigator.maxTouchPoints > 0
   },
   
-  // 画面方向を検出
+  // 画面向きを検出
   getOrientation: () => {
     return window.innerWidth > window.innerHeight ? 'landscape' : 'portrait'
   },
@@ -396,7 +396,7 @@ const deviceDetection = {
   }
 }
 
-// デバイス特性に応じてフォームを調整
+// デバイス特性に基づいてフォームを調整
 const adaptFormToDevice = () => {
   const isMobile = deviceDetection.isMobile()
   const isTouchDevice = deviceDetection.isTouchDevice()
@@ -420,20 +420,20 @@ const adaptFormToDevice = () => {
 }
 ```
 
-### 2. 画面方向変化処理
+### 2. 画面向き変化処理
 
 ```typescript
-// 画面方向変化を監視
+// 画面向き変化を監視
 const handleOrientationChange = () => {
   const isPortrait = window.innerHeight > window.innerWidth
   
-  // 方向に応じてレイアウトを調整
+  // 向きに基づいてレイアウトを調整
   if (formRef.value) {
     formRef.value.updateOptions(options => ({
       ...options,
       responsiveConfig: {
         ...options.responsiveConfig,
-        mobileHideLabels: isPortrait,  // 縦画面時にラベルを非表示
+        mobileHideLabels: isPortrait,  // 縦画面でラベルを非表示
         mobileSingleColumn: true
       }
     }))
@@ -486,7 +486,7 @@ const pwaFormConfig = {
 // PWAオフライン状態処理
 const handleOfflineForm = () => {
   if (!navigator.onLine) {
-    // オフライン時に非同期検証を無効化
+    // オフライン時は非同期検証を無効化
     const items = formRef.value?.getItems() || []
     items.forEach(item => {
       if (item.asyncValidator) {
@@ -503,7 +503,7 @@ const handleOfflineForm = () => {
       }
     })
     
-    ElMessage.warning('現在オフライン状態のため、一部機能が制限されます')
+    ElMessage.warning('現在オフライン状態です。一部機能が制限されます')
   }
 }
 ```
@@ -517,7 +517,7 @@ const mobilePerformanceOptimization = {
     const criticalFields = fields.filter(field => field.priority === 'high')
     const nonCriticalFields = fields.filter(field => field.priority !== 'high')
     
-    // まず重要フィールドをロード
+    // 重要フィールドを先にロード
     formRef.value?.setItems(criticalFields)
     
     // 非重要フィールドを遅延ロード
@@ -537,7 +537,7 @@ const mobilePerformanceOptimization = {
     }
   },
   
-  // 画像遅延ロード
+  // 画像の遅延ロード
   enableImageLazyLoading: () => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -557,3 +557,5 @@ const mobilePerformanceOptimization = {
 ```
 
 ## モバイル適応テスト
+
+### 1. レスポンシブ

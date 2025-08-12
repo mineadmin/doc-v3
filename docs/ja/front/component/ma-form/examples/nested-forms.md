@@ -1,13 +1,13 @@
 # ネストフォーム
 
-MaForm のネストフォーム構造の実装を紹介します。階層フォーム、動的ネスト、オブジェクト配列フォーム、複雑なデータ構造処理を含みます。
+MaFormのネストフォーム構造の実装を展示します。階層フォーム、動的ネスト、オブジェクト配列フォーム、複雑なデータ構造処理を含みます。
 
 <DemoPreview dir="demos/ma-form/nested-forms" />
 
 ## 機能特徴
 
 - **階層構造**: マルチレベルネストフォーム構造をサポート
-- **動的ネスト**: ネストフォーム項目を動的に追加・削除可能
+- **動的ネスト**: ネストフォーム項目の動的追加・削除が可能
 - **オブジェクト配列**: オブジェクト配列形式の複雑なデータ構造をサポート
 - **独立検証**: 各ネストレベルに独立した検証メカニズム
 - **柔軟な設定**: ネスト項目の個別設定をサポート
@@ -82,7 +82,7 @@ const multiLevelNested = [
             render: 'datePicker',
             renderProps: {
               type: 'date',
-              placeholder: '設立日を選択してください'
+              placeholder: '設立日を選択'
             }
           }
         ]
@@ -117,12 +117,12 @@ const multiLevelNested = [
 
 ## 動的ネストフォーム
 
-### 1. 動的追加/削除
+### 1. 動的追加/削除子項目
 
 ```typescript
 // ネストフォーム項目の動的管理
 const dynamicNestedManagement = {
-  // 子項目を追加
+  // 子フォーム項目を追加
   addChildItem: (parentProp: string, childItem: MaFormItem) => {
     const parentItem = formRef.value.getItemByProp(parentProp)
     if (parentItem) {
@@ -133,7 +133,7 @@ const dynamicNestedManagement = {
     }
   },
 
-  // 子項目を削除
+  // 子フォーム項目を削除
   removeChildItem: (parentProp: string, childIndex: number) => {
     const parentItem = formRef.value.getItemByProp(parentProp)
     if (parentItem && parentItem.children) {
@@ -144,7 +144,7 @@ const dynamicNestedManagement = {
     }
   },
 
-  // 子項目を一括更新
+  // 子フォーム項目を一括更新
   updateChildrenItems: (parentProp: string, children: MaFormItem[]) => {
     formRef.value.updateItem(parentProp, { children })
   }
@@ -222,7 +222,7 @@ const conditionalNestedItems = [
     renderSlots: {
       default: () => [
         h('el-option', { label: '個人アカウント', value: 'personal' }),
-        h('el-option', { label: '法人アカウント', value: 'business' })
+        h('el-option', { label: '企業アカウント', value: 'business' })
       ]
     }
   },
@@ -249,7 +249,7 @@ const conditionalNestedItems = [
     ]
   },
   {
-    label: '法人情報',
+    label: '企業情報',
     prop: 'businessInfo',
     show: (model) => model.accountType === 'business',
     dependencies: ['accountType'],
@@ -283,7 +283,7 @@ const arrayFormItems = [
   {
     label: '学歴',
     prop: 'education',
-    children: [], // 動的に生成
+    children: [], // 動的に配列項目を生成
     itemSlots: {
       append: () => {
         return h('el-button', {
@@ -505,8 +505,8 @@ const addProjectMember = (projectIndex: number) => {
         renderSlots: {
           default: () => [
             h('el-option', { label: 'プロジェクトマネージャー', value: 'pm' }),
-            h('el-option', { label: 'フロントエンド開発', value: 'frontend' }),
-            h('el-option', { label: 'バックエンド開発', value: 'backend' }),
+            h('el-option', { label: 'フロントエンド開発者', value: 'frontend' }),
+            h('el-option', { label: 'バックエンド開発者', value: 'backend' }),
             h('el-option', { label: 'テストエンジニア', value: 'tester' })
           ]
         },
@@ -544,7 +544,7 @@ const addProjectMember = (projectIndex: number) => {
 ```typescript
 const nestedValidationItems = [
   {
-    label: 'ユーザープロフィール',
+    label: 'ユーザープロファイル',
     prop: 'profile',
     children: [
       {
@@ -569,7 +569,7 @@ const nestedValidationItems = [
         prop: 'profile.contact',
         children: [
           {
-            label: 'メール',
+            label: 'メールアドレス',
             prop: 'profile.contact.email',
             render: 'input',
             renderProps: { type: 'email' },
@@ -584,7 +584,7 @@ const nestedValidationItems = [
             }
           },
           {
-            label: '電話',
+            label: '電話番号',
             prop: 'profile.contact.phone',
             render: 'input',
             asyncValidator: async (rule, value) => {
@@ -606,5 +606,4 @@ const nestedValidationItems = [
 ### 2. 配列項目検証
 
 ```typescript
-// 全ての配列項目を検証
-const validateArrayItems = async (
+// 

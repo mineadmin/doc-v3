@@ -9,7 +9,7 @@ MaFormの動的バリデーション機能を紹介します。カスタム同�
 - **多層バリデーション**: Element Plusネイティブルール、カスタム同期バリデーション、非同期バリデーションをサポート
 - **連動バリデーション**: フィールド間の依存関係を持つバリデーションロジック
 - **リアルタイムバリデーション**: 入力中の即時フィードバック
-- **非同期バリデーション**: サーバーサイドバリデーション（ユニークチェックなど）をサポート
+- **非同期バリデーション**: サーバーサイドバリデーション（一意性チェックなど）をサポート
 - **カスタムエラーメッセージ**: 柔軟なエラーメッセージカスタマイズ
 
 ## バリデーションレベル
@@ -24,7 +24,7 @@ MaFormの動的バリデーション機能を紹介します。カスタム同�
   itemProps: {
     rules: [
       { required: true, message: 'ユーザー名を入力してください', trigger: 'blur' },
-      { min: 3, max: 15, message: '3〜15文字で入力してください', trigger: 'blur' },
+      { min: 3, max: 15, message: '3～15文字で入力してください', trigger: 'blur' },
       { pattern: /^[a-zA-Z0-9_]+$/, message: '英数字とアンダースコアのみ使用可能', trigger: 'blur' }
     ]
   }
@@ -75,7 +75,7 @@ MaFormの動的バリデーション機能を紹介します。カスタム同�
       throw new Error('有効なメールアドレスを入力してください')
     }
     
-    // メールアドレスの存在チェック（非同期）
+    // 非同期でメールの存在をチェック
     try {
       const exists = await checkEmailExists(value)
       if (exists) {
@@ -85,7 +85,7 @@ MaFormの動的バリデーション機能を紹介します。カスタム同�
       if (error.message.includes('既に登録')) {
         throw error
       }
-      throw new Error('メールアドレスの確認に失敗しました。後ほど再試行してください')
+      throw new Error('メール確認に失敗しました。後ほど再試行してください')
     }
   }
 }
@@ -113,7 +113,7 @@ const linkedValidationFields = [
       
       const endDate = formData.endDate
       if (endDate && new Date(value) >= new Date(endDate)) {
-        callback(new Error('開始日は終了日より前でなければなりません'))
+        callback(new Error('開始日は終了日より前である必要があります'))
       } else {
         callback()
         // 終了日の再バリデーションをトリガー
@@ -141,7 +141,7 @@ const linkedValidationFields = [
       
       const startDate = formData.startDate
       if (startDate && new Date(value) <= new Date(startDate)) {
-        callback(new Error('終了日は開始日より後でなければなりません'))
+        callback(new Error('終了日は開始日より後である必要があります'))
       } else {
         callback()
         // 開始日の再バリデーションをトリガー
@@ -169,7 +169,7 @@ const linkedValidationFields = [
     const isRequired = userType === 'individual'
     
     if (isRequired && !value) {
-      callback(new Error('個人ユーザーは電話番号を入力する必要があります'))
+      callback(new Error('個人ユーザーは電話番号が必須です'))
       return
     }
     
@@ -210,14 +210,14 @@ const linkedValidationFields = [
     // ビジネスルール: VIP商品は100未満不可
     const isVipProduct = formData.isVipProduct
     if (isVipProduct && value < 100) {
-      callback(new Error('VIP商品の価格は100元以上でなければなりません'))
+      callback(new Error('VIP商品は100円未満に設定できません'))
       return
     }
     
     // ビジネスルール: プロモーション商品は1000超不可
     const isPromotional = formData.isPromotional  
     if (isPromotional && value > 1000) {
-      callback(new Error('プロモーション商品の価格は1000円以下でなければなりません'))
+      callback(new Error('プロモーション商品は1000円超に設定できません'))
       return
     }
     
@@ -261,7 +261,7 @@ const debouncedUsernameCheck = debounce(async (username) => {
     
     const exists = await debouncedUsernameCheck(value)
     if (exists) {
-      throw new Error('このユーザー名は既に使用されています')
+      throw new Error('このユーザー名は既に存在します')
     }
   }
 }
@@ -290,7 +290,7 @@ const debouncedUsernameCheck = debounce(async (username) => {
     try {
       const exists = await checkUsernameExists(value)
       if (exists) {
-        throw new Error('このユーザー名は既に使用されています')
+        throw new Error('このユーザー名は既に存在します')
       }
     } finally {
       // ローディング状態を非表示
@@ -302,7 +302,7 @@ const debouncedUsernameCheck = debounce(async (username) => {
 }
 ```
 
-### 3. エラー処理
+### 3. エラーハンドリング
 
 ```typescript
 {
@@ -314,9 +314,9 @@ const debouncedUsernameCheck = debounce(async (username) => {
       const response = await fetch(`/api/check-email?email=${value}`)
       
       if (!response.ok) {
-        // HTTPエラー処理
+        // HTTPエラーハンドリング
         if (response.status === 429) {
-          throw new Error('リクエストが多すぎます。しばらくしてから再試行してください')
+          throw new Error('リクエストが多すぎます。しばらく待ってから再試行してください')
         }
         throw new Error('バリデーションサービスが利用できません')
       }

@@ -1,12 +1,12 @@
 # Slot System
 
-Demonstrates MaForm's slot system, including global slots, form item-level slots, dynamic slot naming, and nested component slot usage.
+Demonstrates MaForm's slot system, including global slots, form-item level slots, dynamic slot naming, and nested component slot usage.
 
 <DemoPreview dir="demos/ma-form/slots-examples" />
 
 ## Features
 
-- **Multi-level Slots**: Supports global, form item, and component-level slots
+- **Multi-level Slots**: Supports global, form-item, and component level slots
 - **Dynamic Slot Naming**: Dynamic slot naming mechanism based on props
 - **Configurable Slots**: Define slot content through configuration
 - **Template Slots**: Supports template-based slot usage
@@ -15,7 +15,7 @@ Demonstrates MaForm's slot system, including global slots, form item-level slots
 ## Global Slots
 
 ### 1. Default Slot
-When using the default slot, the configuration method will automatically become invalid, and the template method will be fully used:
+When using the default slot, the configuration method will automatically become invalid and template mode will be fully used:
 
 ```vue
 <ma-form v-model="formData" :options="formOptions">
@@ -34,7 +34,7 @@ When using the default slot, the configuration method will automatically become 
 ```
 
 ### 2. Footer Slot
-Used to place form action buttons at the bottom:
+Used to place form bottom action buttons:
 
 ```vue
 <ma-form 
@@ -223,7 +223,7 @@ Define form item slots through configuration:
     
     help: ({ item, model }) => {
       return h('div', { class: 'upload-help' }, [
-        h('el-text', { type: 'info', size: 'small' }, 'Supports JPG, PNG formats, file size no more than 2MB')
+        h('el-text', { type: 'info', size: 'small' }, 'Supports JPG, PNG format, file size not exceeding 2MB')
       ])
     }
   }
@@ -287,7 +287,7 @@ Configure slots for rendered components:
     
     // Tip
     tip: () => h('div', { class: 'upload-tip' }, [
-      h('el-text', { type: 'info', size: 'small' }, 'Supports PDF, Word formats, single file no more than 10MB')
+      h('el-text', { type: 'info', size: 'small' }, 'Supports PDF, Word format, single file not exceeding 10MB')
     ]),
     
     // File list
@@ -353,10 +353,10 @@ interface FormItemScope {
 
 When multiple slot definition methods exist simultaneously, the priority is as follows:
 
-1. **Template Slots** (highest priority)
+1. **Template Slots** (Highest priority)
 2. **itemSlots Configuration Slots**
 3. **renderSlots Configuration Slots**
-4. **Default Rendering** (lowest priority)
+4. **Default Rendering** (Lowest priority)
 
 ### Example
 

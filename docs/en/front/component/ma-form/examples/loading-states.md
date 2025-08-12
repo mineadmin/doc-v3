@@ -8,8 +8,8 @@ Demonstrates various loading state configurations for MaForm, including global l
 
 - **Multi-level Loading Control**: Supports global and partial loading states
 - **Custom Loading Styles**: Supports custom loading icons, text, colors, etc.
-- **Dynamic Loading States**: Supports runtime dynamic switching of loading states
-- **Loading Mask Configuration**: Configurable background mask, scroll locking, etc.
+- **Dynamic Loading States**: Supports runtime switching of loading states
+- **Loading Mask Configuration**: Configurable background mask, scroll lock, etc.
 - **Loading Slot Support**: Supports fully customizable loading content
 
 ## Basic Loading Configuration
@@ -36,7 +36,7 @@ const formOptions = {
 />
 ```
 
-### 2. Dynamic Loading State Control
+### 2. Dynamic Loading Control
 
 ```typescript
 // Use exposed methods to control loading
@@ -228,7 +228,7 @@ const applyThemeLoading = (theme: 'light' | 'dark') => {
   render: 'input',
   renderProps: {
     loading: false,  // Field-level loading state
-    placeholder: 'Async validation will occur after input'
+    placeholder: 'Async validation will trigger after input'
   },
   asyncValidator: async (rule, value) => {
     // Show loading when validation starts
@@ -347,7 +347,7 @@ const simulateProgressLoading = async () => {
 >
   <template #loading="{ loading }">
     <div v-if="loading" class="skeleton-loading">
-      <!-- Skeleton screen simulating form structure -->
+      <!-- Simulate form structure skeleton -->
       <div class="skeleton-item" v-for="n in 4" :key="n">
         <div class="skeleton-label"></div>
         <div class="skeleton-input"></div>
