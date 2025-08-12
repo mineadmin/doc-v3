@@ -1,16 +1,16 @@
 # ローディング状態
 
-MaFormの各種ローディング状態設定を表示します。グローバルローディング、部分ローディング、カスタムローディングスタイル、動的ローディング制御を含みます。
+MaFormの各種ローディング状態設定を表示します。グローバルローディング、部分ローディング、カスタムローディングスタイル、動的ローディング制御などが含まれます。
 
 <DemoPreview dir="demos/ma-form/loading-states" />
 
 ## 機能特徴
 
-- **多段階ローディング制御**：グローバルと部分的なローディング状態をサポート
-- **カスタムローディングスタイル**：カスタムローディングアイコン、テキスト、色などをサポート
-- **動的ローディング状態**：実行時に動的にローディング状態を切り替え可能
-- **ローディングマスク設定**：背景マスク、スクロールロックなどを設定可能
-- **ローディングスロットサポート**：完全にカスタマイズ可能なローディングコンテンツをサポート
+- **多段階ローディング制御**: グローバルおよび部分的なローディング状態をサポート
+- **カスタムローディングスタイル**: ローディングアイコン、テキスト、色などのカスタマイズをサポート
+- **動的ローディング状態**: 実行時に動的にローディング状態を切り替え可能
+- **ローディングマスク設定**: 背景マスク、スクロールロックなどの設定が可能
+- **ローディングスロットサポート**: 完全にカスタマイズ可能なローディングコンテンツをサポート
 
 ## 基本ローディング設定
 
@@ -21,7 +21,7 @@ MaFormの各種ローディング状態設定を表示します。グローバ�
 const formOptions = {
   loading: true,  // ローディング状態を有効化
   loadingConfig: {
-    text: 'フォームを読み込み中...',
+    text: 'フォームをロード中...',
     background: 'rgba(0, 0, 0, 0.8)',
     customClass: 'custom-loading'
   }
@@ -36,7 +36,7 @@ const formOptions = {
 />
 ```
 
-### 2. 動的ローディング状態制御
+### 2. 動的ローディング制御
 
 ```typescript
 // 公開メソッドを使用してローディングを制御
@@ -191,12 +191,12 @@ const validationLoadingConfig = {
 const getLoadingConfigByTheme = (theme: 'light' | 'dark') => {
   const configs = {
     light: {
-      text: '読み込み中...',
+      text: 'ロード中...',
       background: 'rgba(255, 255, 255, 0.8)',
       customClass: 'light-loading'
     },
     dark: {
-      text: '読み込み中...',
+      text: 'ロード中...',
       background: 'rgba(0, 0, 0, 0.8)',
       customClass: 'dark-loading'
     }
@@ -316,9 +316,9 @@ const handleRemoteDataLoad = async () => {
 // ローディングテキストと進捗を動的に更新
 const loadingMessages = [
   'フォームを初期化中...',
-  '設定データを読み込み中...',
+  '設定データをロード中...',
   '権限を検証中...',
-  '読み込み完了'
+  'ロード完了'
 ]
 
 const simulateProgressLoading = async () => {
@@ -332,7 +332,7 @@ const simulateProgressLoading = async () => {
   }
   
   formRef.value.setLoadingState(false)
-  ElMessage.success('読み込みが完了しました!')
+  ElMessage.success('ロード完了!')
 }
 ```
 
@@ -394,7 +394,7 @@ const simulateProgressLoading = async () => {
 </style>
 ```
 
-## ローディング状態のベストプラクティス
+## ローディング状態ベストプラクティス
 
 ### 1. ローディングタイミング制御
 
@@ -404,7 +404,7 @@ const initializeForm = async () => {
   formRef.value.setLoadingState(true)
   
   try {
-    // データを並列で読み込み
+    // データを並列でロード
     const [formConfig, initialData, optionsData] = await Promise.all([
       fetchFormConfig(),
       fetchInitialData(),
@@ -436,7 +436,7 @@ const submitForm = async () => {
     
     ElMessage.success('送信が成功しました')
   } catch (error) {
-    ElMessage.error('送信に失敗しました、再度お試しください')
+    ElMessage.error('送信に失敗しました、再試行してください')
   } finally {
     formRef.value.setLoadingState(false)
   }
@@ -493,7 +493,7 @@ const getResponsiveLoadingConfig = () => {
   const isMobile = formRef.value.isMobileState()
   
   return {
-    text: isMobile ? '読み込み中...' : 'データを読み込み中、少々お待ちください...',
+    text: isMobile ? 'ロード中...' : 'データをロード中、少々お待ちください...',
     customClass: isMobile ? 'mobile-loading' : 'desktop-loading',
     fullscreen: isMobile,  // モバイルではフルスクリーンローディング
     lock: true

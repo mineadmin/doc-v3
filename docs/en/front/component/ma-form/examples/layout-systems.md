@@ -7,14 +7,14 @@ Demonstrates MaForm's two layout systems: Flex grid layout and Grid spacing layo
 ## Features
 
 - **Dual Layout Systems**: Supports both Flex and Grid layout methods
-- **Responsive Grid**: Responsive layouts based on Element Plus grid system
+- **Responsive Grid**: Responsive layout based on Element Plus grid system
 - **Breakpoint Adaptation**: Supports five breakpoints: xs, sm, md, lg, xl
-- **Flexible Configuration**: Each form item can be individually configured with layout properties
+- **Flexible Configuration**: Each form item can have individual layout properties
 - **Mobile Optimization**: Automatically switches to single-column layout on mobile
 
 ## Flex Layout (Default)
 
-Grid system implemented based on Element Plus's `el-row` and `el-col`:
+Grid system implemented using Element Plus's `el-row` and `el-col`:
 
 ### Basic Configuration
 ```typescript
@@ -40,7 +40,7 @@ const formItem = {
     offset: 0,       // Left margin columns
     push: 0,         // Move right columns
     pull: 0,         // Move left columns
-    order: 1,        // Sort priority
+    order: 1,        // Sorting priority
     
     // Responsive configuration
     xs: 24,          // Extra small screens: full width
@@ -54,7 +54,7 @@ const formItem = {
 
 ## Grid Layout
 
-Spacing layout implemented based on Element Plus's `el-space`:
+Spacing layout implemented using Element Plus's `el-space`:
 
 ### Basic Configuration
 ```typescript
@@ -82,11 +82,11 @@ const formOptions = {
 
 | Breakpoint | Device Type | Width Range | Recommended Columns |
 |------------|-------------|-------------|----------------------|
-| `xs` | Mobile portrait | < 768px | 1 column |
-| `sm` | Mobile landscape/small tablet | ≥ 768px | 1-2 columns |
+| `xs` | Mobile Portrait | < 768px | 1 column |
+| `sm` | Mobile Landscape/Small Tablet | ≥ 768px | 1-2 columns |
 | `md` | Tablet | ≥ 992px | 2-3 columns |
-| `lg` | Small desktop | ≥ 1200px | 3-4 columns |
-| `xl` | Large desktop | ≥ 1920px | 4+ columns |
+| `lg` | Small Desktop | ≥ 1200px | 3-4 columns |
+| `xl` | Large Desktop | ≥ 1920px | 4+ columns |
 
 ### Responsive Configuration Example
 
@@ -100,9 +100,9 @@ const responsiveField = {
     // Mobile first
     xs: { span: 24 },                    // Mobile: full width
     sm: { span: 12, offset: 0 },         // Small screen: two columns per row
-    md: { span: 8, offset: 0 },          // Medium screen: three columns per row
+    md: { span: 8, offset: 0 },          // Medium screen: three columns per row  
     lg: { span: 6, offset: 0 },          // Large screen: four columns per row
-    xl: { span: 4, offset: 2 }           // Extra large screen: six columns per row with left margin
+    xl: { span: 4, offset: 2 }           // Extra large: six columns per row with left margin
   }
 }
 
@@ -125,7 +125,7 @@ const formOptions = {
 
 ## Layout Best Practices
 
-### 1. Choose the Appropriate Layout System
+### 1. Choose the Right Layout System
 
 ```typescript
 // Complex forms → Use Flex layout
@@ -141,7 +141,7 @@ const simpleForm = {
 }
 ```
 
-### 2. Plan Grids Reasonably
+### 2. Plan Grids Properly
 
 ```typescript
 // Standard three-column layout
@@ -157,10 +157,10 @@ const threeColumnLayout = {
 
 // Primary-secondary layout
 const primarySecondaryLayout = {
-  // Primary fields
+  // Primary field
   cols: { xs: 24, sm: 16, md: 12, lg: 16 },
   
-  // Secondary fields
+  // Secondary field
   cols: { xs: 24, sm: 8, md: 6, lg: 8 }
 }
 ```
@@ -180,6 +180,6 @@ const mobileOptimized = {
 
 ## Related Links
 
-- [Layout System Details](/en/front/component/ma-form#layout-system-details)
-- [Responsive Configuration](/en/front/component/ma-form#responsiveconfig-responsive-configuration)
+- [Layout System Details](/en/front/component/ma-form#布局系统详解)
+- [Responsive Configuration](/en/front/component/ma-form#responsiveconfig-响应式配置)
 - [Mobile Adaptation](/en/front/component/ma-form/examples/mobile-responsive)

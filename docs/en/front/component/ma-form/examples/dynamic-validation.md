@@ -58,7 +58,7 @@ Demonstrates MaForm's dynamic validation capabilities, including custom synchron
 
 ```typescript
 {
-  label: 'Email',
+  label: 'Email Address',
   prop: 'email', 
   render: 'input',
   renderProps: {
@@ -169,7 +169,7 @@ const linkedValidationFields = [
     const isRequired = userType === 'individual'
     
     if (isRequired && !value) {
-      callback(new Error('Individual users must provide phone number'))
+      callback(new Error('Phone number is required for individual users'))
       return
     }
     
@@ -329,7 +329,7 @@ const debouncedUsernameCheck = debounce(async (username) => {
     } catch (error) {
       if (error.name === 'TypeError') {
         // Network error
-        throw new Error('Network connection failed, please check settings')
+        throw new Error('Network connection failed, please check your settings')
       }
       throw error
     }

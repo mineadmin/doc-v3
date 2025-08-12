@@ -6,7 +6,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text: '紹介',
       items: [
         {
-          text: 'なぜ私たちを選ぶのか？',
+          text: 'なぜ私たちを選ぶのか?',
           link: '/ja/guide/introduce/mineadmin',
         },
         {
@@ -195,7 +195,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/ja/front/component/ma-form/examples/loading-states'
             },
             {
-              text: 'ネストされたフォーム',
+              text: 'ネストフォーム',
               link: '/ja/front/component/ma-form/examples/nested-forms'
             },
             {
@@ -303,7 +303,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link:"/ja/plugin/command"
             },
             {
-              text:"アプリケーション作成",
+              text:"アプリ作成",
               link:"/ja/plugin/create"
             },
             {
@@ -343,10 +343,10 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text:"アプリケーション公開",
+      text:"アプリ公開",
       items:[
         {
-          text: "アプリケーションリリース",
+          text: "アプリリリース",
           link: "/ja/plugin/develop/publish"
         },
         {

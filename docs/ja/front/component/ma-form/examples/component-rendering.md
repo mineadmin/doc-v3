@@ -1,16 +1,16 @@
 # コンポーネントレンダリング
 
-MaFormがサポートするすべてのElement Plusコンポーネントのレンダリング方法を展示します。入力類、選択類、日付類、特殊コンポーネントを含みます。
+MaFormがサポートする全てのElement Plusコンポーネントのレンダリング方法を展示します。入力類、選択類、日付類、特殊コンポーネントを含みます。
 
 <DemoPreview dir="demos/ma-form/component-rendering" />
 
 ## 機能特徴
 
-- **全面的なサポート**: すべてのElement Plusフォームコンポーネントをサポート
-- **複数のレンダリング方法**: 文字列、コンポーネント、関数の3種類のレンダリング方法
+- **全面的なサポート**: 全てのElement Plusフォームコンポーネントをサポート
+- **多様なレンダリング方法**: 文字列、コンポーネント、関数の3つのレンダリング方法
 - **スロットサポート**: 完全なスロットシステムをサポート
 - **プロパティ伝達**: renderPropsを通じてコンポーネントプロパティを伝達
-- **イベント処理**: コンポーネントのすべてのネイティブイベントをサポート
+- **イベント処理**: コンポーネントの全てのネイティブイベントをサポート
 
 ## 入力類コンポーネント
 
@@ -132,8 +132,8 @@ MaFormがサポートするすべてのElement Plusコンポーネントのレ�
   },
   renderSlots: {
     default: () => [
-      h('el-radio', { label: 'male' }, '男性'),
-      h('el-radio', { label: 'female' }, '女性'),
+      h('el-radio', { label: 'male' }, '男'),
+      h('el-radio', { label: 'female' }, '女'),
       h('el-radio', { label: 'other' }, 'その他')
     ]
   }
@@ -211,7 +211,7 @@ MaFormがサポートするすべてのElement Plusコンポーネントのレ�
 }
 ```
 
-### DateTimePicker 日付時間ピッカー
+### DateTimePicker 日時ピッカー
 ```typescript
 {
   label: '予約時間',
@@ -219,7 +219,7 @@ MaFormがサポートするすべてのElement Plusコンポーネントのレ�
   render: 'dateTimePicker',
   renderProps: {
     type: 'datetime',
-    placeholder: '日付と時間を選択',
+    placeholder: '日時を選択',
     format: 'YYYY-MM-DD HH:mm:ss',
     valueFormat: 'YYYY-MM-DD HH:mm:ss',
     timePickerOptions: {
@@ -323,7 +323,7 @@ MaFormがサポートするすべてのElement Plusコンポーネントのレ�
         return false
       }
       if (!isLt2M) {
-        ElMessage.error('アップロードファイルサイズは2MBを超えてはいけません!')
+        ElMessage.error('アップロードファイルサイズは2MBを超えられません!')
         return false
       }
       return true

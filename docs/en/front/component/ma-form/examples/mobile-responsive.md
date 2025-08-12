@@ -1,6 +1,6 @@
 # Mobile Responsiveness
 
-Demonstrates MaForm's responsive features on mobile devices, including breakpoint adaptation, mobile optimization, touch interactions, and device-specific configurations.
+Demonstrates MaForm's responsive features on mobile devices, including breakpoint adaptation, mobile optimization, touch interaction, and device-specific configurations.
 
 <DemoPreview dir="demos/ma-form/mobile-responsive" />
 
@@ -99,11 +99,11 @@ const responsiveFormItems = [
 ```typescript
 const mobileOptimizedFields = [
   {
-    label: 'Phone Number',
+    label: 'Mobile Number',
     prop: 'mobile',
     render: 'input',
     renderProps: {
-      placeholder: 'Enter phone number'
+      placeholder: 'Enter mobile number'
     },
     // Mobile-specific properties
     mobileProps: {
@@ -342,30 +342,30 @@ const touchFriendlyFields = [
 ```typescript
 const mobileUploadField = {
   label: 'File Upload',
-  prop: 'files',
-  render: 'upload',
-  renderProps: {
-    action: '/api/upload',
-    listType: 'picture-card',
-    multiple: true
-  },
-  mobileProps: {
-    listType: 'picture',     // Use list style on mobile
-    drag: false,             // Disable drag-and-drop
-    showFileList: true,
-    accept: 'image/*',       // Access camera/photo library
-    capture: 'environment'   // Specify camera type
-  },
-  renderSlots: {
-    trigger: () => {
-      const isMobile = window.innerWidth < 768
-      return h('el-button', {
-        type: 'primary',
-        size: isMobile ? 'large' : 'default',
-        icon: isMobile ? 'Camera' : 'Upload'
-      }, isMobile ? 'Take Photo/Select Image' : 'Select File')
+    prop: 'files',
+    render: 'upload',
+    renderProps: {
+      action: '/api/upload',
+      listType: 'picture-card',
+      multiple: true
+    },
+    mobileProps: {
+      listType: 'picture',     // Use list style on mobile
+      drag: false,             // Disable drag
+      showFileList: true,
+      accept: 'image/*',       // Access camera/photo library
+      capture: 'environment'   // Specify camera type
+    },
+    renderSlots: {
+      trigger: () => {
+        const isMobile = window.innerWidth < 768
+        return h('el-button', {
+          type: 'primary',
+          size: isMobile ? 'large' : 'default',
+          icon: isMobile ? 'Camera' : 'Upload'
+        }, isMobile ? 'Take Photo/Select Image' : 'Select File')
+      }
     }
-  }
 }
 ```
 
@@ -423,7 +423,7 @@ const adaptFormToDevice = () => {
 ### 2. Screen Orientation Change Handling
 
 ```typescript
-// Listen for orientation changes
+// Listen for screen orientation changes
 const handleOrientationChange = () => {
   const isPortrait = window.innerHeight > window.innerWidth
   
@@ -496,14 +496,14 @@ const handleOfflineForm = () => {
             ...item.itemProps,
             rules: [
               ...(item.itemProps?.rules || []),
-              { required: true, message: 'Please fill this field in offline mode', trigger: 'blur' }
+              { required: true, message: 'This field is required in offline mode', trigger: 'blur' }
             ]
           }
         })
       }
     })
     
-    ElMessage.warning('Currently offline, some features are limited')
+    ElMessage.warning('You are currently offline, some features are limited')
   }
 }
 ```

@@ -1,5 +1,3 @@
-The translation maintains all code structure and only translates Chinese text to English while preserving all technical terms, component names, and code paths exactly as they appear in the original. Here's the translated version:
-
 ```typescript
 import type {DefaultTheme} from "vitepress";
 
@@ -62,7 +60,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text: 'Basics',
       items: [
         {
-          text: 'Basic Concepts',
+          text: 'Core Concepts',
           link: '/en/front/base/concept'
         },
         {
@@ -152,7 +150,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/en/front/high/plugins'
         },
         {
-          text: 'JSX & TSX Development',
+          text: 'JSX/TSX Development',
           link: '/en/front/high/tsx'
         }
       ],
@@ -236,7 +234,7 @@ const sidebar:DefaultTheme.Sidebar = {
   ],
   '/zh/backend/':[
     {
-      text:"Intermediate",
+      text:"Advanced",
       items:[
         {
           text: "Directory Structure",
@@ -246,7 +244,7 @@ const sidebar:DefaultTheme.Sidebar = {
           text: "Lifecycle",
           link: "/en/backend/base/lifecycle"
         },
-        { text: "Routes & API Documentation",link: "/en/backend/base/router"},
+        { text: "Routes & API Docs",link: "/en/backend/base/router"},
         { text: "Error Handling",link: "/en/backend/base/error-handler"},
         {text: "Logging",link: "/en/backend/base/logger"},
         {text: "Events",link: "/en/backend/base/event-handler"},
@@ -262,7 +260,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/en/backend/security/passport"
         },
         {
-          text: "Authorization (RBAC)",
+          text: "User Authorization (RBAC)",
           link: "/en/backend/security/access"
         },
         {
@@ -298,7 +296,7 @@ const sidebar:DefaultTheme.Sidebar = {
       items:
           [
             {
-              text:"Preparation",
+              text:"Prerequisites",
               link:"/en/plugin"
             },
             {
@@ -310,15 +308,15 @@ const sidebar:DefaultTheme.Sidebar = {
               link:"/en/plugin/create"
             },
             {
-              text:"Plugin Directory Structure",
+              text:"Plugin Structure",
               link:"/en/plugin/structure"
             },
             {
-              text:"mine.json Documentation & Examples",
+              text:"mine.json Documentation",
               link:"/en/plugin/mineJson"
             },
             {
-            text:"ConfigProvider Documentation",
+            text:"ConfigProvider Guide",
             link:"/en/plugin/configProvider"
           }
           ]
@@ -340,16 +338,16 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"Frontend Development",
       items:[
         {
-          text: "Frontend Development Standards",
+          text: "Frontend Standards",
           link: "/en/plugin/front/develop"
         }
       ]
     },
     {
-      text:"Application Publishing",
+      text:"Publishing",
       items:[
         {
-          text: "Publishing",
+          text: "Application Release",
           link: "/en/plugin/develop/publish"
         },
         {

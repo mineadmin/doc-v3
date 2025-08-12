@@ -9,7 +9,7 @@ Demonstrates the implementation of MaForm's nested form structure, including hie
 - **Hierarchical Structure**: Supports multi-level nested form structures
 - **Dynamic Nesting**: Allows dynamic addition and removal of nested form items
 - **Object Arrays**: Supports complex data structures in object array format
-- **Independent Validation**: Each nested level has its own validation mechanism
+- **Independent Validation**: Each nested level has independent validation mechanisms
 - **Flexible Configuration**: Supports personalized configuration for nested items
 
 ## Basic Nested Structure
@@ -27,7 +27,7 @@ const nestedFormItems = [
         prop: 'userInfo.name',
         render: 'input',
         renderProps: {
-          placeholder: 'Please enter name'
+          placeholder: 'Enter name'
         },
         cols: { xs: 24, sm: 12 }
       },
@@ -47,7 +47,7 @@ const nestedFormItems = [
         render: 'input',
         renderProps: {
           type: 'email',
-          placeholder: 'Please enter email address'
+          placeholder: 'Enter email address'
         },
         cols: { xs: 24, sm: 24 }
       }
@@ -73,16 +73,16 @@ const multiLevelNested = [
             prop: 'company.basic.name',
             render: 'input',
             renderProps: {
-              placeholder: 'Please enter company name'
+              placeholder: 'Enter company name'
             }
           },
           {
-            label: 'Date Founded',
+            label: 'Founded Date',
             prop: 'company.basic.foundedDate',
             render: 'datePicker',
             renderProps: {
               type: 'date',
-              placeholder: 'Select founding date'
+              placeholder: 'Select founded date'
             }
           }
         ]
@@ -97,7 +97,7 @@ const multiLevelNested = [
             render: 'textarea',
             renderProps: {
               rows: 3,
-              placeholder: 'Please enter detailed address'
+              placeholder: 'Enter detailed address'
             }
           },
           {
@@ -105,7 +105,7 @@ const multiLevelNested = [
             prop: 'company.contact.phone',
             render: 'input',
             renderProps: {
-              placeholder: 'Please enter contact phone'
+              placeholder: 'Enter contact phone'
             }
           }
         ]
@@ -117,10 +117,10 @@ const multiLevelNested = [
 
 ## Dynamic Nested Forms
 
-### 1. Dynamic Add/Remove Items
+### 1. Dynamic Add/Remove Child Items
 
 ```typescript
-// Dynamic management of nested form items
+// Dynamically manage nested form items
 const dynamicNestedManagement = {
   // Add child form item
   addChildItem: (parentProp: string, childItem: MaFormItem) => {
@@ -233,7 +233,7 @@ const conditionalNestedItems = [
     dependencies: ['accountType'],
     children: [
       {
-        label: 'ID Card Number',
+        label: 'ID Number',
         prop: 'personalInfo.idCard',
         render: 'input',
         show: (model) => model.accountType === 'personal',
@@ -283,20 +283,20 @@ const arrayFormItems = [
   {
     label: 'Education History',
     prop: 'education',
-    children: [], // Dynamically generated array items
+    children: [], // Dynamically generate array items
     itemSlots: {
       append: () => {
         return h('el-button', {
           type: 'primary',
           size: 'small',
           onClick: () => addEducationItem()
-        }, 'Add Education History')
+        }, 'Add Education')
       }
     }
   }
 ]
 
-// Dynamic management of array items
+// Dynamically manage array items
 const educationArray = ref([])
 
 const addEducationItem = () => {
@@ -558,7 +558,7 @@ const nestedValidationItems = [
             itemProps: {
               rules: [
                 { required: true, message: 'Please enter username', trigger: 'blur' },
-                { min: 3, max: 20, message: 'Username length should be 3-20 characters', trigger: 'blur' }
+                { min: 3, max: 20, message: 'Username length 3-20 characters', trigger: 'blur' }
               ]
             }
           }
@@ -577,7 +577,7 @@ const nestedValidationItems = [
               if (!value) {
                 callback(new Error('Please enter email address'))
               } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-                callback(new Error('Please enter a valid email address'))
+                callback(new Error('Please enter valid email address'))
               } else {
                 callback()
               }
@@ -643,4 +643,10 @@ const validateNestedObject = async (objectProp: string) => {
     nestedProps.map(prop => formRef.value.validateField(prop))
   )
   
-  return results.every(result => result.status === 'fulfilled
+  return results.every(result => result.status === 'fulfilled')
+}
+```
+
+## Data Processing Utilities
+
+### 

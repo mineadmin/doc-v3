@@ -1,24 +1,24 @@
 # Basic Usage
 
-Demonstration of MaForm's basic usage, including configuration methods for common form controls and core functionality features.
+Demonstration of MaForm's basic usage, including common form control configurations and core functionality.
 
 <DemoPreview dir="demos/ma-form/basic-usage" />
 
 ## Features
 
-- **Multiple Input Types Support**: Text input, password field, numeric input, etc.
-- **Automatic Data Binding**: Two-way form data binding without manual handling
-- **Basic Validation Rules**: Supports common validations like required, length, format
+- **Multiple Input Types**: Text input, password field, numeric input, etc.
+- **Automatic Data Binding**: Two-way data binding without manual handling
+- **Basic Validation Rules**: Supports required fields, length, format, and other common validations
 - **Simple Component Configuration**: Quickly build forms through declarative configuration
 - **Native Compatibility**: Fully compatible with Element Plus native properties and events
 
 ## Core Concepts
 
 ### Declarative Development
-Configure form items through the `items` array, each configuration object contains:
+Configure form items through the `items` array, where each configuration object contains:
 - `label`: Form item label
 - `prop`: Bound data field name
-- `render`: Component type to render
+- `render`: Type of component to render
 - `renderProps`: Properties passed to the component
 
 ### Data Binding
