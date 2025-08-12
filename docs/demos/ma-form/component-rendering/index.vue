@@ -1,7 +1,7 @@
-<script setup lang="ts">
-import {ref, h, computed} from 'vue'
+<script setup lang="tsx">
+import {ref, h, computed, Ref, watch, onMounted, nextTick} from 'vue'
 import { ElMessage, ElNotification } from 'element-plus'
-import { MaFormExpose } from '@mineadmin/form'
+import type {MaFormExpose, MaFormItem} from '@mineadmin/form'
 
 // 表单数据 - 包含所有支持的组件类型
 const formData = ref({
@@ -208,7 +208,7 @@ const beforeUpload = (file: File) => {
 }
 
 // 表单项配置 - 展示所有支持的组件
-const formItems = ref([
+const formItems:Ref<MaFormItem[]> = ref([
   // ============ 输入类组件 ============
   {
     label: '文本输入',
@@ -223,7 +223,6 @@ const formItems = ref([
     },
     cols: { span: 8 }
   },
-  
   {
     label: '密码输入',
     prop: 'inputPassword',
@@ -274,16 +273,8 @@ const formItems = ref([
     renderProps: {
       placeholder: '请选择选项',
       clearable: true,
-      filterable: true
-    },
-    renderSlots: {
-      default: () => mockData.selectOptions.map(item => 
-        h('el-option', { 
-          key: item.value, 
-          label: item.label, 
-          value: item.value 
-        })
-      )
+      filterable: true,
+      options: mockData.selectOptions
     },
     cols: { span: 8 }
   },
@@ -297,16 +288,8 @@ const formItems = ref([
       placeholder: '请选择多个选项',
       clearable: true,
       'collapse-tags': true,
-      'collapse-tags-tooltip': true
-    },
-    renderSlots: {
-      default: () => mockData.selectOptions.map(item => 
-        h('el-option', { 
-          key: item.value, 
-          label: item.label, 
-          value: item.value 
-        })
-      )
+      'collapse-tags-tooltip': true,
+      options: mockData.selectOptions
     },
     cols: { span: 8 }
   },
@@ -320,16 +303,9 @@ const formItems = ref([
       filterable: true,
       remote: true,
       'remote-method': remoteSearchMethod,
-      loading: false
-    },
-    renderSlots: {
-      default: () => mockData.remoteOptions.map(item => 
-        h('el-option', { 
-          key: item.value, 
-          label: item.label, 
-          value: item.value 
-        })
-      )
+      loading: false,
+      clearable: true,
+      options: mockData.remoteOptions
     },
     cols: { span: 8 }
   },
@@ -338,38 +314,34 @@ const formItems = ref([
   {
     label: '单选按钮',
     prop: 'radio',
-    render: 'radioGroup',
-    renderSlots: {
-      default: () => [
-        { label: '选项1', value: 'radio1' },
-        { label: '选项2', value: 'radio2' },
-        { label: '选项3', value: 'radio3' }
-      ].map(item => 
-        h('el-radio', { 
-          key: item.value,
-          label: item.value 
-        }, () => item.label)
-      )
-    },
+    render: ({ formData }) => (
+      <el-radio-group>
+        {[
+          { label: '选项1', value: 'radio1' },
+          { label: '选项2', value: 'radio2' },
+          { label: '选项3', value: 'radio3' }
+        ].map(item => {
+          return <el-radio label={item.value} value={item.value}>{item.label}</el-radio>
+        })}
+      </el-radio-group>
+    ),
     cols: { span: 12 }
   },
   
   {
     label: '单选按钮组',
     prop: 'radioButton',
-    render: 'radioGroup',
-    renderSlots: {
-      default: () => [
-        { label: '按钮1', value: 'button1' },
-        { label: '按钮2', value: 'button2' },
-        { label: '按钮3', value: 'button3' }
-      ].map(item => 
-        h('el-radio-button', { 
-          key: item.value,
-          label: item.value 
-        }, () => item.label)
-      )
-    },
+    render: ({ formData }) => (
+      <el-radio-group>
+        {[
+          { label: '按钮1', value: 'button1' },
+          { label: '按钮2', value: 'button2' },
+          { label: '按钮3', value: 'button3' }
+        ].map(item => {
+          return <el-radio label={item.value} value={item.value}>{item.label}</el-radio>
+        })}
+      </el-radio-group>
+    ),
     cols: { span: 12 }
   },
   
@@ -377,8 +349,8 @@ const formItems = ref([
     label: '单个复选框',
     prop: 'checkbox',
     render: 'checkbox',
-    renderSlots: {
-      default: () => '我同意相关条款和条件'
+    renderProps: {
+      label: '我同意相关条款和条件'
     },
     cols: { span: 8 }
   },
@@ -387,18 +359,13 @@ const formItems = ref([
     label: '复选框组',
     prop: 'checkboxGroup',
     render: 'checkboxGroup',
-    renderSlots: {
-      default: () => [
+    renderProps: {
+      options: [
         { label: '复选项1', value: 'check1' },
         { label: '复选项2', value: 'check2' },
         { label: '复选项3', value: 'check3' },
         { label: '复选项4', value: 'check4' }
-      ].map(item => 
-        h('el-checkbox', { 
-          key: item.value,
-          label: item.value 
-        }, () => item.label)
-      )
+      ]
     },
     cols: { span: 16 }
   },
@@ -735,7 +702,13 @@ const formOptions = ref({
 })
 
 // 当前组件分类
-const componentCategories = ref([
+interface ComponentCategory {
+  name: string;
+  props: string[];
+  active: boolean;
+}
+
+const componentCategories: Ref<ComponentCategory[]> = ref([
   { name: '输入类组件', props: ['inputText', 'inputPassword', 'inputNumber', 'inputTextarea'], active: true },
   { name: '选择类组件', props: ['select', 'selectMultiple', 'selectRemote'], active: true },
   { name: '单选多选', props: ['radio', 'radioButton', 'checkbox', 'checkboxGroup'], active: true },
@@ -749,17 +722,47 @@ const componentCategories = ref([
 ])
 
 // 根据分类过滤表单项
-const filteredFormItems = computed(() => {
+const getFilteredFormItems = () => {
   const activeProps = componentCategories.value
     .filter(cat => cat.active)
     .flatMap(cat => cat.props)
   
   return formItems.value.filter(item => activeProps.includes(item.prop))
+}
+
+// 初始化表单项
+const filteredFormItems = ref<MaFormItem[]>(getFilteredFormItems())
+
+// 监听分类变化，通过 setItems 方法更新表单
+watch(componentCategories, () => {
+  const newItems = getFilteredFormItems()
+  filteredFormItems.value = newItems
+  
+  // 通过 ma-form 的 setItems 方法来实时更新表单项
+  if (formRef.value) {
+    formRef.value.setItems(newItems)
+  }
+}, { deep: true })
+
+// 组件挂载后初始化表单项
+onMounted(async () => {
+  // 等待下一个 tick，确保 ma-form 组件完全挂载
+  await nextTick()
+  if (formRef.value) {
+    formRef.value.setItems(filteredFormItems.value)
+  }
 })
 
 // 切换组件分类显示
 const toggleCategory = (index: number) => {
   componentCategories.value[index].active = !componentCategories.value[index].active
+  
+  // 立即更新表单项
+  const newItems = getFilteredFormItems()
+  filteredFormItems.value = newItems
+  if (formRef.value) {
+    formRef.value.setItems(newItems)
+  }
 }
 
 // 全选/全不选
@@ -767,6 +770,13 @@ const toggleAllCategories = (selectAll: boolean) => {
   componentCategories.value.forEach(cat => {
     cat.active = selectAll
   })
+  
+  // 立即更新表单项
+  const newItems = getFilteredFormItems()
+  filteredFormItems.value = newItems
+  if (formRef.value) {
+    formRef.value.setItems(newItems)
+  }
 }
 
 // 提交表单
@@ -845,9 +855,8 @@ const activeDocs = ref(['input', 'select'])
             :key="category.name"
             class="category-item"
             :class="{ active: category.active }"
-            @click="toggleCategory(index)"
           >
-            <el-checkbox v-model="category.active" @click.stop>
+            <el-checkbox v-model="category.active">
               {{ category.name }}
             </el-checkbox>
             <span class="category-count">({{ category.props.length }}个)</span>

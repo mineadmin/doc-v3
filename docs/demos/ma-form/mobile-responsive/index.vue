@@ -1,7 +1,7 @@
-<script setup lang="ts">
+<script setup lang="tsx">
 import { ref, computed, onMounted, onUnmounted, h } from 'vue'
 import { ElMessage } from 'element-plus'
-import { MaFormExpose } from "@mineadmin/form"
+import type { MaFormExpose } from "@mineadmin/form"
 
 // 响应式状态管理
 const isMobile = ref(false)
@@ -230,20 +230,28 @@ const formItems = computed(() => [
   {
     label: '性别',
     prop: 'gender',
-    render: isMobile.value ? 'radioGroup' : 'select',
+    render: isMobile.value 
+      ? ({ formData }) => (
+          <el-radio-group>
+            {[
+              { label: '男', value: 'male' },
+              { label: '女', value: 'female' },
+              { label: '其他', value: 'other' }
+            ].map(item => {
+              return <el-radio label={item.value} value={item.value}>{item.label}</el-radio>
+            })}
+          </el-radio-group>
+        )
+      : 'select',
     renderProps: isMobile.value ? {} : {
       placeholder: '请选择性别'
     },
-    renderSlots: {
+    renderSlots: isMobile.value ? undefined : {
       default: () => [
         { label: '男', value: 'male' },
         { label: '女', value: 'female' },
         { label: '其他', value: 'other' }
-      ].map(item => 
-        isMobile.value 
-          ? h('el-radio', { key: item.value, label: item.value }, () => item.label)
-          : h('el-option', { key: item.value, label: item.label, value: item.value })
-      )
+      ].map(item => h('el-option', { key: item.value, label: item.label, value: item.value }))
     },
     cols: { 
       span: isMobile.value ? 24 : 8,
@@ -469,17 +477,17 @@ const formItems = computed(() => [
   {
     label: '主题',
     prop: 'theme',
-    render: 'radioGroup',
-    renderSlots: {
-      default: () => [
-        { label: '浅色', value: 'light' },
-        { label: '深色', value: 'dark' },
-        { label: '自动', value: 'auto' }
-      ].map(item => h('el-radio', {
-        key: item.value,
-        label: item.value
-      }, () => item.label))
-    },
+    render: ({ formData }) => (
+      <el-radio-group>
+        {[
+          { label: '浅色', value: 'light' },
+          { label: '深色', value: 'dark' },
+          { label: '自动', value: 'auto' }
+        ].map(item => {
+          return <el-radio label={item.value} value={item.value}>{item.label}</el-radio>
+        })}
+      </el-radio-group>
+    ),
     cols: { 
       span: isMobile.value ? 24 : 12,
       xs: 24, sm: 12, md: 12, lg: 8, xl: 8

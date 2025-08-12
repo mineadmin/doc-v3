@@ -1,7 +1,7 @@
-<script setup lang="ts">
+<script setup lang="tsx">
 import { ref, computed, h, nextTick } from 'vue'
 import { ElMessage, ElMessageBox, ElLoading } from 'element-plus'
-import { MaFormExpose } from "@mineadmin/form"
+import type { MaFormExpose } from "@mineadmin/form"
 
 // 多步骤表单状态管理
 const currentStep = ref(0)
@@ -258,18 +258,13 @@ const currentFormItems = computed(() => {
           prop: 'personalInfo.gender',
           render: 'select',
           renderProps: {
-            placeholder: '请选择性别'
-          },
-          renderSlots: {
-            default: () => [
+            placeholder: '请选择性别',
+            clearable: true,
+            options: [
               { label: '男', value: 'male' },
               { label: '女', value: 'female' },
               { label: '其他', value: 'other' }
-            ].map(item => h('el-option', {
-              key: item.value,
-              label: item.label,
-              value: item.value
-            }))
+            ]
           },
           cols: { span: 8 }
         },
@@ -279,20 +274,15 @@ const currentFormItems = computed(() => {
           render: 'select',
           renderProps: {
             placeholder: '请选择国籍',
-            filterable: true
-          },
-          renderSlots: {
-            default: () => [
+            filterable: true,
+            clearable: true,
+            options: [
               { label: '中国', value: 'CN' },
               { label: '美国', value: 'US' },
               { label: '英国', value: 'GB' },
               { label: '加拿大', value: 'CA' },
               { label: '澳大利亚', value: 'AU' }
-            ].map(item => h('el-option', {
-              key: item.value,
-              label: item.label,
-              value: item.value
-            }))
+            ]
           },
           cols: { span: 8 }
         },
@@ -301,19 +291,14 @@ const currentFormItems = computed(() => {
           prop: 'personalInfo.idType',
           render: 'select',
           renderProps: {
-            placeholder: '请选择证件类型'
-          },
-          renderSlots: {
-            default: () => [
+            placeholder: '请选择证件类型',
+            clearable: true,
+            options: [
               { label: '身份证', value: 'id_card' },
               { label: '护照', value: 'passport' },
               { label: '港澳通行证', value: 'hk_mo_pass' },
               { label: '台湾通行证', value: 'tw_pass' }
-            ].map(item => h('el-option', {
-              key: item.value,
-              label: item.label,
-              value: item.value
-            }))
+            ]
           },
           cols: { span: 12 }
         },
@@ -382,19 +367,14 @@ const currentFormItems = computed(() => {
           prop: 'accountSettings.securityQuestion',
           render: 'select',
           renderProps: {
-            placeholder: '请选择安全问题'
-          },
-          renderSlots: {
-            default: () => [
+            placeholder: '请选择安全问题',
+            clearable: true,
+            options: [
               { label: '您宠物的名字？', value: 'pet_name' },
               { label: '您的出生地？', value: 'birth_place' },
               { label: '您母亲的姓名？', value: 'mother_name' },
               { label: '您最喜欢的颜色？', value: 'favorite_color' }
-            ].map(item => h('el-option', {
-              key: item.value,
-              label: item.label,
-              value: item.value
-            }))
+            ]
           },
           cols: { span: 12 }
         },
@@ -433,20 +413,15 @@ const currentFormItems = computed(() => {
           prop: 'accountSettings.sessionTimeout',
           render: 'select',
           renderProps: {
-            placeholder: '请选择会话超时时间'
-          },
-          renderSlots: {
-            default: () => [
+            placeholder: '请选择会话超时时间',
+            clearable: true,
+            options: [
               { label: '15分钟', value: 15 },
               { label: '30分钟', value: 30 },
               { label: '1小时', value: 60 },
               { label: '2小时', value: 120 },
               { label: '永不超时', value: 0 }
-            ].map(item => h('el-option', {
-              key: item.value,
-              label: item.label,
-              value: item.value
-            }))
+            ]
           },
           cols: { span: 8 }
         },
@@ -478,17 +453,17 @@ const currentFormItems = computed(() => {
         {
           label: '主题',
           prop: 'preferences.theme',
-          render: 'radioGroup',
-          renderSlots: {
-            default: () => [
-              { label: '浅色', value: 'light' },
-              { label: '深色', value: 'dark' },
-              { label: '自动', value: 'auto' }
-            ].map(item => h('el-radio', {
-              key: item.value,
-              label: item.value
-            }, () => item.label))
-          },
+          render: ({ formData }) => (
+            <el-radio-group>
+              {[
+                { label: '浅色', value: 'light' },
+                { label: '深色', value: 'dark' },
+                { label: '自动', value: 'auto' }
+              ].map(item => {
+                return <el-radio label={item.value} value={item.value}>{item.label}</el-radio>
+              })}
+            </el-radio-group>
+          ),
           cols: { span: 12 }
         },
         {
@@ -496,20 +471,15 @@ const currentFormItems = computed(() => {
           prop: 'preferences.language',
           render: 'select',
           renderProps: {
-            placeholder: '请选择语言'
-          },
-          renderSlots: {
-            default: () => [
+            placeholder: '请选择语言',
+            clearable: true,
+            options: [
               { label: '简体中文', value: 'zh-CN' },
               { label: '繁體中文', value: 'zh-TW' },
               { label: 'English', value: 'en-US' },
               { label: '日本語', value: 'ja-JP' },
               { label: '한국어', value: 'ko-KR' }
-            ].map(item => h('el-option', {
-              key: item.value,
-              label: item.label,
-              value: item.value
-            }))
+            ]
           },
           cols: { span: 12 }
         },
@@ -519,20 +489,15 @@ const currentFormItems = computed(() => {
           render: 'select',
           renderProps: {
             placeholder: '请选择时区',
-            filterable: true
-          },
-          renderSlots: {
-            default: () => [
+            filterable: true,
+            clearable: true,
+            options: [
               { label: 'Asia/Shanghai (+08:00)', value: 'Asia/Shanghai' },
               { label: 'UTC (+00:00)', value: 'UTC' },
               { label: 'America/New_York (-05:00)', value: 'America/New_York' },
               { label: 'Europe/London (+00:00)', value: 'Europe/London' },
               { label: 'Asia/Tokyo (+09:00)', value: 'Asia/Tokyo' }
-            ].map(item => h('el-option', {
-              key: item.value,
-              label: item.label,
-              value: item.value
-            }))
+            ]
           },
           cols: { span: 12 }
         },
@@ -541,19 +506,14 @@ const currentFormItems = computed(() => {
           prop: 'preferences.dateFormat',
           render: 'select',
           renderProps: {
-            placeholder: '请选择日期格式'
-          },
-          renderSlots: {
-            default: () => [
+            placeholder: '请选择日期格式',
+            clearable: true,
+            options: [
               { label: 'YYYY-MM-DD', value: 'YYYY-MM-DD' },
               { label: 'MM/DD/YYYY', value: 'MM/DD/YYYY' },
               { label: 'DD/MM/YYYY', value: 'DD/MM/YYYY' },
               { label: 'YYYY年MM月DD日', value: 'YYYY年MM月DD日' }
-            ].map(item => h('el-option', {
-              key: item.value,
-              label: item.label,
-              value: item.value
-            }))
+            ]
           },
           cols: { span: 12 }
         },
@@ -563,20 +523,15 @@ const currentFormItems = computed(() => {
           render: 'select',
           renderProps: {
             placeholder: '请选择货币',
-            filterable: true
-          },
-          renderSlots: {
-            default: () => [
+            filterable: true,
+            clearable: true,
+            options: [
               { label: '人民币 (CNY)', value: 'CNY' },
               { label: '美元 (USD)', value: 'USD' },
               { label: '欧元 (EUR)', value: 'EUR' },
               { label: '日元 (JPY)', value: 'JPY' },
               { label: '英镑 (GBP)', value: 'GBP' }
-            ].map(item => h('el-option', {
-              key: item.value,
-              label: item.label,
-              value: item.value
-            }))
+            ]
           },
           cols: { span: 12 }
         },
@@ -687,8 +642,8 @@ const currentFormItems = computed(() => {
           label: '兴趣爱好',
           prop: 'preferences.interests',
           render: 'checkboxGroup',
-          renderSlots: {
-            default: () => [
+          renderProps: {
+            options: [
               { label: '技术', value: 'technology' },
               { label: '商业', value: 'business' },
               { label: '设计', value: 'design' },
@@ -697,11 +652,7 @@ const currentFormItems = computed(() => {
               { label: '体育', value: 'sports' },
               { label: '音乐', value: 'music' },
               { label: '旅行', value: 'travel' }
-            ].map(item => h('el-checkbox', {
-              key: item.value,
-              label: item.value,
-              value: item.value
-            }, () => item.label))
+            ]
           },
           cols: { span: 24 }
         },
@@ -737,20 +688,15 @@ const currentFormItems = computed(() => {
           prop: 'companyInfo.businessType',
           render: 'select',
           renderProps: {
-            placeholder: '请选择业务类型'
-          },
-          renderSlots: {
-            default: () => [
+            placeholder: '请选择业务类型',
+            clearable: true,
+            options: [
               { label: '科技公司', value: 'technology' },
               { label: '制造业', value: 'manufacturing' },
               { label: '服务业', value: 'service' },
               { label: '贸易', value: 'trading' },
               { label: '其他', value: 'other' }
-            ].map(item => h('el-option', {
-              key: item.value,
-              label: item.label,
-              value: item.value
-            }))
+            ]
           },
           cols: { span: 12 }
         },
@@ -760,21 +706,16 @@ const currentFormItems = computed(() => {
           render: 'select',
           renderProps: {
             placeholder: '请选择所属行业',
-            filterable: true
-          },
-          renderSlots: {
-            default: () => [
+            filterable: true,
+            clearable: true,
+            options: [
               { label: '软件开发', value: 'software' },
               { label: '互联网服务', value: 'internet' },
               { label: '电子商务', value: 'ecommerce' },
               { label: '人工智能', value: 'ai' },
               { label: '区块链', value: 'blockchain' },
               { label: '金融科技', value: 'fintech' }
-            ].map(item => h('el-option', {
-              key: item.value,
-              label: item.label,
-              value: item.value
-            }))
+            ]
           },
           cols: { span: 12 }
         },
@@ -783,20 +724,15 @@ const currentFormItems = computed(() => {
           prop: 'companyInfo.employeeCount',
           render: 'select',
           renderProps: {
-            placeholder: '请选择员工规模'
-          },
-          renderSlots: {
-            default: () => [
+            placeholder: '请选择员工规模',
+            clearable: true,
+            options: [
               { label: '1-10人', value: '1-10' },
               { label: '11-50人', value: '11-50' },
               { label: '51-200人', value: '51-200' },
               { label: '201-500人', value: '201-500' },
               { label: '500+人', value: '500+' }
-            ].map(item => h('el-option', {
-              key: item.value,
-              label: item.label,
-              value: item.value
-            }))
+            ]
           },
           cols: { span: 12 }
         },

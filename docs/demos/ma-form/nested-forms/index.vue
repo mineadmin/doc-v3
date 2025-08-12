@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, h, computed } from 'vue'
 import { ElMessage, ElButton, ElCard } from 'element-plus'
-import { MaFormExpose } from "@mineadmin/form"
+import type { MaFormExpose } from "@mineadmin/form"
 
 // 嵌套表单数据模型 - 展示层级结构的复杂数据
 const formData = ref({
@@ -216,19 +216,13 @@ const formItems = ref([
             render: 'select',
             renderProps: {
               placeholder: '请选择省份',
-              clearable: true
-            },
-            renderSlots: {
-              default: () => [
+              clearable: true,
+              options: [
                 { label: '广东省', value: '广东省' },
                 { label: '北京市', value: '北京市' },
                 { label: '上海市', value: '上海市' },
                 { label: '浙江省', value: '浙江省' }
-              ].map(item => h('el-option', {
-                key: item.value,
-                label: item.label,
-                value: item.value
-              }))
+              ]
             },
             cols: { span: 6 }
           },
@@ -238,18 +232,12 @@ const formItems = ref([
             render: 'select',
             renderProps: {
               placeholder: '请选择城市',
-              clearable: true
-            },
-            renderSlots: {
-              default: () => [
+              clearable: true,
+              options: [
                 { label: '深圳市', value: '深圳市' },
                 { label: '广州市', value: '广州市' },
                 { label: '东莞市', value: '东莞市' }
-              ].map(item => h('el-option', {
-                key: item.value,
-                label: item.label,
-                value: item.value
-              }))
+              ]
             },
             cols: { span: 6 }
           },
@@ -259,18 +247,12 @@ const formItems = ref([
             render: 'select',
             renderProps: {
               placeholder: '请选择区县',
-              clearable: true
-            },
-            renderSlots: {
-              default: () => [
+              clearable: true,
+              options: [
                 { label: '南山区', value: '南山区' },
                 { label: '福田区', value: '福田区' },
                 { label: '罗湖区', value: '罗湖区' }
-              ].map(item => h('el-option', {
-                key: item.value,
-                label: item.label,
-                value: item.value
-              }))
+              ]
             },
             cols: { span: 6 }
           },
@@ -388,17 +370,13 @@ const formItems = ref([
             label: '权限类型',
             prop: 'projectSettings.features.permissions',
             render: 'checkboxGroup',
-            renderSlots: {
-              default: () => [
+            renderProps: {
+              options: [
                 { label: '读取', value: 'read' },
                 { label: '写入', value: 'write' },
                 { label: '删除', value: 'delete' },
                 { label: '管理', value: 'admin' }
-              ].map(item => h('el-checkbox', {
-                key: item.value,
-                label: item.value,
-                value: item.value
-              }, () => item.label))
+              ]
             },
             cols: { span: 6 }
           }
@@ -420,19 +398,14 @@ const formItems = ref([
             prop: 'projectSettings.database.type',
             render: 'select',
             renderProps: {
-              placeholder: '请选择数据库类型'
-            },
-            renderSlots: {
-              default: () => [
+              placeholder: '请选择数据库类型',
+              clearable: true,
+              options: [
                 { label: 'MySQL', value: 'mysql' },
                 { label: 'PostgreSQL', value: 'postgresql' },
                 { label: 'SQLite', value: 'sqlite' },
                 { label: 'MongoDB', value: 'mongodb' }
-              ].map(item => h('el-option', {
-                key: item.value,
-                label: item.label,
-                value: item.value
-              }))
+              ]
             },
             cols: { span: 6 }
           },
@@ -472,18 +445,13 @@ const formItems = ref([
                 prop: 'projectSettings.database.config.charset',
                 render: 'select',
                 renderProps: {
-                  placeholder: '请选择字符集'
-                },
-                renderSlots: {
-                  default: () => [
+                  placeholder: '请选择字符编码',
+                  clearable: true,
+                  options: [
                     { label: 'utf8mb4', value: 'utf8mb4' },
                     { label: 'utf8', value: 'utf8' },
                     { label: 'latin1', value: 'latin1' }
-                  ].map(item => h('el-option', {
-                    key: item.value,
-                    label: item.label,
-                    value: item.value
-                  }))
+                  ]
                 },
                 cols: { span: 8 }
               },
@@ -501,18 +469,13 @@ const formItems = ref([
                 prop: 'projectSettings.database.config.timezone',
                 render: 'select',
                 renderProps: {
-                  placeholder: '请选择时区'
-                },
-                renderSlots: {
-                  default: () => [
+                  placeholder: '请选择时区',
+                  clearable: true,
+                  options: [
                     { label: 'Asia/Shanghai (+08:00)', value: '+08:00' },
                     { label: 'UTC (+00:00)', value: '+00:00' },
                     { label: 'America/New_York (-05:00)', value: '-05:00' }
-                  ].map(item => h('el-option', {
-                    key: item.value,
-                    label: item.label,
-                    value: item.value
-                  }))
+                  ]
                 },
                 cols: { span: 8 }
               }

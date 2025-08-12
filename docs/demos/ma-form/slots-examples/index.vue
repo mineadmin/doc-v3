@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, h } from 'vue'
 import { ElMessage, ElButton, ElTag, ElIcon } from 'element-plus'
-import { MaFormExpose } from '@mineadmin/form'
+import type { MaFormExpose } from '@mineadmin/form'
 import type { MaFormItem, MaFormOptions } from '@mineadmin/form'
 
 // 表单数据

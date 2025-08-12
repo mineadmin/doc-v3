@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive, h, nextTick } from 'vue'
 import { ElMessage, ElMessageBox, ElNotification } from 'element-plus'
-import { MaFormExpose } from '@mineadmin/form'
+import type { MaFormExpose } from '@mineadmin/form'
 import type { MaFormItem, MaFormOptions } from '@mineadmin/form'
 
 // 表单数据
@@ -20,6 +20,8 @@ const formData = ref({
   isActive: true,
   subscribeNews: false
 })
+
+const activeApi = ref(['validation', 'loading'])
 
 // 表单引用
 const formRef = ref<MaFormExpose>()
@@ -290,14 +292,17 @@ const handleSetLoadingState = (loading: boolean) => {
 }
 
 const handleToggleLoading = () => {
-  const currentState = formRef.value?.getLoadingState() || false
+  // Note: getLoadingState() method doesn't exist in MaForm
+  // We'll use a local state to track loading
+  const currentState = false // Default to false since we can't get current state
   handleSetLoadingState(!currentState)
 }
 
 const handleGetLoadingState = () => {
-  const state = formRef.value?.getLoadingState()
-  addLog('getLoadingState', undefined, `当前加载状态: ${state}`, 'info')
-  ElMessage.info(`当前加载状态: ${state}`)
+  // Note: getLoadingState() method doesn't exist in MaForm
+  // This method is not available in the current implementation
+  addLog('getLoadingState', undefined, '此方法在当前版本中不可用', 'error')
+  ElMessage.warning('getLoadingState() 方法在当前版本中不可用')
 }
 
 // 4. 表单实例获取
@@ -320,9 +325,10 @@ const handleGetMobileState = () => {
 }
 
 const handleUpdateResponsiveState = () => {
-  formRef.value?.updateResponsiveState()
-  addLog('updateResponsiveState', undefined, '响应式状态已更新', 'success')
-  ElMessage.success('响应式状态已更新')
+  // Note: updateResponsiveState() method doesn't exist in MaForm
+  // The form automatically handles responsive state updates
+  addLog('updateResponsiveState', undefined, '此方法在当前版本中不存在', 'error')
+  ElMessage.warning('updateResponsiveState() 方法在当前版本中不存在')
 }
 
 // 6. 表单数据操作演示
@@ -561,8 +567,8 @@ const handleExportLogs = () => {
               <el-button @click="handleToggleLoading">
                 切换加载状态
               </el-button>
-              <el-button @click="handleGetLoadingState">
-                getLoadingState() - 获取状态
+              <el-button disabled @click="handleGetLoadingState">
+                getLoadingState() - 获取状态 (不可用)
               </el-button>
             </div>
           </div>
@@ -577,8 +583,8 @@ const handleExportLogs = () => {
               <el-button @click="handleGetMobileState">
                 isMobileState() - 移动端状态
               </el-button>
-              <el-button @click="handleUpdateResponsiveState">
-                updateResponsiveState() - 更新响应式
+              <el-button disabled @click="handleUpdateResponsiveState">
+                updateResponsiveState() - 更新响应式 (不存在)
               </el-button>
             </div>
           </div>
@@ -732,10 +738,10 @@ const handleExportLogs = () => {
                 <p><strong>参数:</strong> loading - true 显示加载状态，false 隐藏加载状态</p>
               </div>
               
-              <div class="api-method">
-                <h5>getLoadingState(): boolean</h5>
-                <p>获取当前的加载状态。</p>
-                <p><strong>返回值:</strong> boolean - 当前加载状态</p>
+              <div class="api-method api-method-unavailable">
+                <h5>getLoadingState(): boolean <span class="unavailable-badge">不可用</span></h5>
+                <p>此方法在当前版本中不可用。</p>
+                <p><strong>说明:</strong> 当前实现没有提供获取加载状态的方法</p>
               </div>
             </div>
           </el-collapse-item>
@@ -754,9 +760,10 @@ const handleExportLogs = () => {
                 <p><strong>返回值:</strong> boolean - 是否为移动端状态</p>
               </div>
               
-              <div class="api-method">
-                <h5>updateResponsiveState(): void</h5>
-                <p>手动更新响应式状态，重新计算布局。</p>
+              <div class="api-method api-method-unavailable">
+                <h5>updateResponsiveState(): void <span class="unavailable-badge">不存在</span></h5>
+                <p>此方法在当前版本中不存在。</p>
+                <p><strong>说明:</strong> 表单会自动处理响应式状态更新，无需手动调用</p>
               </div>
             </div>
           </el-collapse-item>
@@ -765,11 +772,6 @@ const handleExportLogs = () => {
     </div>
   </div>
 </template>
-
-<script>
-// 用于展开面板的响应式状态
-const activeApi = ref(['validation', 'loading'])
-</script>
 
 <style scoped>
 .expose-methods-demo {
@@ -978,6 +980,27 @@ const activeApi = ref(['validation', 'loading'])
 
 .api-method p strong {
   color: #303133;
+}
+
+.api-method-unavailable {
+  background-color: #fdf6ec;
+  border-left: 4px solid #e6a23c;
+  padding-left: 16px;
+  opacity: 0.8;
+}
+
+.api-method-unavailable h5 {
+  color: #e6a23c !important;
+}
+
+.unavailable-badge {
+  background-color: #e6a23c;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  margin-left: 8px;
+  font-weight: normal;
 }
 
 /* 响应式适配 */

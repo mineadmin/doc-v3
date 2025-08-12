@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref,h } from 'vue'
+import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
-import {MaFormExpose} from "@mineadmin/form";
+import type {MaFormExpose} from "@mineadmin/form";
 
 // 表单数据模型 - 展示不同数据类型的基础用法
 const formData = ref({
@@ -104,18 +104,12 @@ const formItems = ref([
     render: 'select',
     renderProps: {
       placeholder: '请选择性别',
-      clearable: true
-    },
-    renderSlots: {
-      default: () => [
+      clearable: true,
+      options:[
         { label: '男', value: 'male' },
         { label: '女', value: 'female' },
         { label: '其他', value: 'other' }
-      ].map(item => h('el-option', { 
-        key: item.value, 
-        label: item.label, 
-        value: item.value 
-      }))
+      ]
     },
     cols: { span: 8 }
   },
@@ -124,19 +118,14 @@ const formItems = ref([
     prop: 'department',
     render: 'select',
     renderProps: {
-      placeholder: '请选择部门'
-    },
-    renderSlots: {
-      default: () => [
+      placeholder: '请选择部门',
+      clearable: true,
+      options: [
         { label: '技术部', value: 'tech' },
         { label: '产品部', value: 'product' },
         { label: '运营部', value: 'operation' },
         { label: '人力资源部', value: 'hr' }
-      ].map(item => h('el-option', { 
-        key: item.value, 
-        label: item.label, 
-        value: item.value 
-      }))
+      ]
     },
     cols: { span: 12 }
   },
@@ -144,18 +133,14 @@ const formItems = ref([
     label: '爱好',
     prop: 'hobbies',
     render: 'checkboxGroup',
-    renderSlots: {
-      default: () => [
+    renderProps: {
+      options: [
         { label: '阅读', value: 'reading' },
         { label: '编程', value: 'coding' },
         { label: '运动', value: 'sports' },
         { label: '音乐', value: 'music' },
         { label: '旅行', value: 'travel' }
-      ].map(item => h('el-checkbox', { 
-        key: item.value, 
-        label: item.value,
-        value: item.value 
-      }, () => item.label))
+      ]
     },
     cols: { span: 12 }
   },
@@ -173,8 +158,8 @@ const formItems = ref([
     label: '同意条款',
     prop: 'agreeTerms',
     render: 'checkbox',
-    renderSlots: {
-      default: () => '我已阅读并同意用户协议'
+    renderProps: {
+      label: '我已阅读并同意用户协议'
     },
     cols: { span: 8 }
   },

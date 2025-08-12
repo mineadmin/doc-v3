@@ -1,4 +1,4 @@
-import { DefaultTheme } from "vitepress";
+import type { DefaultTheme } from "vitepress";
 
 const nav: DefaultTheme.NavItem[] = [
     { text: 'Guide', link: '/en/guide/introduce/mineadmin' },

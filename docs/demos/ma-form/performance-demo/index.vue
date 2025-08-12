@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick, watch, h } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { MaFormExpose } from "@mineadmin/form"
+import type { MaFormExpose } from "@mineadmin/form"
 
 // 性能监控状态
 const isLargeFormMode = ref(false)
@@ -124,20 +124,14 @@ const generateLargeFormItems = (count: number) => {
           render: 'select',
           renderProps: {
             placeholder: `请选择 ${i + 1}`,
-            clearable: true
-          },
-          renderSlots: {
-            default: () => [
+            clearable: true,
+            options: [
               { label: `选项1-${i}`, value: 'option1' },
               { label: `选项2-${i}`, value: 'option2' },
               { label: `选项3-${i}`, value: 'option3' },
               { label: `选项4-${i}`, value: 'option4' },
               { label: `选项5-${i}`, value: 'option5' }
-            ].map(item => h('el-option', {
-              key: item.value,
-              label: item.label,
-              value: item.value
-            }))
+            ]
           }
         })
         break
@@ -172,14 +166,11 @@ const generateLargeFormItems = (count: number) => {
         items.push({
           ...baseConfig,
           render: 'checkboxGroup',
-          renderSlots: {
-            default: () => ['a', 'b', 'c', 'd', 'e'].map(value => 
-              h('el-checkbox', {
-                key: `${fieldName}_${value}`,
-                label: value,
-                value: value
-              }, () => `选项${value.toUpperCase()}-${i}`)
-            )
+          renderProps: {
+            options: ['a', 'b', 'c', 'd', 'e'].map(value => ({
+              label: `选项${value.toUpperCase()}-${i}`,
+              value: value
+            }))
           },
           cols: { span: 24 }
         })
@@ -340,7 +331,7 @@ const regenerateForm = async () => {
   try {
     await measurePerformance(async () => {
       formData.value = generateLargeFormData(fieldCount.value)
-      formItems.value = generateLargeFormItems(fieldCount.value)
+      nextTick(()=>formRef.value.setItems(generateLargeFormItems(fieldCount.value)))
       
       await nextTick() // 等待DOM更新
       
@@ -349,6 +340,7 @@ const regenerateForm = async () => {
     
     ElMessage.success(`已生成 ${fieldCount.value} 个字段，渲染时间: ${renderTime.value.toFixed(2)}ms`)
   } catch (error) {
+    console.log(error)
     ElMessage.error('表单生成失败')
   } finally {
     isRendering.value = false
