@@ -16,19 +16,19 @@ importers:
         version: 1.4.2
       '@mineadmin/echarts':
         specifier: ^1.0.1
-        version: 1.0.7(element-plus@2.8.3(vue@3.5.12(typescript@5.9.2)))(typescript@5.9.2)
+        version: 1.0.7(element-plus@2.10.6(vue@3.5.12(typescript@5.9.2)))(typescript@5.9.2)
       '@mineadmin/form':
         specifier: ^1.0.21
-        version: 1.0.21(element-plus@2.8.3(vue@3.5.12(typescript@5.9.2)))(typescript@5.9.2)
+        version: 1.0.21(element-plus@2.10.6(vue@3.5.12(typescript@5.9.2)))(typescript@5.9.2)
       '@mineadmin/pro-table':
         specifier: ^1.0.55
-        version: 1.0.55(element-plus@2.8.3(vue@3.5.12(typescript@5.9.2)))(typescript@5.9.2)
+        version: 1.0.55(element-plus@2.10.6(vue@3.5.12(typescript@5.9.2)))(typescript@5.9.2)
       '@mineadmin/search':
         specifier: ^1.0.27
-        version: 1.0.27(element-plus@2.8.3(vue@3.5.12(typescript@5.9.2)))(typescript@5.9.2)
+        version: 1.0.27(element-plus@2.10.6(vue@3.5.12(typescript@5.9.2)))(typescript@5.9.2)
       '@mineadmin/table':
         specifier: ^1.0.29
-        version: 1.0.29(element-plus@2.8.3(vue@3.5.12(typescript@5.9.2)))(typescript@5.9.2)
+        version: 1.0.29(element-plus@2.10.6(vue@3.5.12(typescript@5.9.2)))(typescript@5.9.2)
       '@vueuse/core':
         specifier: ^11.1.0
         version: 11.1.0(vue@3.5.12(typescript@5.9.2))
@@ -39,8 +39,8 @@ importers:
         specifier: ^5.5.1
         version: 5.5.1
       element-plus:
-        specifier: ^2.8.3
-        version: 2.8.3(vue@3.5.12(typescript@5.9.2))
+        specifier: ^2.10.6
+        version: 2.10.6(vue@3.5.12(typescript@5.9.2))
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -1304,8 +1304,8 @@ packages:
   electron-to-chromium@1.5.47:
     resolution: {integrity: sha512-zS5Yer0MOYw4rtK2iq43cJagHZ8sXN0jDHDKzB+86gSBSAI4v07S97mcq+Gs2vclAxSh1j7vOAHxSVgduiiuVQ==}
 
-  element-plus@2.8.3:
-    resolution: {integrity: sha512-BXQOyDf0s7JHyNEV8iaO+iaOzTZPsBXVKMzMI967vLCodUBDLrtiY5vglAn1YEebQcUOEUMhGcttTpIvEkcBjQ==}
+  element-plus@2.10.6:
+    resolution: {integrity: sha512-N1XfO+x46p9Df9KNHeRQiHW4ilt4k+Jh6jeA1Ip9WpVzwDW8CRz+NqaLLDEZmnez62bBdCuWGfV7lIRq3+FQyg==}
     peerDependencies:
       vue: ^3.2.0
 
@@ -1500,8 +1500,8 @@ packages:
   javascript-stringify@2.1.0:
     resolution: {integrity: sha512-JVAfqNPTvNq3sB/VHQJAFxN/sPgKnsKrCwyRt15zwNCdrMMJDdcEOdubuy+DuJYYdm0ox1J4uzEuYKkN+9yhVg==}
 
-  jiti@1.21.6:
-    resolution: {integrity: sha512-2yTgeWTWzMWkHu6Jp9NKgePDaYHbntiwvYuuJLbbN9vl7DC9DvXKOB2BC3ZZ92D3cvV/aflH0osDfwpHepQ53w==}
+  jiti@1.21.7:
+    resolution: {integrity: sha512-/imKNG4EbWNrVjoNC/1H5/9GFy+tqjGBHCaSsN+P2RnPqjsLmv6UD3Ej+Kj8nBWaRAwyk7kK5ZUc+OEatnTR3A==}
     hasBin: true
 
   jiti@2.0.0-beta.3:
@@ -1978,6 +1978,9 @@ packages:
 
   tslib@2.3.0:
     resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
+
+  tslib@2.8.1:
+    resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
   tsx@4.19.1:
     resolution: {integrity: sha512-0flMz1lh74BR4wOvBjuh9olbnwqCPc35OOlfyzHba0Dc+QNUeWX/Gq2YTbnwcWPO3BMd8fkzRVrHcsR+a7z7rA==}
@@ -2731,39 +2734,39 @@ snapshots:
     optionalDependencies:
       markdown-it: 14.1.0
 
-  '@mineadmin/echarts@1.0.7(element-plus@2.8.3(vue@3.5.12(typescript@5.9.2)))(typescript@5.9.2)':
+  '@mineadmin/echarts@1.0.7(element-plus@2.10.6(vue@3.5.12(typescript@5.9.2)))(typescript@5.9.2)':
     dependencies:
       '@vueuse/core': 10.11.1(vue@3.5.12(typescript@5.9.2))
-      element-plus: 2.8.3(vue@3.5.12(typescript@5.9.2))
+      element-plus: 2.10.6(vue@3.5.12(typescript@5.9.2))
       vue: 3.5.12(typescript@5.9.2)
     transitivePeerDependencies:
       - '@vue/composition-api'
       - typescript
 
-  '@mineadmin/form@1.0.21(element-plus@2.8.3(vue@3.5.12(typescript@5.9.2)))(typescript@5.9.2)':
+  '@mineadmin/form@1.0.21(element-plus@2.10.6(vue@3.5.12(typescript@5.9.2)))(typescript@5.9.2)':
     dependencies:
-      element-plus: 2.8.3(vue@3.5.12(typescript@5.9.2))
+      element-plus: 2.10.6(vue@3.5.12(typescript@5.9.2))
       vue: 3.5.12(typescript@5.9.2)
     transitivePeerDependencies:
       - typescript
 
-  '@mineadmin/pro-table@1.0.55(element-plus@2.8.3(vue@3.5.12(typescript@5.9.2)))(typescript@5.9.2)':
+  '@mineadmin/pro-table@1.0.55(element-plus@2.10.6(vue@3.5.12(typescript@5.9.2)))(typescript@5.9.2)':
     dependencies:
-      element-plus: 2.8.3(vue@3.5.12(typescript@5.9.2))
+      element-plus: 2.10.6(vue@3.5.12(typescript@5.9.2))
       vue: 3.5.12(typescript@5.9.2)
     transitivePeerDependencies:
       - typescript
 
-  '@mineadmin/search@1.0.27(element-plus@2.8.3(vue@3.5.12(typescript@5.9.2)))(typescript@5.9.2)':
+  '@mineadmin/search@1.0.27(element-plus@2.10.6(vue@3.5.12(typescript@5.9.2)))(typescript@5.9.2)':
     dependencies:
-      element-plus: 2.8.3(vue@3.5.12(typescript@5.9.2))
+      element-plus: 2.10.6(vue@3.5.12(typescript@5.9.2))
       vue: 3.5.12(typescript@5.9.2)
     transitivePeerDependencies:
       - typescript
 
-  '@mineadmin/table@1.0.29(element-plus@2.8.3(vue@3.5.12(typescript@5.9.2)))(typescript@5.9.2)':
+  '@mineadmin/table@1.0.29(element-plus@2.10.6(vue@3.5.12(typescript@5.9.2)))(typescript@5.9.2)':
     dependencies:
-      element-plus: 2.8.3(vue@3.5.12(typescript@5.9.2))
+      element-plus: 2.10.6(vue@3.5.12(typescript@5.9.2))
       vue: 3.5.12(typescript@5.9.2)
     transitivePeerDependencies:
       - typescript
@@ -3423,7 +3426,7 @@ snapshots:
 
   electron-to-chromium@1.5.47: {}
 
-  element-plus@2.8.3(vue@3.5.12(typescript@5.9.2)):
+  element-plus@2.10.6(vue@3.5.12(typescript@5.9.2)):
     dependencies:
       '@ctrl/tinycolor': 3.6.1
       '@element-plus/icons-vue': 2.3.1(vue@3.5.12(typescript@5.9.2))
@@ -3632,7 +3635,7 @@ snapshots:
       debug: 4.3.7
       esbuild: 0.21.5
       jiti: 2.0.0-beta.3
-      jiti-v1: jiti@1.21.6
+      jiti-v1: jiti@1.21.7
       pathe: 1.1.2
       tsx: 4.19.1
     transitivePeerDependencies:
@@ -3663,7 +3666,7 @@ snapshots:
 
   javascript-stringify@2.1.0: {}
 
-  jiti@1.21.6: {}
+  jiti@1.21.7: {}
 
   jiti@2.0.0-beta.3: {}
 
@@ -3686,7 +3689,7 @@ snapshots:
     dependencies:
       copy-anything: 2.0.6
       parse-node-version: 1.0.1
-      tslib: 2.3.0
+      tslib: 2.8.1
     optionalDependencies:
       errno: 0.1.8
       graceful-fs: 4.2.11
@@ -4261,6 +4264,9 @@ snapshots:
   trough@2.2.0: {}
 
   tslib@2.3.0: {}
+
+  tslib@2.8.1:
+    optional: true
 
   tsx@4.19.1:
     dependencies:

@@ -18,7 +18,7 @@
     "@vueuse/core": "^11.1.0",
     "@vueuse/integrations": "^11.1.0",
     "echarts": "^5.5.1",
-    "element-plus": "^2.8.3",
+    "element-plus": "^2.10.6",
     "lodash-es": "^4.17.21",
     "openai": "^4.78.1",
     "radash": "^12.1.0",

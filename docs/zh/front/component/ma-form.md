@@ -862,12 +862,12 @@ const field ={
 ```typescript
 // 推荐：使用 show，不渲染隐藏项
 {
-  show: (model) => model.userType === 'admin'
+  show: (item,model) => model.userType === 'admin'
 }
 
 // 避免：使用 hide，仍会渲染但隐藏
 {
-  hide: (model) => model.userType !== 'admin'
+  hide: (item,model) => model.userType !== 'admin'
 }
 ```
 

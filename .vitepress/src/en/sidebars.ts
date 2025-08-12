@@ -1,6 +1,3 @@
-The translation maintains all code structure and only translates Chinese text to English while preserving all technical terms, component names, and code paths exactly as they appear in the original. Here's the translated version:
-
-```typescript
 import type {DefaultTheme} from "vitepress";
 
 const sidebar:DefaultTheme.Sidebar = {
@@ -362,4 +359,3 @@ const sidebar:DefaultTheme.Sidebar = {
 }
 
 export default sidebar
-```

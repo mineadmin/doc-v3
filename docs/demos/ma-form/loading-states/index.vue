@@ -291,7 +291,7 @@ const formItems = computed<MaFormItem[]>(() => [
         value: item.value 
       }))
     },
-    when: (model) => model.country === 'china',
+    when: (item, model) => model.country === 'china',
     dependencies: ['country'],
     cols: { span: 6 }
   },
@@ -315,7 +315,7 @@ const formItems = computed<MaFormItem[]>(() => [
         })
       )
     },
-    when: (model) => !!model.province,
+    when: (item, model) => !!model.province,
     dependencies: ['province'],
     cols: { span: 6 }
   },
@@ -328,7 +328,7 @@ const formItems = computed<MaFormItem[]>(() => [
       placeholder: '请输入详细地址',
       clearable: true
     },
-    when: (model) => !!model.city,
+    when: (item, model) => !!model.city,
     dependencies: ['city'],
     cols: { span: 6 }
   },

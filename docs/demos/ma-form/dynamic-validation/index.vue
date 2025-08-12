@@ -337,7 +337,7 @@ const formItems = computed<MaFormItem[]>(() => [
         return rules
       }).value
     },
-    when: (model) => !!model.userType,
+    when: (item, model) => !!model.userType,
     dependencies: ['userType'],
     cols: { span: 8 }
   },
@@ -381,7 +381,7 @@ const formItems = computed<MaFormItem[]>(() => [
         }
       ]
     },
-    when: (model) => !!model.userType,
+    when: (item, model) => !!model.userType,
     dependencies: ['userType'],
     cols: { span: 8 }
   },
@@ -420,7 +420,7 @@ const formItems = computed<MaFormItem[]>(() => [
         return rules
       }).value
     },
-    when: (model) => !!model.userType,
+    when: (item, model) => !!model.userType,
     dependencies: ['userType'],
     cols: { span: 12 }
   },
@@ -434,7 +434,7 @@ const formItems = computed<MaFormItem[]>(() => [
       'active-text': '有公司',
       'inactive-text': '无公司'
     },
-    when: (model) => model.userType === 'business',
+    when: (item, model) => model.userType === 'business',
     dependencies: ['userType'],
     cols: { span: 8 }
   },
@@ -467,7 +467,7 @@ const formItems = computed<MaFormItem[]>(() => [
         }
       ]
     },
-    when: (model) => model.hasCompany === true,
+    when: (item, model) => model.hasCompany === true,
     dependencies: ['hasCompany'],
     cols: { span: 12 }
   },
@@ -492,7 +492,7 @@ const formItems = computed<MaFormItem[]>(() => [
     itemProps: {
       rules: [{ required: true, message: '请选择公司类型', trigger: 'change' }]
     },
-    when: (model) => model.hasCompany === true,
+    when: (item, model) => model.hasCompany === true,
     dependencies: ['hasCompany'],
     cols: { span: 8 }
   },
@@ -522,7 +522,7 @@ const formItems = computed<MaFormItem[]>(() => [
         }
       ]
     },
-    when: (model) => model.hasCompany === true,
+    when: (item, model) => model.hasCompany === true,
     dependencies: ['hasCompany'],
     cols: { span: 8 }
   },
@@ -624,7 +624,7 @@ const formItems = computed<MaFormItem[]>(() => [
         return rules
       }).value
     },
-    when: (model) => !!model.securityQuestion,
+    when: (item, model) => !!model.securityQuestion,
     dependencies: ['securityQuestion'],
     cols: { span: 12 }
   },

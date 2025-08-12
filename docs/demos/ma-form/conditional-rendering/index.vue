@@ -1,83 +1,111 @@
-<script setup lang="ts">
-import {ref, computed, watch, h} from 'vue'
-import { ElMessage } from 'element-plus'
-import type { MaFormItem, MaFormOptions } from '@mineadmin/form'
+<script setup lang="tsx">
+import { ref, computed, watch } from 'vue'
+import {ElMessage, ElSelect} from 'element-plus'
+import type { MaFormItem as BaseMaFormItem, MaFormOptions, MaFormExpose } from '@mineadmin/form'
 
-// 表单数据 - 包含各种条件渲染场景
+// 扩展MaFormItem以支持show、hide属性和dependencies
+interface MaFormItem extends BaseMaFormItem {
+  show?: (item: MaFormItem, model: any) => boolean
+  hide?: (item: MaFormItem, model: any) => boolean
+  dependencies?: string[]
+}
+
+// 表单数据类型定义
+interface FormData {
+  userType: string
+  personalName: string
+  personalAge: string | number
+  personalEmail: string
+  companyName: string
+  companyScale: string
+  legalPerson: string
+  isVip: boolean
+  vipLevel: string
+  vipExpireDate: string
+  needAddress: boolean
+  country: string
+  province: string
+  city: string
+  detailAddress: string
+  paymentMethod: string
+  bankCard: string
+  alipayAccount: string
+  enableNotifications: boolean
+  emailNotifications: boolean
+  smsNotifications: boolean
+  remarks: string
+  agreeTerms: boolean
+}
+
+// 表单数据 - 包含show和hide的演示场景
 const formData = ref({
-  // 用户类型决定后续字段显示
+  // 基础信息
   userType: '',
   
   // 个人用户字段
   personalName: '',
-  personalAge: '',
-  personalPhone: '',
+  personalAge: 0,
+  personalEmail: '',
   
-  // 企业用户字段
+  // 企业用户字段  
   companyName: '',
   companyScale: '',
-  businessLicense: '',
   legalPerson: '',
   
-  // VIP 相关字段
+  // VIP相关字段
   isVip: false,
   vipLevel: '',
   vipExpireDate: '',
   
-  // 地址信息 - 级联显示
-  hasAddress: false,
+  // 地址信息
+  needAddress: false,
   country: '',
   province: '',
   city: '',
-  district: '',
   detailAddress: '',
   
-  // 支付方式 - 动态字段
+  // 支付方式
   paymentMethod: '',
-  
-  // 银行卡信息
-  bankName: '',
-  cardNumber: '',
-  
-  // 支付宝信息
+  bankCard: '',
   alipayAccount: '',
   
-  // 微信信息
-  wechatAccount: '',
+  // 通知设置
+  enableNotifications: true,
+  emailNotifications: true,
+  smsNotifications: false,
   
-  // 高级配置 - 多重条件
-  enableAdvanced: false,
-  advancedType: '',
-  advancedConfig: '',
-  
-  // 其他字段
-  description: '',
+  // 其他
+  remarks: '',
   agreeTerms: false
 })
 
-const formRef = ref()
+const formRef = ref<MaFormExpose>()
 
-// 监听用户类型变化，清空相关字段
+// 监听用户类型变化，自动清空相关字段
 watch(() => formData.value.userType, (newType, oldType) => {
   if (newType !== oldType) {
-    // 清空个人用户相关字段
+    // 清空个人用户字段
     if (newType !== 'personal') {
       formData.value.personalName = ''
-      formData.value.personalAge = ''
-      formData.value.personalPhone = ''
+      formData.value.personalAge = 0
+      formData.value.personalEmail = ''
     }
     
-    // 清空企业用户相关字段
+    // 清空企业用户字段
     if (newType !== 'company') {
       formData.value.companyName = ''
       formData.value.companyScale = ''
-      formData.value.businessLicense = ''
       formData.value.legalPerson = ''
     }
+    
+    // 重置VIP状态
+    formData.value.isVip = false
+    formData.value.vipLevel = ''
+    formData.value.vipExpireDate = ''
   }
 })
 
-// 监听 VIP 状态变化
+// 监听VIP状态变化
 watch(() => formData.value.isVip, (isVip) => {
   if (!isVip) {
     formData.value.vipLevel = ''
@@ -85,13 +113,12 @@ watch(() => formData.value.isVip, (isVip) => {
   }
 })
 
-// 监听地址选项变化
-watch(() => formData.value.hasAddress, (hasAddress) => {
-  if (!hasAddress) {
+// 监听地址需求变化
+watch(() => formData.value.needAddress, (needAddress) => {
+  if (!needAddress) {
     formData.value.country = ''
     formData.value.province = ''
     formData.value.city = ''
-    formData.value.district = ''
     formData.value.detailAddress = ''
   }
 })
@@ -99,34 +126,33 @@ watch(() => formData.value.hasAddress, (hasAddress) => {
 // 监听支付方式变化
 watch(() => formData.value.paymentMethod, (method, oldMethod) => {
   if (method !== oldMethod) {
-    // 清空所有支付相关字段
-    formData.value.bankName = ''
-    formData.value.cardNumber = ''
+    formData.value.bankCard = ''
     formData.value.alipayAccount = ''
-    formData.value.wechatAccount = ''
   }
 })
 
-// 表单项配置 - 包含各种条件渲染逻辑
-const formItems = computed<MaFormItem[]>(() => [
-  // 用户类型选择 - 主控字段
+// 监听通知设置变化
+watch(() => formData.value.enableNotifications, (enabled) => {
+  if (!enabled) {
+    formData.value.emailNotifications = false
+    formData.value.smsNotifications = false
+  }
+})
+
+// 表单项配置 - 演示show和hide属性的使用
+const formItems = computed((): MaFormItem[] => [
+  // 基础字段 - 用户类型选择
   {
     label: '用户类型',
     prop: 'userType',
-    render: 'select',
+    render: ()=> ElSelect,
     renderProps: {
       placeholder: '请选择用户类型',
-      clearable: true
-    },
-    renderSlots: {
-      default: () => [
+      clearable: true,
+      options: [
         { label: '个人用户', value: 'personal' },
         { label: '企业用户', value: 'company' }
-      ].map(item => h('el-option', { 
-        key: item.value, 
-        label: item.label, 
-        value: item.value 
-      }))
+      ],
     },
     itemProps: {
       rules: [{ required: true, message: '请选择用户类型', trigger: 'change' }]
@@ -134,9 +160,9 @@ const formItems = computed<MaFormItem[]>(() => [
     cols: { span: 12 }
   },
 
-  // 个人用户字段组 - 条件显示
+  // 个人用户字段 - 使用show属性（推荐方式）
   {
-    label: '姓名',
+    label: '个人姓名',
     prop: 'personalName',
     render: 'input',
     renderProps: { 
@@ -149,8 +175,8 @@ const formItems = computed<MaFormItem[]>(() => [
         { min: 2, max: 20, message: '姓名长度在 2 到 20 个字符', trigger: 'blur' }
       ]
     },
-    // 仅当用户类型为个人时显示
-    when: (model) => model.userType === 'personal',
+    // show 函数：不满足条件时不渲染DOM，性能更佳
+    show: (item: MaFormItem, model: FormData) => model.userType === 'personal',
     dependencies: ['userType'],
     cols: { span: 12 }
   },
@@ -161,35 +187,36 @@ const formItems = computed<MaFormItem[]>(() => [
     renderProps: { 
       min: 1, 
       max: 150,
-      placeholder: '请输入年龄' 
+      placeholder: '请输入年龄',
     },
     itemProps: {
       rules: [{ required: true, message: '请输入年龄', trigger: 'blur' }]
     },
-    when: (model) => model.userType === 'personal',
+    show: (item: MaFormItem, model: FormData) => model.userType === 'personal',
     dependencies: ['userType'],
     cols: { span: 8 }
   },
   {
-    label: '手机号',
-    prop: 'personalPhone',
+    label: '邮箱地址',
+    prop: 'personalEmail',
     render: 'input',
     renderProps: { 
-      placeholder: '请输入手机号',
+      type: 'email',
+      placeholder: '请输入邮箱地址',
       clearable: true 
     },
     itemProps: {
       rules: [
-        { required: true, message: '请输入手机号', trigger: 'blur' },
-        { pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号', trigger: 'blur' }
+        { required: true, message: '请输入邮箱', trigger: 'blur' },
+        { type: 'email', message: '请输入正确的邮箱格式', trigger: 'blur' }
       ]
     },
-    when: (model) => model.userType === 'personal',
+    show: (item: MaFormItem, model: FormData) => model.userType === 'personal',
     dependencies: ['userType'],
     cols: { span: 8 }
   },
 
-  // 企业用户字段组 - 条件显示
+  // 企业用户字段 - 使用show属性
   {
     label: '企业名称',
     prop: 'companyName',
@@ -201,7 +228,7 @@ const formItems = computed<MaFormItem[]>(() => [
     itemProps: {
       rules: [{ required: true, message: '请输入企业名称', trigger: 'blur' }]
     },
-    when: (model) => model.userType === 'company',
+    show: (item: MaFormItem, model: FormData) => model.userType === 'company',
     dependencies: ['userType'],
     cols: { span: 12 }
   },
@@ -209,38 +236,16 @@ const formItems = computed<MaFormItem[]>(() => [
     label: '企业规模',
     prop: 'companyScale',
     render: 'select',
-    renderProps: { placeholder: '请选择企业规模' },
-    renderSlots: {
-      default: () => [
+    renderProps: { placeholder: '请选择企业规模' ,options: [
         { label: '1-50人', value: 'small' },
-        { label: '50-200人', value: 'medium' },
-        { label: '200-1000人', value: 'large' },
-        { label: '1000人以上', value: 'xlarge' }
-      ].map(item => h('el-option', { 
-        key: item.value, 
-        label: item.label, 
-        value: item.value 
-      }))
-    },
+        { label: '51-200人', value: 'medium' },
+        { label: '201-1000人', value: 'large' },
+        { label: '1000+人', value: 'xlarge' }
+      ],},
     itemProps: {
       rules: [{ required: true, message: '请选择企业规模', trigger: 'change' }]
     },
-    when: (model) => model.userType === 'company',
-    dependencies: ['userType'],
-    cols: { span: 8 }
-  },
-  {
-    label: '营业执照号',
-    prop: 'businessLicense',
-    render: 'input',
-    renderProps: { 
-      placeholder: '请输入营业执照号',
-      clearable: true 
-    },
-    itemProps: {
-      rules: [{ required: true, message: '请输入营业执照号', trigger: 'blur' }]
-    },
-    when: (model) => model.userType === 'company',
+    show: (item: MaFormItem, model: FormData) => model.userType === 'company',
     dependencies: ['userType'],
     cols: { span: 8 }
   },
@@ -255,22 +260,22 @@ const formItems = computed<MaFormItem[]>(() => [
     itemProps: {
       rules: [{ required: true, message: '请输入法人代表姓名', trigger: 'blur' }]
     },
-    when: (model) => model.userType === 'company',
+    show: (item: MaFormItem, model: FormData) => model.userType === 'company',
     dependencies: ['userType'],
     cols: { span: 8 }
   },
 
-  // VIP 相关字段 - 级联条件显示
+  // VIP相关字段 - 级联条件渲染
   {
-    label: '是否VIP',
+    label: '开通VIP',
     prop: 'isVip',
     render: 'switch',
     renderProps: {
       'active-text': 'VIP用户',
       'inactive-text': '普通用户'
     },
-    // 仅当有用户类型时显示
-    when: (model) => !!model.userType,
+    // 当选择了用户类型后才显示VIP选项
+    show: (item: MaFormItem, model: FormData) => !!model.userType,
     dependencies: ['userType'],
     cols: { span: 8 }
   },
@@ -278,23 +283,16 @@ const formItems = computed<MaFormItem[]>(() => [
     label: 'VIP等级',
     prop: 'vipLevel',
     render: 'select',
-    renderProps: { placeholder: '请选择VIP等级' },
-    renderSlots: {
-      default: () => [
+    renderProps: { placeholder: '请选择VIP等级',options: [
         { label: '黄金VIP', value: 'gold' },
         { label: '白金VIP', value: 'platinum' },
         { label: '钻石VIP', value: 'diamond' }
-      ].map(item => h('el-option', { 
-        key: item.value, 
-        label: item.label, 
-        value: item.value 
-      }))
-    },
+      ], },
     itemProps: {
       rules: [{ required: true, message: '请选择VIP等级', trigger: 'change' }]
     },
-    // 仅当是VIP用户时显示
-    when: (model) => model.isVip === true,
+    // 级联条件：仅当开通VIP时显示
+    show: (item: MaFormItem, model: FormData) => model.isVip === true,
     dependencies: ['isVip'],
     cols: { span: 8 }
   },
@@ -312,20 +310,20 @@ const formItems = computed<MaFormItem[]>(() => [
     itemProps: {
       rules: [{ required: true, message: '请选择VIP到期时间', trigger: 'change' }]
     },
-    when: (model) => model.isVip === true,
+    show: (item: MaFormItem, model: FormData) => model.isVip === true,
     dependencies: ['isVip'],
     cols: { span: 8 }
   },
 
-  // 地址信息 - 级联显示
+  // 地址信息 - 复杂级联条件
   {
-    label: '填写地址',
-    prop: 'hasAddress',
+    label: '填写地址信息',
+    prop: 'needAddress',
     render: 'checkbox',
     renderSlots: {
-      default: () => '需要填写详细地址信息'
+      default: () => '需要填写详细地址'
     },
-    when: (model) => !!model.userType,
+    show: (item: MaFormItem, model: FormData) => !!model.userType,
     dependencies: ['userType'],
     cols: { span: 12 }
   },
@@ -333,70 +331,44 @@ const formItems = computed<MaFormItem[]>(() => [
     label: '国家',
     prop: 'country',
     render: 'select',
-    renderProps: { placeholder: '请选择国家' },
-    renderSlots: {
-      default: () => [
+    renderProps: { placeholder: '请选择国家',options: [
         { label: '中国', value: 'china' },
         { label: '美国', value: 'usa' },
         { label: '日本', value: 'japan' }
-      ].map(item => h('el-option', { 
-        key: item.value, 
-        label: item.label, 
-        value: item.value 
-      }))
-    },
-    when: (model) => model.hasAddress === true,
-    dependencies: ['hasAddress'],
-    cols: { span: 6 }
+      ], },
+    show: (item: MaFormItem, model: FormData) => model.needAddress === true,
+    dependencies: ['needAddress'],
+    cols: { span: 8 }
   },
   {
     label: '省份',
     prop: 'province',
     render: 'select',
-    renderProps: { placeholder: '请选择省份' },
-    renderSlots: {
-      default: () => [
-        { label: '北京', value: 'beijing' },
-        { label: '上海', value: 'shanghai' },
-        { label: '广东', value: 'guangdong' }
-      ].map(item => h('el-option', { 
-        key: item.value, 
-        label: item.label, 
-        value: item.value 
-      }))
-    },
-    when: (model) => model.hasAddress === true && model.country === 'china',
-    dependencies: ['hasAddress', 'country'],
-    cols: { span: 6 }
+    renderProps: { placeholder: '请选择省份' ,options: [
+        { label: '北京市', value: 'beijing' },
+        { label: '上海市', value: 'shanghai' },
+        { label: '广东省', value: 'guangdong' },
+        { label: '江苏省', value: 'jiangsu' }
+      ],},
+    // 多重条件：需要地址 且 选择了中国
+    show: (item: MaFormItem, model: FormData) => model.needAddress === true && model.country === 'china',
+    dependencies: ['needAddress', 'country'],
+    cols: { span: 8 }
   },
   {
     label: '城市',
     prop: 'city',
     render: 'select',
-    renderProps: { placeholder: '请选择城市' },
-    renderSlots: {
-      default: () => [
+    renderProps: { placeholder: '请选择城市' ,options: [
         { label: '北京市', value: 'beijing' },
         { label: '上海市', value: 'shanghai' },
-        { label: '深圳市', value: 'shenzhen' }
-      ].map(item => h('el-option', { 
-        key: item.value, 
-        label: item.label, 
-        value: item.value 
-      }))
-    },
-    when: (model) => model.hasAddress === true && !!model.province,
-    dependencies: ['hasAddress', 'province'],
-    cols: { span: 6 }
-  },
-  {
-    label: '区县',
-    prop: 'district',
-    render: 'input',
-    renderProps: { placeholder: '请输入区县' },
-    when: (model) => model.hasAddress === true && !!model.city,
-    dependencies: ['hasAddress', 'city'],
-    cols: { span: 6 }
+        { label: '深圳市', value: 'shenzhen' },
+        { label: '广州市', value: 'guangzhou' }
+      ],},
+    // 复杂条件：需要地址 且 选择了省份
+    show: (item: MaFormItem, model: FormData) => model.needAddress === true && !!model.province,
+    dependencies: ['needAddress', 'province'],
+    cols: { span: 8 }
   },
   {
     label: '详细地址',
@@ -405,60 +377,32 @@ const formItems = computed<MaFormItem[]>(() => [
     renderProps: { 
       type: 'textarea',
       placeholder: '请输入详细地址',
-      rows: 2
+      rows: 3
     },
-    when: (model) => model.hasAddress === true,
-    dependencies: ['hasAddress'],
+    show: (item: MaFormItem, model: FormData) => model.needAddress === true,
+    dependencies: ['needAddress'],
     cols: { span: 24 }
   },
 
-  // 支付方式 - 动态字段显示
+  // 支付方式 - 基于VIP状态的条件渲染
   {
     label: '支付方式',
     prop: 'paymentMethod',
     render: 'radio',
-    renderSlots: {
-      default: () => [
+    renderProps:{
+      options: [
         { label: '银行卡', value: 'bank' },
-        { label: '支付宝', value: 'alipay' },
-        { label: '微信支付', value: 'wechat' }
-      ].map(item => h('el-radio', { 
-        key: item.value,
-        label: item.value,
-        value: item.value 
-      }, () => item.label))
+        { label: '支付宝', value: 'alipay' }
+      ],
     },
-    // 仅 VIP 用户可以选择支付方式
-    when: (model) => model.isVip === true,
+    // 仅VIP用户可选择支付方式
+    show: (item: MaFormItem, model: FormData) => model.isVip === true,
     dependencies: ['isVip'],
-    cols: { span: 24 }
-  },
-
-  // 银行卡信息 - 条件显示
-  {
-    label: '银行名称',
-    prop: 'bankName',
-    render: 'select',
-    renderProps: { placeholder: '请选择银行' },
-    renderSlots: {
-      default: () => [
-        { label: '中国工商银行', value: 'icbc' },
-        { label: '中国建设银行', value: 'ccb' },
-        { label: '中国农业银行', value: 'abc' },
-        { label: '中国银行', value: 'boc' }
-      ].map(item => h('el-option', { 
-        key: item.value, 
-        label: item.label, 
-        value: item.value 
-      }))
-    },
-    when: (model) => model.paymentMethod === 'bank',
-    dependencies: ['paymentMethod'],
     cols: { span: 12 }
   },
   {
     label: '银行卡号',
-    prop: 'cardNumber',
+    prop: 'bankCard',
     render: 'input',
     renderProps: { 
       placeholder: '请输入银行卡号',
@@ -470,106 +414,79 @@ const formItems = computed<MaFormItem[]>(() => [
         { pattern: /^\d{16,19}$/, message: '请输入正确的银行卡号', trigger: 'blur' }
       ]
     },
-    when: (model) => model.paymentMethod === 'bank',
+    show: (item: MaFormItem, model: FormData) => model.paymentMethod === 'bank',
     dependencies: ['paymentMethod'],
     cols: { span: 12 }
   },
-
-  // 支付宝信息 - 条件显示
   {
     label: '支付宝账户',
     prop: 'alipayAccount',
     render: 'input',
     renderProps: { 
-      placeholder: '请输入支付宝账户（手机号或邮箱）',
+      placeholder: '请输入支付宝账户',
       clearable: true 
     },
     itemProps: {
       rules: [{ required: true, message: '请输入支付宝账户', trigger: 'blur' }]
     },
-    when: (model) => model.paymentMethod === 'alipay',
+    show: (item: MaFormItem, model: FormData) => model.paymentMethod === 'alipay',
     dependencies: ['paymentMethod'],
     cols: { span: 12 }
   },
 
-  // 微信信息 - 条件显示
+  // 通知设置 - 演示hide属性的使用场景
   {
-    label: '微信账户',
-    prop: 'wechatAccount',
-    render: 'input',
-    renderProps: { 
-      placeholder: '请输入微信号',
-      clearable: true 
-    },
-    itemProps: {
-      rules: [{ required: true, message: '请输入微信号', trigger: 'blur' }]
-    },
-    when: (model) => model.paymentMethod === 'wechat',
-    dependencies: ['paymentMethod'],
-    cols: { span: 12 }
-  },
-
-  // 高级配置 - 多重条件
-  {
-    label: '启用高级配置',
-    prop: 'enableAdvanced',
+    label: '启用通知',
+    prop: 'enableNotifications',
     render: 'switch',
     renderProps: {
-      'active-text': '启用',
-      'inactive-text': '禁用'
+      'active-text': '开启',
+      'inactive-text': '关闭'
     },
-    // 仅企业VIP用户可以启用高级配置
-    when: (model) => model.userType === 'company' && model.isVip === true,
-    dependencies: ['userType', 'isVip'],
+    show: (item: MaFormItem, model: FormData) => !!model.userType,
+    dependencies: ['userType'],
     cols: { span: 8 }
   },
   {
-    label: '配置类型',
-    prop: 'advancedType',
-    render: 'select',
-    renderProps: { placeholder: '请选择配置类型' },
-    renderSlots: {
-      default: () => [
-        { label: 'API配置', value: 'api' },
-        { label: '数据库配置', value: 'database' },
-        { label: '缓存配置', value: 'cache' }
-      ].map(item => h('el-option', { 
-        key: item.value, 
-        label: item.label, 
-        value: item.value 
-      }))
-    },
-    when: (model) => model.enableAdvanced === true,
-    dependencies: ['enableAdvanced'],
-    cols: { span: 8 }
-  },
-  {
-    label: '配置详情',
-    prop: 'advancedConfig',
-    render: 'input',
+    label: '邮件通知',
+    prop: 'emailNotifications',
+    render: 'switch',
     renderProps: {
-      type: 'textarea',
-      placeholder: '请输入JSON格式的配置信息',
-      rows: 4
+      'active-text': '开启',
+      'inactive-text': '关闭'
     },
-    when: (model) => model.enableAdvanced === true && !!model.advancedType,
-    dependencies: ['enableAdvanced', 'advancedType'],
+    // hide 函数：不满足条件时隐藏DOM但仍渲染，适用于频繁切换的场景
+    hide: (item: MaFormItem, model: FormData) => !model.enableNotifications,
+    dependencies: ['enableNotifications'],
+    cols: { span: 8 }
+  },
+  {
+    label: '短信通知',
+    prop: 'smsNotifications',
+    render: 'switch',
+    renderProps: {
+      'active-text': '开启',
+      'inactive-text': '关闭'
+    },
+    // 使用hide属性，当通知被禁用时隐藏但保留DOM结构
+    hide: (item: MaFormItem, model: FormData) => !model.enableNotifications,
+    dependencies: ['enableNotifications'],
     cols: { span: 8 }
   },
 
   // 其他字段
   {
-    label: '备注说明',
-    prop: 'description',
+    label: '备注',
+    prop: 'remarks',
     render: 'input',
     renderProps: {
       type: 'textarea',
-      placeholder: '请输入备注说明（可选）',
+      placeholder: '请输入备注（可选）',
       rows: 3,
       'show-word-limit': true,
       maxlength: 200
     },
-    when: (model) => !!model.userType,
+    show: (item: MaFormItem, model: FormData) => !!model.userType,
     dependencies: ['userType'],
     cols: { span: 24 }
   },
@@ -592,7 +509,7 @@ const formItems = computed<MaFormItem[]>(() => [
         trigger: 'change' 
       }]
     },
-    when: (model) => !!model.userType,
+    show: (item: MaFormItem, model: FormData) => !!model.userType,
     dependencies: ['userType'],
     cols: { span: 24 }
   }
@@ -600,9 +517,24 @@ const formItems = computed<MaFormItem[]>(() => [
 
 // 计算当前显示的字段数量
 const visibleFieldsCount = computed(() => {
-  return formItems.value.filter(item => {
-    if (!item.when) return true
-    return item.when(formData.value, item)
+  return formItems.value.filter((item: any) => {
+    if (item.show) {
+      return item.show(item, formData.value)
+    }
+    if (item.hide) {
+      return !item.hide(item, formData.value)
+    }
+    return true
+  }).length
+})
+
+// 计算隐藏的字段数量（使用hide属性的字段）
+const hiddenFieldsCount = computed(() => {
+  return formItems.value.filter((item: any) => {
+    if (item.hide) {
+      return item.hide(item, formData.value)
+    }
+    return false
   }).length
 })
 
@@ -658,16 +590,17 @@ const handleClear = () => {
     <!-- 演示说明 -->
     <div class="demo-description">
       <h3>条件渲染演示</h3>
-      <p>展示 MaForm 的条件渲染功能，根据表单数据动态显示/隐藏字段，支持复杂的依赖关系和级联显示。</p>
+      <p>演示 ma-form 的条件渲染功能，通过 <code>show</code> 和 <code>hide</code> 属性配合 <code>dependencies</code> 数组实现字段的动态显示隐藏。</p>
       <div class="demo-features">
-        <el-tag type="info" size="small">基础条件显示</el-tag>
-        <el-tag type="success" size="small">级联字段</el-tag>
+        <el-tag type="primary" size="small">show属性</el-tag>
+        <el-tag type="success" size="small">hide属性</el-tag>
+        <el-tag type="info" size="small">级联条件</el-tag>
         <el-tag type="warning" size="small">多重条件</el-tag>
-        <el-tag type="danger" size="small">动态验证</el-tag>
-        <el-tag size="small">依赖清理</el-tag>
+        <el-tag type="danger" size="small">自动清理</el-tag>
       </div>
       <div class="demo-stats">
         <el-statistic title="当前显示字段" :value="visibleFieldsCount" />
+        <el-statistic title="隐藏字段数量" :value="hiddenFieldsCount" />
       </div>
     </div>
 
@@ -679,7 +612,6 @@ const handleClear = () => {
         :options="formOptions"
         :items="formItems"
       >
-        <!-- 自定义底部操作栏 -->
         <template #footer>
           <div class="form-footer">
             <el-button @click="handleClear">清空</el-button>
@@ -690,56 +622,130 @@ const handleClear = () => {
       </ma-form>
     </div>
 
-    <!-- 条件逻辑说明 -->
-    <div class="logic-explanation">
+    <!-- 核心API说明 -->
+    <div class="api-explanation">
       <el-card shadow="never">
         <template #header>
-          <span>条件渲染逻辑说明</span>
+          <span>条件渲染核心API</span>
         </template>
         
-        <div class="logic-tree">
-          <div class="logic-item">
-            <h4>1. 用户类型 (userType)</h4>
-            <ul>
-              <li><strong>个人用户</strong>: 显示姓名、年龄、手机号字段</li>
-              <li><strong>企业用户</strong>: 显示企业名称、规模、营业执照、法人代表字段</li>
-            </ul>
+        <div class="api-list">
+          <div class="api-item">
+            <h4>show 属性（推荐）</h4>
+            <div class="code-block">
+              <code>show: (item: MaFormItem, model) => model.userType === 'personal'</code>
+            </div>
+            <p>不满足条件时不渲染DOM，性能更佳，适用于大部分场景</p>
           </div>
           
-          <div class="logic-item">
-            <h4>2. VIP状态 (isVip)</h4>
-            <ul>
-              <li><strong>启用VIP</strong>: 显示VIP等级、到期时间、支付方式字段</li>
-              <li><strong>禁用VIP</strong>: 隐藏所有VIP相关字段</li>
-            </ul>
+          <div class="api-item">
+            <h4>hide 属性</h4>
+            <div class="code-block">
+              <code>hide: (item: MaFormItem, model) => !model.enableNotifications</code>
+            </div>
+            <p>不满足条件时隐藏DOM但仍渲染，适用于频繁切换的场景</p>
           </div>
           
-          <div class="logic-item">
-            <h4>3. 地址信息 (hasAddress)</h4>
-            <ul>
-              <li><strong>需要地址</strong>: 显示国家、省份、城市等级联字段</li>
-              <li><strong>国家为中国</strong>: 显示省份选择器</li>
-              <li><strong>有省份</strong>: 显示城市选择器</li>
-              <li><strong>有城市</strong>: 显示区县输入框</li>
-            </ul>
+          <div class="api-item">
+            <h4>dependencies 数组</h4>
+            <div class="code-block">
+              <code>dependencies: ['userType', 'isVip']</code>
+            </div>
+            <p>声明字段依赖关系，当依赖字段变化时会重新计算条件</p>
           </div>
           
-          <div class="logic-item">
-            <h4>4. 支付方式 (paymentMethod)</h4>
-            <ul>
-              <li><strong>银行卡</strong>: 显示银行名称、银行卡号字段</li>
-              <li><strong>支付宝</strong>: 显示支付宝账户字段</li>
-              <li><strong>微信支付</strong>: 显示微信账户字段</li>
+          <div class="api-item">
+            <h4>多重条件示例</h4>
+            <div class="code-block">
+              <code>show: (item: MaFormItem, model) => model.needAddress && model.country === 'china'</code>
+            </div>
+            <p>支持复杂的条件逻辑，实现多重依赖的级联显示</p>
+          </div>
+        </div>
+      </el-card>
+    </div>
+
+    <!-- show vs hide 对比说明 -->
+    <div class="comparison-section">
+      <el-card shadow="never">
+        <template #header>
+          <span>show vs hide 对比</span>
+        </template>
+        
+        <div class="comparison-grid">
+          <div class="comparison-item">
+            <h4>show 属性</h4>
+            <ul class="comparison-features">
+              <li class="feature-item positive">✓ 不渲染DOM，性能最佳</li>
+              <li class="feature-item positive">✓ 不占用页面空间</li>
+              <li class="feature-item positive">✓ 适用于大部分场景</li>
+              <li class="feature-item neutral">• 初始化时可能有轻微闪烁</li>
             </ul>
+            <div class="usage-scenario">
+              <strong>使用场景：</strong>根据用户类型显示不同表单字段
+            </div>
           </div>
           
-          <div class="logic-item">
-            <h4>5. 高级配置 (多重条件)</h4>
-            <ul>
-              <li><strong>企业用户 + VIP</strong>: 可以启用高级配置</li>
-              <li><strong>启用高级配置</strong>: 显示配置类型选择器</li>
-              <li><strong>有配置类型</strong>: 显示配置详情输入框</li>
+          <div class="comparison-item">
+            <h4>hide 属性</h4>
+            <ul class="comparison-features">
+              <li class="feature-item positive">✓ 切换流畅，无闪烁</li>
+              <li class="feature-item positive">✓ 保持表单结构稳定</li>
+              <li class="feature-item negative">✗ 仍会渲染DOM</li>
+              <li class="feature-item negative">✗ 占用页面空间</li>
             </ul>
+            <div class="usage-scenario">
+              <strong>使用场景：</strong>通知设置等频繁切换的功能
+            </div>
+          </div>
+        </div>
+      </el-card>
+    </div>
+
+    <!-- 条件逻辑流程 -->
+    <div class="logic-flow">
+      <el-card shadow="never">
+        <template #header>
+          <span>条件渲染流程图</span>
+        </template>
+        
+        <div class="flow-steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h5>选择用户类型</h5>
+              <p>显示对应的用户信息字段</p>
+            </div>
+          </div>
+          
+          <div class="step-arrow">→</div>
+          
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h5>开通VIP（可选）</h5>
+              <p>显示VIP等级和到期时间</p>
+            </div>
+          </div>
+          
+          <div class="step-arrow">→</div>
+          
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h5>通知设置</h5>
+              <p>使用hide属性平滑切换</p>
+            </div>
+          </div>
+          
+          <div class="step-arrow">→</div>
+          
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h5>支付方式（VIP专享）</h5>
+              <p>根据支付方式显示对应字段</p>
+            </div>
           </div>
         </div>
       </el-card>
@@ -754,37 +760,6 @@ const handleClear = () => {
         <pre class="data-json">{{ JSON.stringify(formData, null, 2) }}</pre>
       </el-card>
     </div>
-
-    <!-- 技术要点说明 -->
-    <div class="tech-points">
-      <el-card shadow="never">
-        <template #header>
-          <span>技术要点</span>
-        </template>
-        
-        <div class="tech-list">
-          <div class="tech-item">
-            <h5>when 函数</h5>
-            <p>使用 <code>when: (model) => condition</code> 定义显示条件</p>
-          </div>
-          
-          <div class="tech-item">
-            <h5>dependencies 数组</h5>
-            <p>声明字段依赖关系，确保条件变化时及时重新计算</p>
-          </div>
-          
-          <div class="tech-item">
-            <h5>watch 监听</h5>
-            <p>监听关键字段变化，自动清理不相关的字段数据</p>
-          </div>
-          
-          <div class="tech-item">
-            <h5>计算属性</h5>
-            <p>使用 computed 动态生成表单项配置，实现响应式条件渲染</p>
-          </div>
-        </div>
-      </el-card>
-    </div>
   </div>
 </template>
 
@@ -796,30 +771,38 @@ const handleClear = () => {
 }
 
 .demo-description {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   padding: 20px;
-  background-color: #f5f7fa;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  color: white;
 }
 
 .demo-description h3 {
-  margin: 0 0 10px 0;
-  color: #303133;
+  margin: 0 0 12px 0;
   font-size: 18px;
+  font-weight: 600;
 }
 
 .demo-description p {
-  margin: 0 0 15px 0;
-  color: #606266;
+  margin: 0 0 16px 0;
   font-size: 14px;
   line-height: 1.6;
+  opacity: 0.9;
+}
+
+.demo-description code {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 13px;
 }
 
 .demo-features {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 
 .demo-stats {
@@ -828,7 +811,7 @@ const handleClear = () => {
 }
 
 .demo-form {
-  margin-bottom: 30px;
+  margin-bottom: 32px;
 }
 
 .form-footer {
@@ -838,80 +821,175 @@ const handleClear = () => {
   padding: 20px 0;
 }
 
-.logic-explanation,
-.data-display,
-.tech-points {
-  margin-bottom: 20px;
+.api-explanation,
+.comparison-section,
+.logic-flow,
+.data-display {
+  margin-bottom: 24px;
 }
 
-.logic-tree {
+.api-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
-.logic-item h4 {
-  margin: 0 0 10px 0;
+.api-item h4 {
+  margin: 0 0 12px 0;
   color: #409EFF;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.code-block {
+  background-color: #f6f8fa;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 12px 16px;
+  margin: 8px 0;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+.code-block code {
+  color: #d73a49;
   font-size: 14px;
+  font-weight: 500;
 }
 
-.logic-item ul {
-  margin: 0;
-  padding-left: 20px;
-}
-
-.logic-item li {
-  margin-bottom: 8px;
+.api-item p {
+  margin: 8px 0 0 0;
   color: #606266;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.comparison-item {
+  padding: 20px;
+  border: 1px solid #e4e7ed;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.comparison-item h4 {
+  margin: 0 0 16px 0;
+  color: #303133;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.comparison-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+
+.feature-item {
+  padding: 6px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.feature-item.positive {
+  color: #67c23a;
+}
+
+.feature-item.negative {
+  color: #f56c6c;
+}
+
+.feature-item.neutral {
+  color: #909399;
+}
+
+.usage-scenario {
+  padding: 12px;
+  background-color: #fff;
+  border-radius: 4px;
+  border-left: 4px solid #409EFF;
   font-size: 13px;
   line-height: 1.5;
+}
+
+.flow-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #409EFF, #67C23A);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.step-content h5 {
+  margin: 0 0 4px 0;
+  color: #303133;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.step-content p {
+  margin: 0;
+  color: #606266;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.step-arrow {
+  color: #C0C4CC;
+  font-size: 18px;
+  font-weight: bold;
+  flex-shrink: 0;
 }
 
 .data-json {
-  background-color: #f4f4f5;
+  background-color: #f6f8fa;
+  border: 1px solid #e1e4e8;
   padding: 16px;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 12px;
   line-height: 1.5;
-  color: #606266;
+  color: #24292e;
   overflow-x: auto;
   white-space: pre-wrap;
-  max-height: 300px;
+  max-height: 400px;
   overflow-y: auto;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
 }
 
-.tech-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.tech-item h5 {
-  margin: 0 0 8px 0;
-  color: #303133;
-  font-size: 14px;
-}
-
-.tech-item p {
-  margin: 0;
-  color: #606266;
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-.tech-item code {
-  background-color: #f1f2f3;
-  padding: 2px 4px;
-  border-radius: 3px;
-  font-size: 12px;
-  color: #e6a23c;
-}
-
-/* 响应式适配 */
+/* 响应式设计 */
 @media (max-width: 768px) {
   .conditional-rendering-demo {
-    padding: 10px;
+    padding: 16px;
+  }
+  
+  .demo-description {
+    padding: 16px;
   }
   
   .demo-features {
@@ -921,14 +999,62 @@ const handleClear = () => {
   .form-footer {
     flex-direction: column;
     align-items: center;
+    gap: 12px;
   }
   
-  .tech-list {
+  .form-footer .el-button {
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .comparison-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .flow-steps {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .step {
+    width: 100%;
+    min-width: unset;
+  }
+  
+  .step-arrow {
+    transform: rotate(90deg);
+    align-self: center;
   }
   
   .demo-stats {
     justify-content: center;
+  }
+  
+  .code-block {
+    padding: 8px 12px;
+  }
+  
+  .code-block code {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .conditional-rendering-demo {
+    padding: 12px;
+  }
+  
+  .data-json {
+    font-size: 11px;
+    padding: 12px;
+  }
+  
+  .step-content h5 {
+    font-size: 13px;
+  }
+  
+  .step-content p {
+    font-size: 11px;
   }
 }
 </style>
