@@ -102,4 +102,3 @@ jobs:
         with:
           commit_message: "🌐 Auto-translated content"
           branch: ${{ github.event.pull_request.head.ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
