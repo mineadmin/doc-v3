@@ -67,7 +67,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/en/front/base/start'
         },
         {
-          text: 'Routing & Menus',
+          text: 'Routes & Menus',
           link: '/en/front/base/route-menu'
         },
         {
@@ -214,7 +214,46 @@ const sidebar:DefaultTheme.Sidebar = {
         },
         {
           text: 'MaTable',
-          link: '/en/front/component/ma-table'
+          link: '/en/front/component/ma-table',
+          collapsed: true,
+          items: [
+            {
+              text: 'Basic Table',
+              link: '/en/front/component/ma-table/basic'
+            },
+            {
+              text: 'Table Sorting',
+              link: '/en/front/component/ma-table/sorting'
+            },
+            {
+              text: 'Table Filtering',
+              link: '/en/front/component/ma-table/filter'
+            },
+            {
+              text: 'Custom Rendering',
+              link: '/en/front/component/ma-table/custom-render'
+            },
+            {
+              text: 'Dynamic Columns',
+              link: '/en/front/component/ma-table/dynamic-columns'
+            },
+            {
+              text: 'Pagination',
+              link: '/en/front/component/ma-table/pagination'
+            },
+            {
+              text: 'Tree Table',
+              link: '/en/front/component/ma-table/tree-table'
+            },
+            {
+              text: 'Multiple Selection',
+              link: '/en/front/component/ma-table/selection'
+            },
+            {
+              text: 'Responsive Table',
+              link: '/en/front/component/ma-table/responsive'
+            }
+          ]
         },
         {
           text: 'MaSearch',
@@ -243,7 +282,7 @@ const sidebar:DefaultTheme.Sidebar = {
           text: "Lifecycle",
           link: "/en/backend/base/lifecycle"
         },
-        { text: "Routing & API Docs",link: "/en/backend/base/router"},
+        { text: "Routes & API Docs",link: "/en/backend/base/router"},
         { text: "Error Handling",link: "/en/backend/base/error-handler"},
         {text: "Logging",link: "/en/backend/base/logger"},
         {text: "Events",link: "/en/backend/base/event-handler"},
@@ -275,7 +314,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/en/backend/data-permission/overview"
         },
         {
-          text: "Configuration & Demo",
+          text: "Permission Configuration & Demo",
           link: "/en/backend/data-permission/config"
         },
         {
@@ -295,7 +334,7 @@ const sidebar:DefaultTheme.Sidebar = {
       items:
           [
             {
-              text:"Prerequisites",
+              text:"Preparation",
               link:"/en/plugin"
             },
             {
@@ -307,15 +346,15 @@ const sidebar:DefaultTheme.Sidebar = {
               link:"/en/plugin/create"
             },
             {
-              text:"Plugin Structure",
+              text:"Plugin Directory Structure",
               link:"/en/plugin/structure"
             },
             {
-              text:"mine.json Documentation",
+              text:"mine.json Documentation & Examples",
               link:"/en/plugin/mineJson"
             },
             {
-            text:"ConfigProvider Guide",
+            text:"ConfigProvider Documentation",
             link:"/en/plugin/configProvider"
           }
           ]
@@ -337,16 +376,16 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"Frontend Development",
       items:[
         {
-          text: "Frontend Standards",
+          text: "Frontend Development Standards",
           link: "/en/plugin/front/develop"
         }
       ]
     },
     {
-      text:"Publishing",
+      text:"Application Publishing",
       items:[
         {
-          text: "App Publishing",
+          text: "Application Release",
           link: "/en/plugin/develop/publish"
         },
         {

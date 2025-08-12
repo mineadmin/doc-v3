@@ -48,7 +48,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link:"/ja/guide/upgrade"
         },
         {
-          text:"貢献ガイドライン",
+          text:"貢献ガイド",
           link:"/ja/guide/contributions"
         }
       ]
@@ -137,11 +137,11 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/ja/front/high/provider'
         },
         {
-          text: 'Hooks',
+          text: 'フック',
           link: '/ja/front/high/hooks'
         },
         {
-          text: '常用Store',
+          text: '共通ストア',
           link: '/ja/front/high/store'
         },
         {
@@ -195,7 +195,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/ja/front/component/ma-form/examples/loading-states'
             },
             {
-              text: 'ネストされたフォーム',
+              text: 'ネストフォーム',
               link: '/ja/front/component/ma-form/examples/nested-forms'
             },
             {
@@ -214,7 +214,46 @@ const sidebar:DefaultTheme.Sidebar = {
         },
         {
           text: 'MaTable',
-          link: '/ja/front/component/ma-table'
+          link: '/ja/front/component/ma-table',
+          collapsed: true,
+          items: [
+            {
+              text: '基本テーブル',
+              link: '/ja/front/component/ma-table/basic'
+            },
+            {
+              text: 'テーブルソート',
+              link: '/ja/front/component/ma-table/sorting'
+            },
+            {
+              text: 'テーブルフィルタ',
+              link: '/ja/front/component/ma-table/filter'
+            },
+            {
+              text: 'カスタムレンダリング',
+              link: '/ja/front/component/ma-table/custom-render'
+            },
+            {
+              text: '動的カラム管理',
+              link: '/ja/front/component/ma-table/dynamic-columns'
+            },
+            {
+              text: 'ページネーションテーブル',
+              link: '/ja/front/component/ma-table/pagination'
+            },
+            {
+              text: 'ツリーテーブル',
+              link: '/ja/front/component/ma-table/tree-table'
+            },
+            {
+              text: '複数選択テーブル',
+              link: '/ja/front/component/ma-table/selection'
+            },
+            {
+              text: 'レスポンシブテーブル',
+              link: '/ja/front/component/ma-table/responsive'
+            }
+          ]
         },
         {
           text: 'MaSearch',
@@ -244,7 +283,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/ja/backend/base/lifecycle"
         },
         { text: "ルートとAPIドキュメント",link: "/ja/backend/base/router"},
-        { text: "エラー処理",link: "/ja/backend/base/error-handler"},
+        { text: "エラーハンドリング",link: "/ja/backend/base/error-handler"},
         {text: "ログ",link: "/ja/backend/base/logger"},
         {text: "イベント",link: "/ja/backend/base/event-handler"},
         {text: "ファイルアップロード",link: "/ja/backend/base/upload"},
@@ -303,11 +342,11 @@ const sidebar:DefaultTheme.Sidebar = {
               link:"/ja/plugin/command"
             },
             {
-              text:"アプリ作成",
+              text:"アプリケーション作成",
               link:"/ja/plugin/create"
             },
             {
-              text:"プラグインディレクトリ構造",
+              text:"プラグイン構造",
               link:"/ja/plugin/structure"
             },
             {
@@ -337,7 +376,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"フロントエンド開発",
       items:[
         {
-          text: "フロントエンド開発規範",
+          text: "フロントエンド開発規約",
           link: "/ja/plugin/front/develop"
         }
       ]
