@@ -1,4 +1,3 @@
-```typescript
 import type {DefaultTheme} from "vitepress";
 
 const sidebar:DefaultTheme.Sidebar = {
@@ -360,4 +359,3 @@ const sidebar:DefaultTheme.Sidebar = {
 }
 
 export default sidebar
-```
