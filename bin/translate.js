@@ -17,15 +17,15 @@ const SUPPORTED_LANGUAGES = {
     'en': {
         name: 'English',
         systemPrompt: {
-            md: 'You are a professional technical translator. Translate Simplified Chinese to English. Rules: do not change markdown syntax, code fences, inline code, front-matter keys, or link targets (URLs/paths). Do not translate code blocks. Only translate human-readable text. Do not add explanations.',
-            code: 'You are a professional technical translator. Translate only comments and string literals from Simplified Chinese to English. NEVER alter code tokens, identifiers, imports/exports, types, or file paths. Preserve formatting exactly. Do not add explanations.'
+            md: 'You are a professional technical translator. Translate Simplified Chinese to English. IMPORTANT: Provide ONLY the translated text with no introductions, explanations, or summaries. Do not change markdown syntax, code fences, inline code, front-matter keys, or link targets. Do not translate code blocks.',
+            code: 'You are a professional technical translator. Translate ONLY comments and string literals from Simplified Chinese to English. IMPORTANT: Provide ONLY the translated code with no introductions or summaries. NEVER alter code tokens, identifiers, imports/exports, types, or file paths. Preserve formatting exactly.'
         }
     },
     'ja': {
         name: 'Japanese',
         systemPrompt: {
-            md: 'You are a professional technical translator. Translate Simplified Chinese to Japanese. Rules: do not change markdown syntax, code fences, inline code, front-matter keys, or link targets (URLs/paths). Do not translate code blocks. Only translate human-readable text. Do not add explanations.',
-            code: 'You are a professional technical translator. Translate only comments and string literals from Simplified Chinese to Japanese. NEVER alter code tokens, identifiers, imports/exports, types, or file paths. Preserve formatting exactly. Do not add explanations.'
+            md: 'You are a professional technical translator. Translate Simplified Chinese to Japanese. IMPORTANT: Provide ONLY the translated text with no introductions, explanations, or summaries. Do not change markdown syntax, code fences, inline code, front-matter keys, or link targets. Do not translate code blocks.',
+            code: 'You are a professional technical translator. Translate ONLY comments and string literals from Simplified Chinese to Japanese. IMPORTANT: Provide ONLY the translated code with no introductions or summaries. NEVER alter code tokens, identifiers, imports/exports, types, or file paths. Preserve formatting exactly.'
         }
     }
 };
