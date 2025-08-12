@@ -4,7 +4,7 @@ MaFormコンポーネントがdefineExposeを通じて公開するすべてのAP
 
 <DemoPreview dir="demos/ma-form/expose-methods" />
 
-## 機能特性
+## 機能特徴
 
 - **状態管理**: ローディング状態、レスポンシブ状態制御
 - **設定管理**: フォーム設定オプションの動的変更
@@ -34,7 +34,7 @@ const toggleLoading = () => {
 ### レスポンシブ状態管理
 
 ```typescript
-// モバイル状態かどうかをチェック
+// モバイル状態かどうかを確認
 const isMobile = formRef.value.isMobileState()
 
 // 手動でレスポンシブ状態を更新（ウィンドウサイズ変更時）
@@ -191,12 +191,12 @@ const updateMultipleFields = (updates: Record<string, Partial<MaFormItem>>) => {
 const replaceAllItems = () => {
   const newItems = [
     {
-      label: '新しいユーザー名',
+      label: '新規ユーザー名',
       prop: 'newUsername',
       render: 'input'
     },
     {
-      label: '新しいメールアドレス',
+      label: '新規メール',
       prop: 'newEmail', 
       render: 'input',
       renderProps: { type: 'email' }
@@ -289,11 +289,11 @@ const validateForm = async () => {
   try {
     const isValid = await formRef.value.validate()
     if (isValid) {
-      ElMessage.success('フォームバリデーション成功')
+      ElMessage.success('フォームバリデーションに成功')
       return true
     }
   } catch (error) {
-    ElMessage.error('フォームバリデーション失敗')
+    ElMessage.error('フォームバリデーションに失敗')
     console.error('バリデーションエラー:', error)
     return false
   }
@@ -333,10 +333,10 @@ const validateFormWithErrorHandling = async () => {
 const validateSingleField = async (prop: string) => {
   try {
     const isValid = await formRef.value.validateField(prop)
-    console.log(`フィールド ${prop} のバリデーション結果:`, isValid)
+    console.log(`フィールド ${prop} バリデーション結果:`, isValid)
     return isValid
   } catch (error) {
-    console.error(`フィールド ${prop} のバリデーション失敗:`, error)
+    console.error(`フィールド ${prop} バリデーション失敗:`, error)
     return false
   }
 }
@@ -379,7 +379,7 @@ const clearValidationErrors = () => {
   ElMessage.info('バリデーションエラーをクリアしました')
 }
 
-// 指定フィールドのバリデーションエラーをクリア  
+// 指定フィールドのエラーをクリア  
 const clearFieldErrors = (props: string[]) => {
   formRef.value.clearValidate(props)
 }
@@ -397,7 +397,7 @@ const getFormData = () => {
   return data
 }
 
-// 指定フィールドのデータを取得
+// 指定フィールドデータを取得
 const getFieldValue = (prop: string) => {
   const data = formRef.value.getFormData()
   return data[prop]
@@ -431,7 +431,7 @@ const setFormData = (data: Record<string, any>) => {
   ElMessage.success('データ設定に成功')
 }
 
-// 複数フィールドの値を設定
+// 複数フィールド値を一括設定
 const setMultipleFields = (fieldValues: Record<string, any>) => {
   const currentData = formRef.value.getFormData()
   formRef.value.setFormData({
@@ -462,7 +462,7 @@ const getElFormInstance = () => {
   }
 }
 
-// ネイティブインスタンスメソッドを使用
+// ネイティブメソッドの使用
 const useElFormMethods = () => {
   const elForm = formRef.value.getElFormRef()
   if (elForm) {
@@ -473,7 +473,7 @@ const useElFormMethods = () => {
 }
 ```
 
-## 総合アプリケーション例
+## 統合アプリケーション例
 
 ### フォーム動的管理
 
@@ -527,5 +527,5 @@ const formManager = {
 ## 関連リンク
 
 - [公開メソッド詳細](/ja/front/component/ma-form#公開メソッド-expose)
-- [MaFormExpose型定義](/ja/front/component/ma-form#maformexpose)
+- [MaFormExpose 型定義](/ja/front/component/ma-form#maformexpose)
 - [フォームバリデーションメソッド](/ja/front/component/ma-form#フォームバリデーション)

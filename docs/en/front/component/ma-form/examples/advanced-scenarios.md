@@ -4,10 +4,10 @@ Demonstrates complex applications of MaForm in real business scenarios, includin
 
 <DemoPreview dir="demos/ma-form/advanced-scenarios" />
 
-## Features
+## Feature Highlights
 
 - **Multi-step Forms**: Complex form workflows divided into steps
-- **Data Dictionary Integration**: Integration with backend data dictionary systems
+- **Data Dictionary Integration**: Integration with backend dictionary systems
 - **Permission Control**: Form field control based on user permissions
 - **Internationalization Support**: Multi-language form configuration
 - **Business Rule Engine**: Complex business logic processing
@@ -44,7 +44,7 @@ const stepFormConfig = {
     {
       title: 'Additional Information',
       key: 'additional',
-      description: 'Provide supplementary information',
+      description: 'Supplement other details',
       icon: 'Document'
     }
   ]
@@ -99,7 +99,7 @@ const getStepFormItems = (currentStep: number): MaFormItem[] => {
           if (!value) {
             callback(new Error('Please enter phone number'))
           } else if (!/^1[3-9]\d{9}$/.test(value)) {
-            callback(new Error('Please enter a valid phone number'))
+            callback(new Error('Please enter valid phone number'))
           } else {
             callback()
           }
@@ -138,12 +138,12 @@ const getStepFormItems = (currentStep: number): MaFormItem[] => {
     ],
     2: [ // Additional information step
       {
-        label: 'Biography',
+        label: 'Bio',
         prop: 'additional.bio',
         render: 'textarea',
         renderProps: {
           rows: 4,
-          placeholder: 'Enter personal bio',
+          placeholder: 'Enter bio',
           maxlength: 500,
           showWordLimit: true
         },
@@ -266,7 +266,7 @@ const stepValidationStrategy = {
 
 ## Data Dictionary Integration
 
-### 1. Data Dictionary Management
+### 1. Dictionary Management
 
 ```typescript
 interface DictionaryItem {
@@ -341,7 +341,7 @@ const dictionaryService = {
   // Clear dictionary cache
   clearCache: (code?: string) => {
     if (code) {
-      // Clear cache for specific dictionary
+      // Clear specific dictionary cache
       const keysToDelete = Array.from(this.cache.keys()).filter(key => key.startsWith(code))
       keysToDelete.forEach(key => this.cache.delete(key))
     } else {
@@ -372,7 +372,7 @@ const createDictionaryField = (config: {
       loading: true  // Initial loading state
     },
     renderSlots: {
-      default: () => [] // Initially empty, updated dynamically
+      default: () => [] // Initially empty, dynamically updated
     },
     
     // Load dictionary data when field mounts
@@ -631,7 +631,7 @@ const userFormPermissions: FieldPermission[] = [
     field: 'salary',
     permissions: { view: true, edit: true, required: false },
     conditions: {
-      roles: ['admin', 'hr'],  // Only admin and HR can edit salary
+      roles: ['admin', 'hr'],  // Only admins and HR can edit salary
     }
   },
   {
@@ -662,3 +662,4 @@ const dynamicPermissionManager = {
     )
   },
   
+  // Refresh form

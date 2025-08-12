@@ -1,12 +1,12 @@
 # 高度な応用シナリオ
 
-MaFormの実際のビジネスシナリオにおける複雑な応用を紹介します。マルチステップフォーム、データ辞書統合、権限制御、国際化などの高度な機能を含みます。
+MaFormの実際のビジネスシナリオにおける複雑な応用例を紹介します。マルチステップフォーム、データ辞書統合、権限制御、国際化などの高度な機能を含みます。
 
 <DemoPreview dir="demos/ma-form/advanced-scenarios" />
 
 ## 機能特性
 
-- **マルチステップフォーム**: ステップごとの複雑なフォームプロセス
+- **マルチステップフォーム**: ステップに分かれた複雑なフォームフロー
 - **データ辞書統合**: バックエンドのデータ辞書システムとの統合
 - **権限制御**: ユーザー権限に基づくフォームフィールド制御
 - **国際化サポート**: 多言語フォーム設定
@@ -89,17 +89,17 @@ const getStepFormItems = (currentStep: number): MaFormItem[] => {
     ],
     1: [ // 連絡先ステップ
       {
-        label: '携帯電話',
+        label: '電話番号',
         prop: 'contact.phone',
         render: 'input',
         renderProps: {
-          placeholder: '携帯電話番号を入力'
+          placeholder: '電話番号を入力'
         },
         customValidator: (rule, value, callback) => {
           if (!value) {
-            callback(new Error('携帯電話番号を入力してください'))
+            callback(new Error('電話番号を入力してください'))
           } else if (!/^1[3-9]\d{9}$/.test(value)) {
-            callback(new Error('有効な携帯電話番号を入力してください'))
+            callback(new Error('有効な電話番号を入力してください'))
           } else {
             callback()
           }
@@ -194,7 +194,7 @@ const stepFormController = {
     }
   },
   
-  // 指定ステップへ移動
+  // 指定ステップに移動
   goToStep: async (targetStep: number) => {
     // 現在のステップを検証
     const isValid = await formRef.value.validate()
@@ -251,7 +251,7 @@ const stepValidationStrategy = {
     }
   },
   
-  // ステップの完了状態を取得
+  // ステップの状態を取得
   getStepStatus: (stepIndex: number): 'wait' | 'process' | 'finish' | 'error' => {
     if (stepIndex < stepFormController.currentStep.value) {
       return 'finish'
@@ -312,7 +312,7 @@ const dictionaryService = {
     }
   },
   
-  // カスケード辞書データ取得
+  // カスケード辞書データを取得
   async getCascadeDictionary(
     config: DictionaryConfig, 
     parentValue: string | number
@@ -341,7 +341,7 @@ const dictionaryService = {
   // 辞書キャッシュをクリア
   clearCache: (code?: string) => {
     if (code) {
-      // 指定辞書のキャッシュをクリア
+      // 指定された辞書のキャッシュをクリア
       const keysToDelete = Array.from(this.cache.keys()).filter(key => key.startsWith(code))
       keysToDelete.forEach(key => this.cache.delete(key))
     } else {
@@ -351,7 +351,7 @@ const dictionaryService = {
   }
 }
 
-// 辞書フォームアイテムファクトリ
+// 辞書フォームフィールドファクトリ
 const createDictionaryField = (config: {
   label: string
   prop: string
@@ -496,7 +496,7 @@ const cascadeDictionaryFields = [
     prop: 'city',
     render: 'select',
     renderProps: {
-      placeholder: '先に都道府県を選択',
+      placeholder: '都道府県を先に選択',
       clearable: true,
       disabled: true  // 初期は無効
     },
@@ -527,7 +527,7 @@ interface FieldPermission {
   }
   conditions?: {
     roles?: string[]           // ロール条件
-    departments?: string[]     // 部門条件
+    departments?: string[]     // 部署条件
     customCheck?: () => boolean // カスタム条件
   }
 }
@@ -566,7 +566,7 @@ const permissionService = {
         edit = false
       }
       
-      // 部門チェック
+      // 部署チェック
       if (departments && !departments.includes(user.department)) {
         view = false
         edit = false
@@ -597,4 +597,5 @@ const permissionService = {
       return {
         ...item,
         show: visible,
-        renderProps
+        renderProps: {
+         

@@ -1,7 +1,8 @@
+```typescript
 import type {DefaultTheme} from "vitepress";
 
 const sidebar:DefaultTheme.Sidebar = {
-  '/en/guide/': [
+  '/zh/guide/': [
     {
       text: 'Introduction',
       items: [
@@ -85,7 +86,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text: 'Intermediate',
+      text: 'Advanced',
       items: [
         {
           text: 'System Configuration',
@@ -126,10 +127,10 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text: 'Advanced',
+      text: 'Expert',
       items: [
         {
-          text: 'Internationalization',
+          text: 'i18n Configuration',
           link: '/en/front/high/i18n'
         },
         {
@@ -149,7 +150,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/en/front/high/plugins'
         },
         {
-          text: 'JSX/TSX Development',
+          text: 'JSX & TSX Development',
           link: '/en/front/high/tsx'
         }
       ],
@@ -247,8 +248,8 @@ const sidebar:DefaultTheme.Sidebar = {
         { text: "Error Handling",link: "/en/backend/base/error-handler"},
         {text: "Logging",link: "/en/backend/base/logger"},
         {text: "Events",link: "/en/backend/base/event-handler"},
-        {text: "File Upload",link: "/en/backend/base/upload"},
-        {text: "Internationalization",link: "/en/backend/base/lang"},
+        {text: "File Uploads",link: "/en/backend/base/upload"},
+        {text: "i18n",link: "/en/backend/base/lang"},
       ]
     },
     {
@@ -346,7 +347,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"Publishing",
       items:[
         {
-          text: "Application Release",
+          text: "App Publishing",
           link: "/en/plugin/develop/publish"
         },
         {
@@ -359,3 +360,4 @@ const sidebar:DefaultTheme.Sidebar = {
 }
 
 export default sidebar
+```

@@ -8,8 +8,8 @@ Demonstrates various loading state configurations for MaForm, including global l
 
 - **Multi-level Loading Control**: Supports global and partial loading states
 - **Custom Loading Styles**: Supports custom loading icons, text, colors, etc.
-- **Dynamic Loading States**: Supports runtime switching of loading states
-- **Loading Mask Configuration**: Configurable background mask, scroll lock, etc.
+- **Dynamic Loading States**: Supports runtime dynamic switching of loading states
+- **Loading Mask Configuration**: Configurable background mask, scroll locking, etc.
 - **Loading Slot Support**: Supports fully customizable loading content
 
 ## Basic Loading Configuration
@@ -228,7 +228,7 @@ const applyThemeLoading = (theme: 'light' | 'dark') => {
   render: 'input',
   renderProps: {
     loading: false,  // Field-level loading state
-    placeholder: 'Async validation will trigger after input'
+    placeholder: 'Async validation will occur after input'
   },
   asyncValidator: async (rule, value) => {
     // Show loading when validation starts
@@ -500,7 +500,7 @@ const getResponsiveLoadingConfig = () => {
   }
 }
 
-// Watch responsive changes to update loading configuration
+// Update loading configuration on responsive changes
 watch(() => formRef.value?.isMobileState(), (isMobile) => {
   if (formRef.value) {
     const loadingConfig = getResponsiveLoadingConfig()

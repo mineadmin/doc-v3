@@ -48,7 +48,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link:"/ja/guide/upgrade"
         },
         {
-          text:"貢献ガイド",
+          text:"コントリビューションガイド",
           link:"/ja/guide/contributions"
         }
       ]
@@ -133,7 +133,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/ja/front/high/i18n'
         },
         {
-          text: 'サービスプロバイダー',
+          text: 'サービスプロバイダ',
           link: '/ja/front/high/provider'
         },
         {
@@ -259,7 +259,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/ja/backend/security/passport"
         },
         {
-          text: "ユーザー認可(RBAC)",
+          text: "ユーザー権限(RBAC)",
           link: "/ja/backend/security/access"
         },
         {
@@ -337,7 +337,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"フロントエンド開発",
       items:[
         {
-          text: "フロントエンド開発規約",
+          text: "フロントエンド開発規範",
           link: "/ja/plugin/front/develop"
         }
       ]

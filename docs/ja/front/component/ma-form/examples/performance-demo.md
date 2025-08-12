@@ -6,23 +6,23 @@ MaFormの大規模フォームや複雑なシナリオにおけるパフォー�
 
 ## 機能特徴
 
-- **大規模フォーム最適化**：数百のフォーム項目を処理するパフォーマンス最適化
+- **大規模フォーム最適化**：数百のフォーム項目を処理するためのパフォーマンス最適化
 - **仮想スクロール**：長いリストフォームの仮想スクロール実装
 - **遅延読み込みメカニズム**：必要に応じてフォーム項目とデータを読み込み
-- **キャッシュ戦略**：インテリジェントキャッシュで応答速度向上
+- **キャッシュ戦略**：インテリジェントキャッシュによる応答速度向上
 - **レンダリング最適化**：不要な再レンダリングを削減
 - **メモリ管理**：メモリ使用を効果的に制御
 
 ## 大規模フォームのパフォーマンス最適化
 
-### 1. ページング読み込み戦略
+### 1. ページ分割読み込み戦略
 
 ```typescript
 interface FormPageConfig {
-  pageSize: number        // ページあたりのフォーム項目数
+  pageSize: number        // 1ページあたりのフォーム項目数
   currentPage: number     // 現在のページ番号
-  totalItems: number      // 総フォーム項目数
-  preloadPages: number    // 事前読み込みページ数
+  totalItems: number      // フォーム項目総数
+  preloadPages: number    // プリロードするページ数
 }
 
 const largeFormManager = {
@@ -36,7 +36,7 @@ const largeFormManager = {
   allFormItems: [] as MaFormItem[],
   loadedPages: new Set<number>(),
   
-  // 大規模フォーム初期化
+  // 大規模フォームの初期化
   async initLargeForm(totalItems: number) {
     this.pageConfig.value.totalItems = totalItems
     this.allFormItems = await this.generateLargeFormItems(totalItems)
@@ -45,17 +45,17 @@ const largeFormManager = {
     await this.loadPage(1)
   },
   
-  // 大量のフォーム項目生成
+  // 大量のフォーム項目を生成
   async generateLargeFormItems(count: number): Promise<MaFormItem[]> {
     const items: MaFormItem[] = []
     
     for (let i = 1; i <= count; i++) {
       items.push({
-        label: `項目 ${i}`,
+        label: `フィールド ${i}`,
         prop: `field_${i}`,
         render: this.getRandomRenderType(),
         renderProps: {
-          placeholder: `項目 ${i} を入力してください`,
+          placeholder: `フィールド ${i} を入力してください`,
           clearable: true
         },
         cols: { xs: 24, sm: 12, md: 8, lg: 6 },
@@ -68,7 +68,7 @@ const largeFormManager = {
     return items
   },
   
-  // ランダムなレンダリングタイプ選択
+  // ランダムにレンダリングタイプを選択
   getRandomRenderType(): string {
     const types = ['input', 'select', 'datePicker', 'inputNumber', 'textarea', 'switch']
     return types[Math.floor(Math.random() * types.length)]
@@ -90,7 +90,7 @@ const largeFormManager = {
     })
     
     this.loadedPages.add(page)
-    console.log(`ページ ${page} を読み込みました、${pageItems.length} 項目を含みます`)
+    console.log(`ページ ${page} を読み込みました。${pageItems.length} 個のフォーム項目を含みます`)
   },
   
   // スクロールでさらに読み込み
@@ -104,7 +104,7 @@ const largeFormManager = {
     }
   },
   
-  // 次のページを事前読み込み
+  // 次のページをプリロード
   async preloadNext() {
     const { currentPage, preloadPages } = this.pageConfig.value
     for (let i = 1; i <= preloadPages; i++) {
@@ -113,7 +113,7 @@ const largeFormManager = {
   }
 }
 
-// 無限読み込みのスクロール監視実装
+// 無限読み込みのスクロール監視を設定
 const setupInfiniteLoading = () => {
   const scrollContainer = document.querySelector('.ma-form-container')
   if (!scrollContainer) return
@@ -127,7 +127,7 @@ const setupInfiniteLoading = () => {
       largeFormManager.loadMore()
     }
     
-    // 70%スクロール時に事前読み込み
+    // 70%スクロール時にプリロード
     if (scrollPercentage > 0.7) {
       largeFormManager.preloadNext()
     }
@@ -141,7 +141,7 @@ const setupInfiniteLoading = () => {
 }
 ```
 
-### 2. 仮想スクロール実装
+### 2. 仮想スクロールの実装
 
 ```typescript
 interface VirtualScrollConfig {
@@ -215,9 +215,9 @@ const virtualScrollManager = {
 }
 ```
 
-## 遅延読み込み最適化
+## 遅延読み込みの最適化
 
-### 1. フィールド遅延読み込み
+### 1. フィールドの遅延読み込み
 
 ```typescript
 const lazyLoadManager = {
@@ -239,7 +239,7 @@ const lazyLoadManager = {
     })
   },
   
-  // フィールド遅延読み込みをトリガー
+  // フィールドの遅延読み込みをトリガー
   async triggerLazyLoad(fieldProp: string) {
     const config = this.lazyConfig.get(fieldProp)
     if (!config || config.loading || config.loaded) return
@@ -256,11 +256,11 @@ const lazyLoadManager = {
       config.data = data
       config.loaded = true
       
-      // 遅延データでフィールド設定を更新
+      // 遅延読み込みデータでフィールドを更新
       this.updateFieldWithLazyData(fieldProp, data)
       
     } catch (error) {
-      console.error(`フィールド ${fieldProp} の遅延読み込みに失敗:`, error)
+      console.error(`フィールド ${fieldProp} の遅延読み込みに失敗しました:`, error)
     } finally {
       config.loading = false
       formRef.value?.updateItem(fieldProp, {
@@ -308,7 +308,7 @@ const createLazyLoadFields = (): MaFormItem[] => [
     renderSlots: {
       default: () => [h('el-option', { label: 'クリックして読み込み...', value: '', disabled: true })]
     },
-    // フィールドフォーカス時に遅延読み込み
+    // フィールドがフォーカスされた時に遅延読み込み
     onFocus: () => {
       lazyLoadManager.triggerLazyLoad('city')
     }
@@ -321,7 +321,7 @@ const createLazyLoadFields = (): MaFormItem[] => [
       placeholder: '部門を選択',
       options: []
     },
-    // フィールドマウント時に遅延読み込み
+    // フィールドがマウントされた時に遅延読み込み
     onMounted: () => {
       lazyLoadManager.triggerLazyLoad('department')
     }
@@ -345,7 +345,7 @@ const setupLazyLoaders = () => {
 }
 ```
 
-### 2. 画像遅延読み込み
+### 2. 画像の遅延読み込み
 
 ```typescript
 const imageLazyLoader = {
@@ -414,13 +414,13 @@ interface CacheItem<T = any> {
   data: T
   timestamp: number
   ttl: number           // 生存時間（ミリ秒）
-  hitCount: number      // ヒット回数
+  hitCount: number      // ヒット数
 }
 
 class MultiLevelCache {
   private l1Cache = new Map<string, CacheItem>()  // メモリキャッシュ（高速）
-  private l2Cache: LocalStorage                   // ローカルストレージキャッシュ（永続的）
-  private maxL1Size = 100                         // L1キャッシュ最大エントリ数
+  private l2Cache: LocalStorage                   // ローカルストレージキャッシュ（永続）
+  private maxL1Size = 100                         // L1キャッシュの最大エントリ数
   private defaultTTL = 5 * 60 * 1000             // デフォルト5分TTL
   
   constructor() {
@@ -451,7 +451,7 @@ class MultiLevelCache {
           return l2Item.data
         }
       } catch (error) {
-        console.warn(`L2キャッシュ解析失敗: ${key}`, error)
+        console.warn(`L2キャッシュの解析に失敗しました: ${key}`, error)
       }
     }
     
@@ -474,7 +474,7 @@ class MultiLevelCache {
     try {
       this.l2Cache.setItem(key, JSON.stringify(cacheItem))
     } catch (error) {
-      console.warn(`L2キャッシュ設定失敗: ${key}`, error)
+      console.warn(`L2キャッシュの設定に失敗しました: ${key}`, error)
     }
   }
   
@@ -493,7 +493,7 @@ class MultiLevelCache {
     })
   }
   
-  // L1キャッシュ退避戦略（LFU - 最少使用頻度）
+  // L1キャッシュのエビクション戦略（LFU - 最も使用頻度が低いもの）
   private evictL1Cache() {
     let minHitCount = Infinity
     let evictKey = ''
@@ -519,18 +519,14 @@ class MultiLevelCache {
   clearExpired() {
     const now = Date.now()
     
-    // L1期限切れキャッシュをクリア
+    // L1の期限切れキャッシュをクリア
     for (const [key, item] of this.l1Cache) {
       if (this.isExpired(item)) {
         this.l1Cache.delete(key)
       }
     }
     
-    // L2期限切れキャッシュをクリア
+    // L2の期限切れキャッシュをクリア
     for (let i = localStorage.length - 1; i >= 0; i--) {
       const key = localStorage.key(i)
-      if (key) {
-        try {
-          const item = JSON.parse(localStorage.getItem(key) || '{}')
-          if (item.timestamp && this.isExpired(item)) {
-           
+     

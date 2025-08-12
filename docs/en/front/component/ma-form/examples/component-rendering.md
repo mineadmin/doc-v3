@@ -1,13 +1,13 @@
 # Component Rendering
 
-Demonstrates all Element Plus component rendering methods supported by MaForm, including input, selection, date, and special components.
+Demonstrates all Element Plus component rendering methods supported by MaForm, including input types, selection types, date types, and special components.
 
 <DemoPreview dir="demos/ma-form/component-rendering" />
 
 ## Features
 
 - **Comprehensive Support**: Supports all Element Plus form components
-- **Multiple Rendering Methods**: String, component, and function-based rendering
+- **Multiple Rendering Methods**: Three rendering methods - string, component, and function
 - **Slot Support**: Complete slot system support
 - **Property Passing**: Pass component properties via renderProps
 - **Event Handling**: Supports all native component events
@@ -30,7 +30,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 }
 ```
 
-### Number Input
+### InputNumber Field
 ```typescript
 {
   label: 'Quantity',
@@ -47,7 +47,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 }
 ```
 
-### Textarea
+### Textarea Field
 ```typescript
 {
   label: 'Description',
@@ -66,7 +66,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 
 ## Selection Components
 
-### Select
+### Select Field
 ```typescript
 {
   label: 'City',
@@ -90,7 +90,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 }
 ```
 
-### Cascader
+### Cascader Field
 ```typescript
 {
   label: 'Region',
@@ -102,8 +102,8 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
         value: 'guangdong',
         label: 'Guangdong Province',
         children: [
-          { value: 'guangzhou', label: 'Guangzhou' },
-          { value: 'shenzhen', label: 'Shenzhen' }
+          { value: 'guangzhou', label: 'Guangzhou City' },
+          { value: 'shenzhen', label: 'Shenzhen City' }
         ]
       }
     ],
@@ -119,7 +119,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 }
 ```
 
-### Radio Group
+### RadioGroup Field
 ```typescript
 {
   label: 'Gender',
@@ -140,7 +140,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 }
 ```
 
-### Checkbox Group
+### CheckboxGroup Field
 ```typescript
 {
   label: 'Hobbies',
@@ -163,7 +163,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 
 ## Date & Time Components
 
-### Date Picker
+### DatePicker Field
 ```typescript
 {
   label: 'Birth Date',
@@ -195,7 +195,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 }
 ```
 
-### Time Picker
+### TimePicker Field
 ```typescript
 {
   label: 'Time',
@@ -211,7 +211,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 }
 ```
 
-### DateTime Picker
+### DateTimePicker Field
 ```typescript
 {
   label: 'Appointment Time',
@@ -231,10 +231,10 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 
 ## Special Components
 
-### Switch
+### Switch Field
 ```typescript
 {
-  label: 'Enabled',
+  label: 'Enabled Status',
   prop: 'enabled',
   render: 'switch',
   renderProps: {
@@ -255,7 +255,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 }
 ```
 
-### Rate
+### Rate Field
 ```typescript
 {
   label: 'Rating',
@@ -267,13 +267,13 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
     showText: true,
     showScore: true,
     scoreTemplate: '{value} points',
-    texts: ['Terrible', 'Disappointed', 'Normal', 'Satisfied', 'Surprised'],
+    texts: ['Very Poor', 'Disappointed', 'Average', 'Satisfied', 'Surprised'],
     colors: ['#99A9BF', '#F7BA2A', '#FF9900']
   }
 }
 ```
 
-### Slider
+### Slider Field
 ```typescript
 {
   label: 'Progress',
@@ -299,7 +299,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 }
 ```
 
-### Upload
+### Upload Field
 ```typescript
 {
   label: 'File Upload',
@@ -397,7 +397,7 @@ import CustomComponent from './CustomComponent.vue'
     <div class="jsx-field">
       <el-input
         v-model={model[item.prop]}
-        placeholder="JSX rendering"
+        placeholder="JSX rendered input"
         clearable
         v-slots={{
           append: () => <el-button icon="Search">Search</el-button>
@@ -422,13 +422,13 @@ import CustomComponent from './CustomComponent.vue'
       console.log('Selection changed:', value)
     },
     onFocus: () => {
-      console.log('Focused')
+      console.log('Got focus')
     },
     onBlur: () => {
-      console.log('Blurred')
+      console.log('Lost focus')
     },
     onClear: () => {
-      console.log('Cleared')
+      console.log('Selection cleared')
     }
   }
 }

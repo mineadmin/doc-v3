@@ -9,7 +9,7 @@ Demonstrates MaForm's responsive features on mobile devices, including breakpoin
 - **Breakpoint Responsiveness**: Automatically adapts layout based on screen size
 - **Mobile Optimization**: Special optimizations for mobile devices
 - **Touch-Friendly**: Interaction design optimized for touch operations
-- **Device Recognition**: Automatically detects mobile devices and applies corresponding configurations
+- **Device Detection**: Automatically identifies mobile devices and applies corresponding configurations
 - **Flexible Configuration**: Supports mobile-specific field configurations
 
 ## Responsive Breakpoint System
@@ -58,7 +58,7 @@ const responsiveFormItems = [
     }
   },
   {
-    label: 'Email Address',
+    label: 'Email',
     prop: 'email',
     render: 'input',
     renderProps: {
@@ -73,7 +73,7 @@ const responsiveFormItems = [
     }
   },
   {
-    label: 'Phone Number',
+    label: 'Phone',
     prop: 'phone',
     render: 'input',
     cols: {
@@ -99,7 +99,7 @@ const responsiveFormItems = [
 ```typescript
 const mobileOptimizedFields = [
   {
-    label: 'Mobile Number',
+    label: 'Mobile',
     prop: 'mobile',
     render: 'input',
     renderProps: {
@@ -222,7 +222,7 @@ const mobileLayoutConfig = {
   }
 }
 
-// Manual control of mobile layout
+// Manually control mobile layout
 const isMobileLayout = computed(() => {
   return formRef.value?.isMobileState() || false
 })
@@ -252,7 +252,7 @@ const mobileSizedFields = [
       size: 'default'  // Default size on desktop
     },
     mobileProps: {
-      size: 'large'    // Large size on mobile for better touch
+      size: 'large'    // Larger size on mobile for better touch
     }
   },
   {
@@ -292,7 +292,7 @@ const mobileSizedFields = [
 ```typescript
 const touchFriendlyFields = [
   {
-    label: 'Slider Control',
+    label: 'Slider',
     prop: 'slider',
     render: 'slider',
     renderProps: {
@@ -342,30 +342,30 @@ const touchFriendlyFields = [
 ```typescript
 const mobileUploadField = {
   label: 'File Upload',
-    prop: 'files',
-    render: 'upload',
-    renderProps: {
-      action: '/api/upload',
-      listType: 'picture-card',
-      multiple: true
-    },
-    mobileProps: {
-      listType: 'picture',     // Use list style on mobile
-      drag: false,             // Disable drag
-      showFileList: true,
-      accept: 'image/*',       // Access camera/photo library
-      capture: 'environment'   // Specify camera type
-    },
-    renderSlots: {
-      trigger: () => {
-        const isMobile = window.innerWidth < 768
-        return h('el-button', {
-          type: 'primary',
-          size: isMobile ? 'large' : 'default',
-          icon: isMobile ? 'Camera' : 'Upload'
-        }, isMobile ? 'Take Photo/Select Image' : 'Select File')
-      }
+  prop: 'files',
+  render: 'upload',
+  renderProps: {
+    action: '/api/upload',
+    listType: 'picture-card',
+    multiple: true
+  },
+  mobileProps: {
+    listType: 'picture',     // Use list style on mobile
+    drag: false,             // Disable drag
+    showFileList: true,
+    accept: 'image/*',       // Access camera/photo library
+    capture: 'environment'   // Specify camera type
+  },
+  renderSlots: {
+    trigger: () => {
+      const isMobile = window.innerWidth < 768
+      return h('el-button', {
+        type: 'primary',
+        size: isMobile ? 'large' : 'default',
+        icon: isMobile ? 'Camera' : 'Upload'
+      }, isMobile ? 'Take Photo/Select Image' : 'Select File')
     }
+  }
 }
 ```
 
@@ -423,7 +423,7 @@ const adaptFormToDevice = () => {
 ### 2. Screen Orientation Change Handling
 
 ```typescript
-// Listen for screen orientation changes
+// Listen for orientation changes
 const handleOrientationChange = () => {
   const isPortrait = window.innerHeight > window.innerWidth
   
@@ -433,7 +433,7 @@ const handleOrientationChange = () => {
       ...options,
       responsiveConfig: {
         ...options.responsiveConfig,
-        mobileHideLabels: isPortrait,  // Hide labels in portrait mode
+        mobileHideLabels: isPortrait,  // Hide labels in portrait
         mobileSingleColumn: true
       }
     }))
@@ -466,7 +466,7 @@ const pwaFormConfig = {
     enabled: true,
     mobileSingleColumn: true,
     breakpoints: {
-      xs: 320,   // Minimum phone screen
+      xs: 320,   // Smallest phone screen
       sm: 768,   // Tablet portrait
       md: 1024,  // Tablet landscape
       lg: 1440,  // Desktop
@@ -549,7 +549,7 @@ const mobilePerformanceOptimization = {
       })
     })
     
-    // Observe images in the form
+    // Observe images in form
     const images = document.querySelectorAll('img[data-src]')
     images.forEach(img => observer.observe(img))
   }
@@ -600,5 +600,5 @@ const responsiveTestUtils = {
 ## Related Links
 
 - [Layout System - Responsive Configuration](/en/front/component/ma-form/examples/layout-systems#responsive-system)
-- [ResponsiveConfig Configuration](/en/front/component/ma-form#responsiveconfig-responsive-configuration)
+- [ResponsiveConfig Settings](/en/front/component/ma-form#responsiveconfig-settings)
 - [Mobile Configuration Options](/en/front/component/ma-form#mobile-configuration)

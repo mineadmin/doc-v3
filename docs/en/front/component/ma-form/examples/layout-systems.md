@@ -45,9 +45,9 @@ const formItem = {
     // Responsive configuration
     xs: 24,          // Extra small screens: full width
     sm: 12,          // Small screens: half width
-    md: 8,           // Medium screens: one third
-    lg: 6,           // Large screens: one quarter
-    xl: 4            // Extra large screens: one sixth
+    md: 8,           // Medium screens: one-third
+    lg: 6,           // Large screens: one-quarter
+    xl: 4            // Extra large screens: one-sixth
   }
 }
 ```
@@ -81,7 +81,7 @@ const formOptions = {
 ### Breakpoint Definitions
 
 | Breakpoint | Device Type | Width Range | Recommended Columns |
-|------------|-------------|-------------|----------------------|
+|------------|-------------|-------------|---------------------|
 | `xs` | Mobile Portrait | < 768px | 1 column |
 | `sm` | Mobile Landscape/Small Tablet | ≥ 768px | 1-2 columns |
 | `md` | Tablet | ≥ 992px | 2-3 columns |
@@ -97,12 +97,12 @@ const responsiveField = {
   prop: 'title',
   render: 'input',
   cols: {
-    // Mobile first
+    // Mobile-first
     xs: { span: 24 },                    // Mobile: full width
-    sm: { span: 12, offset: 0 },         // Small screen: two columns per row
-    md: { span: 8, offset: 0 },          // Medium screen: three columns per row  
-    lg: { span: 6, offset: 0 },          // Large screen: four columns per row
-    xl: { span: 4, offset: 2 }           // Extra large: six columns per row with left margin
+    sm: { span: 12, offset: 0 },         // Small screens: two columns
+    md: { span: 8, offset: 0 },          // Medium screens: three columns  
+    lg: { span: 6, offset: 0 },          // Large screens: four columns
+    xl: { span: 4, offset: 2 }           // Extra large: six columns with left margin
   }
 }
 
@@ -148,19 +148,19 @@ const simpleForm = {
 const threeColumnLayout = {
   cols: {
     xs: 24,    // Mobile: single column
-    sm: 24,    // Small screen: single column
-    md: 8,     // Medium screen: three columns
-    lg: 8,     // Large screen: three columns
-    xl: 8      // Extra large screen: three columns
+    sm: 24,    // Small screens: single column
+    md: 8,     // Medium screens: three columns
+    lg: 8,     // Large screens: three columns
+    xl: 8      // Extra large screens: three columns
   }
 }
 
 // Primary-secondary layout
 const primarySecondaryLayout = {
-  // Primary field
+  // Primary fields
   cols: { xs: 24, sm: 16, md: 12, lg: 16 },
   
-  // Secondary field
+  // Secondary fields
   cols: { xs: 24, sm: 8, md: 6, lg: 8 }
 }
 ```
@@ -180,6 +180,6 @@ const mobileOptimized = {
 
 ## Related Links
 
-- [Layout System Details](/en/front/component/ma-form#布局系统详解)
-- [Responsive Configuration](/en/front/component/ma-form#responsiveconfig-响应式配置)
+- [Layout System Details](/en/front/component/ma-form#layout-system-details)
+- [Responsive Configuration](/en/front/component/ma-form#responsiveconfig-responsive-configuration)
 - [Mobile Adaptation](/en/front/component/ma-form/examples/mobile-responsive)

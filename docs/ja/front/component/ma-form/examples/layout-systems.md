@@ -1,6 +1,6 @@
 # レイアウトシステム
 
-MaFormの2つのレイアウトシステム：FlexグリッドレイアウトとGridスペーシングレイアウト、およびレスポンシブデザインの実装を紹介します。
+MaFormの2つのレイアウトシステム：FlexグリッドレイアウトとGridスペースレイアウト、およびレスポンシブデザインの実装を紹介します。
 
 <DemoPreview dir="demos/ma-form/layout-systems" />
 
@@ -8,7 +8,7 @@ MaFormの2つのレイアウトシステム：Flexグリッドレイアウトと
 
 - **デュアルレイアウトシステム**：FlexとGridの2つのレイアウト方式をサポート
 - **レスポンシブグリッド**：Element Plusグリッドシステムに基づくレスポンシブレイアウト
-- **ブレークポイント適応**：xs、sm、md、lg、xlの5つのブレークポイントをサポート
+- **ブレークポイント対応**：xs、sm、md、lg、xlの5つのブレークポイントをサポート
 - **柔軟な設定**：各フォーム項目ごとにレイアウトプロパティを個別に設定可能
 - **モバイル最適化**：モバイル端末では自動的にシングルカラムレイアウトに切り替え
 
@@ -37,24 +37,24 @@ const formItem = {
   render: 'input',
   cols: {
     span: 12,        // 12列を占有（合計24列）
-    offset: 0,       // 左側の間隔列数
+    offset: 0,       // 左側のオフセット列数
     push: 0,         // 右方向への移動列数
     pull: 0,         // 左方向への移動列数
     order: 1,        // ソート優先順位
     
     // レスポンシブ設定
-    xs: 24,          // 超小画面：1行全体
-    sm: 12,          // 小画面：半分
-    md: 8,           // 中画面：3分の1
-    lg: 6,           // 大画面：4分の1
-    xl: 4            // 超大画面：6分の1
+    xs: 24,          // 超小画面：1行占有
+    sm: 12,          // 小画面：半分を占有
+    md: 8,           // 中画面：3分の1を占有
+    lg: 6,           // 大画面：4分の1を占有
+    xl: 4            // 超大画面：6分の1を占有
   }
 }
 ```
 
 ## Gridレイアウト
 
-Element Plusの`el-space`を利用したスペーシングレイアウト：
+Element Plusの`el-space`を利用したスペースレイアウト：
 
 ### 基本設定
 ```typescript
@@ -65,7 +65,7 @@ const formOptions = {
     size: 'large',           // スペースサイズ：small | default | large
     wrap: true,              // 折り返し有無
     fill: true,              // コンテナ幅を埋めるかどうか
-    fillRatio: 30,           // 埋める比率
+    fillRatio: 30,           // 埋め込み比率
     alignment: 'start'       // 配置方法
   }
 }
@@ -73,7 +73,7 @@ const formOptions = {
 
 ### 適用シナリオ
 - **垂直フォーム**：項目が少ないシンプルなフォーム
-- **動的フォーム**：項目数が不確定なフォーム
+- **動的フォーム**：項目数が不定のフォーム
 - **コンパクトレイアウト**：スペースを節約したい場面
 
 ## レスポンシブシステム
@@ -98,7 +98,7 @@ const responsiveField = {
   render: 'input',
   cols: {
     // モバイルファースト
-    xs: { span: 24 },                    // スマートフォン：1行全体
+    xs: { span: 24 },                    // スマートフォン：1行占有
     sm: { span: 12, offset: 0 },         // 小画面：1行2列
     md: { span: 8, offset: 0 },          // 中画面：1行3列  
     lg: { span: 6, offset: 0 },          // 大画面：1行4列
@@ -141,7 +141,7 @@ const simpleForm = {
 }
 ```
 
-### 2. グリッドの合理的な計画
+### 2. グリッドの適切な計画
 
 ```typescript
 // 標準3列レイアウト
@@ -172,7 +172,7 @@ const mobileOptimized = {
   mobileBreakpoint: 768,
   responsiveConfig: {
     enabled: true,
-    mobileSingleColumn: true,      // モバイル端末で1列
+    mobileSingleColumn: true,      // モバイルで1列
     mobileHideLabels: false        // ラベル表示を保持
   }
 }
@@ -182,4 +182,4 @@ const mobileOptimized = {
 
 - [レイアウトシステム詳細](/ja/front/component/ma-form#レイアウトシステム詳細)
 - [レスポンシブ設定](/ja/front/component/ma-form#responsiveconfig-レスポンシブ設定)
-- [モバイル適応](/ja/front/component/ma-form/examples/mobile-responsive)
+- [モバイル対応](/ja/front/component/ma-form/examples/mobile-responsive)

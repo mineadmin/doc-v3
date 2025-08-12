@@ -1,63 +1,66 @@
-# 条件付きレンダリング
+# 条件レンダリング
 
-フォームデータに基づいてフィールドの表示/非表示を動的に制御する条件付きレンダリング機能を紹介します。連動表示や複雑な条件判断を含みます。
+フォームデータに基づいてフィールドの表示/非表示を動的に制御する条件レンダリング機能を紹介します。連動表示や複雑な条件判定も含みます。
 
 <DemoPreview dir="demos/ma-form/conditional-rendering" />
 
 ## 機能特徴
 
-- **動的表示制御**：フォームデータに基づいてフィールドの表示/非表示を制御
-- **依存関係管理**：dependenciesでフィールド間の依存関係を宣言
-- **複雑条件サポート**：複数条件の組み合わせ判断をサポート
-- **パフォーマンス最適化**：依存フィールド変更時のみ条件を再計算
-- **show vs hide**：2種類の制御方式を提供
+- **動的表示制御**: フォームデータに基づいてフィールドの表示/非表示を制御
+- **依存関係管理**: dependenciesでフィールド間の依存関係を宣言
+- **複雑条件サポート**: 複数条件の組み合わせ判定に対応
+- **パフォーマンス最適化**: 依存フィールド変更時のみ条件を再計算
+- **2つのレンダリング方式**: showとhide属性で異なる表示制御戦略を提供
 
-## 条件付きレンダリング方法
+## 条件レンダリング方法
 
-### 1. show属性（推奨）
-条件を満たさない場合コンポーネントをレンダリングせず、DOMスペースを占有しないためパフォーマンス向上：
+MaFormでは2種類の条件レンダリング方法を提供しています:
+
+### show属性（推奨）
+
+条件を満たさない場合DOMをレンダリングしないため、最高のパフォーマンスを発揮します:
 
 ```typescript
 {
   label: '企業名',
   prop: 'companyName',
   render: 'input',
-  show: (model, item) => model.userType === 'company',
+  show: (item, model) => model.userType === 'company',
   dependencies: ['userType']
 }
 ```
 
-### 2. hide属性
-条件を満たさない場合コンポーネントを非表示にするが、DOMスペースは占有：
+**特徴:**
+- ✅ DOMをレンダリングしないため最高のパフォーマンス
+- ✅ ページスペースを占有しない
+- ✅ ほとんどのシナリオに適している
+- ⚠️ 初期化時にわずかなちらつきが発生する可能性あり
+
+### hide属性
+
+条件を満たさない場合DOMを非表示にするがレンダリングは行います。頻繁に切り替わるシナリオに適しています:
 
 ```typescript
 {
-  label: '個人情報', 
-  prop: 'personalInfo',
-  render: 'input',
-  hide: (model, item) => model.userType === 'company',
-  dependencies: ['userType']
-}
-```
-
-### 3. when条件関数
-より柔軟な条件判断方式：
-
-```typescript
-{
-  label: '詳細オプション',
-  prop: 'advancedOptions',
+  label: 'メール通知',
+  prop: 'emailNotifications', 
   render: 'switch',
-  when: (model, item) => {
-    return model.userLevel === 'advanced' && model.isVip === true
-  },
-  dependencies: ['userLevel', 'isVip']
+  hide: (item, model) => !model.enableNotifications,
+  dependencies: ['enableNotifications']
 }
 ```
 
-## 一般的な使用シナリオ
+**特徴:**
+- ✅ スムーズな切り替え、ちらつきなし
+- ✅ フォーム構造を安定させる
+- ❌ DOMはレンダリングされる
+- ❌ ページスペースを占有する
 
-### 1. タイプ連動表示
+## 使用シナリオ比較
+
+### show属性の使用例
+
+**1. ユーザータイプに応じたフィールド表示**
 
 ```typescript
 const userTypeFields = [
@@ -65,41 +68,29 @@ const userTypeFields = [
     label: 'ユーザータイプ',
     prop: 'userType',
     render: 'select',
-    renderProps: {
-      placeholder: 'ユーザータイプを選択'
-    },
-    renderSlots: {
-      default: () => [
-        h('el-option', { label: '個人ユーザー', value: 'personal' }),
-        h('el-option', { label: '企業ユーザー', value: 'company' })
-      ]
-    }
+    options: [
+      { label: '個人ユーザー', value: 'personal' },
+      { label: '企業ユーザー', value: 'company' }
+    ]
   },
   {
-    label: '本名',
+    label: '本名', 
     prop: 'realName',
     render: 'input',
-    show: (model) => model.userType === 'personal',
+    show: (item, model) => model.userType === 'personal',
     dependencies: ['userType']
   },
   {
     label: '企業名',
-    prop: 'companyName',
+    prop: 'companyName', 
     render: 'input',
-    show: (model) => model.userType === 'company',
-    dependencies: ['userType']
-  },
-  {
-    label: '統一社会信用コード',
-    prop: 'creditCode',
-    render: 'input',
-    show: (model) => model.userType === 'company',
+    show: (item, model) => model.userType === 'company',
     dependencies: ['userType']
   }
 ]
 ```
 
-### 2. 権限レベル制御
+**2. 権限レベル制御**
 
 ```typescript
 const permissionFields = [
@@ -107,149 +98,255 @@ const permissionFields = [
     label: 'ユーザー権限',
     prop: 'permission',
     render: 'select',
-    renderSlots: {
-      default: () => [
-        h('el-option', { label: '一般ユーザー', value: 'user' }),
-        h('el-option', { label: '管理者', value: 'admin' }),
-        h('el-option', { label: 'スーパー管理者', value: 'superAdmin' })
-      ]
-    }
+    options: [
+      { label: '一般ユーザー', value: 'user' },
+      { label: '管理者', value: 'admin' },
+      { label: 'スーパー管理者', value: 'superAdmin' }
+    ]
   },
   {
     label: '管理範囲',
     prop: 'adminScope',
     render: 'checkboxGroup',
-    show: (model) => ['admin', 'superAdmin'].includes(model.permission),
+    show: (item, model) => ['admin', 'superAdmin'].includes(model.permission),
     dependencies: ['permission']
   },
   {
     label: 'システム設定権限',
     prop: 'systemConfig',
     render: 'switch',
-    show: (model) => model.permission === 'superAdmin',
+    show: (item, model) => model.permission === 'superAdmin',
     dependencies: ['permission']
   }
 ]
 ```
 
-### 3. 複雑な複数条件判断
+### hide属性の使用例
+
+**1. 頻繁に切り替わる機能スイッチ**
 
 ```typescript
-const complexConditionField = {
-  label: '特殊機能',
-  prop: 'specialFeature',
-  render: 'input',
-  when: (model, item) => {
-    // 複数条件判断
-    const hasPermission = model.userLevel >= 5
-    const isSubscribed = model.subscription === 'premium'
-    const isEligible = model.accountAge > 365 // アカウント年齢1年以上
-    
-    // 組み合わせ条件：権限、購読状態、アカウント年齢すべて満たす必要あり
-    return hasPermission && isSubscribed && isEligible
-  },
-  dependencies: ['userLevel', 'subscription', 'accountAge']
-}
-```
-
-### 4. ネストした条件レンダリング
-
-```typescript
-const nestedConditionFields = [
+const notificationFields = [
   {
-    label: '詳細機能を有効化',
-    prop: 'enableAdvanced',
+    label: '通知を有効化',
+    prop: 'enableNotifications',
     render: 'switch'
   },
   {
-    label: '詳細設定',
-    prop: 'advancedConfig',
-    show: (model) => model.enableAdvanced === true,
-    dependencies: ['enableAdvanced'],
-    children: [
-      {
-        label: 'キャッシュ戦略',
-        prop: 'cacheStrategy',
-        render: 'select',
-        show: (model) => model.enableAdvanced === true,
-        dependencies: ['enableAdvanced']
-      },
-      {
-        label: 'キャッシュ時間（時間）',
-        prop: 'cacheTimeout',
-        render: 'inputNumber',
-        show: (model) => {
-          return model.enableAdvanced === true && 
-                 model.cacheStrategy === 'custom'
-        },
-        dependencies: ['enableAdvanced', 'cacheStrategy']
-      }
-    ]
+    label: 'メール通知',
+    prop: 'emailNotifications',
+    render: 'switch',
+    // hideを使用してレイアウト安定性を保持
+    hide: (item, model) => !model.enableNotifications,
+    dependencies: ['enableNotifications']
+  },
+  {
+    label: 'SMS通知',
+    prop: 'smsNotifications',
+    render: 'switch',
+    hide: (item, model) => !model.enableNotifications,
+    dependencies: ['enableNotifications']
   }
 ]
 ```
 
+**2. フォームバリデーションヒント**
+
+```typescript
+{
+  label: 'パスワード強度ヒント',
+  prop: 'passwordStrengthTip',
+  render: 'input',
+  renderProps: {
+    readonly: true,
+    placeholder: 'パスワード強度: 弱'
+  },
+  // レイアウトジャンプを防ぐためhideを使用
+  hide: (item, model) => !model.password || model.password.length === 0,
+  dependencies: ['password']
+}
+```
+
+## 複雑条件シナリオ
+
+### 1. 複数条件判定
+
+```typescript
+{
+  label: '特別機能',
+  prop: 'specialFeature',
+  render: 'input',
+  show: (item, model) => {
+    // 複数条件: すべての条件を満たす必要あり
+    return model.userLevel >= 5 && 
+           model.subscription === 'premium' && 
+           model.accountAge > 365
+  },
+  dependencies: ['userLevel', 'subscription', 'accountAge']
+}
+```
+
+### 2. カスケード条件レンダリング
+
+```typescript
+const cascadeFields = [
+  {
+    label: '住所が必要',
+    prop: 'needAddress',
+    render: 'switch'
+  },
+  {
+    label: '国',
+    prop: 'country',
+    render: 'select',
+    show: (item, model) => model.needAddress,
+    dependencies: ['needAddress']
+  },
+  {
+    label: '都道府県',
+    prop: 'province',
+    render: 'select',
+    // カスケード条件: 住所が必要かつ中国を選択
+    show: (item, model) => model.needAddress && model.country === 'china',
+    dependencies: ['needAddress', 'country']
+  },
+  {
+    label: '市区町村',
+    prop: 'city',
+    render: 'select',
+    // より複雑なカスケード: 住所が必要かつ都道府県を選択
+    show: (item, model) => model.needAddress && !!model.province,
+    dependencies: ['needAddress', 'province']
+  }
+]
+```
+
+### 3. 動的条件計算
+
+```typescript
+// 計算プロパティを使用して複雑な条件を最適化
+const isAdvancedUser = computed(() => {
+  return formData.value.userLevel >= 10 && 
+         formData.value.vipStatus === 'active' &&
+         formData.value.experience > 1000
+})
+
+const advancedField = {
+  label: '高度な機能',
+  prop: 'advancedFeature',
+  render: 'input',
+  show: (item) => isAdvancedUser.value,
+  dependencies: ['userLevel', 'vipStatus', 'experience']
+}
+```
+
 ## 依存関係最適化
 
-### 1. 依存フィールドの宣言
-`dependencies`配列でフィールド依存関係を宣言し、正確な更新を実現：
+### 1. 正確な依存宣言
 
 ```typescript
+// ✅ 推奨: 正確な依存関係
 {
-  label: '関連フィールド',
-  prop: 'relatedField',
-  render: 'input',
-  show: (model) => model.status === 'active' && model.type === 'premium',
-  dependencies: ['status', 'type']  // これらのフィールド変更時のみ再計算
+  show: (item, model) => model.userType === 'admin',
+  dependencies: ['userType']  // 表示に影響するフィールドのみ依存
+}
+
+// ❌ 避ける: 過剰な依存関係
+{
+  show: (item, model) => model.userType === 'admin',
+  dependencies: ['userType', 'userName', 'email', 'phone']  // 不要な依存関係を含む
 }
 ```
 
-### 2. 過剰な依存を避ける
+### 2. 循環依存を避ける
 
 ```typescript
-// ❌ 非推奨：依存フィールドが多すぎる
+// ❌ 誤り: 循環依存の可能性あり
 {
-  dependencies: ['field1', 'field2', 'field3', 'field4', 'field5']
+  label: 'フィールドA',
+  prop: 'fieldA',
+  show: (item, model) => model.fieldB === 'show',
+  dependencies: ['fieldB']
+},
+{
+  label: 'フィールドB',
+  prop: 'fieldB',
+  show: (item, model) => model.fieldA === 'active',
+  dependencies: ['fieldA']  // 循環依存
 }
 
-// ✅ 推奨：正確な依存関係
+// ✅ 正解: 共通の制御フィールドを使用
 {
-  dependencies: ['userType']  // 表示に実際に影響するフィールドのみ依存
+  label: '制御スイッチ',
+  prop: 'enableFeatures',
+  render: 'switch'
+},
+{
+  label: 'フィールドA',
+  prop: 'fieldA',
+  show: (item, model) => model.enableFeatures,
+  dependencies: ['enableFeatures']
+},
+{
+  label: 'フィールドB',
+  prop: 'fieldB',
+  show: (item, model) => model.enableFeatures,
+  dependencies: ['enableFeatures']
 }
 ```
 
-## パフォーマンス考慮事項
+## パフォーマンス最適化の推奨事項
 
-### 1. hideではなくshowを使用
+### 1. show属性を優先使用
 
 ```typescript
-// ✅ 推奨：showを使用し、非表示要素をレンダリングしない
+// ✅ 推奨: showを使用、非表示要素はレンダリングしない
 {
-  show: (model) => model.userType === 'admin'
+  show: (item, model) => model.userType === 'admin'
 }
 
-// ❌ 避ける：hideを使用するとレンダリングはされるが非表示
+// ⚠️ 注意: hideを使用、非表示でもレンダリングされる
 {  
-  hide: (model) => model.userType !== 'admin'
+  hide: (item, model) => model.userType !== 'admin'
 }
 ```
 
-### 2. 条件計算結果をキャッシュ
+### 2. 複雑な計算をキャッシュ
 
 ```typescript
-// 複雑な条件計算にはcomputedプロパティでキャッシュ可能
-const computedCondition = computed(() => {
-  return model.value.userLevel >= 5 && 
-         model.value.subscription === 'premium' &&
-         model.value.accountAge > 365
+// 複雑な条件計算には計算プロパティを使用
+const complexCondition = computed(() => {
+  const { userLevel, subscription, accountAge } = formData.value
+  return userLevel >= 5 && 
+         subscription === 'premium' &&
+         accountAge > 365
 })
 
 const field = {
-  label: '特殊機能',
-  prop: 'specialFeature',
+  label: '特別機能',
+  prop: 'specialFeature', 
   render: 'input',
-  show: () => computedCondition.value,
+  show: () => complexCondition.value,
   dependencies: ['userLevel', 'subscription', 'accountAge']
+}
+```
+
+### 3. 依存関係数を削減
+
+```typescript
+// ✅ 関連ロジックを統合、依存関係を削減
+{
+  show: (item, model) => {
+    // 関連条件を1つの関数に統合
+    return model.status === 'active' && model.level > 3
+  },
+  dependencies: ['status', 'level']
+}
+
+// ❌ 避ける: 分散した条件チェック
+{
+  show: (item, model) => model.status === 'active',
+  dependencies: ['status', 'level', 'type', 'category']
 }
 ```
 
@@ -262,38 +359,79 @@ const field = {
   label: 'デバッグフィールド',
   prop: 'debugField',
   render: 'input',
-  show: (model, item) => {
+  show: (item, model) => {
     const condition = model.userType === 'admin'
-    console.log(`フィールド ${item.prop} 表示条件:`, {
-      userType: model.userType,
-      condition
-    })
+    
+    // 開発環境でのデバッグ情報
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`フィールド ${item.prop} 表示条件:`, {
+        userType: model.userType,
+        condition,
+        dependencies: item.dependencies
+      })
+    }
+    
     return condition
   },
   dependencies: ['userType']
 }
 ```
 
-### 2. 依存関係の追跡
+### 2. 依存関係追跡
 
 ```typescript
-{
-  label: '追跡フィールド',
-  prop: 'trackField',
-  render: 'input',
-  show: (model, item) => {
-    console.log(`依存フィールド変更:`, {
+// デバッグ用ユーティリティ関数を作成
+const createDebugShow = (conditionFn: Function, debugName: string) => {
+  return (item: any, model: any) => {
+    const result = conditionFn(item, model)
+    
+    console.log(`[${debugName}] 条件チェック:`, {
+      result,
       dependencies: item.dependencies,
-      values: item.dependencies?.map(dep => ({ [dep]: model[dep] }))
+      dependencyValues: item.dependencies?.reduce((acc: any, dep: string) => {
+        acc[dep] = model[dep]
+        return acc
+      }, {})
     })
-    return model.status === 'active'
-  },
+    
+    return result
+  }
+}
+
+// デバッグツールを使用
+{
+  label: 'テストフィールド',
+  prop: 'testField',
+  render: 'input',
+  show: createDebugShow(
+    (item, model) => model.status === 'active',
+    'testField'
+  ),
   dependencies: ['status']
 }
 ```
 
+## ベストプラクティス
+
+### 1. 明確な使用シナリオ
+
+- **show属性**: ほとんどの条件レンダリングシナリオに適し、最高のパフォーマンス
+- **hide属性**: 頻繁な切り替えやレイアウト安定性が必要なシナリオに適している
+
+### 2. 適切な依存関係設計
+
+- 表示に実際に影響するフィールドのみを依存関係として宣言
+- 過剰な依存関係や循環依存を避ける
+- 複雑な条件には計算プロパティを使用してキャッシュ
+
+### 3. ユーザーエクスペリエンスを考慮
+
+- 頻繁に切り替わるシナリオではhide属性を使用してレイアウトジャンプを防止
+- 一度きりの表示シナリオではshow属性を使用してパフォーマンスを最適化
+- 適切なトランジションアニメーションでUXを向上
+
 ## 関連リンク
 
 - [MaFormItem 設定詳細](/ja/front/component/ma-form#maformitem-設定詳細)
-- [高度な機能 - 条件付きレンダリング](/ja/front/component/ma-form#条件付きレンダリング)
-- [ネストしたフォーム構造](/ja/front/component/ma-form/examples/nested-forms)
+- [高度な機能 - 条件レンダリング](/ja/front/component/ma-form#条件レンダリング)
+- [ネストされたフォーム構造](/ja/front/component/ma-form/examples/nested-forms)

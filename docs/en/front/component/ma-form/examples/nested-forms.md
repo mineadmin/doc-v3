@@ -9,7 +9,7 @@ Demonstrates the implementation of MaForm's nested form structure, including hie
 - **Hierarchical Structure**: Supports multi-level nested form structures
 - **Dynamic Nesting**: Allows dynamic addition and removal of nested form items
 - **Object Arrays**: Supports complex data structures in object array format
-- **Independent Validation**: Each nested level has independent validation mechanisms
+- **Independent Validation**: Each nesting level has independent validation mechanisms
 - **Flexible Configuration**: Supports personalized configuration for nested items
 
 ## Basic Nested Structure
@@ -56,7 +56,7 @@ const nestedFormItems = [
 ]
 ```
 
-### 2. Multi-Level Nesting
+### 2. Multi-level Nesting
 
 ```typescript
 const multiLevelNested = [
@@ -120,7 +120,7 @@ const multiLevelNested = [
 ### 1. Dynamic Add/Remove Child Items
 
 ```typescript
-// Dynamically manage nested form items
+// Dynamic management of nested form items
 const dynamicNestedManagement = {
   // Add child form item
   addChildItem: (parentProp: string, childItem: MaFormItem) => {
@@ -144,7 +144,7 @@ const dynamicNestedManagement = {
     }
   },
 
-  // Batch update child items
+  // Batch update child form items
   updateChildrenItems: (parentProp: string, children: MaFormItem[]) => {
     formRef.value.updateItem(parentProp, { children })
   }
@@ -155,7 +155,7 @@ const contactFormItems = [
   {
     label: 'Contact List',
     prop: 'contacts',
-    children: [], // Initially empty, added dynamically
+    children: [], // Initially empty, dynamically added
     itemSlots: {
       append: ({ item, model }) => {
         return h('div', { class: 'contact-actions' }, [
@@ -233,7 +233,7 @@ const conditionalNestedItems = [
     dependencies: ['accountType'],
     children: [
       {
-        label: 'ID Number',
+        label: 'ID Card Number',
         prop: 'personalInfo.idCard',
         render: 'input',
         show: (model) => model.accountType === 'personal',
@@ -278,12 +278,12 @@ const conditionalNestedItems = [
 ### 1. Basic Object Array
 
 ```typescript
-// Handle array-type nested data
+// Handling array-type nested data
 const arrayFormItems = [
   {
     label: 'Education History',
     prop: 'education',
-    children: [], // Dynamically generate array items
+    children: [], // Dynamically generated array items
     itemSlots: {
       append: () => {
         return h('el-button', {
@@ -296,7 +296,7 @@ const arrayFormItems = [
   }
 ]
 
-// Dynamically manage array items
+// Dynamic management of array items
 const educationArray = ref([])
 
 const addEducationItem = () => {
@@ -558,7 +558,7 @@ const nestedValidationItems = [
             itemProps: {
               rules: [
                 { required: true, message: 'Please enter username', trigger: 'blur' },
-                { min: 3, max: 20, message: 'Username length 3-20 characters', trigger: 'blur' }
+                { min: 3, max: 20, message: 'Username length should be 3-20 characters', trigger: 'blur' }
               ]
             }
           }
@@ -577,7 +577,7 @@ const nestedValidationItems = [
               if (!value) {
                 callback(new Error('Please enter email address'))
               } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-                callback(new Error('Please enter valid email address'))
+                callback(new Error('Please enter a valid email address'))
               } else {
                 callback()
               }
@@ -623,7 +623,7 @@ const validateArrayItems = async (arrayProp: string) => {
   return validationResults
 }
 
-// Validate nested objects
+// Validate nested object
 const validateNestedObject = async (objectProp: string) => {
   const nestedProps = []
   const collectNestedProps = (items: MaFormItem[], prefix = '') => {
@@ -641,12 +641,9 @@ const validateNestedObject = async (objectProp: string) => {
   
   const results = await Promise.allSettled(
     nestedProps.map(prop => formRef.value.validateField(prop))
-  )
   
   return results.every(result => result.status === 'fulfilled')
 }
 ```
 
 ## Data Processing Utilities
-
-### 

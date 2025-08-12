@@ -1,17 +1,17 @@
 # Exposed Methods
 
-Showcases all API methods exposed by the MaForm component via defineExpose, including state management, configuration management, form item management, validation, and other functionalities.
+Displays all API methods exposed by the MaForm component through defineExpose, including state management, configuration management, form item management, validation, and other functionalities.
 
 <DemoPreview dir="demos/ma-form/expose-methods" />
 
 ## Features
 
-- **State Management**: Loading state, responsive state control  
-- **Configuration Management**: Dynamic modification of form configuration options  
-- **Form Item Management**: CRUD operations for form item configurations  
-- **Validation Control**: Form and field validation management  
-- **Data Operations**: Reading and setting form data  
-- **Instance Access**: Access to underlying Element Plus instances  
+- **State Management**: Loading state, responsive state control
+- **Configuration Management**: Dynamic modification of form configuration options
+- **Form Item Management**: CRUD operations for form item configurations
+- **Validation Control**: Form and field validation management
+- **Data Operations**: Reading and setting form data
+- **Instance Access**: Accessing underlying Element Plus instances
 
 ## State Management Methods
 
@@ -57,7 +57,7 @@ formRef.value.setOptions({
 
 // Get current configuration
 const currentOptions = formRef.value.getOptions()
-console.log('Current config:', currentOptions)
+console.log('Current configuration:', currentOptions)
 
 // Modify configuration via update function
 formRef.value.updateOptions(options => ({
@@ -95,7 +95,7 @@ const updateConfigByCondition = (condition: string) => {
 ### Add Form Items
 
 ```typescript
-// Append item at end
+// Append form item at the end
 const appendNewField = () => {
   formRef.value.appendItem({
     label: `New Field ${Date.now()}`,
@@ -107,7 +107,7 @@ const appendNewField = () => {
   })
 }
 
-// Insert item at specified position
+// Insert form item at specified position
 const insertField = (index: number) => {
   formRef.value.appendItem({
     label: 'Inserted Field',
@@ -116,7 +116,7 @@ const insertField = (index: number) => {
   }, index)
 }
 
-// Prepend item at beginning
+// Prepend form item at the beginning
 const prependField = () => {
   formRef.value.prependItem({
     label: 'First Field',
@@ -130,7 +130,7 @@ const prependField = () => {
 ### Remove Form Items
 
 ```typescript
-// Remove item by prop
+// Remove form item by prop
 const removeField = (prop: string) => {
   const success = formRef.value.removeItem(prop)
   if (success) {
@@ -140,7 +140,7 @@ const removeField = (prop: string) => {
   }
 }
 
-// Batch remove items
+// Batch remove form items
 const removeMultipleFields = (props: string[]) => {
   const results = props.map(prop => ({
     prop,
@@ -155,7 +155,7 @@ const removeMultipleFields = (props: string[]) => {
 ### Update Form Items
 
 ```typescript
-// Update single item
+// Update single form item
 const updateField = (prop: string, updates: Partial<MaFormItem>) => {
   const success = formRef.value.updateItem(prop, updates)
   if (success) {
@@ -163,7 +163,7 @@ const updateField = (prop: string, updates: Partial<MaFormItem>) => {
   }
 }
 
-// Toggle field disabled state
+// Dynamically update field properties
 const toggleFieldDisabled = (prop: string) => {
   const item = formRef.value.getItemByProp(prop)
   if (item) {
@@ -219,7 +219,7 @@ const getAllItems = () => {
 ### Single Query
 
 ```typescript
-// Find item by prop
+// Find form item by prop
 const findFieldByProp = (prop: string) => {
   const item = formRef.value.getItemByProp(prop)
   if (item) {
@@ -262,7 +262,7 @@ const findRequiredFields = () => {
 // Get all visible fields
 const getVisibleFields = () => {
   const visibleItems = formRef.value.getVisibleItems()
-  console.log('Visible fields count:', visibleItems.length)
+  console.log('Visible field count:', visibleItems.length)
   return visibleItems
 }
 
@@ -370,7 +370,7 @@ const resetValidation = () => {
 // Reset specified fields
 const resetSpecificFields = (props: string[]) => {
   formRef.value.resetFields(props)
-  ElMessage.info(`Reset fields: ${props.join(', ')}`)
+  ElMessage.info(`Fields ${props.join(', ')} reset`)
 }
 
 // Clear validation errors
@@ -397,7 +397,7 @@ const getFormData = () => {
   return data
 }
 
-// Get specified field value
+// Get specified field data
 const getFieldValue = (prop: string) => {
   const data = formRef.value.getFormData()
   return data[prop]
@@ -475,7 +475,7 @@ const useElFormMethods = () => {
 
 ## Comprehensive Usage Examples
 
-### Dynamic Form Management
+### Form Dynamic Management
 
 ```typescript
 const formManager = {

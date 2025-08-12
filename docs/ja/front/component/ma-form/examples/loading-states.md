@@ -1,15 +1,15 @@
 # ローディング状態
 
-MaFormの各種ローディング状態設定を表示します。グローバルローディング、部分ローディング、カスタムローディングスタイル、動的ローディング制御などが含まれます。
+MaFormの各種ローディング状態の設定を表示します。グローバルローディング、部分ローディング、カスタムローディングスタイル、動的ローディング制御を含みます。
 
 <DemoPreview dir="demos/ma-form/loading-states" />
 
 ## 機能特徴
 
 - **多段階ローディング制御**: グローバルおよび部分的なローディング状態をサポート
-- **カスタムローディングスタイル**: ローディングアイコン、テキスト、色などのカスタマイズをサポート
+- **カスタムローディングスタイル**: カスタムローディングアイコン、テキスト、色などをサポート
 - **動的ローディング状態**: 実行時に動的にローディング状態を切り替え可能
-- **ローディングマスク設定**: 背景マスク、スクロールロックなどの設定が可能
+- **ローディングマスク設定**: 背景マスク、スクロールロックなどを設定可能
 - **ローディングスロットサポート**: 完全にカスタマイズ可能なローディングコンテンツをサポート
 
 ## 基本ローディング設定
@@ -66,7 +66,7 @@ const handleAsyncOperation = async () => {
 ```typescript
 const loadingConfig = {
   // ローディングテキスト
-  text: 'データ処理中、少々お待ちください...',
+  text: 'データ処理中、お待ちください...',
   
   // カスタムアイコンクラス名
   spinner: 'el-loading-spinner',
@@ -108,7 +108,7 @@ const dataLoadingConfig = {
 
 // フォーム送信ローディング
 const submitLoadingConfig = {
-  text: '送信中、少々お待ちください...',
+  text: '送信中、お待ちください...',
   svg: `
     <svg class="loading-svg" viewBox="0 0 120 30" fill="currentColor">
       <circle cx="15" cy="15" r="15">
@@ -184,7 +184,7 @@ const validationLoadingConfig = {
 }
 ```
 
-### 2. テーマに応じたローディングスタイル
+### 2. テーマに適応したローディングスタイル
 
 ```typescript
 // テーマに基づいて動的にローディングスタイルを設定
@@ -394,7 +394,7 @@ const simulateProgressLoading = async () => {
 </style>
 ```
 
-## ローディング状態ベストプラクティス
+## ローディング状態のベストプラクティス
 
 ### 1. ローディングタイミング制御
 
@@ -493,7 +493,7 @@ const getResponsiveLoadingConfig = () => {
   const isMobile = formRef.value.isMobileState()
   
   return {
-    text: isMobile ? 'ロード中...' : 'データをロード中、少々お待ちください...',
+    text: isMobile ? 'ロード中...' : 'データをロード中、お待ちください...',
     customClass: isMobile ? 'mobile-loading' : 'desktop-loading',
     fullscreen: isMobile,  // モバイルではフルスクリーンローディング
     lock: true

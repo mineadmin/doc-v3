@@ -1,16 +1,16 @@
 # コンポーネントレンダリング
 
-MaFormがサポートする全てのElement Plusコンポーネントのレンダリング方法を展示します。入力類、選択類、日付類、特殊コンポーネントを含みます。
+MaFormがサポートするすべてのElement Plusコンポーネントのレンダリング方法を展示します。入力類、選択類、日付類、特殊コンポーネントを含みます。
 
 <DemoPreview dir="demos/ma-form/component-rendering" />
 
 ## 機能特徴
 
-- **全面的なサポート**: 全てのElement Plusフォームコンポーネントをサポート
-- **多様なレンダリング方法**: 文字列、コンポーネント、関数の3つのレンダリング方法
+- **全面的なサポート**: すべてのElement Plusフォームコンポーネントをサポート
+- **複数のレンダリング方法**: 文字列、コンポーネント、関数の3種類のレンダリング方法
 - **スロットサポート**: 完全なスロットシステムをサポート
 - **プロパティ伝達**: renderPropsを通じてコンポーネントプロパティを伝達
-- **イベント処理**: コンポーネントの全てのネイティブイベントをサポート
+- **イベント処理**: コンポーネントのすべてのネイティブイベントをサポート
 
 ## 入力類コンポーネント
 
@@ -246,7 +246,7 @@ MaFormがサポートする全てのElement Plusコンポーネントのレン�
     inactiveColor: '#ff4949',
     beforeChange: () => {
       return new Promise((resolve) => {
-        ElMessageBox.confirm('状態を切り替えますか？')
+        ElMessageBox.confirm('状態を変更しますか？')
           .then(() => resolve(true))
           .catch(() => resolve(false))
       })
@@ -323,7 +323,7 @@ MaFormがサポートする全てのElement Plusコンポーネントのレン�
         return false
       }
       if (!isLt2M) {
-        ElMessage.error('アップロードファイルサイズは2MBを超えられません!')
+        ElMessage.error('アップロードファイルサイズは2MBを超えてはいけません!')
         return false
       }
       return true

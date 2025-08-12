@@ -6,16 +6,16 @@ Demonstrates MaForm's slot system, including global slots, form-item level slots
 
 ## Features
 
-- **Multi-level Slots**: Supports global, form-item, and component level slots
-- **Dynamic Slot Naming**: Dynamic slot naming mechanism based on props
-- **Configurable Slots**: Define slot content through configuration
-- **Template Slots**: Supports template-based slot usage
-- **Scoped Slots**: Provides rich scoped data
+- **Multi-level slots**: Supports global, form-item, and component level slots
+- **Dynamic slot naming**: Dynamic slot naming mechanism based on props
+- **Configurable slots**: Define slot content through configuration
+- **Template slots**: Supports template-based slot usage
+- **Scoped slots**: Provides rich scoped data
 
 ## Global Slots
 
 ### 1. Default Slot
-When using the default slot, the configuration method will automatically become invalid and template mode will be fully used:
+When using the default slot, the configuration method will automatically become invalid and fully use the template approach:
 
 ```vue
 <ma-form v-model="formData" :options="formOptions">
@@ -172,14 +172,14 @@ Define form item slots through configuration:
       ])
     },
     
-    // Help text
+    // Help information
     help: ({ item, model }) => {
       return h('div', { class: 'help-text' }, [
-        h('el-text', { type: 'info', size: 'small' }, 'This is help text')
+        h('el-text', { type: 'info', size: 'small' }, 'Help information')
       ])
     },
     
-    // Error message
+    // Error information
     error: ({ error }) => {
       return h('div', { class: 'custom-error' }, [
         h('el-icon', { color: '#F56C6C' }, [h('WarningFilled')]),
@@ -223,7 +223,7 @@ Define form item slots through configuration:
     
     help: ({ item, model }) => {
       return h('div', { class: 'upload-help' }, [
-        h('el-text', { type: 'info', size: 'small' }, 'Supports JPG, PNG format, file size not exceeding 2MB')
+        h('el-text', { type: 'info', size: 'small' }, 'Supports JPG, PNG formats, file size not exceeding 2MB')
       ])
     }
   }
@@ -285,9 +285,9 @@ Configure slots for rendered components:
       h('div', { style: 'margin-top: 8px;' }, 'Click or drag to upload')
     ]),
     
-    // Tip
+    // Hint information
     tip: () => h('div', { class: 'upload-tip' }, [
-      h('el-text', { type: 'info', size: 'small' }, 'Supports PDF, Word format, single file not exceeding 10MB')
+      h('el-text', { type: 'info', size: 'small' }, 'Supports PDF, Word formats, single file not exceeding 10MB')
     ]),
     
     // File list
@@ -308,7 +308,7 @@ Configure slots for rendered components:
 }
 ```
 
-## Slot Scope Data
+## Slot Scoped Data
 
 ### FormItemScope Interface
 Scoped data for form item slots:
@@ -353,10 +353,10 @@ interface FormItemScope {
 
 When multiple slot definition methods exist simultaneously, the priority is as follows:
 
-1. **Template Slots** (Highest priority)
-2. **itemSlots Configuration Slots**
-3. **renderSlots Configuration Slots**
-4. **Default Rendering** (Lowest priority)
+1. **Template slots** (highest priority)
+2. **itemSlots configuration slots**
+3. **renderSlots configuration slots**
+4. **Default rendering** (lowest priority)
 
 ### Example
 
@@ -367,7 +367,7 @@ When multiple slot definition methods exist simultaneously, the priority is as f
   prop: 'testField',
   render: 'input',
   itemSlots: {
-    label: () => h('span', 'Config Slot Label')
+    label: () => h('span', 'Config slot label')
   }
 }
 ```
@@ -376,7 +376,7 @@ When multiple slot definition methods exist simultaneously, the priority is as f
 <!-- Template slots will override config slots -->
 <ma-form v-model="formData" :items="items">
   <template #label-testField>
-    <span>Template Slot Label</span>  <!-- This will take effect -->
+    <span>Template slot label</span>  <!-- This will take effect -->
   </template>
 </ma-form>
 ```
@@ -425,7 +425,7 @@ itemSlots: {
       const isMobile = window.innerWidth < 768
       return h('div', { 
         class: isMobile ? 'mobile-help' : 'desktop-help' 
-      }, 'Responsive help text')
+      }, 'Responsive help information')
     }
   }
 }

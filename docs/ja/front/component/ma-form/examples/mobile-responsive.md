@@ -1,6 +1,6 @@
 # モバイルレスポンシブ
 
-MaFormのモバイル端末向けレスポンシブ機能を紹介します。ブレークポイント適応、モバイル最適化、タッチ操作、デバイス固有の設定などが含まれます。
+MaFormのモバイル端末向けレスポンシブ機能を紹介します。ブレークポイント適応、モバイル最適化、タッチ操作、デバイス固有の設定を含みます。
 
 <DemoPreview dir="demos/ma-form/mobile-responsive" />
 
@@ -8,8 +8,8 @@ MaFormのモバイル端末向けレスポンシブ機能を紹介します。�
 
 - **ブレークポイントレスポンシブ**: 画面サイズに基づいて自動的にレイアウトを適応
 - **モバイル最適化**: モバイルデバイス向けの特別な最適化
-- **タッチ操作対応**: タッチ操作に適したインタラクションデザイン
-- **デバイス認識**: モバイルデバイスを自動認識し適切な設定を適用
+- **タッチフレンドリー**: タッチ操作に適したインタラクションデザイン
+- **デバイス認識**: 自動的にモバイルデバイスを認識し対応する設定を適用
 - **柔軟な設定**: モバイル専用のフィールド設定をサポート
 
 ## レスポンシブブレークポイントシステム
@@ -50,11 +50,11 @@ const responsiveFormItems = [
       span: 12,
       
       // レスポンシブ設定
-      xs: 24,    // 超小画面：1行全体
-      sm: 24,    // 小画面：1行全体
-      md: 12,    // 中画面：半分
-      lg: 8,     // 大画面：3分の1
-      xl: 6      // 超大画面：4分の1
+      xs: 24,    // 超小画面: 1行全体
+      sm: 24,    // 小画面: 1行全体
+      md: 12,    // 中画面: 半分
+      lg: 8,     // 大画面: 3分の1
+      xl: 6      // 超大画面: 4分の1
     }
   },
   {
@@ -177,7 +177,7 @@ const adaptiveVisibilityFields = [
     mobileHide: true
   },
   {
-    label: '備考',
+    label: '備考情報',
     prop: 'remark',
     render: 'input',
     renderProps: {
@@ -187,10 +187,10 @@ const adaptiveVisibilityFields = [
     mobileHide: (model) => !model.showAdvanced
   },
   {
-    label: '高度なオプション',
+    label: '詳細オプション',
     prop: 'advanced',
     render: 'switch',
-    // モバイルで簡略化バージョンを表示
+    // モバイルで簡易版を表示
     show: (model, item) => {
       const isMobile = window.innerWidth < 768
       return !isMobile || model.showAdvancedOnMobile
@@ -227,7 +227,7 @@ const isMobileLayout = computed(() => {
   return formRef.value?.isMobileState() || false
 })
 
-// モバイル状態に基づいてフォーム設定を調整
+// モバイル状態に応じてフォーム設定を調整
 watch(isMobileLayout, (isMobile) => {
   if (formRef.value) {
     formRef.value.updateOptions(options => ({
@@ -252,7 +252,7 @@ const mobileSizedFields = [
       size: 'default'  // デスクトップデフォルトサイズ
     },
     mobileProps: {
-      size: 'large'    // モバイルで大サイズ、タッチ操作に適応
+      size: 'large'    // モバイル大サイズ、タッチ操作に便利
     }
   },
   {
@@ -287,7 +287,7 @@ const mobileSizedFields = [
 
 ## タッチ操作最適化
 
-### 1. タッチ操作対応コンポーネント設定
+### 1. タッチフレンドリーなコンポーネント設定
 
 ```typescript
 const touchFriendlyFields = [
@@ -303,7 +303,7 @@ const touchFriendlyFields = [
     },
     mobileProps: {
       showInput: false,
-      height: 6,        // スライダーの高さを増加、タッチ操作に適応
+      height: 6,        // スライダー高さを増加、タッチ操作しやすく
       showTooltip: true,
       tooltipClass: 'mobile-slider-tooltip'
     }
@@ -363,7 +363,7 @@ const mobileUploadField = {
         type: 'primary',
         size: isMobile ? 'large' : 'default',
         icon: isMobile ? 'Camera' : 'Upload'
-      }, isMobile ? '写真撮影/画像選択' : 'ファイル選択')
+      }, isMobile ? '写真/画像選択' : 'ファイル選択')
     }
   }
 }
@@ -396,7 +396,7 @@ const deviceDetection = {
   }
 }
 
-// デバイス特性に基づいてフォームを調整
+// デバイス特性に応じてフォームを調整
 const adaptFormToDevice = () => {
   const isMobile = deviceDetection.isMobile()
   const isTouchDevice = deviceDetection.isTouchDevice()
@@ -427,7 +427,7 @@ const adaptFormToDevice = () => {
 const handleOrientationChange = () => {
   const isPortrait = window.innerHeight > window.innerWidth
   
-  // 向きに基づいてレイアウトを調整
+  // 向きに応じてレイアウトを調整
   if (formRef.value) {
     formRef.value.updateOptions(options => ({
       ...options,
@@ -478,7 +478,7 @@ const pwaFormConfig = {
   loadingConfig: {
     text: '処理中...',
     background: 'rgba(0, 0, 0, 0.7)',
-    fullscreen: true,  // PWAでフルスクリーンローディングを使用
+    fullscreen: true,  // PWAで全画面ローディングを使用
     lock: true
   }
 }
@@ -537,7 +537,7 @@ const mobilePerformanceOptimization = {
     }
   },
   
-  // 画像の遅延ロード
+  // 画像遅延ロード
   enableImageLazyLoading: () => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -558,4 +558,6 @@ const mobilePerformanceOptimization = {
 
 ## モバイル適応テスト
 
-### 1. レスポンシブ
+### 1. レスポンシブテスト
+
+```typescript

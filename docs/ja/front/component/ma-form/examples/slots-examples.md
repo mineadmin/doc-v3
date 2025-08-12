@@ -1,21 +1,21 @@
 # スロットシステム
 
-MaFormのスロットシステムを紹介します。グローバルスロット、フォームアイテムレベルのスロット、動的スロット命名、ネストされたコンポーネントスロットの使用方法を含みます。
+MaFormのスロットシステムを紹介します。グローバルスロット、フォームアイテムレベルのスロット、動的スロット命名、およびネストされたコンポーネントスロットの使用方法を含みます。
 
 <DemoPreview dir="demos/ma-form/slots-examples" />
 
 ## 機能特性
 
-- **マルチレベルスロット**: グローバル、フォームアイテム、コンポーネントの3レベルのスロットをサポート
+- **マルチレベルスロット**: グローバル、フォームアイテム、コンポーネントの3つのレベルのスロットをサポート
 - **動的スロット命名**: propベースの動的スロット命名メカニズム
-- **設定可能なスロット**: 設定方式でスロット内容を定義
+- **設定可能なスロット**: 設定方法でスロット内容を定義
 - **テンプレートスロット**: テンプレート方式のスロット使用をサポート
 - **スコープ付きスロット**: 豊富なスコープデータを提供
 
 ## グローバルスロット
 
 ### 1. デフォルトスロット
-デフォルトスロットを使用する場合、設定方式は自動的に無効になり、完全にテンプレート方式を使用します:
+デフォルトスロットを使用する場合、設定方法は自動的に無効になり、完全にテンプレート方式を使用します:
 
 ```vue
 <ma-form v-model="formData" :options="formOptions">
@@ -33,7 +33,7 @@ MaFormのスロットシステムを紹介します。グローバルスロッ�
 </ma-form>
 ```
 
-### 2. Footerスロット
+### 2. Footer スロット
 フォーム下部の操作ボタンを配置するために使用:
 
 ```vue
@@ -57,7 +57,7 @@ MaFormのスロットシステムを紹介します。グローバルスロッ�
 </ma-form>
 ```
 
-### 3. Loadingスロット
+### 3. Loading スロット
 カスタムローディング状態表示:
 
 ```vue
@@ -112,7 +112,7 @@ MaFormのスロットシステムを紹介します。グローバルスロッ�
     <span class="custom-label">
       <el-icon color="#409EFF"><Lock /></el-icon>
       <span style="margin-left: 4px;">ログインパスワード</span>
-      <el-tooltip content="パスワード長8-16文字、英数字を含む" placement="top">
+      <el-tooltip content="パスワード長さ8-16文字、英字と数字を含む" placement="top">
         <el-icon style="margin-left: 4px;"><QuestionFilled /></el-icon>
       </el-tooltip>
     </span>
@@ -137,8 +137,8 @@ MaFormのスロットシステムを紹介します。グローバルスロッ�
 
 ## フォームアイテムレベルスロット設定
 
-### 1. itemSlots設定
-設定方式でフォームアイテムスロットを定義:
+### 1. itemSlots 設定
+設定方法でフォームアイテムスロットを定義:
 
 ```typescript
 {
@@ -154,14 +154,14 @@ MaFormのスロットシステムを紹介します。グローバルスロッ�
       ])
     },
     
-    // プレフィックス内容
+    // 前置き内容
     prepend: ({ item, model }) => {
       return h('div', { class: 'prepend-content' }, [
         h('el-text', { type: 'info', size: 'small' }, 'ヒント情報')
       ])
     },
     
-    // サフィックス内容
+    // 後置き内容
     append: ({ item, model }) => {
       return h('div', { class: 'append-content' }, [
         h('el-button', {
@@ -223,7 +223,7 @@ MaFormのスロットシステムを紹介します。グローバルスロッ�
     
     help: ({ item, model }) => {
       return h('div', { class: 'upload-help' }, [
-        h('el-text', { type: 'info', size: 'small' }, 'jpg、png形式をサポート、ファイルサイズ2MB以下')
+        h('el-text', { type: 'info', size: 'small' }, 'jpg、png形式をサポート、ファイルサイズは2MB以下')
       ])
     }
   }
@@ -232,7 +232,7 @@ MaFormのスロットシステムを紹介します。グローバルスロッ�
 
 ## ネストされたコンポーネントスロット
 
-### 1. renderSlots設定
+### 1. renderSlots 設定
 レンダリングされるコンポーネントのスロットを設定:
 
 ```typescript
@@ -265,7 +265,7 @@ MaFormのスロットシステムを紹介します。グローバルスロッ�
 }
 ```
 
-### 2. Uploadコンポーネントスロット
+### 2. Upload コンポーネントスロット
 
 ```typescript
 {
@@ -282,12 +282,12 @@ MaFormのスロットシステムを紹介します。グローバルスロッ�
     // アップロードトリガー
     trigger: () => h('div', { class: 'upload-trigger' }, [
       h('el-icon', { size: 32, color: '#409EFF' }, [h('UploadFilled')]),
-      h('div', { style: 'margin-top: 8px;' }, 'クリックまたはドラッグでファイルをアップロード')
+      h('div', { style: 'margin-top: 8px;' }, 'クリックまたはドラッグしてファイルをアップロード')
     ]),
     
     // ヒント情報
     tip: () => h('div', { class: 'upload-tip' }, [
-      h('el-text', { type: 'info', size: 'small' }, 'PDF、Word形式をサポート、単一ファイル10MB以下')
+      h('el-text', { type: 'info', size: 'small' }, 'PDF、Word形式をサポート、単一ファイルは10MB以下')
     ]),
     
     // ファイルリスト
@@ -310,7 +310,7 @@ MaFormのスロットシステムを紹介します。グローバルスロッ�
 
 ## スロットスコープデータ
 
-### FormItemScopeインターフェース
+### FormItemScope インターフェース
 フォームアイテムスロットのスコープデータ:
 
 ```typescript
@@ -351,12 +351,12 @@ interface FormItemScope {
 
 ## スロット優先順位
 
-複数のスロット定義方法が同時に存在する場合、優先順位は以下の通り:
+複数のスロット定義方法が同時に存在する場合、優先順位は次のとおりです:
 
-1. **テンプレートスロット** (最高優先度)
-2. **itemSlots設定スロット**
-3. **renderSlots設定スロット**
-4. **デフォルトレンダリング** (最低優先度)
+1. **テンプレートスロット** (最高優先順位)
+2. **itemSlots 設定スロット**
+3. **renderSlots 設定スロット**
+4. **デフォルトレンダリング** (最低優先順位)
 
 ### 例
 
@@ -389,7 +389,7 @@ interface FormItemScope {
 // ✅ 推奨: アロー関数でキャッシュ
 const labelSlot = () => h('span', 'ラベル')
 
-// ❌ 回避: 毎回新しい関数を作成
+// ❌ 回避: レンダリングごとに新しい関数を作成
 itemSlots: {
   label: () => h('span', 'ラベル')  // 毎回新しい関数
 }
@@ -434,5 +434,5 @@ itemSlots: {
 ## 関連リンク
 
 - [スロットシステム詳細](/ja/front/component/ma-form#スロットシステム)
-- [MaFormItem itemSlots設定](/ja/front/component/ma-form#レイアウト設定)
+- [MaFormItem itemSlots 設定](/ja/front/component/ma-form#レイアウト設定)
 - [コンポーネントレンダリング renderSlots](/ja/front/component/ma-form/examples/component-rendering)

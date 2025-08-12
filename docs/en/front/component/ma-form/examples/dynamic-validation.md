@@ -169,7 +169,7 @@ const linkedValidationFields = [
     const isRequired = userType === 'individual'
     
     if (isRequired && !value) {
-      callback(new Error('Phone number is required for individual users'))
+      callback(new Error('Individual users must provide phone number'))
       return
     }
     
@@ -207,10 +207,10 @@ const linkedValidationFields = [
       return
     }
     
-    // Business rule: VIP product price cannot be lower than 100
+    // Business rule: VIP product price cannot be below 100
     const isVipProduct = formData.isVipProduct
     if (isVipProduct && value < 100) {
-      callback(new Error('VIP product price cannot be lower than 100'))
+      callback(new Error('VIP product price cannot be below 100'))
       return
     }
     
@@ -245,7 +245,7 @@ const debounce = (func, wait) => {
   }
 }
 
-// Debounced async validation
+// Debounced asynchronous validation
 const debouncedUsernameCheck = debounce(async (username) => {
   return await checkUsernameExists(username)
 }, 500)
@@ -267,7 +267,7 @@ const debouncedUsernameCheck = debounce(async (username) => {
 }
 ```
 
-### 2. Loading State Indicator
+### 2. Loading State Indication
 
 ```typescript
 {
