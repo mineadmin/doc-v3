@@ -21,12 +21,14 @@ const isOpen = ref<boolean>(false)
 </script>
 
 <template>
-  <div class="b-1 b-solid b-l-5 b-gray-2 dark:b-dark-2 relative rounded-lg shadow-sm dark:shadow-dark-3 hover:b-blue transition-all duration-300">
+  <div class="b-1 b-solid b-l-5 b-gray-2 dark:b-dark-2 relative rounded-lg shadow-sm dark:shadow-dark-3 hover:b-blue transition-all duration-300 w-full">
     <div
-      class="not-prose relative w-full overflow-x-auto"
+      class="not-prose relative w-full min-h-0 overflow-x-auto"
     >
-      <div class="flex w-full p-4 pb-10">
-        <slot v-if="codeFiles.length > 0"></slot>
+      <div class="flex w-full min-w-0 p-4 pb-10">
+        <div v-if="codeFiles.length > 0" class="w-full flex-1 min-w-0">
+          <slot></slot>
+        </div>
         <div v-else class="text-sm">
           <span class="rounded-sm">
             出错了，找不到演示文件路径
