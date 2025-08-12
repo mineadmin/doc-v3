@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import MaSvgIcon from "../ma-svg-icon/index.vue";
 
 // 模拟菜单数据结构
 const menuData = ref([
