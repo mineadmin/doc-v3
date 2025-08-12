@@ -159,7 +159,58 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: 'MaForm',
-          link: '/zh-hk/front/component/ma-form'
+          link: '/zh-hk/front/component/ma-form',
+          collapsed: true,
+          items: [
+            {
+              text: '基礎用法',
+              link: '/zh-hk/front/component/ma-form/examples/basic-usage'
+            },
+            {
+              text: '佈局系統',
+              link: '/zh-hk/front/component/ma-form/examples/layout-systems'
+            },
+            {
+              text: '條件渲染',
+              link: '/zh-hk/front/component/ma-form/examples/conditional-rendering'
+            },
+            {
+              text: '動態驗證',
+              link: '/zh-hk/front/component/ma-form/examples/dynamic-validation'
+            },
+            {
+              text: '組件渲染',
+              link: '/zh-hk/front/component/ma-form/examples/component-rendering'
+            },
+            {
+              text: '插槽示例',
+              link: '/zh-hk/front/component/ma-form/examples/slots-examples'
+            },
+            {
+              text: '暴露方法',
+              link: '/zh-hk/front/component/ma-form/examples/expose-methods'
+            },
+            {
+              text: '加載狀態',
+              link: '/zh-hk/front/component/ma-form/examples/loading-states'
+            },
+            {
+              text: '嵌套表單',
+              link: '/zh-hk/front/component/ma-form/examples/nested-forms'
+            },
+            {
+              text: '移動端適配',
+              link: '/zh-hk/front/component/ma-form/examples/mobile-responsive'
+            },
+            {
+              text: '高級場景',
+              link: '/zh-hk/front/component/ma-form/examples/advanced-scenarios'
+            },
+            {
+              text: '性能演示',
+              link: '/zh-hk/front/component/ma-form/examples/performance-demo'
+            }
+          ]
         },
         {
           text: 'MaTable',

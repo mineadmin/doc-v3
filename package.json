@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "dev": "vitepress dev",
-    "build": "vitepress build",
+    "build": "NODE_OPTIONS='--max-old-space-size=8192' vitepress build",
     "preview": "vitepress preview",
     "docs:translate": "node bin/translate.js"
   },
@@ -18,11 +18,12 @@
     "@vueuse/core": "^11.1.0",
     "@vueuse/integrations": "^11.1.0",
     "echarts": "^5.5.1",
-    "element-plus": "^2.8.3",
+    "element-plus": "^2.10.6",
     "lodash-es": "^4.17.21",
     "openai": "^4.78.1",
     "radash": "^12.1.0",
     "sortablejs": "1.15.2",
+    "vite": "^7.1.2",
     "vitepress-plugin-announcement": "^0.1.2",
     "vitepress-plugin-llms": "^1.7.2"
   },
@@ -30,12 +31,12 @@
     "@iconify/json": "^2.2.369",
     "@mdit/plugin-plantuml": "^0.13.1",
     "@types/node": "^22.17.1",
-    "@vitejs/plugin-vue-jsx": "^4.0.1",
+    "@vitejs/plugin-vue-jsx": "^4.2.0",
     "simple-git": "^3.27.0",
     "tsx": "^4.19.1",
     "typescript": "^5.9.2",
     "unocss": "^0.63.6",
-    "vitepress": "^1.4.0",
+    "vitepress": "^1.6.4",
     "vitepress-plugin-comment-with-giscus": "^1.1.15",
     "vitepress-plugin-group-icons": "^1.2.4",
     "vue": "^3.5.12"

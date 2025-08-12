@@ -1,93 +1,313 @@
 # MaForm
 
-`Element plus` をベースにしたフォームの二次ラッピング `Form` コンポーネントで、すべてのネイティブフォームのパラメータ、イベント、スロット、書き方をサポートし、設定方式でも実装可能です。
-さらに、`el-row` と `el-space` をベースにしたレイアウトでフォームを設計することもサポートしています。
+`Element plus` をベースにしたフォームの二次ラッピング `Form` コンポーネントで、すべてのネイティブフォームのパラメータ、イベント、スロット、書き方をサポートし、設定方式でも実装できます。
+さらに、`el-row` と `el-space` に基づくレイアウトでフォームを計画でき、レスポンシブデザインとモバイル対応機能を備えています。
 
 ::: tip 説明
-ネイティブ `el-from` のすべてのパラメータ、イベント、スロットを完全に互換性およびサポートしているため、拡張パラメータのみを説明します。
+ネイティブ `el-from` のすべてのパラメータ、イベント、スロットを完全に互換性がありサポートしているため、このドキュメントでは主に拡張機能について説明します。
 
-公式フォームのパラメータについては、[Element plus](https://element-plus.org/zh-CN/component/form.html) 公式ドキュメントを参照してください。
+公式フォームパラメータについては [Element plus](https://element-plus.org/ja/component/form.html) 公式ドキュメントを参照してください。
 :::
 
-## 設定方式での使用
+## クイックスタート
+
+### 設定方式で使用
 <DemoPreview dir="demos/ma-form/config" />
 
-## テンプレート方式での使用
+### テンプレート方式で使用
 <DemoPreview dir="demos/ma-form/template" />
 
-## `コンポーネント`と`el-form-item`の`Ref`を取得
+### `コンポーネント`と`el-form-item`の`Ref`を取得
 :::tip ヒント
-この方法は **設定形式** 用です。`template` では自分で `ref` を定義できます。
+この方法は **設定形式** で使用します。`template` では自分で `ref` を定義できます
 :::
 
 <DemoPreview dir="demos/ma-form/getRef" />
 
+## 完全な例
+
+:::info サンプルナビゲーション
+以下の例は、MaForm のさまざまな使用方法と高度な機能を示しています。基本使用から複雑なシナリオアプリケーションまでをカバーしています。最適な効果を得るために順番に学習することをお勧めします。
+:::
+
+### 基本機能の例
+- [基本的な使用方法](/ja/front/component/ma-form/examples/basic-usage) - 一般的なフォームコントロールの基本設定と使用方法
+- [レイアウトシステム](/ja/front/component/ma-form/examples/layout-systems) - Flex と Grid レイアウトのレスポンシブデザイン
+- [コンポーネントレンダリング](/ja/front/component/ma-form/examples/component-rendering) - サポートされているすべての Element Plus コンポーネントの表示
+
+### 高度な機能の例
+- [条件付きレンダリング](/ja/front/component/ma-form/examples/conditional-rendering) - フォームデータに基づくフィールド表示制御
+- [動的検証](/ja/front/component/ma-form/examples/dynamic-validation) - カスタム検証ルールと非同期検証
+- [スロットシステム](/ja/front/component/ma-form/examples/slots-examples) - 多階層スロットの柔軟な使用方法
+
+### 機能デモの例
+- [公開メソッド](/ja/front/component/ma-form/examples/expose-methods) - すべての API メソッドの使用デモ
+- [ローディング状態](/ja/front/component/ma-form/examples/loading-states) - さまざまなローディングシナリオの処理方法
+- [ネストされたフォーム](/ja/front/component/ma-form/examples/nested-forms) - 複雑な階層構造のフォーム処理
+
+### 実際のアプリケーション例
+- [モバイル対応](/ja/front/component/ma-form/examples/mobile-responsive) - レスポンシブデザインとモバイル最適化
+- [高度なシナリオ](/ja/front/component/ma-form/examples/advanced-scenarios) - マルチステッププロセスと複雑なビジネスロジック
+- [パフォーマンス最適化](/ja/front/component/ma-form/examples/performance-demo) - 大規模フォームのパフォーマンス最適化戦略
+
+## TypeScript 型定義
+
+### コアインターフェース
+
+#### MaFormOptions
+フォーム設定オプションの完全な型定義：
+
+```typescript
+interface MaFormOptions {
+  // Element Plus ネイティブ el-form プロパティ
+  model?: Record<string, any>
+  rules?: Record<string, FormItemRule[]>
+  inline?: boolean
+  labelPosition?: 'left' | 'right' | 'top'
+  labelWidth?: string | number
+  labelSuffix?: string
+  hideRequiredAsterisk?: boolean
+  requireAsteriskPosition?: 'left' | 'right'
+  showMessage?: boolean
+  inlineMessage?: boolean
+  statusIcon?: boolean
+  validateOnRuleChange?: boolean
+  size?: 'large' | 'default' | 'small'
+  disabled?: boolean
+  scrollToError?: boolean
+  scrollIntoViewOptions?: boolean | ScrollIntoViewOptions
+  
+  // MaForm 拡張プロパティ
+  containerClass?: string
+  loading?: boolean
+  loadingConfig?: LoadingConfig
+  layout?: 'flex' | 'grid'
+  flex?: ElRowProps
+  grid?: ElSpaceProps
+  footerSlot?: () => VNode | VNode[]
+  
+  // レスポンシブ設定
+  responsiveConfig?: ResponsiveConfig
+  mobileBreakpoint?: number
+}
+```
+
+#### MaFormItem
+フォーム項目設定の完全な型定義：
+
+```typescript
+interface MaFormItem {
+  // 基本設定
+  label?: string | (() => string)
+  prop?: string | (() => string)
+  hide?: boolean | ((item: MaFormItem, model: MaModel) => boolean)
+  show?: boolean | ((item: MaFormItem, model: MaModel) => boolean)
+  
+  // レイアウト設定
+  cols?: ColsConfiguration
+  itemProps?: ElFormItemProps
+  itemSlots?: Record<string, (...args: any[]) => VNode | VNode[]>
+  
+  // レンダリング設定
+  render?: RenderType
+  renderProps?: Record<string, any>
+  renderSlots?: Record<string, (...args: any[]) => VNode | VNode[]>
+  
+  // ネスト設定
+  children?: MaFormItem[]
+  
+  // 条件付きレンダリング
+  when?: ConditionFunction
+  dependencies?: string[]
+  
+  // 検証設定
+  customValidator?: (rule: any, value: any, callback: Function) => void
+  asyncValidator?: (rule: any, value: any) => Promise<void>
+  
+  // モバイル設定
+  mobileProps?: Record<string, any>
+  mobileHide?: boolean
+}
+```
+
+#### ColsConfiguration
+レスポンシブ列設定タイプ：
+
+```typescript
+interface ColsConfiguration {
+  // 基本グリッド設定
+  span?: number
+  offset?: number
+  push?: number
+  pull?: number
+  
+  // レスポンシブ設定
+  xs?: number | ResponsiveColConfig
+  sm?: number | ResponsiveColConfig
+  md?: number | ResponsiveColConfig
+  lg?: number | ResponsiveColConfig
+  xl?: number | ResponsiveColConfig
+  
+  // カスタム設定
+  order?: number
+  flex?: string | number
+}
+
+interface ResponsiveColConfig {
+  span?: number
+  offset?: number
+  push?: number
+  pull?: number
+}
+```
+
+#### RenderType
+コンポーネントレンダリングタイプ定義：
+
+```typescript
+type RenderType = 
+  | string  // Element Plus コンポーネント名
+  | Component  // Vue コンポーネント
+  | ((data: RenderContext) => VNode | VNode[])  // レンダリング関数
+
+interface RenderContext {
+  item: MaFormItem
+  model: MaModel
+  formRef: Ref<FormInstance | undefined>
+  disabled: boolean
+  readonly: boolean
+  size: ComponentSize
+}
+```
+
+#### MaFormExpose
+コンポーネント公開メソッドの型定義：
+
+```typescript
+interface MaFormExpose {
+  // 状態管理
+  setLoadingState: (loading: boolean) => void
+  getLoadingState: () => boolean
+  
+  // 設定管理
+  setOptions: (options: Partial<MaFormOptions>) => void
+  getOptions: () => MaFormOptions
+  updateOptions: (updater: (options: MaFormOptions) => MaFormOptions) => void
+  
+  // フォーム項目管理
+  setItems: (items: MaFormItem[]) => void
+  getItems: () => MaFormItem[]
+  appendItem: (item: MaFormItem, index?: number) => void
+  prependItem: (item: MaFormItem) => void
+  removeItem: (prop: string) => boolean
+  updateItem: (prop: string, updates: Partial<MaFormItem>) => boolean
+  
+  // フォーム項目クエリ
+  getItemByProp: (prop: string) => MaFormItem | undefined
+  getItemsByCondition: (condition: (item: MaFormItem) => boolean) => MaFormItem[]
+  getVisibleItems: () => MaFormItem[]
+  
+  // フォーム検証
+  validate: () => Promise<boolean>
+  validateField: (prop: string) => Promise<boolean>
+  resetFields: (props?: string[]) => void
+  clearValidate: (props?: string[]) => void
+  
+  // フォームデータ
+  getFormData: () => Record<string, any>
+  setFormData: (data: Record<string, any>) => void
+  resetFormData: () => void
+  
+  // レスポンシブとモバイル
+  isMobileState: () => boolean
+  updateResponsiveState: () => void
+  
+  // El-Form インスタンス
+  getElFormRef: () => FormInstance | undefined
+}
+```
+
 ## Props
 
-| パラメータ        | 説明                             | タイプ         | Ele-公式ドキュメント                                                                   | バージョン    |
-|-----------|--------------------------------|-------------------|----------------------------------------------------------------------------|-------|
-| `v-model` | `ma-form`データ、双方向バインディング               | `MaModel`   | -                                                                          | 1.0.0 |
-| `options` | `el-form` パラメータおよび[拡張パラメータ](#extraprops) | `MaFormOptions`   | [フォーム属性](https://element-plus.org/zh-CN/component/form.html#form-attributes) | 1.0.0 |
-| `items`   | [ma-form-itemパラメータ](#maformitem)  | `MaFormItem[]` | -                                                                          | 1.0.0 |
+| パラメータ        | 説明                             | タイプ         | デフォルト値 | バージョン    |
+|-----------|--------------------------------|-------------------|-------|-------|
+| `v-model` | フォームデータ、双方向バインディング、レスポンシブ更新をサポート | `Record<string, any>` | `{}` | 1.0.0 |
+| `options` | フォーム設定オプション、Element Plus ネイティブプロパティと拡張プロパティを含む | `MaFormOptions` | `{}` | 1.0.0 |
+| `items`   | フォーム項目設定配列、ネストと動的設定をサポート | `MaFormItem[]` | `[]` | 1.0.0 |
+| `loading` | グローバルローディング状態、options.loading より優先度が高い | `boolean` | `false` | 1.0.0 |
+| `disabled` | グローバル無効状態、options.disabled より優先度が高い | `boolean` | `false` | 1.0.0 |
 
-### ExtraProps
+### MaFormOptions 拡張設定
+
 ::: tip 説明
-これは `ma-form` が `el-form` に対して拡張したパラメータです。
+これらは `ma-form` が `el-form` に追加した拡張パラメータで、Element Plus ネイティブパラメータと完全に互換性があります。
 :::
+
 | パラメータ        | 説明                                                                    | タイプ                                                                                              | デフォルト値      | バージョン    |
 |-----------|-----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|----------|-------|
-| `containerClass` | フォームコンテナのクラス名                                                                  | `string`                                                                                        | -        | 1.0.0 |
-| `loading` | ローディングアニメーションを有効にするか                                                              | `boolean`                                                                                       | `false`  | 1.0.0 |
-| `loadingConfig` | ローディングアニメーションの関連設定                                                             | [LoadingConfig](#loadingconfig説明)                                                               | -        | 1.0.0 |
-| `layout` | <el-tooltip content="レイアウト方式。`flex`を使用する場合、`item`の`itemProps`設定で`cols`パラメータを設定できます。デフォルト値：`flex`">`マウスを乗せて確認`</el-tooltip>  | `flex, grid` | `flex` | 1.0.0 |
-| `grid` | <el-tooltip content=" `grid` レイアウト。`layout`が`grid`の場合に有効。実際には`el-space`を使用しており、設定は`element-plus`の`el-space`ドキュメントを参照してください">`マウスを乗せて確認`</el-tooltip> | [el-spaceドキュメント](https://element-plus.org/zh-CN/component/space.html#attributes)     | -        | 1.0.0 |
-| `flex` | <el-tooltip content=" `flex` レイアウト。`layout`が`flex`の場合に有効。実際には`el-row`を使用しており、設定は`element-plus`の`el-row`ドキュメントを参照してください">`マウスを乗せて確認`</el-tooltip> | [el-rowドキュメント](https://element-plus.org/zh-CN/component/layout.html#row-attributes)     | -        | 1.0.0 |
-| `footerSlot` | <el-tooltip content="設定型スロット。`template`での書き方は #footer">`マウスを乗せて確認`</el-tooltip>       | `() => {}`  | -  | 1.0.0 |
+| `containerClass` | フォームコンテナのカスタムクラス名、スタイルカスタマイズ用                                                   | `string`                                                                                        | -        | 1.0.0 |
+| `loading` | ローディングアニメーションを表示するかどうか、グローバルとローカルのローディング状態をサポート                                               | `boolean`                                                                                       | `false`  | 1.0.0 |
+| `loadingConfig` | ローディングアニメーションの詳細設定オプション                                                             | [LoadingConfig](#loadingconfig-設定)                                                               | `{}`     | 1.0.0 |
+| `layout` | レイアウト方式：`flex` はグリッドシステムを使用、`grid` はスペースレイアウトを使用                                    | `'flex' \| 'grid'`                                                                              | `flex`   | 1.0.0 |
+| `flex` | flex レイアウト設定、`el-row` コンポーネントに基づく                                            | `ElRowProps`                                                                                    | `{}`     | 1.0.0 |
+| `grid` | grid レイアウト設定、`el-space` コンポーネントに基づく                                          | `ElSpaceProps`                                                                                  | `{}`     | 1.0.0 |
+| `footerSlot` | 設定型フッタースロット、VNode または VNode 配列を返す                                        | `() => VNode \| VNode[]`                                                                        | -        | 1.0.0 |
+| `responsiveConfig` | レスポンシブ設定オプション                                                               | `ResponsiveConfig`                                                                              | -        | 1.0.0 |
+| `mobileBreakpoint` | モバイルブレークポイントピクセル値                                                             | `number`                                                                                        | `768`    | 1.0.0 |
 
-#### LoadingConfig説明
+#### ResponsiveConfig レスポンシブ設定
+
+```typescript
+interface ResponsiveConfig {
+  // レスポンシブレイアウトを有効にする
+  enabled?: boolean
+  // モバイルシングルカラムレイアウト
+  mobileSingleColumn?: boolean
+  // モバイルでラベルを非表示
+  mobileHideLabels?: boolean
+  // カスタムブレークポイント
+  breakpoints?: {
+    xs?: number  // 超小画面
+    sm?: number  // 小画面
+    md?: number  // 中画面
+    lg?: number  // 大画面
+    xl?: number  // 超大画面
+  }
+}
+```
+
+#### LoadingConfig 設定
+
+ローディングアニメーションの詳細設定オプション：
+
 | パラメータ        | 説明      | タイプ   | デフォルト値 | バージョン    |
 |-----------|----------|------|-----|-------|
-| `text` | ローディングアイコンの下に表示されるテキスト   | `string`  | -   | 1.0.0 |
-| `spinner` | カスタムローディングアイコン   | `string` | -   | 1.0.0 |
-| `svg` | カスタム `svg` ローディングアイコン   | `string` | -   | 1.0.0 |
-| `viewBox` | ローディングアイコンのサイズ   | `string` | -   | 1.0.0 |
-| `background` | 背景マスクの色   | `string` | -   | 1.0.0 |
-| `customClass` | カスタム class クラス名   | `string` | -   | 1.0.0 |
+| `text` | ローディングアイコンの下に表示されるローディングテキスト   | `string`  | `'ローディング中...'`   | 1.0.0 |
+| `spinner` | カスタムローディングアイコンクラス名   | `string` | -   | 1.0.0 |
+| `svg` | カスタム SVG ローディングアイコン   | `string` | -   | 1.0.0 |
+| `viewBox` | SVG アイコンの viewBox 属性   | `string` | -   | 1.0.0 |
+| `background` | 背景マスクの色   | `string` | `'rgba(0, 0, 0, 0.8)'`   | 1.0.0 |
+| `customClass` | カスタムスタイルクラス名   | `string` | -   | 1.0.0 |
+| `lock` | スクロールをロックするかどうか   | `boolean` | `true`   | 1.0.0 |
+| `fullscreen` | フルスクリーン表示するかどうか   | `boolean` | `false`   | 1.0.0 |
 
-### MaFormItem
+### MaFormItem 設定詳細
+
+フォーム項目の完全な設定オプション：
+
+#### 基本設定
 
 | パラメータ            | 説明                                                                                                                                                                             | タイプ                                                                                                 | デフォルト値     | バージョン     |
 |---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|---------|--------|
-| `label`       | ネイティブパラメータを強化し、関数タイプをサポート                                                                                                                                                                | `string, () => string`                                                                             | -       | 1.0.0  |
-| `prop`        | ネイティブパラメータを強化し、関数タイプをサポート                                                                                                                                                                | `string, () => string`                                                                             | -       | 1.0.0  |
-| `hide`        | <el-tooltip content="この項目を非表示にするかどうか。非表示にしてもデータは保持されます。デフォルト: `false`。カスタムコンポーネントでは無効な場合があります">`マウスを乗せて確認`</el-tooltip>                                                                                            | <el-tooltip content="boolean, (item: MaFormItem, model: MaModel) => boolean">`マウスを乗せて確認`</el-tooltip> | `false` | 1.0.0  |
-| `show`        | <el-tooltip content="この項目を表示するかどうか。表示しない場合、実際にはレンダリングされず、データも保持されません。デフォルト: `true`。カスタムコンポーネントでは無効な場合があります">`マウスを乗せて確認`</el-tooltip>                                                                                       | <el-tooltip content="boolean, (item: MaFormItem, model: MaModel) => boolean">`マウスを乗せて確認`</el-tooltip> | `true`  | 1.0.0  |
-| `cols`        | `options.layout が flex` の場合に有効                                                                                                                                                  | [el-colドキュメント](https://element-plus.org/zh-CN/component/layout.html#col-attributes)                    | -       | 1.0.0  |
-| `itemProps`   | `el-form-item` ネイティブ属性                                                                                                                                                            | [フォーム項目属性](https://element-plus.org/zh-CN/component/form.html#formitem-attributes)                    | -       | 1.0.0  |
-| `itemSlots`   | `el-form-item` ネイティブスロット                                                                                                                                                            | [フォーム項目スロット](https://element-plus.org/zh-CN/component/form.html#formitem-slots)                         | -       | 1.0.0  |
-| `render`      | レンダリングコンポーネント：<el-tooltip content="レンダリングするコンポーネントを設定します。`element plus` のすべての `form` コンポーネントを設定できます。例：`input`, `datePicker`。また、`tsx`, `jsx` 構文の仮想DOMや、コンポーネント、関数形式（例：() => ElInput）も渡せます">`マウスを乗せて確認`</el-tooltip> | `string, (data) => any`                                                                            | -       | 1.0.0  |
-| `renderProps` | レンダリングコンポーネントの `props` 属性                                                                                                                                                              | `Record<string, any>`                                                                              | -       | 1.0.0  |
-| `renderSlots` | レンダリングコンポーネントのスロット                                                                                                                                                                       | `Record<string, (...args) => {}>`                                                                  | -       | 1.0.0  |
-| `children`    | 子設定項目。無限ネストをサポート。注：親コンポーネントでスロットを使用する場合、子設定項目は無効になります                                                                                                                                                 | `MaFormItem[]`                                                                                     | -       | 1.0.33 |
+| `label`       | フォーム項目ラベル、文字列または関数の戻り値をサポート                                                                                                                                                                | `string \| (() => string)`                                                                             | -       | 1.0.0  |
+| `prop`        | フォーム項目フィールド名、文字列または関数の戻り値をサポート、データバインディングと検証に使用                                                                                                                                                                | `string \| (() => string)`                                                                             | -       | 1.0.0  |
+| `hide`        | この項目を非表示にするかどうか（非表示だがデータは保持）、動的制御をサポート                                                                                            | `boolean \| ((item: MaFormItem, model: Record<string, any>) => boolean)` | `false` | 1.0.0  |
+| `show`        | この項目を表示するかどうか（表示しない場合はレンダリングされずデータもない）、動的制御をサポート                                                                                       | `boolean \| ((item: MaFormItem, model: Record<string, any>) => boolean)` | `true`  | 1.0.0  |
 
-## Slot
+#### レイアウト設定
 
-| 名前              | 説明                                    | パラメータ |
-|-----------------|---------------------------------------|----|
-| `default`       | デフォルトスロット。ネイティブタグ `<el-form-item>` を記述可能。設定方式では自動的に無効化 | -  |
-| `footer`        | フォームフッタースロット                                | -  |
-
-
-## Expose
-| 名前                  | 説明                | パラメータ                | 戻り値             |
-|---------------------|-------------------|-------------------|-----------------|
-| `setLoadingState()` | フォームの `loading` 状態を設定 | `(boolean)`       | -               |
-| `setOptions()`      | `ma-form` 設定を設定   | `(MaFormOptions)` | -               |
-| `getOptions()`      | `ma-form` 設定を取得   | -                 | `MaFormOptions` |
-| `setItems()`        | フォーム項目を設定             | `(MaFormItem[])`  | -               |
-| `getItems()`        | フォーム項目を取得             | -                 | `MaFormItem[]`  |
-| `appendItem()`      | フォーム項目を追加             | `(MaFormItem)`    | -               |
-| `removeItem()`      | フォーム項目を削除             | `(prop: string)`  | -              |
-| `getItemByProp()`   | `prop`でフォーム項目を取得      | `(prop: string)`  | `MaFormItem`    |
-| `isMobileState()`   | モバイルモードかどうかを確認        | -                 | `boolean`    |
-| `getElFormRef()`    | `el-form` Ref を取得  | -                 | `El-Form`       |
+| パラメータ            | 説明                                                                                                                                                                             | タイプ                                                                                                 | デフォルト値     | バージョン     |
+|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|---------|--------|
+| `cols`        | グリッドレイアウト設定、`layout` が `flex` の場合に有効、レスポンシブ設定をサポート                                                                                                                                                  | `ColsConfiguration`                    | -       | 1.0.0  |
+| `itemProps`   | Element Plus `el-form-item` のネイティブプロパティ                                                                                                                                                                            | `ElFormItemProps`                    | `{}`       | 1.0.0  |
+| `itemSlots`   | Element Plus `el-form-item` のネイティブスロット設定                                                                                                                                                                            | `Record<string, (...args: any[]) => VNode \| VNode[]>`

@@ -159,7 +159,58 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: 'MaForm',
-          link: '/zh/front/component/ma-form'
+          link: '/zh/front/component/ma-form',
+          collapsed: true,
+          items: [
+            {
+              text: '基础用法',
+              link: '/zh/front/component/ma-form/examples/basic-usage'
+            },
+            {
+              text: '布局系统',
+              link: '/zh/front/component/ma-form/examples/layout-systems'
+            },
+            {
+              text: '条件渲染',
+              link: '/zh/front/component/ma-form/examples/conditional-rendering'
+            },
+            {
+              text: '动态验证',
+              link: '/zh/front/component/ma-form/examples/dynamic-validation'
+            },
+            {
+              text: '组件渲染',
+              link: '/zh/front/component/ma-form/examples/component-rendering'
+            },
+            {
+              text: '插槽示例',
+              link: '/zh/front/component/ma-form/examples/slots-examples'
+            },
+            {
+              text: '暴露方法',
+              link: '/zh/front/component/ma-form/examples/expose-methods'
+            },
+            {
+              text: '加载状态',
+              link: '/zh/front/component/ma-form/examples/loading-states'
+            },
+            {
+              text: '嵌套表单',
+              link: '/zh/front/component/ma-form/examples/nested-forms'
+            },
+            {
+              text: '移动端适配',
+              link: '/zh/front/component/ma-form/examples/mobile-responsive'
+            },
+            {
+              text: '高级场景',
+              link: '/zh/front/component/ma-form/examples/advanced-scenarios'
+            },
+            {
+              text: '性能演示',
+              link: '/zh/front/component/ma-form/examples/performance-demo'
+            }
+          ]
         },
         {
           text: 'MaTable',

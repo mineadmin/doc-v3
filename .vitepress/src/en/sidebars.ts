@@ -67,7 +67,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/en/front/base/start'
         },
         {
-          text: 'Routes & Menus',
+          text: 'Routing & Menus',
           link: '/en/front/base/route-menu'
         },
         {
@@ -85,7 +85,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text: 'Advanced',
+      text: 'Intermediate',
       items: [
         {
           text: 'System Configuration',
@@ -126,7 +126,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text: 'Expert',
+      text: 'Advanced',
       items: [
         {
           text: 'Internationalization',
@@ -159,7 +159,58 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: 'MaForm',
-          link: '/en/front/component/ma-form'
+          link: '/en/front/component/ma-form',
+          collapsed: true,
+          items: [
+            {
+              text: 'Basic Usage',
+              link: '/en/front/component/ma-form/examples/basic-usage'
+            },
+            {
+              text: 'Layout Systems',
+              link: '/en/front/component/ma-form/examples/layout-systems'
+            },
+            {
+              text: 'Conditional Rendering',
+              link: '/en/front/component/ma-form/examples/conditional-rendering'
+            },
+            {
+              text: 'Dynamic Validation',
+              link: '/en/front/component/ma-form/examples/dynamic-validation'
+            },
+            {
+              text: 'Component Rendering',
+              link: '/en/front/component/ma-form/examples/component-rendering'
+            },
+            {
+              text: 'Slot Examples',
+              link: '/en/front/component/ma-form/examples/slots-examples'
+            },
+            {
+              text: 'Exposed Methods',
+              link: '/en/front/component/ma-form/examples/expose-methods'
+            },
+            {
+              text: 'Loading States',
+              link: '/en/front/component/ma-form/examples/loading-states'
+            },
+            {
+              text: 'Nested Forms',
+              link: '/en/front/component/ma-form/examples/nested-forms'
+            },
+            {
+              text: 'Mobile Responsive',
+              link: '/en/front/component/ma-form/examples/mobile-responsive'
+            },
+            {
+              text: 'Advanced Scenarios',
+              link: '/en/front/component/ma-form/examples/advanced-scenarios'
+            },
+            {
+              text: 'Performance Demo',
+              link: '/en/front/component/ma-form/examples/performance-demo'
+            }
+          ]
         },
         {
           text: 'MaTable',
@@ -192,7 +243,7 @@ const sidebar:DefaultTheme.Sidebar = {
           text: "Lifecycle",
           link: "/en/backend/base/lifecycle"
         },
-        { text: "Routes & API Documentation",link: "/en/backend/base/router"},
+        { text: "Routing & API Docs",link: "/en/backend/base/router"},
         { text: "Error Handling",link: "/en/backend/base/error-handler"},
         {text: "Logging",link: "/en/backend/base/logger"},
         {text: "Events",link: "/en/backend/base/event-handler"},
@@ -212,7 +263,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/en/backend/security/access"
         },
         {
-          text: "Client IP Retrieval",
+          text: "Client IP Detection",
           link: "/en/backend/security/client-ip"
         }
       ]
@@ -244,7 +295,7 @@ const sidebar:DefaultTheme.Sidebar = {
       items:
           [
             {
-              text:"Preparation",
+              text:"Prerequisites",
               link:"/en/plugin"
             },
             {
@@ -256,15 +307,15 @@ const sidebar:DefaultTheme.Sidebar = {
               link:"/en/plugin/create"
             },
             {
-              text:"Plugin Directory Structure",
+              text:"Plugin Structure",
               link:"/en/plugin/structure"
             },
             {
-              text:"mine.json Documentation & Examples",
+              text:"mine.json Documentation",
               link:"/en/plugin/mineJson"
             },
             {
-            text:"ConfigProvider Documentation",
+            text:"ConfigProvider Guide",
             link:"/en/plugin/configProvider"
           }
           ]
@@ -286,16 +337,16 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"Frontend Development",
       items:[
         {
-          text: "Frontend Development Standards",
+          text: "Frontend Standards",
           link: "/en/plugin/front/develop"
         }
       ]
     },
     {
-      text:"Application Publishing",
+      text:"Publishing",
       items:[
         {
-          text: "Publishing Applications",
+          text: "App Publishing",
           link: "/en/plugin/develop/publish"
         },
         {
