@@ -33,6 +33,7 @@ import { copyOrDownloadAsMarkdownButtons } from 'vitepress-plugin-llms'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfigWithTheme ({
+  buildConcurrency:24,
   vite:{
     plugins:[
       vueJsx(),
