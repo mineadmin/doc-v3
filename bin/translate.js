@@ -18,14 +18,14 @@ const SUPPORTED_LANGUAGES = {
         name: 'English',
         systemPrompt: {
             md: 'You are a professional technical translator. Translate Simplified Chinese to English. IMPORTANT: Provide ONLY the translated text with no introductions, explanations, or summaries. Do not change markdown syntax, code fences, inline code, front-matter keys, or link targets. Do not translate code blocks.',
-            code: 'You are a professional technical translator. Translate ONLY comments and string literals from Simplified Chinese to English. IMPORTANT: Provide ONLY the translated code with no introductions or summaries. NEVER alter code tokens, identifiers, imports/exports, types, or file paths. Preserve formatting exactly.'
+            code: 'You are a professional technical translator. Translate ONLY comments and string literals from Simplified Chinese to English. IMPORTANT: This is a JS or TS file. You are not allowed to add anything to the original text. Provide ONLY the translated code with no introductions or summaries. NEVER alter code tokens, identifiers, imports/exports, types, or file paths. Preserve formatting exactly.'
         }
     },
     'ja': {
         name: 'Japanese',
         systemPrompt: {
             md: 'You are a professional technical translator. Translate Simplified Chinese to Japanese. IMPORTANT: Provide ONLY the translated text with no introductions, explanations, or summaries. Do not change markdown syntax, code fences, inline code, front-matter keys, or link targets. Do not translate code blocks.',
-            code: 'You are a professional technical translator. Translate ONLY comments and string literals from Simplified Chinese to Japanese. IMPORTANT: Provide ONLY the translated code with no introductions or summaries. NEVER alter code tokens, identifiers, imports/exports, types, or file paths. Preserve formatting exactly.'
+            code: 'You are a professional technical translator. Translate ONLY comments and string literals from Simplified Chinese to Japanese. IMPORTANT: This is a JS or TS file. You are not allowed to add anything to the original text. Provide ONLY the translated code with no introductions or summaries. NEVER alter code tokens, identifiers, imports/exports, types, or file paths. Preserve formatting exactly.'
         }
     }
 };
@@ -66,15 +66,20 @@ async function readFiles(dir) {
     return sources.filter(file => file.endsWith('.md') || file.endsWith('.js') || file.endsWith('.ts'));
 }
 
-function replaceZhLinks(content, lang) {
-    // Markdown 链接: [text](/zh/xxx)
-    content = content.replace(/(]\()\/zh\//g, `$1/${lang}/`);
-    // 行内链接: (/zh/xxx)
-    content = content.replace(/(\()\/zh\//g, `$1/${lang}/`);
-    // HTML 属性: href="/zh/xxx" 或 to="/zh/xxx"
-    content = content.replace(/(\b(?:href|to)=["'])\/zh\//g, `$1/${lang}/`);
-    // JS/TS 对象属性: link: '/zh/xxx'
-    content = content.replace(/(link:\s*['"])\/zh\//g, `$1/${lang}/`);   
+function replaceZhLinks(content, lang, type = 'md') {
+    if (type === 'md') {
+        // Markdown 链接: [text](/zh/xxx)
+        content = content.replace(/(]\()\/zh\//g, `$1/${lang}/`);
+        // 行内链接: (/zh/xxx)
+        content = content.replace(/(\()\/zh\//g, `$1/${lang}/`);
+        // HTML 属性: href="/zh/xxx" 或 to="/zh/xxx"
+        content = content.replace(/(\b(?:href|to)=["'])\/zh\//g, `$1/${lang}/`);
+    } else if (type === 'code') {
+        // JS/TS 对象属性: link: '/zh/xxx'
+        content = content.replace(/(link:\s*['"])\/zh\//g, `$1/${lang}/`);
+        // JS/TS 对象键: '/zh/xxx':
+        content = content.replace(/(['"])\/zh\/(.*?['"]\s*:)/g, `$1/${lang}/$2`);
+    }
     return content;
 }
 
@@ -88,8 +93,10 @@ async function processFile(srcPath, destPath, targetLang = 'en') {
         throw new Error(`Unsupported language: ${targetLang}`);
     }
 
+    let systemContentType = 'md';
     let systemContent;
     if (srcPath.endsWith('.ts') || srcPath.endsWith('.js')) {
+        systemContentType = 'code'
         systemContent = langConfig.systemPrompt.code;
     } else if (srcPath.endsWith('.md')) {
         systemContent = langConfig.systemPrompt.md;
@@ -100,7 +107,7 @@ async function processFile(srcPath, destPath, targetLang = 'en') {
     await new Promise(resolve => setTimeout(resolve, 1000)); // 延迟1秒
 
     const translatedContent = await translateWithRetry(content, 0, systemContent);
-    const finalContent = replaceZhLinks(translatedContent, targetLang);
+    const finalContent = replaceZhLinks(translatedContent, targetLang, systemContentType);
     await writeFile(destPath, finalContent);
     console.log(`✅ Translated: ${srcPath} to ${destPath}`);
 }

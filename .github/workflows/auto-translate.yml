@@ -24,13 +24,6 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
-      - name: Generate GitHub Token
-        id: generate-token
-        uses: tibdex/github-app-token@v2
-        with:
-          app_id: ${{ secrets.MINEADMIN_APP_ID }}
-          private_key: ${{ secrets.MINEADMIN_APP_PRIVATE_KEY }}
-
       - name: Get All Pr Changed Files
         id: changed-files
         uses: tj-actions/changed-files@v46
@@ -109,4 +102,3 @@ jobs:
         with:
           commit_message: "🌐 Auto-translated content"
           branch: ${{ github.event.pull_request.head.ref }}
-          token: ${{ steps.generate-token.outputs.token }}
