@@ -214,7 +214,46 @@ const sidebar:DefaultTheme.Sidebar = {
         },
         {
           text: 'MaTable',
-          link: '/zh-tw/front/component/ma-table'
+          link: '/zh-tw/front/component/ma-table',
+          collapsed: true,
+          items: [
+            {
+              text: '基礎表格',
+              link: '/zh-tw/front/component/ma-table/basic'
+            },
+            {
+              text: '表格排序',
+              link: '/zh-tw/front/component/ma-table/sorting'
+            },
+            {
+              text: '表格篩選',
+              link: '/zh-tw/front/component/ma-table/filter'
+            },
+            {
+              text: '自定義渲染',
+              link: '/zh-tw/front/component/ma-table/custom-render'
+            },
+            {
+              text: '動態列管理',
+              link: '/zh-tw/front/component/ma-table/dynamic-columns'
+            },
+            {
+              text: '分頁表格',
+              link: '/zh-tw/front/component/ma-table/pagination'
+            },
+            {
+              text: '樹形表格',
+              link: '/zh-tw/front/component/ma-table/tree-table'
+            },
+            {
+              text: '多選表格',
+              link: '/zh-tw/front/component/ma-table/selection'
+            },
+            {
+              text: '響應式表格',
+              link: '/zh-tw/front/component/ma-table/responsive'
+            }
+          ]
         },
         {
           text: 'MaSearch',

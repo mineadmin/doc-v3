@@ -30,10 +30,11 @@ import llmstxt from 'vitepress-plugin-llms'
 import { copyOrDownloadAsMarkdownButtons } from 'vitepress-plugin-llms'
 
 
-
 // https://vitepress.dev/reference/site-config
 export default defineConfigWithTheme ({
-  buildConcurrency:24,
+  build:{
+
+  },
   vite:{
     plugins:[
       vueJsx(),
@@ -44,11 +45,11 @@ export default defineConfigWithTheme ({
           {type:"text",content:"官方QQ群: 150105478"}
         ]
       }),
-      llmstxt({
-        domain:'https://doc.mineadmin.com',
-        workDir:'en',
-        ignoreFiles:['guide/changelog.md']
-      })
+      // llmstxt({
+      //   domain:'https://doc.mineadmin.com',
+      //   workDir:'en',
+      //   ignoreFiles:['guide/changelog.md']
+      // })
     ]
   },
   ignoreDeadLinks: true,
@@ -121,7 +122,7 @@ export default defineConfigWithTheme ({
       label: '页面导航',
       level: [2, 4],
     },
-    aside: 'left', // 侧边栏位置优化
+    aside: true, // 启用右侧TOC
     externalLinkIcon: true, // 显示外部链接图标
     editLink: {
       pattern: 'https://github.com/mineadmin/doc-v3/edit/main/docs/:path',
