@@ -1,6 +1,6 @@
 # MaSearch Component
 
-`ma-search` is built upon `ma-form` and designed for quickly constructing search forms. It offers rich configuration options, responsive layouts, form validation, and more, making it an ideal choice for building search functionalities in backend management systems.
+`ma-search` is built upon `ma-form` and designed for quickly constructing search forms. It provides rich configuration options, responsive layouts, form validation, and more, making it an ideal choice for building search functionalities in backend management systems.
 
 :::tip Note
 The `form` and `form-item` parameters are consistent with `ma-form`. For detailed configurations, please refer to the [ma-form documentation](ma-form).
@@ -19,7 +19,7 @@ The `form` and `form-item` parameters are consistent with `ma-form`. For detaile
 
 ### Custom Extensions
 - **[Custom Actions](./ma-search/examples/custom-actions)** - Custom action buttons and slot usage
-- **[Dynamic Management](./ma-search/examples/dynamic-items)** - Dynamically add/remove search items at runtime
+- **[Dynamic Management](./ma-search/examples/dynamic-items)** - Runtime dynamic addition/removal of search items
 - **[Methods Demo](./ma-search/examples/methods-demo)** - Detailed usage of all exposed methods
 
 ### Advanced Applications
@@ -45,8 +45,8 @@ Core configuration options for the search component:
 |-----------|-------------|------|---------|---------|
 | `defaultValue` | Default values for the search form | `Record<string, any>` | - | 1.0.0 |
 | `cols` | Responsive column configuration for different screen sizes | `MediaBreakPoint` | `{xs: 1, sm: 2, md: 2, lg: 3, xl: 4}` | 1.0.0 |
-| `fold` | Whether to enable folding functionality | `boolean` | `false` | 1.0.0 |
-| `foldRows` | Number of rows to display when folded | `number` | `2` | 1.0.0 |
+| `fold` | Whether to enable collapsible functionality | `boolean` | `false` | 1.0.0 |
+| `foldRows` | Number of rows to display when collapsed | `number` | `2` | 1.0.0 |
 | `show` | Whether to show the search panel | `boolean` | `true` | 1.0.0 |
 | `text` | Button text configuration | `TextConfig` | - | 1.0.0 |
 
@@ -80,9 +80,9 @@ Search form item configuration, extended from `ma-form-item`:
 | Parameter | Description | Type | Default | Version |
 |-----------|-------------|------|---------|---------|
 | `label` | Label text | `string` | - | 1.0.0 |
-| `prop` | Field name, corresponding to the key in form data | `string` | - | 1.0.0 |
+| `prop` | Field name corresponding to form data key | `string` | - | 1.0.0 |
 | `render` | Rendering method, supports string or function | `string \| Function \| Component` | - | 1.0.0 |
-| `options` | Options data for selection components | `Array<{label: string, value: any}>` | - | 1.0.0 |
+| `options` | Options data for select-type components | `Array<{label: string, value: any}>` | - | 1.0.0 |
 | `props` | Properties passed to form components | `object` | - | 1.0.0 |
 | `rules` | Validation rules | `FormItemRule[]` | - | 1.0.0 |
 | `span` | Grid span, number of columns occupied | `number` | `1` | 1.0.0 |
@@ -110,37 +110,37 @@ Supported built-in render types:
 |------|-------------|------------|---------|
 | `search` | Triggered when search button is clicked | `(formData: Record<string, any>) => void` | 1.0.0 |
 | `reset` | Triggered when reset button is clicked | `(formData: Record<string, any>) => void` | 1.0.0 |
-| `fold` | Triggered when fold state changes | `(state: boolean) => void` | 1.0.0 |
+| `fold` | Triggered when collapse state changes | `(state: boolean) => void` | 1.0.0 |
 
 ### Slots
 
 | Name | Description | Parameters | Version |
 |------|-------------|------------|---------|
-| `default` | Default slot for native `<el-form-item>` tags | - | 1.0.0 |
-| `actions` | Completely replace action button area | `{ searchLoading: boolean, resetLoading: boolean }` | 1.0.0 |
-| `beforeActions` | Insert content before action buttons | - | 1.0.0 |
-| `afterActions` | Append content after action buttons | - | 1.0.0 |
+| `default` | Default slot for native `<el-form-item>` tags (configuration becomes invalid when used) | - | 1.0.0 |
+| `actions` | Completely replaces action button area | `{ searchLoading: boolean, resetLoading: boolean }` | 1.0.0 |
+| `beforeActions` | Inserts content before action buttons | - | 1.0.0 |
+| `afterActions` | Appends content after action buttons | - | 1.0.0 |
 
 ### Exposed Methods
 
 | Method | Description | Parameters | Return | Version |
 |--------|-------------|------------|--------|---------|
-| `getMaFormRef()` | Get internal `ma-form` component reference | - | `MaFormRef` | 1.0.0 |
-| `foldToggle()` | Toggle fold state | - | - | 1.0.0 |
-| `getFold()` | Get current fold state | - | `boolean` | 1.0.0 |
-| `setSearchForm(form)` | Set search form data | `form: Record<string, any>` | - | 1.0.0 |
-| `getSearchForm()` | Get current search form data | - | `Record<string, any>` | 1.0.0 |
-| `setShowState(visible)` | Set component visibility | `visible: boolean` | - | 1.0.0 |
-| `getShowState()` | Get current visibility state | - | `boolean` | 1.0.0 |
-| `setOptions(options)` | Dynamically set component options | `options: MaSearchOptions` | - | 1.0.0 |
-| `getOptions()` | Get current component options | - | `MaSearchOptions` | 1.0.0 |
-| `setFormOptions(options)` | Dynamically set form options | `options: MaFormOptions` | - | 1.0.0 |
-| `getFormOptions()` | Get current form options | - | `MaFormOptions` | 1.0.0 |
-| `setItems(items)` | Dynamically set search items | `items: MaSearchItem[]` | - | 1.0.0 |
-| `getItems()` | Get current search items | - | `MaSearchItem[]` | 1.0.0 |
-| `appendItem(item)` | Append a single search item | `item: MaSearchItem` | - | 1.0.0 |
-| `removeItem(prop)` | Remove specified search item | `prop: string` | - | 1.0.0 |
-| `getItemByProp(prop)` | Get search item by property name | `prop: string` | `MaSearchItem \| undefined` | 1.0.0 |
+| `getMaFormRef()` | Gets internal `ma-form` component reference | - | `MaFormRef` | 1.0.0 |
+| `foldToggle()` | Toggles collapse state | - | - | 1.0.0 |
+| `getFold()` | Gets current collapse state | - | `boolean` | 1.0.0 |
+| `setSearchForm(form)` | Sets search form data | `form: Record<string, any>` | - | 1.0.0 |
+| `getSearchForm()` | Gets current search form data | - | `Record<string, any>` | 1.0.0 |
+| `setShowState(visible)` | Sets component visibility | `visible: boolean` | - | 1.0.0 |
+| `getShowState()` | Gets current visibility state | - | `boolean` | 1.0.0 |
+| `setOptions(options)` | Dynamically sets component options | `options: MaSearchOptions` | - | 1.0.0 |
+| `getOptions()` | Gets current component options | - | `MaSearchOptions` | 1.0.0 |
+| `setFormOptions(options)` | Dynamically sets form options | `options: MaFormOptions` | - | 1.0.0 |
+| `getFormOptions()` | Gets current form options | - | `MaFormOptions` | 1.0.0 |
+| `setItems(items)` | Dynamically sets search items | `items: MaSearchItem[]` | - | 1.0.0 |
+| `getItems()` | Gets current search items | - | `MaSearchItem[]` | 1.0.0 |
+| `appendItem(item)` | Appends a single search item | `item: MaSearchItem` | - | 1.0.0 |
+| `removeItem(prop)` | Removes specified search item | `prop: string` | - | 1.0.0 |
+| `getItemByProp(prop)` | Gets search item by property name | `prop: string` | `MaSearchItem \| undefined` | 1.0.0 |
 
 ## TypeScript Definitions
 
@@ -221,14 +221,14 @@ const searchOptions = {
 }
 ```
 
-### 2. Folding Functionality
+### 2. Collapsible Functionality
 
-Enable folding when there are many search items:
+Enable collapsible feature when there are many search items:
 
 ```typescript
 const searchOptions = {
   fold: true,
-  foldRows: 2,  // Show 2 rows by default
+  foldRows: 2,  // Display 2 rows by default
   text: {
     isFoldBtn: 'Show more conditions',
     notFoldBtn: 'Hide some conditions'
@@ -256,7 +256,7 @@ const searchItems = [
 
 ### 4. Dynamic Form Items
 
-Add or remove search items dynamically based on business needs:
+Dynamically add or remove search items based on business needs:
 
 ```typescript
 // Add search item
@@ -346,7 +346,7 @@ const handleSearch = (formData: any) => {
     time: new Date().toLocaleString()
   })
   
-  // Limit history size
+  // Limit history count
   if (searchHistory.value.length > 10) {
     searchHistory.value = searchHistory.value.slice(0, 10)
   }
@@ -358,16 +358,16 @@ const handleSearch = (formData: any) => {
 ### v1.0.27 (Latest)
 - 🎉 Added form validation support
 - 🐛 Fixed display issues in some responsive layouts
-- ⚡️ Optimized performance, reduced unnecessary re-renders
+- ⚡️ Optimized performance by reducing unnecessary re-renders
 - 📝 Improved TypeScript type definitions
 
 ### v1.0.20
 - 🎉 Added dynamic search item management
 - 🎉 Added more built-in render types
-- 🐛 Fixed styling issues in folded state
+- 🐛 Fixed styling issues in collapsed state
 
 ### v1.0.15
 - 🎉 Initial version release
-- ✨ Basic search functionality support
-- ✨ Responsive layout support
-- ✨ Collapsible panel support
+- ✨ Supported basic search functionality
+- ✨ Supported responsive layouts
+- ✨ Supported collapsible panels

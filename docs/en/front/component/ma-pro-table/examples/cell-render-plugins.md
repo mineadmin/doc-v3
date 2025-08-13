@@ -7,7 +7,7 @@ Demonstrates the usage of various cell render plugins, including built-in and cu
 ## Features
 
 - **Plugin Mechanism**: Extend cell rendering capabilities through a plugin system
-- **Built-in Plugins**: Provides commonly used render plugins (e.g., tags, progress bars, etc.)
+- **Built-in Plugins**: Provides common rendering plugins (e.g., tags, progress bars)
 - **Custom Plugins**: Supports registering custom render plugins
 - **Flexible Configuration**: Supports dynamic property configuration and conditional rendering
 - **Code Reuse**: Avoids repetitive rendering logic
@@ -131,7 +131,7 @@ addPlugin({
       modelValue: !!data.row[data.column.property],
       onChange: (value) => {
         // Handle switch change
-        console.log(`${data.row.name} status ${value ? 'enabled' : 'disabled'}`)
+        console.log(`${data.row.name}'s status is now ${value ? 'on' : 'off'}`)
       },
       ...props
     })
@@ -162,7 +162,7 @@ addPlugin({
 })
 ```
 
-### 6. Multi-Tag Plugin
+### 6. Multiple Tags Plugin
 ```javascript
 addPlugin({
   name: 'tags',
@@ -272,7 +272,7 @@ const tagPlugin = getPluginByName('tag')
 removePlugin('custom-plugin')
 ```
 
-### Plugin Parameter Specification
+### Plugin Parameters
 ```javascript
 // Plugin definition
 interface MaProTableRenderPlugin {
@@ -297,13 +297,13 @@ interface MaProTableRenderPlugin {
 
 ### 1. Plugin Naming
 - Use descriptive names like `progress`, `image`, `tags`
-- Avoid conflicts with built-in plugin names
-- Add prefixes if publishing to marketplace
+- Avoid conflicts with built-in plugins
+- Add prefix if publishing to marketplace
 
 ### 2. Performance Optimization
 - Avoid complex computations in render functions
-- Use props functions for conditional logic and property calculations
-- Leverage Vue's reactivity system appropriately
+- Use props function for conditional logic and property computation
+- Leverage Vue's reactivity properly
 
 ### 3. Error Handling
 ```javascript

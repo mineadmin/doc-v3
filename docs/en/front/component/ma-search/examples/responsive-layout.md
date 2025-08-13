@@ -1,6 +1,6 @@
 # Responsive Layout
 
-Demonstrates responsive effects across different screen sizes, including real-time viewport information and dynamic configuration testing to ensure the search component delivers an optimal user experience on all devices.
+Demonstrates responsive effects across different screen sizes, including real-time viewport information and dynamic configuration testing to ensure the search component delivers a good user experience on various devices.
 
 ## Responsive Layout Demo
 
@@ -20,7 +20,7 @@ MaSearch employs a responsive breakpoint system based on CSS Media Queries:
 | `xl` | ≥ 1920px | 4 | Large screens |
 
 ### Basic Configuration
-Configure column counts per breakpoint using the `cols` parameter:
+Configure column counts for different breakpoints using the `cols` parameter:
 
 ```typescript
 const searchOptions = {
@@ -35,7 +35,7 @@ const searchOptions = {
 ```
 
 ### Custom Breakpoints
-Define custom breakpoints according to business requirements:
+Customize breakpoint configurations based on business requirements:
 
 ```typescript
 // Compact layout
@@ -71,17 +71,17 @@ const mobileFirstConfig = {
 }
 ```
 
-### 2. Desktop Dense Display
+### 2. Dense Desktop Display
 Maximize screen space utilization on desktops:
 
 ```typescript
-// Desktop dense display
+// Dense desktop display
 const desktopDenseConfig = {
   cols: { xs: 1, sm: 2, md: 3, lg: 4, xl: 6 }
 }
 ```
 
-### 3. Adaptive Dashboard
+### 3. Adaptive Data Dashboard
 Automatically adjust search area based on dashboard layout:
 
 ```typescript
@@ -99,15 +99,15 @@ const dashboardConfig = {
 The component automatically calculates columns per row based on container width and breakpoint configuration.
 
 ### Smooth Transitions
-Layout transitions smoothly during screen size changes to prevent jarring jumps.
+Layout transitions smoothly during screen size changes to avoid abrupt jumps.
 
 ### Content Overflow Handling
-Automatically adds ellipsis or line breaks when search item content exceeds available space.
+Automatically adds ellipsis or line breaks when search item content is too long.
 
 ## Key Features
 
 - 📱 Mobile-friendly responsive design
-- 🖥 Optimal large-screen space utilization
+- 🖥 Optimal large screen utilization
 - 🔄 Smooth layout transition animations
 - 📏 Flexible breakpoint configuration system
 - ⚡ High-performance layout calculations
@@ -190,7 +190,7 @@ const progressiveConfig = {
   fold: true,
   foldRows: 1,
   
-  // Tablet enhancements
+  // Enhanced tablet experience
   ...window.innerWidth >= 768 && { 
     cols: { xs: 1, sm: 2 },
     foldRows: 2 
@@ -208,7 +208,7 @@ const progressiveConfig = {
 Display search items with different priorities across screen sizes:
 
 ```typescript
-// Show priority-based search items per screen size
+// Show items by priority based on screen size
 const getItemsByPriority = (screenSize: string) => {
   const allItems = [
     { label: 'Username', prop: 'username', priority: 'high' },
@@ -229,10 +229,10 @@ const getItemsByPriority = (screenSize: string) => {
 ```
 
 ### 3. Performance Optimization
-Optimize rendering performance on small-screen devices:
+Optimize rendering performance on small screens:
 
 ```typescript
-// Small-screen performance optimization
+// Small screen performance optimization
 const optimizedConfig = {
   // Reduce columns on mobile for better performance
   cols: window.innerWidth < 768 ? { xs: 1 } : { xs: 1, sm: 2, md: 3, lg: 4 },
@@ -245,6 +245,6 @@ const optimizedConfig = {
 
 ## Related Links
 
-- [Collapsible Search](./collapsible-search) - Learn about combining folding functionality with responsiveness
+- [Collapsible Search](./collapsible-search) - Learn about combining folding with responsiveness
 - [Table Integration](./table-integration) - Understand responsive search integration with tables
 - [Basic Usage](./basic-usage) - Learn fundamental search functionality

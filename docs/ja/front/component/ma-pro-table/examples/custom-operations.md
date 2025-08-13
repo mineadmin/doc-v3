@@ -1,16 +1,16 @@
 # カスタム操作
 
-異なるタイプの操作列の設定を表示し、条件表示、カスタムスタイル、複雑な操作ロジックを含みます。
+異なるタイプの操作列の設定を表示し、条件付き表示、カスタムスタイル、複雑な操作ロジックを含みます。
 
 <DemoPreview dir="demos/ma-pro-table-examples/custom-operations" />
 
 ## 機能特徴
 
 - **複数の操作タイプ**: フラット表示、ドロップダウンメニュー、自動折りたたみなどの表示方法をサポート
-- **条件表示**: 行データに基づいて動的に操作ボタンを表示/非表示
+- **条件付き表示**: 行データに基づいて操作ボタンを動的に表示/非表示
 - **右クリックメニュー**: 行の右クリックメニュー機能をサポート
-- **ドラッグソート**: 行のドラッグによる並べ替えをサポート
-- **バッチ操作**: 複数選択とバッチ操作機能をサポート
+- **ドラッグ&ドロップ並び替え**: 行のドラッグによる並び替えをサポート
+- **一括操作**: 複数選択と一括操作機能をサポート
 
 ## 操作列の設定
 
@@ -44,7 +44,7 @@
 ```javascript
 operationConfigure: {
   type: 'auto',
-  fold: 2,                  // 2つのボタンを表示後に折りたたむ
+  fold: 2,                  // 2つのボタンを表示後に折りたたみ
   actions: [...]
 }
 ```
@@ -80,13 +80,13 @@ operationConfigure: {
 }
 ```
 
-### 条件表示
+### 条件付き表示
 ```javascript
 {
   name: 'approve',
   text: '承認',
-  show: (data) => data.row.status === 'pending',    // 条件表示
-  disabled: (data) => !data.row.canApprove,        // 条件無効化
+  show: (data) => data.row.status === 'pending',    // 条件付き表示
+  disabled: (data) => !data.row.canApprove,        // 条件付き無効化
   onClick: (data, proxy) => {
     // 承認ロジック
     proxy.refresh()  // テーブルを更新
@@ -114,12 +114,12 @@ operationConfigure: {
 }
 ```
 
-### 操作の並べ替え
+### 操作の並び替え
 ```javascript
 {
   name: 'high-priority',
   text: '高優先度',
-  order: 1,                 // 並べ替え重み、数字が小さいほど前に表示
+  order: 1,                 // 並び替え重み、数字が小さいほど前に表示
   onClick: (data) => {
     console.log('高優先度操作')
   }
@@ -151,7 +151,7 @@ const options = {
       {
         label: '削除',
         icon: 'delete',
-        disabled: (data) => !data.row.canDelete,  // 条件無効化
+        disabled: (data) => !data.row.canDelete,  // 条件付き無効化
         onMenuClick: (data, event) => {
           console.log('右クリックで削除:', data.row)
         }
@@ -161,7 +161,7 @@ const options = {
 }
 ```
 
-## ドラッグソート
+## ドラッグ&ドロップ並び替え
 
 ### ドラッグの有効化
 ```javascript
@@ -196,7 +196,7 @@ const handleRowDragSort = (tableData) => {
 </script>
 ```
 
-## バッチ操作
+## 一括操作
 
 ### 複数選択の有効化
 ```javascript
@@ -207,7 +207,7 @@ const options = {
 }
 ```
 
-### バッチ操作の例
+### 一括操作の例
 ```vue
 <template>
   <div class="control-panel">
@@ -226,7 +226,7 @@ const batchApprove = () => {
 }
 
 const batchDelete = () => {
-  ElMessageBox.confirm('選択した項目を一括削除しますか?', 'バッチ操作', {
+  ElMessageBox.confirm('選択した項目を一括削除しますか?', '一括操作', {
     type: 'warning'
   }).then(() => {
     // 一括削除ロジック
@@ -236,7 +236,7 @@ const batchDelete = () => {
 </script>
 ```
 
-## 高度な操作例
+## 高度な操作の例
 
 ### 非同期操作
 ```javascript

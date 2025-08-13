@@ -92,7 +92,7 @@ Range validation for numeric inputs:
 ## Advanced Validation Scenarios
 
 ### Asynchronous Validation
-Supports server-side validation with asynchronous rules:
+Support for server-side validation with asynchronous rules:
 
 ```typescript
 // Asynchronous validation example
@@ -168,7 +168,7 @@ const createConditionalRules = () => {
 ```
 
 ### Combined Validation
-Validation across multiple fields:
+Multiple fields joint validation:
 
 ```typescript
 // Password confirmation validation
@@ -224,7 +224,7 @@ const userRegisterSearchItems = [
     render: 'input',
     rules: [
       { required: true, message: 'Username cannot be empty' },
-      { min: 3, max: 20, message: 'Username must be 3-20 characters' },
+      { min: 3, max: 20, message: 'Username length must be 3-20 characters' },
       { pattern: /^[a-zA-Z0-9_]+$/, message: 'Username can only contain letters, numbers, and underscores' }
     ]
   },
@@ -302,7 +302,7 @@ const orderSearchItems = [
 ## Validation Timing Control
 
 ### Trigger Configuration
-Different validation trigger modes:
+Different validation trigger methods:
 
 ```typescript
 // Real-time validation
@@ -324,7 +324,7 @@ Different validation trigger modes:
   rules: [
     { 
       validator: validateAsync, 
-      trigger: 'manual'  // Requires manual validation
+      trigger: 'manual'  // Requires manual validation call
     }
   ]
 }
@@ -397,7 +397,7 @@ const createFriendlyRules = (fieldName: string) => [
 - Validation caching mechanism
 
 ```typescript
-// Validation caching
+// Validation cache
 const validationCache = new Map()
 
 const cachedValidator = (cacheKey: string, validator: Function) => {
@@ -472,4 +472,4 @@ const ValidationRules = {
 
 - [Advanced Search](./advanced-search) - Learn about validation applications in complex search scenarios
 - [Table Integration](./table-integration) - Understand validation's role before data submission
-- [Methods Demo](./methods-demo) - Learn about component methods related to validation
+- [Methods Demo](./methods-demo) - Learn about validation-related component methods

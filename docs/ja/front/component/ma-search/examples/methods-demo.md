@@ -1,15 +1,15 @@
-# メソッドデモンストレーション
+# メソッドデモ
 
-公開されているすべてのメソッドの使用方法を展示し、リアルタイム状態追跡と操作ログ記録を含め、開発者がコンポーネントのプログラミングインターフェースと高度な使用方法を深く理解できるようにします。
+公開されているすべてのメソッドの使用方法を展示し、リアルタイムの状態追跡と操作ログ記録を含め、開発者がコンポーネントのプログラミングインターフェースと高度な使用方法を深く理解するのを支援します。
 
-## メソッドデモンストレーション
+## メソッドデモ
 
 <DemoPreview dir="demos/ma-search/methods-demo" />
 
-## 公開メソッド詳細解説
+## 公開メソッド詳細
 
 ### フォームデータ管理
-検索フォームデータの操作と取得:
+検索フォームのデータを操作および取得:
 
 ```typescript
 // 検索フォームデータを設定
@@ -141,7 +141,7 @@ const setBatchItems = () => {
 // 単一検索項目を追加
 const appendSingleItem = () => {
   const newItem = {
-    label: '登録時間',
+    label: '登録日時',
     prop: 'created_at',
     render: 'date-picker',
     props: {
@@ -161,7 +161,7 @@ const removeSpecificItem = (prop: string) => {
 const findItemByProp = (prop: string) => {
   const item = searchRef.value?.getItemByProp(prop)
   if (item) {
-    console.log(`検索項目が見つかりました:`, item)
+    console.log(`検索項目を発見:`, item)
   } else {
     console.log(`prop "${prop}" の検索項目が見つかりません`)
   }
@@ -177,7 +177,7 @@ const getAllItems = () => {
 ```
 
 ### フォーム参照取得
-内部ma-formコンポーネント参照を取得してより低レベルな操作を実行:
+内部 ma-form コンポーネント参照を取得してより低レベルの操作を実行:
 
 ```typescript
 // フォーム参照を取得
@@ -204,12 +204,12 @@ const validateViaFormRef = async () => {
   }
 }
 
-// フォーム参照でリセットを実行
+// フォーム参照でリセット
 const resetViaFormRef = () => {
   const formRef = searchRef.value?.getMaFormRef()
   if (formRef) {
     formRef.resetFields()
-    console.log('フォームをリセットしました')
+    console.log('フォームをリセット')
   }
 }
 ```
@@ -261,14 +261,14 @@ const applyPreset = (scenario: keyof typeof presetScenarios) => {
 ユーザー権限に基づいて検索機能を動的に調整:
 
 ```typescript
-// 検索項目の権限制御
+// 権限制御検索項目
 const applyPermissionControl = (userRole: string) => {
   const baseItems = [
     { label: 'ユーザー名', prop: 'username', render: 'input' },
     { label: '状態', prop: 'status', render: 'select', options: statusOptions }
   ]
   
-  // 管理者はより多くの検索項目を見られる
+  // 管理者はより多くの検索項目を閲覧可能
   if (userRole === 'admin') {
     baseItems.push(
       { label: '作成者', prop: 'creator', render: 'select', options: userOptions },
@@ -324,7 +324,7 @@ const adjustForDevice = () => {
   searchRef.value?.setOptions(newOptions)
 }
 
-// ウィンドウサイズ変化を監視
+// ウィンドウサイズ変更を監視
 onMounted(() => {
   window.addEventListener('resize', adjustForDevice)
   adjustForDevice() // 初期調整
@@ -335,7 +335,7 @@ onUnmounted(() => {
 })
 ```
 
-## 主要特性
+## 主要機能
 
 - 🔧 完全なプログラミングインターフェース
 - 📊 リアルタイム状態追跡
@@ -347,7 +347,7 @@ onUnmounted(() => {
 ## 高度な使用例
 
 ### 検索テンプレートシステム
-保存可能でロード可能な検索テンプレートを作成:
+保存および読み込み可能な検索テンプレートを作成:
 
 ```typescript
 // 検索テンプレート管理
@@ -367,7 +367,7 @@ class SearchTemplateManager {
     localStorage.setItem('searchTemplates', JSON.stringify(Array.from(this.templates)))
   }
   
-  // 検索テンプレートをロード
+  // 検索テンプレートを読み込み
   loadTemplate(name: string, searchRef: any) {
     const template = this.templates.get(name)
     if (template) {
@@ -394,7 +394,7 @@ class SearchTemplateManager {
 検索コンポーネントの各種状態変化を監視:
 
 ```typescript
-// 状態モニター
+// 状態監視器
 class SearchStateMonitor {
   private logs: any[] = []
   

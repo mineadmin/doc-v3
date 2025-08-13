@@ -9,7 +9,7 @@ Demonstrates the implementation of complex search scenarios, including advanced 
 ## Advanced Features
 
 ### JSX Custom Rendering
-Fully customize form components by returning JSX elements through functions:
+Fully customize form components by returning JSX elements via functions:
 
 ```typescript
 {
@@ -32,7 +32,7 @@ Use the `hide` function to dynamically show or hide search items:
 ```
 
 ### Multi-selection Components
-Supports multi-selection components like checkbox groups and cascading selectors:
+Support for multi-select components like checkbox groups and cascading selectors:
 
 ```typescript
 {
@@ -49,15 +49,15 @@ Supports multi-selection components like checkbox groups and cascading selectors
 Suitable for complex business data filtering, supporting multi-dimensional and multi-condition combined queries.
 
 ### 2. Report Query Systems  
-Ideal for report queries requiring precise condition control, supporting complex conditions like date ranges and numerical intervals.
+Ideal for report queries requiring precise condition control, supporting complex conditions like time ranges and numerical intervals.
 
 ### 3. E-commerce Advanced Filtering
-Perfect for product filtering on e-commerce platforms, supporting multiple filtering dimensions such as brand, specifications, and price.
+Perfect for product filtering on e-commerce platforms, supporting multiple dimensions like brands, specifications, and prices.
 
 ## Key Features
 
 - 🎯 Supports JSX/TSX custom rendering
-- 🔄 Dynamic display and hiding of search items
+- 🔄 Dynamic show/hide of search items
 - 📊 Multiple data selection component support
 - ⚡ Performance-optimized rendering mechanism
 - 🛠 Flexible configuration and extensibility
@@ -67,15 +67,15 @@ Perfect for product filtering on e-commerce platforms, supporting multiple filte
 ### Custom Rendering Functions
 - Supports returning any Vue component or JSX element
 - Automatically passes form data and update methods
-- Full type inference and intelligent prompts
+- Full type inference and intelligent hints
 
 ### Performance Optimization
-- Uses virtual list technology to handle large numbers of options
+- Uses virtual list technology for handling large option sets
 - Debounce processing to reduce unnecessary requests
 - Smart caching to enhance user experience
 
 ## Related Links
 
 - [Basic Usage](./basic-usage) - Learn basic search configurations
-- [Custom Actions](./custom-actions) - Learn about custom action buttons
-- [Dynamic Management](./dynamic-items) - Learn about dynamic search item management
+- [Custom Actions](./custom-actions) - Understand custom action buttons
+- [Dynamic Management](./dynamic-items) - Learn dynamic search item management

@@ -6,11 +6,11 @@ Demonstrates how to extend toolbar functionality through the plugin API, includi
 
 ## Features
 
-- **Plugin Mechanism**: Extend toolbar functionality via plugin API  
-- **Custom Tools**: Support for registering custom tool buttons  
-- **Slot Extensions**: Support for extending toolbar layout via slots  
-- **State Control**: Support for dynamically showing/hiding tools  
-- **Order Control**: Support for customizing tool display order  
+- **Plugin Mechanism**: Extend toolbar functionality via plugin API
+- **Custom Tools**: Support for registering custom tool buttons
+- **Slot Extensions**: Support for extending toolbar layout via slots
+- **State Control**: Dynamic show/hide of tools
+- **Order Control**: Customizable tool display order
 
 ## Plugin API Extensions
 
@@ -183,7 +183,7 @@ add({
 
 ## Slot Extensions
 
-### Toolbar Left Extension
+### Left Toolbar Extension
 ```vue
 <template>
   <MaProTable :options="options" :schema="schema">
@@ -226,7 +226,7 @@ add({
 </template>
 ```
 
-### Toolbar Before/After Extensions
+### Before/After Toolbar Extensions
 ```vue
 <template>
   <MaProTable :options="options" :schema="schema">
@@ -338,7 +338,7 @@ add({
 })
 ```
 
-### Real-time Data Tool
+### Realtime Data Tool
 ```javascript
 add({
   name: 'realtime',
@@ -349,7 +349,7 @@ add({
       <el-button
         circle
         type={isRealtime ? 'success' : 'info'}
-        title={isRealtime ? 'Stop Real-time Refresh' : 'Start Real-time Refresh'}
+        title={isRealtime ? 'Stop Realtime Refresh' : 'Start Realtime Refresh'}
         onClick={() => {
           setIsRealtime(!isRealtime)
           if (!isRealtime) {
@@ -384,25 +384,25 @@ interface MaProTableToolbar {
 ## Best Practices
 
 ### 1. Tool Naming
-- Use descriptive names  
-- Avoid conflicts with built-in tools  
-- Maintain naming consistency  
+- Use descriptive names
+- Avoid conflicts with built-in tools
+- Maintain naming consistency
 
 ### 2. User Experience
-- Provide clear tooltips  
-- Use appropriate icons and colors  
-- Consider logical grouping of tools  
+- Provide clear tooltips
+- Use appropriate icons and colors
+- Consider logical grouping of tools
 
 ### 3. Performance Optimization
-- Avoid heavy computations in render functions  
-- Use reactive states appropriately  
-- Remove unnecessary tools when appropriate  
+- Avoid heavy computations in render functions
+- Use reactive states appropriately
+- Remove unnecessary tools when appropriate
 
 ### 4. Permission Control
 ```javascript
 add({
   name: 'admin-tool',
-  show: () => hasRole('admin'),         // Display based on permissions
+  show: () => hasRole('admin'),         // Permission-based display
   render: ({ proxy }) => (...)
 })
 ```

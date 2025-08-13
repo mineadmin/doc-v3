@@ -7,10 +7,10 @@ Demonstrates various search component types and complex search logic, including 
 ## Features
 
 - **Rich Search Components**: Supports input, select, date-range, slider, checkbox, etc.
-- **Multi-Condition Combination**: Allows complex search condition combinations
-- **Search Events**: Can listen for search submission and reset events
+- **Multi-Condition Combination**: Supports complex search condition combinations
+- **Search Events**: Listen for search submission and reset events
 - **Default Expansion**: Configurable number of default displayed search items
-- **Responsive Layout**: Search form supports responsive layout
+- **Responsive Layout**: Search form supports responsive layouts
 
 ## Search Component Types
 
@@ -36,7 +36,7 @@ Demonstrates various search component types and complex search logic, including 
   render: 'select',
   renderProps: {
     options: [
-      { label: 'Tech', value: 'Tech' },
+      { label: 'Technology', value: 'Technology' },
       { label: 'Product', value: 'Product' }
     ]
   }
@@ -124,7 +124,7 @@ Demonstrates various search component types and complex search logic, including 
 ### Radio Group Component
 ```javascript
 {
-  label: 'Status',
+  label: 'Employment Status',
   prop: 'status',
   render: 'radio-group',
   renderProps: {
@@ -154,7 +154,7 @@ const options = {
 const options = {
   onSearchSubmit: (form) => {
     console.log('Search conditions:', form)
-    // Can preprocess search conditions
+    // Pre-process search conditions if needed
     return form
   },
   onSearchReset: (form) => {

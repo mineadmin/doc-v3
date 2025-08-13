@@ -1,6 +1,6 @@
 # フォームバリデーション
 
-様々なバリデーションルールとシナリオをデモンストレーションします。基本バリデーション、高度なバリデーション、非同期バリデーション、条件付きバリデーションなど、検索条件の正確性とデータの完全性を確保します。
+様々なバリデーションルールとシナリオをデモンストレーションします。基本バリデーション、高度なバリデーション、非同期バリデーション、条件付きバリデーションなどを含み、検索条件の正確性とデータの完全性を保証します。
 
 ## フォームバリデーションデモ
 
@@ -9,7 +9,7 @@
 ## バリデーションルール説明
 
 ### 基本バリデーション
-最も一般的なフォームバリデーションルール:
+最も一般的なフォームバリデーションルール：
 
 ```typescript
 // 必須バリデーション
@@ -28,13 +28,13 @@
   prop: 'description', 
   render: 'input',
   rules: [
-    { min: 10, max: 100, message: '説明は10〜100文字で入力してください', trigger: 'blur' }
+    { min: 10, max: 100, message: '説明は10～100文字で入力してください', trigger: 'blur' }
   ]
 }
 ```
 
 ### フォーマットバリデーション
-メールアドレス、電話番号、URLなどのフォーマットバリデーション:
+メールアドレス、電話番号、URLなどのフォーマットバリデーション：
 
 ```typescript
 // メールアドレスバリデーション
@@ -64,7 +64,7 @@
 ```
 
 ### 数値範囲バリデーション
-数値入力の範囲バリデーション:
+数値入力の範囲バリデーション：
 
 ```typescript
 // 数値範囲バリデーション
@@ -73,7 +73,7 @@
   prop: 'age',
   render: 'input-number',
   rules: [
-    { type: 'number', min: 18, max: 65, message: '年齢は18〜65歳の間で入力してください', trigger: 'blur' }
+    { type: 'number', min: 18, max: 65, message: '年齢は18～65歳の間で入力してください', trigger: 'blur' }
   ]
 }
 
@@ -92,7 +92,7 @@
 ## 高度なバリデーションシナリオ
 
 ### 非同期バリデーション
-サーバーサイドバリデーションをサポートする非同期バリデーションルール:
+サーバーサイドバリデーションをサポートする非同期バリデーションルール：
 
 ```typescript
 // 非同期バリデーション例
@@ -116,7 +116,7 @@
   ]
 }
 
-// デバウンス付き非同期バリデーション
+// デバウンス非同期バリデーション
 {
   label: '企業名',
   prop: 'company',
@@ -128,7 +128,7 @@
         
         const isValid = await validateCompanyName(value)
         if (!isValid) {
-          throw new Error('企業名が規制に準拠していません')
+          throw new Error('企業名が規格に合致しません')
         }
       }, 500),
       trigger: 'change'
@@ -138,7 +138,7 @@
 ```
 
 ### 条件付きバリデーション
-他のフィールド値に基づく条件付きバリデーション:
+他のフィールド値に基づく条件付きバリデーション：
 
 ```typescript
 // 条件付きバリデーション例
@@ -148,9 +148,9 @@ const createConditionalRules = () => {
       validator: (rule: any, value: string) => {
         const formData = searchRef.value?.getSearchForm()
         
-        // 「企業ユーザー」を選択時、企業名は必須
+        // 「企業ユーザー」選択時、企業名は必須
         if (formData?.userType === 'enterprise' && !value) {
-          throw new Error('企業ユーザーは企業名を入力する必要があります')
+          throw new Error('企業ユーザーは企業名を入力してください')
         }
       },
       trigger: 'blur'
@@ -158,7 +158,7 @@ const createConditionalRules = () => {
   ]
 }
 
-// 条件付きバリデーションの適用
+// 条件付きバリデーション適用
 {
   label: '企業名',
   prop: 'company',
@@ -168,7 +168,7 @@ const createConditionalRules = () => {
 ```
 
 ### 複合バリデーション
-複数フィールドの連携バリデーション:
+複数フィールドの連携バリデーション：
 
 ```typescript
 // パスワード確認バリデーション
@@ -202,7 +202,7 @@ const createConditionalRules = () => {
         const formData = searchRef.value?.getSearchForm()
         
         if (value && formData?.startDate && new Date(value) < new Date(formData.startDate)) {
-          throw new Error('終了日は開始日より前に設定できません')
+          throw new Error('終了日は開始日より前にはできません')
         }
       },
       trigger: 'change'
@@ -214,7 +214,7 @@ const createConditionalRules = () => {
 ## 使用シナリオ
 
 ### 1. ユーザー登録検索
-ユーザー登録情報の厳格なバリデーション:
+ユーザー登録情報の厳格なバリデーション：
 
 ```typescript
 const userRegisterSearchItems = [
@@ -224,7 +224,7 @@ const userRegisterSearchItems = [
     render: 'input',
     rules: [
       { required: true, message: 'ユーザー名は必須です' },
-      { min: 3, max: 20, message: 'ユーザー名は3〜20文字で入力してください' },
+      { min: 3, max: 20, message: 'ユーザー名は3～20文字で入力してください' },
       { pattern: /^[a-zA-Z0-9_]+$/, message: 'ユーザー名は英数字とアンダースコアのみ使用できます' }
     ]
   },
@@ -241,7 +241,7 @@ const userRegisterSearchItems = [
 ```
 
 ### 2. 金融データ検索
-金融分野の精密なデータバリデーション:
+金融分野の精密データバリデーション：
 
 ```typescript
 const financialSearchItems = [
@@ -251,7 +251,7 @@ const financialSearchItems = [
     render: 'input-number',
     rules: [
       { required: true, message: '取引金額は必須です' },
-      { type: 'number', min: 0.01, max: 999999.99, message: '金額は0.01〜999999.99の範囲で入力してください' }
+      { type: 'number', min: 0.01, max: 999999.99, message: '金額は0.01～999999.99の範囲で入力してください' }
     ]
   },
   {
@@ -260,14 +260,14 @@ const financialSearchItems = [
     render: 'input',
     rules: [
       { required: true, message: '口座番号は必須です' },
-      { pattern: /^\d{16,19}$/, message: '口座番号は16〜19桁の数字で入力してください' }
+      { pattern: /^\d{16,19}$/, message: '口座番号は16～19桁の数字で入力してください' }
     ]
   }
 ]
 ```
 
 ### 3. 注文管理バリデーション
-注文検索のビジネスルールバリデーション:
+注文検索のビジネスルールバリデーション：
 
 ```typescript
 const orderSearchItems = [
@@ -276,7 +276,7 @@ const orderSearchItems = [
     prop: 'orderNo',
     render: 'input',
     rules: [
-      { pattern: /^ORD\d{12}$/, message: '注文番号形式: ORD+12桁数字' }
+      { pattern: /^ORD\d{12}$/, message: '注文番号形式：ORD+12桁数字' }
     ]
   },
   {
@@ -290,11 +290,11 @@ const orderSearchItems = [
 ]
 ```
 
-## 主な特徴
+## 主要機能
 
 - ✅ 完全なバリデーションルールサポート
 - 🔄 非同期バリデーション機能
-- 🎯 条件付きバリデーションと複合バリデーション
+- 🎯 条件付きバリデーションと連携バリデーション
 - 📝 分かりやすいエラーメッセージ
 - ⚡ 高性能なバリデーションメカニズム
 - 🛡 データセキュリティと完全性の保証
@@ -302,17 +302,17 @@ const orderSearchItems = [
 ## バリデーションタイミング制御
 
 ### トリガー方法設定
-異なるバリデーションタイミング:
+異なるバリデーショントリガータイミング：
 
 ```typescript
 // リアルタイムバリデーション
 {
   rules: [
-    { required: true, message: '必須項目です', trigger: 'change' }
+    { required: true, message: '必須入力です', trigger: 'change' }
   ]
 }
 
-// フォーカス喪失時バリデーション
+// フォーカス外れバリデーション
 {
   rules: [
     { type: 'email', message: '正しいメールアドレス形式で入力してください', trigger: 'blur' }
@@ -331,10 +331,10 @@ const orderSearchItems = [
 ```
 
 ### バリデーション状態管理
-バリデーション状態の取得と制御:
+バリデーション状態の取得と制御：
 
 ```typescript
-// 単一フィールドのバリデーション
+// 単一フィールドバリデーション
 const validateField = async (prop: string) => {
   const formRef = searchRef.value?.getMaFormRef()
   try {
@@ -345,12 +345,12 @@ const validateField = async (prop: string) => {
   }
 }
 
-// フォーム全体のバリデーション
+// フォーム全体バリデーション
 const validateForm = async () => {
   const formRef = searchRef.value?.getMaFormRef()
   try {
     await formRef?.validate()
-    console.log('フォームバリデーションに成功しました、検索を実行できます')
+    console.log('フォームバリデーションに成功しました。検索を実行できます')
     return true
   } catch (error) {
     console.log('フォームバリデーションに失敗しました:', error)
@@ -358,7 +358,7 @@ const validateForm = async () => {
   }
 }
 
-// バリデーション状態のクリア
+// バリデーション状態クリア
 const clearValidation = () => {
   const formRef = searchRef.value?.getMaFormRef()
   formRef?.clearValidate()
@@ -367,7 +367,7 @@ const clearValidation = () => {
 
 ## ベストプラクティス
 
-### 1. ユーザーエクスペリエンスの最適化
+### 1. ユーザーエクスペリエンス最適化
 - リアルタイムのバリデーションフィードバックを提供
 - 分かりやすいエラーメッセージを使用
 - エラーメッセージの国際化をサポート
@@ -393,7 +393,7 @@ const createFriendlyRules = (fieldName: string) => [
 
 ### 2. パフォーマンス最適化
 - 頻繁なバリデーションにはデバウンスを使用
-- 非同期バリデーションのエラーハンドリング
+- 非同期バリデーションのエラー処理
 - バリデーションキャッシュメカニズム
 
 ```typescript
@@ -451,12 +451,12 @@ const ValidationRules = {
     type: 'number',
     min,
     max,
-    message: message || `値は${min}〜${max}の間で入力してください`,
+    message: message || `${min}～${max}の範囲で入力してください`,
     trigger: 'blur'
   })
 }
 
-// 共通ルールの使用例
+// 共通ルールの使用
 {
   label: 'メールアドレス',
   prop: 'email',
@@ -470,6 +470,6 @@ const ValidationRules = {
 
 ## 関連リンク
 
-- [高度な検索](./advanced-search) - 複雑な検索シナリオでのバリデーション適用を学ぶ
-- [テーブル統合](./table-integration) - データ送信前のバリデーションの役割を理解する
-- [メソッドデモ](./methods-demo) - バリデーション関連のコンポーネントメソッドを学ぶ
+- [高度な検索](./advanced-search) - 複雑な検索シナリオでのバリデーション適用を理解
+- [テーブル統合](./table-integration) - データ送信前のバリデーションの役割を理解
+- [メソッドデモ](./methods-demo) - バリデーション関連のコンポーネントメソッドを理解

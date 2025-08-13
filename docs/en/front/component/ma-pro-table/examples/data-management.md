@@ -1,14 +1,14 @@
 # Data Management
 
-Demonstrates complete CRUD operations including create, edit, delete, and data linkage features.
+Demonstrates complete CRUD operations including create, edit, delete, and data linkage.
 
 <DemoPreview dir="demos/ma-pro-table-examples/data-management" />
 
-## Key Features
+## Features
 
-- **Full CRUD**: Supports create, read, update, and delete operations
+- **Complete CRUD**: Supports create, read, update, and delete operations
 - **Form Linkage**: Create/edit forms interact with table data
-- **Data Statistics**: Real-time statistical indicators
+- **Data Statistics**: Real-time statistical metrics
 - **Batch Operations**: Supports batch selection and operations
 - **Status Synchronization**: Automatically refreshes table data after operations
 
@@ -71,7 +71,7 @@ const statistics = computed(() => {
 })
 ```
 
-## Add/Edit Form
+## Create/Edit Form
 
 ### Form Component
 ```vue
@@ -138,7 +138,7 @@ const formRules = {
 }
 ```
 
-## CRUD Implementation
+## CRUD Operations Implementation
 
 ### Create Operation
 ```javascript
@@ -155,7 +155,7 @@ const handleSaveEmployee = async () => {
     await formRef.value.validate()
     saving.value = true
     
-    // Mock API call
+    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000))
     
     if (editingEmployee.value) {
@@ -243,7 +243,7 @@ const showEmployeeDetail = (employee) => {
       Name: ${employee.name}
       Department: ${employee.department}
       Position: ${employee.position}
-      Salary: $${employee.salary.toLocaleString()}
+      Salary: ￥${employee.salary.toLocaleString()}
     `,
     type: 'info',
     duration: 5000
@@ -262,11 +262,11 @@ const showEmployeeDetail = (employee) => {
 
 ## Batch Operations
 
-### Enable Selection
+### Enable Multiple Selection
 ```javascript
 const options = {
   tableOptions: {
-    selection: true         // Enable multi-selection
+    selection: true         // Enable multiple selection
   }
 }
 ```
@@ -313,8 +313,8 @@ const handleBatchDelete = () => {
 ```javascript
 const handleSearchSubmit = (form) => {
   console.log('Search criteria:', form)
-  ElMessage.info('Performing search')
-  // Handle search logic here
+  ElMessage.info('Executing search')
+  // Can handle search logic here
   return form
 }
 
@@ -406,23 +406,23 @@ const loadDataFromStorage = () => {
 ## Best Practices
 
 ### 1. Form Design
-- Group form fields logically
+- Reasonably group form fields
 - Provide clear validation prompts
 - Support keyboard shortcuts
 
 ### 2. Data Management
 - Synchronize table and form data promptly
-- Provide data backup and recovery
-- Implement optimistic locking to avoid conflicts
+- Provide data backup and recovery functions
+- Implement optimistic locking to avoid data conflicts
 
 ### 3. User Experience
-- Provide operation confirmation and undo
+- Provide operation confirmation and undo functions
 - Display operation progress and status
 - Proper error handling and prompts
 
 ### 4. Performance Optimization
 - Consider pagination and virtual scrolling for large datasets
 - Avoid frequent data refreshes
-- Use debounce and throttle appropriately
+- Use debouncing and throttling appropriately
 
-The data management feature allows you to build complete data operation interfaces to meet various business scenario requirements.
+Data management features allow you to build complete data operation interfaces to meet various business scenario requirements.

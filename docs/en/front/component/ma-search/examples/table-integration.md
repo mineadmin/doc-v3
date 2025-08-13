@@ -6,9 +6,9 @@ A complete integration solution for data tables, including search, pagination, s
 
 <DemoPreview dir="demos/ma-search/table-integration" />
 
-## Integration Solution Explanation
+## Integration Solution Details
 
-### Search and Table Synchronization
+### Search and Table Interaction
 Real-time synchronization between search conditions and table data:
 
 ```typescript
@@ -34,7 +34,7 @@ const handleReset = () => {
 ```
 
 ### Pagination Integration
-Complete integration between search and pagination systems:
+Complete integration of search and pagination systems:
 
 ```typescript
 // Pagination configuration
@@ -89,7 +89,7 @@ const loadTableData = async () => {
 }
 ```
 
-## Usage Scenarios
+## Use Cases
 
 ### 1. User Management System
 Complete user data management interface:
@@ -161,7 +161,7 @@ const switchView = (mode: 'table' | 'card') => {
 ```
 
 ### Sorting Integration
-Synchronization between search conditions and table sorting:
+Interaction between search conditions and table sorting:
 
 ```typescript
 // Sorting state management
@@ -219,7 +219,7 @@ const handleBatchOperation = async (operation: string) => {
 
 ## Key Features
 
-- 🔗 Complete search and table synchronization
+- 🔗 Complete search and table interaction
 - 📄 Smart pagination integration
 - 🔄 Flexible view switching
 - 📊 Powerful sorting functionality

@@ -187,7 +187,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/ja/front/component/ma-form/examples/slots-examples'
             },
             {
-              text: 'メソッド公開',
+              text: '公開メソッド',
               link: '/ja/front/component/ma-form/examples/expose-methods'
             },
             {
@@ -195,7 +195,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/ja/front/component/ma-form/examples/loading-states'
             },
             {
-              text: 'ネストフォーム',
+              text: 'ネストされたフォーム',
               link: '/ja/front/component/ma-form/examples/nested-forms'
             },
             {
@@ -226,7 +226,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/ja/front/component/ma-table/sorting'
             },
             {
-              text: 'テーブルフィルタ',
+              text: 'テーブルフィルタリング',
               link: '/ja/front/component/ma-table/filter'
             },
             {
@@ -234,7 +234,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/ja/front/component/ma-table/custom-render'
             },
             {
-              text: '動的カラム管理',
+              text: '動的列管理',
               link: '/ja/front/component/ma-table/dynamic-columns'
             },
             {
@@ -265,7 +265,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/ja/front/component/ma-search/examples/basic-usage'
             },
             {
-              text: '高度検索',
+              text: '高度な検索',
               link: '/ja/front/component/ma-search/examples/advanced-search'
             },
             {
@@ -308,7 +308,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/ja/front/component/ma-pro-table/examples/basic'
             },
             {
-              text: '高度検索',
+              text: '高度な検索',
               link: '/ja/front/component/ma-pro-table/examples/advanced-search'
             },
             {
@@ -368,7 +368,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/ja/backend/security/passport"
         },
         {
-          text: "ユーザー認可(RBAC)",
+          text: "ユーザー権限(RBAC)",
           link: "/ja/backend/security/access"
         },
         {

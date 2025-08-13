@@ -69,7 +69,7 @@ const hasUserItem = !!searchRef.value?.getItemByProp('username')
 Dynamically display different search conditions based on user permissions:
 
 ```typescript
-// Admin sees all search items, regular users see partial items
+// Admins see all search items, regular users see partial items
 if (userRole === 'admin') {
   searchRef.value?.appendItem({
     label: 'Creator',
@@ -81,7 +81,7 @@ if (userRole === 'admin') {
 ```
 
 ### 2. Business Scenario Switching
-Switch between different search condition combinations based on business scenarios:
+Switch different search condition combinations based on business scenarios:
 
 ```typescript
 // Switch business scenario
@@ -126,7 +126,7 @@ const onCategoryChange = (categoryId: string) => {
 - 🔧 Full CRUD operation support
 - 🔄 Real-time search item management
 - 📊 Comprehensive query and retrieval methods
-- � Support for complex business logic
+- 🎯 Support for complex business logic
 - ⚡ High-performance dynamic update mechanism
 
 ## Advanced Usage
@@ -143,7 +143,7 @@ const templates = {
     { label: 'Status', prop: 'status', render: 'select', options: statusOptions }
   ],
   orderSearch: [
-    { label: 'Order Number', prop: 'order_no', render: 'input' },
+    { label: 'Order No.', prop: 'order_no', render: 'input' },
     { label: 'Order Status', prop: 'order_status', render: 'select', options: orderStatusOptions },
     { label: 'Order Time', prop: 'created_at', render: 'date-picker' }
   ]
@@ -166,7 +166,7 @@ const addItemWithValidation = (item: any) => {
   // Add validation rules for certain fields
   if (item.prop === 'email') {
     item.rules = [
-      { required: true, message: 'Email cannot be empty', trigger: 'blur' },
+      { required: true, message: 'Email is required', trigger: 'blur' },
       { type: 'email', message: 'Invalid email format', trigger: 'blur' }
     ]
   }
@@ -178,7 +178,7 @@ const addItemWithValidation = (item: any) => {
 ## Best Practices
 
 ### 1. State Management
-Recommended to use state management libraries (e.g., Pinia) for managing complex search item states:
+Recommended to use state management libraries (e.g., Pinia) to manage complex search item states:
 
 ```typescript
 // Use Pinia store to manage search items
@@ -200,7 +200,7 @@ const useSearchStore = defineStore('search', () => {
 ```
 
 ### 2. Performance Optimization
-Use debounce technique for performance optimization when frequently updating search items:
+Use debounce techniques to optimize performance during frequent dynamic updates:
 
 ```typescript
 import { debounce } from 'lodash-es'
