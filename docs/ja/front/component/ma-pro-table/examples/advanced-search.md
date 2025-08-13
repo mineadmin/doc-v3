@@ -108,7 +108,7 @@
 ### チェックボックスグループコンポーネント
 ```javascript
 {
-  label: '職位ランク',
+  label: '職位',
   prop: 'level',
   render: 'checkbox-group',
   renderProps: {
@@ -129,7 +129,7 @@
   render: 'radio-group',
   renderProps: {
     options: [
-      { label: 'すべて', value: '' },
+      { label: '全て', value: '' },
       { label: '在職中', value: 1 },
       { label: '退職', value: 0 }
     ]
@@ -166,7 +166,7 @@ const options = {
 
 ## 高度なテーブル列
 
-### プログレスバー表示
+### 進捗バー表示
 ```javascript
 {
   label: '業績評価',
@@ -207,12 +207,12 @@ const options = {
   type: 'operation',
   operationConfigure: {
     type: 'auto',
-    fold: 2,               // 2つ以上の操作時に折りたたみ
+    fold: 2,               // 2つ以上の操作で折りたたみ
     actions: [
       {
         name: 'promote',
         text: '昇進',
-        show: (data) => data.row.performance >= 85,  // 条件付き表示
+        show: (data) => data.row.performance >= 85,  // 条件表示
         onClick: (data) => {
           console.log('昇進社員:', data.row.name)
         }

@@ -1,16 +1,16 @@
 # レスポンシブレイアウト
 
-テーブルが異なる画面サイズでのレスポンシブな挙動を表示し、モバイル対応とレイアウト最適化を含みます。
+テーブルの異なる画面サイズにおけるレスポンシブな挙動を表示し、モバイル対応とレイアウト最適化を含みます。
 
 <DemoPreview dir="demos/ma-pro-table-examples/responsive-layout" />
 
 ## 機能特徴
 
-- **デバイス対応**: デスクトップ、タブレット、スマートフォンなど異なるデバイスに自動対応
+- **デバイス対応**: デスクトップ、タブレット、スマートフォンなど異なるデバイスに自動適応
 - **動的列管理**: 画面サイズに応じて列を動的に表示/非表示
-- **検索レスポンシブ**: 検索フォームがレスポンシブレイアウトに対応
-- **操作最適化**: デバイスごとの操作方法を最適化
-- **パフォーマンス考慮**: 小画面デバイスで過剰な情報表示を回避
+- **検索レスポンシブ**: 検索フォームがレスポンシブレイアウトをサポート
+- **操作最適化**: 異なるデバイスでの操作方法を最適化
+- **パフォーマンス考慮**: 小画面デバイスで過剰な情報表示を避ける
 
 ## デバイスブレークポイント設定
 
@@ -114,11 +114,11 @@ const searchOptions = {
 const updateTableColumns = (device) => {
   const baseColumns = [
     { label: 'ID', prop: 'id', width: 60 },
-    { label: '氏名', prop: 'name', width: 100, fixed: 'left' },
+    { label: '名前', prop: 'name', width: 100, fixed: 'left' },
     { label: '部門', prop: 'department', width: 100 },
     { label: '職位', prop: 'position', width: 150 },
     { label: '給与', prop: 'salary', width: 120 },
-    { label: 'ステータス', prop: 'status', width: 80 },
+    { label: '状態', prop: 'status', width: 80 },
     { label: '入社日', prop: 'createTime', width: 120 }
   ]
   
@@ -127,20 +127,20 @@ const updateTableColumns = (device) => {
     // スマートフォンではコア情報のみ表示
     visibleColumns = [
       baseColumns[0], // ID
-      baseColumns[1], // 氏名
+      baseColumns[1], // 名前
       baseColumns[2], // 部門
-      baseColumns[5], // ステータス
+      baseColumns[5], // 状態
       operationColumn
     ]
   } else if (device === 'tablet') {
     // タブレットでは主要情報を表示
     visibleColumns = [
       baseColumns[0], // ID
-      baseColumns[1], // 氏名
+      baseColumns[1], // 名前
       baseColumns[2], // 部門
       baseColumns[3], // 職位
       baseColumns[4], // 給与
-      baseColumns[5], // ステータス
+      baseColumns[5], // 状態
       operationColumn
     ]
   } else {
@@ -152,9 +152,9 @@ const updateTableColumns = (device) => {
 }
 ```
 
-### 列幅調整
+### 列幅適応
 ```javascript
-// モバイル向け列幅最適化
+// モバイル端末向け列幅最適化
 const getColumnWidth = (device, column) => {
   if (device === 'mobile') {
     return {
@@ -170,7 +170,7 @@ const getColumnWidth = (device, column) => {
 
 ## レスポンシブ操作
 
-### 操作列調整
+### 操作列適応
 ```javascript
 const getOperationConfig = (device) => {
   return {
@@ -208,7 +208,7 @@ const getDeviceActions = (device) => {
     }
   ]
   
-  // デスクトップでは追加操作を表示
+  // デスクトップではより多くの操作を表示
   if (device === 'desktop') {
     baseActions.push(
       {
@@ -234,9 +234,9 @@ const getDeviceActions = (device) => {
 
 ## モバイル最適化
 
-### セル内容調整
+### セル内容適応
 ```javascript
-// モバイル向けスキルタグ表示最適化
+// モバイル端末向けスキルタグ表示最適化
 {
   label: 'スキル',
   prop: 'skills',
@@ -259,7 +259,7 @@ const getDeviceActions = (device) => {
 
 ### モバイルスタイル
 ```css
-/* モバイル専用スタイル */
+/* モバイル向け特殊スタイル */
 .responsive-container.mobile :deep(.ma-pro-table) {
   font-size: 14px;
 }
@@ -282,7 +282,7 @@ const getDeviceActions = (device) => {
 
 ### タブレットスタイル
 ```css
-/* タブレット専用スタイル */
+/* タブレット向け特殊スタイル */
 .responsive-container.tablet :deep(.el-table th),
 .responsive-container.tablet :deep(.el-table td) {
   padding: 10px 6px;
@@ -295,7 +295,7 @@ const getDeviceActions = (device) => {
 
 ## ページネーションレスポンシブ
 
-### ページネーションレイアウト調整
+### ページネーションレイアウト適応
 ```javascript
 const getPaginationLayout = (device) => {
   if (device === 'mobile') {
@@ -321,7 +321,7 @@ const options = {
 
 ### CSSメディアクエリ
 ```css
-/* メディアクエリによる真のレスポンシブ実装 */
+/* メディアクエリを使用した真のレスポンシブ実装 */
 @media (max-width: 768px) {
   .ma-pro-table {
     font-size: 14px;
@@ -374,7 +374,7 @@ const isTablet = useMediaQuery('(max-width: 1024px) and (min-width: 769px)')
 
 ## ツールバーレスポンシブ
 
-### ツールバーボタン調整
+### ツールバーボタン適応
 ```javascript
 const getToolbarConfig = (device) => {
   if (device === 'mobile') {
@@ -404,21 +404,21 @@ const getToolbarConfig = (device) => {
 ### 1. プログレッシブエンハンスメント
 - モバイルファーストで設計
 - デスクトップ向け機能を段階的に追加
-- コア機能を全デバイスで利用可能に
+- コア機能が全デバイスで利用可能であることを確認
 
 ### 2. パフォーマンス最適化
-- 小画面デバイスで過剰なデータ読み込みを回避
-- 大量データ処理には仮想スクロールを採用
-- 画像・メディアリソースを適切に使用
+- 小画面デバイスでの過剰なデータ読み込みを避ける
+- 大量データ処理には仮想スクロールを使用
+- 画像やメディアリソースを適切に使用
 
 ### 3. ユーザーエクスペリエンス
-- デバイス固有のインタラクションを提供
-- 一貫したビジュアルヒエラルキーを維持
-- タッチターゲットを十分な大きさに
+- デバイス固有の操作方式を提供
+- 一貫したビジュアル階層を維持
+- タッチターゲットが十分な大きさであることを確認
 
 ### 4. テスト戦略
-- 実機テストを実施
-- ブラウザ開発ツールでシミュレーション
+- 実機でテスト
+- ブラウザ開発ツールでシミュレート
 - ネットワーク条件の影響を考慮
 
-レスポンシブレイアウト機能により、テーブルアプリケーションはあらゆるデバイスに最適化され、一貫したユーザーエクスペリエンスを提供します。
+レスポンシブレイアウト機能により、テーブルアプリケーションはあらゆるデバイスに完璧に適応し、一貫したユーザーエクスペリエンスを提供します。

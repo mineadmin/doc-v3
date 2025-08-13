@@ -1,6 +1,6 @@
 # テーブル統合
 
-データテーブルとの完全な統合ソリューションを展示し、検索、ページネーション、ソート、テーブル/カードビュー切り替えなどの機能を含み、完全なデータ管理インターフェースを構築するためのベストプラクティスです。
+データテーブルとの完全な統合ソリューションを展示し、検索、ページネーション、ソート、テーブル/カードビューの切り替えなどの機能を含み、完全なデータ管理インターフェースを構築するためのベストプラクティスを提供します。
 
 ## テーブル統合デモ
 
@@ -8,7 +8,7 @@
 
 ## 統合ソリューション説明
 
-### 検索とテーブル連動
+### 検索とテーブルの連動
 検索条件とテーブルデータのリアルタイム同期を実現：
 
 ```typescript
@@ -34,7 +34,7 @@ const handleReset = () => {
 ```
 
 ### ページネーション統合
-検索とページネーションシステムの完全統合：
+検索とページネーションシステムの完全な統合：
 
 ```typescript
 // ページネーション設定
@@ -188,14 +188,14 @@ const params = {
 }
 ```
 
-### バッチ操作
-検索とテーブル選択を組み合わせたバッチ操作：
+### 一括操作
+検索とテーブル選択を組み合わせた一括操作：
 
 ```typescript
 // 選択状態管理
 const selection = ref<any[]>([])
 
-// バッチ操作処理
+// 一括操作処理
 const handleBatchOperation = async (operation: string) => {
   if (selection.value.length === 0) {
     ElMessage.warning('操作するデータを選択してください')
@@ -206,20 +206,20 @@ const handleBatchOperation = async (operation: string) => {
     const ids = selection.value.map(item => item.id)
     await batchOperation(operation, ids)
     
-    // 操作完了後にデータを再読み込み
+    // 操作後にデータを再読み込み
     await loadTableData()
     selection.value = []
     
-    ElMessage.success('バッチ操作が成功しました')
+    ElMessage.success('一括操作が成功しました')
   } catch (error) {
-    ElMessage.error('バッチ操作が失敗しました')
+    ElMessage.error('一括操作に失敗しました')
   }
 }
 ```
 
 ## 主要特性
 
-- 🔗 完全な検索とテーブル連動
+- 🔗 完全な検索とテーブルの連動
 - 📄 インテリジェントなページネーション統合
 - 🔄 柔軟なビュー切り替え
 - 📊 強力なソート機能
@@ -246,7 +246,7 @@ const onSearchInput = (searchData: any) => {
 ```
 
 ### データキャッシュ
-検索結果のインテリジェントキャッシュを実現：
+検索結果のインテリジェントなキャッシュを実現：
 
 ```typescript
 // キャッシュ設定
@@ -323,7 +323,7 @@ const handleError = (error: any, context: string) => {
   console.error(`${context}失敗:`, error)
   
   // ユーザーフレンドリーなエラーメッセージ
-  const errorMessage = error.response?.data?.message || '操作が失敗しました。後ほど再試行してください'
+  const errorMessage = error.response?.data?.message || '操作に失敗しました。後ほど再試行してください'
   ElMessage.error(errorMessage)
   
   // エラー報告（オプション）

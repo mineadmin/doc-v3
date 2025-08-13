@@ -67,7 +67,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/en/front/base/start'
         },
         {
-          text: 'Routes & Menus',
+          text: 'Routing & Menus',
           link: '/en/front/base/route-menu'
         },
         {
@@ -352,7 +352,7 @@ const sidebar:DefaultTheme.Sidebar = {
           text: "Lifecycle",
           link: "/en/backend/base/lifecycle"
         },
-        { text: "Routes & API Docs",link: "/en/backend/base/router"},
+        { text: "Routing & API Docs",link: "/en/backend/base/router"},
         { text: "Error Handling",link: "/en/backend/base/error-handler"},
         {text: "Logging",link: "/en/backend/base/logger"},
         {text: "Events",link: "/en/backend/base/event-handler"},
@@ -372,7 +372,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/en/backend/security/access"
         },
         {
-          text: "Client IP Retrieval",
+          text: "Get Client IP",
           link: "/en/backend/security/client-ip"
         }
       ]

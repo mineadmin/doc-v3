@@ -1,15 +1,15 @@
 # Method Demonstration
 
-Showcases the usage of all exposed methods, including real-time state tracking and operation logging, helping developers gain an in-depth understanding of the component's programming interface and advanced usage.
+Showcase the usage of all exposed methods, including real-time state tracking and operation logging, helping developers gain in-depth understanding of the component's programming interface and advanced usage.
 
 ## Method Demonstration
 
 <DemoPreview dir="demos/ma-search/methods-demo" />
 
-## Exposed Methods Details
+## Exposed Methods Explained
 
 ### Form Data Management
-Operations and retrieval of search form data:
+Manipulate and retrieve search form data:
 
 ```typescript
 // Set search form data
@@ -61,7 +61,7 @@ const setFoldState = (fold: boolean) => {
 ```
 
 ### Visibility Management
-Control the display and hiding of the entire search component:
+Control the visibility of the entire search component:
 
 ```typescript
 // Set visibility state
@@ -84,7 +84,7 @@ const toggleVisibility = () => {
 ```
 
 ### Dynamic Configuration Management
-Dynamically modify various configuration options of the component:
+Modify various component configuration options dynamically:
 
 ```typescript
 // Dynamically set search options
@@ -116,15 +116,15 @@ const getCurrentConfig = () => {
   const searchOptions = searchRef.value?.getOptions()
   const formOptions = searchRef.value?.getFormOptions()
   
-  console.log('Search component configuration:', searchOptions)
-  console.log('Form component configuration:', formOptions)
+  console.log('Search component config:', searchOptions)
+  console.log('Form component config:', formOptions)
   
   return { searchOptions, formOptions }
 }
 ```
 
-### Search Items Dynamic Management
-Dynamically modify search item configurations at runtime:
+### Dynamic Search Item Management
+Modify search item configurations at runtime:
 
 ```typescript
 // Batch set search items
@@ -184,7 +184,7 @@ Get internal ma-form component reference for lower-level operations:
 const getFormRef = () => {
   const formRef = searchRef.value?.getMaFormRef()
   if (formRef) {
-    console.log('Obtained form reference:', formRef)
+    console.log('Form reference obtained:', formRef)
     return formRef
   }
 }
@@ -261,7 +261,7 @@ const applyPreset = (scenario: keyof typeof presetScenarios) => {
 Dynamically adjust search functionality based on user permissions:
 
 ```typescript
-// Permission control for search items
+// Permission-controlled search items
 const applyPermissionControl = (userRole: string) => {
   const baseItems = [
     { label: 'Username', prop: 'username', render: 'input' },
@@ -279,7 +279,7 @@ const applyPermissionControl = (userRole: string) => {
   searchRef.value?.setItems(baseItems)
 }
 
-// Permission control for visibility
+// Permission-controlled visibility
 const applyVisibilityControl = (userRole: string) => {
   // Hide search for guest users
   if (userRole === 'guest') {
@@ -354,7 +354,7 @@ Create saveable and loadable search templates:
 class SearchTemplateManager {
   private templates = new Map()
   
-  // Save current search configuration as template
+  // Save current search config as template
   saveTemplate(name: string, searchRef: any) {
     const template = {
       formData: searchRef.getSearchForm(),

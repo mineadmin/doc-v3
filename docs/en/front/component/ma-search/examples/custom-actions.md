@@ -9,7 +9,7 @@ Demonstrates the usage of all slots, including scenarios for completely replacin
 ## Slot Usage Instructions
 
 ### actions Slot
-Completely replaces the default action button area for maximum customization flexibility:
+Completely replace the default action button area for maximum customization flexibility:
 
 ```vue
 <template #actions="{ searchLoading, resetLoading }">
@@ -35,7 +35,7 @@ Completely replaces the default action button area for maximum customization fle
 ```
 
 ### beforeActions Slot
-Inserts custom content before the default action buttons:
+Insert custom content before the default action buttons:
 
 ```vue
 <template #beforeActions>
@@ -49,7 +49,7 @@ Inserts custom content before the default action buttons:
 ```
 
 ### afterActions Slot
-Appends custom content after the default action buttons:
+Append custom content after the default action buttons:
 
 ```vue
 <template #afterActions>
@@ -118,7 +118,7 @@ Suitable for scenarios requiring complete redesign of the action area:
 Suitable for adding extra actions while preserving default functionality:
 
 ```vue
-<!-- Extend on default buttons -->
+<!-- Extend on top of default buttons -->
 <template #beforeActions>
   <ExtraActions />
 </template>
@@ -138,10 +138,10 @@ Ensure custom actions display and function properly across different screen size
 ### 4. User Experience Optimization
 - Provide clear operation feedback
 - Add appropriate confirmation dialogs
-- Implement operation undo functionality
+- Implement undo functionality for actions
 
 ## Related Links
 
-- [Method Demo](./methods-demo) - Learn about all exposed method usage
+- [Method Demo](./methods-demo) - Learn about all exposed methods
 - [Dynamic Management](./dynamic-items) - Learn about dynamic search item management
 - [Form Validation](./form-validation) - Learn about form validation features

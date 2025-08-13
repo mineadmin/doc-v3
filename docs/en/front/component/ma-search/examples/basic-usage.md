@@ -1,6 +1,6 @@
 # Basic Usage
 
-The simplest implementation of a search form, including basic form elements such as input fields and selectors. Suitable for most simple search scenarios.
+The simplest implementation of a search form, including basic form elements like input fields and selectors. Suitable for most simple search scenarios.
 
 ## Basic Search Form
 
@@ -14,20 +14,20 @@ The simplest implementation of a search form, including basic form elements such
 - **Date Search**: Use `render: 'date-picker'` to create a date picker
 
 ### Basic Properties
-- `label`: The label name of the search item
+- `label`: The label name for the search item
 - `prop`: The key name corresponding to the form data
 - `render`: Specifies the type of component to render
 
 ## Use Cases
 
 ### 1. User List Search
-Suitable for searching user information by criteria such as username, email, or status.
+Suitable for searching user information by username, email, status, etc.
 
 ### 2. Product Information Filtering
-Suitable for filtering products by criteria such as product name, category, or price range.
+Suitable for filtering products by name, category, price range, etc.
 
 ### 3. Order Query
-Suitable for querying orders by criteria such as order number, order status, or order time.
+Suitable for querying orders by order number, order status, order time, etc.
 
 ## Key Features
 

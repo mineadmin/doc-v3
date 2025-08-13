@@ -77,7 +77,7 @@ const deviceConfigs = {
 
 ### Search Item Quantity Control
 ```javascript
-// Adjust search item display quantity based on device
+// Adjust number of displayed search items based on device
 const updateSearchLayout = (device) => {
   const showNumber = device === 'desktop' ? 4 : 
                     device === 'tablet' ? 2 : 1
@@ -92,7 +92,7 @@ const updateSearchLayout = (device) => {
 ### Search Layout Modes
 ```javascript
 const searchOptions = {
-  showNumber: 3,            // Default number of search items to display
+  showNumber: 3,            // Default number of displayed search items
   layout: 'auto',           // auto/inline/vertical
   responsive: {
     mobile: {
@@ -124,7 +124,7 @@ const updateTableColumns = (device) => {
   
   let visibleColumns
   if (device === 'mobile') {
-    // Mobile shows only core information
+    // Only show core information on mobile
     visibleColumns = [
       baseColumns[0], // ID
       baseColumns[1], // Name
@@ -133,7 +133,7 @@ const updateTableColumns = (device) => {
       operationColumn
     ]
   } else if (device === 'tablet') {
-    // Tablet shows main information
+    // Show main information on tablet
     visibleColumns = [
       baseColumns[0], // ID
       baseColumns[1], // Name
@@ -144,7 +144,7 @@ const updateTableColumns = (device) => {
       operationColumn
     ]
   } else {
-    // Desktop shows all information
+    // Show all information on desktop
     visibleColumns = [...baseColumns, operationColumn]
   }
   
@@ -154,7 +154,7 @@ const updateTableColumns = (device) => {
 
 ### Column Width Adaptation
 ```javascript
-// Mobile column width optimization
+// Optimize column width for mobile
 const getColumnWidth = (device, column) => {
   if (device === 'mobile') {
     return {
@@ -208,7 +208,7 @@ const getDeviceActions = (device) => {
     }
   ]
   
-  // Desktop shows more operations
+  // Show more operations on desktop
   if (device === 'desktop') {
     baseActions.push(
       {
@@ -236,7 +236,7 @@ const getDeviceActions = (device) => {
 
 ### Cell Content Adaptation
 ```javascript
-// Mobile skill tag display optimization
+// Optimize skill tag display on mobile
 {
   label: 'Skills',
   prop: 'skills',
@@ -259,7 +259,7 @@ const getDeviceActions = (device) => {
 
 ### Mobile Styles
 ```css
-/* Mobile-specific styles */
+/* Special styles for mobile */
 .responsive-container.mobile :deep(.ma-pro-table) {
   font-size: 14px;
 }
@@ -282,7 +282,7 @@ const getDeviceActions = (device) => {
 
 ### Tablet Styles
 ```css
-/* Tablet-specific styles */
+/* Special styles for tablet */
 .responsive-container.tablet :deep(.el-table th),
 .responsive-container.tablet :deep(.el-table td) {
   padding: 10px 6px;
@@ -321,7 +321,7 @@ const options = {
 
 ### CSS Media Queries
 ```css
-/* Using media queries for true responsiveness */
+/* Implement true responsiveness with media queries */
 @media (max-width: 768px) {
   .ma-pro-table {
     font-size: 14px;
@@ -380,7 +380,7 @@ const getToolbarConfig = (device) => {
   if (device === 'mobile') {
     return {
       size: 'small',
-      onlyIcons: true,        // Show only icons
+      onlyIcons: true,        // Only show icons
       maxButtons: 3           // Maximum 3 buttons
     }
   } else if (device === 'tablet') {
@@ -402,14 +402,14 @@ const getToolbarConfig = (device) => {
 ## Best Practices
 
 ### 1. Progressive Enhancement
-- Start designing from mobile
+- Start design from mobile
 - Gradually add desktop features
 - Ensure core functionality works on all devices
 
 ### 2. Performance Optimization
-- Avoid loading excessive data on small screens
+- Avoid loading excessive data on small-screen devices
 - Use virtual scrolling for large datasets
-- Optimize image and media resources
+- Use images and media resources wisely
 
 ### 3. User Experience
 - Provide device-specific interaction methods
@@ -419,6 +419,6 @@ const getToolbarConfig = (device) => {
 ### 4. Testing Strategy
 - Test on real devices
 - Use browser developer tools for simulation
-- Consider network conditions
+- Consider network condition impacts
 
-The responsive layout feature ensures your table application perfectly adapts to various devices while providing a consistent user experience.
+The responsive layout feature enables your table application to perfectly adapt to various devices, providing a consistent user experience.
