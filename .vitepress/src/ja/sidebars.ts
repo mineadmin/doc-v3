@@ -1,12 +1,12 @@
 import type {DefaultTheme} from "vitepress";
 
 const sidebar:DefaultTheme.Sidebar = {
-  '/zh/guide/': [
+  '/ja/guide/': [
     {
       text: '紹介',
       items: [
         {
-          text: 'なぜ私たちを選ぶのか？',
+          text: 'なぜ私たちを選ぶのか?',
           link: '/ja/guide/introduce/mineadmin',
         },
         {
@@ -54,7 +54,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     }
   ],
-  '/zh/front/': [
+  '/ja/front/': [
     {
       text: '基礎',
       items: [
@@ -137,11 +137,11 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/ja/front/high/provider'
         },
         {
-          text: 'フック',
+          text: 'Hooks',
           link: '/ja/front/high/hooks'
         },
         {
-          text: '共通ストア',
+          text: '常用Store',
           link: '/ja/front/high/store'
         },
         {
@@ -226,7 +226,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/ja/front/component/ma-table/sorting'
             },
             {
-              text: 'テーブルフィルタ',
+              text: 'テーブルフィルタリング',
               link: '/ja/front/component/ma-table/filter'
             },
             {
@@ -257,11 +257,81 @@ const sidebar:DefaultTheme.Sidebar = {
         },
         {
           text: 'MaSearch',
-          link: '/ja/front/component/ma-search'
+          link: '/ja/front/component/ma-search',
+          collapsed: true,
+          items: [
+            {
+              text: '基本使用法',
+              link: '/ja/front/component/ma-search/examples/basic-usage'
+            },
+            {
+              text: '高度検索',
+              link: '/ja/front/component/ma-search/examples/advanced-search'
+            },
+            {
+              text: '折りたたみ検索',
+              link: '/ja/front/component/ma-search/examples/collapsible-search'
+            },
+            {
+              text: 'カスタム操作',
+              link: '/ja/front/component/ma-search/examples/custom-actions'
+            },
+            {
+              text: '動的管理',
+              link: '/ja/front/component/ma-search/examples/dynamic-items'
+            },
+            {
+              text: 'レスポンシブレイアウト',
+              link: '/ja/front/component/ma-search/examples/responsive-layout'
+            },
+            {
+              text: 'テーブル統合',
+              link: '/ja/front/component/ma-search/examples/table-integration'
+            },
+            {
+              text: 'フォームバリデーション',
+              link: '/ja/front/component/ma-search/examples/form-validation'
+            },
+            {
+              text: 'メソッドデモ',
+              link: '/ja/front/component/ma-search/examples/methods-demo'
+            }
+          ]
         },
         {
           text: 'MaProTable',
-          link: '/ja/front/component/ma-pro-table'
+          link: '/ja/front/component/ma-pro-table',
+          collapsed: true,
+          items: [
+            {
+              text: '基本使用法',
+              link: '/ja/front/component/ma-pro-table/examples/basic'
+            },
+            {
+              text: '高度検索',
+              link: '/ja/front/component/ma-pro-table/examples/advanced-search'
+            },
+            {
+              text: 'カスタム操作',
+              link: '/ja/front/component/ma-pro-table/examples/custom-operations'
+            },
+            {
+              text: 'セルレンダリングプラグイン',
+              link: '/ja/front/component/ma-pro-table/examples/cell-render-plugins'
+            },
+            {
+              text: 'ツールバー拡張',
+              link: '/ja/front/component/ma-pro-table/examples/toolbar-extensions'
+            },
+            {
+              text: 'データ管理',
+              link: '/ja/front/component/ma-pro-table/examples/data-management'
+            },
+            {
+              text: 'レスポンシブレイアウト',
+              link: '/ja/front/component/ma-pro-table/examples/responsive-layout'
+            }
+          ]
         },
         {
           text: 'MaEcharts',
@@ -270,7 +340,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     }
   ],
-  '/zh/backend/':[
+  '/ja/backend/':[
     {
       text:"応用",
       items:[
@@ -283,7 +353,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/ja/backend/base/lifecycle"
         },
         { text: "ルートとAPIドキュメント",link: "/ja/backend/base/router"},
-        { text: "エラーハンドリング",link: "/ja/backend/base/error-handler"},
+        { text: "エラー処理",link: "/ja/backend/base/error-handler"},
         {text: "ログ",link: "/ja/backend/base/logger"},
         {text: "イベント",link: "/ja/backend/base/event-handler"},
         {text: "ファイルアップロード",link: "/ja/backend/base/upload"},
@@ -298,7 +368,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/ja/backend/security/passport"
         },
         {
-          text: "ユーザー権限(RBAC)",
+          text: "ユーザー認可(RBAC)",
           link: "/ja/backend/security/access"
         },
         {
@@ -310,7 +380,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"データ権限",
       items:[
         {
-          text: "コアコンセプト",
+          text: "コア概念",
           link: "/ja/backend/data-permission/overview"
         },
         {
@@ -328,7 +398,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     }
   ],
-  '/zh/plugin/':[
+  '/ja/plugin/':[
     {
       text:"クイックスタート",
       items:
@@ -342,11 +412,11 @@ const sidebar:DefaultTheme.Sidebar = {
               link:"/ja/plugin/command"
             },
             {
-              text:"アプリケーション作成",
+              text:"アプリ作成",
               link:"/ja/plugin/create"
             },
             {
-              text:"プラグイン構造",
+              text:"プラグインディレクトリ構造",
               link:"/ja/plugin/structure"
             },
             {

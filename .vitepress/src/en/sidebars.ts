@@ -1,7 +1,7 @@
 import type {DefaultTheme} from "vitepress";
 
 const sidebar:DefaultTheme.Sidebar = {
-  '/zh/guide/': [
+  '/en/guide/': [
     {
       text: 'Introduction',
       items: [
@@ -54,7 +54,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     }
   ],
-  '/zh/front/': [
+  '/en/front/': [
     {
       text: 'Basics',
       items: [
@@ -85,7 +85,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text: 'Intermediate',
+      text: 'Advanced',
       items: [
         {
           text: 'System Configuration',
@@ -126,7 +126,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text: 'Advanced',
+      text: 'Expert',
       items: [
         {
           text: 'Internationalization',
@@ -167,7 +167,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/en/front/component/ma-form/examples/basic-usage'
             },
             {
-              text: 'Layout Systems',
+              text: 'Layout System',
               link: '/en/front/component/ma-form/examples/layout-systems'
             },
             {
@@ -238,7 +238,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/en/front/component/ma-table/dynamic-columns'
             },
             {
-              text: 'Pagination',
+              text: 'Pagination Table',
               link: '/en/front/component/ma-table/pagination'
             },
             {
@@ -246,7 +246,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/en/front/component/ma-table/tree-table'
             },
             {
-              text: 'Multiple Selection',
+              text: 'Multi-select Table',
               link: '/en/front/component/ma-table/selection'
             },
             {
@@ -257,11 +257,81 @@ const sidebar:DefaultTheme.Sidebar = {
         },
         {
           text: 'MaSearch',
-          link: '/en/front/component/ma-search'
+          link: '/en/front/component/ma-search',
+          collapsed: true,
+          items: [
+            {
+              text: 'Basic Usage',
+              link: '/en/front/component/ma-search/examples/basic-usage'
+            },
+            {
+              text: 'Advanced Search',
+              link: '/en/front/component/ma-search/examples/advanced-search'
+            },
+            {
+              text: 'Collapsible Search',
+              link: '/en/front/component/ma-search/examples/collapsible-search'
+            },
+            {
+              text: 'Custom Actions',
+              link: '/en/front/component/ma-search/examples/custom-actions'
+            },
+            {
+              text: 'Dynamic Items',
+              link: '/en/front/component/ma-search/examples/dynamic-items'
+            },
+            {
+              text: 'Responsive Layout',
+              link: '/en/front/component/ma-search/examples/responsive-layout'
+            },
+            {
+              text: 'Table Integration',
+              link: '/en/front/component/ma-search/examples/table-integration'
+            },
+            {
+              text: 'Form Validation',
+              link: '/en/front/component/ma-search/examples/form-validation'
+            },
+            {
+              text: 'Methods Demo',
+              link: '/en/front/component/ma-search/examples/methods-demo'
+            }
+          ]
         },
         {
           text: 'MaProTable',
-          link: '/en/front/component/ma-pro-table'
+          link: '/en/front/component/ma-pro-table',
+          collapsed: true,
+          items: [
+            {
+              text: 'Basic Usage',
+              link: '/en/front/component/ma-pro-table/examples/basic'
+            },
+            {
+              text: 'Advanced Search',
+              link: '/en/front/component/ma-pro-table/examples/advanced-search'
+            },
+            {
+              text: 'Custom Operations',
+              link: '/en/front/component/ma-pro-table/examples/custom-operations'
+            },
+            {
+              text: 'Cell Render Plugins',
+              link: '/en/front/component/ma-pro-table/examples/cell-render-plugins'
+            },
+            {
+              text: 'Toolbar Extensions',
+              link: '/en/front/component/ma-pro-table/examples/toolbar-extensions'
+            },
+            {
+              text: 'Data Management',
+              link: '/en/front/component/ma-pro-table/examples/data-management'
+            },
+            {
+              text: 'Responsive Layout',
+              link: '/en/front/component/ma-pro-table/examples/responsive-layout'
+            }
+          ]
         },
         {
           text: 'MaEcharts',
@@ -270,7 +340,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     }
   ],
-  '/zh/backend/':[
+  '/en/backend/':[
     {
       text:"Advanced",
       items:[
@@ -302,7 +372,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/en/backend/security/access"
         },
         {
-          text: "Client IP Detection",
+          text: "Client IP Retrieval",
           link: "/en/backend/security/client-ip"
         }
       ]
@@ -328,7 +398,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     }
   ],
-  '/zh/plugin/':[
+  '/en/plugin/':[
     {
       text:"Quick Start",
       items:
@@ -382,10 +452,10 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text:"Application Publishing",
+      text:"App Publishing",
       items:[
         {
-          text: "Application Release",
+          text: "App Release",
           link: "/en/plugin/develop/publish"
         },
         {
