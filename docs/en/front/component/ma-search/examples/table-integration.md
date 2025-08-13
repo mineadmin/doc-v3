@@ -14,7 +14,7 @@ Real-time synchronization between search conditions and table data:
 ```typescript
 // Search handler
 const handleSearch = (searchData: any) => {
-  // Reset pagination to first page
+  // Reset to first page
   pagination.page = 1
   // Save search conditions
   searchCondition.value = { ...searchData }
@@ -95,7 +95,7 @@ const loadTableData = async () => {
 Complete user data management interface:
 
 ```typescript
-// User search item configuration
+// User search items configuration
 const userSearchItems = [
   { label: 'Username', prop: 'username', render: 'input' },
   { label: 'Email', prop: 'email', render: 'input' },
@@ -103,7 +103,7 @@ const userSearchItems = [
   { label: 'Registration Date', prop: 'created_at', render: 'date-picker' }
 ]
 
-// User table column configuration
+// User table columns configuration
 const userTableColumns = [
   { prop: 'username', label: 'Username' },
   { prop: 'email', label: 'Email' },
@@ -141,7 +141,7 @@ const productSearchItems = [
 ## Advanced Features
 
 ### View Switching
-Support switching between table view and card view:
+Support for switching between table and card views:
 
 ```typescript
 // View mode management
@@ -178,7 +178,7 @@ const handleSortChange = ({ prop, order }: any) => {
   loadTableData()
 }
 
-// Include sorting parameters in data loading function
+// Include sorting parameters in data loading
 const params = {
   page: pagination.page,
   pageSize: pagination.pageSize,
@@ -189,7 +189,7 @@ const params = {
 ```
 
 ### Batch Operations
-Batch operations combining search and table selection:
+Batch operations combined with search and table selection:
 
 ```typescript
 // Selection state management
@@ -210,7 +210,7 @@ const handleBatchOperation = async (operation: string) => {
     await loadTableData()
     selection.value = []
     
-    ElMessage.success('Batch operation successful')
+    ElMessage.success('Batch operation succeeded')
   } catch (error) {
     ElMessage.error('Batch operation failed')
   }
@@ -292,7 +292,7 @@ const loadTableDataWithCache = async () => {
 ## Best Practices
 
 ### 1. State Synchronization
-Synchronize search state with URL parameters:
+Keep search state synchronized with URL parameters:
 
 ```typescript
 // URL parameter synchronization
@@ -359,5 +359,5 @@ const withLoading = async (key: keyof typeof loadingStates, operation: () => Pro
 ## Related Links
 
 - [Responsive Layout](./responsive-layout) - Learn about table display optimization across devices
-- [Form Validation](./form-validation) - Understand search condition validation
+- [Form Validation](./form-validation) - Learn about search condition validation
 - [Methods Demo](./methods-demo) - Learn about component methods in table integration

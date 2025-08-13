@@ -1,16 +1,16 @@
 # Advanced Search
 
-Demonstrates various search component types and complex search logic, including date ranges, numeric ranges, multi-select functionality, and more.
+Demonstrates various search component types and complex search logic, including date ranges, numeric ranges, multi-select, and more.
 
 <DemoPreview dir="demos/ma-pro-table-examples/advanced-search" />
 
-## Key Features
+## Features
 
-- **Rich Search Components**: Supports input, select, date-range, slider, checkbox, and more
-- **Multi-condition Combination**: Enables complex search condition combinations
-- **Search Events**: Listen for search submission and reset events
+- **Rich Search Components**: Supports input, select, date-range, slider, checkbox, etc.
+- **Multi-Condition Combination**: Supports complex search condition combinations
+- **Search Events**: Can listen for search submission and reset events
 - **Default Expansion**: Configurable number of search items to display by default
-- **Responsive Layout**: Search forms support responsive layouts
+- **Responsive Layout**: Search form supports responsive layout
 
 ## Search Component Types
 
@@ -27,7 +27,7 @@ Demonstrates various search component types and complex search logic, including 
 }
 ```
 
-### Selector Components
+### Selector Component
 ```javascript
 // Single select
 {
@@ -36,8 +36,8 @@ Demonstrates various search component types and complex search logic, including 
   render: 'select',
   renderProps: {
     options: [
-      { label: 'Technology', value: 'Technology' },
-      { label: 'Product', value: 'Product' }
+      { label: 'Tech Department', value: 'Tech Department' },
+      { label: 'Product Department', value: 'Product Department' }
     ]
   }
 }
@@ -72,7 +72,7 @@ Demonstrates various search component types and complex search logic, including 
 ### Date Range Component
 ```javascript
 {
-  label: 'Join Date Range',
+  label: 'Join Date',
   prop: 'joinDateRange',
   render: 'date-range',
   renderProps: {
@@ -88,7 +88,7 @@ Demonstrates various search component types and complex search logic, including 
 ### Slider Component
 ```javascript
 {
-  label: 'Work Experience',
+  label: 'Experience',
   prop: 'experience',
   render: 'slider',
   renderProps: {
@@ -108,7 +108,7 @@ Demonstrates various search component types and complex search logic, including 
 ### Checkbox Group Component
 ```javascript
 {
-  label: 'Job Level',
+  label: 'Level',
   prop: 'level',
   render: 'checkbox-group',
   renderProps: {
@@ -154,7 +154,7 @@ const options = {
 const options = {
   onSearchSubmit: (form) => {
     console.log('Search conditions:', form)
-    // Preprocess search conditions if needed
+    // Can preprocess search conditions
     return form
   },
   onSearchReset: (form) => {
@@ -183,7 +183,7 @@ const options = {
 }
 ```
 
-### Multi-tag Display
+### Multi-Tag Display
 ```javascript
 {
   label: 'Skill Tags',
@@ -207,7 +207,7 @@ const options = {
   type: 'operation',
   operationConfigure: {
     type: 'auto',
-    fold: 2,               // Collapse when more than 2 operations
+    fold: 2,               // Fold when more than 2 operations
     actions: [
       {
         name: 'promote',
@@ -222,4 +222,4 @@ const options = {
 }
 ```
 
-Advanced search functionality allows you to build complex query interfaces to meet various business scenario requirements.
+Advanced search functionality allows you to build complex query interfaces to meet various business scenario search requirements.

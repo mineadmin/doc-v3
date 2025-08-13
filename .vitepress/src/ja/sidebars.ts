@@ -226,7 +226,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/ja/front/component/ma-table/sorting'
             },
             {
-              text: 'テーブルフィルタリング',
+              text: 'テーブルフィルタ',
               link: '/ja/front/component/ma-table/filter'
             },
             {
@@ -234,7 +234,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/ja/front/component/ma-table/custom-render'
             },
             {
-              text: '動的カラム管理',
+              text: '動的列管理',
               link: '/ja/front/component/ma-table/dynamic-columns'
             },
             {
@@ -353,7 +353,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/ja/backend/base/lifecycle"
         },
         { text: "ルートとAPIドキュメント",link: "/ja/backend/base/router"},
-        { text: "エラー処理",link: "/ja/backend/base/error-handler"},
+        { text: "エラーハンドリング",link: "/ja/backend/base/error-handler"},
         {text: "ログ",link: "/ja/backend/base/logger"},
         {text: "イベント",link: "/ja/backend/base/event-handler"},
         {text: "ファイルアップロード",link: "/ja/backend/base/upload"},
@@ -412,7 +412,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link:"/ja/plugin/command"
             },
             {
-              text:"アプリケーション作成",
+              text:"アプリ作成",
               link:"/ja/plugin/create"
             },
             {
@@ -446,16 +446,16 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"フロントエンド開発",
       items:[
         {
-          text: "フロントエンド開発規範",
+          text: "フロントエンド開発規約",
           link: "/ja/plugin/front/develop"
         }
       ]
     },
     {
-      text:"アプリケーション公開",
+      text:"アプリ公開",
       items:[
         {
-          text: "アプリケーションリリース",
+          text: "アプリリリース",
           link: "/ja/plugin/develop/publish"
         },
         {

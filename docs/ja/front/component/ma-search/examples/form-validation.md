@@ -1,6 +1,6 @@
 # フォームバリデーション
 
-様々なバリデーションルールとシナリオをデモンストレーションします。基本的なバリデーション、高度なバリデーション、非同期バリデーション、条件付きバリデーションなどを含み、検索条件の正確性とデータの整合性を確保します。
+様々なバリデーションルールとシナリオをデモンストレーションします。基本的なバリデーション、高度なバリデーション、非同期バリデーション、条件付きバリデーションなど、検索条件の正確性とデータの整合性を確保します。
 
 ## フォームバリデーションデモ
 
@@ -37,7 +37,7 @@
 メールアドレス、電話番号、URLなどのフォーマットバリデーション：
 
 ```typescript
-// メールアドレスバリデーション
+// メールバリデーション
 {
   label: 'メールアドレス',
   prop: 'email',
@@ -128,7 +128,7 @@
         
         const isValid = await validateCompanyName(value)
         if (!isValid) {
-          throw new Error('企業名が規約に違反しています')
+          throw new Error('企業名が規約に準拠していません')
         }
       }, 500),
       trigger: 'change'
@@ -148,7 +148,7 @@ const createConditionalRules = () => {
       validator: (rule: any, value: string) => {
         const formData = searchRef.value?.getSearchForm()
         
-        // "企業ユーザー"を選択した場合、企業名は必須
+        // 「企業ユーザー」を選択時、企業名は必須
         if (formData?.userType === 'enterprise' && !value) {
           throw new Error('企業ユーザーは企業名を入力してください')
         }
@@ -168,7 +168,7 @@ const createConditionalRules = () => {
 ```
 
 ### 複合バリデーション
-複数のフィールドを組み合わせたバリデーション：
+複数フィールドの連携バリデーション：
 
 ```typescript
 // パスワード確認バリデーション
@@ -214,7 +214,7 @@ const createConditionalRules = () => {
 ## 使用シナリオ
 
 ### 1. ユーザー登録検索
-ユーザー登録情報の厳格なバリデーション：
+ユーザー登録情報の厳密なバリデーション：
 
 ```typescript
 const userRegisterSearchItems = [
@@ -241,7 +241,7 @@ const userRegisterSearchItems = [
 ```
 
 ### 2. 金融データ検索
-金融分野の精密なデータバリデーション：
+金融分野の精密データバリデーション：
 
 ```typescript
 const financialSearchItems = [
@@ -276,7 +276,7 @@ const orderSearchItems = [
     prop: 'orderNo',
     render: 'input',
     rules: [
-      { pattern: /^ORD\d{12}$/, message: '注文番号形式：ORD+12桁の数字' }
+      { pattern: /^ORD\d{12}$/, message: '注文番号形式：ORD+12桁数字' }
     ]
   },
   {
@@ -284,7 +284,7 @@ const orderSearchItems = [
     prop: 'orderAmount',
     render: 'input-number',
     rules: [
-      { type: 'number', min: 1, message: '注文金額は0より大きい値を入力してください' }
+      { type: 'number', min: 1, message: '注文金額は1以上で入力してください' }
     ]
   }
 ]
@@ -312,7 +312,7 @@ const orderSearchItems = [
   ]
 }
 
-// フォーカスアウト時バリデーション
+// フォーカス喪失時バリデーション
 {
   rules: [
     { type: 'email', message: '正しいメールアドレス形式で入力してください', trigger: 'blur' }
@@ -350,10 +350,10 @@ const validateForm = async () => {
   const formRef = searchRef.value?.getMaFormRef()
   try {
     await formRef?.validate()
-    console.log('フォームのバリデーションに成功しました。検索を実行できます')
+    console.log('フォームバリデーションに成功しました。検索を実行できます')
     return true
   } catch (error) {
-    console.log('フォームのバリデーションに失敗しました:', error)
+    console.log('フォームバリデーションに失敗しました:', error)
     return false
   }
 }
@@ -373,7 +373,7 @@ const clearValidation = () => {
 - エラーメッセージの国際化をサポート
 
 ```typescript
-// 分かりやすいエラーメッセージ
+// ユーザーフレンドリーなエラーメッセージ
 const createFriendlyRules = (fieldName: string) => [
   { 
     required: true, 
@@ -383,7 +383,7 @@ const createFriendlyRules = (fieldName: string) => [
   {
     validator: (rule: any, value: string) => {
       if (value && value.length < 2) {
-        throw new Error(`${fieldName}は2文字以上入力してください`)
+        throw new Error(`${fieldName}は2文字以上必要です`)
       }
     },
     trigger: 'blur'
@@ -421,10 +421,10 @@ const cachedValidator = (cacheKey: string, validator: Function) => {
 }
 ```
 
-### 3. メンテナンス性
-- 共通のバリデーションルールを抽出
-- バリデーションルールファクトリ関数を作成
-- バリデーションルールの動的設定をサポート
+### 3. 保守性
+- 共通バリデーションルールの抽出
+- バリデーションルールファクトリ関数の作成
+- バリデーションルールの動的設定サポート
 
 ```typescript
 // 共通バリデーションルールライブラリ
@@ -456,7 +456,7 @@ const ValidationRules = {
   })
 }
 
-// 共通ルールの使用
+// 共通ルールの使用例
 {
   label: 'メールアドレス',
   prop: 'email',
@@ -470,6 +470,6 @@ const ValidationRules = {
 
 ## 関連リンク
 
-- [高度な検索](./advanced-search) - 複雑な検索シナリオでのバリデーション適用を理解する
+- [高度な検索](./advanced-search) - 複雑な検索シナリオでのバリデーション適用を学ぶ
 - [テーブル統合](./table-integration) - データ送信前のバリデーションの役割を理解する
-- [メソッドデモ](./methods-demo) - バリデーション関連のコンポーネントメソッドを理解する
+- [メソッドデモ](./methods-demo) - バリデーション関連のコンポーネントメソッドを学ぶ

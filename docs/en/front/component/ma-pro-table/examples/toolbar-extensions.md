@@ -7,12 +7,12 @@ Demonstrates how to extend toolbar functionality through the plugin API, includi
 ## Features
 
 - **Plugin Mechanism**: Extend toolbar functionality via plugin API
-- **Custom Tools**: Support for registering custom tool buttons
-- **Slot Expansion**: Support for extending toolbar layout through slots
-- **State Control**: Dynamic show/hide of tools
-- **Order Control**: Customizable tool display order
+- **Custom Tools**: Supports registering custom tool buttons
+- **Slot Extensions**: Supports extending toolbar layout through slots
+- **State Control**: Supports dynamic show/hide of tools
+- **Order Control**: Supports custom tool display order
 
-## Plugin API Extension
+## Plugin API Extensions
 
 ### Registering Toolbar Plugins
 ```javascript
@@ -226,18 +226,18 @@ add({
 </template>
 ```
 
-### Toolbar Pre/Post Extensions
+### Toolbar Before/After Extensions
 ```vue
 <template>
   <MaProTable :options="options" :schema="schema">
     <!-- Pre-toolbar content -->
     <template #beforeToolbar>
-      <el-button size="small" type="text">Pre Button</el-button>
+      <el-button size="small" type="text">Pre-button</el-button>
     </template>
     
     <!-- Post-toolbar content -->
     <template #afterToolbar>
-      <el-button size="small" type="text">Post Button</el-button>
+      <el-button size="small" type="text">Post-button</el-button>
     </template>
   </MaProTable>
 </template>
@@ -245,7 +245,7 @@ add({
 
 ## Tool State Control
 
-### Configuring Tool Display States
+### Configuring Tool Display State
 ```javascript
 const options = {
   toolbar: true,                // Whether to show toolbar
@@ -396,7 +396,7 @@ interface MaProTableToolbar {
 ### 3. Performance Optimization
 - Avoid heavy computations in render functions
 - Use reactive states appropriately
-- Remove unnecessary tools when appropriate
+- Remove unnecessary tools when needed
 
 ### 4. Permission Control
 ```javascript
@@ -407,4 +407,4 @@ add({
 })
 ```
 
-Toolbar extension functionality allows you to build feature-rich table operation interfaces, enhancing user experience.
+The toolbar extension functionality allows you to build feature-rich table operation interfaces, enhancing user interaction experience.

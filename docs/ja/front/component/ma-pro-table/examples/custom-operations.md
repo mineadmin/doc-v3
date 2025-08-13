@@ -1,6 +1,6 @@
 # カスタム操作
 
-さまざまなタイプの操作列設定を表示し、条件付き表示、カスタムスタイル、複雑な操作ロジックを含みます。
+異なるタイプの操作列の設定を表示し、条件付き表示、カスタムスタイル、複雑な操作ロジックを含みます。
 
 <DemoPreview dir="demos/ma-pro-table-examples/custom-operations" />
 
@@ -12,9 +12,9 @@
 - **ドラッグソート**: 行のドラッグによる並べ替えをサポート
 - **バッチ操作**: 複数選択とバッチ操作機能をサポート
 
-## 操作列設定
+## 操作列の設定
 
-### 基本操作設定
+### 基本的な操作設定
 ```javascript
 {
   type: 'operation',
@@ -38,7 +38,7 @@
 }
 ```
 
-### 操作タイプ説明
+### 操作タイプの説明
 
 #### 1. 自動モード (auto)
 ```javascript
@@ -65,7 +65,7 @@ operationConfigure: {
 }
 ```
 
-## 操作ボタン設定
+## 操作ボタンの設定
 
 ### 基本ボタン
 ```javascript
@@ -114,12 +114,12 @@ operationConfigure: {
 }
 ```
 
-### 操作順序
+### 操作の並べ替え
 ```javascript
 {
   name: 'high-priority',
   text: '高優先度',
-  order: 1,                 // ソートウェイト、数字が小さいほど前に表示
+  order: 1,                 // 並べ替え重み、数字が小さいほど前に表示
   onClick: (data) => {
     console.log('高優先度操作')
   }
@@ -190,8 +190,8 @@ const schema = {
 
 <script setup>
 const handleRowDragSort = (tableData) => {
-  console.log('新しいソート順:', tableData.map(item => item.title))
-  // APIを呼び出して新しいソート順を保存
+  console.log('新しい並び順:', tableData.map(item => item.title))
+  // APIを呼び出して新しい並び順を保存
 }
 </script>
 ```
@@ -207,7 +207,7 @@ const options = {
 }
 ```
 
-### バッチ操作例
+### バッチ操作の例
 ```vue
 <template>
   <div class="control-panel">

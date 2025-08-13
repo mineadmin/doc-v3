@@ -9,7 +9,7 @@ Demonstrates the usage of all slots, including scenarios for completely replacin
 ## Slot Usage Instructions
 
 ### actions Slot
-Completely replace the default action button area for maximum customization flexibility:
+Completely replaces the default action button area for maximum customization flexibility:
 
 ```vue
 <template #actions="{ searchLoading, resetLoading }">
@@ -35,7 +35,7 @@ Completely replace the default action button area for maximum customization flex
 ```
 
 ### beforeActions Slot
-Insert custom content before the default action buttons:
+Inserts custom content before the default action buttons:
 
 ```vue
 <template #beforeActions>
@@ -49,7 +49,7 @@ Insert custom content before the default action buttons:
 ```
 
 ### afterActions Slot
-Append custom content after the default action buttons:
+Appends custom content after the default action buttons:
 
 ```vue
 <template #afterActions>
@@ -80,7 +80,7 @@ Add functionality to save and load search templates for easy reuse of common sea
 Add import/export functionality to the search area to support batch operations and data exchange.
 
 ### 3. Quick Action Menu
-Provide dropdown menus for quick actions like filtering today's, this week's, or this month's data.
+Provide dropdown menus for quick actions such as filtering today's, this week's, or this month's data.
 
 ### 4. Multi-step Search Process
 Implement a wizard-style search process controlled by custom buttons.
@@ -99,7 +99,7 @@ Implement a wizard-style search process controlled by custom buttons.
 - 🎨 Fully customizable action area
 - 🔧 Flexible slot system design
 - 📦 Extend capabilities while maintaining original functionality
-- 🎯 Support for complex business scenario customization
+- 🎯 Supports complex business scenario customization
 - ⚡ High-performance slot rendering mechanism
 
 ## Design Patterns
@@ -130,7 +130,7 @@ Suitable for adding extra actions while preserving default functionality:
 Keep custom action buttons visually consistent with the overall system style.
 
 ### 2. Proper Use of Loading States
-Utilize the `loading` state from slot parameters to add loading effects to custom buttons.
+Utilize the `loading` state parameters in slots to add loading effects to custom buttons.
 
 ### 3. Responsive Design
 Ensure custom actions display and function properly across different screen sizes.
@@ -138,10 +138,10 @@ Ensure custom actions display and function properly across different screen size
 ### 4. User Experience Optimization
 - Provide clear operation feedback
 - Add appropriate confirmation dialogs
-- Implement operation undo functionality
+- Implement undo functionality for actions
 
 ## Related Links
 
-- [Method Demo](./methods-demo) - Learn about all exposed method usages
-- [Dynamic Management](./dynamic-items) - Learn about dynamic search item management
+- [Method Demo](./methods-demo) - Learn about all exposed methods
+- [Dynamic Management](./dynamic-items) - Understand dynamic search item management
 - [Form Validation](./form-validation) - Learn about form validation features

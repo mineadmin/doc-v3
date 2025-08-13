@@ -4,7 +4,7 @@
 
 <DemoPreview dir="demos/ma-pro-table-examples/cell-render-plugins" />
 
-## 機能特徴
+## 特徴
 
 - **プラグイン機構**: プラグインシステムでセルレンダリング機能を拡張
 - **組み込みプラグイン**: 一般的なレンダリングプラグインを提供（タグ、プログレスバーなど）
@@ -14,7 +14,7 @@
 
 ## 組み込みプラグイン
 
-### Tag タグプラグイン
+### タグプラグイン
 ```javascript
 {
   label: '状態',
@@ -53,7 +53,7 @@ addPlugin({
 })
 ```
 
-### カスタムプラグインの使用
+### カスタムプラグイン使用
 ```javascript
 {
   label: '作業進捗',
@@ -87,7 +87,7 @@ addPlugin({
 })
 ```
 
-### 2. 評価プラグイン
+### 2. レートプラグイン
 ```javascript
 addPlugin({
   name: 'rate',
@@ -262,10 +262,10 @@ import { useProTableRenderPlugin } from '@mineadmin/pro-table'
 
 const { getPlugins, getPluginByName, removePlugin } = useProTableRenderPlugin()
 
-// 全てのプラグインを取得
+// 全プラグイン取得
 const allPlugins = getPlugins()
 
-// 特定のプラグインを取得
+// 特定プラグイン取得
 const tagPlugin = getPluginByName('tag')
 
 // プラグイン削除
@@ -298,12 +298,12 @@ interface MaProTableRenderPlugin {
 ### 1. プラグイン命名
 - 説明的な名前を使用（例: `progress`、`image`、`tags`）
 - 組み込みプラグインとの重複を避ける
-- アプリケーションマーケットに公開する場合はプレフィックスを推奨
+- アプリマーケットに公開する場合はプレフィックスを推奨
 
 ### 2. パフォーマンス最適化
 - render関数内での複雑な計算を避ける
 - props関数で条件判断と属性計算を行う
-- Vueのリアクティブ特性を適切に利用
+- Vueのリアクティブ特性を適切に使用
 
 ### 3. エラー処理
 ```javascript
@@ -323,7 +323,7 @@ addPlugin({
 
 ### 4. 型安全
 ```typescript
-// TypeScript プラグイン定義
+// TypeScriptプラグイン定義
 import type { MaProTableRenderPlugin } from '@mineadmin/pro-table'
 
 const myPlugin: MaProTableRenderPlugin = {

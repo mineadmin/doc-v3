@@ -1,15 +1,15 @@
 # ツールバー拡張
 
-プラグインAPIを使用してツールバー機能を拡張する方法を紹介し、カスタムツールボタンとツールバーレイアウトを含みます。
+プラグインAPIを使用してツールバー機能を拡張する方法を紹介し、カスタムツールボタンやツールバーレイアウトを含みます。
 
 <DemoPreview dir="demos/ma-pro-table-examples/toolbar-extensions" />
 
 ## 機能特徴
 
-- **プラグイン機構**：プラグインAPIでツールバー機能を拡張
+- **プラグインメカニズム**：プラグインAPIでツールバー機能を拡張
 - **カスタムツール**：カスタムツールボタンの登録をサポート
 - **スロット拡張**：スロットによるツールバーレイアウト拡張をサポート
-- **状態制御**：ツールの動的な表示/非表示をサポート
+- **状態制御**：ツールの動的表示/非表示をサポート
 - **順序制御**：ツール表示順序のカスタマイズをサポート
 
 ## プラグインAPI拡張
@@ -20,7 +20,7 @@ import { useProTableToolbar } from '@mineadmin/pro-table'
 
 const { add, remove, hide, show } = useProTableToolbar()
 
-// カスタムツールを追加
+// カスタムツール追加
 add({
   name: 'statistics',           // ツール名（ユニーク識別子）
   render: ({ proxy }) => (      // レンダリング関数
@@ -33,7 +33,7 @@ add({
       <el-icon><ChatDotRound /></el-icon>
     </el-button>
   ),
-  show: true,                   // 表示するかどうか
+  show: true,                   // 表示可否
   order: 1                      // 表示順序
 })
 ```
@@ -42,26 +42,26 @@ add({
 ```javascript
 const { add, remove, hide, show, get, getAll } = useProTableToolbar()
 
-// ツールを追加
+// ツール追加
 add(toolbar)
 
-// ツールを削除
+// ツール削除
 remove('tool-name')
 
-// ツールを非表示
+// ツール非表示
 hide('tool-name')
 
-// ツールを表示
+// ツール表示
 show('tool-name')
 
-// 単一ツールを取得
+// 単一ツール取得
 const tool = get('tool-name')
 
-// 全てのツールを取得
+// 全ツール取得
 const allTools = getAll()
 ```
 
-## 一般的なツール例
+## よく使われるツール例
 
 ### 1. データ統計ツール
 ```javascript
@@ -125,7 +125,7 @@ add({
         ElMessageBox.confirm('データをインポートしますか？', 'インポート確認', {
           type: 'warning'
         }).then(() => {
-          // ファイル選択またはインポートダイアログを表示
+          // ファイル選択またはインポートダイアログ表示
           showImportDialog(proxy)
         })
       }}
@@ -190,7 +190,7 @@ add({
     <template #toolbarLeft>
       <div class="custom-toolbar-left">
         <el-space>
-          <el-text type="primary">合計 {{ totalCount }} 件</el-text>
+          <el-text type="primary">全 {{ totalCount }} 件</el-text>
           <el-divider direction="vertical" />
           <el-text type="success">在職 {{ activeCount }} 人</el-text>
         </el-space>
@@ -248,12 +248,12 @@ add({
 ### ツール表示状態設定
 ```javascript
 const options = {
-  toolbar: true,                // ツールバーを表示するか
+  toolbar: true,                // ツールバー表示可否
   toolStates: {
-    size: true,                 // サイズ調整ツールを表示
-    setting: true,              // 列設定ツールを表示
-    fullscreen: true,           // 全画面ツールを表示
-    refresh: false              // 更新ツールを非表示
+    size: true,                 // サイズ調整ツール表示
+    setting: true,              // 列設定ツール表示
+    fullscreen: true,           // 全画面ツール表示
+    refresh: false              // 更新ツール非表示
   }
 }
 ```
@@ -263,13 +263,13 @@ const options = {
 // 実行時制御
 const { hide, show } = useProTableToolbar()
 
-// 特定ツールを非表示
+// 特定ツール非表示
 hide('statistics')
 
-// 特定ツールを表示
+// 特定ツール表示
 show('statistics')
 
-// 条件付き表示
+// 条件表示
 const shouldShowExport = computed(() => hasPermission('export'))
 add({
   name: 'export',
@@ -290,7 +290,7 @@ add({
       type="danger"
       title="システム監視"
       onClick={() => {
-        // システム状態を取得
+        // システム状態取得
         const status = getSystemStatus()
         ElNotification({
           title: 'システム監視',
@@ -308,7 +308,7 @@ add({
 })
 ```
 
-### バッチ操作ツール
+### 一括操作ツール
 ```javascript
 add({
   name: 'batch-operations',
@@ -376,7 +376,7 @@ interface MaProTableToolbar {
   render: (props: {                     // レンダリング関数
     proxy: MaProTableExpose
   }) => VNode | Component
-  show: boolean | (() => boolean)       // 表示するかどうか
+  show: boolean | (() => boolean)       // 表示可否
   order: number                         // 表示順序
 }
 ```
@@ -391,18 +391,18 @@ interface MaProTableToolbar {
 ### 2. ユーザーエクスペリエンス
 - 明確なツールチップを提供
 - 適切なアイコンと色を使用
-- ツールの論理的なグループ化を考慮
+- ツールの論理的分類を考慮
 
 ### 3. パフォーマンス最適化
 - render関数での重い計算を避ける
-- リアクティブ状態を適切に使用
-- 不要なツールを適時に削除
+- リアクティブ状態の適切な使用
+- 不要なツールの適時削除
 
 ### 4. 権限制御
 ```javascript
 add({
   name: 'admin-tool',
-  show: () => hasRole('admin'),         // 権限に基づいて表示
+  show: () => hasRole('admin'),         // 権限ベース表示
   render: ({ proxy }) => (...)
 })
 ```

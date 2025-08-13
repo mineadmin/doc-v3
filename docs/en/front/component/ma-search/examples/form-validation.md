@@ -34,7 +34,7 @@ Most commonly used form validation rules:
 ```
 
 ### Format Validation
-Email, phone number, URL, and other format validations:
+Email, phone number, URL format validation:
 
 ```typescript
 // Email validation
@@ -64,7 +64,7 @@ Email, phone number, URL, and other format validations:
 ```
 
 ### Numeric Range Validation
-Range validation for numeric inputs:
+Number input range validation:
 
 ```typescript
 // Numeric range validation
@@ -105,7 +105,7 @@ Supports server-side validation with asynchronous rules:
       validator: async (rule: any, value: string) => {
         if (!value) return
         
-        // Simulate asynchronous validation
+        // Simulate async validation
         const response = await checkUsernameExists(value)
         if (response.exists) {
           throw new Error('Username already exists')
@@ -116,7 +116,7 @@ Supports server-side validation with asynchronous rules:
   ]
 }
 
-// Debounced asynchronous validation
+// Debounced async validation
 {
   label: 'Company Name',
   prop: 'company',
@@ -168,7 +168,7 @@ const createConditionalRules = () => {
 ```
 
 ### Combined Validation
-Validation involving multiple fields:
+Multiple fields joint validation:
 
 ```typescript
 // Password confirmation validation
@@ -241,7 +241,7 @@ const userRegisterSearchItems = [
 ```
 
 ### 2. Financial Data Query
-Precise data validation for financial fields:
+Precise data validation in financial fields:
 
 ```typescript
 const financialSearchItems = [
@@ -302,7 +302,7 @@ const orderSearchItems = [
 ## Validation Timing Control
 
 ### Trigger Configuration
-Different validation trigger modes:
+Different validation trigger timings:
 
 ```typescript
 // Real-time validation
@@ -331,7 +331,7 @@ Different validation trigger modes:
 ```
 
 ### Validation State Management
-Get and control validation states:
+Get and control validation state:
 
 ```typescript
 // Validate single field
@@ -358,7 +358,7 @@ const validateForm = async () => {
   }
 }
 
-// Clear validation states
+// Clear validation state
 const clearValidation = () => {
   const formRef = searchRef.value?.getMaFormRef()
   formRef?.clearValidate()
@@ -373,7 +373,7 @@ const clearValidation = () => {
 - Support internationalization of error messages
 
 ```typescript
-// User-friendly error messages
+// Friendly error messages
 const createFriendlyRules = (fieldName: string) => [
   { 
     required: true, 
@@ -393,7 +393,7 @@ const createFriendlyRules = (fieldName: string) => [
 
 ### 2. Performance Optimization
 - Use debounce for frequent validations
-- Error handling for asynchronous validation
+- Error handling for async validation
 - Validation caching mechanism
 
 ```typescript
@@ -472,4 +472,4 @@ const ValidationRules = {
 
 - [Advanced Search](./advanced-search) - Learn about validation applications in complex search scenarios
 - [Table Integration](./table-integration) - Understand validation's role before data submission
-- [Methods Demo](./methods-demo) - Learn about validation-related component methods
+- [Methods Demo](./methods-demo) - Learn about component methods related to validation

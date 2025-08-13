@@ -1,10 +1,10 @@
 # MaProTable
-`ma-pro-table` は `ma-search` と `ma-table` の2つのコンポーネントを基に構築され、完全な `CRUD` 機能を素早く構築するために使用され、サボる時間を増やします。
+`ma-pro-table` は `ma-search` と `ma-table` の2つのコンポーネントを基に構築されており、完全な `CRUD` 機能を素早く構築するために使用され、サボる時間を増やします。
 
 :::tip ヒント
-システムに組み込まれている **ユーザー、ロール管理** はすべて `ma-pro-table` CRUDのベストプラクティスです。ドキュメントと実際の例を参考にして、このコンポーネントを素早く習得してください。
+システムに組み込まれている **ユーザー、ロール管理** はすべて `ma-pro-table` CRUDのベストプラクティスであり、ドキュメントと実際の例を参照することで、このコンポーネントを素早く習得できます。
 
-注意：このコンポーネントは `2.0 ma-crud` のように直接 `追加` や `編集` 機能をサポートしません。これらは自分で実装する必要があります。
+注意：このコンポーネントは `2.0 ma-crud` のように直接 `追加` や `編集` 機能をサポートしなくなりました。これらは自分で実装する必要があります。
 :::
 
 ## クイックスタート
@@ -16,9 +16,9 @@
 以下のサンプルを通じて、MaProTableの様々な使用シナリオと機能特性を素早く理解できます：
 
 ### 基本機能
-- **[基本使用法](/ja/front/component/ma-pro-table/examples/basic)** - 最もシンプルなテーブルの使用法
+- **[基本使用法](/ja/front/component/ma-pro-table/examples/basic)** - 最もシンプルなテーブルの使用方法
 - **[高度な検索](/ja/front/component/ma-pro-table/examples/advanced-search)** - 複数の検索コンポーネントと複雑な検索ロジック
-- **[カスタム操作](/ja/front/component/ma-pro-table/examples/custom-operations)** - 柔軟な操作列設定と一括操作
+- **[カスタム操作](/ja/front/component/ma-pro-table/examples/custom-operations)** - 柔軟な操作列の設定とバッチ操作
 
 ### 拡張機能
 - **[セルレンダリングプラグイン](/ja/front/component/ma-pro-table/examples/cell-render-plugins)** - 豊富なセルレンダリング効果
@@ -32,15 +32,15 @@
 
 ### 🚀 迅速な開発
 - ma-searchとma-tableの組み合わせに基づき、すぐに使用可能
-- 一般的なCRUD操作モードを組み込み
+- 一般的なCRUD操作モードを内蔵
 - 複数のデータソースとAPIフォーマットをサポート
 
 ### 🎨 豊富なレンダリング
-- 組み込みのセルレンダリングプラグインシステム
+- 内蔵セルレンダリングプラグインシステム
 - カスタムレンダリングコンポーネントをサポート
 - 柔軟な操作列設定
 
-### 🔧 強力な拡張性
+### 🔧 強力な拡張
 - ツールバープラグインシステム
 - 完全なTypeScript型サポート
 - 豊富なイベントとコールバック
@@ -52,12 +52,12 @@
 
 ## cellRenderTo セルレンダリングプラグイン
 ::: tip なぜcellRenderToプラグインが必要なのか？
-まず、セルレンダリングで異なる内容を表示することは非常に頻繁に使用されるシナリオです。多くのコードは同じで、パラメータやフィールド名が異なるだけかもしれません。そのため、`ma-pro-table`を構築する際にこの問題を解決する方法を検討しました。
+まず、セルのレンダリング内容が異なることは非常に頻繁に発生するシナリオであり、多くのコードは同じで、パラメータやフィールド名が異なるだけの場合があります。そのため、`ma-pro-table`を構築する際にこの問題を解決する方法を検討しました。
 
-`ma-pro-table`は`url`、`image`、`video`、`switch`レンダリングなど、異なる内容に対するレンダリングを組み込むことができますが、問題は要件が多様であることです。
-組み込み機能はビジネス要件の成長に永遠に対応できませんが、同時にコードの冗長性を避けるために、このプラグインメカニズムが導入されました。
+`ma-pro-table`は`url`、`image`、`video`、`switch`レンダリングなど、異なる内容に対してレンダリングを内蔵できますが、問題はニーズが多様であり、
+内蔵機能ではビジネスニーズの増加に永遠に対応できないことです。同時にコードの冗長性を避けるため、このプラグインメカニズムが導入されました。
 
-皆さんは自分がよく使う、または特定のビジネスに特化したセルレンダリングプラグインを共有し、アプリケーションマーケットで共有してセルレンダリングを豊かにすることができます。これにより、同じコードを再び書く必要がなくなります。
+皆さんがよく使用する、または特定のビジネスに特化したセルレンダリングプラグインを共有し、アプリケーションマーケットで共有することで、セルレンダリングを豊かにし、同じコードを書く必要がなくなります。
 :::
 
 ### セルプラグインの使用
@@ -74,11 +74,11 @@ const schema = ref<MaProTableSchema>({
       prop: 'title',
       // セルレンダリングプラグインを呼び出す // [!code focus:9]
       cellRenderTo: {
-        // プラグイン名、このプラグインは文字列をel-tag形式でレンダリングし、ma-pro-tableに唯一組み込まれています。
+        // プラグイン名、このプラグインは文字列をel-tag形式でレンダリングし、ma-pro-tableはこれ一つだけを内蔵しています。
         name: 'tag', 
         // プラグインに必要なパラメータを渡すことができます
         props: {
-          // このプラグインはパラメータを必須としていないため、渡しません
+          // このプラグインはパラメータを必須としないため、渡しません
         }
       }
     }
@@ -93,7 +93,7 @@ const schema = ref<MaProTableSchema>({
 ```
 
 ### セルプラグインの登録
-プラグインを登録するには、`useProTableRenderPlugin()`メソッドをインポートし、このメソッドを使用してプラグインを登録または削除します。
+プラグインを登録するには、`useProTableRenderPlugin()`メソッドをインポートし、このメソッドを使用してプラグインを登録、削除します。
 ```ts
 import { useProTableRenderPlugin } from '@mineadmin/pro-table'
 ```
@@ -117,9 +117,9 @@ import { useProTableRenderPlugin } from '@mineadmin/pro-table'
 - `proxy` タイプ: `MaProTableExpose` このセクションの最後にある`Expose`ノードの説明を参照してください。
 :::
 
-ドキュメントではプラグインの登録方法のみを説明します。プラグインを登録するには`addPlugin`関数を使用します。
+ドキュメントではプラグインの登録方法のみを説明します。`addPlugin`関数を使用して登録します。
 
-組み込み`tag`プラグインのプロトタイプは以下の通りです：
+内蔵`tag`プラグインのプロトタイプは以下の通り：
 ```ts
 import { h } from 'vue'
 import { useProTableRenderPlugin } from '@mineadmin/pro-table'
@@ -129,13 +129,13 @@ const { addPlugin } = useProTableRenderPlugin()
 
 // プラグインを登録
 addPlugin({
-  // プラグイン名、一意の識別子。アプリケーションマーケットにアップロードする場合は、専用のプレフィックスを含めてください
+  // プラグイン名、一意の識別子。アプリケーションマーケットにアップロードする場合は、専用のプレフィックスを付けてください
   name: 'tag',
   // プラグインレンダリング関数、他のvueコンポーネントを指定するか、直接tsxまたはjsxを記述できます
   render: (data: TableColumnRenderer, props: any, proxy: MaProTableExpose) => {
     return h(
       ElTag,  // el-tagを使用してレンダリング
-      props,  // プラグイン呼び出し時に渡されるpropsパラメータを透過的に伝達
+      props,  // プラグイン呼び出し時に渡されるpropsパラメータを透過的に渡す
       {
         default: () => data.row[props?.prop] // el-tagのデフォルトスロットを使用
       }
@@ -149,7 +149,7 @@ addPlugin({
 ![テーブルツールバー](https://s21.ax1x.com/2024/11/03/pArlfRU.png)
 
 ::: tip 説明
-`ma-pro-table`には[スロット](#slot)もあり、ここを拡張できます。特定の一時的な機能にはスロットを使用し、システム全体で必要な機能には`api`を使用して拡張することをお勧めします。
+`ma-pro-table`には[スロット](#slot)もあり、ここを拡張できます。もし特定の一時的な機能が必要な場合はスロットを使用し、システム全体で必要な場合は`api`を使用して拡張することをお勧めします。
 :::
 
 `useProTableToolbar()`は以下のメソッドを返します：
@@ -191,7 +191,7 @@ add({
 ```vue [CustomerTool.vue]
 
 <script setup lang="ts">
-  // `ma-pro-table`から渡されるproxyパラメータを受け取るためにpropsを定義
+  // propsを定義して`ma-pro-table`から渡されるproxyパラメータを受け取る
   import { MaProTableExpose } from "@mineadmin/pro-table"
   import { ElMessage } from 'element-plus'
 
@@ -205,7 +205,7 @@ add({
 </script>
 
 <template>
-  <!-- circle属性を追加して円形ボタンにし、システムと統一させる -->
+  <!-- circle属性を追加して円形ボタンにし、システムと統一感を出す -->
   <el-button circle @click="execute">😀</el-button>
 </template>
 ```
@@ -216,13 +216,13 @@ add({
 ### コアタイプ
 
 ```typescript
-// コンポーネントの主要インターフェース
+// コンポーネント主要インターフェース
 interface MaProTableProps {
   options: MaProTableOptions    // コンポーネント設定
   schema: MaProTableSchema      // テーブルスキーマ
 }
 
-// コンポーネントが公開するメソッドとプロパティ
+// コンポーネント公開メソッドとプロパティ
 interface MaProTableExpose {
   // 子コンポーネントアクセス
   getSearchRef(): MaSearchExpose
@@ -285,11 +285,11 @@ interface MaProTableToolbar {
 | `searchOptions`        | `ma-search` パラメータ                            | `MaSearchOptions`                           | -      | 1.0.0  |
 | `searchFormOptions`    | `ma-form` パラメータ                              | `MaFormOptions`                             | -      | 1.0.0  |
 | -                      | -                                         | -                                           | -      | -      |
-| `id`                   | 現在のid、グローバルに一意、指定しない場合はランダムに生成されます                      | `string`                                    | -      | 1.0.0  |
-| `adaptionOffsetBottom` | 下部からのオフセット量                                   | `number`                                    | 0      | 1.0.0  |
-| `actionBtnPosition`    | アクションボタンの配置位置、自動モードでは、タイトルバーが有効な場合はタイトルバーに表示され、それ以外の場合はテーブルの左上に表示されます | `auto, header, table`                       | `auto` | 1.0.0  |
+| `id`                   | 現在のID、グローバルに一意、指定しない場合はランダムに生成                      | `string`                                    | -      | 1.0.0  |
+| `adaptionOffsetBottom` | 底部からのオフセット量                                   | `number`                                    | 0      | 1.0.0  |
+| `actionBtnPosition`    | アクションボタンの配置位置、自動モードではタイトルバーが有効な場合はタイトルバーに表示、それ以外はテーブルの左上に表示 | `auto, header, table`                       | `auto` | 1.0.0  |
 | `header`               | ヘッダー設定                                      | [パラメータ設定](#headerconfig)を参照                    | -      | 1.0.0  |
-| `toolbar`              | ツールバーを表示するかどうか                                   | `boolean, (() => boolean)`                  | `true` | 1.0.0  |
+| `toolbar`              | ツールバーを表示するか                                   | `boolean, (() => boolean)`                  | `true` | 1.0.0  |
 | `toolStates`           | 必要に応じてツールの表示を設定                                | { `[key:string]` : `boolean, (() => boolean)` | -      | 1.0.69 |
 | `rowContextMenu`       | 右クリック設定                                      | [パラメータ設定](#rowcontextmenu)を参照                  | -      | 1.0.0  |
 | `requestOptions`       | リストネットワークリクエスト設定                                  | [パラメータ設定](#requestoptions)を参照                  | -      | 1.0.0  |
@@ -300,11 +300,12 @@ interface MaProTableToolbar {
 #### HeaderConfig
 | パラメータ   | 説明           | タイプ                         | デフォルト値     | バージョン    |
 |------|--------------|----------------------------|---------|-------|
-| `show` | ヘッダーを表示するかどうか  | `boolean, (() => boolean)` | `true`  | 1.0.0 |
+| `show` | ヘッダーを表示するか  | `boolean, (() => boolean)` | `true`  | 1.0.0 |
 | `mainTitle` | メインタイトル  | `string, (() => string)`   | `テーブルメインタイトル` | 1.0.0 |
 | `subTitle` | サブタイトル  | `string, (() => string)`                   | -       | 1.0.0 |
 
 #### rowContextMenu
 | パラメータ                | 説明        | タイプ                                                                                 | デフォルト値     | バージョン    |
 |-------------------|-----------|------------------------------------------------------------------------------------|---------|-------|
-| `enabled`         | 行の右クリックメニューを有効にするかどうか | `boolean`                                                                          | `
+| `enabled`         | 行の右クリックメニューを有効にするか | `boolean`                                                                          | `false` | 1.0.0 |
+| `items`           | 右クリックメニュー

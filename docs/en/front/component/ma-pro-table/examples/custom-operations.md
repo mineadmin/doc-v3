@@ -1,13 +1,13 @@
 # Custom Operations
 
-Demonstrates different types of operation column configurations, including conditional display, custom styles, and complex operation logic.
+Demonstrates different types of action column configurations, including conditional display, custom styles, and complex operation logic.
 
 <DemoPreview dir="demos/ma-pro-table-examples/custom-operations" />
 
-## Features
+## Key Features
 
 - **Multiple operation types**: Supports tiled, dropdown menu, auto-collapse display modes
-- **Conditional display**: Dynamically show/hide operation buttons based on row data
+- **Conditional display**: Dynamically show/hide action buttons based on row data
 - **Context menu**: Supports row right-click menu functionality
 - **Drag sorting**: Supports row drag-and-drop reordering
 - **Batch operations**: Supports multi-selection and batch operation functionality
@@ -65,7 +65,7 @@ operationConfigure: {
 }
 ```
 
-## Operation Button Configuration
+## Action Button Configuration
 
 ### Basic Button
 ```javascript
@@ -114,12 +114,12 @@ operationConfigure: {
 }
 ```
 
-### Operation Sorting
+### Operation Ordering
 ```javascript
 {
   name: 'high-priority',
   text: 'High Priority',
-  order: 1,                 // Sort weight, lower numbers appear first
+  order: 1,                 // Sort weight, lower numbers come first
   onClick: (data) => {
     console.log('High priority operation')
   }

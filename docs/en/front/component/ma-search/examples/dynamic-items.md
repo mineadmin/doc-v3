@@ -19,7 +19,7 @@ const addSearchItem = () => {
     prop: 'new_field',
     render: 'input',
     props: {
-      placeholder: 'Please enter new field value'
+      placeholder: 'Please enter the new field value'
     }
   })
 }
@@ -29,7 +29,7 @@ const addSearchItem = () => {
 Use the `removeItem` method to remove specified search items:
 
 ```typescript
-// Remove specified search item
+// Remove a specific search item
 const removeSearchItem = (prop: string) => {
   searchRef.value?.removeItem(prop)
 }
@@ -56,10 +56,10 @@ Use various retrieval methods to query current search item configurations:
 // Get all search items
 const allItems = searchRef.value?.getItems()
 
-// Get specific search item
+// Get a specific search item
 const userItem = searchRef.value?.getItemByProp('username')
 
-// Check if search item exists
+// Check if a search item exists
 const hasUserItem = !!searchRef.value?.getItemByProp('username')
 ```
 
@@ -69,7 +69,7 @@ const hasUserItem = !!searchRef.value?.getItemByProp('username')
 Dynamically display different search conditions based on user permissions:
 
 ```typescript
-// Admins see all search items, regular users see partial items
+// Admin users see all search items, regular users see partial items
 if (userRole === 'admin') {
   searchRef.value?.appendItem({
     label: 'Creator',
@@ -81,7 +81,7 @@ if (userRole === 'admin') {
 ```
 
 ### 2. Business Scenario Switching
-Switch different search condition combinations based on business scenarios:
+Switch between different search condition combinations based on business scenarios:
 
 ```typescript
 // Switch business scenario
@@ -106,7 +106,7 @@ const switchScenario = (scenario: string) => {
 Implement dependencies between search conditions:
 
 ```typescript
-// When selecting a category, dynamically add subcategory search item
+// When selecting a category, dynamically add subcategory search items
 const onCategoryChange = (categoryId: string) => {
   if (categoryId) {
     searchRef.value?.appendItem({
@@ -123,9 +123,9 @@ const onCategoryChange = (categoryId: string) => {
 
 ## Key Features
 
-- 🔧 Complete CRUD operation support
+- 🔧 Full CRUD operation support
 - 🔄 Real-time search item management
-- 📊 Rich query and retrieval methods
+- 📊 Comprehensive query and retrieval methods
 - 🎯 Support for complex business logic
 - ⚡ High-performance dynamic update mechanism
 
@@ -143,7 +143,7 @@ const templates = {
     { label: 'Status', prop: 'status', render: 'select', options: statusOptions }
   ],
   orderSearch: [
-    { label: 'Order No.', prop: 'order_no', render: 'input' },
+    { label: 'Order Number', prop: 'order_no', render: 'input' },
     { label: 'Order Status', prop: 'order_status', render: 'select', options: orderStatusOptions },
     { label: 'Order Time', prop: 'created_at', render: 'date-picker' }
   ]
@@ -163,11 +163,11 @@ Add validation rules dynamically based on search items:
 
 ```typescript
 const addItemWithValidation = (item: any) => {
-  // Add validation rules for certain fields
+  // Add validation rules for specific fields
   if (item.prop === 'email') {
     item.rules = [
-      { required: true, message: 'Email cannot be empty', trigger: 'blur' },
-      { type: 'email', message: 'Incorrect email format', trigger: 'blur' }
+      { required: true, message: 'Email is required', trigger: 'blur' },
+      { type: 'email', message: 'Invalid email format', trigger: 'blur' }
     ]
   }
   
@@ -178,7 +178,7 @@ const addItemWithValidation = (item: any) => {
 ## Best Practices
 
 ### 1. State Management
-Recommended to use state management libraries (like Pinia) for managing complex search item states:
+Recommended to use state management libraries (e.g., Pinia) for managing complex search item states:
 
 ```typescript
 // Use Pinia store to manage search items
@@ -200,7 +200,7 @@ const useSearchStore = defineStore('search', () => {
 ```
 
 ### 2. Performance Optimization
-Use debounce technique to optimize performance during frequent dynamic updates:
+Use debounce techniques to optimize performance during frequent dynamic updates:
 
 ```typescript
 import { debounce } from 'lodash-es'

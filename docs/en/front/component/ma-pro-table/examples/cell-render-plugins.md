@@ -4,13 +4,13 @@ Demonstrates the usage of various cell render plugins, including built-in and cu
 
 <DemoPreview dir="demos/ma-pro-table-examples/cell-render-plugins" />
 
-## Key Features
+## Features
 
 - **Plugin Mechanism**: Extend cell rendering capabilities through a plugin system
 - **Built-in Plugins**: Provides commonly used render plugins (e.g., tags, progress bars)
 - **Custom Plugins**: Supports registering custom render plugins
 - **Flexible Configuration**: Supports dynamic property configuration and conditional rendering
-- **Code Reuse**: Avoids repetitive rendering logic implementation
+- **Code Reusability**: Avoids repetitive rendering logic
 
 ## Built-in Plugins
 
@@ -31,7 +31,7 @@ Demonstrates the usage of various cell render plugins, including built-in and cu
 
 ## Custom Plugins
 
-### Registering Plugins
+### Register Plugin
 ```javascript
 import { useProTableRenderPlugin } from '@mineadmin/pro-table'
 import { h } from 'vue'
@@ -53,7 +53,7 @@ addPlugin({
 })
 ```
 
-### Using Custom Plugins
+### Using Custom Plugin
 ```javascript
 {
   label: 'Work Progress',
@@ -131,7 +131,7 @@ addPlugin({
       modelValue: !!data.row[data.column.property],
       onChange: (value) => {
         // Handle switch change
-        console.log(`${data.row.name} status changed to ${value ? 'on' : 'off'}`)
+        console.log(`${data.row.name} status ${value ? 'enabled' : 'disabled'}`)
       },
       ...props
     })
@@ -162,7 +162,7 @@ addPlugin({
 })
 ```
 
-### 6. Multiple Tags Plugin
+### 6. Tags Plugin
 ```javascript
 addPlugin({
   name: 'tags',
@@ -217,7 +217,7 @@ addPlugin({
 }
 ```
 
-### Ability Rating
+### Rating Display
 ```javascript
 {
   label: 'Rating',
@@ -250,13 +250,13 @@ addPlugin({
       }
     })
   },
-  formatter: () => 'Visit Website'
+  formatter: () => 'Visit Site'
 }
 ```
 
 ## Plugin Management
 
-### Getting Plugin Information
+### Get Plugin Information
 ```javascript
 import { useProTableRenderPlugin } from '@mineadmin/pro-table'
 
@@ -272,7 +272,7 @@ const tagPlugin = getPluginByName('tag')
 removePlugin('custom-plugin')
 ```
 
-### Plugin Parameter Specifications
+### Plugin Parameter Description
 ```javascript
 // Plugin definition
 interface MaProTableRenderPlugin {
@@ -284,11 +284,11 @@ interface MaProTableRenderPlugin {
   ) => VNode | string
 }
 
-// Using plugins
+// Using plugin
 {
   cellRenderTo: {
     name: 'plugin-name',          // Plugin name
-    props: any | any[] | (data) => any  // Plugin parameters (supports dynamic computation)
+    props: any | any[] | (data) => any  // Plugin parameters (supports dynamic calculation)
   }
 }
 ```
@@ -298,12 +298,12 @@ interface MaProTableRenderPlugin {
 ### 1. Plugin Naming
 - Use descriptive names like `progress`, `image`, `tags`
 - Avoid conflicts with built-in plugin names
-- Consider adding prefixes if publishing to app stores
+- Consider adding prefixes if publishing to marketplace
 
 ### 2. Performance Optimization
 - Avoid complex computations in render functions
 - Use props functions for conditional logic and property calculations
-- Properly utilize Vue's reactivity features
+- Leverage Vue's reactivity system appropriately
 
 ### 3. Error Handling
 ```javascript
@@ -335,4 +335,4 @@ const myPlugin: MaProTableRenderPlugin = {
 }
 ```
 
-The cell render plugin system provides powerful extensibility, enabling you to easily build rich table display effects.
+The cell render plugin system provides powerful extensibility, allowing you to easily build rich table display effects.

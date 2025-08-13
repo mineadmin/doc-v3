@@ -1,15 +1,15 @@
-# 動的検索項目管理
+# 動的な検索項目管理
 
-すべてのプログラムによる管理方法の使用を紹介し、検索項目の追加、削除、変更などの操作を含み、ビジネスロジックに基づいて検索条件を動的に調整する必要があるシナリオに適用されます。
+すべてのプログラムによる管理方法の使用を表示し、検索項目の追加、削除、変更などの操作を含み、ビジネスロジックに基づいて検索条件を動的に調整する必要があるシナリオに適用されます。
 
 ## 動的管理デモ
 
 <DemoPreview dir="demos/ma-search/dynamic-items" />
 
-## 動的管理メソッド
+## 動的管理方法
 
 ### 検索項目の追加
-`appendItem` メソッドを使用して新しい検索項目を動的に追加：
+`appendItem` メソッドを使用して新しい検索項目を動的に追加します：
 
 ```typescript
 // 単一の検索項目を追加
@@ -19,24 +19,24 @@ const addSearchItem = () => {
     prop: 'new_field',
     render: 'input',
     props: {
-      placeholder: '新規フィールド値を入力してください'
+      placeholder: '新規フィールドの値を入力してください'
     }
   })
 }
 ```
 
 ### 検索項目の削除
-`removeItem` メソッドを使用して指定した検索項目を削除：
+`removeItem` メソッドを使用して指定された検索項目を削除します：
 
 ```typescript
-// 指定した検索項目を削除
+// 指定された検索項目を削除
 const removeSearchItem = (prop: string) => {
   searchRef.value?.removeItem(prop)
 }
 ```
 
 ### 検索項目の一括設定
-`setItems` メソッドを使用してすべての検索項目を一度に設定：
+`setItems` メソッドを使用してすべての検索項目を一度に設定します：
 
 ```typescript
 // 検索項目を一括更新
@@ -50,7 +50,7 @@ const updateAllItems = () => {
 ```
 
 ### 検索項目情報の取得
-各種取得メソッドを使用して現在の検索項目構成を照会：
+さまざまな取得メソッドを使用して現在の検索項目構成をクエリします：
 
 ```typescript
 // すべての検索項目を取得
@@ -59,14 +59,14 @@ const allItems = searchRef.value?.getItems()
 // 特定の検索項目を取得
 const userItem = searchRef.value?.getItemByProp('username')
 
-// 検索項目の存在を確認
+// 検索項目が存在するか確認
 const hasUserItem = !!searchRef.value?.getItemByProp('username')
 ```
 
 ## 使用シナリオ
 
 ### 1. 権限制御
-ユーザー権限に基づいて異なる検索条件を動的に表示：
+ユーザーの権限に基づいて異なる検索条件を動的に表示：
 
 ```typescript
 // 管理者はすべての検索項目を表示、一般ユーザーは一部の検索項目を表示
@@ -80,7 +80,7 @@ if (userRole === 'admin') {
 }
 ```
 
-### 2. ビジネスシナリオ切り替え
+### 2. ビジネスシナリオの切り替え
 ビジネスシナリオに応じて異なる検索条件の組み合わせを切り替え：
 
 ```typescript
@@ -103,7 +103,7 @@ const switchScenario = (scenario: string) => {
 ```
 
 ### 3. 条件依存関係
-検索条件間の依存関係を実現：
+検索条件間の依存関係を実装：
 
 ```typescript
 // 特定のカテゴリを選択した場合、サブカテゴリ検索項目を動的に追加
@@ -125,7 +125,7 @@ const onCategoryChange = (categoryId: string) => {
 
 - 🔧 完全なCRUD操作サポート
 - 🔄 リアルタイムの検索項目管理
-- 📊 豊富な照会および検索方法
+- 📊 豊富なクエリと検索方法
 - 🎯 複雑なビジネスロジックのサポート
 - ⚡ 高性能な動的更新メカニズム
 
@@ -233,6 +233,6 @@ const restoreSearchConfig = () => {
 
 ## 関連リンク
 
-- [メソッドデモ](./methods-demo) - すべての公開メソッドの詳細な使用法を理解
-- [カスタムアクション](./custom-actions) - カスタムアクションボタンを理解
+- [メソッドデモ](./methods-demo) - すべての公開メソッドの詳細な使用法を確認
+- [カスタムアクション](./custom-actions) - カスタムアクションボタンについて学ぶ
 - [高度な検索](./advanced-search) - 複雑な検索シナリオの実装を理解

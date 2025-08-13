@@ -1,6 +1,6 @@
 # テーブル統合
 
-データテーブルとの完全な統合ソリューションを展示し、検索、ページネーション、ソート、テーブル/カードビューの切り替えなどの機能を含み、完全なデータ管理インターフェースを構築するためのベストプラクティスです。
+データテーブルとの完全な統合ソリューションを表示し、検索、ページネーション、ソート、テーブル/カードビューの切り替えなどの機能を含み、完全なデータ管理インターフェースを構築するためのベストプラクティスです。
 
 ## テーブル統合デモ
 
@@ -14,7 +14,7 @@
 ```typescript
 // 検索処理関数
 const handleSearch = (searchData: any) => {
-  // ページネーションを最初のページにリセット
+  // ページネーションを1ページ目にリセット
   pagination.page = 1
   // 検索条件を保存
   searchCondition.value = { ...searchData }
@@ -53,7 +53,7 @@ const handlePageChange = (page: number) => {
 // ページサイズ変更処理
 const handleSizeChange = (size: number) => {
   pagination.pageSize = size
-  pagination.page = 1  // 最初のページにリセット
+  pagination.page = 1  // 1ページ目にリセット
   loadTableData()
 }
 ```
@@ -77,7 +77,7 @@ const loadTableData = async () => {
     // API呼び出し
     const response = await fetchTableData(params)
     
-    // データ更新
+    // データを更新
     tableData.value = response.data
     pagination.total = response.total
     
@@ -246,7 +246,7 @@ const onSearchInput = (searchData: any) => {
 ```
 
 ### データキャッシュ
-検索結果のインテリジェントなキャッシュを実装:
+検索結果のインテリジェントなキャッシュを実現:
 
 ```typescript
 // キャッシュ設定
@@ -359,5 +359,5 @@ const withLoading = async (key: keyof typeof loadingStates, operation: () => Pro
 ## 関連リンク
 
 - [レスポンシブレイアウト](./responsive-layout) - 異なるデバイスでのテーブル表示最適化について
-- [フォームバリデーション](./form-validation) - 検索条件の検証処理について
+- [フォームバリデーション](./form-validation) - 検索条件のバリデーション処理について
 - [メソッドデモ](./methods-demo) - テーブル統合におけるコンポーネントメソッドの応用について

@@ -92,7 +92,7 @@ const updateSearchLayout = (device) => {
 ### Search Layout Modes
 ```javascript
 const searchOptions = {
-  showNumber: 3,            // Default number of search items
+  showNumber: 3,            // Default number of search items to display
   layout: 'auto',           // auto/inline/vertical
   responsive: {
     mobile: {
@@ -124,7 +124,7 @@ const updateTableColumns = (device) => {
   
   let visibleColumns
   if (device === 'mobile') {
-    // Only show core information on mobile
+    // Mobile shows only core information
     visibleColumns = [
       baseColumns[0], // ID
       baseColumns[1], // Name
@@ -133,7 +133,7 @@ const updateTableColumns = (device) => {
       operationColumn
     ]
   } else if (device === 'tablet') {
-    // Show main information on tablet
+    // Tablet shows main information
     visibleColumns = [
       baseColumns[0], // ID
       baseColumns[1], // Name
@@ -144,7 +144,7 @@ const updateTableColumns = (device) => {
       operationColumn
     ]
   } else {
-    // Show all information on desktop
+    // Desktop shows all information
     visibleColumns = [...baseColumns, operationColumn]
   }
   
@@ -154,7 +154,7 @@ const updateTableColumns = (device) => {
 
 ### Column Width Adaptation
 ```javascript
-// Optimize column width for mobile
+// Mobile column width optimization
 const getColumnWidth = (device, column) => {
   if (device === 'mobile') {
     return {
@@ -208,7 +208,7 @@ const getDeviceActions = (device) => {
     }
   ]
   
-  // Show more operations on desktop
+  // Desktop shows more operations
   if (device === 'desktop') {
     baseActions.push(
       {
@@ -236,7 +236,7 @@ const getDeviceActions = (device) => {
 
 ### Cell Content Adaptation
 ```javascript
-// Optimize skill tag display for mobile
+// Mobile skill tag display optimization
 {
   label: 'Skills',
   prop: 'skills',
@@ -259,7 +259,7 @@ const getDeviceActions = (device) => {
 
 ### Mobile Styles
 ```css
-/* Special styles for mobile */
+/* Mobile-specific styles */
 .responsive-container.mobile :deep(.ma-pro-table) {
   font-size: 14px;
 }
@@ -282,7 +282,7 @@ const getDeviceActions = (device) => {
 
 ### Tablet Styles
 ```css
-/* Special styles for tablet */
+/* Tablet-specific styles */
 .responsive-container.tablet :deep(.el-table th),
 .responsive-container.tablet :deep(.el-table td) {
   padding: 10px 6px;
@@ -321,7 +321,7 @@ const options = {
 
 ### CSS Media Queries
 ```css
-/* Implement true responsiveness with media queries */
+/* Using media queries for true responsiveness */
 @media (max-width: 768px) {
   .ma-pro-table {
     font-size: 14px;
@@ -380,7 +380,7 @@ const getToolbarConfig = (device) => {
   if (device === 'mobile') {
     return {
       size: 'small',
-      onlyIcons: true,        // Only show icons
+      onlyIcons: true,        // Show only icons
       maxButtons: 3           // Maximum 3 buttons
     }
   } else if (device === 'tablet') {
@@ -409,7 +409,7 @@ const getToolbarConfig = (device) => {
 ### 2. Performance Optimization
 - Avoid loading excessive data on small screens
 - Use virtual scrolling for large datasets
-- Optimize images and media resources
+- Optimize image and media resources
 
 ### 3. User Experience
 - Provide device-specific interaction methods

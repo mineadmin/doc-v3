@@ -1,12 +1,12 @@
 # データ管理
 
-完全なCRUD操作を表示し、新規追加、編集、削除、データ連動などの機能を含みます。
+完全なCRUD操作を表示し、新規追加、編集、削除、データ連動などの機能を含む。
 
 <DemoPreview dir="demos/ma-pro-table-examples/data-management" />
 
 ## 機能特徴
 
-- **完全なCRUD**: データの追加、削除、編集、検索操作をサポート
+- **完全CRUD**: データの追加、削除、編集、検索操作をサポート
 - **フォーム連動**: 新規追加/編集フォームとテーブルデータの連動
 - **データ統計**: リアルタイムでデータ指標を統計
 - **一括操作**: 一括選択と操作をサポート
@@ -123,7 +123,7 @@ const statistics = computed(() => {
 const formRules = {
   name: [
     { required: true, message: '従業員氏名を入力してください', trigger: 'blur' },
-    { min: 2, max: 10, message: '氏名の長さは2～10文字です', trigger: 'blur' }
+    { min: 2, max: 10, message: '氏名は2～10文字で入力してください', trigger: 'blur' }
   ],
   department: [
     { required: true, message: '部門を選択してください', trigger: 'change' }
@@ -314,7 +314,7 @@ const handleBatchDelete = () => {
 const handleSearchSubmit = (form) => {
   console.log('検索条件:', form)
   ElMessage.info('検索操作を実行')
-  // ここで検索ロジックを処理できます
+  // ここで検索ロジックを処理可能
   return form
 }
 
@@ -413,9 +413,9 @@ const loadDataFromStorage = () => {
 ### 2. データ管理
 - テーブルとフォームデータを即時同期
 - データバックアップと復元機能を提供
-- 楽観的ロックを実装してデータ競合を防止
+- データ競合を避けるため楽観的ロックを実装
 
-### 3. ユーザーエクスペリエンス
+### 3. ユーザー体験
 - 操作確認と取り消し機能を提供
 - 操作進捗と状態を表示
 - 適切なエラー処理と通知
@@ -425,4 +425,4 @@ const loadDataFromStorage = () => {
 - 頻繁なデータ更新を避ける
 - デバウンスとスロットリングを適切に使用
 
-データ管理機能により、完全なデータ操作インターフェースを構築でき、様々な業務シナリオのデータ管理要件を満たします。
+データ管理機能により、完全なデータ操作インターフェースを構築でき、様々な業務シナリオのデータ管理ニーズを満たします。

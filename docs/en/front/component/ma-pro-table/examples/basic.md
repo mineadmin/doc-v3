@@ -1,15 +1,15 @@
 # Basic Usage
 
-The simplest way to use the table, including search, pagination, and basic operation features.
+The simplest way to use a table, including search, pagination, and basic operation functionalities.
 
 <DemoPreview dir="demos/ma-pro-table-examples/basic" />
 
 ## Key Features
 
-- **Quick Setup**: Based on the combination of ma-search and ma-table
-- **Search Functionality**: Built-in search form supporting various search components
+- **Quick Setup**: Built on the combination of ma-search and ma-table
+- **Search Functionality**: Built-in search form supporting multiple search components
 - **Pagination Support**: Automatic pagination logic handling
-- **Action Column**: Flexible configuration for operation buttons
+- **Operation Column**: Flexible configuration for action buttons
 - **Data Binding**: Automatic API request handling and data rendering
 
 ## Core Configuration
@@ -59,7 +59,7 @@ const schema = reactive({
 </script>
 ```
 
-### Action Column Configuration
+### Operation Column Configuration
 ```javascript
 {
   type: 'operation',
@@ -82,7 +82,7 @@ const schema = reactive({
 
 ## Usage Instructions
 
-1. **API Interface**: Should return data in `{ code, data: { list, total } }` format
+1. **API Interface**: Should return data in the format `{ code, data: { list, total } }`
 2. **Search Components**: Supports various types including input, select, date, etc.
 3. **Action Buttons**: Configurable click events, display conditions, styles, etc.
 4. **Auto Height Adjustment**: Automatically calculates table height when `adaption` is enabled

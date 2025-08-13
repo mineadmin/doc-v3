@@ -1,13 +1,13 @@
-# 基本使い方
+# 基本の使い方
 
-最もシンプルなテーブルの使用方法で、検索、ページネーション、基本操作機能を含みます。
+最もシンプルなテーブルの使用例で、検索、ページネーション、基本操作機能を含みます。
 
 <DemoPreview dir="demos/ma-pro-table-examples/basic" />
 
-## 機能特徴
+## 特徴
 
-- **迅速な構築**: ma-searchとma-tableの組み合わせをベース
-- **検索機能**: 内蔵検索フォーム、複数の検索コンポーネントをサポート
+- **迅速な構築**: ma-search と ma-table の組み合わせをベース
+- **検索機能**: 内蔵の検索フォーム、複数の検索コンポーネントをサポート
 - **ページネーション対応**: 自動的にページネーションロジックを処理
 - **操作列**: 柔軟な操作ボタン設定をサポート
 - **データバインディング**: APIリクエストとデータレンダリングを自動処理
@@ -34,7 +34,7 @@ const options = reactive({
     }
   },
   tableOptions: {
-    adaption: true,          // 高さ自動調整
+    adaption: true,          // 高さの自動調整
     pagination: {
       total: 0,
       pageSize: 10
@@ -46,14 +46,14 @@ const options = reactive({
 const schema = reactive({
   searchItems: [             // 検索設定
     {
-      label: '氏名',
+      label: '名前',
       prop: 'name',
       render: 'input'
     }
   ],
   tableColumns: [            // テーブル列設定
     { label: 'ID', prop: 'id' },
-    { label: '氏名', prop: 'name' }
+    { label: '名前', prop: 'name' }
   ]
 })
 </script>
@@ -83,8 +83,8 @@ const schema = reactive({
 ## 使用説明
 
 1. **APIインターフェース**: `{ code, data: { list, total } }` 形式のデータを返す必要あり
-2. **検索コンポーネント**: input、select、dateなど複数のタイプをサポート
+2. **検索コンポーネント**: input、select、date など複数のタイプをサポート
 3. **操作ボタン**: クリックイベント、表示条件、スタイルなどを設定可能
-4. **高さ自動調整**: `adaption`を有効にするとテーブル高さを自動計算
+4. **高さ自動調整**: `adaption` を有効にするとテーブルの高さを自動計算
 
-これはMaProTableを使用する最も基本的な例で、完全なCRUDインターフェースを迅速に構築する方法を示しています。
+これは MaProTable を使用した最も基本的な例で、完全な CRUD インターフェースを迅速に構築する方法を示しています。

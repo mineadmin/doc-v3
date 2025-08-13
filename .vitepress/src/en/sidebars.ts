@@ -129,7 +129,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text: 'Expert',
       items: [
         {
-          text: 'i18n Configuration',
+          text: 'Internationalization',
           link: '/en/front/high/i18n'
         },
         {
@@ -246,7 +246,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/en/front/component/ma-table/tree-table'
             },
             {
-              text: 'Multiple Selection',
+              text: 'Multi-select Table',
               link: '/en/front/component/ma-table/selection'
             },
             {
@@ -357,7 +357,7 @@ const sidebar:DefaultTheme.Sidebar = {
         {text: "Logging",link: "/en/backend/base/logger"},
         {text: "Events",link: "/en/backend/base/event-handler"},
         {text: "File Upload",link: "/en/backend/base/upload"},
-        {text: "i18n",link: "/en/backend/base/lang"},
+        {text: "Internationalization",link: "/en/backend/base/lang"},
       ]
     },
     {
@@ -372,7 +372,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/en/backend/security/access"
         },
         {
-          text: "Get Client IP",
+          text: "Client IP Detection",
           link: "/en/backend/security/client-ip"
         }
       ]
@@ -384,7 +384,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/en/backend/data-permission/overview"
         },
         {
-          text: "Permission Configuration & Demo",
+          text: "Configuration & Demo",
           link: "/en/backend/data-permission/config"
         },
         {
@@ -404,7 +404,7 @@ const sidebar:DefaultTheme.Sidebar = {
       items:
           [
             {
-              text:"Preparation",
+              text:"Prerequisites",
               link:"/en/plugin"
             },
             {
@@ -416,15 +416,15 @@ const sidebar:DefaultTheme.Sidebar = {
               link:"/en/plugin/create"
             },
             {
-              text:"Plugin Directory Structure",
+              text:"Plugin Structure",
               link:"/en/plugin/structure"
             },
             {
-              text:"mine.json Documentation & Examples",
+              text:"mine.json Documentation",
               link:"/en/plugin/mineJson"
             },
             {
-            text:"ConfigProvider Documentation",
+            text:"ConfigProvider Guide",
             link:"/en/plugin/configProvider"
           }
           ]
@@ -446,16 +446,16 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"Frontend Development",
       items:[
         {
-          text: "Frontend Development Standards",
+          text: "Frontend Standards",
           link: "/en/plugin/front/develop"
         }
       ]
     },
     {
-      text:"Application Submission",
+      text:"Publishing",
       items:[
         {
-          text: "Application Publishing",
+          text: "Publishing Apps",
           link: "/en/plugin/develop/publish"
         },
         {

@@ -1,13 +1,13 @@
 # Data Management
 
-Demonstrates complete CRUD operations including create, edit, delete, and data linkage functionalities.
+Demonstrates complete CRUD operations including create, edit, delete, and data linkage.
 
 <DemoPreview dir="demos/ma-pro-table-examples/data-management" />
 
 ## Key Features
 
 - **Complete CRUD**: Supports create, read, update, and delete operations
-- **Form Linkage**: Create/edit forms synchronized with table data
+- **Form Linkage**: New/edit forms synchronize with table data
 - **Data Statistics**: Real-time statistical indicators
 - **Batch Operations**: Supports batch selection and operations
 - **Status Synchronization**: Automatically refreshes table data after operations
@@ -71,7 +71,7 @@ const statistics = computed(() => {
 })
 ```
 
-## Create/Edit Form
+## Add/Edit Form
 
 ### Form Component
 ```vue
@@ -207,7 +207,7 @@ const showEditDialog = (employee) => {
 ### Delete Operation
 ```javascript
 const handleDeleteEmployee = (employee) => {
-  ElMessageBox.confirm(`Are you sure to delete employee "${employee.name}"?`, 'Confirm Deletion', {
+  ElMessageBox.confirm(`Are you sure to delete employee "${employee.name}"?`, 'Delete Confirmation', {
     confirmButtonText: 'Confirm',
     cancelButtonText: 'Cancel',
     type: 'warning'
@@ -301,7 +301,7 @@ const handleBatchDelete = () => {
   }).then(() => {
     const selectedIds = selectedRows.map(row => row.id)
     tableData.value = tableData.value.filter(item => !selectedIds.includes(item.id))
-    ElMessage.success('Batch deletion successful')
+    ElMessage.success('Batch delete successful')
     tableRef.value?.refresh()
   })
 }
@@ -412,11 +412,11 @@ const loadDataFromStorage = () => {
 
 ### 2. Data Management
 - Synchronize table and form data promptly
-- Provide data backup and recovery functions
-- Implement optimistic locking to prevent data conflicts
+- Provide data backup and recovery
+- Implement optimistic locking to prevent conflicts
 
 ### 3. User Experience
-- Provide operation confirmation and undo functions
+- Provide operation confirmation and undo
 - Display operation progress and status
 - Proper error handling and prompts
 
@@ -425,4 +425,4 @@ const loadDataFromStorage = () => {
 - Avoid frequent data refreshes
 - Use debounce and throttle appropriately
 
-The data management functionality allows you to build complete data operation interfaces to meet various business scenario requirements.
+The data management feature allows you to build complete data operation interfaces to meet various business scenario requirements.
