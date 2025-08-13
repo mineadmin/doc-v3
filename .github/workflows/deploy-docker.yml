@@ -39,7 +39,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Build with VitePress
-        run: pnpm build
+        run: make build
       - name: Push Image
         env:
             DOCKER_USERNAME: ${{ secrets.ALIYUN_USERNAME }}

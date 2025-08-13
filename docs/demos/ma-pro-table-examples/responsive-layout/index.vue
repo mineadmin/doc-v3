@@ -22,7 +22,7 @@
                   :type="currentDevice === 'tablet' ? 'primary' : 'default'"
                   @click="switchDevice('tablet')"
                 >
-                  <el-icon><Tablet /></el-icon>
+                  <el-icon></el-icon>
                   平板
                 </el-button>
                 <el-button 
@@ -72,7 +72,7 @@
 import { ref, reactive, computed, watch } from 'vue'
 import type { MaProTableExpose, MaProTableOptions, MaProTableSchema } from "@mineadmin/pro-table"
 import { ElMessage, ElNotification } from 'element-plus'
-import { Monitor, Tablet, Iphone, View, Edit, Delete } from '@element-plus/icons-vue'
+import { Monitor, Iphone, View, Edit, Delete } from '@element-plus/icons-vue'
 
 const tableRef = ref<MaProTableExpose>()
 const currentDevice = ref<'desktop' | 'tablet' | 'mobile'>('desktop')

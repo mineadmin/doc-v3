@@ -99,32 +99,32 @@ clean:
 # Build all languages using original multi-locale config (memory intensive)
 build-all: clean
 	@echo "Building all languages using original config..."
-	NODE_OPTIONS="--max-old-space-size=8192" pnpm run build
+	NODE_OPTIONS="--max-old-space-size=16192" pnpm run build
 
 # Build Chinese documentation only (default output)
 build-zh:
 	@echo "Building Chinese documentation → .vitepress/dist/"
-	NODE_OPTIONS="--max-old-space-size=8192" pnpm exec vitepress build --config .vitepress/config.zh.mts
+	NODE_OPTIONS="--max-old-space-size=16192" pnpm exec vitepress build --config .vitepress/config.zh.mts
 
 # Build English documentation only
 build-en:
 	@echo "Building English documentation → .vitepress/dist-en/"
-	NODE_OPTIONS="--max-old-space-size=8192" pnpm exec vitepress build --config .vitepress/config.en.mts
+	NODE_OPTIONS="--max-old-space-size=16192" pnpm exec vitepress build --config .vitepress/config.en.mts
 
 # Build Japanese documentation only
 build-ja:
 	@echo "Building Japanese documentation → .vitepress/dist-ja/"
-	NODE_OPTIONS="--max-old-space-size=8192" pnpm exec vitepress build --config .vitepress/config.ja.mts
+	NODE_OPTIONS="--max-old-space-size=16192" pnpm exec vitepress build --config .vitepress/config.ja.mts
 
 # Build Traditional Chinese (Hong Kong) documentation only
 build-zh-hk:
 	@echo "Building Traditional Chinese (Hong Kong) documentation → .vitepress/dist-zh-hk/"
-	NODE_OPTIONS="--max-old-space-size=8192" pnpm exec vitepress build --config .vitepress/config.zh-hk.mts
+	NODE_OPTIONS="--max-old-space-size=16192" pnpm exec vitepress build --config .vitepress/config.zh-hk.mts
 
 # Build Traditional Chinese (Taiwan) documentation only
 build-zh-tw:
 	@echo "Building Traditional Chinese (Taiwan) documentation → .vitepress/dist-zh-tw/"
-	NODE_OPTIONS="--max-old-space-size=8192" pnpm exec vitepress build --config .vitepress/config.zh-tw.mts
+	NODE_OPTIONS="--max-old-space-size=16192" pnpm exec vitepress build --config .vitepress/config.zh-tw.mts
 
 # Step-by-step build (recommended for memory management)
 build: clean

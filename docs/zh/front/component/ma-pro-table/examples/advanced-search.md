@@ -34,11 +34,12 @@
   label: '部门',
   prop: 'department',
   render: 'select',
+  options: [
+    { label: '技术部', value: '技术部' },
+    { label: '产品部', value: '产品部' }
+  ],
   renderProps: {
-    options: [
-      { label: '技术部', value: '技术部' },
-      { label: '产品部', value: '产品部' }
-    ]
+    placeholder: '请选择部门'
   }
 }
 
@@ -47,9 +48,14 @@
   label: '部门',
   prop: 'departments',
   render: 'select',
+  options: [
+    { label: '技术部', value: '技术部' },
+    { label: '产品部', value: '产品部' },
+    { label: '设计部', value: '设计部' }
+  ],
   renderProps: {
     multiple: true,
-    options: [...options]
+    placeholder: '请选择部门'
   }
 }
 ```
@@ -59,13 +65,28 @@
 {
   label: '薪资范围',
   prop: 'salaryRange',
-  render: 'input-number-range',
-  renderProps: {
-    startPlaceholder: '最低薪资',
-    endPlaceholder: '最高薪资',
-    min: 0,
-    max: 100000
-  }
+  render: () => (
+    <div style="display: flex; gap: 8px; align-items: center;">
+      <el-input-number
+        v-model={formData.salaryMin}
+        placeholder="最低薪资"
+        min={0}
+        max={100000}
+        controls-position="right"
+        style="width: 140px;"
+      />
+      <span>-</span>
+      <el-input-number
+        v-model={formData.salaryMax}
+        placeholder="最高薪资"
+        min={0}
+        max={100000}
+        controls-position="right"
+        style="width: 140px;"
+      />
+    </div>
+  ),
+  span: 2
 }
 ```
 
@@ -74,7 +95,7 @@
 {
   label: '入职时间',
   prop: 'joinDateRange',
-  render: 'date-range',
+  render: 'date-picker',
   renderProps: {
     type: 'daterange',
     startPlaceholder: '开始日期',
@@ -111,13 +132,14 @@
   label: '职级',
   prop: 'level',
   render: 'checkbox-group',
-  renderProps: {
-    options: [
-      { label: 'P4', value: 'P4' },
-      { label: 'P5', value: 'P5' },
-      { label: 'P6', value: 'P6' }
-    ]
-  }
+  options: [
+    { label: 'P4', value: 'P4' },
+    { label: 'P5', value: 'P5' },
+    { label: 'P6', value: 'P6' },
+    { label: 'P7', value: 'P7' },
+    { label: 'P8', value: 'P8' },
+    { label: 'P9', value: 'P9' }
+  ]
 }
 ```
 
@@ -127,15 +149,60 @@
   label: '在职状态',
   prop: 'status',
   render: 'radio-group',
-  renderProps: {
-    options: [
-      { label: '全部', value: '' },
-      { label: '在职', value: 1 },
-      { label: '离职', value: 0 }
-    ]
-  }
+  options: [
+    { label: '全部', value: '' },
+    { label: '在职', value: 1 },
+    { label: '离职', value: 0 }
+  ]
 }
 ```
+
+## 自定义渲染组件
+
+### JSX 自定义渲染
+对于复杂的输入组件，可以使用 JSX 进行自定义渲染：
+
+```javascript
+// 需要在 script setup 中添加响应式数据
+const formData = reactive({
+  salaryMin: undefined,
+  salaryMax: undefined
+})
+
+// 搜索项配置
+{
+  label: '薪资范围',
+  prop: 'salaryRange',
+  render: () => (
+    <div style="display: flex; gap: 8px; align-items: center;">
+      <el-input-number
+        v-model={formData.salaryMin}
+        placeholder="最低薪资"
+        min={0}
+        max={100000}
+        controls-position="right"
+        style="width: 140px;"
+      />
+      <span>-</span>
+      <el-input-number
+        v-model={formData.salaryMax}
+        placeholder="最高薪资"
+        min={0}
+        max={100000}
+        controls-position="right"
+        style="width: 140px;"
+      />
+    </div>
+  ),
+  span: 2  // 占据两列宽度
+}
+```
+
+### 组件配置要点
+- `options` 数组直接配置在搜索项中，不需要嵌套在 `renderProps` 内
+- `renderProps` 用于配置组件的其他属性（如 placeholder、multiple 等）
+- 自定义 JSX 渲染需要配合响应式数据使用
+- 使用 `span` 属性控制表单项占据的列数
 
 ## 搜索配置
 

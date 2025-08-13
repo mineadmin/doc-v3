@@ -14,6 +14,14 @@ import { ElMessage } from 'element-plus'
 
 const tableRef = ref<MaProTableExpose>()
 
+// 表单数据
+const formData = reactive({
+  salaryMin: undefined,
+  salaryMax: undefined,
+  performanceMin: undefined,
+  performanceMax: undefined
+})
+
 // 模拟 API 接口
 const getAdvancedList = async (params: any) => {
   console.log('高级搜索参数:', params)
@@ -157,30 +165,45 @@ const schema = reactive<MaProTableSchema>({
       label: '部门',
       prop: 'department',
       render: 'select',
+      options: [
+        { label: '技术部', value: '技术部' },
+        { label: '产品部', value: '产品部' },
+        { label: '设计部', value: '设计部' },
+        { label: '运营部', value: '运营部' },
+        { label: '研发中心', value: '研发中心' },
+        { label: '架构组', value: '架构组' },
+        { label: '增长团队', value: '增长团队' }
+      ],
       renderProps: {
         multiple: true,
-        placeholder: '请选择部门',
-        options: [
-          { label: '技术部', value: '技术部' },
-          { label: '产品部', value: '产品部' },
-          { label: '设计部', value: '设计部' },
-          { label: '运营部', value: '运营部' },
-          { label: '研发中心', value: '研发中心' },
-          { label: '架构组', value: '架构组' },
-          { label: '增长团队', value: '增长团队' }
-        ]
+        placeholder: '请选择部门'
       }
     },
     {
       label: '薪资范围',
       prop: 'salaryRange',
-      render: 'input-number-range',
-      renderProps: {
-        startPlaceholder: '最低薪资',
-        endPlaceholder: '最高薪资',
-        min: 0,
-        max: 100000
-      }
+      render: () => (
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <el-input-number
+            v-model={formData.salaryMin}
+            placeholder="最低薪资"
+            min={0}
+            max={100000}
+            controls-position="right"
+            style="width: 140px;"
+          />
+          <span>-</span>
+          <el-input-number
+            v-model={formData.salaryMax}
+            placeholder="最高薪资"
+            min={0}
+            max={100000}
+            controls-position="right"
+            style="width: 140px;"
+          />
+        </div>
+      ),
+      span: 2
     },
     {
       label: '工作经验',
@@ -201,7 +224,7 @@ const schema = reactive<MaProTableSchema>({
     {
       label: '入职时间',
       prop: 'joinDateRange',
-      render: 'date-range',
+      render: 'date-picker',
       renderProps: {
         type: 'daterange',
         startPlaceholder: '开始日期',
@@ -214,39 +237,50 @@ const schema = reactive<MaProTableSchema>({
       label: '职级',
       prop: 'level',
       render: 'checkbox-group',
-      renderProps: {
-        options: [
-          { label: 'P4', value: 'P4' },
-          { label: 'P5', value: 'P5' },
-          { label: 'P6', value: 'P6' },
-          { label: 'P7', value: 'P7' },
-          { label: 'P8', value: 'P8' },
-          { label: 'P9', value: 'P9' }
-        ]
-      }
+      options: [
+        { label: 'P4', value: 'P4' },
+        { label: 'P5', value: 'P5' },
+        { label: 'P6', value: 'P6' },
+        { label: 'P7', value: 'P7' },
+        { label: 'P8', value: 'P8' },
+        { label: 'P9', value: 'P9' }
+      ]
     },
     {
       label: '绩效评分',
       prop: 'performanceRange',
-      render: 'input-number-range',
-      renderProps: {
-        startPlaceholder: '最低分',
-        endPlaceholder: '最高分',
-        min: 0,
-        max: 100
-      }
+      render: () => (
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <el-input-number
+            v-model={formData.performanceMin}
+            placeholder="最低分"
+            min={0}
+            max={100}
+            controls-position="right"
+            style="width: 120px;"
+          />
+          <span>-</span>
+          <el-input-number
+            v-model={formData.performanceMax}
+            placeholder="最高分"
+            min={0}
+            max={100}
+            controls-position="right"
+            style="width: 120px;"
+          />
+        </div>
+      ),
+      span: 2
     },
     {
       label: '在职状态',
       prop: 'status',
       render: 'radio-group',
-      renderProps: {
-        options: [
-          { label: '全部', value: '' },
-          { label: '在职', value: 1 },
-          { label: '离职', value: 0 }
-        ]
-      }
+      options: [
+        { label: '全部', value: '' },
+        { label: '在职', value: 1 },
+        { label: '离职', value: 0 }
+      ]
     }
   ],
   tableColumns: [
