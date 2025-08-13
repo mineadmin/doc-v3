@@ -1,7 +1,7 @@
 import type {DefaultTheme} from "vitepress";
 
 const sidebar:DefaultTheme.Sidebar = {
-  '/zh/guide/': [
+  '/en/guide/': [
     {
       text: 'Introduction',
       items: [
@@ -54,7 +54,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     }
   ],
-  '/zh/front/': [
+  '/en/front/': [
     {
       text: 'Basics',
       items: [
@@ -67,7 +67,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/en/front/base/start'
         },
         {
-          text: 'Routes & Menus',
+          text: 'Routing & Menus',
           link: '/en/front/base/route-menu'
         },
         {
@@ -85,7 +85,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text: 'Intermediate',
+      text: 'Advanced',
       items: [
         {
           text: 'System Configuration',
@@ -126,7 +126,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text: 'Advanced',
+      text: 'Expert',
       items: [
         {
           text: 'Internationalization',
@@ -167,7 +167,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/en/front/component/ma-form/examples/basic-usage'
             },
             {
-              text: 'Layout Systems',
+              text: 'Layout System',
               link: '/en/front/component/ma-form/examples/layout-systems'
             },
             {
@@ -257,7 +257,46 @@ const sidebar:DefaultTheme.Sidebar = {
         },
         {
           text: 'MaSearch',
-          link: '/en/front/component/ma-search'
+          link: '/en/front/component/ma-search',
+          collapsed: true,
+          items: [
+            {
+              text: 'Basic Usage',
+              link: '/en/front/component/ma-search/examples/basic-usage'
+            },
+            {
+              text: 'Advanced Search',
+              link: '/en/front/component/ma-search/examples/advanced-search'
+            },
+            {
+              text: 'Collapsible Search',
+              link: '/en/front/component/ma-search/examples/collapsible-search'
+            },
+            {
+              text: 'Custom Actions',
+              link: '/en/front/component/ma-search/examples/custom-actions'
+            },
+            {
+              text: 'Dynamic Items',
+              link: '/en/front/component/ma-search/examples/dynamic-items'
+            },
+            {
+              text: 'Responsive Layout',
+              link: '/en/front/component/ma-search/examples/responsive-layout'
+            },
+            {
+              text: 'Table Integration',
+              link: '/en/front/component/ma-search/examples/table-integration'
+            },
+            {
+              text: 'Form Validation',
+              link: '/en/front/component/ma-search/examples/form-validation'
+            },
+            {
+              text: 'Methods Demo',
+              link: '/en/front/component/ma-search/examples/methods-demo'
+            }
+          ]
         },
         {
           text: 'MaProTable',
@@ -270,7 +309,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     }
   ],
-  '/zh/backend/':[
+  '/en/backend/':[
     {
       text:"Advanced",
       items:[
@@ -282,27 +321,27 @@ const sidebar:DefaultTheme.Sidebar = {
           text: "Lifecycle",
           link: "/en/backend/base/lifecycle"
         },
-        { text: "Routes & API Docs",link: "/en/backend/base/router"},
+        { text: "Routing & API Docs",link: "/en/backend/base/router"},
         { text: "Error Handling",link: "/en/backend/base/error-handler"},
         {text: "Logging",link: "/en/backend/base/logger"},
         {text: "Events",link: "/en/backend/base/event-handler"},
         {text: "File Upload",link: "/en/backend/base/upload"},
-        {text: "Internationalization",link: "/en/backend/base/lang"},
+        {text: "Localization",link: "/en/backend/base/lang"},
       ]
     },
     {
       text:"Security",
       items:[
         {
-          text: "User Authentication",
+          text: "Authentication",
           link: "/en/backend/security/passport"
         },
         {
-          text: "User Authorization (RBAC)",
+          text: "Authorization (RBAC)",
           link: "/en/backend/security/access"
         },
         {
-          text: "Client IP Detection",
+          text: "Client IP",
           link: "/en/backend/security/client-ip"
         }
       ]
@@ -314,7 +353,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/en/backend/data-permission/overview"
         },
         {
-          text: "Permission Configuration & Demo",
+          text: "Configuration & Demo",
           link: "/en/backend/data-permission/config"
         },
         {
@@ -328,7 +367,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     }
   ],
-  '/zh/plugin/':[
+  '/en/plugin/':[
     {
       text:"Quick Start",
       items:
@@ -346,15 +385,15 @@ const sidebar:DefaultTheme.Sidebar = {
               link:"/en/plugin/create"
             },
             {
-              text:"Plugin Directory Structure",
+              text:"Plugin Structure",
               link:"/en/plugin/structure"
             },
             {
-              text:"mine.json Documentation & Examples",
+              text:"mine.json Documentation",
               link:"/en/plugin/mineJson"
             },
             {
-            text:"ConfigProvider Documentation",
+            text:"ConfigProvider Guide",
             link:"/en/plugin/configProvider"
           }
           ]
@@ -376,16 +415,16 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"Frontend Development",
       items:[
         {
-          text: "Frontend Development Standards",
+          text: "Frontend Standards",
           link: "/en/plugin/front/develop"
         }
       ]
     },
     {
-      text:"Application Publishing",
+      text:"Publishing",
       items:[
         {
-          text: "Application Release",
+          text: "App Publishing",
           link: "/en/plugin/develop/publish"
         },
         {

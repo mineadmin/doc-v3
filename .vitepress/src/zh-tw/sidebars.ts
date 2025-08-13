@@ -257,7 +257,46 @@ const sidebar:DefaultTheme.Sidebar = {
         },
         {
           text: 'MaSearch',
-          link: '/zh-tw/front/component/ma-search'
+          link: '/zh-tw/front/component/ma-search',
+          collapsed: true,
+          items: [
+            {
+              text: '基礎用法',
+              link: '/zh-tw/front/component/ma-search/examples/basic-usage'
+            },
+            {
+              text: '高階搜尋',
+              link: '/zh-tw/front/component/ma-search/examples/advanced-search'
+            },
+            {
+              text: '摺疊搜尋',
+              link: '/zh-tw/front/component/ma-search/examples/collapsible-search'
+            },
+            {
+              text: '自定義操作',
+              link: '/zh-tw/front/component/ma-search/examples/custom-actions'
+            },
+            {
+              text: '動態管理',
+              link: '/zh-tw/front/component/ma-search/examples/dynamic-items'
+            },
+            {
+              text: '響應式佈局',
+              link: '/zh-tw/front/component/ma-search/examples/responsive-layout'
+            },
+            {
+              text: '表格整合',
+              link: '/zh-tw/front/component/ma-search/examples/table-integration'
+            },
+            {
+              text: '表單驗證',
+              link: '/zh-tw/front/component/ma-search/examples/form-validation'
+            },
+            {
+              text: '方法演示',
+              link: '/zh-tw/front/component/ma-search/examples/methods-demo'
+            }
+          ]
         },
         {
           text: 'MaProTable',
