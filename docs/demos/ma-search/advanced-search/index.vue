@@ -65,45 +65,37 @@ const searchItems = ref([
   {
     label: '年龄范围',
     prop: 'age_range',
-    render: () => (
-      <el-input-number
-        v-model:model-value={searchResult.value?.age_min}
-        placeholder="最小年龄"
-        min={0}
-        max={120}
-        style="width: 120px; margin-right: 10px;"
-      />
-    ),
+    render: 'input-number',
+    renderProps: {
+      placeholder: '最小年龄',
+      min: 0,
+      max: 120,
+      style: 'width: 120px; margin-right: 10px;'
+    },
     span: 1
   },
   {
     label: '',
     prop: 'age_max',
-    render: () => (
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <span>到</span>
-        <el-input-number
-          v-model:model-value={searchResult.value?.age_max}
-          placeholder="最大年龄"
-          min={0}
-          max={120}
-          style="width: 120px;"
-        />
-      </div>
-    ),
+    render: 'input-number',
+    renderProps: {
+      placeholder: '最大年龄',
+      min: 0,
+      max: 120,
+      style: 'width: 120px;'
+    },
     span: 1
   },
   {
     label: '账户状态',
     prop: 'status',
-    render: () => (
-      <el-radio-group>
-        <el-radio label="全部" value="" />
-        <el-radio label="正常" value={1} />
-        <el-radio label="禁用" value={0} />
-        <el-radio label="锁定" value={-1} />
-      </el-radio-group>
-    ),
+    render: 'radio',
+    options: [
+      { label: '全部', value: '' },
+      { label: '正常', value: 1 },
+      { label: '禁用', value: 0 },
+      { label: '锁定', value: -1 }
+    ],
     span: 2
   },
   {
