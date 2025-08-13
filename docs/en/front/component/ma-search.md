@@ -1,9 +1,9 @@
 # MaSearch Component
 
-`ma-search` is built on top of `ma-form` to quickly construct search forms. It provides rich configuration options, responsive layouts, form validation, and more, making it an ideal choice for building search functionalities in backend management systems.
+`ma-search` is built upon `ma-form` and designed for quickly constructing search forms. It offers rich configuration options, responsive layouts, form validation, and more, making it an ideal choice for building search functionalities in backend management systems.
 
 :::tip Note
-The `form` and `form-item` parameters are consistent with `ma-form`. For more detailed configurations, refer to the [ma-form documentation](ma-form).
+The parameters for `form` and `form-item` are consistent with `ma-form`. For detailed configurations, please refer to the [ma-form documentation](ma-form).
 :::
 
 ## Quick Start
@@ -13,7 +13,7 @@ The `form` and `form-item` parameters are consistent with `ma-form`. For more de
 ## Complete Examples
 
 ### Basic Features
-- **[Basic Usage](./ma-search/examples/basic-usage)** - Simplest search form implementation
+- **[Basic Usage](./ma-search/examples/basic-usage)** - Simplest implementation of a search form
 - **[Advanced Search](./ma-search/examples/advanced-search)** - Complex search scenarios with JSX custom rendering
 - **[Collapsible Search](./ma-search/examples/collapsible-search)** - Space-saving expand/collapse functionality
 
@@ -23,9 +23,9 @@ The `form` and `form-item` parameters are consistent with `ma-form`. For more de
 - **[Methods Demo](./ma-search/examples/methods-demo)** - Detailed usage of all exposed methods
 
 ### Advanced Applications
-- **[Responsive Layout](./ma-search/examples/responsive-layout)** - Adaptive display for different devices
-- **[Table Integration](./ma-search/examples/table-integration)** - Complete integration with data tables
-- **[Form Validation](./ma-search/examples/form-validation)** - Various validation rules and scenarios
+- **[Responsive Layout](./ma-search/examples/responsive-layout)** - Adaptive display across different devices
+- **[Table Integration](./ma-search/examples/table-integration)** - Complete integration solution with data tables
+- **[Form Validation](./ma-search/examples/form-validation)** - Various validation rules and scenario demonstrations
 
 ## API Documentation
 
@@ -33,9 +33,9 @@ The `form` and `form-item` parameters are consistent with `ma-form`. For more de
 
 | Parameter | Description | Type | Default | Version |
 |-----------|-------------|------|---------|---------|
-| `options` | Configuration options for `ma-search` | `MaSearchOptions` | - | 1.0.0 |
-| `formOptions` | Configuration options for `ma-form` (see [ma-form Props](ma-form#props)) | `MaFormOptions` | - | 1.0.0 |
-| `searchItems` | Search form item configurations (extends [ma-form-item](ma-form#maformitem)) | `MaSearchItem[]` | - | 1.0.0 |
+| `options` | Configuration options for `ma-search` component | `MaSearchOptions` | - | 1.0.0 |
+| `formOptions` | Configuration options for `ma-form` component, see [ma-form Props](ma-form#props) | `MaFormOptions` | - | 1.0.0 |
+| `searchItems` | Search form item configurations, extended from [ma-form-item](ma-form#maformitem) | `MaSearchItem[]` | - | 1.0.0 |
 
 ### MaSearchOptions
 
@@ -45,14 +45,14 @@ Core configuration options for the search component:
 |-----------|-------------|------|---------|---------|
 | `defaultValue` | Default values for the search form | `Record<string, any>` | - | 1.0.0 |
 | `cols` | Responsive column configuration for different screen sizes | `MediaBreakPoint` | `{xs: 1, sm: 2, md: 2, lg: 3, xl: 4}` | 1.0.0 |
-| `fold` | Whether to enable collapsible functionality | `boolean` | `false` | 1.0.0 |
+| `fold` | Whether to enable folding functionality | `boolean` | `false` | 1.0.0 |
 | `foldRows` | Number of rows to display when folded | `number` | `2` | 1.0.0 |
 | `show` | Whether to show the search panel | `boolean` | `true` | 1.0.0 |
-| `text` | Button text configuration | `TextConfig` | - | 1.0.0 |
+| `text` | Button text configurations | `TextConfig` | - | 1.0.0 |
 
 #### MediaBreakPoint
 
-Responsive breakpoint configuration for column counts:
+Responsive breakpoint configuration defining columns for different screen sizes:
 
 | Parameter | Description | Screen Size | Type | Default | Version |
 |-----------|-------------|-------------|------|---------|---------|
@@ -64,7 +64,7 @@ Responsive breakpoint configuration for column counts:
 
 #### TextConfig
 
-Button text configuration:
+Button text configurations:
 
 | Parameter | Description | Type | Default | Version |
 |-----------|-------------|------|---------|---------|
@@ -75,18 +75,18 @@ Button text configuration:
 
 ### MaSearchItem
 
-Search form item configuration (extends `ma-form-item`):
+Search form item configurations, extended from `ma-form-item`:
 
 | Parameter | Description | Type | Default | Version |
 |-----------|-------------|------|---------|---------|
 | `label` | Label text | `string` | - | 1.0.0 |
-| `prop` | Field name (key in form data) | `string` | - | 1.0.0 |
-| `render` | Rendering method (string, function, or component) | `string \| Function \| Component` | - | 1.0.0 |
-| `options` | Options for select-type components | `Array<{label: string, value: any}>` | - | 1.0.0 |
-| `props` | Props passed to form components | `object` | - | 1.0.0 |
+| `prop` | Field name corresponding to form data key | `string` | - | 1.0.0 |
+| `render` | Rendering method, supports string or function | `string \| Function \| Component` | - | 1.0.0 |
+| `options` | Options data for selection components | `Array<{label: string, value: any}>` | - | 1.0.0 |
+| `props` | Properties passed to form components | `object` | - | 1.0.0 |
 | `rules` | Validation rules | `FormItemRule[]` | - | 1.0.0 |
 | `span` | Grid span (number of columns occupied) | `number` | `1` | 1.0.0 |
-| `offset` | Grid left offset | `number` | `0` | 1.0.0 |
+| `offset` | Number of columns to offset from left | `number` | `0` | 1.0.0 |
 | `hide` | Whether to hide this form item | `boolean \| (() => boolean)` | `false` | 1.0.0 |
 
 #### Built-in Render Types
@@ -96,10 +96,10 @@ Supported built-in render types:
 | Type | Description | Example |
 |------|-------------|---------|
 | `'input'` | Text input | `render: 'input'` |
-| `'select'` | Select dropdown | `render: 'select'` |
+| `'select'` | Selector | `render: 'select'` |
 | `'date-picker'` | Date picker | `render: 'date-picker'` |
 | `'input-number'` | Number input | `render: 'input-number'` |
-| `'switch'` | Switch toggle | `render: 'switch'` |
+| `'switch'` | Switch | `render: 'switch'` |
 | `'radio-group'` | Radio group | `render: 'radio-group'` |
 | `'checkbox-group'` | Checkbox group | `render: 'checkbox-group'` |
 | `'cascader'` | Cascader | `render: 'cascader'` |
@@ -116,15 +116,15 @@ Supported built-in render types:
 
 | Name | Description | Parameters | Version |
 |------|-------------|------------|---------|
-| `default` | Default slot for native `<el-form-item>` tags (overrides configuration) | - | 1.0.0 |
-| `actions` | Completely replaces action buttons area | `{ searchLoading: boolean, resetLoading: boolean }` | 1.0.0 |
+| `default` | Default slot for native `<el-form-item>` tags (disables config-based approach) | - | 1.0.0 |
+| `actions` | Completely replaces action button area | `{ searchLoading: boolean, resetLoading: boolean }` | 1.0.0 |
 | `beforeActions` | Inserts content before action buttons | - | 1.0.0 |
 | `afterActions` | Appends content after action buttons | - | 1.0.0 |
 
 ### Exposed Methods
 
-| Method | Description | Parameters | Returns | Version |
-|--------|-------------|------------|---------|---------|
+| Method | Description | Parameters | Return | Version |
+|--------|-------------|------------|--------|---------|
 | `getMaFormRef()` | Gets internal `ma-form` component reference | - | `MaFormRef` | 1.0.0 |
 | `foldToggle()` | Toggles fold state | - | - | 1.0.0 |
 | `getFold()` | Gets current fold state | - | `boolean` | 1.0.0 |
@@ -212,16 +212,16 @@ Configure `cols` appropriately for different screen sizes:
 ```typescript
 const searchOptions = {
   cols: {
-    xs: 1,  // Single column on mobile
-    sm: 2,  // Two columns on tablets
-    md: 3,  // Three columns on desktops
-    lg: 4,  // Four columns on large screens
-    xl: 6   // Six columns on extra large screens
+    xs: 1,  // Single column for mobile
+    sm: 2,  // Two columns for tablets
+    md: 3,  // Three columns for desktops
+    lg: 4,  // Four columns for large screens
+    xl: 6   // Six columns for extra large screens
   }
 }
 ```
 
-### 2. Collapsible Functionality
+### 2. Folding Functionality
 
 Enable folding when there are many search items:
 
@@ -256,7 +256,7 @@ const searchItems = [
 
 ### 4. Dynamic Form Items
 
-Add or remove search items dynamically based on business needs:
+Add or remove search items dynamically based on requirements:
 
 ```typescript
 // Add search item
@@ -293,7 +293,7 @@ const handleSearch = (searchData: any) => {
 
 ### Q: How to customize form item rendering?
 
-A: Pass a function or component via the `render` property:
+A: Pass a function or component through the `render` property:
 
 ```typescript
 {
@@ -312,7 +312,7 @@ A: Use the `hide` property with a function:
   label: 'Conditional Field',
   prop: 'conditional',
   render: 'input',
-  hide: () => someCondition // Hide when returns true
+  hide: () => someCondition // Hidden when returns true
 }
 ```
 
@@ -358,8 +358,8 @@ const handleSearch = (formData: any) => {
 ### v1.0.27 (Latest)
 - 🎉 Added form validation support
 - 🐛 Fixed display issues in some responsive layouts
-- ⚡️ Optimized performance (reduced unnecessary re-renders)
-- 📝 Improved TypeScript definitions
+- ⚡️ Optimized performance by reducing unnecessary re-renders
+- 📝 Improved TypeScript type definitions
 
 ### v1.0.20
 - 🎉 Added dynamic search item management
@@ -370,4 +370,4 @@ const handleSearch = (formData: any) => {
 - 🎉 Initial version release
 - ✨ Basic search functionality
 - ✨ Responsive layout support
-- ✨ Collapsible panel support
+- ✨ Foldable panel support

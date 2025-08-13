@@ -1,15 +1,15 @@
 # Basic Usage
 
-The simplest way to use a table, including search, pagination, and basic operation functionalities.
+The simplest way to use a table, including search, pagination, and basic operation functionality.
 
 <DemoPreview dir="demos/ma-pro-table-examples/basic" />
 
 ## Key Features
 
 - **Quick Setup**: Built on the combination of ma-search and ma-table
-- **Search Functionality**: Built-in search form supporting multiple search components
+- **Search Functionality**: Built-in search form supporting various search components
 - **Pagination Support**: Automatic pagination logic handling
-- **Operation Column**: Flexible configuration for action buttons
+- **Action Column**: Flexible configuration for operation buttons
 - **Data Binding**: Automatic API request handling and data rendering
 
 ## Core Configuration
@@ -59,7 +59,7 @@ const schema = reactive({
 </script>
 ```
 
-### Operation Column Configuration
+### Action Column Configuration
 ```javascript
 {
   type: 'operation',
@@ -85,6 +85,6 @@ const schema = reactive({
 1. **API Interface**: Should return data in the format `{ code, data: { list, total } }`
 2. **Search Components**: Supports various types including input, select, date, etc.
 3. **Action Buttons**: Configurable click events, display conditions, styles, etc.
-4. **Auto Height Adjustment**: Automatically calculates table height when `adaption` is enabled
+4. **Auto Height Adjustment**: Enabling `adaption` will automatically calculate table height
 
 This is the most basic example of using MaProTable, demonstrating how to quickly build a complete CRUD interface.

@@ -128,7 +128,7 @@ Supports server-side validation with asynchronous rules:
         
         const isValid = await validateCompanyName(value)
         if (!isValid) {
-          throw new Error('Company name does not meet requirements')
+          throw new Error('Invalid company name format')
         }
       }, 500),
       trigger: 'change'
@@ -241,7 +241,7 @@ const userRegisterSearchItems = [
 ```
 
 ### 2. Financial Data Query
-Precise data validation in financial fields:
+Precise data validation for financial fields:
 
 ```typescript
 const financialSearchItems = [
@@ -276,7 +276,7 @@ const orderSearchItems = [
     prop: 'orderNo',
     render: 'input',
     rules: [
-      { pattern: /^ORD\d{12}$/, message: 'Order number format: ORD followed by 12 digits' }
+      { pattern: /^ORD\d{12}$/, message: 'Order number format: ORD+12 digits' }
     ]
   },
   {
@@ -324,7 +324,7 @@ Different validation trigger timings:
   rules: [
     { 
       validator: validateAsync, 
-      trigger: 'manual'  // Requires manual validation call
+      trigger: 'manual'  // Requires manual validation
     }
   ]
 }
@@ -350,7 +350,7 @@ const validateForm = async () => {
   const formRef = searchRef.value?.getMaFormRef()
   try {
     await formRef?.validate()
-    console.log('Form validation passed, ready to submit search')
+    console.log('Form validation passed, ready for search submission')
     return true
   } catch (error) {
     console.log('Form validation failed:', error)
@@ -373,7 +373,7 @@ const clearValidation = () => {
 - Support internationalization of error messages
 
 ```typescript
-// Friendly error messages
+// User-friendly error messages
 const createFriendlyRules = (fieldName: string) => [
   { 
     required: true, 
@@ -397,7 +397,7 @@ const createFriendlyRules = (fieldName: string) => [
 - Validation caching mechanism
 
 ```typescript
-// Validation cache
+// Validation caching
 const validationCache = new Map()
 
 const cachedValidator = (cacheKey: string, validator: Function) => {

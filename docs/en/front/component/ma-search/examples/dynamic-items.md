@@ -1,4 +1,4 @@
-# Dynamic Search Item Management
+# Dynamic Management of Search Items
 
 Demonstrates all programmatic management methods, including adding, removing, and modifying search items, suitable for scenarios requiring dynamic adjustment of search conditions based on business logic.
 
@@ -19,7 +19,7 @@ const addSearchItem = () => {
     prop: 'new_field',
     render: 'input',
     props: {
-      placeholder: 'Please enter the new field value'
+      placeholder: 'Please enter new field value'
     }
   })
 }
@@ -29,7 +29,7 @@ const addSearchItem = () => {
 Use the `removeItem` method to remove specified search items:
 
 ```typescript
-// Remove a specific search item
+// Remove specified search item
 const removeSearchItem = (prop: string) => {
   searchRef.value?.removeItem(prop)
 }
@@ -56,10 +56,10 @@ Use various retrieval methods to query current search item configurations:
 // Get all search items
 const allItems = searchRef.value?.getItems()
 
-// Get a specific search item
+// Get specific search item
 const userItem = searchRef.value?.getItemByProp('username')
 
-// Check if a search item exists
+// Check if search item exists
 const hasUserItem = !!searchRef.value?.getItemByProp('username')
 ```
 
@@ -69,7 +69,7 @@ const hasUserItem = !!searchRef.value?.getItemByProp('username')
 Dynamically display different search conditions based on user permissions:
 
 ```typescript
-// Admin users see all search items, regular users see partial items
+// Admin sees all search items, regular users see partial items
 if (userRole === 'admin') {
   searchRef.value?.appendItem({
     label: 'Creator',
@@ -106,7 +106,7 @@ const switchScenario = (scenario: string) => {
 Implement dependencies between search conditions:
 
 ```typescript
-// When selecting a category, dynamically add subcategory search items
+// When selecting a category, dynamically add subcategory search item
 const onCategoryChange = (categoryId: string) => {
   if (categoryId) {
     searchRef.value?.appendItem({
@@ -143,7 +143,7 @@ const templates = {
     { label: 'Status', prop: 'status', render: 'select', options: statusOptions }
   ],
   orderSearch: [
-    { label: 'Order Number', prop: 'order_no', render: 'input' },
+    { label: 'Order No.', prop: 'order_no', render: 'input' },
     { label: 'Order Status', prop: 'order_status', render: 'select', options: orderStatusOptions },
     { label: 'Order Time', prop: 'created_at', render: 'date-picker' }
   ]
@@ -163,10 +163,10 @@ Add validation rules dynamically based on search items:
 
 ```typescript
 const addItemWithValidation = (item: any) => {
-  // Add validation rules for specific fields
+  // Add validation rules for certain fields
   if (item.prop === 'email') {
     item.rules = [
-      { required: true, message: 'Email is required', trigger: 'blur' },
+      { required: true, message: 'Email cannot be empty', trigger: 'blur' },
       { type: 'email', message: 'Invalid email format', trigger: 'blur' }
     ]
   }
@@ -178,7 +178,7 @@ const addItemWithValidation = (item: any) => {
 ## Best Practices
 
 ### 1. State Management
-Recommended to use state management libraries (e.g., Pinia) for managing complex search item states:
+Recommended to use state management libraries (like Pinia) for managing complex search item states:
 
 ```typescript
 // Use Pinia store to manage search items
@@ -200,12 +200,12 @@ const useSearchStore = defineStore('search', () => {
 ```
 
 ### 2. Performance Optimization
-Use debounce techniques to optimize performance during frequent dynamic updates:
+Use debounce technique when frequently updating search items dynamically:
 
 ```typescript
 import { debounce } from 'lodash-es'
 
-// Debounced search item updates
+// Debounced item update
 const updateItemsDebounced = debounce((items: any[]) => {
   searchRef.value?.setItems(items)
 }, 300)

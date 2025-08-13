@@ -1,6 +1,6 @@
 # Responsive Layout
 
-Demonstrates responsive effects across different screen sizes, including real-time viewport information and dynamic configuration testing to ensure the search component provides an optimal user experience on all devices.
+Demonstrates responsive effects across different screen sizes, including real-time viewport information and dynamic configuration testing to ensure the search component delivers an optimal user experience on all devices.
 
 ## Responsive Layout Demo
 
@@ -9,10 +9,10 @@ Demonstrates responsive effects across different screen sizes, including real-ti
 ## Responsive Configuration Guide
 
 ### Breakpoint System
-MaSearch employs a responsive breakpoint system based on CSS Media Queries:
+MaSearch utilizes a responsive breakpoint system based on CSS Media Queries:
 
 | Breakpoint | Screen Size | Default Columns | Typical Devices |
-|------------|-------------|------------------|------------------|
+|------------|------------|-----------------|-----------------|
 | `xs` | < 768px | 1 | Mobile portrait |
 | `sm` | ≥ 768px | 2 | Mobile landscape, small tablets |
 | `md` | ≥ 992px | 2 | Tablets, small laptops |
@@ -20,7 +20,7 @@ MaSearch employs a responsive breakpoint system based on CSS Media Queries:
 | `xl` | ≥ 1920px | 4 | Large screens |
 
 ### Basic Configuration
-Configure column counts per breakpoint using the `cols` parameter:
+Configure column counts per breakpoint via the `cols` parameter:
 
 ```typescript
 const searchOptions = {
@@ -35,7 +35,7 @@ const searchOptions = {
 ```
 
 ### Custom Breakpoints
-Define custom breakpoints based on business requirements:
+Customize breakpoints according to business requirements:
 
 ```typescript
 // Compact layout
@@ -71,17 +71,17 @@ const mobileFirstConfig = {
 }
 ```
 
-### 2. Dense Desktop Display
-Maximize screen real estate on desktop:
+### 2. Desktop Dense Display
+Maximize screen real estate on desktops:
 
 ```typescript
-// Dense desktop display
+// Desktop dense display
 const desktopDenseConfig = {
   cols: { xs: 1, sm: 2, md: 3, lg: 4, xl: 6 }
 }
 ```
 
-### 3. Adaptive Data Dashboard
+### 3. Adaptive Dashboard
 Automatically adjust search area based on dashboard layout:
 
 ```typescript
@@ -96,7 +96,7 @@ const dashboardConfig = {
 ## Responsive Features
 
 ### Automatic Column Calculation
-The component automatically calculates column counts based on container width and breakpoint configuration.
+The component automatically calculates columns per row based on container width and breakpoint configuration.
 
 ### Smooth Transitions
 Layout transitions smoothly during screen size changes to avoid abrupt jumps.
@@ -107,9 +107,9 @@ Automatically adds ellipsis or line breaks when search item content is too long.
 ## Key Features
 
 - 📱 Mobile-friendly responsive design
-- 🖥 Optimal large-screen utilization
+- 🖥 Optimized for large screens
 - 🔄 Smooth layout transition animations
-- 📏 Flexible breakpoint configuration system
+- 📏 Flexible breakpoint configuration
 - ⚡ High-performance layout calculations
 
 ## Advanced Configuration
@@ -118,7 +118,7 @@ Automatically adds ellipsis or line breaks when search item content is too long.
 Adjust layout dynamically based on container size:
 
 ```typescript
-// Monitor container size changes
+// Listen to container size changes
 const useResponsiveColumns = () => {
   const containerRef = ref<HTMLElement>()
   const cols = ref({ xs: 1, sm: 2, md: 3, lg: 4, xl: 5 })
@@ -190,7 +190,7 @@ const progressiveConfig = {
   fold: true,
   foldRows: 1,
   
-  // Tablet enhancements
+  // Enhanced tablet experience
   ...window.innerWidth >= 768 && { 
     cols: { xs: 1, sm: 2 },
     foldRows: 2 
@@ -208,7 +208,7 @@ const progressiveConfig = {
 Display search items with different priorities across screen sizes:
 
 ```typescript
-// Show items by priority based on screen size
+// Show different priority search items by screen size
 const getItemsByPriority = (screenSize: string) => {
   const allItems = [
     { label: 'Username', prop: 'username', priority: 'high' },
@@ -232,7 +232,7 @@ const getItemsByPriority = (screenSize: string) => {
 Optimize rendering performance on small screens:
 
 ```typescript
-// Small-screen performance optimization
+// Small screen performance optimization
 const optimizedConfig = {
   // Reduce columns on mobile for better performance
   cols: window.innerWidth < 768 ? { xs: 1 } : { xs: 1, sm: 2, md: 3, lg: 4 },
@@ -245,6 +245,6 @@ const optimizedConfig = {
 
 ## Related Links
 
-- [Collapsible Search](./collapsible-search) - Learn about combining folding with responsive features
+- [Collapsible Search](./collapsible-search) - Learn about combining folding with responsiveness
 - [Table Integration](./table-integration) - Understand responsive search integration with tables
 - [Basic Usage](./basic-usage) - Learn fundamental search functionality

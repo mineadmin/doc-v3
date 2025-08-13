@@ -6,7 +6,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text: '紹介',
       items: [
         {
-          text: 'なぜ私たちを選ぶのか？',
+          text: 'なぜ私たちを選ぶのか?',
           link: '/ja/guide/introduce/mineadmin',
         },
         {
@@ -195,7 +195,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/ja/front/component/ma-form/examples/loading-states'
             },
             {
-              text: 'ネストされたフォーム',
+              text: 'ネストフォーム',
               link: '/ja/front/component/ma-form/examples/nested-forms'
             },
             {
@@ -226,7 +226,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/ja/front/component/ma-table/sorting'
             },
             {
-              text: 'テーブルフィルタ',
+              text: 'テーブルフィルタリング',
               link: '/ja/front/component/ma-table/filter'
             },
             {
@@ -234,7 +234,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/ja/front/component/ma-table/custom-render'
             },
             {
-              text: '動的列管理',
+              text: '動的カラム管理',
               link: '/ja/front/component/ma-table/dynamic-columns'
             },
             {
@@ -265,7 +265,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/ja/front/component/ma-search/examples/basic-usage'
             },
             {
-              text: '高度な検索',
+              text: '高度検索',
               link: '/ja/front/component/ma-search/examples/advanced-search'
             },
             {
@@ -308,7 +308,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/ja/front/component/ma-pro-table/examples/basic'
             },
             {
-              text: '高度な検索',
+              text: '高度検索',
               link: '/ja/front/component/ma-pro-table/examples/advanced-search'
             },
             {
@@ -353,7 +353,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/ja/backend/base/lifecycle"
         },
         { text: "ルートとAPIドキュメント",link: "/ja/backend/base/router"},
-        { text: "エラーハンドリング",link: "/ja/backend/base/error-handler"},
+        { text: "エラー処理",link: "/ja/backend/base/error-handler"},
         {text: "ログ",link: "/ja/backend/base/logger"},
         {text: "イベント",link: "/ja/backend/base/event-handler"},
         {text: "ファイルアップロード",link: "/ja/backend/base/upload"},
@@ -380,7 +380,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"データ権限",
       items:[
         {
-          text: "コアコンセプト",
+          text: "コア概念",
           link: "/ja/backend/data-permission/overview"
         },
         {

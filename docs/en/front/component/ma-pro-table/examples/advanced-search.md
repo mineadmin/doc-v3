@@ -1,16 +1,16 @@
 # Advanced Search
 
-Demonstrates various search component types and complex search logic, including date ranges, numeric ranges, multi-select, and more.
+Demonstrates various search component types and complex search logic, including date ranges, numeric ranges, multi-select functionality, and more.
 
 <DemoPreview dir="demos/ma-pro-table-examples/advanced-search" />
 
 ## Features
 
 - **Rich Search Components**: Supports input, select, date-range, slider, checkbox, etc.
-- **Multi-Condition Combination**: Supports complex search condition combinations
-- **Search Events**: Can listen for search submission and reset events
-- **Default Expansion**: Configurable number of search items to display by default
-- **Responsive Layout**: Search form supports responsive layout
+- **Multi-Condition Combination**: Allows complex search condition combinations.
+- **Search Events**: Listen for search submission and reset events.
+- **Default Expansion**: Configurable number of search items to display by default.
+- **Responsive Layout**: Search forms support responsive layouts.
 
 ## Search Component Types
 
@@ -34,22 +34,28 @@ Demonstrates various search component types and complex search logic, including 
   label: 'Department',
   prop: 'department',
   render: 'select',
+  options: [
+    { label: 'Tech', value: 'Tech' },
+    { label: 'Product', value: 'Product' }
+  ],
   renderProps: {
-    options: [
-      { label: 'Tech Department', value: 'Tech Department' },
-      { label: 'Product Department', value: 'Product Department' }
-    ]
+    placeholder: 'Please select department'
   }
 }
 
-// Multiple select
+// Multi-select
 {
   label: 'Departments',
   prop: 'departments',
   render: 'select',
+  options: [
+    { label: 'Tech', value: 'Tech' },
+    { label: 'Product', value: 'Product' },
+    { label: 'Design', value: 'Design' }
+  ],
   renderProps: {
     multiple: true,
-    options: [...options]
+    placeholder: 'Please select departments'
   }
 }
 ```
@@ -59,22 +65,37 @@ Demonstrates various search component types and complex search logic, including 
 {
   label: 'Salary Range',
   prop: 'salaryRange',
-  render: 'input-number-range',
-  renderProps: {
-    startPlaceholder: 'Minimum salary',
-    endPlaceholder: 'Maximum salary',
-    min: 0,
-    max: 100000
-  }
+  render: () => (
+    <div style="display: flex; gap: 8px; align-items: center;">
+      <el-input-number
+        v-model={formData.salaryMin}
+        placeholder="Min salary"
+        min={0}
+        max={100000}
+        controls-position="right"
+        style="width: 140px;"
+      />
+      <span>-</span>
+      <el-input-number
+        v-model={formData.salaryMax}
+        placeholder="Max salary"
+        min={0}
+        max={100000}
+        controls-position="right"
+        style="width: 140px;"
+      />
+    </div>
+  ),
+  span: 2
 }
 ```
 
 ### Date Range Component
 ```javascript
 {
-  label: 'Join Date',
+  label: 'Join Date Range',
   prop: 'joinDateRange',
-  render: 'date-range',
+  render: 'date-picker',
   renderProps: {
     type: 'daterange',
     startPlaceholder: 'Start date',
@@ -111,13 +132,14 @@ Demonstrates various search component types and complex search logic, including 
   label: 'Level',
   prop: 'level',
   render: 'checkbox-group',
-  renderProps: {
-    options: [
-      { label: 'P4', value: 'P4' },
-      { label: 'P5', value: 'P5' },
-      { label: 'P6', value: 'P6' }
-    ]
-  }
+  options: [
+    { label: 'P4', value: 'P4' },
+    { label: 'P5', value: 'P5' },
+    { label: 'P6', value: 'P6' },
+    { label: 'P7', value: 'P7' },
+    { label: 'P8', value: 'P8' },
+    { label: 'P9', value: 'P9' }
+  ]
 }
 ```
 
@@ -127,15 +149,60 @@ Demonstrates various search component types and complex search logic, including 
   label: 'Employment Status',
   prop: 'status',
   render: 'radio-group',
-  renderProps: {
-    options: [
-      { label: 'All', value: '' },
-      { label: 'Active', value: 1 },
-      { label: 'Inactive', value: 0 }
-    ]
-  }
+  options: [
+    { label: 'All', value: '' },
+    { label: 'Active', value: 1 },
+    { label: 'Inactive', value: 0 }
+  ]
 }
 ```
+
+## Custom Rendering Components
+
+### JSX Custom Rendering
+For complex input components, use JSX for custom rendering:
+
+```javascript
+// Need to add reactive data in script setup
+const formData = reactive({
+  salaryMin: undefined,
+  salaryMax: undefined
+})
+
+// Search item configuration
+{
+  label: 'Salary Range',
+  prop: 'salaryRange',
+  render: () => (
+    <div style="display: flex; gap: 8px; align-items: center;">
+      <el-input-number
+        v-model={formData.salaryMin}
+        placeholder="Min salary"
+        min={0}
+        max={100000}
+        controls-position="right"
+        style="width: 140px;"
+      />
+      <span>-</span>
+      <el-input-number
+        v-model={formData.salaryMax}
+        placeholder="Max salary"
+        min={0}
+        max={100000}
+        controls-position="right"
+        style="width: 140px;"
+      />
+    </div>
+  ),
+  span: 2  // Occupies two column widths
+}
+```
+
+### Component Configuration Points
+- `options` array is configured directly in the search item, no need to nest in `renderProps`
+- `renderProps` is used to configure other component properties (like placeholder, multiple, etc.)
+- Custom JSX rendering requires reactive data
+- Use `span` property to control the number of columns a form item occupies
 
 ## Search Configuration
 
@@ -154,7 +221,7 @@ const options = {
 const options = {
   onSearchSubmit: (form) => {
     console.log('Search conditions:', form)
-    // Can preprocess search conditions
+    // Preprocess search conditions if needed
     return form
   },
   onSearchReset: (form) => {
@@ -207,7 +274,7 @@ const options = {
   type: 'operation',
   operationConfigure: {
     type: 'auto',
-    fold: 2,               // Fold when more than 2 operations
+    fold: 2,               // Collapse when more than 2 actions
     actions: [
       {
         name: 'promote',

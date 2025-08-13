@@ -6,13 +6,13 @@ Demonstrates different types of action column configurations, including conditio
 
 ## Key Features
 
-- **Multiple operation types**: Supports tiled, dropdown menu, auto-collapse display modes
-- **Conditional display**: Dynamically show/hide action buttons based on row data
-- **Context menu**: Supports row right-click menu functionality
-- **Drag sorting**: Supports row drag-and-drop reordering
-- **Batch operations**: Supports multi-selection and batch operation functionality
+- **Multiple Action Types**: Supports tiled, dropdown menu, auto-collapse display modes
+- **Conditional Display**: Dynamically show/hide action buttons based on row data
+- **Context Menu**: Supports row right-click menu functionality
+- **Drag Sorting**: Supports row drag-and-drop reordering
+- **Batch Operations**: Supports multi-selection and batch operation features
 
-## Operation Column Configuration
+## Action Column Configuration
 
 ### Basic Operation Configuration
 ```javascript

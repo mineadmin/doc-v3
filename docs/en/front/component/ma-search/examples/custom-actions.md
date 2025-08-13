@@ -1,6 +1,6 @@
 # Custom Action Buttons
 
-Demonstrates the usage of all slots, including scenarios for completely replacing the action button area, prepending content, appending content, and various other customization options.
+Demonstrates the usage of all slots, including scenarios for completely replacing the action button area, prepending content, appending content, and various other customization cases.
 
 ## Custom Action Demo
 
@@ -9,7 +9,7 @@ Demonstrates the usage of all slots, including scenarios for completely replacin
 ## Slot Usage Instructions
 
 ### actions Slot
-Completely replaces the default action button area for maximum customization flexibility:
+Completely replace the default action button area for maximum customization flexibility:
 
 ```vue
 <template #actions="{ searchLoading, resetLoading }">
@@ -35,7 +35,7 @@ Completely replaces the default action button area for maximum customization fle
 ```
 
 ### beforeActions Slot
-Inserts custom content before the default action buttons:
+Insert custom content before the default action buttons:
 
 ```vue
 <template #beforeActions>
@@ -49,7 +49,7 @@ Inserts custom content before the default action buttons:
 ```
 
 ### afterActions Slot
-Appends custom content after the default action buttons:
+Append custom content after the default action buttons:
 
 ```vue
 <template #afterActions>
@@ -80,10 +80,10 @@ Add functionality to save and load search templates for easy reuse of common sea
 Add import/export functionality to the search area to support batch operations and data exchange.
 
 ### 3. Quick Action Menu
-Provide dropdown menus for quick actions such as filtering today's, this week's, or this month's data.
+Provide dropdown menus for quick actions like filtering today's, this week's, or this month's data.
 
 ### 4. Multi-step Search Process
-Implement a wizard-style search process controlled by custom buttons.
+Implement wizard-style search processes controlled by custom buttons.
 
 ## Slot Parameter Description
 
@@ -98,8 +98,8 @@ Implement a wizard-style search process controlled by custom buttons.
 
 - 🎨 Fully customizable action area
 - 🔧 Flexible slot system design
-- 📦 Extend capabilities while maintaining original functionality
-- 🎯 Supports complex business scenario customization
+- 📦 Extended capabilities while preserving original functionality
+- � Support for complex business scenario customization
 - ⚡ High-performance slot rendering mechanism
 
 ## Design Patterns
@@ -115,10 +115,10 @@ Suitable for scenarios requiring complete redesign of the action area:
 ```
 
 ### Extension Mode (beforeActions/afterActions)
-Suitable for adding extra actions while preserving default functionality:
+Suitable for adding extra actions while maintaining default functionality:
 
 ```vue
-<!-- Extend on top of default buttons -->
+<!-- Extend on default buttons -->
 <template #beforeActions>
   <ExtraActions />
 </template>
@@ -142,6 +142,6 @@ Ensure custom actions display and function properly across different screen size
 
 ## Related Links
 
-- [Method Demo](./methods-demo) - Learn about all exposed methods
-- [Dynamic Management](./dynamic-items) - Understand dynamic search item management
+- [Method Demo](./methods-demo) - Learn about all exposed method usages
+- [Dynamic Management](./dynamic-items) - Learn about dynamic search item management
 - [Form Validation](./form-validation) - Learn about form validation features

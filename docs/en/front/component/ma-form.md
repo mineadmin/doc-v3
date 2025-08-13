@@ -1,25 +1,25 @@
 # MaForm
 
-A secondary encapsulated `Form` component based on `Element Plus`, supporting all native form parameters, events, slots, and syntax, while also enabling configuration-based implementation.  
-Additionally, it supports layout planning for forms using `el-row` and `el-space`, featuring responsive design capabilities.
+A secondary encapsulated `Form` component based on `Element Plus`, supporting all native form parameters, events, slots, and syntax, as well as configuration-based implementation.  
+Additionally, it supports layout planning for forms based on `el-row` and `el-space`, with responsive design capabilities.
 
 ::: tip Note
-Since it fully supports all parameters, events, and slots of the native `el-form`, this documentation primarily focuses on extended functionalities.
+Since it fully supports all parameters, events, and slots of the native `el-form`, this documentation primarily focuses on extended features.
 
-For official form parameters, refer to the [Element Plus](https://element-plus.org/en-US/component/form.html) documentation.
+For official form parameters, please refer to the [Element Plus](https://element-plus.org/zh-CN/component/form.html) documentation.
 :::
 
 ## Quick Start
 
-### Using Configuration Approach
+### Using Configuration Mode
 <DemoPreview dir="demos/ma-form/config" />
 
-### Using Template Approach
+### Using Template Mode
 <DemoPreview dir="demos/ma-form/template" />
 
 ### Getting `Component` and `el-form-item` `Refs`
-:::tip Tip
-This method is for **configuration mode**. In `template`, you can define `ref` yourself.
+:::tip Hint
+This method is for **configuration mode**. For `template` mode, you can define `ref` yourself.
 :::
 
 <DemoPreview dir="demos/ma-form/getRef" />
@@ -27,7 +27,7 @@ This method is for **configuration mode**. In `template`, you can define `ref` y
 ## Complete Examples
 
 :::info Example Navigation
-The following examples demonstrate various usages and advanced features of MaForm, from basic usage to complex scenario applications. It is recommended to learn them in order for the best results.
+The following examples demonstrate various usage scenarios and advanced features of MaForm, from basic usage to complex applications. It is recommended to learn them in order for the best experience.
 :::
 
 ### Basic Functionality Examples
@@ -46,7 +46,7 @@ The following examples demonstrate various usages and advanced features of MaFor
 - [Nested Forms](/en/front/component/ma-form/examples/nested-forms) - Handling complex hierarchical form structures
 
 ### Practical Application Examples
-- [Advanced Scenarios](/en/front/component/ma-form/examples/advanced-scenarios) - Multi-step processes and complex business logic
+- [Advanced Scenarios](/en/front/component/ma-form/examples/advanced-scenarios) - Multi-step workflows and complex business logic
 - [Performance Optimization](/en/front/component/ma-form/examples/performance-demo) - Strategies for optimizing large forms
 
 ## TypeScript Type Definitions
@@ -58,7 +58,7 @@ Complete type definition for form configuration options:
 
 ```typescript
 interface MaFormOptions {
-  // Native el-form properties from Element Plus
+  // Element Plus native el-form properties
   model?: Record<string, any>
   rules?: Record<string, FormItemRule[]>
   inline?: boolean
@@ -212,44 +212,44 @@ interface MaFormExpose {
 
 ## Props
 
-| Parameter     | Description                          | Type         | Default | Version |
-|--------------|-------------------------------------|-------------------|--------|--------|
-| `v-model`    | Form data, two-way binding, supports reactive updates | `Record<string, any>` | `{}` | 1.0.0 |
-| `options`    | Form configuration options, including native Element Plus properties and extended properties | `MaFormOptions` | `{}` | 1.0.0 |
-| `items`      | Form item configuration array, supports nesting and dynamic configuration | `MaFormItem[]` | `[]` | 1.0.0 |
-| `loading`    | Global loading state, higher priority than options.loading | `boolean` | `false` | 1.0.0 |
-| `disabled`   | Global disabled state, higher priority than options.disabled | `boolean` | `false` | 1.0.0 |
+| Parameter | Description | Type | Default | Version |
+|-----------|-------------|------|---------|---------|
+| `v-model` | Form data, two-way binding, supports reactive updates | `Record<string, any>` | `{}` | 1.0.0 |
+| `options` | Form configuration options, including native Element Plus properties and extended properties | `MaFormOptions` | `{}` | 1.0.0 |
+| `items` | Form item configuration array, supports nesting and dynamic configuration | `MaFormItem[]` | `[]` | 1.0.0 |
+| `loading` | Global loading state, takes precedence over options.loading | `boolean` | `false` | 1.0.0 |
+| `disabled` | Global disabled state, takes precedence over options.disabled | `boolean` | `false` | 1.0.0 |
 
 ### MaFormOptions Extended Configuration
 
 ::: tip Note
-These are `ma-form` extensions to `el-form` parameters, fully compatible with native Element Plus parameters.
+These are extended parameters of `ma-form` for `el-form`, fully compatible with native Element Plus parameters.
 :::
 
-| Parameter     | Description                                                                 | Type                                                                                              | Default   | Version |
-|--------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|-----------|--------|
-| `containerClass` | Custom class name for form container, used for styling customization       | `string`                                                                                        | -         | 1.0.0 |
-| `loading`    | Whether to show loading animation, supports global and local loading states | `boolean`                                                                                       | `false`   | 1.0.0 |
-| `loadingConfig` | Detailed loading animation configuration options                           | [LoadingConfig](#loadingconfig-configuration)                                                      | `{}`      | 1.0.0 |
-| `layout`     | Layout method: `flex` uses grid system, `grid` uses spacing layout          | `'flex' \| 'grid'`                                                                              | `flex`    | 1.0.0 |
-| `flex`       | Flex layout configuration, based on `el-row` component                     | `ElRowProps`                                                                                    | `{}`      | 1.0.0 |
-| `grid`       | Grid layout configuration, based on `el-space` component                   | `ElSpaceProps`                                                                                  | `{}`      | 1.0.0 |
-| `footerSlot` | Configuration-based footer slot, can return VNode or VNode array           | `() => VNode \| VNode[]`                                                                        | -         | 1.0.0 |
+| Parameter | Description | Type | Default | Version |
+|-----------|-------------|------|---------|---------|
+| `containerClass` | Custom class name for the form container, used for styling | `string` | - | 1.0.0 |
+| `loading` | Whether to show loading animation, supports global and local loading states | `boolean` | `false` | 1.0.0 |
+| `loadingConfig` | Detailed configuration options for loading animation | [LoadingConfig](#loadingconfig-configuration) | `{}` | 1.0.0 |
+| `layout` | Layout mode: `flex` uses grid system, `grid` uses spacing layout | `'flex' \| 'grid'` | `flex` | 1.0.0 |
+| `flex` | Flex layout configuration, based on `el-row` component | `ElRowProps` | `{}` | 1.0.0 |
+| `grid` | Grid layout configuration, based on `el-space` component | `ElSpaceProps` | `{}` | 1.0.0 |
+| `footerSlot` | Configuration-based footer slot, can return VNode or VNode array | `() => VNode \| VNode[]` | - | 1.0.0 |
 
 #### LoadingConfig Configuration
 
-Detailed loading animation configuration options:
+Detailed configuration options for loading animation:
 
-| Parameter     | Description      | Type   | Default | Version |
-|--------------|-----------------|--------|---------|--------|
-| `text`       | Loading text displayed below the icon   | `string`  | `'Loading...'`   | 1.0.0 |
-| `spinner`    | Custom loading icon class name   | `string` | -   | 1.0.0 |
-| `svg`       | Custom SVG loading icon   | `string` | -   | 1.0.0 |
-| `viewBox`   | SVG icon's viewBox attribute   | `string` | -   | 1.0.0 |
-| `background` | Background mask color   | `string` | `'rgba(0, 0, 0, 0.8)'`   | 1.0.0 |
-| `customClass` | Custom style class name   | `string` | -   | 1.0.0 |
-| `lock`      | Whether to lock scrolling   | `boolean` | `true`   | 1.0.0 |
-| `fullscreen` | Whether to display fullscreen   | `boolean` | `false`   | 1.0.0 |
+| Parameter | Description | Type | Default | Version |
+|-----------|-------------|------|---------|---------|
+| `text` | Loading text displayed below the icon | `string` | `'Loading...'` | 1.0.0 |
+| `spinner` | Custom loading icon class name | `string` | - | 1.0.0 |
+| `svg` | Custom SVG loading icon | `string` | - | 1.0.0 |
+| `viewBox` | SVG icon's viewBox attribute | `string` | - | 1.0.0 |
+| `background` | Background mask color | `string` | `'rgba(0, 0, 0, 0.8)'` | 1.0.0 |
+| `customClass` | Custom style class name | `string` | - | 1.0.0 |
+| `lock` | Whether to lock scrolling | `boolean` | `true` | 1.0.0 |
+| `fullscreen` | Whether to display fullscreen | `boolean` | `false` | 1.0.0 |
 
 ### MaFormItem Configuration Details
 
@@ -257,63 +257,63 @@ Complete configuration options for form items:
 
 #### Basic Configuration
 
-| Parameter     | Description                                                                                                                                                                             | Type                                                                                                 | Default   | Version |
-|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|-----------|--------|
-| `label`      | Form item label, supports string or function return value                                                                                                                                 | `string \| (() => string)`                                                                             | -         | 1.0.0  |
-| `prop`       | Form item field name, supports string or function return value, used for data binding and validation                                                                                     | `string \| (() => string)`                                                                             | -         | 1.0.0  |
-| `hide`       | Whether to hide the item (hidden but retains data), supports dynamic control                                                                                                             | `boolean \| ((item: MaFormItem, model: Record<string, any>) => boolean)` | `false`   | 1.0.0  |
-| `show`       | Whether to show the item (not displayed means not rendered and no data), supports dynamic control                                                                                        | `boolean \| ((item: MaFormItem, model: Record<string, any>) => boolean)` | `true`    | 1.0.0  |
+| Parameter | Description | Type | Default | Version |
+|-----------|-------------|------|---------|---------|
+| `label` | Form item label, supports string or function return value | `string \| (() => string)` | - | 1.0.0 |
+| `prop` | Form item field name, supports string or function return value, used for data binding and validation | `string \| (() => string)` | - | 1.0.0 |
+| `hide` | Whether to hide the item (hidden but retains data), supports dynamic control | `boolean \| ((item: MaFormItem, model: Record<string, any>) => boolean)` | `false` | 1.0.0 |
+| `show` | Whether to show the item (not rendered if not shown and no data), supports dynamic control | `boolean \| ((item: MaFormItem, model: Record<string, any>) => boolean)` | `true` | 1.0.0 |
 
 #### Layout Configuration
 
-| Parameter     | Description                                                                                                                                                                             | Type                                                                                                 | Default   | Version |
-|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|-----------|--------|
-| `cols`       | Grid layout configuration, effective when `layout` is `flex`, supports responsive configuration                                                                                         | `ColsConfiguration`                    | -         | 1.0.0  |
-| `itemProps`  | Native properties of Element Plus `el-form-item`                                                                                                                                        | `ElFormItemProps`                    | `{}`      | 1.0.0  |
-| `itemSlots`  | Native slot configuration for Element Plus `el-form-item`                                                                                                                               | `Record<string, (...args: any[]) => VNode \| VNode[]>`                         | `{}`      | 1.0.0  |
+| Parameter | Description | Type | Default | Version |
+|-----------|-------------|------|---------|---------|
+| `cols` | Grid layout configuration, effective when `layout` is `flex`, supports responsive configuration | `ColsConfiguration` | - | 1.0.0 |
+| `itemProps` | Native properties of Element Plus `el-form-item` | `ElFormItemProps` | `{}` | 1.0.0 |
+| `itemSlots` | Native slot configuration for Element Plus `el-form-item` | `Record<string, (...args: any[]) => VNode \| VNode[]>` | `{}` | 1.0.0 |
 
 #### Rendering Configuration
 
-| Parameter     | Description                                                                                                                                                                             | Type                                                                                                 | Default   | Version |
-|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|-----------|--------|
-| `render`     | Component rendering type: can be Element Plus component name (e.g., `'input'`, `'select'`), Vue component, or render function                                                           | `RenderType`                                                                            | -         | 1.0.0  |
-| `renderProps` | Props configuration for the rendered component                                                                                                                                          | `Record<string, any>`                                                                              | `{}`      | 1.0.0  |
-| `renderSlots` | Slot configuration for the rendered component                                                                                                                                           | `Record<string, (...args: any[]) => VNode \| VNode[]>`                                                                  | `{}`      | 1.0.0  |
+| Parameter | Description | Type | Default | Version |
+|-----------|-------------|------|---------|---------|
+| `render` | Component rendering type: can be Element Plus component name (e.g., `'input'`, `'select'`), Vue component, or render function | `RenderType` | - | 1.0.0 |
+| `renderProps` | Props configuration for the rendered component | `Record<string, any>` | `{}` | 1.0.0 |
+| `renderSlots` | Slot configuration for the rendered component | `Record<string, (...args: any[]) => VNode \| VNode[]>` | `{}` | 1.0.0 |
 
 #### Nested and Conditional Configuration
 
-| Parameter     | Description                                                                                                                                                                             | Type                                                                                                 | Default   | Version |
-|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|-----------|--------|
-| `children`   | Child configuration items, supports infinite nesting, used for complex form structures                                                                                                  | `MaFormItem[]`                                                                                     | `[]`      | 1.0.33 |
+| Parameter | Description | Type | Default | Version |
+|-----------|-------------|------|---------|---------|
+| `children` | Child configuration items, supports infinite nesting for complex form structures | `MaFormItem[]` | `[]` | 1.0.33 |
 
 #### Validation Configuration
 
-| Parameter     | Description                                                                                                                                                                             | Type                                                                                                 | Default   | Version |
-|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|-----------|--------|
-| `customValidator` | Custom synchronous validation function                                                                                                                                                 | `(rule: any, value: any, callback: Function) => void`                                                                                     | -         | 1.0.0 |
-| `asyncValidator`  | Custom asynchronous validation function                                                                                                                                                 | `(rule: any, value: any) => Promise<void>`                                                                                     | -         | 1.0.0 |
+| Parameter | Description | Type | Default | Version |
+|-----------|-------------|------|---------|---------|
+| `customValidator` | Custom synchronous validation function | `(rule: any, value: any, callback: Function) => void` | - | 1.0.0 |
+| `asyncValidator` | Custom asynchronous validation function | `(rule: any, value: any) => Promise<void>` | - | 1.0.0 |
 
 ## Slot System
 
-MaForm provides a flexible slot system supporting multi-level content customization:
+MaForm provides a flexible slot system, supporting multi-level content customization:
 
 ### Global Slots
 
-| Name            | Description                                    | Scope Variables | Example |
-|-----------------|-----------------------------------------------|----------------|---------|
-| `default`       | Default slot, can write native `<el-form-item>` tags, using this will disable configuration mode | - | `<ma-form><el-form-item>...</el-form-item></ma-form>` |
-| `footer`        | Form footer slot, for placing submit buttons and other action elements | `{ formRef, model, loading }` | `<template #footer="{ formRef }">` |
-| `loading`       | Custom loading state content | `{ loading }` | `<template #loading="{ loading }">` |
+| Name | Description | Scoped Variables | Example |
+|------|-------------|------------------|---------|
+| `default` | Default slot, can write native `<el-form-item>` tags, configuration mode will be disabled if used | - | `<ma-form><el-form-item>...</el-form-item></ma-form>` |
+| `footer` | Form footer slot, used for action elements like submit buttons | `{ formRef, model, loading }` | `<template #footer="{ formRef }">` |
+| `loading` | Custom loading state content | `{ loading }` | `<template #loading="{ loading }">` |
 
 ### Form Item Level Slots
 
-Each `MaFormItem` supports custom slots via `itemSlots` configuration:
+Each `MaFormItem` supports custom slots through `itemSlots` configuration:
 
 #### itemSlots Configuration
 
 ```typescript
 interface ItemSlots {
-  // Native el-form-item slots from Element Plus
+  // Element Plus el-form-item native slots
   label?: (scope: { label: string }) => VNode | VNode[]
   error?: (scope: { error: string }) => VNode | VNode[]
   
@@ -376,7 +376,21 @@ The MaForm component exposes rich API methods via `defineExpose` for external co
 
 ### State Management
 
-| Method Name | Description | Parameters | Return Value | Example |
-|------------|-------------|------------|--------------|---------|
-| `setLoadingState(loading)` | Sets form loading state | `loading: boolean` | `void` | `formRef.value.setLoadingState(true)` |
-| `getLoadingState()` | Gets current loading state | - | `boolean` | `const loading
+| Method | Description | Parameters | Return Value | Example |
+|--------|-------------|------------|--------------|---------|
+| `setLoadingState(loading)` | Set form loading state | `loading: boolean` | `void` | `formRef.value.setLoadingState(true)` |
+| `getLoadingState()` | Get current loading state | - | `boolean` | `const loading = formRef.value.getLoadingState()` |
+
+### Configuration Management
+
+| Method | Description | Parameters | Return Value | Example |
+|--------|-------------|------------|--------------|---------|
+| `setOptions(options)` | Set form configuration options | `options: Partial<MaFormOptions>` | `void` | `formRef.value.setOptions({ loading: true })` |
+| `getOptions()` | Get current form configuration | - | `MaFormOptions` | `const opts = formRef.value.getOptions()` |
+| `updateOptions(updater)` | Modify configuration via update function | `updater: (options) => MaFormOptions` | `void` | `formRef.value.updateOptions(opts => ({ ...opts, loading: false }))` |
+
+### Form Item Management
+
+| Method | Description | Parameters | Return Value | Example |
+|--------|-------------|------------|--------------|---------|
+| `setItems(items)` | Set form item array | `items: MaFormItem[]` | `void

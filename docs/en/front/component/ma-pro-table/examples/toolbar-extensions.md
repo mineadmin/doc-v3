@@ -4,13 +4,13 @@ Demonstrates how to extend toolbar functionality through the plugin API, includi
 
 <DemoPreview dir="demos/ma-pro-table-examples/toolbar-extensions" />
 
-## Features
+## Key Features
 
 - **Plugin Mechanism**: Extend toolbar functionality via plugin API
-- **Custom Tools**: Supports registering custom tool buttons
-- **Slot Extensions**: Supports extending toolbar layout through slots
-- **State Control**: Supports dynamic show/hide of tools
-- **Order Control**: Supports custom tool display order
+- **Custom Tools**: Support for registering custom tool buttons
+- **Slot Extensions**: Support for extending toolbar layout via slots
+- **State Control**: Dynamic show/hide of tools
+- **Order Control**: Customizable tool display order
 
 ## Plugin API Extensions
 
@@ -226,18 +226,18 @@ add({
 </template>
 ```
 
-### Toolbar Before/After Extensions
+### Toolbar Pre/Post Extensions
 ```vue
 <template>
   <MaProTable :options="options" :schema="schema">
     <!-- Pre-toolbar content -->
     <template #beforeToolbar>
-      <el-button size="small" type="text">Pre-button</el-button>
+      <el-button size="small" type="text">Pre Button</el-button>
     </template>
     
     <!-- Post-toolbar content -->
     <template #afterToolbar>
-      <el-button size="small" type="text">Post-button</el-button>
+      <el-button size="small" type="text">Post Button</el-button>
     </template>
   </MaProTable>
 </template>
@@ -245,7 +245,7 @@ add({
 
 ## Tool State Control
 
-### Configuring Tool Display State
+### Configuring Tool Display States
 ```javascript
 const options = {
   toolbar: true,                // Whether to show toolbar
@@ -338,7 +338,7 @@ add({
 })
 ```
 
-### Real-time Data Tool
+### Realtime Data Tool
 ```javascript
 add({
   name: 'realtime',
@@ -349,7 +349,7 @@ add({
       <el-button
         circle
         type={isRealtime ? 'success' : 'info'}
-        title={isRealtime ? 'Stop Real-time Refresh' : 'Start Real-time Refresh'}
+        title={isRealtime ? 'Stop Realtime Refresh' : 'Start Realtime Refresh'}
         onClick={() => {
           setIsRealtime(!isRealtime)
           if (!isRealtime) {
@@ -396,7 +396,7 @@ interface MaProTableToolbar {
 ### 3. Performance Optimization
 - Avoid heavy computations in render functions
 - Use reactive states appropriately
-- Remove unnecessary tools when needed
+- Remove unnecessary tools when appropriate
 
 ### 4. Permission Control
 ```javascript
@@ -407,4 +407,4 @@ add({
 })
 ```
 
-The toolbar extension functionality allows you to build feature-rich table operation interfaces, enhancing user interaction experience.
+Toolbar extension functionality allows you to build feature-rich table operation interfaces, enhancing user experience.

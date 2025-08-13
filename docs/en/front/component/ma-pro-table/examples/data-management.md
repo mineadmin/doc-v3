@@ -4,10 +4,10 @@ Demonstrates complete CRUD operations including create, edit, delete, and data l
 
 <DemoPreview dir="demos/ma-pro-table-examples/data-management" />
 
-## Key Features
+## Features
 
 - **Complete CRUD**: Supports create, read, update, and delete operations
-- **Form Linkage**: New/edit forms synchronize with table data
+- **Form Linkage**: Create/edit forms interact with table data
 - **Data Statistics**: Real-time statistical indicators
 - **Batch Operations**: Supports batch selection and operations
 - **Status Synchronization**: Automatically refreshes table data after operations
@@ -97,7 +97,7 @@ const statistics = computed(() => {
         <el-col :span="12">
           <el-form-item label="Department" prop="department">
             <el-select v-model="employeeForm.department" style="width: 100%">
-              <el-option label="Technology" value="Technology" />
+              <el-option label="Technical" value="Technical" />
               <el-option label="Product" value="Product" />
               <!-- More options... -->
             </el-select>
@@ -155,7 +155,7 @@ const handleSaveEmployee = async () => {
     await formRef.value.validate()
     saving.value = true
     
-    // Simulate API call
+    // Mock API call
     await new Promise(resolve => setTimeout(resolve, 1000))
     
     if (editingEmployee.value) {
@@ -207,7 +207,7 @@ const showEditDialog = (employee) => {
 ### Delete Operation
 ```javascript
 const handleDeleteEmployee = (employee) => {
-  ElMessageBox.confirm(`Are you sure to delete employee "${employee.name}"?`, 'Delete Confirmation', {
+  ElMessageBox.confirm(`Confirm to delete employee "${employee.name}"?`, 'Delete Confirmation', {
     confirmButtonText: 'Confirm',
     cancelButtonText: 'Cancel',
     type: 'warning'
@@ -243,7 +243,7 @@ const showEmployeeDetail = (employee) => {
       Name: ${employee.name}
       Department: ${employee.department}
       Position: ${employee.position}
-      Salary: $${employee.salary.toLocaleString()}
+      Salary: ￥${employee.salary.toLocaleString()}
     `,
     type: 'info',
     duration: 5000
@@ -276,7 +276,7 @@ const options = {
 const handleExportSelected = () => {
   const selectedRows = tableRef.value?.getTableRef?.()?.getSelectionRows?.()
   if (!selectedRows?.length) {
-    ElMessage.warning('Please select data to export first')
+    ElMessage.warning('Please select data to export')
     return
   }
   
@@ -290,11 +290,11 @@ const handleExportSelected = () => {
 const handleBatchDelete = () => {
   const selectedRows = tableRef.value?.getTableRef?.()?.getSelectionRows?.()
   if (!selectedRows?.length) {
-    ElMessage.warning('Please select data to delete first')
+    ElMessage.warning('Please select data to delete')
     return
   }
   
-  ElMessageBox.confirm(`Are you sure to delete ${selectedRows.length} selected records?`, 'Batch Delete', {
+  ElMessageBox.confirm(`Confirm to delete ${selectedRows.length} selected records?`, 'Batch Delete', {
     confirmButtonText: 'Confirm',
     cancelButtonText: 'Cancel',
     type: 'warning'
@@ -313,7 +313,7 @@ const handleBatchDelete = () => {
 ```javascript
 const handleSearchSubmit = (form) => {
   console.log('Search criteria:', form)
-  ElMessage.info('Performing search operation')
+  ElMessage.info('Performing search')
   // Handle search logic here
   return form
 }
@@ -413,7 +413,7 @@ const loadDataFromStorage = () => {
 ### 2. Data Management
 - Synchronize table and form data promptly
 - Provide data backup and recovery
-- Implement optimistic locking to prevent conflicts
+- Implement optimistic locking to avoid conflicts
 
 ### 3. User Experience
 - Provide operation confirmation and undo
@@ -425,4 +425,4 @@ const loadDataFromStorage = () => {
 - Avoid frequent data refreshes
 - Use debounce and throttle appropriately
 
-The data management feature allows you to build complete data operation interfaces to meet various business scenario requirements.
+Data management features allow you to build complete data operation interfaces to meet various business scenario requirements.

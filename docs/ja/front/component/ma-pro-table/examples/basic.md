@@ -1,13 +1,13 @@
-# 基本の使い方
+# 基本使用法
 
 最もシンプルなテーブルの使用例で、検索、ページネーション、基本操作機能を含みます。
 
 <DemoPreview dir="demos/ma-pro-table-examples/basic" />
 
-## 特徴
+## 機能特徴
 
-- **迅速な構築**: ma-search と ma-table の組み合わせをベース
-- **検索機能**: 内蔵の検索フォーム、複数の検索コンポーネントをサポート
+- **迅速な構築**: ma-searchとma-tableの組み合わせに基づく
+- **検索機能**: 内蔵検索フォーム、複数の検索コンポーネントをサポート
 - **ページネーション対応**: 自動的にページネーションロジックを処理
 - **操作列**: 柔軟な操作ボタン設定をサポート
 - **データバインディング**: APIリクエストとデータレンダリングを自動処理
@@ -34,7 +34,7 @@ const options = reactive({
     }
   },
   tableOptions: {
-    adaption: true,          // 高さの自動調整
+    adaption: true,          // 高さ自動調整
     pagination: {
       total: 0,
       pageSize: 10
@@ -46,14 +46,14 @@ const options = reactive({
 const schema = reactive({
   searchItems: [             // 検索設定
     {
-      label: '名前',
+      label: '氏名',
       prop: 'name',
       render: 'input'
     }
   ],
   tableColumns: [            // テーブル列設定
     { label: 'ID', prop: 'id' },
-    { label: '名前', prop: 'name' }
+    { label: '氏名', prop: 'name' }
   ]
 })
 </script>
@@ -66,7 +66,7 @@ const schema = reactive({
   label: '操作',
   width: 200,
   operationConfigure: {
-    type: 'tile',            // タイル表示
+    type: 'tile',            // 平置き表示
     actions: [
       {
         name: 'edit',
@@ -82,9 +82,9 @@ const schema = reactive({
 
 ## 使用説明
 
-1. **APIインターフェース**: `{ code, data: { list, total } }` 形式のデータを返す必要あり
-2. **検索コンポーネント**: input、select、date など複数のタイプをサポート
+1. **APIインターフェース**: `{ code, data: { list, total } }`形式のデータを返す必要あり
+2. **検索コンポーネント**: input、select、dateなど複数のタイプをサポート
 3. **操作ボタン**: クリックイベント、表示条件、スタイルなどを設定可能
-4. **高さ自動調整**: `adaption` を有効にするとテーブルの高さを自動計算
+4. **高さ自動調整**: `adaption`を有効にするとテーブル高さを自動計算
 
-これは MaProTable を使用した最も基本的な例で、完全な CRUD インターフェースを迅速に構築する方法を示しています。
+これはMaProTableの最も基本的な使用例で、完全なCRUDインターフェースを迅速に構築する方法を示しています。

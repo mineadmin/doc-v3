@@ -8,7 +8,7 @@ A complete integration solution for data tables, including search, pagination, s
 
 ## Integration Solution Explanation
 
-### Search and Table Interaction
+### Search and Table Synchronization
 Real-time synchronization between search conditions and table data:
 
 ```typescript
@@ -34,7 +34,7 @@ const handleReset = () => {
 ```
 
 ### Pagination Integration
-Complete integration of search and pagination systems:
+Complete integration between search and pagination systems:
 
 ```typescript
 // Pagination configuration
@@ -95,7 +95,7 @@ const loadTableData = async () => {
 Complete user data management interface:
 
 ```typescript
-// User search items configuration
+// User search item configuration
 const userSearchItems = [
   { label: 'Username', prop: 'username', render: 'input' },
   { label: 'Email', prop: 'email', render: 'input' },
@@ -103,7 +103,7 @@ const userSearchItems = [
   { label: 'Registration Date', prop: 'created_at', render: 'date-picker' }
 ]
 
-// User table columns configuration
+// User table column configuration
 const userTableColumns = [
   { prop: 'username', label: 'Username' },
   { prop: 'email', label: 'Email' },
@@ -161,7 +161,7 @@ const switchView = (mode: 'table' | 'card') => {
 ```
 
 ### Sorting Integration
-Interaction between search conditions and table sorting:
+Synchronization between search conditions and table sorting:
 
 ```typescript
 // Sorting state management
@@ -189,7 +189,7 @@ const params = {
 ```
 
 ### Batch Operations
-Batch operations combined with search and table selection:
+Batch operations combining search and table selection:
 
 ```typescript
 // Selection state management
@@ -210,7 +210,7 @@ const handleBatchOperation = async (operation: string) => {
     await loadTableData()
     selection.value = []
     
-    ElMessage.success('Batch operation succeeded')
+    ElMessage.success('Batch operation successful')
   } catch (error) {
     ElMessage.error('Batch operation failed')
   }
@@ -219,7 +219,7 @@ const handleBatchOperation = async (operation: string) => {
 
 ## Key Features
 
-- 🔗 Complete search and table interaction
+- 🔗 Complete search and table synchronization
 - 📄 Smart pagination integration
 - 🔄 Flexible view switching
 - 📊 Powerful sorting functionality
@@ -359,5 +359,5 @@ const withLoading = async (key: keyof typeof loadingStates, operation: () => Pro
 ## Related Links
 
 - [Responsive Layout](./responsive-layout) - Learn about table display optimization across devices
-- [Form Validation](./form-validation) - Learn about search condition validation
+- [Form Validation](./form-validation) - Understand validation handling for search conditions
 - [Methods Demo](./methods-demo) - Learn about component methods in table integration

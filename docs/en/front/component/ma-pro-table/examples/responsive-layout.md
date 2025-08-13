@@ -8,7 +8,7 @@ Demonstrates the responsive behavior of tables across different screen sizes, in
 
 - **Device Adaptation**: Automatically adapts to different devices like desktops, tablets, and mobile phones
 - **Dynamic Column Management**: Dynamically shows/hides columns based on screen size
-- **Responsive Search**: Search forms support responsive layouts
+- **Responsive Search**: Search form supports responsive layouts
 - **Operation Optimization**: Optimized operation methods for different devices
 - **Performance Friendly**: Avoids displaying excessive information on small-screen devices
 
@@ -77,7 +77,7 @@ const deviceConfigs = {
 
 ### Search Item Quantity Control
 ```javascript
-// Adjust search item display quantity based on device
+// Adjust displayed search items based on device
 const updateSearchLayout = (device) => {
   const showNumber = device === 'desktop' ? 4 : 
                     device === 'tablet' ? 2 : 1
@@ -92,7 +92,7 @@ const updateSearchLayout = (device) => {
 ### Search Layout Modes
 ```javascript
 const searchOptions = {
-  showNumber: 3,            // Default number of search items to display
+  showNumber: 3,            // Default number of displayed search items
   layout: 'auto',           // auto/inline/vertical
   responsive: {
     mobile: {
@@ -321,7 +321,7 @@ const options = {
 
 ### CSS Media Queries
 ```css
-/* Using media queries for true responsiveness */
+/* Use media queries for true responsiveness */
 @media (max-width: 768px) {
   .ma-pro-table {
     font-size: 14px;
@@ -419,6 +419,6 @@ const getToolbarConfig = (device) => {
 ### 4. Testing Strategy
 - Test on real devices
 - Use browser developer tools for simulation
-- Consider network conditions
+- Consider network condition impacts
 
-The responsive layout feature ensures your table application perfectly adapts to various devices, providing a consistent user experience.
+The responsive layout feature enables your table application to perfectly adapt to various devices, providing a consistent user experience.

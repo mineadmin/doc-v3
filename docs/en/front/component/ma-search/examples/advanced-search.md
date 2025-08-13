@@ -6,7 +6,7 @@ Demonstrates the implementation of complex search scenarios, including advanced 
 
 <DemoPreview dir="demos/ma-search/advanced-search" />
 
-## Advanced Features Explanation
+## Advanced Features Explained
 
 ### JSX Custom Rendering
 Achieve fully customized form components by returning JSX elements via functions:
@@ -31,12 +31,12 @@ Use the `hide` function to dynamically show or hide search items:
 }
 ```
 
-### Multi-selection Components
-Support for multi-selection components like checkbox groups and cascading selectors:
+### Multi-Select Components
+Support multi-select type search components such as checkbox groups and cascading selectors:
 
 ```typescript
 {
-  label: 'Multi-select Categories',
+  label: 'Multi-Select Categories',
   prop: 'categories',
   render: 'checkbox-group',
   options: categoryOptions
@@ -49,18 +49,18 @@ Support for multi-selection components like checkbox groups and cascading select
 Suitable for complex business data filtering, supporting multi-dimensional and multi-condition combined queries.
 
 ### 2. Report Query Systems  
-Ideal for report queries requiring precise condition control, supporting complex conditions like time ranges and numerical intervals.
+Ideal for report queries requiring precise condition control, supporting complex conditions such as time ranges and numerical intervals.
 
 ### 3. E-commerce Advanced Filtering
-Perfect for product filtering on e-commerce platforms, supporting multiple filtering dimensions such as brand, specifications, and price.
+Perfect for product filtering on e-commerce platforms, supporting various filtering dimensions like brand, specifications, and price.
 
 ## Key Features
 
 - 🎯 Supports JSX/TSX custom rendering
-- 🔄 Dynamic show/hide of search items
+- 🔄 Dynamic display and hiding of search items
 - 📊 Multiple data selection component support
 - ⚡ Performance-optimized rendering mechanism
-- 🛠 Flexible configuration and extension capabilities
+- 🛠 Flexible configuration and expansion capabilities
 
 ## Technical Highlights
 
@@ -76,6 +76,6 @@ Perfect for product filtering on e-commerce platforms, supporting multiple filte
 
 ## Related Links
 
-- [Basic Usage](./basic-usage) - Learn basic search configuration
+- [Basic Usage](./basic-usage) - Learn about basic search configurations
 - [Custom Actions](./custom-actions) - Learn about custom action buttons
 - [Dynamic Management](./dynamic-items) - Learn about dynamic search item management

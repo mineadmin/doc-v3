@@ -4,10 +4,10 @@
 
 <DemoPreview dir="demos/ma-pro-table-examples/cell-render-plugins" />
 
-## 特徴
+## 機能特徴
 
-- **プラグイン機構**: プラグインシステムでセルレンダリング機能を拡張
-- **組み込みプラグイン**: 一般的なレンダリングプラグインを提供（タグ、プログレスバーなど）
+- **プラグインメカニズム**: プラグインシステムでセルレンダリング機能を拡張
+- **組み込みプラグイン**: よく使われるレンダリングプラグインを提供（タグ、プログレスバーなど）
 - **カスタムプラグイン**: カスタムレンダリングプラグインの登録をサポート
 - **柔軟な設定**: 動的な属性設定と条件付きレンダリングをサポート
 - **コード再利用**: 同じレンダリングロジックの重複記述を回避
@@ -53,7 +53,7 @@ addPlugin({
 })
 ```
 
-### カスタムプラグイン使用
+### カスタムプラグインの使用
 ```javascript
 {
   label: '作業進捗',
@@ -69,7 +69,7 @@ addPlugin({
 }
 ```
 
-## 一般的なプラグイン例
+## よく使われるプラグイン例
 
 ### 1. プログレスバープラグイン
 ```javascript
@@ -87,7 +87,7 @@ addPlugin({
 })
 ```
 
-### 2. レートプラグイン
+### 2. 評価プラグイン
 ```javascript
 addPlugin({
   name: 'rate',
@@ -262,13 +262,13 @@ import { useProTableRenderPlugin } from '@mineadmin/pro-table'
 
 const { getPlugins, getPluginByName, removePlugin } = useProTableRenderPlugin()
 
-// 全プラグイン取得
+// 全てのプラグインを取得
 const allPlugins = getPlugins()
 
-// 特定プラグイン取得
+// 特定のプラグインを取得
 const tagPlugin = getPluginByName('tag')
 
-// プラグイン削除
+// プラグインを削除
 removePlugin('custom-plugin')
 ```
 
@@ -298,10 +298,10 @@ interface MaProTableRenderPlugin {
 ### 1. プラグイン命名
 - 説明的な名前を使用（例: `progress`、`image`、`tags`）
 - 組み込みプラグインとの重複を避ける
-- アプリマーケットに公開する場合はプレフィックスを推奨
+- アプリケーション市場に公開する場合はプレフィックスを推奨
 
 ### 2. パフォーマンス最適化
-- render関数内での複雑な計算を避ける
+- render関数内で複雑な計算を避ける
 - props関数で条件判断と属性計算を行う
 - Vueのリアクティブ特性を適切に使用
 
@@ -314,14 +314,14 @@ addPlugin({
       // プラグインロジック
       return h(SomeComponent, props)
     } catch (error) {
-      console.error('プラグイン描画エラー:', error)
-      return '描画エラー'
+      console.error('プラグインレンダリングエラー:', error)
+      return 'レンダリングエラー'
     }
   }
 })
 ```
 
-### 4. 型安全
+### 4. タイプセーフ
 ```typescript
 // TypeScriptプラグイン定義
 import type { MaProTableRenderPlugin } from '@mineadmin/pro-table'
@@ -329,7 +329,7 @@ import type { MaProTableRenderPlugin } from '@mineadmin/pro-table'
 const myPlugin: MaProTableRenderPlugin = {
   name: 'my-plugin',
   render: (data, props) => {
-    // 型安全なプラグインロジック
+    // タイプセーフなプラグインロジック
     return h('div', data.row[data.column.property])
   }
 }

@@ -1,12 +1,12 @@
 # Collapsible Search
 
-Displays a search form with collapsible functionality, suitable for scenarios with numerous search items. The collapsible feature saves page space and enhances user experience.
+Displays a search form with collapsible and expandable functionality, suitable for scenarios with numerous search items. The collapsible feature saves page space and enhances user experience.
 
 ## Collapsible Search Demo
 
 <DemoPreview dir="demos/ma-search/collapsible-search" />
 
-## Collapsible Feature Explanation
+## Collapsible Functionality Explanation
 
 ### Basic Configuration
 Control collapsible behavior through `fold` and `foldRows` parameters:
@@ -47,7 +47,7 @@ const isFold = searchRef.value?.getFold()
 In admin backends where multiple search conditions are typically required, the collapsible feature maintains interface cleanliness.
 
 ### 2. Data Analysis Platforms
-For complex data filtering conditions, commonly used filters remain visible while advanced conditions are hidden in the collapsible area.
+Complex data filtering conditions display commonly used criteria while hiding advanced conditions in the collapsible area.
 
 ### 3. Mobile Adaptation
 On mobile devices with limited screen space, the collapsible feature is particularly important.
@@ -56,7 +56,7 @@ On mobile devices with limited screen space, the collapsible feature is particul
 
 ### Smart Collapsing
 - Automatically calculates the number of search items to collapse
-- Prioritizes displaying most frequently used search conditions
+- Prioritizes displaying the most commonly used search conditions
 - Keeps action buttons always visible
 
 ### Responsive Collapsing
@@ -68,13 +68,13 @@ On mobile devices with limited screen space, the collapsible feature is particul
 
 - 📱 Mobile-friendly design
 - 🔄 Smooth expand/collapse animations
-- 🎛 Flexible configuration of collapsed rows
+- 🎛 Flexible fold row configuration
 - 📝 Customizable button text
 - ⚡ Programmatic state control
 
 ## Best Practices
 
-### 1. Reasonable Collapsed Row Settings
+### 1. Reasonable Fold Row Settings
 Set the `foldRows` parameter appropriately based on actual business scenarios and page layout:
 
 ```typescript
@@ -86,13 +86,13 @@ const searchOptions = {
 ```
 
 ### 2. Optimize Search Item Order
-Place most frequently used search conditions first to ensure they remain visible when collapsed.
+Place the most commonly used search conditions first to ensure visibility when collapsed.
 
 ### 3. Provide State Indicators
-Clearly indicate the current collapsed state to users through custom button text or icons.
+Clearly indicate the current collapsed state through custom button text or icons.
 
 ## Related Links
 
-- [Responsive Layout](./responsive-layout) - Learn about adaptive display across different screens
+- [Responsive Layout](./responsive-layout) - Learn about adaptive display on different screens
 - [Custom Actions](./custom-actions) - Learn about custom action buttons
-- [Basic Usage](./basic-usage) - Learn about fundamental search functionality
+- [Basic Usage](./basic-usage) - Learn about basic search functionality

@@ -1,6 +1,6 @@
 # Method Demonstration
 
-Showcases the usage of all exposed methods, including real-time state tracking and operation logging, helping developers gain an in-depth understanding of the component's programming interface and advanced usage.
+Showcase the usage of all exposed methods, including real-time state tracking and operation logging, to help developers gain a deeper understanding of the component's programming interface and advanced usage.
 
 ## Method Demonstration
 
@@ -61,7 +61,7 @@ const setFoldState = (fold: boolean) => {
 ```
 
 ### Visibility Management
-Control the visibility of the entire search component:
+Control the display state of the entire search component:
 
 ```typescript
 // Set visibility state
@@ -84,7 +84,7 @@ const toggleVisibility = () => {
 ```
 
 ### Dynamic Configuration Management
-Dynamically modify various configuration options of the component:
+Modify various component configuration options dynamically:
 
 ```typescript
 // Dynamically set search options
@@ -124,7 +124,7 @@ const getCurrentConfig = () => {
 ```
 
 ### Search Item Dynamic Management
-Dynamically modify search item configuration at runtime:
+Modify search item configurations at runtime:
 
 ```typescript
 // Batch set search items
@@ -163,7 +163,7 @@ const findItemByProp = (prop: string) => {
   if (item) {
     console.log(`Found search item:`, item)
   } else {
-    console.log(`No search item found with prop "${prop}"`)
+    console.log(`Search item with prop "${prop}" not found`)
   }
   return item
 }
@@ -184,12 +184,12 @@ Get internal ma-form component reference for lower-level operations:
 const getFormRef = () => {
   const formRef = searchRef.value?.getMaFormRef()
   if (formRef) {
-    console.log('Form reference obtained:', formRef)
+    console.log('Obtained form reference:', formRef)
     return formRef
   }
 }
 
-// Perform validation via form reference
+// Validate via form reference
 const validateViaFormRef = async () => {
   const formRef = searchRef.value?.getMaFormRef()
   if (formRef) {
@@ -291,7 +291,7 @@ const applyVisibilityControl = (userRole: string) => {
 ```
 
 ### 3. Responsive Configuration Adjustment
-Dynamically adjust configuration based on device type and screen size:
+Dynamically adjust configurations based on device type and screen size:
 
 ```typescript
 // Responsive configuration adjustment
@@ -341,8 +341,8 @@ onUnmounted(() => {
 - 📊 Real-time state tracking
 - 🎯 Flexible configuration management
 - ⚡ High-performance method calls
-- 🛠 Powerful extensibility
-- 📝 Detailed operation logs
+- 🛠 Powerful extension capabilities
+- 📝 Detailed operation logging
 
 ## Advanced Usage Examples
 

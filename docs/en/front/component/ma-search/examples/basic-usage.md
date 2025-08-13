@@ -1,12 +1,12 @@
 # Basic Usage
 
-The simplest implementation of a search form, including basic form elements like input fields and selectors. Suitable for most simple search scenarios.
+The simplest implementation of a search form, including basic form elements such as input fields and selectors. Suitable for most simple search scenarios.
 
 ## Basic Search Form
 
 <DemoPreview dir="demos/ma-search/basic-usage" />
 
-## Basic Configuration Instructions
+## Basic Configuration Guide
 
 ### Search Item Configuration
 - **Input Field Search**: Use `render: 'input'` to create a text input field
