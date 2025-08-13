@@ -1,12 +1,12 @@
 # Collapsible Search
 
-Displays a search form with collapsible and expandable functionality, suitable for scenarios with numerous search items. The collapsible feature saves page space and enhances user experience.
+Displays a search form with collapsible functionality, suitable for scenarios with multiple search items. The collapsible feature saves page space and enhances user experience.
 
 ## Collapsible Search Demo
 
 <DemoPreview dir="demos/ma-search/collapsible-search" />
 
-## Collapsible Functionality Description
+## Collapsible Functionality
 
 ### Basic Configuration
 Control collapsible behavior through `fold` and `foldRows` parameters:
@@ -19,7 +19,7 @@ const searchOptions = {
 ```
 
 ### Custom Button Text
-Customize the collapsible button text through `text` configuration:
+Customize collapsible button text through `text` configuration:
 
 ```typescript
 const searchOptions = {
@@ -43,39 +43,39 @@ const isFold = searchRef.value?.getFold()
 
 ## Usage Scenarios
 
-### 1. Backend Management Systems
-In admin backends where multiple search conditions are typically needed, the collapsible feature maintains interface cleanliness.
+### 1. Admin Systems
+In admin backends where multiple search conditions are often needed, the collapsible feature maintains interface cleanliness.
 
 ### 2. Data Analysis Platforms
-For complex data filtering conditions, commonly used criteria are displayed while advanced conditions remain hidden in the collapsible area.
+For complex data filtering, frequently used conditions are displayed while advanced conditions remain hidden in the collapsible area.
 
 ### 3. Mobile Adaptation
-On mobile devices with limited screen space, the collapsible feature is particularly important.
+Particularly important on mobile devices where screen space is limited.
 
 ## Collapsible Strategies
 
 ### Smart Collapsing
-- Automatically calculates the number of search items to collapse
-- Prioritizes displaying the most frequently used search conditions
+- Automatically calculates number of items to collapse
+- Prioritizes display of most frequently used search conditions
 - Keeps action buttons always visible
 
 ### Responsive Collapsing
-- Automatically adjusts the number of collapsed rows based on screen size
+- Automatically adjusts fold rows based on screen size
 - Defaults to more compact display on mobile
-- Smooth expand/collapse animation effects
+- Smooth expand/collapse animations
 
 ## Key Features
 
 - 📱 Mobile-friendly design
 - 🔄 Smooth expand/collapse animations
-- 🎛 Flexible row collapse configuration
+- 🎛 Flexible fold row configuration
 - 📝 Customizable button text
 - ⚡ Programmatic state control
 
 ## Best Practices
 
 ### 1. Reasonable Fold Row Settings
-Set the `foldRows` parameter appropriately based on actual business scenarios and page layout:
+Set `foldRows` appropriately based on actual business scenarios and page layout:
 
 ```typescript
 // Recommended 2-3 rows for desktop
@@ -86,13 +86,13 @@ const searchOptions = {
 ```
 
 ### 2. Optimize Search Item Order
-Place the most commonly used search conditions first to ensure visibility in collapsed state.
+Place most frequently used search conditions first to ensure visibility when collapsed.
 
-### 3. Provide State Indication
-Clearly indicate the current collapsed state through custom button text or icons.
+### 3. Provide State Indicators
+Clearly indicate current collapsible state through custom button text or icons.
 
 ## Related Links
 
-- [Responsive Layout](./responsive-layout) - Learn about adaptive display across different screens
-- [Custom Actions](./custom-actions) - Understand custom action buttons
-- [Basic Usage](./basic-usage) - Learn fundamental search functionality
+- [Responsive Layout](./responsive-layout) - Learn about adaptive display across screens
+- [Custom Actions](./custom-actions) - Learn about custom action buttons
+- [Basic Usage](./basic-usage) - Learn about basic search functionality

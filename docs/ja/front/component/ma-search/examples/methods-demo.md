@@ -1,15 +1,15 @@
-# メソッドデモ
+# メソッドデモンストレーション
 
-公開されているすべてのメソッドの使用方法を展示し、リアルタイムの状態追跡と操作ログ記録を含め、開発者がコンポーネントのプログラミングインターフェースと高度な使用方法を深く理解するのを支援します。
+公開されているすべてのメソッドの使用法を展示し、リアルタイムの状態追跡と操作ログ記録を含め、開発者がコンポーネントのプログラミングインターフェースと高度な使用方法を深く理解するのを支援します。
 
-## メソッドデモ
+## メソッドデモンストレーション
 
 <DemoPreview dir="demos/ma-search/methods-demo" />
 
-## 公開メソッド詳細
+## 公開メソッドの詳細解説
 
 ### フォームデータ管理
-検索フォームのデータを操作および取得:
+検索フォームのデータを操作および取得：
 
 ```typescript
 // 検索フォームデータを設定
@@ -36,7 +36,7 @@ const clearFormData = () => {
 ```
 
 ### 折りたたみ状態制御
-検索パネルの折りたたみ/展開状態を管理:
+検索パネルの折りたたみ/展開状態を管理：
 
 ```typescript
 // 折りたたみ状態をトグル
@@ -47,7 +47,7 @@ const toggleFold = () => {
 // 現在の折りたたみ状態を取得
 const getCurrentFoldState = () => {
   const isFold = searchRef.value?.getFold()
-  console.log('現在の折りたたみ状態:', isFold ? '折りたたみ済み' : '展開済み')
+  console.log('現在の折りたたみ状態:', isFold ? '折りたたまれています' : '展開されています')
   return isFold
 }
 
@@ -61,7 +61,7 @@ const setFoldState = (fold: boolean) => {
 ```
 
 ### 表示状態管理
-検索コンポーネント全体の表示/非表示を制御:
+検索コンポーネント全体の表示/非表示を制御：
 
 ```typescript
 // 表示状態を設定
@@ -84,7 +84,7 @@ const toggleVisibility = () => {
 ```
 
 ### 設定動的管理
-コンポーネントの各種設定オプションを動的に変更:
+コンポーネントの各種設定オプションを動的に変更：
 
 ```typescript
 // 検索オプションを動的に設定
@@ -124,7 +124,7 @@ const getCurrentConfig = () => {
 ```
 
 ### 検索項目動的管理
-実行時に検索項目設定を動的に変更:
+実行時に検索項目設定を動的に変更：
 
 ```typescript
 // 検索項目を一括設定
@@ -141,7 +141,7 @@ const setBatchItems = () => {
 // 単一検索項目を追加
 const appendSingleItem = () => {
   const newItem = {
-    label: '登録日時',
+    label: '登録時間',
     prop: 'created_at',
     render: 'date-picker',
     props: {
@@ -161,9 +161,9 @@ const removeSpecificItem = (prop: string) => {
 const findItemByProp = (prop: string) => {
   const item = searchRef.value?.getItemByProp(prop)
   if (item) {
-    console.log(`検索項目を発見:`, item)
+    console.log(`検索項目が見つかりました:`, item)
   } else {
-    console.log(`prop "${prop}" の検索項目が見つかりません`)
+    console.log(`prop "${prop}" の検索項目が見つかりませんでした`)
   }
   return item
 }
@@ -177,7 +177,7 @@ const getAllItems = () => {
 ```
 
 ### フォーム参照取得
-内部 ma-form コンポーネント参照を取得してより低レベルの操作を実行:
+内部 ma-form コンポーネント参照を取得してより低レベルの操作：
 
 ```typescript
 // フォーム参照を取得
@@ -189,35 +189,35 @@ const getFormRef = () => {
   }
 }
 
-// フォーム参照で検証を実行
+// フォーム参照を通じて検証
 const validateViaFormRef = async () => {
   const formRef = searchRef.value?.getMaFormRef()
   if (formRef) {
     try {
       await formRef.validate()
-      console.log('フォーム検証成功')
+      console.log('フォーム検証に成功')
       return true
     } catch (error) {
-      console.log('フォーム検証失敗:', error)
+      console.log('フォーム検証に失敗:', error)
       return false
     }
   }
 }
 
-// フォーム参照でリセット
+// フォーム参照を通じてリセット
 const resetViaFormRef = () => {
   const formRef = searchRef.value?.getMaFormRef()
   if (formRef) {
     formRef.resetFields()
-    console.log('フォームをリセット')
+    console.log('フォームをリセットしました')
   }
 }
 ```
 
 ## 使用シナリオ
 
-### 1. 検索条件プリセット
-業務シナリオに基づいて異なる検索条件をプリセット:
+### 1. 検索条件のプリセット
+業務シナリオに基づいて異なる検索条件をプリセット：
 
 ```typescript
 // 検索シナリオをプリセット
@@ -258,17 +258,17 @@ const applyPreset = (scenario: keyof typeof presetScenarios) => {
 ```
 
 ### 2. 権限制御
-ユーザー権限に基づいて検索機能を動的に調整:
+ユーザー権限に基づいて検索機能を動的に調整：
 
 ```typescript
-// 権限制御検索項目
+// 検索項目の権限制御
 const applyPermissionControl = (userRole: string) => {
   const baseItems = [
     { label: 'ユーザー名', prop: 'username', render: 'input' },
     { label: '状態', prop: 'status', render: 'select', options: statusOptions }
   ]
   
-  // 管理者はより多くの検索項目を閲覧可能
+  // 管理者はより多くの検索項目を見られる
   if (userRole === 'admin') {
     baseItems.push(
       { label: '作成者', prop: 'creator', render: 'select', options: userOptions },
@@ -291,7 +291,7 @@ const applyVisibilityControl = (userRole: string) => {
 ```
 
 ### 3. レスポンシブ設定調整
-デバイスタイプと画面サイズに基づいて設定を動的に調整:
+デバイスタイプと画面サイズに基づいて設定を動的に調整：
 
 ```typescript
 // デバイスに応じた設定調整
@@ -335,7 +335,7 @@ onUnmounted(() => {
 })
 ```
 
-## 主要機能
+## 主要特性
 
 - 🔧 完全なプログラミングインターフェース
 - 📊 リアルタイム状態追跡
@@ -347,7 +347,7 @@ onUnmounted(() => {
 ## 高度な使用例
 
 ### 検索テンプレートシステム
-保存および読み込み可能な検索テンプレートを作成:
+保存および読み込み可能な検索テンプレートを作成：
 
 ```typescript
 // 検索テンプレート管理
@@ -391,7 +391,7 @@ class SearchTemplateManager {
 ```
 
 ### 検索状態監視
-検索コンポーネントの各種状態変化を監視:
+検索コンポーネントの各種状態変化を監視：
 
 ```typescript
 // 状態監視器
@@ -454,13 +454,13 @@ const safeMethodCall = async (methodName: string, ...args: any[]) => {
   } catch (error) {
     console.error(`メソッド ${methodName} の呼び出しに失敗:`, error)
     // ユーザーフレンドリーなエラーメッセージを追加可能
-    ElMessage.error(`操作失敗: ${error.message}`)
+    ElMessage.error(`操作に失敗: ${error.message}`)
     return null
   }
 }
 ```
 
-### 2. バッチ操作最適化
+### 2. バッチ操作の最適化
 ```typescript
 const batchOperations = (operations: Array<() => void>) => {
   // リアクティブ更新を一時停止

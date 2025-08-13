@@ -1,4 +1,4 @@
-# Dynamic Management of Search Items
+# Dynamic Search Item Management
 
 Demonstrates all programmatic management methods, including adding, removing, and modifying search items, suitable for scenarios requiring dynamic adjustment of search conditions based on business logic.
 
@@ -123,9 +123,9 @@ const onCategoryChange = (categoryId: string) => {
 
 ## Key Features
 
-- 🔧 Full CRUD operation support
+- 🔧 Complete CRUD operation support
 - 🔄 Real-time search item management
-- 📊 Comprehensive query and retrieval methods
+- 📊 Rich query and retrieval methods
 - 🎯 Support for complex business logic
 - ⚡ High-performance dynamic update mechanism
 
@@ -166,8 +166,8 @@ const addItemWithValidation = (item: any) => {
   // Add validation rules for certain fields
   if (item.prop === 'email') {
     item.rules = [
-      { required: true, message: 'Email is required', trigger: 'blur' },
-      { type: 'email', message: 'Invalid email format', trigger: 'blur' }
+      { required: true, message: 'Email cannot be empty', trigger: 'blur' },
+      { type: 'email', message: 'Incorrect email format', trigger: 'blur' }
     ]
   }
   
@@ -178,7 +178,7 @@ const addItemWithValidation = (item: any) => {
 ## Best Practices
 
 ### 1. State Management
-Recommended to use state management libraries (e.g., Pinia) to manage complex search item states:
+Recommended to use state management libraries (like Pinia) for managing complex search item states:
 
 ```typescript
 // Use Pinia store to manage search items
@@ -200,7 +200,7 @@ const useSearchStore = defineStore('search', () => {
 ```
 
 ### 2. Performance Optimization
-Use debounce techniques to optimize performance during frequent dynamic updates:
+Use debounce technique to optimize performance during frequent dynamic updates:
 
 ```typescript
 import { debounce } from 'lodash-es'
@@ -233,6 +233,6 @@ const restoreSearchConfig = () => {
 
 ## Related Links
 
-- [Method Demo](./methods-demo) - Learn detailed usage of all exposed methods
+- [Method Demonstration](./methods-demo) - Learn detailed usage of all exposed methods
 - [Custom Actions](./custom-actions) - Learn about custom action buttons
 - [Advanced Search](./advanced-search) - Learn implementation of complex search scenarios

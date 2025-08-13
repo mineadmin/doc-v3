@@ -1,15 +1,15 @@
 # Method Demonstration
 
-Showcase the usage of all exposed methods, including real-time state tracking and operation logging, helping developers gain in-depth understanding of the component's programming interface and advanced usage.
+Demonstrates the usage of all exposed methods, including real-time state tracking and operation logging, helping developers gain an in-depth understanding of the component's programming interface and advanced usage.
 
 ## Method Demonstration
 
 <DemoPreview dir="demos/ma-search/methods-demo" />
 
-## Exposed Methods Explained
+## Exposed Methods Details
 
 ### Form Data Management
-Manipulate and retrieve search form data:
+Operate and retrieve search form data:
 
 ```typescript
 // Set search form data
@@ -84,7 +84,7 @@ const toggleVisibility = () => {
 ```
 
 ### Dynamic Configuration Management
-Modify various component configuration options dynamically:
+Dynamically modify various component configuration options:
 
 ```typescript
 // Dynamically set search options
@@ -116,15 +116,15 @@ const getCurrentConfig = () => {
   const searchOptions = searchRef.value?.getOptions()
   const formOptions = searchRef.value?.getFormOptions()
   
-  console.log('Search component config:', searchOptions)
-  console.log('Form component config:', formOptions)
+  console.log('Search component configuration:', searchOptions)
+  console.log('Form component configuration:', formOptions)
   
   return { searchOptions, formOptions }
 }
 ```
 
-### Dynamic Search Item Management
-Modify search item configurations at runtime:
+### Search Items Dynamic Management
+Dynamically modify search item configurations at runtime:
 
 ```typescript
 // Batch set search items
@@ -184,12 +184,12 @@ Get internal ma-form component reference for lower-level operations:
 const getFormRef = () => {
   const formRef = searchRef.value?.getMaFormRef()
   if (formRef) {
-    console.log('Form reference obtained:', formRef)
+    console.log('Obtained form reference:', formRef)
     return formRef
   }
 }
 
-// Perform validation via form reference
+// Validate through form reference
 const validateViaFormRef = async () => {
   const formRef = searchRef.value?.getMaFormRef()
   if (formRef) {
@@ -204,7 +204,7 @@ const validateViaFormRef = async () => {
   }
 }
 
-// Reset form via reference
+// Reset form through reference
 const resetViaFormRef = () => {
   const formRef = searchRef.value?.getMaFormRef()
   if (formRef) {
@@ -261,7 +261,7 @@ const applyPreset = (scenario: keyof typeof presetScenarios) => {
 Dynamically adjust search functionality based on user permissions:
 
 ```typescript
-// Permission-controlled search items
+// Permission control for search items
 const applyPermissionControl = (userRole: string) => {
   const baseItems = [
     { label: 'Username', prop: 'username', render: 'input' },
@@ -279,9 +279,9 @@ const applyPermissionControl = (userRole: string) => {
   searchRef.value?.setItems(baseItems)
 }
 
-// Permission-controlled visibility
+// Permission control for visibility
 const applyVisibilityControl = (userRole: string) => {
-  // Hide search for guest users
+  // Hide search functionality for guest users
   if (userRole === 'guest') {
     searchRef.value?.setShowState(false)
   } else {
@@ -347,14 +347,14 @@ onUnmounted(() => {
 ## Advanced Usage Examples
 
 ### Search Template System
-Create saveable and loadable search templates:
+Create savable and loadable search templates:
 
 ```typescript
 // Search template management
 class SearchTemplateManager {
   private templates = new Map()
   
-  // Save current search config as template
+  // Save current search configuration as template
   saveTemplate(name: string, searchRef: any) {
     const template = {
       formData: searchRef.getSearchForm(),
@@ -465,11 +465,11 @@ const safeMethodCall = async (methodName: string, ...args: any[]) => {
 const batchOperations = (operations: Array<() => void>) => {
   // Pause reactive updates
   const pauseReactivity = () => {
-    // Implementation to pause reactivity
+    // Implement pause logic
   }
   
   const resumeReactivity = () => {
-    // Implementation to resume reactivity
+    // Implement resume logic
   }
   
   try {
@@ -484,17 +484,17 @@ const batchOperations = (operations: Array<() => void>) => {
 ### 3. State Synchronization
 ```typescript
 const syncWithExternalState = (externalState: any) => {
-  // Sync form data
+  // Synchronize form data
   if (externalState.formData) {
     searchRef.value?.setSearchForm(externalState.formData)
   }
   
-  // Sync configuration options
+  // Synchronize configuration options
   if (externalState.options) {
     searchRef.value?.setOptions(externalState.options)
   }
   
-  // Sync search items
+  // Synchronize search items
   if (externalState.items) {
     searchRef.value?.setItems(externalState.items)
   }
@@ -505,4 +505,4 @@ const syncWithExternalState = (externalState: any) => {
 
 - [Dynamic Management](./dynamic-items) - Learn about dynamic management of search items
 - [Custom Actions](./custom-actions) - Learn about implementing custom action buttons
-- [Form Validation](./form-validation) - Learn about form validation via methods
+- [Form Validation](./form-validation) - Learn about form validation through methods

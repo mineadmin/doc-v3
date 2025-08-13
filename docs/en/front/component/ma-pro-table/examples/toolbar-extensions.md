@@ -8,11 +8,11 @@ Demonstrates how to extend toolbar functionality through the plugin API, includi
 
 - **Plugin Mechanism**: Extend toolbar functionality via plugin API
 - **Custom Tools**: Support for registering custom tool buttons
-- **Slot Extensions**: Support for extending toolbar layout via slots
+- **Slot Expansion**: Support for extending toolbar layout through slots
 - **State Control**: Dynamic show/hide of tools
 - **Order Control**: Customizable tool display order
 
-## Plugin API Extensions
+## Plugin API Extension
 
 ### Registering Toolbar Plugins
 ```javascript
@@ -226,18 +226,18 @@ add({
 </template>
 ```
 
-### Before/After Toolbar Extensions
+### Toolbar Pre/Post Extensions
 ```vue
 <template>
   <MaProTable :options="options" :schema="schema">
     <!-- Pre-toolbar content -->
     <template #beforeToolbar>
-      <el-button size="small" type="text">Pre-button</el-button>
+      <el-button size="small" type="text">Pre Button</el-button>
     </template>
     
     <!-- Post-toolbar content -->
     <template #afterToolbar>
-      <el-button size="small" type="text">Post-button</el-button>
+      <el-button size="small" type="text">Post Button</el-button>
     </template>
   </MaProTable>
 </template>
@@ -338,7 +338,7 @@ add({
 })
 ```
 
-### Realtime Data Tool
+### Real-time Data Tool
 ```javascript
 add({
   name: 'realtime',
@@ -349,7 +349,7 @@ add({
       <el-button
         circle
         type={isRealtime ? 'success' : 'info'}
-        title={isRealtime ? 'Stop Realtime Refresh' : 'Start Realtime Refresh'}
+        title={isRealtime ? 'Stop Real-time Refresh' : 'Start Real-time Refresh'}
         onClick={() => {
           setIsRealtime(!isRealtime)
           if (!isRealtime) {
@@ -402,7 +402,7 @@ interface MaProTableToolbar {
 ```javascript
 add({
   name: 'admin-tool',
-  show: () => hasRole('admin'),         // Permission-based display
+  show: () => hasRole('admin'),         // Display based on permissions
   render: ({ proxy }) => (...)
 })
 ```

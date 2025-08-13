@@ -6,7 +6,7 @@
 
 ## 機能特徴
 
-- **完全なCRUD**: データの作成、読み取り、更新、削除操作をサポート
+- **完全なCRUD**: データの追加、削除、編集、検索操作をサポート
 - **フォーム連動**: 新規追加/編集フォームとテーブルデータの連動
 - **データ統計**: リアルタイムでデータ指標を統計
 - **一括操作**: 一括選択と操作をサポート
@@ -24,7 +24,7 @@
         <el-space>
           <el-button type="primary" @click="showAddDialog">
             <el-icon><Plus /></el-icon>
-            従業員を追加
+            新規従業員
           </el-button>
           <el-button type="success" @click="handleExportSelected">
             <el-icon><Download /></el-icon>
@@ -45,7 +45,7 @@
         <el-statistic title="平均給与" :value="statistics.avgSalary" />
       </el-col>
       <el-col :span="6">
-        <el-statistic title="今月の新規" :value="statistics.newThisMonth" />
+        <el-statistic title="今月新規" :value="statistics.newThisMonth" />
       </el-col>
     </el-row>
   </el-card>
@@ -78,7 +78,7 @@ const statistics = computed(() => {
 <template>
   <el-dialog 
     v-model="dialogVisible" 
-    :title="editingEmployee ? '従業員を編集' : '従業員を追加'"
+    :title="editingEmployee ? '従業員編集' : '新規従業員'"
     width="600px"
     destroy-on-close
   >
@@ -91,7 +91,7 @@ const statistics = computed(() => {
       <el-row :gutter="20">
         <el-col :span="12">
           <el-form-item label="氏名" prop="name">
-            <el-input v-model="employeeForm.name" placeholder="氏名を入力してください" />
+            <el-input v-model="employeeForm.name" placeholder="氏名を入力" />
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -111,7 +111,7 @@ const statistics = computed(() => {
     <template #footer>
       <el-button @click="dialogVisible = false">キャンセル</el-button>
       <el-button type="primary" @click="handleSaveEmployee" :loading="saving">
-        {{ editingEmployee ? '保存' : '追加' }}
+        {{ editingEmployee ? '保存' : '新規追加' }}
       </el-button>
     </template>
   </el-dialog>
@@ -123,7 +123,7 @@ const statistics = computed(() => {
 const formRules = {
   name: [
     { required: true, message: '従業員氏名を入力してください', trigger: 'blur' },
-    { min: 2, max: 10, message: '氏名の長さは2〜10文字です', trigger: 'blur' }
+    { min: 2, max: 10, message: '氏名の長さは2～10文字です', trigger: 'blur' }
   ],
   department: [
     { required: true, message: '部門を選択してください', trigger: 'change' }
@@ -133,7 +133,7 @@ const formRules = {
   ],
   salary: [
     { required: true, message: '給与を入力してください', trigger: 'blur' },
-    { type: 'number', min: 3000, max: 100000, message: '給与範囲は3000〜100000です', trigger: 'blur' }
+    { type: 'number', min: 3000, max: 100000, message: '給与範囲は3000～100000です', trigger: 'blur' }
   ]
 }
 ```
@@ -176,7 +176,7 @@ const handleSaveEmployee = async () => {
     await tableRef.value?.refresh()
     
   } catch (error) {
-    console.error('保存に失敗しました:', error)
+    console.error('保存失敗:', error)
   } finally {
     saving.value = false
   }
@@ -281,7 +281,7 @@ const handleExportSelected = () => {
   }
   
   console.log('エクスポートデータ:', selectedRows)
-  ElMessage.success(`${selectedRows.length}件のレコードをエクスポートしました`)
+  ElMessage.success(`${selectedRows.length}件のレコードをエクスポート`)
 }
 ```
 
@@ -313,14 +313,14 @@ const handleBatchDelete = () => {
 ```javascript
 const handleSearchSubmit = (form) => {
   console.log('検索条件:', form)
-  ElMessage.info('検索操作を実行します')
+  ElMessage.info('検索操作を実行')
   // ここで検索ロジックを処理できます
   return form
 }
 
 const handleSearchReset = (form) => {
-  console.log('検索条件をリセット:', form)
-  ElMessage.info('検索条件をリセットしました')
+  console.log('検索リセット:', form)
+  ElMessage.info('検索条件をリセット')
   return form
 }
 ```
@@ -332,7 +332,7 @@ const refreshTableData = async () => {
     await tableRef.value?.refresh()
     ElMessage.success('データを更新しました')
   } catch (error) {
-    ElMessage.error('データの更新に失敗しました')
+    ElMessage.error('データ更新に失敗しました')
   }
 }
 ```
@@ -388,7 +388,7 @@ const saveDataToStorage = (data) => {
   try {
     localStorage.setItem('employee-data', JSON.stringify(data))
   } catch (error) {
-    console.error('ローカルストレージへの保存に失敗しました:', error)
+    console.error('ローカルストレージへの保存失敗:', error)
   }
 }
 
@@ -397,7 +397,7 @@ const loadDataFromStorage = () => {
     const data = localStorage.getItem('employee-data')
     return data ? JSON.parse(data) : []
   } catch (error) {
-    console.error('ローカルストレージからの読み込みに失敗しました:', error)
+    console.error('ローカルストレージからの読み込み失敗:', error)
     return []
   }
 }
@@ -408,12 +408,12 @@ const loadDataFromStorage = () => {
 ### 1. フォーム設計
 - フォームフィールドを適切にグループ化
 - 明確な検証メッセージを提供
-- キーボードショートカットをサポート
+- キーボードショートカット操作をサポート
 
 ### 2. データ管理
-- テーブルとフォームデータをタイムリーに同期
+- テーブルとフォームデータを即時同期
 - データバックアップと復元機能を提供
-- データ競合を避けるために楽観的ロックを実装
+- 楽観的ロックを実装してデータ競合を防止
 
 ### 3. ユーザーエクスペリエンス
 - 操作確認と取り消し機能を提供
@@ -421,8 +421,8 @@ const loadDataFromStorage = () => {
 - 適切なエラー処理と通知
 
 ### 4. パフォーマンス最適化
-- 大量データの場合はページングと仮想スクロールを考慮
+- 大量データ時はページングと仮想スクロールを考慮
 - 頻繁なデータ更新を避ける
-- ディバウンスとスロットリングを適切に使用
+- デバウンスとスロットリングを適切に使用
 
-データ管理機能により、完全なデータ操作インターフェースを構築し、様々なビジネスシナリオのデータ管理ニーズを満たすことができます。
+データ管理機能により、完全なデータ操作インターフェースを構築でき、様々な業務シナリオのデータ管理要件を満たします。

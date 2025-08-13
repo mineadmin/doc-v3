@@ -77,7 +77,7 @@ const deviceConfigs = {
 
 ### Search Item Quantity Control
 ```javascript
-// Adjust number of displayed search items based on device
+// Adjust search item display quantity based on device
 const updateSearchLayout = (device) => {
   const showNumber = device === 'desktop' ? 4 : 
                     device === 'tablet' ? 2 : 1
@@ -92,7 +92,7 @@ const updateSearchLayout = (device) => {
 ### Search Layout Modes
 ```javascript
 const searchOptions = {
-  showNumber: 3,            // Default number of displayed search items
+  showNumber: 3,            // Default number of search items
   layout: 'auto',           // auto/inline/vertical
   responsive: {
     mobile: {
@@ -236,7 +236,7 @@ const getDeviceActions = (device) => {
 
 ### Cell Content Adaptation
 ```javascript
-// Optimize skill tag display on mobile
+// Optimize skill tag display for mobile
 {
   label: 'Skills',
   prop: 'skills',
@@ -402,14 +402,14 @@ const getToolbarConfig = (device) => {
 ## Best Practices
 
 ### 1. Progressive Enhancement
-- Start design from mobile
+- Start designing from mobile
 - Gradually add desktop features
 - Ensure core functionality works on all devices
 
 ### 2. Performance Optimization
-- Avoid loading excessive data on small-screen devices
+- Avoid loading excessive data on small screens
 - Use virtual scrolling for large datasets
-- Use images and media resources wisely
+- Optimize images and media resources
 
 ### 3. User Experience
 - Provide device-specific interaction methods
@@ -419,6 +419,6 @@ const getToolbarConfig = (device) => {
 ### 4. Testing Strategy
 - Test on real devices
 - Use browser developer tools for simulation
-- Consider network condition impacts
+- Consider network conditions
 
-The responsive layout feature enables your table application to perfectly adapt to various devices, providing a consistent user experience.
+The responsive layout feature ensures your table application perfectly adapts to various devices, providing a consistent user experience.

@@ -1,15 +1,15 @@
-# 動的な検索項目の管理
+# 動的検索項目管理
 
-すべてのプログラムによる管理方法の使用を表示し、検索項目の追加、削除、変更などの操作を含み、ビジネスロジックに基づいて検索条件を動的に調整する必要があるシナリオに適用されます。
+すべてのプログラムによる管理方法の使用を紹介し、検索項目の追加、削除、変更などの操作を含み、ビジネスロジックに基づいて検索条件を動的に調整する必要があるシナリオに適用されます。
 
 ## 動的管理デモ
 
 <DemoPreview dir="demos/ma-search/dynamic-items" />
 
-## 動的管理方法
+## 動的管理メソッド
 
 ### 検索項目の追加
-`appendItem` メソッドを使用して新しい検索項目を動的に追加します：
+`appendItem` メソッドを使用して新しい検索項目を動的に追加：
 
 ```typescript
 // 単一の検索項目を追加
@@ -19,24 +19,24 @@ const addSearchItem = () => {
     prop: 'new_field',
     render: 'input',
     props: {
-      placeholder: '新規フィールドの値を入力してください'
+      placeholder: '新規フィールド値を入力してください'
     }
   })
 }
 ```
 
 ### 検索項目の削除
-`removeItem` メソッドを使用して指定された検索項目を削除します：
+`removeItem` メソッドを使用して指定した検索項目を削除：
 
 ```typescript
-// 指定された検索項目を削除
+// 指定した検索項目を削除
 const removeSearchItem = (prop: string) => {
   searchRef.value?.removeItem(prop)
 }
 ```
 
 ### 検索項目の一括設定
-`setItems` メソッドを使用してすべての検索項目を一度に設定します：
+`setItems` メソッドを使用してすべての検索項目を一度に設定：
 
 ```typescript
 // 検索項目を一括更新
@@ -50,7 +50,7 @@ const updateAllItems = () => {
 ```
 
 ### 検索項目情報の取得
-さまざまな取得メソッドを使用して現在の検索項目構成をクエリします：
+各種取得メソッドを使用して現在の検索項目構成を照会：
 
 ```typescript
 // すべての検索項目を取得
@@ -66,7 +66,7 @@ const hasUserItem = !!searchRef.value?.getItemByProp('username')
 ## 使用シナリオ
 
 ### 1. 権限制御
-ユーザー権限に基づいて異なる検索条件を動的に表示します：
+ユーザー権限に基づいて異なる検索条件を動的に表示：
 
 ```typescript
 // 管理者はすべての検索項目を表示、一般ユーザーは一部の検索項目を表示
@@ -80,8 +80,8 @@ if (userRole === 'admin') {
 }
 ```
 
-### 2. ビジネスシナリオの切り替え
-ビジネスシナリオに応じて異なる検索条件の組み合わせを切り替えます：
+### 2. ビジネスシナリオ切り替え
+ビジネスシナリオに応じて異なる検索条件の組み合わせを切り替え：
 
 ```typescript
 // ビジネスシナリオを切り替え
@@ -103,10 +103,10 @@ const switchScenario = (scenario: string) => {
 ```
 
 ### 3. 条件依存関係
-検索条件間の依存関係を実装します：
+検索条件間の依存関係を実現：
 
 ```typescript
-// 特定のカテゴリを選択した場合、サブカテゴリの検索項目を動的に追加
+// 特定のカテゴリを選択した場合、サブカテゴリ検索項目を動的に追加
 const onCategoryChange = (categoryId: string) => {
   if (categoryId) {
     searchRef.value?.appendItem({
@@ -123,16 +123,16 @@ const onCategoryChange = (categoryId: string) => {
 
 ## 主な特徴
 
-- 🔧 完全なCRUD操作のサポート
+- 🔧 完全なCRUD操作サポート
 - 🔄 リアルタイムの検索項目管理
-- 📊 豊富なクエリと検索方法
+- 📊 豊富な照会および検索方法
 - 🎯 複雑なビジネスロジックのサポート
 - ⚡ 高性能な動的更新メカニズム
 
 ## 高度な使用法
 
 ### 検索項目テンプレートシステム
-再利用可能な検索項目テンプレートを作成します：
+再利用可能な検索項目テンプレートを作成：
 
 ```typescript
 // 検索項目テンプレートを定義
@@ -159,7 +159,7 @@ const applyTemplate = (templateName: string) => {
 ```
 
 ### 動的検証ルール
-検索項目に基づいて動的に検証ルールを追加します：
+検索項目に基づいて動的に検証ルールを追加：
 
 ```typescript
 const addItemWithValidation = (item: any) => {
@@ -178,7 +178,7 @@ const addItemWithValidation = (item: any) => {
 ## ベストプラクティス
 
 ### 1. 状態管理
-複雑な検索項目の状態を管理するために状態管理ライブラリ（Piniaなど）を使用することをお勧めします：
+複雑な検索項目の状態を管理するために状態管理ライブラリ（Piniaなど）を使用することを推奨：
 
 ```typescript
 // Piniaストアを使用して検索項目を管理
@@ -200,19 +200,19 @@ const useSearchStore = defineStore('search', () => {
 ```
 
 ### 2. パフォーマンス最適化
-頻繁に検索項目を動的に更新する場合、デバウンス技術を使用してパフォーマンスを最適化します：
+頻繁に検索項目を動的に更新する場合、デバウンス技術を使用してパフォーマンスを最適化：
 
 ```typescript
 import { debounce } from 'lodash-es'
 
-// デバウンスして検索項目を更新
+// 検索項目の更新をデバウンス
 const updateItemsDebounced = debounce((items: any[]) => {
   searchRef.value?.setItems(items)
 }, 300)
 ```
 
 ### 3. データ永続化
-動的に作成された検索項目構成をローカルストレージに保存します：
+動的に作成された検索項目構成をローカルストレージに保存：
 
 ```typescript
 // 検索項目構成を保存
@@ -233,6 +233,6 @@ const restoreSearchConfig = () => {
 
 ## 関連リンク
 
-- [メソッドデモ](./methods-demo) - すべての公開メソッドの詳細な使用法を確認
-- [カスタムアクション](./custom-actions) - カスタムアクションボタンについて学ぶ
-- [高度な検索](./advanced-search) - 複雑な検索シナリオの実装を学ぶ
+- [メソッドデモ](./methods-demo) - すべての公開メソッドの詳細な使用法を理解
+- [カスタムアクション](./custom-actions) - カスタムアクションボタンを理解
+- [高度な検索](./advanced-search) - 複雑な検索シナリオの実装を理解

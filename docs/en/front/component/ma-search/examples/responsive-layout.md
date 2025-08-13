@@ -20,7 +20,7 @@ MaSearch employs a responsive breakpoint system based on CSS Media Queries:
 | `xl` | ≥ 1920px | 4 | Large screens |
 
 ### Basic Configuration
-Configure column counts for different breakpoints using the `cols` parameter:
+Configure column counts per breakpoint via the `cols` parameter:
 
 ```typescript
 const searchOptions = {
@@ -35,7 +35,7 @@ const searchOptions = {
 ```
 
 ### Custom Breakpoints
-Customize breakpoint configurations based on business requirements:
+Customize breakpoint configurations based on business needs:
 
 ```typescript
 // Compact layout
@@ -96,7 +96,7 @@ const dashboardConfig = {
 ## Responsive Features
 
 ### Automatic Column Calculation
-The component automatically calculates columns per row based on container width and breakpoint configuration.
+The component automatically calculates column counts per row based on container width and breakpoint configuration.
 
 ### Smooth Transitions
 Layout transitions smoothly during screen size changes to avoid abrupt jumps.
@@ -107,7 +107,7 @@ Automatically adds ellipsis or line breaks when search item content is too long.
 ## Key Features
 
 - 📱 Mobile-friendly responsive design
-- 🖥 Optimal large screen utilization
+- 🖥 Optimal large-screen space utilization
 - 🔄 Smooth layout transition animations
 - 📏 Flexible breakpoint configuration system
 - ⚡ High-performance layout calculations
@@ -232,7 +232,7 @@ const getItemsByPriority = (screenSize: string) => {
 Optimize rendering performance on small screens:
 
 ```typescript
-// Small screen performance optimization
+// Small-screen performance optimization
 const optimizedConfig = {
   // Reduce columns on mobile for better performance
   cols: window.innerWidth < 768 ? { xs: 1 } : { xs: 1, sm: 2, md: 3, lg: 4 },
@@ -245,6 +245,6 @@ const optimizedConfig = {
 
 ## Related Links
 
-- [Collapsible Search](./collapsible-search) - Learn about combining folding with responsiveness
+- [Collapsible Search](./collapsible-search) - Learn about combining folding with responsive design
 - [Table Integration](./table-integration) - Understand responsive search integration with tables
 - [Basic Usage](./basic-usage) - Learn fundamental search functionality
