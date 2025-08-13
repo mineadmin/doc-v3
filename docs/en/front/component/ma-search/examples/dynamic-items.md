@@ -1,4 +1,4 @@
-# Dynamic Search Item Management
+# Dynamic Management of Search Items
 
 Demonstrates all programmatic management methods, including adding, removing, and modifying search items, suitable for scenarios requiring dynamic adjustment of search conditions based on business logic.
 
@@ -19,7 +19,7 @@ const addSearchItem = () => {
     prop: 'new_field',
     render: 'input',
     props: {
-      placeholder: 'Enter new field value'
+      placeholder: 'Please enter new field value'
     }
   })
 }
@@ -36,7 +36,7 @@ const removeSearchItem = (prop: string) => {
 ```
 
 ### Batch Setting Search Items
-Use the `setItems` method to configure all search items at once:
+Use the `setItems` method to set all search items at once:
 
 ```typescript
 // Batch update search items
@@ -126,7 +126,7 @@ const onCategoryChange = (categoryId: string) => {
 - 🔧 Full CRUD operation support
 - 🔄 Real-time search item management
 - 📊 Comprehensive query and retrieval methods
-- 🎯 Support for complex business logic
+- � Support for complex business logic
 - ⚡ High-performance dynamic update mechanism
 
 ## Advanced Usage
@@ -143,7 +143,7 @@ const templates = {
     { label: 'Status', prop: 'status', render: 'select', options: statusOptions }
   ],
   orderSearch: [
-    { label: 'Order No.', prop: 'order_no', render: 'input' },
+    { label: 'Order Number', prop: 'order_no', render: 'input' },
     { label: 'Order Status', prop: 'order_status', render: 'select', options: orderStatusOptions },
     { label: 'Order Time', prop: 'created_at', render: 'date-picker' }
   ]
@@ -166,7 +166,7 @@ const addItemWithValidation = (item: any) => {
   // Add validation rules for certain fields
   if (item.prop === 'email') {
     item.rules = [
-      { required: true, message: 'Email is required', trigger: 'blur' },
+      { required: true, message: 'Email cannot be empty', trigger: 'blur' },
       { type: 'email', message: 'Invalid email format', trigger: 'blur' }
     ]
   }
@@ -200,12 +200,12 @@ const useSearchStore = defineStore('search', () => {
 ```
 
 ### 2. Performance Optimization
-Use debouncing when frequently updating search items dynamically:
+Use debounce technique for performance optimization when frequently updating search items:
 
 ```typescript
 import { debounce } from 'lodash-es'
 
-// Debounced item updates
+// Debounced search item updates
 const updateItemsDebounced = debounce((items: any[]) => {
   searchRef.value?.setItems(items)
 }, 300)

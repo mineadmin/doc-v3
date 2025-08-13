@@ -300,7 +300,38 @@ const sidebar:DefaultTheme.Sidebar = {
         },
         {
           text: 'MaProTable',
-          link: '/zh-hk/front/component/ma-pro-table'
+          link: '/zh-hk/front/component/ma-pro-table',
+          collapsed: true,
+          items: [
+            {
+              text: '基礎用法',
+              link: '/zh-hk/front/component/ma-pro-table/examples/basic'
+            },
+            {
+              text: '高級搜索',
+              link: '/zh-hk/front/component/ma-pro-table/examples/advanced-search'
+            },
+            {
+              text: '自定義操作',
+              link: '/zh-hk/front/component/ma-pro-table/examples/custom-operations'
+            },
+            {
+              text: '單元格渲染插件',
+              link: '/zh-hk/front/component/ma-pro-table/examples/cell-render-plugins'
+            },
+            {
+              text: '工具欄擴展',
+              link: '/zh-hk/front/component/ma-pro-table/examples/toolbar-extensions'
+            },
+            {
+              text: '數據管理',
+              link: '/zh-hk/front/component/ma-pro-table/examples/data-management'
+            },
+            {
+              text: '響應式佈局',
+              link: '/zh-hk/front/component/ma-pro-table/examples/responsive-layout'
+            }
+          ]
         },
         {
           text: 'MaEcharts',

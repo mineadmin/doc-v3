@@ -1,15 +1,15 @@
 # Collapsible Search
 
-Displays a search form with collapsible and expandable functionality, suitable for scenarios with multiple search items. The collapsible feature saves page space and enhances user experience.
+Displays a search form with collapsible and expandable functionality, suitable for scenarios with numerous search items. The collapsible feature saves page space and enhances user experience.
 
 ## Collapsible Search Demo
 
 <DemoPreview dir="demos/ma-search/collapsible-search" />
 
-## Collapsible Functionality Description
+## Collapsible Feature Explanation
 
 ### Basic Configuration
-Control collapsible behavior through `fold` and `foldRows` parameters:
+Control the collapsible behavior through `fold` and `foldRows` parameters:
 
 ```typescript
 const searchOptions = {
@@ -44,19 +44,19 @@ const isFold = searchRef.value?.getFold()
 ## Usage Scenarios
 
 ### 1. Backend Management Systems
-In admin backends where multiple search conditions are typically needed, the collapsible feature maintains interface cleanliness.
+In management backends that typically require multiple search conditions, the collapsible feature maintains interface cleanliness.
 
 ### 2. Data Analysis Platforms
-For complex data filtering conditions, displaying the most commonly used filters while hiding advanced ones in the collapsible area.
+Complex data filtering conditions display commonly used filters while hiding advanced conditions in the collapsible area.
 
 ### 3. Mobile Adaptation
-Particularly important on mobile devices where screen space is limited.
+On mobile devices with limited screen space, the collapsible feature is particularly important.
 
 ## Collapsible Strategies
 
 ### Smart Collapsing
 - Automatically calculates the number of search items to collapse
-- Prioritizes displaying the most frequently used search conditions
+- Prioritizes displaying most frequently used search conditions
 - Keeps action buttons always visible
 
 ### Responsive Collapsing
@@ -68,7 +68,7 @@ Particularly important on mobile devices where screen space is limited.
 
 - 📱 Mobile-friendly design
 - 🔄 Smooth expand/collapse animations
-- 🎛 Flexible configuration for collapsed rows
+- 🎛 Flexible configuration of collapsed rows
 - 📝 Customizable button text
 - ⚡ Programmatic state control
 
@@ -86,7 +86,7 @@ const searchOptions = {
 ```
 
 ### 2. Optimize Search Item Order
-Place the most commonly used search conditions first to ensure visibility when collapsed.
+Place most frequently used search conditions first to ensure visibility when collapsed.
 
 ### 3. Provide State Indicators
 Clearly indicate the current collapsed state through custom button text or icons.

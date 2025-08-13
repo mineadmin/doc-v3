@@ -67,7 +67,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/en/front/base/start'
         },
         {
-          text: 'Routing & Menus',
+          text: 'Routes & Menus',
           link: '/en/front/base/route-menu'
         },
         {
@@ -167,7 +167,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/en/front/component/ma-form/examples/basic-usage'
             },
             {
-              text: 'Layout System',
+              text: 'Layout Systems',
               link: '/en/front/component/ma-form/examples/layout-systems'
             },
             {
@@ -300,7 +300,38 @@ const sidebar:DefaultTheme.Sidebar = {
         },
         {
           text: 'MaProTable',
-          link: '/en/front/component/ma-pro-table'
+          link: '/en/front/component/ma-pro-table',
+          collapsed: true,
+          items: [
+            {
+              text: 'Basic Usage',
+              link: '/en/front/component/ma-pro-table/examples/basic'
+            },
+            {
+              text: 'Advanced Search',
+              link: '/en/front/component/ma-pro-table/examples/advanced-search'
+            },
+            {
+              text: 'Custom Operations',
+              link: '/en/front/component/ma-pro-table/examples/custom-operations'
+            },
+            {
+              text: 'Cell Render Plugins',
+              link: '/en/front/component/ma-pro-table/examples/cell-render-plugins'
+            },
+            {
+              text: 'Toolbar Extensions',
+              link: '/en/front/component/ma-pro-table/examples/toolbar-extensions'
+            },
+            {
+              text: 'Data Management',
+              link: '/en/front/component/ma-pro-table/examples/data-management'
+            },
+            {
+              text: 'Responsive Layout',
+              link: '/en/front/component/ma-pro-table/examples/responsive-layout'
+            }
+          ]
         },
         {
           text: 'MaEcharts',
@@ -321,27 +352,27 @@ const sidebar:DefaultTheme.Sidebar = {
           text: "Lifecycle",
           link: "/en/backend/base/lifecycle"
         },
-        { text: "Routing & API Docs",link: "/en/backend/base/router"},
+        { text: "Routes & API Docs",link: "/en/backend/base/router"},
         { text: "Error Handling",link: "/en/backend/base/error-handler"},
         {text: "Logging",link: "/en/backend/base/logger"},
         {text: "Events",link: "/en/backend/base/event-handler"},
         {text: "File Upload",link: "/en/backend/base/upload"},
-        {text: "Localization",link: "/en/backend/base/lang"},
+        {text: "Internationalization",link: "/en/backend/base/lang"},
       ]
     },
     {
       text:"Security",
       items:[
         {
-          text: "Authentication",
+          text: "User Authentication",
           link: "/en/backend/security/passport"
         },
         {
-          text: "Authorization (RBAC)",
+          text: "User Authorization (RBAC)",
           link: "/en/backend/security/access"
         },
         {
-          text: "Client IP",
+          text: "Client IP Retrieval",
           link: "/en/backend/security/client-ip"
         }
       ]
@@ -353,7 +384,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/en/backend/data-permission/overview"
         },
         {
-          text: "Configuration & Demo",
+          text: "Permission Configuration & Demo",
           link: "/en/backend/data-permission/config"
         },
         {
@@ -385,15 +416,15 @@ const sidebar:DefaultTheme.Sidebar = {
               link:"/en/plugin/create"
             },
             {
-              text:"Plugin Structure",
+              text:"Plugin Directory Structure",
               link:"/en/plugin/structure"
             },
             {
-              text:"mine.json Documentation",
+              text:"mine.json Documentation & Examples",
               link:"/en/plugin/mineJson"
             },
             {
-            text:"ConfigProvider Guide",
+            text:"ConfigProvider Documentation",
             link:"/en/plugin/configProvider"
           }
           ]
@@ -415,16 +446,16 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"Frontend Development",
       items:[
         {
-          text: "Frontend Standards",
+          text: "Frontend Development Standards",
           link: "/en/plugin/front/develop"
         }
       ]
     },
     {
-      text:"Publishing",
+      text:"App Publishing",
       items:[
         {
-          text: "App Publishing",
+          text: "App Release",
           link: "/en/plugin/develop/publish"
         },
         {

@@ -9,7 +9,7 @@ Demonstrates the usage of all slots, including scenarios for completely replacin
 ## Slot Usage Instructions
 
 ### actions Slot
-Completely replace the default action button area for maximum customization flexibility:
+Completely replaces the default action button area for maximum customization flexibility:
 
 ```vue
 <template #actions="{ searchLoading, resetLoading }">
@@ -35,7 +35,7 @@ Completely replace the default action button area for maximum customization flex
 ```
 
 ### beforeActions Slot
-Insert custom content before the default action buttons:
+Inserts custom content before the default action buttons:
 
 ```vue
 <template #beforeActions>
@@ -49,7 +49,7 @@ Insert custom content before the default action buttons:
 ```
 
 ### afterActions Slot
-Append custom content after the default action buttons:
+Appends custom content after the default action buttons:
 
 ```vue
 <template #afterActions>
@@ -98,27 +98,27 @@ Implement a wizard-style search process controlled by custom buttons.
 
 - 🎨 Fully customizable action area
 - 🔧 Flexible slot system design
-- 📦 Extend capabilities while preserving original functionality
+- 📦 Extend capabilities while maintaining original functionality
 - 🎯 Support for complex business scenario customization
 - ⚡ High-performance slot rendering mechanism
 
 ## Design Patterns
 
-### Replacement Mode (actions)
+### Replacement Pattern (actions)
 Suitable for scenarios requiring complete redesign of the action area:
 
 ```vue
-<!-- Fully custom action area -->
+<!-- Fully customized action area -->
 <template #actions>
   <CustomActionBar />
 </template>
 ```
 
-### Extension Mode (beforeActions/afterActions)
-Suitable for adding extra actions while maintaining default functionality:
+### Extension Pattern (beforeActions/afterActions)
+Suitable for adding extra actions while preserving default functionality:
 
 ```vue
-<!-- Extend on top of default buttons -->
+<!-- Extend on default buttons -->
 <template #beforeActions>
   <ExtraActions />
 </template>
@@ -138,10 +138,10 @@ Ensure custom actions display and function properly across different screen size
 ### 4. User Experience Optimization
 - Provide clear operation feedback
 - Add appropriate confirmation dialogs
-- Implement undo functionality for actions
+- Implement operation undo functionality
 
 ## Related Links
 
-- [Method Demo](./methods-demo) - Learn about all exposed method usages
-- [Dynamic Management](./dynamic-items) - Understand dynamic search item management
+- [Method Demo](./methods-demo) - Learn about all exposed method usage
+- [Dynamic Management](./dynamic-items) - Learn about dynamic search item management
 - [Form Validation](./form-validation) - Learn about form validation features

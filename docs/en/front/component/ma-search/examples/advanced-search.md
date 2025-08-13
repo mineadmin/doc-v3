@@ -6,10 +6,10 @@ Demonstrates the implementation of complex search scenarios, including advanced 
 
 <DemoPreview dir="demos/ma-search/advanced-search" />
 
-## Advanced Features Explained
+## Advanced Features
 
 ### JSX Custom Rendering
-Fully customize form components by returning JSX elements via functions:
+Fully customize form components by returning JSX elements through functions:
 
 ```typescript
 {
@@ -24,7 +24,7 @@ Use the `hide` function to dynamically show or hide search items:
 
 ```typescript
 {
-  label: 'Advanced Options',
+  label: 'Advanced Option',
   prop: 'advanced',
   render: 'input',
   hide: () => !showAdvanced.value
@@ -32,11 +32,11 @@ Use the `hide` function to dynamically show or hide search items:
 ```
 
 ### Multi-selection Components
-Support multi-select components like checkbox groups and cascading selectors:
+Supports multi-selection components like checkbox groups and cascading selectors:
 
 ```typescript
 {
-  label: 'Multi-select Categories',
+  label: 'Multi-category',
   prop: 'categories',
   render: 'checkbox-group',
   options: categoryOptions
@@ -49,7 +49,7 @@ Support multi-select components like checkbox groups and cascading selectors:
 Suitable for complex business data filtering, supporting multi-dimensional and multi-condition combined queries.
 
 ### 2. Report Query Systems  
-Ideal for report queries requiring precise condition control, supporting complex conditions like time ranges and numerical intervals.
+Ideal for report queries requiring precise condition control, supporting complex conditions like date ranges and numerical intervals.
 
 ### 3. E-commerce Advanced Filtering
 Perfect for product filtering on e-commerce platforms, supporting multiple filtering dimensions such as brand, specifications, and price.
@@ -57,7 +57,7 @@ Perfect for product filtering on e-commerce platforms, supporting multiple filte
 ## Key Features
 
 - 🎯 Supports JSX/TSX custom rendering
-- 🔄 Dynamic show/hide of search items
+- 🔄 Dynamic display and hiding of search items
 - 📊 Multiple data selection component support
 - ⚡ Performance-optimized rendering mechanism
 - 🛠 Flexible configuration and extensibility
@@ -67,7 +67,7 @@ Perfect for product filtering on e-commerce platforms, supporting multiple filte
 ### Custom Rendering Functions
 - Supports returning any Vue component or JSX element
 - Automatically passes form data and update methods
-- Complete type inference and intelligent hints
+- Full type inference and intelligent prompts
 
 ### Performance Optimization
 - Uses virtual list technology to handle large numbers of options
@@ -76,6 +76,6 @@ Perfect for product filtering on e-commerce platforms, supporting multiple filte
 
 ## Related Links
 
-- [Basic Usage](./basic-usage) - Learn basic search configuration
+- [Basic Usage](./basic-usage) - Learn basic search configurations
 - [Custom Actions](./custom-actions) - Learn about custom action buttons
 - [Dynamic Management](./dynamic-items) - Learn about dynamic search item management

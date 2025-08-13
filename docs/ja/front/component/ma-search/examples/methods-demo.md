@@ -1,6 +1,6 @@
 # メソッドデモンストレーション
 
-公開されているすべてのメソッドの使用法を展示し、リアルタイム状態追跡と操作ログ記録を含め、開発者がコンポーネントのプログラミングインターフェースと高度な使用方法を深く理解するのを支援します。
+公開されているすべてのメソッドの使用方法を展示し、リアルタイム状態追跡と操作ログ記録を含め、開発者がコンポーネントのプログラミングインターフェースと高度な使用方法を深く理解できるようにします。
 
 ## メソッドデモンストレーション
 
@@ -9,7 +9,7 @@
 ## 公開メソッド詳細解説
 
 ### フォームデータ管理
-検索フォームのデータを操作および取得：
+検索フォームデータの操作と取得:
 
 ```typescript
 // 検索フォームデータを設定
@@ -36,7 +36,7 @@ const clearFormData = () => {
 ```
 
 ### 折りたたみ状態制御
-検索パネルの折りたたみ/展開状態を管理：
+検索パネルの折りたたみ/展開状態を管理:
 
 ```typescript
 // 折りたたみ状態をトグル
@@ -61,7 +61,7 @@ const setFoldState = (fold: boolean) => {
 ```
 
 ### 表示状態管理
-検索コンポーネント全体の表示/非表示を制御：
+検索コンポーネント全体の表示/非表示を制御:
 
 ```typescript
 // 表示状態を設定
@@ -84,7 +84,7 @@ const toggleVisibility = () => {
 ```
 
 ### 設定動的管理
-コンポーネントの各種設定オプションを動的に変更：
+コンポーネントの各種設定オプションを動的に変更:
 
 ```typescript
 // 検索オプションを動的に設定
@@ -94,8 +94,8 @@ const updateSearchOptions = () => {
     fold: true,
     foldRows: 3,
     text: {
-      searchBtn: '即時検索',
-      resetBtn: '条件リセット'
+      searchBtn: 'すぐに検索',
+      resetBtn: '条件をリセット'
     }
   }
   searchRef.value?.setOptions(newOptions)
@@ -124,7 +124,7 @@ const getCurrentConfig = () => {
 ```
 
 ### 検索項目動的管理
-実行時に検索項目設定を動的に変更：
+実行時に検索項目設定を動的に変更:
 
 ```typescript
 // 検索項目を一括設定
@@ -141,7 +141,7 @@ const setBatchItems = () => {
 // 単一検索項目を追加
 const appendSingleItem = () => {
   const newItem = {
-    label: '登録日時',
+    label: '登録時間',
     prop: 'created_at',
     render: 'date-picker',
     props: {
@@ -161,7 +161,7 @@ const removeSpecificItem = (prop: string) => {
 const findItemByProp = (prop: string) => {
   const item = searchRef.value?.getItemByProp(prop)
   if (item) {
-    console.log(`検索項目を発見:`, item)
+    console.log(`検索項目が見つかりました:`, item)
   } else {
     console.log(`prop "${prop}" の検索項目が見つかりません`)
   }
@@ -177,7 +177,7 @@ const getAllItems = () => {
 ```
 
 ### フォーム参照取得
-内部ma-formコンポーネント参照を取得してより低レベルの操作を実行：
+内部ma-formコンポーネント参照を取得してより低レベルな操作を実行:
 
 ```typescript
 // フォーム参照を取得
@@ -189,7 +189,7 @@ const getFormRef = () => {
   }
 }
 
-// フォーム参照を通じて検証
+// フォーム参照で検証を実行
 const validateViaFormRef = async () => {
   const formRef = searchRef.value?.getMaFormRef()
   if (formRef) {
@@ -204,7 +204,7 @@ const validateViaFormRef = async () => {
   }
 }
 
-// 参照を通じてフォームをリセット
+// フォーム参照でリセットを実行
 const resetViaFormRef = () => {
   const formRef = searchRef.value?.getMaFormRef()
   if (formRef) {
@@ -217,7 +217,7 @@ const resetViaFormRef = () => {
 ## 使用シナリオ
 
 ### 1. 検索条件プリセット
-業務シナリオに基づいて異なる検索条件をプリセット：
+業務シナリオに基づいて異なる検索条件をプリセット:
 
 ```typescript
 // 検索シナリオをプリセット
@@ -258,7 +258,7 @@ const applyPreset = (scenario: keyof typeof presetScenarios) => {
 ```
 
 ### 2. 権限制御
-ユーザー権限に基づいて検索機能を動的に調整：
+ユーザー権限に基づいて検索機能を動的に調整:
 
 ```typescript
 // 検索項目の権限制御
@@ -268,7 +268,7 @@ const applyPermissionControl = (userRole: string) => {
     { label: '状態', prop: 'status', render: 'select', options: statusOptions }
   ]
   
-  // 管理者はより多くの検索項目を閲覧可能
+  // 管理者はより多くの検索項目を見られる
   if (userRole === 'admin') {
     baseItems.push(
       { label: '作成者', prop: 'creator', render: 'select', options: userOptions },
@@ -291,7 +291,7 @@ const applyVisibilityControl = (userRole: string) => {
 ```
 
 ### 3. レスポンシブ設定調整
-デバイスタイプと画面サイズに基づいて設定を動的に調整：
+デバイスタイプと画面サイズに基づいて設定を動的に調整:
 
 ```typescript
 // デバイスに応じた設定調整
@@ -347,7 +347,7 @@ onUnmounted(() => {
 ## 高度な使用例
 
 ### 検索テンプレートシステム
-保存および読み込み可能な検索テンプレートを作成：
+保存可能でロード可能な検索テンプレートを作成:
 
 ```typescript
 // 検索テンプレート管理
@@ -367,7 +367,7 @@ class SearchTemplateManager {
     localStorage.setItem('searchTemplates', JSON.stringify(Array.from(this.templates)))
   }
   
-  // 検索テンプレートを読み込み
+  // 検索テンプレートをロード
   loadTemplate(name: string, searchRef: any) {
     const template = this.templates.get(name)
     if (template) {
@@ -391,7 +391,7 @@ class SearchTemplateManager {
 ```
 
 ### 検索状態監視
-検索コンポーネントの各種状態変化を監視：
+検索コンポーネントの各種状態変化を監視:
 
 ```typescript
 // 状態モニター

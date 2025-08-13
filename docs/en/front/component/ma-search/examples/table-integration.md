@@ -8,13 +8,13 @@ A complete integration solution for data tables, including search, pagination, s
 
 ## Integration Solution Explanation
 
-### Search and Table Interaction
+### Search and Table Synchronization
 Real-time synchronization between search conditions and table data:
 
 ```typescript
 // Search handler
 const handleSearch = (searchData: any) => {
-  // Reset pagination to first page
+  // Reset to first page
   pagination.page = 1
   // Save search conditions
   searchCondition.value = { ...searchData }
@@ -141,7 +141,7 @@ const productSearchItems = [
 ## Advanced Features
 
 ### View Switching
-Support switching between table view and card view:
+Support for switching between table and card views:
 
 ```typescript
 // View mode management
@@ -161,7 +161,7 @@ const switchView = (mode: 'table' | 'card') => {
 ```
 
 ### Sorting Integration
-Interaction between search conditions and table sorting:
+Synchronization between search conditions and table sorting:
 
 ```typescript
 // Sorting state management
@@ -178,7 +178,7 @@ const handleSortChange = ({ prop, order }: any) => {
   loadTableData()
 }
 
-// Include sorting parameters in data loading function
+// Include sorting parameters in data loading
 const params = {
   page: pagination.page,
   pageSize: pagination.pageSize,
@@ -189,7 +189,7 @@ const params = {
 ```
 
 ### Batch Operations
-Batch operations combined with search and table selection:
+Batch operations combining search and table selection:
 
 ```typescript
 // Selection state management
@@ -219,7 +219,7 @@ const handleBatchOperation = async (operation: string) => {
 
 ## Key Features
 
-- 🔗 Complete search and table interaction
+- 🔗 Complete search and table synchronization
 - 📄 Smart pagination integration
 - 🔄 Flexible view switching
 - 📊 Powerful sorting functionality

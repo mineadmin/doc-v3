@@ -34,7 +34,7 @@ Most commonly used form validation rules:
 ```
 
 ### Format Validation
-Email, phone number, URL format validation:
+Email, phone number, URL, and other format validations:
 
 ```typescript
 // Email validation
@@ -168,7 +168,7 @@ const createConditionalRules = () => {
 ```
 
 ### Combined Validation
-Cross-field validation:
+Validation across multiple fields:
 
 ```typescript
 // Password confirmation validation
@@ -224,7 +224,7 @@ const userRegisterSearchItems = [
     render: 'input',
     rules: [
       { required: true, message: 'Username cannot be empty' },
-      { min: 3, max: 20, message: 'Username length must be 3-20 characters' },
+      { min: 3, max: 20, message: 'Username must be 3-20 characters' },
       { pattern: /^[a-zA-Z0-9_]+$/, message: 'Username can only contain letters, numbers, and underscores' }
     ]
   },
@@ -294,8 +294,8 @@ const orderSearchItems = [
 
 - ✅ Complete validation rule support
 - 🔄 Asynchronous validation capability
-- � Conditional and combined validation
-- 📝 Friendly error messages
+- 🎯 Conditional and combined validation
+- 📝 User-friendly error messages
 - ⚡ High-performance validation mechanism
 - 🛡 Data security and integrity protection
 
@@ -350,7 +350,7 @@ const validateForm = async () => {
   const formRef = searchRef.value?.getMaFormRef()
   try {
     await formRef?.validate()
-    console.log('Form validation passed, ready for submission')
+    console.log('Form validation passed, ready to submit search')
     return true
   } catch (error) {
     console.log('Form validation failed:', error)
@@ -369,11 +369,11 @@ const clearValidation = () => {
 
 ### 1. User Experience Optimization
 - Provide real-time validation feedback
-- Use friendly error messages
-- Support error message internationalization
+- Use user-friendly error messages
+- Support internationalization of error messages
 
 ```typescript
-// Friendly error messages
+// User-friendly error messages
 const createFriendlyRules = (fieldName: string) => [
   { 
     required: true, 
@@ -470,6 +470,6 @@ const ValidationRules = {
 
 ## Related Links
 
-- [Advanced Search](./advanced-search) - Learn about validation in complex search scenarios
+- [Advanced Search](./advanced-search) - Learn about validation applications in complex search scenarios
 - [Table Integration](./table-integration) - Understand validation's role before data submission
-- [Methods Demo](./methods-demo) - Learn about validation-related component methods
+- [Methods Demo](./methods-demo) - Learn about component methods related to validation

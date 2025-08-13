@@ -133,15 +133,15 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/ja/front/high/i18n'
         },
         {
-          text: 'サービスプロバイダ',
+          text: 'サービスプロバイダー',
           link: '/ja/front/high/provider'
         },
         {
-          text: 'フック',
+          text: 'Hooks',
           link: '/ja/front/high/hooks'
         },
         {
-          text: '常用ストア',
+          text: '常用Store',
           link: '/ja/front/high/store'
         },
         {
@@ -187,7 +187,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/ja/front/component/ma-form/examples/slots-examples'
             },
             {
-              text: '公開メソッド',
+              text: 'メソッド公開',
               link: '/ja/front/component/ma-form/examples/expose-methods'
             },
             {
@@ -234,7 +234,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/ja/front/component/ma-table/custom-render'
             },
             {
-              text: '動的列管理',
+              text: '動的カラム管理',
               link: '/ja/front/component/ma-table/dynamic-columns'
             },
             {
@@ -300,7 +300,38 @@ const sidebar:DefaultTheme.Sidebar = {
         },
         {
           text: 'MaProTable',
-          link: '/ja/front/component/ma-pro-table'
+          link: '/ja/front/component/ma-pro-table',
+          collapsed: true,
+          items: [
+            {
+              text: '基本使用法',
+              link: '/ja/front/component/ma-pro-table/examples/basic'
+            },
+            {
+              text: '高度検索',
+              link: '/ja/front/component/ma-pro-table/examples/advanced-search'
+            },
+            {
+              text: 'カスタム操作',
+              link: '/ja/front/component/ma-pro-table/examples/custom-operations'
+            },
+            {
+              text: 'セルレンダリングプラグイン',
+              link: '/ja/front/component/ma-pro-table/examples/cell-render-plugins'
+            },
+            {
+              text: 'ツールバー拡張',
+              link: '/ja/front/component/ma-pro-table/examples/toolbar-extensions'
+            },
+            {
+              text: 'データ管理',
+              link: '/ja/front/component/ma-pro-table/examples/data-management'
+            },
+            {
+              text: 'レスポンシブレイアウト',
+              link: '/ja/front/component/ma-pro-table/examples/responsive-layout'
+            }
+          ]
         },
         {
           text: 'MaEcharts',
@@ -337,7 +368,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/ja/backend/security/passport"
         },
         {
-          text: "ユーザー権限(RBAC)",
+          text: "ユーザー認可(RBAC)",
           link: "/ja/backend/security/access"
         },
         {
@@ -349,7 +380,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"データ権限",
       items:[
         {
-          text: "コア概念",
+          text: "コアコンセプト",
           link: "/ja/backend/data-permission/overview"
         },
         {

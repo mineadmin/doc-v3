@@ -1,6 +1,6 @@
 # テーブル統合
 
-データテーブルとの完全な統合ソリューションを展示し、検索、ページネーション、ソート、テーブル/カードビューの切り替えなどの機能を含み、完全なデータ管理インターフェースを構築するためのベストプラクティスを提供します。
+データテーブルとの完全な統合ソリューションを展示し、検索、ページネーション、ソート、テーブル/カードビュー切り替えなどの機能を含み、完全なデータ管理インターフェースを構築するためのベストプラクティスです。
 
 ## テーブル統合デモ
 
@@ -8,13 +8,13 @@
 
 ## 統合ソリューション説明
 
-### 検索とテーブルの連動
+### 検索とテーブル連動
 検索条件とテーブルデータのリアルタイム同期を実現：
 
 ```typescript
 // 検索処理関数
 const handleSearch = (searchData: any) => {
-  // ページネーションを最初のページにリセット
+  // ページネーションを1ページ目にリセット
   pagination.page = 1
   // 検索条件を保存
   searchCondition.value = { ...searchData }
@@ -34,7 +34,7 @@ const handleReset = () => {
 ```
 
 ### ページネーション統合
-検索とページネーションシステムの完全な統合：
+検索とページネーションシステムの完全統合：
 
 ```typescript
 // ページネーション設定
@@ -53,7 +53,7 @@ const handlePageChange = (page: number) => {
 // ページサイズ変更処理
 const handleSizeChange = (size: number) => {
   pagination.pageSize = size
-  pagination.page = 1  // 最初のページにリセット
+  pagination.page = 1  // 1ページ目にリセット
   loadTableData()
 }
 ```
@@ -74,7 +74,7 @@ const loadTableData = async () => {
       ...searchCondition.value  // 検索条件を含む
     }
     
-    // APIを呼び出し
+    // API呼び出し
     const response = await fetchTableData(params)
     
     // データを更新
@@ -98,7 +98,7 @@ const loadTableData = async () => {
 // ユーザー検索項目設定
 const userSearchItems = [
   { label: 'ユーザー名', prop: 'username', render: 'input' },
-  { label: 'メールアドレス', prop: 'email', render: 'input' },
+  { label: 'メール', prop: 'email', render: 'input' },
   { label: 'ステータス', prop: 'status', render: 'select', options: statusOptions },
   { label: '登録日時', prop: 'created_at', render: 'date-picker' }
 ]
@@ -106,7 +106,7 @@ const userSearchItems = [
 // ユーザーテーブル列設定
 const userTableColumns = [
   { prop: 'username', label: 'ユーザー名' },
-  { prop: 'email', label: 'メールアドレス' },
+  { prop: 'email', label: 'メール' },
   { prop: 'status', label: 'ステータス' },
   { prop: 'created_at', label: '登録日時' }
 ]
@@ -206,7 +206,7 @@ const handleBatchOperation = async (operation: string) => {
     const ids = selection.value.map(item => item.id)
     await batchOperation(operation, ids)
     
-    // 操作後にデータを再読み込み
+    // 操作完了後にデータを再読み込み
     await loadTableData()
     selection.value = []
     
@@ -219,7 +219,7 @@ const handleBatchOperation = async (operation: string) => {
 
 ## 主要特性
 
-- 🔗 完全な検索とテーブルの連動
+- 🔗 完全な検索とテーブル連動
 - 📄 インテリジェントなページネーション統合
 - 🔄 柔軟なビュー切り替え
 - 📊 強力なソート機能
@@ -246,7 +246,7 @@ const onSearchInput = (searchData: any) => {
 ```
 
 ### データキャッシュ
-検索結果のインテリジェントなキャッシュを実現：
+検索結果のインテリジェントキャッシュを実現：
 
 ```typescript
 // キャッシュ設定

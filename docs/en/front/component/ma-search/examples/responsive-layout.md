@@ -1,6 +1,6 @@
 # Responsive Layout
 
-Demonstrates responsive effects across different screen sizes, including real-time viewport information and dynamic configuration testing to ensure the search component provides an optimal user experience on all devices.
+Demonstrates responsive effects across different screen sizes, including real-time viewport information and dynamic configuration testing to ensure the search component delivers an optimal user experience on all devices.
 
 ## Responsive Layout Demo
 
@@ -20,7 +20,7 @@ MaSearch employs a responsive breakpoint system based on CSS Media Queries:
 | `xl` | ≥ 1920px | 4 | Large screens |
 
 ### Basic Configuration
-Configure column count per breakpoint via the `cols` parameter:
+Configure column counts per breakpoint using the `cols` parameter:
 
 ```typescript
 const searchOptions = {
@@ -35,7 +35,7 @@ const searchOptions = {
 ```
 
 ### Custom Breakpoints
-Customize breakpoint configurations based on business needs:
+Define custom breakpoints according to business requirements:
 
 ```typescript
 // Compact layout
@@ -81,7 +81,7 @@ const desktopDenseConfig = {
 }
 ```
 
-### 3. Adaptive Data Dashboard
+### 3. Adaptive Dashboard
 Automatically adjust search area based on dashboard layout:
 
 ```typescript
@@ -96,13 +96,13 @@ const dashboardConfig = {
 ## Responsive Features
 
 ### Automatic Column Calculation
-The component automatically calculates column count per row based on container width and breakpoint configuration.
+The component automatically calculates columns per row based on container width and breakpoint configuration.
 
 ### Smooth Transitions
-Layout transitions smoothly during screen size changes to avoid abrupt jumps.
+Layout transitions smoothly during screen size changes to prevent jarring jumps.
 
 ### Content Overflow Handling
-Automatically adds ellipsis or line breaks when search item content is too long.
+Automatically adds ellipsis or line breaks when search item content exceeds available space.
 
 ## Key Features
 
@@ -208,7 +208,7 @@ const progressiveConfig = {
 Display search items with different priorities across screen sizes:
 
 ```typescript
-// Show different priority search items based on screen size
+// Show priority-based search items per screen size
 const getItemsByPriority = (screenSize: string) => {
   const allItems = [
     { label: 'Username', prop: 'username', priority: 'high' },
@@ -229,7 +229,7 @@ const getItemsByPriority = (screenSize: string) => {
 ```
 
 ### 3. Performance Optimization
-Optimize rendering performance on small screens:
+Optimize rendering performance on small-screen devices:
 
 ```typescript
 // Small-screen performance optimization

@@ -1,291 +1,373 @@
-# MaProTable  
-`ma-pro-table` is built upon the `ma-search` and `ma-table` components, designed to quickly implement full `CRUD` functionality and maximize slacking time.
+# MaProTable
+`ma-pro-table` is built upon the `ma-search` and `ma-table` components, designed to quickly implement complete `CRUD` functionality and increase leisure time.
 
-:::tip Note  
-The built-in **User and Role Management** modules in the system are the best examples of `ma-pro-table` CRUD in action. Refer to both the documentation and real-world examples to master this component quickly.  
+:::tip Note
+The built-in **User and Role Management** systems in the platform serve as best practice examples for `ma-pro-table` CRUD operations. Refer to both documentation and real-world cases to master this component quickly.
 
-Note: Unlike `2.0 ma-crud`, this component no longer natively supports `Add` and `Edit` functionalities—these must be implemented manually.  
+Note: Unlike `2.0 ma-crud`, this component no longer directly supports built-in `Add` and `Edit` functionality - these need to be implemented separately.
 :::
 
-## Usage  
+## Quick Start
+
 <DemoPreview dir="demos/ma-pro-table" />
 
-## cellRenderTo Cell Rendering Plugins  
-::: tip Why Do cellRenderTo Plugins Exist?  
-First, rendering different content in table cells is an extremely common scenario. Much of the code may be identical, differing only in parameters or field names. When designing `ma-pro-table`, we considered how to address this issue.  
+## Comprehensive Examples
 
-While `ma-pro-table` can natively render different content types—such as `url`, `image`, `video`, or `switch`—the reality is that requirements are ever-changing. Built-in features can never keep up with growing business demands. To avoid redundant code, we introduced this plugin mechanism.  
+Through the following examples, you can quickly understand various usage scenarios and features of MaProTable:
 
-Everyone is encouraged to share commonly used or specialized cell rendering plugins in the marketplace to enrich the ecosystem, eliminating the need to rewrite the same logic repeatedly.  
+### Basic Features
+- **[Basic Usage](/en/front/component/ma-pro-table/examples/basic)** - Simplest table implementation
+- **[Advanced Search](/en/front/component/ma-pro-table/examples/advanced-search)** - Multiple search components and complex search logic
+- **[Custom Operations](/en/front/component/ma-pro-table/examples/custom-operations)** - Flexible operation column configuration and batch operations
+
+### Extended Features
+- **[Cell Render Plugins](/en/front/component/ma-pro-table/examples/cell-render-plugins)** - Rich cell rendering effects
+- **[Toolbar Extensions](/en/front/component/ma-pro-table/examples/toolbar-extensions)** - Custom toolbar functionality
+- **[Data Management](/en/front/component/ma-pro-table/examples/data-management)** - Complete CRUD workflow
+
+### Advanced Features
+- **[Responsive Layout](/en/front/component/ma-pro-table/examples/responsive-layout)** - Multi-device adaptation and responsive design
+
+## Core Features
+
+### 🚀 Rapid Development
+- Built on ma-search and ma-table combination, ready out-of-the-box
+- Built-in common CRUD operation patterns
+- Supports multiple data sources and API formats
+
+### 🎨 Rich Rendering
+- Built-in cell render plugin system
+- Supports custom render components
+- Flexible operation column configuration
+
+### 🔧 Powerful Extensibility
+- Toolbar plugin system
+- Complete TypeScript type support
+- Rich events and callbacks
+
+### 📱 Responsive Design
+- Automatic adaptation to different device sizes
+- Mobile-friendly interaction experience
+- Flexible layout configuration
+
+## cellRenderTo Cell Render Plugin
+::: tip Why does cellRenderTo plugin exist?
+First, rendering different content in cells is an extremely frequent scenario. Much of the code may be identical, with only parameters and field names differing. When designing `ma-pro-table`, we considered how to solve this problem.
+
+While `ma-pro-table` could build-in rendering for different content types like `url`, `image`, `video`, or `switch` rendering, requirements are ever-changing. Built-in features could never keep up with business growth. To avoid code redundancy while addressing this, we created this plugin mechanism.
+
+You can share commonly used or business-specific cell render plugins in the marketplace to enrich cell rendering options, eliminating redundant coding.
 :::
 
-### Using Cell Plugins  
+### Using Cell Plugins
 
-```vue  
-<script setup lang="ts">  
-import { ref } from 'vue'  
-import { MaProTableSchema } from "@mineadmin/pro-table";  
+```vue 
+<script setup lang="ts">
+import { ref } from 'vue'
+import { MaProTableSchema } from "@mineadmin/pro-table";
 
-const schema = ref<MaProTableSchema>({  
-  tableColumns: [  
-    {  
-      title: 'Cell Rendering Example',  
-      prop: 'title',  
-      // Invoke the cell rendering plugin // [!code focus:9]  
-      cellRenderTo: {  
-        // Plugin name. This plugin renders strings as el-tag, the only built-in example.  
-        name: 'tag',   
-        // Optional plugin parameters  
-        props: {  
-          // This plugin doesn't require parameters, so none are passed.  
-        }  
-      }  
-    }  
-  ]  
-})  
-</script>  
+const schema = ref<MaProTableSchema>({
+  tableColumns: [
+    {
+      title: 'Cell Render Example',
+      prop: 'title',
+      // Calling cell render plugin // [!code focus:9]
+      cellRenderTo: {
+        // Plugin name - this plugin renders strings as el-tag (ma-pro-table's only built-in plugin)
+        name: 'tag', 
+        // Optional plugin parameters
+        props: {
+          // This plugin doesn't require parameters
+        }
+      }
+    }
+  ]
+})
+</script>
 
-<template>  
-  <ma-pro-table :schema="schema"/>  
-</template>  
+<template>
+  <ma-pro-table :schema="schema"/>
+</template>
+
 ```
 
-### Registering Cell Plugins  
-To register a plugin, import the `useProTableRenderPlugin()` method and use it to add or remove plugins.  
-```ts  
-import { useProTableRenderPlugin } from '@mineadmin/pro-table'  
-```  
-`useProTableRenderPlugin()` returns the following methods:  
+### Registering Cell Plugins
+Plugin registration requires importing the `useProTableRenderPlugin()` method, then using it to register/remove plugins.
+```ts
+import { useProTableRenderPlugin } from '@mineadmin/pro-table'
+```
+`useProTableRenderPlugin()` returns these methods:
 
-- `addPlugin(plugin: MaProTableRenderPlugin): void`: Register a plugin.  
-- `removePlugin(pluginName: string): void`: Remove a plugin.  
-- `getPlugins(): MaProTableRenderPlugin[]`: Retrieve all registered plugins in **ma-pro-table**.  
-- `getPluginByName(pluginName: string): MaProTableRenderPlugin`: Get a specific plugin by name.  
+- `addPlugin(plugin: MaProTableRenderPlugin): void`: Register plugin
+- `removePlugin(pluginName: string): void`: Remove plugin
+- `getPlugins(): MaProTableRenderPlugin[]`: Get all registered plugins
+- `getPluginByName(pluginName: string): MaProTableRenderPlugin`: Get plugin by name
 
-::: details Click to View `MaProTableRenderPlugin` Type Definition  
-| Parameter | Description | Type |  
-|----------|-------------|------|  
-| `name` | Unique identifier for the cell rendering plugin | `string` |  
-| `render` | Rendering function, supports `components, jsx, tsx`, etc. | `Function` |  
 
-`render` Function Parameters:  
-- `data`: Type: `TableColumnRenderer`—includes `el-table`'s native `scope` parameters and `ma-table` extensions.  
-- `props`: External parameters passed via the `props` argument when invoking the plugin.  
-- `proxy`: Type: `MaProTableExpose`—refer to the `Expose` section at the bottom of this chapter.  
+::: details Click to view `MaProTableRenderPlugin` type definition
+| Parameter | Description | Type |
+|----------|-------------|------|
+| `name` | Unique cell render plugin identifier | `string`|
+| `render` | Render function supporting `components, jsx, tsx` etc. | `Function` |
+
+`render` function parameters:
+- `data` type: `TableColumnRenderer` containing native `el-table` `scope` parameters plus `ma-table` extensions
+- `props`: External parameters passed via `props` when calling the plugin
+- `proxy` type: `MaProTableExpose` (see `Expose` section at bottom)
 :::
 
-The documentation only explains how to register plugins. We use the `addPlugin` function for registration.  
+This documentation only covers plugin registration using the `addPlugin` function.
 
-The built-in `tag` plugin prototype is as follows:  
-```ts  
-import { h } from 'vue'  
-import { useProTableRenderPlugin } from '@mineadmin/pro-table'  
-import { ElTag } from 'element-plus'  
+The built-in `tag` plugin prototype:
+```ts
+import { h } from 'vue'
+import { useProTableRenderPlugin } from '@mineadmin/pro-table'
+import { ElTag } from 'element-plus'
 
-const { addPlugin } = useProTableRenderPlugin()  
+const { addPlugin } = useProTableRenderPlugin()
 
-// Register the plugin  
-addPlugin({  
-  // Plugin name, a unique identifier. If uploading to the marketplace, prefix it uniquely.  
-  name: 'tag',  
-  // Plugin rendering function—supports Vue components or direct tsx/jsx.  
-  render: (data: TableColumnRenderer, props: any, proxy: MaProTableExpose) => {  
-    return h(  
-      ElTag,  // Render using el-tag  
-      props,  // Pass through external props  
-      {  
-        default: () => data.row[props?.prop] // Use el-tag's default slot  
-      }  
-    )  
-  }  
-})  
+// Register plugin
+addPlugin({
+  // Unique plugin name (add prefix if publishing to marketplace)
+  name: 'tag',
+  // Render function (can use Vue components or write tsx/jsx directly)
+  render: (data: TableColumnRenderer, props: any, proxy: MaProTableExpose) => {
+    return h(
+      ElTag,  // Render using el-tag
+      props,  // Pass through external props
+      {
+        default: () => data.row[props?.prop] // Use el-tag default slot
+      }
+    )
+  }
+})
+
 ```
 
-## ToolbarPlugin Toolbar Plugins  
-![Table Toolbar](https://s21.ax1x.com/2024/11/03/pArlfRU.png)  
+## ToolbarPlugin Toolbar Plugin
+![Table Toolbar](https://s21.ax1x.com/2024/11/03/pArlfRU.png)
 
-::: tip Note  
-`ma-pro-table` also provides [slots](#slot) for extending the toolbar. For one-off features, use slots. For system-wide needs, use the `API` extension.  
+::: tip Note
+`ma-pro-table` also has [slots](#slot) for toolbar extension. Use slots for one-off features, but for system-wide needs, use the API approach.
 :::
 
-`useProTableToolbar()` returns the following methods:  
-- `get: (name: string) => MaProTableToolbar`: Retrieve a specific tool's info.  
-- `getAll: () => MaProTableToolbar[]`: Retrieve all tools' info.  
-- `add: (toolbar: MaProTableToolbar) => void`: Add a new tool.  
-- `remove: (name: string) => void`: Remove a tool.  
-- `hide: (name: string) => void`: Set a tool to hidden.  
-- `show: (name: string) => void`: Set a tool to visible.  
+`useProTableToolbar()` returns these methods:
+- `get: (name: string) => MaProTableToolbar` Get tool info
+- `getAll: () => MaProTableToolbar[]` Get all tools
+- `add: (toolbar: MaProTableToolbar) => void` Add new tool
+- `remove: (name: string) => void` Remove tool
+- `hide: (name: string) => void` Hide tool
+- `show: (name: string) => void` Show tool
 
-::: details Click to View `MaProTableToolbar` Type Definition  
-| Parameter | Description | Type |  
-|----------|-------------|------|  
-| `name` | Unique identifier for the tool | `string` |  
-| `render` | Rendering function, supports `components, jsx, tsx`, etc. | `Function` |  
-| `show` | Whether to display by default | `boolean` |  
-| `order` | Rendering order—smaller numbers appear first | `number` |  
+::: details Click to view `MaProTableToolbar` type definition
+| Parameter | Description | Type |
+|----------|-------------|------|
+| `name` | Unique tool identifier | `string`|
+| `render` | Render function supporting `components, jsx, tsx` | `Function` |
+| `show` | Whether to display by default | `boolean` |
+| `order` | Render order (lower numbers appear first) | `number` |
+  :::
+
+### Extending Toolbar
+
+::: code-group 
+```ts [index.vue]
+import { useProTableToolbar } from '@mineadmin/pro-table'
+import CustomerTool from './CustomerTool.vue'
+
+const { add } = useProTableToolbar()
+
+add({
+  // Tool name
+  name: 'heihei',
+  // Render component (receives proxy parameter)
+  render: CustomerTool,
+  show: true,
+  order: 99,
+})
+```
+
+```vue [CustomerTool.vue]
+
+<script setup lang="ts">
+  // Define props to receive ma-pro-table's proxy
+  import { MaProTableExpose } from "@mineadmin/pro-table"
+  import { ElMessage } from 'element-plus'
+
+  const { proxy } = defineProps<{ proxy: MaProTableExpose }>()
+  
+  const execute = async () => {
+    // Refresh table
+    await proxy?.refresh?.()
+    ElMessage.success('Table refreshed')
+  }
+</script>
+
+<template>
+  <!-- Add circle prop for rounded button (matches system style) -->
+  <el-button circle @click="execute">😀</el-button>
+</template>
+```
 :::
 
-### Extending the Toolbar  
+## TypeScript Type Definitions
 
-::: code-group  
-```ts [index.vue]  
-import { useProTableToolbar } from '@mineadmin/pro-table'  
-import CustomerTool from './CustomerTool.vue'  
+### Core Types
 
-const { add } = useProTableToolbar()  
+```typescript
+// Component main interface
+interface MaProTableProps {
+  options: MaProTableOptions    // Component config
+  schema: MaProTableSchema      // Table schema
+}
 
-add({  
-  // Tool name  
-  name: 'heihei',  
-  // Specify the rendering component. The component receives a `proxy` prop.  
-  render: CustomerTool,  
-  show: true,  
-  order: 99,  
-})  
-```  
+// Exposed methods and properties
+interface MaProTableExpose {
+  // Child component access
+  getSearchRef(): MaSearchExpose
+  getTableRef(): MaTableExpose
+  getElTableStates(): Record<string, any>
+  
+  // Data operations
+  refresh(): Promise<void>
+  requestData(): Promise<void>
+  changeApi(api: () => any, isRequestNow: boolean): void
+  setRequestParams(params: Record<string, any>, isRequestNow: boolean): void
+  
+  // Column management
+  setTableColumns(cols: MaProTableColumns[]): void
+  getTableColumns(): MaProTableColumns[]
+  
+  // Search management
+  setSearchForm(form: Record<string, any>): void
+  getSearchForm(): Record<string, any>
+  search(form: Record<string, any>): void
+  
+  // Configuration management
+  setProTableOptions(opts: MaProTableOptions): void
+  getProTableOptions(): MaProTableOptions
+  
+  // Utility methods
+  resizeHeight(): Promise<void>
+  getCurrentId(): string
+}
+```
 
-```vue [CustomerTool.vue]  
-<script setup lang="ts">  
-  // Define props to receive `ma-pro-table`'s `proxy` parameter.  
-  import { MaProTableExpose } from "@mineadmin/pro-table"  
-  import { ElMessage } from 'element-plus'  
+### Plugin System Types
 
-  const { proxy } = defineProps<{ proxy: MaProTableExpose }>()  
+```typescript
+// Cell render plugin
+interface MaProTableRenderPlugin {
+  name: string
+  render: (data: TableColumnRenderer, props: any, proxy: MaProTableExpose) => VNode | string
+}
 
-  const execute = async () => {  
-    // Refresh the table  
-    await proxy?.refresh?.()  
-    ElMessage.success('Table refreshed successfully')  
-  }  
-</script>  
+// Toolbar plugin
+interface MaProTableToolbar {
+  name: string
+  render: (props: { proxy: MaProTableExpose }) => VNode | Component
+  show: boolean | (() => boolean)
+  order: number
+}
+```
 
-<template>  
-  <!-- Add the `circle` prop to match the system's style -->  
-  <el-button circle @click="execute">😀</el-button>  
-</template>  
-```  
+## Props
+| Parameter | Description | Type | Version |
+|-----------|-------------|------|---------|
+| `options` | `ma-pro-table` configuration | `MaProTableOptions` | 1.0.0 |
+| `schema` | `ma-pro-table` schema configuration | `MaProTableSchema` | 1.0.0 |
+
+### MaProTableOptions
+| Parameter | Description | Type | Default | Version |
+|-----------|-------------|------|---------|---------|
+| `tableOptions` | `ma-table` parameters | `MaTableOptions` | - | 1.0.0 |
+| `searchOptions` | `ma-search` parameters | `MaSearchOptions` | - | 1.0.0 |
+| `searchFormOptions` | `ma-form` parameters | `MaFormOptions` | - | 1.0.0 |
+| - | - | - | - | - |
+| `id` | Unique ID (random if unspecified) | `string` | - | 1.0.0 |
+| `adaptionOffsetBottom` | Bottom offset | `number` | 0 | 1.0.0 |
+| `actionBtnPosition` | Action button position (auto: header if enabled, otherwise table top-left) | `auto, header, table` | `auto` | 1.0.0 |
+| `header` | Header configuration | See [HeaderConfig](#headerconfig) | - | 1.0.0 |
+| `toolbar` | Whether to show toolbar | `boolean, (() => boolean)` | `true` | 1.0.0 |
+| `toolStates` | Tool visibility control | { `[key:string]` : `boolean, (() => boolean)` | - | 1.0.69 |
+| `rowContextMenu` | Right-click configuration | See [RowContextMenu](#rowcontextmenu) | - | 1.0.0 |
+| `requestOptions` | List request configuration | See [RequestOptions](#requestoptions) | - | 1.0.0 |
+| `onSearchSubmit` | Search submit event | `(form: Record<string, any>) => void` | - | 1.0.0 |
+| `onSearchReset` | Search reset event | `(form: Record<string, any>) => void` | - | 1.0.0 |
+
+
+#### HeaderConfig
+| Parameter | Description | Type | Default | Version |
+|-----------|-------------|------|---------|---------|
+| `show` | Whether to show header | `boolean, (() => boolean)` | `true` | 1.0.0 |
+| `mainTitle` | Main title | `string, (() => string)` | `Table Title` | 1.0.0 |
+| `subTitle` | Subtitle | `string, (() => string)` | - | 1.0.0 |
+
+#### rowContextMenu
+| Parameter | Description | Type | Default | Version |
+|-----------|-------------|------|---------|---------|
+| `enabled` | Enable row right-click menu | `boolean` | `false` | 1.0.0 |
+| `items` | Menu items | `ContextMenuItem[]` | - | 1.0.0 |
+| - | - | - | - | - |
+| `ContextMenuItem` | Description | Menu item configuration | - | - |
+| `label` | Menu text | `string, (() => string)` | - | 1.0.0 |
+| `icon` | Menu icon | `string, (() => string)` | - | 1.0.0 |
+| `disabled` | Whether disabled | `boolean` | - | 1.0.0 |
+| `divided` | Whether to show divider | `boolean` | - | 1.0.0 |
+| `onMenuClick` | Menu click event | `(data: { row: any, column: any, proxy: MaProTableExpose }, event: Event) => void` | - | 1.0.0 |
+
+#### requestOptions
+| Parameter | Description | Type | Default | Version |
+|-----------|-------------|------|---------|---------|
+| `api` | Request API method | `(...args: any[]) => any` | - | 1.0.0 |
+| `autoRequest` | Whether to auto-request | `boolean` | `true` | 1.0.0 |
+| `response` | Response structure config | `{ totalKey?: string, dataKey?: string }` | `{ totalKey: 'total', dataKey: 'list'}` | 1.0.0 |
+| `requestPage` | Pagination config | `{ pageName?: string, sizeName?: string, size?: number }` | `{ pageName: 'page', sizeName: 'pageSize', size: 10 }` | 1.0.0 |
+| `requestParams` | Default request params | `Object` | - | 1.0.0 |
+| `responseDataHandler` | Post-response data processing (must return table data) | `(response: Record<string, any>) => any[]` | - | 1.0.0 |
+| `on` | Event list | `Record<string, (...args: any[]) => any>` | - | 1.0.0 |
+
+
+### MaProTableSchema
+| Parameter | Description | Type | Default | Version |
+|-----------|-------------|------|---------|---------|
+|`searchItems`| Search item configuration | `MaSearchItem[]` [Config](ma-search#searchitems) | - | 1.0.0 |
+|`tableColumns`| Table column configuration | `MaProTableColumns[]` | - | 1.0.0 |
+
+#### MaProTableColumns
+::: tip
+Extends `el-table-columns` and `ma-table` [extra columns config](ma-table#columnextraprops). Below are extended parameters.
 :::
+| Parameter | Description | Type | Default | Version |
+|-----------|-------------|------|---------|---------|
+|`type`| Extends native `el-table` with `operation` (action column) and `sort` (row drag sorting) | `string` | - | 1.0.0 |
+|`cellRenderTo`| Render cell using registered plugins | [See below](#cellrenderto-cell-render-plugin) | - | 1.0.0 |
+|`isRender`| Whether to render column (unlike `hide`, won't appear in table settings) | `boolean & () => boolean` | - | 1.0.55 |
+|`cellRenderPro`| Enhanced `cellRender` with `proxy: MaProTableExpose` param | `(data, proxy) => VNode & string` | - | 1.0.55 |
+|`headerRenderPro`| Enhanced `headerRender` with `proxy: MaProTableExpose` param | `(data, proxy) => VNode & string` | - | 1.0.55 |
+|`operationConfigure`| Operation column config (only when `type` is `operation`) | [See below](#operationconfigure-operation-column) | - | 1.0.0 |
 
-## Props  
-| Parameter | Description | Type | Version |  
-|----------|-------------|------|---------|  
-| `options` | `ma-pro-table` configuration | `MaProTableOptions` | 1.0.0 |  
-| `schema` | `ma-pro-table` schema configuration | `MaProTableSchema` | 1.0.0 |  
-
-### MaProTableOptions  
-| Parameter | Description | Type | Default | Version |  
-|----------|-------------|------|---------|---------|  
-| `tableOptions` | `ma-table` parameters | `MaTableOptions` | - | 1.0.0 |  
-| `searchOptions` | `ma-search` parameters | `MaSearchOptions` | - | 1.0.0 |  
-| `searchFormOptions` | `ma-form` parameters | `MaFormOptions` | - | 1.0.0 |  
-| - | - | - | - | - |  
-| `id` | Unique ID for the component. Randomly generated if unspecified. | `string` | - | 1.0.0 |  
-| `adaptionOffsetBottom` | Bottom offset for height adaptation | `number` | 0 | 1.0.0 |  
-| `actionBtnPosition` | Action button placement. In `auto` mode, shows in the header if enabled; otherwise, top-left of the table. | `auto, header, table` | `auto` | 1.0.0 |  
-| `header` | Header configuration | See [HeaderConfig](#headerconfig) | - | 1.0.0 |  
-| `toolbar` | Whether to show the toolbar | `boolean, (() => boolean)` | `true` | 1.0.0 |  
-| `toolStates` | Conditionally show/hide tools | `{ [key:string]: boolean, (() => boolean) }` | - | 1.0.69 |  
-| `rowContextMenu` | Right-click menu configuration | See [RowContextMenu](#rowcontextmenu) | - | 1.0.0 |  
-| `requestOptions` | Table data request configuration | See [RequestOptions](#requestoptions) | - | 1.0.0 |  
-| `onSearchSubmit` | Search submit event | `(form: Record<string, any>) => void` | - | 1.0.0 |  
-| `onSearchReset` | Search reset event | `(form: Record<string, any>) => void` | - | 1.0.0 |  
-
-#### HeaderConfig  
-| Parameter | Description | Type | Default | Version |  
-|----------|-------------|------|---------|---------|  
-| `show` | Whether to show the header | `boolean, (() => boolean)` | `true` | 1.0.0 |  
-| `mainTitle` | Main title | `string, (() => string)` | `Table Title` | 1.0.0 |  
-| `subTitle` | Subtitle | `string, (() => string)` | - | 1.0.0 |  
-
-#### rowContextMenu  
-| Parameter | Description | Type | Default | Version |  
-|----------|-------------|------|---------|---------|  
-| `enabled` | Enable row right-click menu | `boolean` | `false` | 1.0.0 |  
-| `items` | Menu items | `ContextMenuItem[]` | - | 1.0.0 |  
-| - | - | - | - | - |  
-| `ContextMenuItem` | Description | Menu item configuration | - | - |  
-| `label` | Menu display text | `string, (() => string)` | - | 1.0.0 |  
-| `icon` | Menu icon | `string, (() => string)` | - | 1.0.0 |  
-| `disabled` | Disable the item | `boolean` | - | 1.0.0 |  
-| `divided` | Show a divider | `boolean` | - | 1.0.0 |  
-| `onMenuClick` | Menu item click event | `(data: { row: any, column: any, proxy: MaProTableExpose }, event: Event) => void` | - | 1.0.0 |  
-
-#### requestOptions  
-| Parameter | Description | Type | Default | Version |  
-|----------|-------------|------|---------|---------|  
-| `api` | API method for data fetching | `(...args: any[]) => any` | - | 1.0.0 |  
-| `autoRequest` | Auto-fetch data | `boolean` | `true` | 1.0.0 |  
-| `response` | Response structure configuration | `{ totalKey?: string, dataKey?: string }` | `{ totalKey: 'total', dataKey: 'list'}` | 1.0.0 |  
-| `requestPage` | Pagination configuration | `{ pageName?: string, sizeName?: string, size?: number }` | `{ pageName: 'page', sizeName: 'pageSize', size: 10 }` | 1.0.0 |  
-| `requestParams` | Default request parameters | `Object` | - | 1.0.0 |  
-| `responseDataHandler` | Post-response data processing (must return table data) | `(response: Record<string, any>) => any[]` | - | 1.0.0 |  
-| `on` | Event listeners | `Record<string, (...args: any[]) => any>` | - | 1.0.0 |  
-
-### MaProTableSchema  
-| Parameter | Description | Type | Default | Version |  
-|----------|-------------|------|---------|---------|  
-| `searchItems` | Search item configuration | `MaSearchItem[]` [Config](ma-search#searchitems) | - | 1.0.0 |  
-| `tableColumns` | Table column configuration | `MaProTableColumns[]` | - | 1.0.0 |  
-
-#### MaProTableColumns  
-::: tip  
-Extends `el-table-columns` and `ma-table`'s [extra column config](ma-table#columnextraprops). Below are the extended parameters.  
+##### cellRenderTo Cell Render Plugin
+::: info 
+`ma-pro-table` cell render plugins must be registered before use.
 :::
-| Parameter | Description | Type | Default | Version |  
-|----------|-------------|------|---------|---------|  
-| `type` | Adds `operation` (action column, extendable via API) and `sort` (drag-to-sort) to native `el-table` types. | `string` | - | 1.0.0 |  
-| `cellRenderTo` | Render cells using registered plugins | [See Below](#cellrenderto-cell-rendering-plugins) | - | 1.0.0 |  
-| `isRender` | Whether to render the column (unlike `hide`, it won't appear in table settings) | `boolean & () => boolean` | - | 1.0.55 |  
-| `cellRenderPro` | Enhanced `cellRender` with a second `proxy: MaProTableExpose` parameter | `(data, proxy) => VNode & string` | - | 1.0.55 |  
-| `headerRenderPro` | Enhanced `headerRender` with a second `proxy: MaProTableExpose` parameter | `(data, proxy) => VNode & string` | - | 1.0.55 |  
-| `operationConfigure` | Action column config (only when `type` is `operation`) | [See Below](#operationconfigure-action-column) | - | 1.0.0 |  
+| Parameter | Description | Type | Default | Version |
+|-----------|-------------|------|---------|---------|
+| `name` | Cell render plugin name | `string` | - | 1.0.0 |
+| `props` | Additional plugin parameters | `any, any[]` | - | 1.0.0 |
 
-##### cellRenderTo Cell Rendering Plugins  
-::: info  
-Plugins must be registered before use.  
+##### operationConfigure Operation Column
+::: info 
+`Operation Column` can only be configured via API. For simpler needs, add a regular column and implement via slots.
 :::
-| Parameter | Description | Type | Default | Version |  
-|----------|-------------|------|---------|---------|  
-| `name` | Plugin name | `string` | - | 1.0.0 |  
-| `props` | Plugin parameters | `any, any[]` | - | 1.0.0 |  
+| Parameter | Description | Type | Default | Version |
+|-----------|-------------|------|---------|---------|
+| `type` | Display mode: `auto`, `dropdown` (menu), `tile` (flat) | `string` | `auto` | `auto` requires `1.0.75` |
+| `fold` | Auto-fold threshold (number of items before folding) | `number` | `1` | 1.0.75 |
+| `actions` | Operation column items | `OperationAction[]` | - | 1.0.0 |
 
-##### operationConfigure Action Column  
-::: info  
-Action items can only be configured via `API`. For simplicity, add a regular column and implement via slots.  
-:::
-| Parameter | Description | Type | Default | Version |  
-|----------|-------------|------|---------|---------|  
-| `type` | Display mode: `auto`, `dropdown`, or `tile` | `string` | `auto` | 1.0.75 |  
-| `fold` | In `auto` mode, number of items before folding | `number` | `1` | 1.0.75 |  
-| `actions` | Action item list | `OperationAction[]` | - | 1.0.0 |  
-
-###### OperationAction Action Item Config  
-| Parameter | Description | Type | Default | Version |  
-|----------|-------------|------|---------|---------|  
-| `name` | Action identifier | `string` | - | 1.0.0 |  
-| `text` | Display text | `string, ((data: TableColumnRenderer) => string)` | - | 1.0.0 |  
-| `icon` | Icon (rendered via `ma-svg-icon`) | `string, ((data: TableColumnRenderer) => string)` | - | 1.0.0 |  
-| `order` | Sort order (lower = earlier) | `number` | - | 1.0.0 |  
-| `disabled` | Disable the action | `((data: TableColumnRenderer) => boolean)` | - | 1.0.0 |  
-| `show` | Show the action | `((data: TableColumnRenderer) => boolean)` | - | 1.0.0 |  
-| `onClick` | Click event | `(data: TableColumnRenderer, proxy: MaProTableExpose) => void` | - | 1.0.0 |  
-| `linkProps` | `el-link` props | [LinkProps Docs](https://element-plus.org/zh-CN/component/link.html#attributes) | - | 1.0.0 |  
-
-## Event  
-
-| Name | Description | Parameters |  
-|------|-------------|------------|  
-| `row-drag-sort` | Row drag-sort event | `(tableData: any[]) => void` |  
-| `search-submit` | Search submit event | `(form: Record<string, any>) => Record<string, any>, void` |  
-| `search-reset` | Search reset event | `(form: Record<string, any>) => Record<string, any>, void` |  
-
-## Slot  
-
-| Name | Description | Parameters |  
-|------|-------------|------------|  
-| `default` | Default slot (includes native `el-table` slots) | - |  
-| `empty` | Native slot for empty data | - |  
-| `append` | Native slot for the last row | - |  
-| `pageLeft` | Left side of the pagination row | - |  
-| `column-[prop]` | Column slot (`prop` = field name) | `scope` |  
-| `header-[prop]` | Header slot (`prop` = field name) | `
+###### OperationAction Operation Column Items
+| Parameter | Description | Type | Default | Version |
+|-----------|-------------|------|---------|---------|
+| `name` | Operation identifier | `string` | - | 1.0.0 |
+| `text` | Text config | `string, ((data: TableColumnRenderer) => string)` | - | 1.0

@@ -1,15 +1,15 @@
 # Method Demonstration
 
-Showcases the usage of all exposed methods, including real-time state tracking and operation logging, helping developers gain in-depth understanding of the component's programming interface and advanced usage.
+Showcases the usage of all exposed methods, including real-time state tracking and operation logging, helping developers gain an in-depth understanding of the component's programming interface and advanced usage.
 
 ## Method Demonstration
 
 <DemoPreview dir="demos/ma-search/methods-demo" />
 
-## Exposed Method Details
+## Exposed Methods Details
 
 ### Form Data Management
-Manipulate and retrieve search form data:
+Operations and retrieval of search form data:
 
 ```typescript
 // Set search form data
@@ -61,7 +61,7 @@ const setFoldState = (fold: boolean) => {
 ```
 
 ### Visibility Management
-Control the visibility of the entire search component:
+Control the display and hiding of the entire search component:
 
 ```typescript
 // Set visibility state
@@ -116,15 +116,15 @@ const getCurrentConfig = () => {
   const searchOptions = searchRef.value?.getOptions()
   const formOptions = searchRef.value?.getFormOptions()
   
-  console.log('Search component config:', searchOptions)
-  console.log('Form component config:', formOptions)
+  console.log('Search component configuration:', searchOptions)
+  console.log('Form component configuration:', formOptions)
   
   return { searchOptions, formOptions }
 }
 ```
 
-### Search Item Dynamic Management
-Modify search item configurations at runtime:
+### Search Items Dynamic Management
+Dynamically modify search item configurations at runtime:
 
 ```typescript
 // Batch set search items
@@ -152,7 +152,7 @@ const appendSingleItem = () => {
   searchRef.value?.appendItem(newItem)
 }
 
-// Remove specified search item
+// Remove specific search item
 const removeSpecificItem = (prop: string) => {
   searchRef.value?.removeItem(prop)
 }
@@ -163,7 +163,7 @@ const findItemByProp = (prop: string) => {
   if (item) {
     console.log(`Found search item:`, item)
   } else {
-    console.log(`No search item found with prop "${prop}"`)
+    console.log(`Search item with prop "${prop}" not found`)
   }
   return item
 }
@@ -261,7 +261,7 @@ const applyPreset = (scenario: keyof typeof presetScenarios) => {
 Dynamically adjust search functionality based on user permissions:
 
 ```typescript
-// Permission-controlled search items
+// Permission control for search items
 const applyPermissionControl = (userRole: string) => {
   const baseItems = [
     { label: 'Username', prop: 'username', render: 'input' },
@@ -279,7 +279,7 @@ const applyPermissionControl = (userRole: string) => {
   searchRef.value?.setItems(baseItems)
 }
 
-// Permission-controlled visibility
+// Permission control for visibility
 const applyVisibilityControl = (userRole: string) => {
   // Hide search for guest users
   if (userRole === 'guest') {
@@ -324,7 +324,7 @@ const adjustForDevice = () => {
   searchRef.value?.setOptions(newOptions)
 }
 
-// Listen for window resize
+// Listen to window resize
 onMounted(() => {
   window.addEventListener('resize', adjustForDevice)
   adjustForDevice() // Initial adjustment
@@ -347,7 +347,7 @@ onUnmounted(() => {
 ## Advanced Usage Examples
 
 ### Search Template System
-Create savable and loadable search templates:
+Create saveable and loadable search templates:
 
 ```typescript
 // Search template management
@@ -465,11 +465,11 @@ const safeMethodCall = async (methodName: string, ...args: any[]) => {
 const batchOperations = (operations: Array<() => void>) => {
   // Pause reactive updates
   const pauseReactivity = () => {
-    // Implement pause logic
+    // Implementation to pause reactivity
   }
   
   const resumeReactivity = () => {
-    // Implement resume logic
+    // Implementation to resume reactivity
   }
   
   try {
