@@ -92,7 +92,7 @@ Range validation for numeric inputs:
 ## Advanced Validation Scenarios
 
 ### Asynchronous Validation
-Support for server-side validation with asynchronous rules:
+Supports server-side validation with asynchronous rules:
 
 ```typescript
 // Asynchronous validation example
@@ -168,7 +168,7 @@ const createConditionalRules = () => {
 ```
 
 ### Combined Validation
-Multiple fields joint validation:
+Validation involving multiple fields:
 
 ```typescript
 // Password confirmation validation
@@ -224,7 +224,7 @@ const userRegisterSearchItems = [
     render: 'input',
     rules: [
       { required: true, message: 'Username cannot be empty' },
-      { min: 3, max: 20, message: 'Username length must be 3-20 characters' },
+      { min: 3, max: 20, message: 'Username must be 3-20 characters' },
       { pattern: /^[a-zA-Z0-9_]+$/, message: 'Username can only contain letters, numbers, and underscores' }
     ]
   },
@@ -302,7 +302,7 @@ const orderSearchItems = [
 ## Validation Timing Control
 
 ### Trigger Configuration
-Different validation trigger methods:
+Different validation trigger modes:
 
 ```typescript
 // Real-time validation
@@ -331,7 +331,7 @@ Different validation trigger methods:
 ```
 
 ### Validation State Management
-Get and control validation state:
+Get and control validation states:
 
 ```typescript
 // Validate single field
@@ -358,7 +358,7 @@ const validateForm = async () => {
   }
 }
 
-// Clear validation state
+// Clear validation states
 const clearValidation = () => {
   const formRef = searchRef.value?.getMaFormRef()
   formRef?.clearValidate()

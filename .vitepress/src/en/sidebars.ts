@@ -129,7 +129,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text: 'Expert',
       items: [
         {
-          text: 'Internationalization',
+          text: 'i18n Configuration',
           link: '/en/front/high/i18n'
         },
         {
@@ -357,7 +357,7 @@ const sidebar:DefaultTheme.Sidebar = {
         {text: "Logging",link: "/en/backend/base/logger"},
         {text: "Events",link: "/en/backend/base/event-handler"},
         {text: "File Upload",link: "/en/backend/base/upload"},
-        {text: "Internationalization",link: "/en/backend/base/lang"},
+        {text: "i18n",link: "/en/backend/base/lang"},
       ]
     },
     {
@@ -452,10 +452,10 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text:"App Publishing",
+      text:"Application Submission",
       items:[
         {
-          text: "App Release",
+          text: "Application Publishing",
           link: "/en/plugin/develop/publish"
         },
         {

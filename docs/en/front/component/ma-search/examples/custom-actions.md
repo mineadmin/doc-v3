@@ -104,7 +104,7 @@ Implement a wizard-style search process controlled by custom buttons.
 
 ## Design Patterns
 
-### Replacement Pattern (actions)
+### Replacement Mode (actions)
 Suitable for scenarios requiring complete redesign of the action area:
 
 ```vue
@@ -114,7 +114,7 @@ Suitable for scenarios requiring complete redesign of the action area:
 </template>
 ```
 
-### Extension Pattern (beforeActions/afterActions)
+### Extension Mode (beforeActions/afterActions)
 Suitable for adding extra actions while preserving default functionality:
 
 ```vue
@@ -130,7 +130,7 @@ Suitable for adding extra actions while preserving default functionality:
 Keep custom action buttons visually consistent with the overall system style.
 
 ### 2. Proper Use of Loading States
-Utilize the `loading` state parameters to add loading effects to custom buttons.
+Utilize the `loading` state from slot parameters to add loading effects to custom buttons.
 
 ### 3. Responsive Design
 Ensure custom actions display and function properly across different screen sizes.
@@ -138,10 +138,10 @@ Ensure custom actions display and function properly across different screen size
 ### 4. User Experience Optimization
 - Provide clear operation feedback
 - Add appropriate confirmation dialogs
-- Implement undo functionality for actions
+- Implement operation undo functionality
 
 ## Related Links
 
-- [Method Demo](./methods-demo) - Learn about all exposed methods
+- [Method Demo](./methods-demo) - Learn about all exposed method usages
 - [Dynamic Management](./dynamic-items) - Learn about dynamic search item management
 - [Form Validation](./form-validation) - Learn about form validation features

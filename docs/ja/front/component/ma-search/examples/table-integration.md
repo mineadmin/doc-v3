@@ -1,6 +1,6 @@
 # テーブル統合
 
-データテーブルとの完全な統合ソリューションを展示し、検索、ページネーション、ソート、テーブル/カードビューの切り替えなどの機能を含み、完全なデータ管理インターフェースを構築するためのベストプラクティスを提供します。
+データテーブルとの完全な統合ソリューションを展示し、検索、ページネーション、ソート、テーブル/カードビューの切り替えなどの機能を含み、完全なデータ管理インターフェースを構築するためのベストプラクティスです。
 
 ## テーブル統合デモ
 
@@ -9,12 +9,12 @@
 ## 統合ソリューション説明
 
 ### 検索とテーブルの連動
-検索条件とテーブルデータのリアルタイム同期を実現：
+検索条件とテーブルデータのリアルタイム同期を実現:
 
 ```typescript
 // 検索処理関数
 const handleSearch = (searchData: any) => {
-  // ページネーションを1ページ目にリセット
+  // ページネーションを最初のページにリセット
   pagination.page = 1
   // 検索条件を保存
   searchCondition.value = { ...searchData }
@@ -34,7 +34,7 @@ const handleReset = () => {
 ```
 
 ### ページネーション統合
-検索とページネーションシステムの完全な統合：
+検索とページネーションシステムの完全統合:
 
 ```typescript
 // ページネーション設定
@@ -53,13 +53,13 @@ const handlePageChange = (page: number) => {
 // ページサイズ変更処理
 const handleSizeChange = (size: number) => {
   pagination.pageSize = size
-  pagination.page = 1  // 1ページ目にリセット
+  pagination.page = 1  // 最初のページにリセット
   loadTableData()
 }
 ```
 
 ### データ読み込みロジック
-統一されたデータ読み込みと状態管理：
+統一されたデータ読み込みと状態管理:
 
 ```typescript
 // データ読み込み関数
@@ -77,7 +77,7 @@ const loadTableData = async () => {
     // API呼び出し
     const response = await fetchTableData(params)
     
-    // データを更新
+    // データ更新
     tableData.value = response.data
     pagination.total = response.total
     
@@ -92,7 +92,7 @@ const loadTableData = async () => {
 ## 使用シナリオ
 
 ### 1. ユーザー管理システム
-完全なユーザーデータ管理インターフェース：
+完全なユーザーデータ管理インターフェース:
 
 ```typescript
 // ユーザー検索項目設定
@@ -113,7 +113,7 @@ const userTableColumns = [
 ```
 
 ### 2. 注文管理システム
-注文データの検索と表示：
+注文データの検索と表示:
 
 ```typescript
 // 注文検索設定
@@ -126,7 +126,7 @@ const orderSearchItems = [
 ```
 
 ### 3. 商品管理システム
-商品情報のフィルタリングと管理：
+商品情報のフィルタリングと管理:
 
 ```typescript
 // 商品検索設定
@@ -141,7 +141,7 @@ const productSearchItems = [
 ## 高度な機能
 
 ### ビュー切り替え
-テーブルビューとカードビューの切り替えをサポート：
+テーブルビューとカードビューの切り替えをサポート:
 
 ```typescript
 // ビューモード管理
@@ -152,7 +152,7 @@ const switchView = (mode: 'table' | 'card') => {
   viewMode.value = mode
   // ビューモードに応じてページサイズを調整
   if (mode === 'card') {
-    pagination.pageSize = 12  // カードビューでより多くの項目を表示
+    pagination.pageSize = 12  // カードビューではより多くの項目を表示
   } else {
     pagination.pageSize = 10  // テーブルビューの標準ページネーション
   }
@@ -161,7 +161,7 @@ const switchView = (mode: 'table' | 'card') => {
 ```
 
 ### ソート統合
-検索条件とテーブルソートの連動：
+検索条件とテーブルソートの連動:
 
 ```typescript
 // ソート状態管理
@@ -188,14 +188,14 @@ const params = {
 }
 ```
 
-### 一括操作
-検索とテーブル選択を組み合わせた一括操作：
+### バッチ操作
+検索とテーブル選択を組み合わせたバッチ操作:
 
 ```typescript
 // 選択状態管理
 const selection = ref<any[]>([])
 
-// 一括操作処理
+// バッチ操作処理
 const handleBatchOperation = async (operation: string) => {
   if (selection.value.length === 0) {
     ElMessage.warning('操作するデータを選択してください')
@@ -206,13 +206,13 @@ const handleBatchOperation = async (operation: string) => {
     const ids = selection.value.map(item => item.id)
     await batchOperation(operation, ids)
     
-    // 操作後にデータを再読み込み
+    // 操作完了後にデータを再読み込み
     await loadTableData()
     selection.value = []
     
-    ElMessage.success('一括操作が成功しました')
+    ElMessage.success('バッチ操作が成功しました')
   } catch (error) {
-    ElMessage.error('一括操作に失敗しました')
+    ElMessage.error('バッチ操作に失敗しました')
   }
 }
 ```
@@ -229,7 +229,7 @@ const handleBatchOperation = async (operation: string) => {
 ## パフォーマンス最適化
 
 ### デバウンス検索
-検索入力にデバウンス処理を適用：
+検索入力にデバウンス処理を適用:
 
 ```typescript
 import { debounce } from 'lodash-es'
@@ -246,7 +246,7 @@ const onSearchInput = (searchData: any) => {
 ```
 
 ### データキャッシュ
-検索結果のインテリジェントなキャッシュを実現：
+検索結果のインテリジェントなキャッシュを実装:
 
 ```typescript
 // キャッシュ設定
@@ -292,7 +292,7 @@ const loadTableDataWithCache = async () => {
 ## ベストプラクティス
 
 ### 1. 状態同期
-検索状態とURLパラメータの同期を確保：
+検索状態とURLパラメータの同期を確保:
 
 ```typescript
 // URLパラメータ同期
@@ -316,7 +316,7 @@ const syncUrlParams = () => {
 ```
 
 ### 2. エラー処理
-完全なエラー処理とユーザーフィードバック：
+完全なエラー処理とユーザーフィードバック:
 
 ```typescript
 const handleError = (error: any, context: string) => {
@@ -334,7 +334,7 @@ const handleError = (error: any, context: string) => {
 ```
 
 ### 3. ローディング状態管理
-きめ細かいローディング状態制御：
+きめ細かいローディング状態制御:
 
 ```typescript
 // 異なる操作のローディング状態
@@ -359,5 +359,5 @@ const withLoading = async (key: keyof typeof loadingStates, operation: () => Pro
 ## 関連リンク
 
 - [レスポンシブレイアウト](./responsive-layout) - 異なるデバイスでのテーブル表示最適化について
-- [フォームバリデーション](./form-validation) - 検索条件のバリデーション処理について
+- [フォームバリデーション](./form-validation) - 検索条件の検証処理について
 - [メソッドデモ](./methods-demo) - テーブル統合におけるコンポーネントメソッドの応用について

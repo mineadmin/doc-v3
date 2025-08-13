@@ -6,7 +6,7 @@ A complete integration solution for data tables, including search, pagination, s
 
 <DemoPreview dir="demos/ma-search/table-integration" />
 
-## Integration Solution Details
+## Integration Solution Explanation
 
 ### Search and Table Interaction
 Real-time synchronization between search conditions and table data:
@@ -14,7 +14,7 @@ Real-time synchronization between search conditions and table data:
 ```typescript
 // Search handler
 const handleSearch = (searchData: any) => {
-  // Reset to first page
+  // Reset pagination to first page
   pagination.page = 1
   // Save search conditions
   searchCondition.value = { ...searchData }
@@ -89,7 +89,7 @@ const loadTableData = async () => {
 }
 ```
 
-## Use Cases
+## Usage Scenarios
 
 ### 1. User Management System
 Complete user data management interface:
@@ -141,7 +141,7 @@ const productSearchItems = [
 ## Advanced Features
 
 ### View Switching
-Support for switching between table and card views:
+Support switching between table view and card view:
 
 ```typescript
 // View mode management
@@ -178,7 +178,7 @@ const handleSortChange = ({ prop, order }: any) => {
   loadTableData()
 }
 
-// Include sorting parameters in data loading
+// Include sorting parameters in data loading function
 const params = {
   page: pagination.page,
   pageSize: pagination.pageSize,
@@ -359,5 +359,5 @@ const withLoading = async (key: keyof typeof loadingStates, operation: () => Pro
 ## Related Links
 
 - [Responsive Layout](./responsive-layout) - Learn about table display optimization across devices
-- [Form Validation](./form-validation) - Understand validation handling for search conditions
+- [Form Validation](./form-validation) - Understand search condition validation
 - [Methods Demo](./methods-demo) - Learn about component methods in table integration

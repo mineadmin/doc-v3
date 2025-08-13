@@ -108,7 +108,7 @@
 ### チェックボックスグループコンポーネント
 ```javascript
 {
-  label: '職位',
+  label: '職位等級',
   prop: 'level',
   render: 'checkbox-group',
   renderProps: {
@@ -207,12 +207,12 @@ const options = {
   type: 'operation',
   operationConfigure: {
     type: 'auto',
-    fold: 2,               // 2つ以上の操作で折りたたみ
+    fold: 2,               // 2つ以上の操作時に折りたたむ
     actions: [
       {
         name: 'promote',
         text: '昇進',
-        show: (data) => data.row.performance >= 85,  // 条件表示
+        show: (data) => data.row.performance >= 85,  // 条件付き表示
         onClick: (data) => {
           console.log('昇進社員:', data.row.name)
         }

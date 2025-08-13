@@ -20,7 +20,7 @@ Fully customize form components by returning JSX elements via functions:
 ```
 
 ### Conditional Display
-Use the `hide` function to dynamically show or hide search items:
+Dynamically show or hide search items using the `hide` function:
 
 ```typescript
 {
@@ -31,12 +31,12 @@ Use the `hide` function to dynamically show or hide search items:
 }
 ```
 
-### Multi-selection Components
-Support for multi-select components like checkbox groups and cascading selectors:
+### Multi-Select Components
+Supports multi-select components like checkbox groups and cascaders:
 
 ```typescript
 {
-  label: 'Multi-category',
+  label: 'Multi-Select Categories',
   prop: 'categories',
   render: 'checkbox-group',
   options: categoryOptions
@@ -46,20 +46,20 @@ Support for multi-select components like checkbox groups and cascading selectors
 ## Use Cases
 
 ### 1. Enterprise Data Filtering
-Suitable for complex business data filtering, supporting multi-dimensional and multi-condition combined queries.
+Ideal for complex business data filtering with multi-dimensional, multi-condition combined queries.
 
 ### 2. Report Query Systems  
-Ideal for report queries requiring precise condition control, supporting complex conditions like time ranges and numerical intervals.
+Suitable for report queries requiring precise condition control, supporting time ranges, numerical intervals, and other complex criteria.
 
 ### 3. E-commerce Advanced Filtering
-Perfect for product filtering on e-commerce platforms, supporting multiple dimensions like brands, specifications, and prices.
+Perfect for product filtering in e-commerce platforms, supporting multiple dimensions like brands, specifications, and prices.
 
 ## Key Features
 
 - 🎯 Supports JSX/TSX custom rendering
-- 🔄 Dynamic show/hide of search items
-- 📊 Multiple data selection component support
-- ⚡ Performance-optimized rendering mechanism
+- 🔄 Dynamic show/hide for search items
+- 📊 Multiple data selection component options
+- ⚡ Performance-optimized rendering
 - 🛠 Flexible configuration and extensibility
 
 ## Technical Highlights
@@ -67,15 +67,15 @@ Perfect for product filtering on e-commerce platforms, supporting multiple dimen
 ### Custom Rendering Functions
 - Supports returning any Vue component or JSX element
 - Automatically passes form data and update methods
-- Full type inference and intelligent hints
+- Full type inference and intelligent suggestions
 
 ### Performance Optimization
-- Uses virtual list technology for handling large option sets
-- Debounce processing to reduce unnecessary requests
-- Smart caching to enhance user experience
+- Uses virtual list technology for large option sets
+- Debounce handling to reduce unnecessary requests
+- Smart caching for improved user experience
 
 ## Related Links
 
 - [Basic Usage](./basic-usage) - Learn basic search configurations
-- [Custom Actions](./custom-actions) - Understand custom action buttons
-- [Dynamic Management](./dynamic-items) - Learn dynamic search item management
+- [Custom Actions](./custom-actions) - Learn about custom action buttons
+- [Dynamic Management](./dynamic-items) - Learn about dynamic search item management

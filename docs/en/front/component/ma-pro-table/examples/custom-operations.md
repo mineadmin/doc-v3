@@ -6,11 +6,11 @@ Demonstrates different types of operation column configurations, including condi
 
 ## Features
 
-- **Multiple Operation Types**: Supports tile, dropdown menu, auto-folding display modes
-- **Conditional Display**: Dynamically show/hide operation buttons based on row data
-- **Context Menu**: Supports row right-click menu functionality
-- **Drag Sorting**: Supports row drag-and-drop reordering
-- **Batch Operations**: Supports multi-selection and batch operation functionality
+- **Multiple operation types**: Supports tiled, dropdown menu, auto-collapse display modes
+- **Conditional display**: Dynamically show/hide operation buttons based on row data
+- **Context menu**: Supports row right-click menu functionality
+- **Drag sorting**: Supports row drag-and-drop reordering
+- **Batch operations**: Supports multi-selection and batch operation functionality
 
 ## Operation Column Configuration
 
@@ -38,7 +38,7 @@ Demonstrates different types of operation column configurations, including condi
 }
 ```
 
-### Operation Type Descriptions
+### Operation Type Explanation
 
 #### 1. Auto Mode (auto)
 ```javascript
@@ -57,7 +57,7 @@ operationConfigure: {
 }
 ```
 
-#### 3. Tile Mode (tile)
+#### 3. Tiled Mode (tile)
 ```javascript
 operationConfigure: {
   type: 'tile',
@@ -247,7 +247,7 @@ const batchDelete = () => {
     try {
       ElMessage.info('Processing...')
       await someAsyncOperation(data.row.id)
-      ElMessage.success('Operation succeeded')
+      ElMessage.success('Operation successful')
       await proxy.refresh()  // Refresh table
     } catch (error) {
       ElMessage.error('Operation failed')

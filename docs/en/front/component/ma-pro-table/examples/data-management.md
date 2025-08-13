@@ -1,14 +1,14 @@
 # Data Management
 
-Demonstrates complete CRUD operations including create, edit, delete, and data linkage.
+Demonstrates complete CRUD operations including create, edit, delete, and data linkage functionalities.
 
 <DemoPreview dir="demos/ma-pro-table-examples/data-management" />
 
-## Features
+## Key Features
 
 - **Complete CRUD**: Supports create, read, update, and delete operations
-- **Form Linkage**: Create/edit forms interact with table data
-- **Data Statistics**: Real-time statistical metrics
+- **Form Linkage**: Create/edit forms synchronized with table data
+- **Data Statistics**: Real-time statistical indicators
 - **Batch Operations**: Supports batch selection and operations
 - **Status Synchronization**: Automatically refreshes table data after operations
 
@@ -97,7 +97,7 @@ const statistics = computed(() => {
         <el-col :span="12">
           <el-form-item label="Department" prop="department">
             <el-select v-model="employeeForm.department" style="width: 100%">
-              <el-option label="Tech" value="Tech" />
+              <el-option label="Technology" value="Technology" />
               <el-option label="Product" value="Product" />
               <!-- More options... -->
             </el-select>
@@ -138,7 +138,7 @@ const formRules = {
 }
 ```
 
-## CRUD Operations Implementation
+## CRUD Implementation
 
 ### Create Operation
 ```javascript
@@ -207,7 +207,7 @@ const showEditDialog = (employee) => {
 ### Delete Operation
 ```javascript
 const handleDeleteEmployee = (employee) => {
-  ElMessageBox.confirm(`Confirm to delete employee "${employee.name}"?`, 'Delete Confirmation', {
+  ElMessageBox.confirm(`Are you sure to delete employee "${employee.name}"?`, 'Confirm Deletion', {
     confirmButtonText: 'Confirm',
     cancelButtonText: 'Cancel',
     type: 'warning'
@@ -243,7 +243,7 @@ const showEmployeeDetail = (employee) => {
       Name: ${employee.name}
       Department: ${employee.department}
       Position: ${employee.position}
-      Salary: ￥${employee.salary.toLocaleString()}
+      Salary: $${employee.salary.toLocaleString()}
     `,
     type: 'info',
     duration: 5000
@@ -262,11 +262,11 @@ const showEmployeeDetail = (employee) => {
 
 ## Batch Operations
 
-### Enable Multiple Selection
+### Enable Multi-selection
 ```javascript
 const options = {
   tableOptions: {
-    selection: true         // Enable multiple selection
+    selection: true         // Enable multi-selection
   }
 }
 ```
@@ -294,14 +294,14 @@ const handleBatchDelete = () => {
     return
   }
   
-  ElMessageBox.confirm(`Confirm to delete ${selectedRows.length} selected records?`, 'Batch Delete', {
+  ElMessageBox.confirm(`Are you sure to delete ${selectedRows.length} selected records?`, 'Batch Delete', {
     confirmButtonText: 'Confirm',
     cancelButtonText: 'Cancel',
     type: 'warning'
   }).then(() => {
     const selectedIds = selectedRows.map(row => row.id)
     tableData.value = tableData.value.filter(item => !selectedIds.includes(item.id))
-    ElMessage.success('Batch delete successful')
+    ElMessage.success('Batch deletion successful')
     tableRef.value?.refresh()
   })
 }
@@ -313,8 +313,8 @@ const handleBatchDelete = () => {
 ```javascript
 const handleSearchSubmit = (form) => {
   console.log('Search criteria:', form)
-  ElMessage.info('Executing search')
-  // Can handle search logic here
+  ElMessage.info('Performing search operation')
+  // Handle search logic here
   return form
 }
 
@@ -406,14 +406,14 @@ const loadDataFromStorage = () => {
 ## Best Practices
 
 ### 1. Form Design
-- Reasonably group form fields
+- Group form fields logically
 - Provide clear validation prompts
 - Support keyboard shortcuts
 
 ### 2. Data Management
 - Synchronize table and form data promptly
 - Provide data backup and recovery functions
-- Implement optimistic locking to avoid data conflicts
+- Implement optimistic locking to prevent data conflicts
 
 ### 3. User Experience
 - Provide operation confirmation and undo functions
@@ -423,6 +423,6 @@ const loadDataFromStorage = () => {
 ### 4. Performance Optimization
 - Consider pagination and virtual scrolling for large datasets
 - Avoid frequent data refreshes
-- Use debouncing and throttling appropriately
+- Use debounce and throttle appropriately
 
-Data management features allow you to build complete data operation interfaces to meet various business scenario requirements.
+The data management functionality allows you to build complete data operation interfaces to meet various business scenario requirements.

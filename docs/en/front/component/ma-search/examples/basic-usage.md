@@ -14,7 +14,7 @@ The simplest implementation of a search form, including basic form elements like
 - **Date Search**: Use `render: 'date-picker'` to create a date picker
 
 ### Basic Properties
-- `label`: The label name for the search item
+- `label`: The label name of the search item
 - `prop`: The key name corresponding to the form data
 - `render`: Specifies the type of component to render
 

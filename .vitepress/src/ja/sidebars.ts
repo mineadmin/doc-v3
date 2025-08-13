@@ -234,7 +234,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/ja/front/component/ma-table/custom-render'
             },
             {
-              text: '動的列管理',
+              text: '動的カラム管理',
               link: '/ja/front/component/ma-table/dynamic-columns'
             },
             {
@@ -368,7 +368,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/ja/backend/security/passport"
         },
         {
-          text: "ユーザー権限(RBAC)",
+          text: "ユーザー認可(RBAC)",
           link: "/ja/backend/security/access"
         },
         {
@@ -412,7 +412,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link:"/ja/plugin/command"
             },
             {
-              text:"アプリ作成",
+              text:"アプリケーション作成",
               link:"/ja/plugin/create"
             },
             {
@@ -446,16 +446,16 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"フロントエンド開発",
       items:[
         {
-          text: "フロントエンド開発規約",
+          text: "フロントエンド開発規範",
           link: "/ja/plugin/front/develop"
         }
       ]
     },
     {
-      text:"アプリ公開",
+      text:"アプリケーション公開",
       items:[
         {
-          text: "アプリリリース",
+          text: "アプリケーションリリース",
           link: "/ja/plugin/develop/publish"
         },
         {
