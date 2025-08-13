@@ -1,7 +1,7 @@
 # MaForm
 
 基于 `Element plus` 的表单二次封装的 `Form` 组件，支持所有原生表单的参数、事件、插槽、写法，还支持通过配置方式来实现。
-另外还支持了基于 `el-row` 和 `el-space` 的布局来规划表单，具备响应式设计和移动端适配能力。
+另外还支持了基于 `el-row` 和 `el-space` 的布局来规划表单，具备响应式设计能力。
 
 ::: tip 说明
 由于全部兼容及支持原生 `el-from` 的所有参数、事件、插槽，所以本文档主要讲解扩展功能。
@@ -46,7 +46,6 @@
 - [嵌套表单](/zh/front/component/ma-form/examples/nested-forms) - 复杂层级结构的表单处理
 
 ### 实际应用示例
-- [移动端适配](/zh/front/component/ma-form/examples/mobile-responsive) - 响应式设计和移动端优化
 - [高级场景](/zh/front/component/ma-form/examples/advanced-scenarios) - 多步骤流程和复杂业务逻辑
 - [性能优化](/zh/front/component/ma-form/examples/performance-demo) - 大表单性能优化策略
 
@@ -85,10 +84,6 @@ interface MaFormOptions {
   flex?: ElRowProps
   grid?: ElSpaceProps
   footerSlot?: () => VNode | VNode[]
-  
-  // 响应式配置
-  responsiveConfig?: ResponsiveConfig
-  mobileBreakpoint?: number
 }
 ```
 
@@ -116,17 +111,9 @@ interface MaFormItem {
   // 嵌套配置
   children?: MaFormItem[]
   
-  // 条件渲染
-  when?: ConditionFunction
-  dependencies?: string[]
-  
   // 验证配置
   customValidator?: (rule: any, value: any, callback: Function) => void
   asyncValidator?: (rule: any, value: any) => Promise<void>
-  
-  // 移动端配置
-  mobileProps?: Record<string, any>
-  mobileHide?: boolean
 }
 ```
 
@@ -218,10 +205,6 @@ interface MaFormExpose {
   setFormData: (data: Record<string, any>) => void
   resetFormData: () => void
   
-  // 响应式和移动端
-  isMobileState: () => boolean
-  updateResponsiveState: () => void
-  
   // El-Form 实例
   getElFormRef: () => FormInstance | undefined
 }
@@ -252,29 +235,6 @@ interface MaFormExpose {
 | `flex` | flex 布局配置，基于 `el-row` 组件                                            | `ElRowProps`                                                                                    | `{}`     | 1.0.0 |
 | `grid` | grid 布局配置，基于 `el-space` 组件                                          | `ElSpaceProps`                                                                                  | `{}`     | 1.0.0 |
 | `footerSlot` | 配置型底部插槽，可返回 VNode 或 VNode 数组                                        | `() => VNode \| VNode[]`                                                                        | -        | 1.0.0 |
-| `responsiveConfig` | 响应式配置选项                                                               | `ResponsiveConfig`                                                                              | -        | 1.0.0 |
-| `mobileBreakpoint` | 移动端断点像素值                                                             | `number`                                                                                        | `768`    | 1.0.0 |
-
-#### ResponsiveConfig 响应式配置
-
-```typescript
-interface ResponsiveConfig {
-  // 启用响应式布局
-  enabled?: boolean
-  // 移动端单列布局
-  mobileSingleColumn?: boolean
-  // 移动端隐藏标签
-  mobileHideLabels?: boolean
-  // 自定义断点
-  breakpoints?: {
-    xs?: number  // 超小屏幕
-    sm?: number  // 小屏幕
-    md?: number  // 中等屏幕
-    lg?: number  // 大屏幕
-    xl?: number  // 超大屏幕
-  }
-}
-```
 
 #### LoadingConfig 配置
 
@@ -325,8 +285,6 @@ interface ResponsiveConfig {
 | 参数            | 说明                                                                                                                                                                             | 类型                                                                                                 | 默认值     | 版本     |
 |---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|---------|--------|
 | `children`    | 子配置项，支持无限嵌套，用于复杂表单结构                                                                                                                                                                 | `MaFormItem[]`                                                                                     | `[]`       | 1.0.33 |
-| `when`        | 条件渲染函数，返回 true 时渲染该项                                                                                                                                                                | `(model: Record<string, any>, item: MaFormItem) => boolean`                                                                                     | -       | 1.0.0 |
-| `dependencies`| 依赖字段数组，当依赖字段变化时重新计算条件                                                                                                                                                                | `string[]`                                                                                     | `[]`       | 1.0.0 |
 
 #### 验证配置
 
@@ -334,13 +292,6 @@ interface ResponsiveConfig {
 |---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|---------|--------|
 | `customValidator` | 自定义同步验证函数                                                                                                                                                                | `(rule: any, value: any, callback: Function) => void`                                                                                     | -       | 1.0.0 |
 | `asyncValidator`  | 自定义异步验证函数                                                                                                                                                                | `(rule: any, value: any) => Promise<void>`                                                                                     | -       | 1.0.0 |
-
-#### 移动端配置
-
-| 参数            | 说明                                                                                                                                                                             | 类型                                                                                                 | 默认值     | 版本     |
-|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|---------|--------|
-| `mobileProps` | 移动端专用的组件 props 配置                                                                                                                                                                | `Record<string, any>`                                                                                     | `{}`       | 1.0.0 |
-| `mobileHide`  | 移动端是否隐藏该项                                                                                                                                                                | `boolean`                                                                                     | `false`       | 1.0.0 |
 
 ## 插槽系统
 
@@ -475,13 +426,6 @@ MaForm 组件通过 `defineExpose` 暴露了丰富的 API 方法，用于外部�
 | `setFormData(data)` | 设置表单数据 | `data: Record<string, any>` | `void` | `formRef.value.setFormData({ username: 'admin' })` |
 | `resetFormData()` | 重置表单数据为初始状态 | - | `void` | `formRef.value.resetFormData()` |
 
-### 响应式和移动端
-
-| 方法名 | 说明 | 参数 | 返回值 | 示例 |
-|-------|------|-----|-------|------|
-| `isMobileState()` | 检查是否为移动端模式 | - | `boolean` | `const isMobile = formRef.value.isMobileState()` |
-| `updateResponsiveState()` | 手动更新响应式状态 | - | `void` | `formRef.value.updateResponsiveState()` |
-
 ### Element Plus 原生实例
 
 | 方法名 | 说明 | 参数 | 返回值 | 示例 |
@@ -534,7 +478,7 @@ const handleToggleLoading = () => {
 
 ## 布局系统详解
 
-MaForm 提供了两种布局系统，支持响应式设计和移动端适配：
+MaForm 提供了两种布局系统，支持响应式设计：
 
 ### Flex 布局 (默认)
 
@@ -607,26 +551,6 @@ const field ={
 | `md` | 中等屏幕 | ≥992px |
 | `lg` | 大屏幕 | ≥1200px |
 | `xl` | 超大屏幕 | ≥1920px |
-
-#### 移动端适配
-
-```typescript
-const field ={
-  mobileBreakpoint: 768,
-  responsiveConfig: {
-    enabled: true,
-    mobileSingleColumn: true,      // 移动端单列布局
-    mobileHideLabels: false,       // 移动端隐藏标签
-    breakpoints: {
-      xs: 576,
-      sm: 768,
-      md: 992,
-      lg: 1200,
-      xl: 1920
-    }
-  }
-}
-```
 
 ## 组件渲染系统
 
@@ -794,8 +718,7 @@ const field =[
       prop: 'companyName',
       render: 'input',
       // 仅当账户类型为企业时显示
-      when: (model, item) => model.accountType === 'company',
-      dependencies: ['accountType']  // 依赖字段，变化时重新计算
+      show: (model) => model.accountType === 'company',
     }
 ]
 ```
@@ -1064,29 +987,5 @@ const field ={
       render: 'select'
     }
   ]
-}
-```
-
-### Q: 移动端适配有哪些注意事项？
-
-A: 关键配置项：
-
-```typescript
-const field ={
-  mobileBreakpoint: 768,
-  responsiveConfig: {
-    enabled: true,
-    mobileSingleColumn: true,    // 移动端强制单列
-    mobileHideLabels: false      // 是否隐藏标签
-  }
-}
-
-// 表单项级别的移动端配置
-const field1 ={
-  mobileProps: {
-    size: 'large',           // 移动端使用大尺寸
-    clearable: false         // 移动端禁用清除按钮
-  },
-  mobileHide: false          // 移动端是否隐藏
 }
 ```
