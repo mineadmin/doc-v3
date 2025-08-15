@@ -12,3 +12,4 @@ dist-ssr
 /vendor/
 composer.lock
 stats.html
+CLAUDE.md
