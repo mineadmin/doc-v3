@@ -180,6 +180,6 @@ const mobileOptimized = {
 
 ## 相關連結
 
-- [佈局系統詳解](/zh-tw/front/component/ma-form#佈局系統詳解)
-- [響應式配置](/zh-tw/front/component/ma-form#responsiveconfig-響應式配置)
-- [移動端適配](/zh-tw/front/component/ma-form/examples/mobile-responsive)
+- [佈局系統詳解](/front/component/ma-form#佈局系統詳解)
+- [響應式配置](/front/component/ma-form#responsiveconfig-響應式配置)
+- [移動端適配](/front/component/ma-form/examples/mobile-responsive)

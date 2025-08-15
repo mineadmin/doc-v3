@@ -433,6 +433,6 @@ itemSlots: {
 
 ## 相關鏈接
 
-- [插槽系統詳解](/zh-hk/front/component/ma-form#插槽系統)
-- [MaFormItem itemSlots 配置](/zh-hk/front/component/ma-form#佈局配置)
-- [組件渲染 renderSlots](/zh-hk/front/component/ma-form/examples/component-rendering)
+- [插槽系統詳解](/front/component/ma-form#插槽系統)
+- [MaFormItem itemSlots 配置](/front/component/ma-form#佈局配置)
+- [組件渲染 renderSlots](/front/component/ma-form/examples/component-rendering)

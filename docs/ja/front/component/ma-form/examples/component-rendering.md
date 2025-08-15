@@ -1,18 +1,18 @@
 # コンポーネントレンダリング
 
-MaFormがサポートするすべてのElement Plusコンポーネントのレンダリング方法を展示します。入力類、選択類、日付類、特殊コンポーネントを含みます。
+MaFormがサポートするすべてのElement Plusコンポーネントのレンダリング方法を表示します。入力クラス、選択クラス、日付クラス、特殊コンポーネントを含みます。
 
 <DemoPreview dir="demos/ma-form/component-rendering" />
 
 ## 機能特徴
 
 - **全面的なサポート**: すべてのElement Plusフォームコンポーネントをサポート
-- **多様なレンダリング方法**: 文字列、コンポーネント、関数の3つのレンダリング方法
+- **複数のレンダリング方法**: 文字列、コンポーネント、関数の3つのレンダリング方法
 - **スロットサポート**: 完全なスロットシステムをサポート
 - **プロパティ伝達**: renderPropsを通じてコンポーネントプロパティを伝達
 - **イベント処理**: コンポーネントのすべてのネイティブイベントをサポート
 
-## 入力類コンポーネント
+## 入力クラスコンポーネント
 
 ### Input 入力ボックス
 ```typescript
@@ -64,7 +64,7 @@ MaFormがサポートするすべてのElement Plusコンポーネントのレ�
 }
 ```
 
-## 選択類コンポーネント
+## 選択クラスコンポーネント
 
 ### Select セレクター
 ```typescript
@@ -161,7 +161,7 @@ MaFormがサポートするすべてのElement Plusコンポーネントのレ�
 }
 ```
 
-## 日付時間類コンポーネント
+## 日付時間クラスコンポーネント
 
 ### DatePicker 日付ピッカー
 ```typescript
@@ -397,7 +397,7 @@ import CustomComponent from './CustomComponent.vue'
     <div class="jsx-field">
       <el-input
         v-model={model[item.prop]}
-        placeholder="JSX 方式でレンダリング"
+        placeholder="JSX 方式レンダリング"
         clearable
         v-slots={{
           append: () => <el-button icon="Search">検索</el-button>
@@ -436,6 +436,6 @@ import CustomComponent from './CustomComponent.vue'
 
 ## 関連リンク
 
-- [コンポーネントレンダリングシステム](/ja/front/component/ma-form#コンポーネントレンダリングシステム)
-- [サポートする Element Plus コンポーネント](/ja/front/component/ma-form#サポートする-element-plus-コンポーネント)
-- [スロットシステム](/ja/front/component/ma-form#スロットシステム)
+- [コンポーネントレンダリングシステム](/front/component/ma-form#コンポーネントレンダリングシステム)
+- [サポートする Element Plus コンポーネント](/front/component/ma-form#サポートする-element-plus-コンポーネント)
+- [スロットシステム](/front/component/ma-form#スロットシステム)

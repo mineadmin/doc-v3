@@ -345,7 +345,7 @@ const isDesktop = breakpoints.greater('desktop')
 
 ## 相關文檔
 
-- [常用 Store](/zh-hk/front/high/store) - 狀態管理相關文檔
+- [常用 Store](/front/high/store) - 狀態管理相關文檔
 
 ::: tip 源碼參考
 完整的佈局系統源碼可以在以下位置找到：

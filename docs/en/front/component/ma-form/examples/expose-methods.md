@@ -1,13 +1,13 @@
 # Exposed Methods
 
-Showcases all API methods exposed by the MaForm component through defineExpose, including loading state control, reactive state management, instance access, and other functionalities.
+Displays all API methods exposed by the MaForm component through defineExpose, including loading state control, responsive state management, instance access, and other functionalities.
 
 <DemoPreview dir="demos/ma-form/expose-methods" />
 
 ## Features
 
 - **Loading State Control**: Set form loading state
-- **Reactive State Management**: Mobile state detection
+- **Responsive State Management**: Mobile state detection
 - **Form Item Management**: Dynamically modify form item configurations
 - **Instance Access**: Access underlying Element Plus Form instance for advanced operations
 
@@ -50,13 +50,13 @@ const handleSubmit = async () => {
 }
 ```
 
-### Reactive State Management
+### Responsive State Management
 
 ```typescript
-// Check mobile state
+// Check if in mobile state
 const isMobile = formRef.value?.isMobileState?.()
 
-// Manually update reactive state (when window resizes)
+// Manually update responsive state (when window size changes)
 window.addEventListener('resize', () => {
   formRef.value?.updateResponsiveState?.()
 })
@@ -65,11 +65,11 @@ window.addEventListener('resize', () => {
 const adjustFormLayout = () => {
   const isMobile = formRef.value?.isMobileState?.()
   if (isMobile) {
-    // Use single-column layout for mobile
-    console.log('Mobile detected, using responsive layout')
+    // Use single column layout for mobile
+    console.log('Currently on mobile, using responsive layout')
   } else {
     // Use multi-column layout for desktop
-    console.log('Desktop detected, using standard layout')
+    console.log('Currently on desktop, using standard layout')
   }
 }
 ```
@@ -78,7 +78,7 @@ const adjustFormLayout = () => {
 
 ### Access Native Form Instance
 
-One of MaForm's most important exposed methods is `getElFormRef()`, which allows accessing the underlying Element Plus Form instance to use all native form methods:
+One of MaForm's most important exposed methods is `getElFormRef()`, which allows you to access the underlying Element Plus Form instance and use all native form methods:
 
 ```typescript
 // Get Element Plus el-form instance
@@ -173,7 +173,7 @@ const resetSpecificFields = (props: string[]) => {
   const elFormRef = formRef.value?.getElFormRef()
   if (elFormRef) {
     elFormRef.resetFields(props)
-    ElMessage.info(`Reset ${props.join(', ')} fields`)
+    ElMessage.info(`Reset fields: ${props.join(', ')}`)
   }
 }
 
@@ -186,12 +186,12 @@ const clearValidationErrors = () => {
   }
 }
 
-// Clear specified field errors  
+// Clear specified field validation errors  
 const clearFieldErrors = (props: string[]) => {
   const elFormRef = formRef.value?.getElFormRef()
   if (elFormRef) {
     elFormRef.clearValidate(props)
-    console.log(`Cleared validation errors for ${props.join(', ')} fields`)
+    console.log(`Cleared validation errors for fields: ${props.join(', ')}`)
   }
 }
 ```
@@ -222,9 +222,9 @@ const getFieldInstance = (prop: string) => {
 
 ## Practical Application Scenarios
 
-### Form Submission Flow
+### Form Submission Process
 
-Combining all exposed methods to implement a complete form submission flow:
+Combining all exposed methods, we can implement a complete form submission process:
 
 ```typescript
 const handleFormSubmit = async () => {
@@ -268,7 +268,7 @@ const handleFormSubmit = async () => {
 
 ### Responsive Layout Adaptation
 
-Utilize reactive state management for optimal experience across devices:
+Use responsive state management to achieve optimal experience across different devices:
 
 ```typescript
 const handleResponsiveLayout = () => {
@@ -283,10 +283,10 @@ const handleResponsiveLayout = () => {
     })
     
     // Logic that may require special handling on mobile
-    console.log('Mobile mode detected, using single-column layout')
+    console.log('Currently in mobile mode, using single column layout')
   } else {
     // Desktop layout
-    console.log('Desktop mode detected, using multi-column layout')
+    console.log('Currently in desktop mode, using multi-column layout')
   }
 }
 
@@ -297,7 +297,7 @@ window.addEventListener('resize', () => {
 })
 ```
 
-### Error Handling and UX Optimization
+### Error Handling and User Experience Optimization
 
 ```typescript
 // Smart form operation handler
@@ -351,7 +351,7 @@ const smartFormHandler = {
 ### Debugging and Development Tools
 
 ```typescript
-// Development debugging tools
+// Debugging tools for development
 const devTools = {
   // Print status of all exposed methods
   debug: () => {
@@ -397,7 +397,7 @@ const devTools = {
     console.log('Current mobile state:', isMobile)
     
     formRef.value?.updateResponsiveState?.()
-    console.log('Responsive state updated')
+    console.log('Updated responsive state')
     
     // Test form instance
     const elFormRef = formRef.value?.getElFormRef()
@@ -418,7 +418,7 @@ const devTools = {
 | `setOptions` | `opts: MaFormOptions` | `void` | Set form configuration options |
 | `getOptions` | - | `MaFormOptions` | Get current form configuration |
 | `setItems` | `items: MaFormItem[]` | `void` | Set form item array |
-| `getItems` | - | `MaFormItem[]` | Get current form items array |
+| `getItems` | - | `MaFormItem[]` | Get current form item array |
 | `appendItem` | `item: MaFormItem` | `void` | Add a form item |
 | `removeItem` | `prop: string` | `void` | Remove form item by prop |
 | `getItemByProp` | `prop: string` | `MaFormItem \| null` | Get form item by prop |
@@ -436,7 +436,7 @@ The following methods do not exist in the current version:
 
 ### Element Plus Form Instance Methods
 
-The instance obtained via `getElFormRef()` supports these common methods:
+The instance obtained through `getElFormRef()` supports the following common methods:
 
 | Method | Parameters | Return Value | Description |
 |-------|-----|-------|-----|
@@ -448,14 +448,14 @@ The instance obtained via `getElFormRef()` supports these common methods:
 
 ## Notes
 
-1. **Safe Calls**: Use optional chaining (`?.`) to safely call methods and avoid errors when component is not mounted
-2. **Timing**: Ensure methods are called after component is mounted
+1. **Safe Calls**: Use optional chaining operator (`?.`) to safely call methods and avoid errors when components are not mounted
+2. **Timing**: Ensure these methods are called after component mounting is complete
 3. **Error Handling**: Implement proper error handling for async methods (like `validate`)
-4. **Type Safety**: When using TypeScript, import correct type definitions
+4. **Type Safety**: When using with TypeScript, import correct type definitions
 
 ## Related Links
 
-- [MaForm Basic Usage](/en/front/component/ma-form/examples/basic-usage)
-- [Form Validation Examples](/en/front/component/ma-form/examples/dynamic-validation)
-- [Loading State Demo](/en/front/component/ma-form/examples/loading-states)
+- [MaForm Basic Usage](/front/component/ma-form/examples/basic-usage)
+- [Form Validation Examples](/front/component/ma-form/examples/dynamic-validation)
+- [Loading State Demo](/front/component/ma-form/examples/loading-states)
 - [Element Plus Form Documentation](https://element-plus.org/zh-CN/component/form.html)

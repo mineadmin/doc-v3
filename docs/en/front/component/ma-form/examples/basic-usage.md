@@ -1,14 +1,14 @@
 # Basic Usage
 
-Demonstration of MaForm's basic usage, including configuration methods for common form controls and core functionality features.
+Demonstrates the basic usage of MaForm, including common form control configurations and core features.
 
 <DemoPreview dir="demos/ma-form/basic-usage" />
 
 ## Features
 
 - **Multiple Input Types**: Text input, password field, number input, etc.
-- **Automatic Data Binding**: Two-way form data binding without manual handling
-- **Basic Validation Rules**: Supports common validations like required fields, length, and format
+- **Automatic Data Binding**: Two-way data binding without manual handling
+- **Basic Validation Rules**: Supports required fields, length, format, and other common validations
 - **Simple Component Configuration**: Quickly build forms through declarative configuration
 - **Native Compatibility**: Fully compatible with Element Plus native properties and events
 
@@ -17,7 +17,7 @@ Demonstration of MaForm's basic usage, including configuration methods for commo
 ### Declarative Development
 Configure form items through the `items` array, where each configuration object contains:
 - `label`: Form item label
-- `prop`: Bound data field name
+- `prop`: Data field name for binding
 - `render`: Type of component to render
 - `renderProps`: Properties passed to the component
 
@@ -72,6 +72,6 @@ Use `v-model` for two-way data binding:
 
 ## Related Links
 
-- [Props Configuration](/en/front/component/ma-form#props)
-- [MaFormItem Configuration](/en/front/component/ma-form#maformitem-configuration-details)
-- [Component Rendering System](/en/front/component/ma-form#component-rendering-system)
+- [Props Configuration](/front/component/ma-form#props)
+- [MaFormItem Configuration](/front/component/ma-form#maformitem-configuration-details)
+- [Component Rendering System](/front/component/ma-form#component-rendering-system)

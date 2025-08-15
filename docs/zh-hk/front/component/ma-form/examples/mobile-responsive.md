@@ -599,6 +599,6 @@ const responsiveTestUtils = {
 
 ## 相關鏈接
 
-- [佈局系統 - 響應式配置](/zh-hk/front/component/ma-form/examples/layout-systems#響應式系統)
-- [ResponsiveConfig 配置](/zh-hk/front/component/ma-form#responsiveconfig-響應式配置)
-- [移動端配置選項](/zh-hk/front/component/ma-form#移動端配置)
+- [佈局系統 - 響應式配置](/front/component/ma-form/examples/layout-systems#響應式系統)
+- [ResponsiveConfig 配置](/front/component/ma-form#responsiveconfig-響應式配置)
+- [移動端配置選項](/front/component/ma-form#移動端配置)

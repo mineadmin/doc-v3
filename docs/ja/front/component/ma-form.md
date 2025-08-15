@@ -1,12 +1,12 @@
 # MaForm
 
-`Element plus` をベースにしたフォームの二次ラッピング `Form` コンポーネントで、すべてのネイティブフォームのパラメータ、イベント、スロット、書き方をサポートし、設定方式でも実現できます。
-さらに、`el-row` と `el-space` をベースにしたレイアウトでフォームを計画し、レスポンシブデザイン能力を備えています。
+`Element plus` に基づいて二次的にカプセル化された `Form` コンポーネントで、すべてのネイティブフォームのパラメータ、イベント、スロット、書き方をサポートし、設定方式でも実現できます。
+さらに、`el-row` と `el-space` に基づいたレイアウトでフォームを計画し、レスポンシブデザイン能力を備えています。
 
 ::: tip 説明
-すべてのネイティブ `el-from` のパラメータ、イベント、スロットとの互換性とサポートを完全に提供しているため、このドキュメントでは主に拡張機能について説明します。
+ネイティブ `el-from` のすべてのパラメータ、イベント、スロットを完全に互換性およびサポートしているため、このドキュメントでは主に拡張機能について説明します。
 
-公式フォームパラメータについては、[Element plus](https://element-plus.org/ja-JP/component/form.html) 公式ドキュメントを参照してください。
+公式フォームパラメータについては [Element plus](https://element-plus.org/zh-CN/component/form.html) 公式ドキュメントを参照してください。
 :::
 
 ## クイックスタート
@@ -19,42 +19,42 @@
 
 ### `コンポーネント`と`el-form-item`の`Ref`を取得
 :::tip ヒント
-この方法は **設定形式** 用で、`template` 内で独自に `ref` を定義できます
+この方法は **設定形式** 用で、`template` では自分で `ref` を定義できます
 :::
 
 <DemoPreview dir="demos/ma-form/getRef" />
 
 ## 完全な例
 
-:::info 例のナビゲーション
-以下の例は、MaForm のさまざまな使用方法と高度な機能を、基本的な使用から複雑なシナリオのアプリケーションまで示しています。最適な効果を得るために順番に学習することをお勧めします。
+:::info サンプルナビゲーション
+以下の例は、MaForm のさまざまな使用方法と高度な機能を展示しており、基本的な使用から複雑なシナリオアプリケーションまでをカバーしています。最適な効果を得るために順番に学習することをお勧めします。
 :::
 
 ### 基本機能の例
-- [基本的な使用法](/ja/front/component/ma-form/examples/basic-usage) - 一般的なフォームコントロールの基本的な設定と使用方法
-- [レイアウトシステム](/ja/front/component/ma-form/examples/layout-systems) - Flex と Grid レイアウトのレスポンシブデザイン
-- [コンポーネントレンダリング](/ja/front/component/ma-form/examples/component-rendering) - サポートされているすべての Element Plus コンポーネントの表示
+- [基本的な使い方](/front/component/ma-form/examples/basic-usage) - 一般的なフォームコントロールの基本設定と使用方法
+- [レイアウトシステム](/front/component/ma-form/examples/layout-systems) - Flex と Grid レイアウトのレスポンシブデザイン
+- [コンポーネントレンダリング](/front/component/ma-form/examples/component-rendering) - サポートされているすべての Element Plus コンポーネントの展示
 
 ### 高度な機能の例
-- [条件付きレンダリング](/ja/front/component/ma-form/examples/conditional-rendering) - フォームデータに基づくフィールド表示制御
-- [動的検証](/ja/front/component/ma-form/examples/dynamic-validation) - カスタム検証ルールと非同期検証
-- [スロットシステム](/ja/front/component/ma-form/examples/slots-examples) - マルチレベルスロットの柔軟な使用方法
+- [条件付きレンダリング](/front/component/ma-form/examples/conditional-rendering) - フォームデータに基づいたフィールド表示制御
+- [動的検証](/front/component/ma-form/examples/dynamic-validation) - カスタム検証ルールと非同期検証
+- [スロットシステム](/front/component/ma-form/examples/slots-examples) - マルチレベルスロットの柔軟な使用方法
 
 ### 機能デモの例
-- [メソッドの公開](/ja/front/component/ma-form/examples/expose-methods) - すべての API メソッドの使用デモ
-- [ローディング状態](/ja/front/component/ma-form/examples/loading-states) - さまざまなローディングシナリオの処理方法
-- [ネストされたフォーム](/ja/front/component/ma-form/examples/nested-forms) - 複雑な階層構造のフォーム処理
+- [公開メソッド](/front/component/ma-form/examples/expose-methods) - すべての API メソッドの使用デモ
+- [ローディング状態](/front/component/ma-form/examples/loading-states) - さまざまなローディングシナリオの処理方法
+- [ネストされたフォーム](/front/component/ma-form/examples/nested-forms) - 複雑な階層構造のフォーム処理
 
 ### 実際のアプリケーション例
-- [高度なシナリオ](/ja/front/component/ma-form/examples/advanced-scenarios) - マルチステッププロセスと複雑なビジネスロジック
-- [パフォーマンス最適化](/ja/front/component/ma-form/examples/performance-demo) - 大規模フォームのパフォーマンス最適化戦略
+- [高度なシナリオ](/front/component/ma-form/examples/advanced-scenarios) - マルチステッププロセスと複雑なビジネスロジック
+- [パフォーマンス最適化](/front/component/ma-form/examples/performance-demo) - 大規模フォームのパフォーマンス最適化戦略
 
 ## TypeScript 型定義
 
 ### コアインターフェース
 
 #### MaFormOptions
-フォーム設定オプションの完全な型定義：
+フォーム設定オプションの完全な型定義:
 
 ```typescript
 interface MaFormOptions {
@@ -88,7 +88,7 @@ interface MaFormOptions {
 ```
 
 #### MaFormItem
-フォームアイテム設定の完全な型定義：
+フォームアイテム設定の完全な型定義:
 
 ```typescript
 interface MaFormItem {
@@ -118,7 +118,7 @@ interface MaFormItem {
 ```
 
 #### ColsConfiguration
-レスポンシブ列設定タイプ：
+レスポンシブ列設定タイプ:
 
 ```typescript
 interface ColsConfiguration {
@@ -149,7 +149,7 @@ interface ResponsiveColConfig {
 ```
 
 #### RenderType
-コンポーネントレンダリングタイプ定義：
+コンポーネントレンダリング型定義:
 
 ```typescript
 type RenderType = 
@@ -168,7 +168,7 @@ interface RenderContext {
 ```
 
 #### MaFormExpose
-コンポーネント公開メソッドの型定義：
+コンポーネント公開メソッドの型定義:
 
 ```typescript
 interface MaFormExpose {
@@ -214,11 +214,11 @@ interface MaFormExpose {
 
 | パラメータ        | 説明                             | タイプ         | デフォルト値 | バージョン    |
 |-----------|--------------------------------|-------------------|-------|-------|
-| `v-model` | フォームデータ、双方向バインディング、リアクティブ更新をサポート | `Record<string, any>` | `{}` | 1.0.0 |
+| `v-model` | フォームデータ、双方向バインディング、レスポンシブ更新をサポート | `Record<string, any>` | `{}` | 1.0.0 |
 | `options` | フォーム設定オプション、Element Plus ネイティブプロパティと拡張プロパティを含む | `MaFormOptions` | `{}` | 1.0.0 |
 | `items`   | フォームアイテム設定配列、ネストと動的設定をサポート | `MaFormItem[]` | `[]` | 1.0.0 |
-| `loading` | グローバルローディング状態、options.loading よりも優先度が高い | `boolean` | `false` | 1.0.0 |
-| `disabled` | グローバル無効状態、options.disabled よりも優先度が高い | `boolean` | `false` | 1.0.0 |
+| `loading` | グローバルローディング状態、options.loading より優先度が高い | `boolean` | `false` | 1.0.0 |
+| `disabled` | グローバル無効状態、options.disabled より優先度が高い | `boolean` | `false` | 1.0.0 |
 
 ### MaFormOptions 拡張設定
 
@@ -231,14 +231,14 @@ interface MaFormExpose {
 | `containerClass` | フォームコンテナのカスタムクラス名、スタイルカスタマイズ用                                                   | `string`                                                                                        | -        | 1.0.0 |
 | `loading` | ローディングアニメーションを表示するかどうか、グローバルとローカルのローディング状態をサポート                                               | `boolean`                                                                                       | `false`  | 1.0.0 |
 | `loadingConfig` | ローディングアニメーションの詳細設定オプション                                                             | [LoadingConfig](#loadingconfig-設定)                                                               | `{}`     | 1.0.0 |
-| `layout` | レイアウト方法：`flex` はグリッドシステムを使用、`grid` はスペースレイアウトを使用                                    | `'flex' \| 'grid'`                                                                              | `flex`   | 1.0.0 |
+| `layout` | レイアウト方法：`flex` はグリッドシステムを使用、`grid` は間隔レイアウトを使用                                    | `'flex' \| 'grid'`                                                                              | `flex`   | 1.0.0 |
 | `flex` | flex レイアウト設定、`el-row` コンポーネントに基づく                                            | `ElRowProps`                                                                                    | `{}`     | 1.0.0 |
 | `grid` | grid レイアウト設定、`el-space` コンポーネントに基づく                                          | `ElSpaceProps`                                                                                  | `{}`     | 1.0.0 |
 | `footerSlot` | 設定型フッタースロット、VNode または VNode 配列を返すことが可能                                        | `() => VNode \| VNode[]`                                                                        | -        | 1.0.0 |
 
 #### LoadingConfig 設定
 
-ローディングアニメーションの詳細設定オプション：
+ローディングアニメーションの詳細設定オプション:
 
 | パラメータ        | 説明      | タイプ   | デフォルト値 | バージョン    |
 |-----------|----------|------|-----|-------|
@@ -249,11 +249,11 @@ interface MaFormExpose {
 | `background` | 背景マスクの色   | `string` | `'rgba(0, 0, 0, 0.8)'`   | 1.0.0 |
 | `customClass` | カスタムスタイルクラス名   | `string` | -   | 1.0.0 |
 | `lock` | スクロールをロックするかどうか   | `boolean` | `true`   | 1.0.0 |
-| `fullscreen` | フルスクリーン表示するかどうか   | `boolean` | `false`   | 1.0.0 |
+| `fullscreen` | 全画面表示するかどうか   | `boolean` | `false`   | 1.0.0 |
 
-### MaFormItem 設定の詳細
+### MaFormItem 設定詳細
 
-フォームアイテムの完全な設定オプション：
+フォームアイテムの完全な設定オプション:
 
 #### 基本設定
 
@@ -268,7 +268,7 @@ interface MaFormExpose {
 
 | パラメータ            | 説明                                                                                                                                                                             | タイプ                                                                                                 | デフォルト値     | バージョン     |
 |---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|---------|--------|
-| `cols`        | グリッドレイアウト設定、`layout` が `flex` のときに有効、レスポンシブ設定をサポート                                                                                                                                                  | `ColsConfiguration`                    | -       | 1.0.0  |
+| `cols`        | グリッドレイアウト設定、`layout` が `flex` の場合に有効、レスポンシブ設定をサポート                                                                                                                                                  | `ColsConfiguration`                    | -       | 1.0.0  |
 | `itemProps`   | Element Plus `el-form-item` のネイティブプロパティ                                                                                                                                                                            | `ElFormItemProps`                    | `{}`       | 1.0.0  |
 | `itemSlots`   | Element Plus `el-form-item` のネイティブスロット設定                                                                                                                                                                            | `Record<string, (...args: any[]) => VNode \| VNode[]>`                         | `{}`       | 1.0.0  |
 
@@ -286,4 +286,6 @@ interface MaFormExpose {
 |---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|---------|--------|
 | `children`    | 子設定アイテム、無限ネストをサポート、複雑なフォーム構造用                                                                                                                                                                 | `MaFormItem[]`                                                                                     | `[]`       | 1.0.33 |
 
-#### 検
+#### 検証設定
+
+| パラメータ            | 説明                                                                                                                                                                             | タイプ                                                                                                 | デフォルト値    

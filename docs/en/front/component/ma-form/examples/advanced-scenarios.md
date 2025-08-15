@@ -6,12 +6,12 @@ Demonstrates MaForm's complex applications in real business scenarios, including
 
 ## Features
 
-- **Multi-step Forms**: Complex form processes divided into steps
-- **Data Dictionary Integration**: Integration with backend data dictionary systems
+- **Multi-step Forms**: Complex form workflows divided into steps
+- **Data Dictionary Integration**: Integration with backend dictionary systems
 - **Permission Control**: Form field control based on user permissions
 - **Internationalization Support**: Multi-language form configuration
 - **Business Rule Engine**: Complex business logic processing
-- **Data Linkage**: Multi-level data linkage and dependencies
+- **Data Linkage**: Multi-level data relationships and dependencies
 
 ## Multi-step Forms
 
@@ -76,7 +76,7 @@ const getStepFormItems = (currentStep: number): MaFormItem[] => {
         cols: { xs: 24, sm: 12 }
       },
       {
-        label: 'Birth Date',
+        label: 'Date of Birth',
         prop: 'basic.birthDate',
         render: 'datePicker',
         renderProps: {
@@ -99,7 +99,7 @@ const getStepFormItems = (currentStep: number): MaFormItem[] => {
           if (!value) {
             callback(new Error('Please enter phone number'))
           } else if (!/^1[3-9]\d{9}$/.test(value)) {
-            callback(new Error('Please enter valid phone number'))
+            callback(new Error('Please enter a valid phone number'))
           } else {
             callback()
           }
@@ -138,12 +138,12 @@ const getStepFormItems = (currentStep: number): MaFormItem[] => {
     ],
     2: [ // Additional information step
       {
-        label: 'Biography',
+        label: 'Bio',
         prop: 'additional.bio',
         render: 'textarea',
         renderProps: {
           rows: 4,
-          placeholder: 'Enter biography',
+          placeholder: 'Enter bio',
           maxlength: 500,
           showWordLimit: true
         },
@@ -194,7 +194,7 @@ const stepFormController = {
     }
   },
   
-  // Go to specific step
+  // Jump to specific step
   goToStep: async (targetStep: number) => {
     // Validate current step
     const isValid = await formRef.value.validate()
@@ -266,7 +266,7 @@ const stepValidationStrategy = {
 
 ## Data Dictionary Integration
 
-### 1. Data Dictionary Management
+### 1. Dictionary Management
 
 ```typescript
 interface DictionaryItem {
@@ -281,7 +281,7 @@ interface DictionaryConfig {
   code: string          // Dictionary code
   label: string         // Dictionary name
   cache: boolean        // Whether to cache
-  cascade?: boolean     // Whether cascading
+  cascade?: boolean     // Whether cascaded
   parentField?: string  // Parent field (for cascading)
 }
 
@@ -312,7 +312,7 @@ const dictionaryService = {
     }
   },
   
-  // Get cascading dictionary data
+  // Get cascaded dictionary data
   async getCascadeDictionary(
     config: DictionaryConfig, 
     parentValue: string | number
@@ -333,7 +333,7 @@ const dictionaryService = {
       
       return data
     } catch (error) {
-      console.error(`Failed to get cascading dictionary ${config.code}:`, error)
+      console.error(`Failed to get cascaded dictionary ${config.code}:`, error)
       return []
     }
   },
@@ -341,7 +341,7 @@ const dictionaryService = {
   // Clear dictionary cache
   clearCache: (code?: string) => {
     if (code) {
-      // Clear specific dictionary cache
+      // Clear cache for specific dictionary
       const keysToDelete = Array.from(this.cache.keys()).filter(key => key.startsWith(code))
       keysToDelete.forEach(key => this.cache.delete(key))
     } else {
@@ -433,7 +433,7 @@ const createDictSlots = (data: DictionaryItem[], renderType: string) => {
 }
 ```
 
-### 2. Cascading Dictionary Implementation
+### 2. Cascaded Dictionary Implementation
 
 ```typescript
 const cascadeDictionaryFields = [
@@ -542,7 +542,7 @@ interface UserContext {
 const permissionService = {
   userContext: ref<UserContext | null>(null),
   
-  // Check field permissions
+  // Check field permission
   checkFieldPermission(fieldPermission: FieldPermission): {
     visible: boolean
     editable: boolean

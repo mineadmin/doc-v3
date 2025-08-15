@@ -556,7 +556,7 @@ watch(
 除了上述核心 Store 外，系統還提供了其他輔助性的 Store 模組：
 
 ### useKeepAliveStore()
-頁面快取管理，詳見 [前端快取系統](/zh-tw/front/advanced/cache.md#頁面快取-keep-alive)
+頁面快取管理，詳見 [前端快取系統](/front/advanced/cache.md#頁面快取-keep-alive)
 
 ```typescript
 const keepAliveStore = useKeepAliveStore()
@@ -660,7 +660,7 @@ const { userInfo, isLogin } = userStore // 會丟失響應性
 
 ## 相關文件
 
-- [自動匯入配置](/zh-tw/front/advanced/auto-import.md) - Store 自動匯入機制
-- [前端快取系統](/zh-tw/front/advanced/cache.md) - 頁面和資料快取
-- [外掛系統](/zh-tw/front/high/plugins.md) - 外掛開發與管理
-- [請求與攔截器](/zh-tw/front/advanced/request.md) - HTTP 請求中的 Store 使用
+- [自動匯入配置](/front/advanced/auto-import.md) - Store 自動匯入機制
+- [前端快取系統](/front/advanced/cache.md) - 頁面和資料快取
+- [外掛系統](/front/high/plugins.md) - 外掛開發與管理
+- [請求與攔截器](/front/advanced/request.md) - HTTP 請求中的 Store 使用

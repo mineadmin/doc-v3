@@ -737,6 +737,6 @@ const arrayDataManager = {
 
 ## 相關連結
 
-- [MaFormItem children 配置](/zh-tw/front/component/ma-form#巢狀與條件配置)
-- [高階特性 - 條件渲染](/zh-tw/front/component/ma-form#條件渲染)
-- [表單項管理方法](/zh-tw/front/component/ma-form/examples/expose-methods#表單項管理方法)
+- [MaFormItem children 配置](/front/component/ma-form#巢狀與條件配置)
+- [高階特性 - 條件渲染](/front/component/ma-form#條件渲染)
+- [表單項管理方法](/front/component/ma-form/examples/expose-methods#表單項管理方法)

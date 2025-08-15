@@ -1,12 +1,12 @@
 # 高度な応用シナリオ
 
-MaFormが実際のビジネスシナリオでどのように複雑に活用されるかを紹介します。マルチステップフォーム、データ辞書統合、権限制御、国際化などの高度な機能を含みます。
+MaFormの実際のビジネスシナリオにおける複雑な応用を紹介します。マルチステップフォーム、データ辞書統合、権限制御、国際化などの高度な機能を含みます。
 
 <DemoPreview dir="demos/ma-form/advanced-scenarios" />
 
-## 機能特徴
+## 機能特性
 
-- **マルチステップフォーム**: ステップに分かれた複雑なフォームフロー
+- **マルチステップフォーム**: ステップごとの複雑なフォームフロー
 - **データ辞書統合**: バックエンドのデータ辞書システムとの統合
 - **権限制御**: ユーザー権限に基づくフォームフィールド制御
 - **国際化サポート**: 多言語フォーム設定
@@ -44,7 +44,7 @@ const stepFormConfig = {
     {
       title: '追加情報',
       key: 'additional',
-      description: 'その他の情報を入力',
+      description: 'その他の情報を追加',
       icon: 'Document'
     }
   ]
@@ -194,7 +194,7 @@ const stepFormController = {
     }
   },
   
-  // 指定ステップへ移動
+  // 指定ステップに移動
   goToStep: async (targetStep: number) => {
     // 現在のステップを検証
     const isValid = await formRef.value.validate()
@@ -205,7 +205,7 @@ const stepFormController = {
   }
 }
 
-// フォームアイテム更新
+// フォームアイテムを更新
 const updateFormItems = () => {
   const items = getStepFormItems(stepFormController.currentStep.value)
   formRef.value.setItems(items)
@@ -216,7 +216,7 @@ const updateFormItems = () => {
 
 ```typescript
 const stepValidationStrategy = {
-  // ステップ検証
+  // ステップごとの検証
   validateStep: async (stepIndex: number): Promise<boolean> => {
     const stepKey = stepFormConfig.steps[stepIndex].key
     const stepProps = Object.keys(stepFormController.stepData.value[stepKey])
@@ -234,7 +234,7 @@ const stepValidationStrategy = {
     }
   },
   
-  // 全ステップ検証
+  // 全ステップの検証
   validateAllSteps: async (): Promise<{ isValid: boolean; invalidSteps: number[] }> => {
     const invalidSteps: number[] = []
     
@@ -251,7 +251,7 @@ const stepValidationStrategy = {
     }
   },
   
-  // ステップ状態取得
+  // ステップ完了状態を取得
   getStepStatus: (stepIndex: number): 'wait' | 'process' | 'finish' | 'error' => {
     if (stepIndex < stepFormController.currentStep.value) {
       return 'finish'
@@ -280,8 +280,8 @@ interface DictionaryItem {
 interface DictionaryConfig {
   code: string          // 辞書コード
   label: string         // 辞書名
-  cache: boolean        // キャッシュ有無
-  cascade?: boolean     // カスケード有無
+  cache: boolean        // キャッシュするか
+  cascade?: boolean     // カスケードするか
   parentField?: string  // 親フィールド（カスケード時使用）
 }
 
@@ -289,9 +289,9 @@ const dictionaryService = {
   // 辞書データキャッシュ
   cache: new Map<string, DictionaryItem[]>(),
   
-  // 辞書データ取得
+  // 辞書データを取得
   async getDictionary(config: DictionaryConfig): Promise<DictionaryItem[]> {
-    // キャッシュ確認
+    // キャッシュをチェック
     if (config.cache && this.cache.has(config.code)) {
       return this.cache.get(config.code)!
     }
@@ -300,19 +300,19 @@ const dictionaryService = {
       const response = await fetch(`/api/dictionary/${config.code}`)
       const data = await response.json()
       
-      // データキャッシュ
+      // データをキャッシュ
       if (config.cache) {
         this.cache.set(config.code, data)
       }
       
       return data
     } catch (error) {
-      console.error(`辞書 ${config.code} 取得失敗:`, error)
+      console.error(`辞書 ${config.code} の取得に失敗:`, error)
       return []
     }
   },
   
-  // カスケード辞書データ取得
+  // カスケード辞書データを取得
   async getCascadeDictionary(
     config: DictionaryConfig, 
     parentValue: string | number
@@ -333,25 +333,25 @@ const dictionaryService = {
       
       return data
     } catch (error) {
-      console.error(`カスケード辞書 ${config.code} 取得失敗:`, error)
+      console.error(`カスケード辞書 ${config.code} の取得に失敗:`, error)
       return []
     }
   },
   
-  // 辞書キャッシュクリア
+  // 辞書キャッシュをクリア
   clearCache: (code?: string) => {
     if (code) {
-      // 指定辞書のキャッシュクリア
+      // 指定辞書のキャッシュをクリア
       const keysToDelete = Array.from(this.cache.keys()).filter(key => key.startsWith(code))
       keysToDelete.forEach(key => this.cache.delete(key))
     } else {
-      // 全キャッシュクリア
+      // 全キャッシュをクリア
       this.cache.clear()
     }
   }
 }
 
-// 辞書フォームアイテムファクトリ
+// 辞書フォームフィールドファクトリ
 const createDictionaryField = (config: {
   label: string
   prop: string
@@ -372,15 +372,15 @@ const createDictionaryField = (config: {
       loading: true  // 初期ローディング状態
     },
     renderSlots: {
-      default: () => [] // 初期は空、動的更新
+      default: () => [] // 初期は空、動的に更新
     },
     
-    // フィールドマウント時に辞書データロード
+    // フィールドマウント時に辞書データをロード
     async onMounted() {
       try {
         const dictData = await dictionaryService.getDictionary(dictConfig)
         
-        // フィールドオプション更新
+        // フィールドオプションを更新
         const slots = createDictSlots(dictData, renderType)
         formRef.value?.updateItem(prop, {
           renderProps: { loading: false },
@@ -388,7 +388,7 @@ const createDictionaryField = (config: {
         })
         
       } catch (error) {
-        console.error(`辞書データロード失敗: ${dictConfig.code}`, error)
+        console.error(`辞書データのロードに失敗: ${dictConfig.code}`, error)
         formRef.value?.updateItem(prop, {
           renderProps: { loading: false }
         })
@@ -397,7 +397,7 @@ const createDictionaryField = (config: {
   }
 }
 
-// 辞書オプションスロット作成
+// 辞書オプションスロットを作成
 const createDictSlots = (data: DictionaryItem[], renderType: string) => {
   return () => {
     switch (renderType) {
@@ -457,7 +457,7 @@ const cascadeDictionaryFields = [
         )
       }
     },
-    // 都道府県変更時に市区町村オプション更新
+    // 都道府県変更時に市区町村オプションを更新
     onChange: async (value: string) => {
       // 市区町村と区をクリア
       formRef.value.setFormData({
@@ -467,7 +467,7 @@ const cascadeDictionaryFields = [
       })
       
       if (value) {
-        // 市区町村データロード
+        // 市区町村データをロード
         formRef.value.updateItem('city', {
           renderProps: { loading: true }
         })
@@ -496,9 +496,9 @@ const cascadeDictionaryFields = [
     prop: 'city',
     render: 'select',
     renderProps: {
-      placeholder: '都道府県を先に選択',
+      placeholder: 'まず都道府県を選択',
       clearable: true,
-      disabled: true  // 初期無効
+      disabled: true  // 初期は無効
     },
     show: (model) => !!model.province,
     dependencies: ['province'],
@@ -506,7 +506,7 @@ const cascadeDictionaryFields = [
       // 同様の区連動ロジック
       const formData = formRef.value.getFormData()
       if (value && formData.province) {
-        // 区データロード...
+        // 区データをロード...
       }
     }
   }
@@ -521,9 +521,9 @@ const cascadeDictionaryFields = [
 interface FieldPermission {
   field: string
   permissions: {
-    view: boolean      // 表示可否
-    edit: boolean      // 編集可否
-    required: boolean  // 必須可否
+    view: boolean      // 表示可能か
+    edit: boolean      // 編集可能か
+    required: boolean  // 必須か
   }
   conditions?: {
     roles?: string[]           // ロール条件
@@ -542,7 +542,7 @@ interface UserContext {
 const permissionService = {
   userContext: ref<UserContext | null>(null),
   
-  // フィールド権限チェック
+  // フィールド権限をチェック
   checkFieldPermission(fieldPermission: FieldPermission): {
     visible: boolean
     editable: boolean
@@ -597,9 +597,4 @@ const permissionService = {
       return {
         ...item,
         show: visible,
-        renderProps: {
-          ...item.renderProps,
-          disabled: !editable
-        },
-        itemProps: {
-          ...item.item
+        renderProps:

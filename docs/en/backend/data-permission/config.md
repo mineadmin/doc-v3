@@ -6,22 +6,19 @@ This article explains the configuration and usage methods of various strategies 
 
 Currently, data isolation only supports row-level isolation but offers multiple isolation strategies.
 
-It is primarily divided into isolation methods based on the creator and the department.
+Mainly divided into isolation methods based on creator and department ownership:
 
-* **Department** isolation uses the user's current department as the basis, automatically adding department filter conditions when querying data.
-* **Creator** isolation uses the data creator as the basis, automatically adding creator filter conditions when querying data.
+* `Department` isolation uses the user's current department as the basis, automatically adding department filter conditions when querying data.
+* `Creator` isolation uses the data creator as the basis, automatically adding creator filter conditions when querying data.
 
 ## Priority
 
-Currently, two methods are supported:
-1. **Setting isolation policies for specific users**
-2. **Assigning positions to users and setting isolation policies for those positions**
-
-If a user has both an isolation policy and a position-based isolation policy, the user-specific isolation policy takes precedence.
+Currently supports two methods: `setting isolation policies for specific users` and `assigning positions to users with position-based isolation policies`.  
+If a user has both an isolation policy and position-based isolation policy set, the user-specific isolation policy takes precedence.
 
 ```plantuml
 @startuml
-title Retrieve Data Isolation Policy
+title Get Data Isolation Policy
 start
 :Get current user policy;
 if (User has isolation policy) then (yes)
@@ -42,10 +39,10 @@ end
 @enduml
 ```
 
-The logic code is as follows:
+The logic code is:
 
 ```php
-// app/Model/Permission/User.php:167~186
+// /mineadmin/app/Model/Permission/User.php:160-179
 
 public function getPolicy(): ?Policy
 {
@@ -76,35 +73,35 @@ Using the current `user` table as the isolation table, assume the following data
 
 ### Sample Data
 
-Department Table
+Department table
 
 ---
 
 | id | name | parent_id |
 |----|------|-----------|
-| 1  | Dept1 | 0         |
-| 2  | Dept2 | 1         |
-| 3  | Dept3 | 0         |
+| 1  | Dept1  | 0         |
+| 2  | Dept2  | 1         |
+| 3  | Dept3  | 0         |
 
-Dept1 is a top-level department with no parent.
-Dept2 is a sub-department of Dept1.
+Dept1 is a top-level department with no parent.  
+Dept2 is a sub-department of Dept1.  
 Dept3 is a top-level department with no parent.
 
 ---
 
-Position Table
+Position table
 
 | id | name | dept_id |
 |----|------|---------|
-| 1  | Position1 | 1       |
-| 2  | Position2 | 2       |
-| 3  | Position3 | 3       |
+| 1  | Position1  | 1       |
+| 2  | Position2  | 2       |
+| 3  | Position3  | 3       |
 
-Dept1 has Position1, Dept2 has Position2, and Dept3 has Position3.
+Dept1 has Position1, Dept2 has Position2, Dept3 has Position3.
 
 ---
 
-User Table
+User table
 
 | id | name  | dept_id | created_by | post_id |
 |----|-------|---------|------------|---------|
@@ -115,127 +112,127 @@ User Table
 | 5  | a4    | 2       | 2          | 0       |
 | 6  | a5    | 0       | 4          | 0       |
 
-In the user table, `dept_id` 0 indicates no department, and `created_by` 0 indicates no creator.
+In the user table, `dept_id` 0 indicates no department, `created_by` 0 indicates no creator.  
 The super admin can view all data.
 
-a1 and a3 belong to Dept1; a2 and a4 belong to Dept2.
+a1 and a3 belong to Dept1, a2 and a4 belong to Dept2.
 
-a1 and a2 were created by the super admin; a3 and a4 were created by a1.
+a1 and a2 were created by the super admin, a3 and a4 were created by a1.
 
-a1 and a2 hold Position1; a3 holds Position2; a4 has no position.
+a1 and a2 hold Position1, a3 holds Position2, a4 has no position.
 
 Below are examples illustrating query results under different policies.
 
-### PolicyType::SELF `Query Only Own Data`
+### PolicyType::SELF `Query Only Self`
 
-Assume the current user is a1 (ID 2) with a "query only own data" policy.
+Assume current user is a1 (id 2) with "query only self" policy.
 
-1. Isolation method: Only by creator. The query condition will be `created_by = current user ID`, i.e., users a3 and a4.
+1. Isolation method: creator only. Adds condition `created_by = current user id`, querying users a3, a4.
 
 ```sql
 SELECT * FROM user WHERE created_by in (4,5);
 ```
 
-2. Isolation method: Only by department. The query condition will be `dept_id = current user's department`, i.e., users a1 and a3.
+2. Isolation method: department only. Adds condition `dept_id = current user's department`, querying users a1, a3.
 
 ```sql
 SELECT * FROM user WHERE dept_id in(1);
 ```
 
-3. Isolation method: By creator and department. The query condition will be `created_by = current user ID` AND `dept_id = current user's department`, i.e., user a3.
+3. Isolation method: both creator and department. Adds conditions `created_by = current user id` AND `dept_id = current user's department`, querying user a3.
 
 ```sql
 SELECT * FROM user WHERE created_by in(2) AND dept_id in(1);
 ```
 
-4. Isolation method: By department OR creator. The query condition will be `created_by = current user ID` OR `dept_id = current user's department`, i.e., users a1, a3, and a4.
+4. Isolation method: department OR creator. Adds conditions `dept_id = current user's department` OR `created_by = current user id`, querying users a1, a3, a4.
 
 ```sql
 SELECT * FROM user WHERE dept_id in(1) OR created_by in(2);
 ```
 
-### PolicyType::DEPT_SELF `Query Only Own Department`
+### PolicyType::DEPT_SELF `Query Only Current Department`
 
-Assume the current user is a1 (ID 2) with a "query only own department" policy.
+Assume current user is a1 (id 2) with "query only current department" policy.
 
-1. Isolation method: Only by creator. The query condition will be `created_by = IDs of all users in the same department`, i.e., users a3, a4, and a5.
+1. Isolation method: creator only. Adds condition `created_by = all users in same department`, querying users a3, a4, a5.
 
 ```sql
 SELECT * FROM user WHERE created_by in (2,4,5);
 ```
 
-2. Isolation method: Only by department. The query condition will be `dept_id = current user's department`, i.e., users a1 and a3.
+2. Isolation method: department only. Adds condition `dept_id = current department`, querying users a1, a3.
 
 ```sql
 SELECT * FROM user WHERE dept_id in(1);
 ```
 
-3. Isolation method: By creator and department. The query condition will be `created_by = IDs of all users in the same department` AND `dept_id = current user's department`, i.e., user a3.
+3. Isolation method: both creator and department. Adds conditions `created_by = all users in same department` AND `dept_id = current department`, querying user a3.
 
 ```sql
 SELECT * FROM user WHERE created_by in(2,4,5) AND dept_id in(1);
 ```
 
-4. Isolation method: By department OR creator. The query condition will be `created_by = IDs of all users in the same department` OR `dept_id = current user's department`, i.e., users a1, a3, a4, and a5.
+4. Isolation method: department OR creator. Adds conditions `created_by = all users in same department` OR `dept_id = current department`, querying users a1, a3, a4, a5.
 
 ```sql
 SELECT * FROM user WHERE created_by in(2,4,5) OR dept_id in(1);
 ```
 
-### PolicyType::DEPT_TREE `Query Own Department and Sub-Departments`
+### PolicyType::DEPT_TREE `Query Current Department and Sub-departments`
 
-Assume the current user is a1 (ID 2) with a "query own department and sub-departments" policy.
+Assume current user is a1 (id 2) with "query current department and sub-departments" policy.
 
-1. Isolation method: Only by creator. The query condition will be `created_by = IDs of all users in the same and sub-departments`, i.e., users a3, a4, and a5.
+1. Isolation method: creator only. Adds condition `created_by = all users in current and child departments`, querying users a3, a4, a5.
 
 ```sql
 SELECT * FROM user WHERE created_by in (2,4,5);
 ```
 
-2. Isolation method: Only by department. The query condition will be `dept_id = current user's department and sub-departments`, i.e., users a1, a2, a3, and a4.
+2. Isolation method: department only. Adds condition `dept_id = current and child departments`, querying users a1, a2, a3, a4.
 
 ```sql
 SELECT * FROM user WHERE dept_id in(1,2);
 ```
 
-3. Isolation method: By creator and department. The query condition will be `created_by = IDs of all users in the same and sub-departments` AND `dept_id = current user's department and sub-departments`, i.e., users a3 and a4.
+3. Isolation method: both creator and department. Adds conditions `created_by = all users in current and child departments` AND `dept_id = current and child departments`, querying users a3, a4.
 
 ```sql
 SELECT * FROM user WHERE created_by in(2,4,5) AND dept_id in(1,2);
 ```
 
-4. Isolation method: By department OR creator. The query condition will be `created_by = IDs of all users in the same and sub-departments` OR `dept_id = current user's department and sub-departments`, i.e., users a1, a2, a3, a4, and a5.
+4. Isolation method: department OR creator. Adds conditions `created_by = all users in current and child departments` OR `dept_id = current and child departments`, querying users a1, a2, a3, a4, a5.
 
 ```sql
 SELECT * FROM user WHERE created_by in(2,4,5) OR dept_id in(1,2);
 ```
 
-### PolicyType::ALL `Query All Data`
-Assume the current user is a1 (ID 2) with a "query all data" policy. All restrictions will be lifted.
+### PolicyType::ALL `Query All`
+Assume current user is a1 (id 2) with "query all" policy. Removes all restrictions.
 
-### PolicyType::CUSTOM_DEPT `Custom Departments`
+### PolicyType::CUSTOM_DEPT `Custom Department`
 
-Assume the current user is a1 (ID 2) with a policy allowing only access to data from departments 2 and 3.
+Assume current user is a1 (id 2) with policy allowing only Dept2 and Dept3 data.
 
-1. Isolation method: Only by creator. The query condition will be `created_by = IDs of all users in departments 2 and 3`, i.e., users a2, a4, and a5.
+1. Isolation method: creator only. Adds condition `created_by = all users in Dept2 and Dept3`, querying users a2, a4, a5.
 
 ```sql
 SELECT * FROM user WHERE created_by in (2,4,5);
 ```
 
-2. Isolation method: Only by department. The query condition will be `dept_id = 2 and 3`, i.e., users a2 and a4.
+2. Isolation method: department only. Adds condition `dept_id = 2 and 3`, querying users a2, a4.
 
 ```sql
 SELECT * FROM user WHERE dept_id in(2,3);
 ```
 
-3. Isolation method: By creator and department. The query condition will be `created_by = IDs of all users in departments 2 and 3` AND `dept_id = 2 and 3`, i.e., users a2 and a4.
+3. Isolation method: both creator and department. Adds conditions `created_by = all users in Dept2 and Dept3` AND `dept_id = 2 and 3`, querying users a2, a4.
 
 ```sql
 SELECT * FROM user WHERE created_by in(2,4,5) AND dept_id in(2,3);
 ```
 
-4. Isolation method: By department OR creator. The query condition will be `created_by = IDs of all users in departments 2 and 3` OR `dept_id = 2 and 3`, i.e., users a2, a4, and a5.
+4. Isolation method: department OR creator. Adds conditions `created_by = all users in Dept2 and Dept3` OR `dept_id = 2 and 3`, querying users a2, a4, a5.
 
 ```sql
 SELECT * FROM user WHERE created_by in(2,4,5) OR dept_id in(2,3);
@@ -243,41 +240,24 @@ SELECT * FROM user WHERE created_by in(2,4,5) OR dept_id in(2,3);
 
 ### PolicyType::CUSTOM_FUNC `Custom Function`
 
-Assume the current user is a1 (ID 2) with a policy using the custom function `testction`.
+Assume current user is a1 (id 2) with custom function `testction` policy.
 
-In `config/autoload/department/custom.php`, the custom function `testction` is defined:
+In `/Users/zhuzhu/project/mineadmin/config/autoload/department/custom.php`, custom function `testction` is defined:
 
 ```php
-<?php
-
-declare(strict_types=1);
-/**
- * This file is part of MineAdmin.
- *
- * @link     https://www.mineadmin.com
- * @document https://doc.mineadmin.com
- * @contact  root@imoi.cn
- * @license  https://github.com/mineadmin/MineAdmin/blob/master/LICENSE
- */
-
-use App\Library\DataPermission\Context;
-use App\Library\DataPermission\ScopeType;
-use App\Model\DataPermission\Policy;
-use App\Model\Permission\User;
-use Hyperf\Database\Query\Builder;
-
+// /mineadmin/config/autoload/department/custom.php
 return [
     'testction' =>  function (Builder $builder, ScopeType $scopeType, Policy $policy, User $user) {
-        // Only applies to user with ID 2
+        // Only applies to user with id 2
         if ($user->id !== 2) {
             return;
         }
-        // Get the creator column name from the current context
+        // Get creator column name from context
         $createdByColumn = Context::getCreatedByColumn();
-        // Get the department column name from the current context
+        // Get department column name from context
         $deptColumn = Context::getDeptColumn();
         switch ($scopeType){
-            // Isolation type: By creator
+            // Isolation type: creator
             case ScopeType::CREATED_BY:
                 // Creator column equals current user
                 $builder->where($createdByColumn, $user->id);
@@ -304,4 +284,4 @@ return [
 
 ```
 
-When isolation is active, the current context's user, isolation method, and permission policy are passed to the custom function `testction` for processing, allowing developers to implement complex isolation logic.
+When isolation takes effect, the current context's user, isolation method, and permission policy are passed to `testction` for processing, allowing developers to implement complex custom isolation logic.

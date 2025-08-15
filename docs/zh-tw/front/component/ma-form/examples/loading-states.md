@@ -514,6 +514,6 @@ watch(() => formRef.value?.isMobileState(), (isMobile) => {
 
 ## 相關連結
 
-- [LoadingConfig 配置詳解](/zh-tw/front/component/ma-form#loadingconfig-配置)
-- [狀態管理方法](/zh-tw/front/component/ma-form#狀態管理)
-- [暴露方法 - 載入狀態](/zh-tw/front/component/ma-form/examples/expose-methods#狀態管理方法)
+- [LoadingConfig 配置詳解](/front/component/ma-form#loadingconfig-配置)
+- [狀態管理方法](/front/component/ma-form#狀態管理)
+- [暴露方法 - 載入狀態](/front/component/ma-form/examples/expose-methods#狀態管理方法)

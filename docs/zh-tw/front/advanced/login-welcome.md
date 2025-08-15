@@ -109,7 +109,7 @@ LoginIndex --> Background
 
 **自定義建議**：
 - 不建議直接修改原始碼，以免影響後續版本升級
-- 推薦透過[外掛系統](/zh-tw/front/high/plugins.md)替換登入元件
+- 推薦透過[外掛系統](/front/high/plugins.md)替換登入元件
 - 可透過路由配置覆蓋預設的 `login` 路由元件
 :::
 
@@ -282,7 +282,7 @@ async initRoutes() {
 - **Access Token**：短期有效（預設 1 小時），用於 API 請求認證
 - **Refresh Token**：長期有效（預設 2 小時），用於重新整理 Access Token
 
-詳細的 Token 重新整理機制請參考 [請求與攔截器](/zh-tw/front/advanced/request.md#token-重新整理機制) 文件。
+詳細的 Token 重新整理機制請參考 [請求與攔截器](/front/advanced/request.md#token-重新整理機制) 文件。
 
 ## 歡迎頁配置與路由管理
 
@@ -673,9 +673,9 @@ async login(params: LoginParams) {
 
 ## 相關文件連結
 
-- [系統配置詳解](/zh-tw/front/advanced/system-config.md) - 系統全域性配置說明
-- [請求與攔截器](/zh-tw/front/advanced/request.md) - HTTP 請求和 Token 管理
-- [路由與選單](/zh-tw/front/base/route-menu.md) - 路由系統配置
-- [外掛系統](/zh-tw/front/high/plugins.md) - 外掛開發與配置
-- [後端認證機制](/zh-tw/backend/security/passport.md) - 後端 JWT 認證實現
+- [系統配置詳解](/front/advanced/system-config.md) - 系統全域性配置說明
+- [請求與攔截器](/front/advanced/request.md) - HTTP 請求和 Token 管理
+- [路由與選單](/front/base/route-menu.md) - 路由系統配置
+- [外掛系統](/front/high/plugins.md) - 外掛開發與配置
+- [後端認證機制](/backend/security/passport.md) - 後端 JWT 認證實現
 

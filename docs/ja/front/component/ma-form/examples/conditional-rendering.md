@@ -1,6 +1,6 @@
 # 条件付きレンダリング
 
-フォームデータに基づいてフィールドの表示・非表示を動的に制御する条件付きレンダリング機能を紹介します。連動表示や複雑な条件判定を含みます。
+フォームデータに基づいてフィールドの表示/非表示を動的に制御する条件付きレンダリング機能を紹介します。連動表示や複雑な条件判定を含みます。
 
 <DemoPreview dir="demos/ma-form/conditional-rendering" />
 
@@ -8,7 +8,7 @@
 
 - **動的表示制御**: フォームデータに基づいてフィールドの表示/非表示を制御
 - **依存関係管理**: dependenciesでフィールド間の依存関係を宣言
-- **複雑条件対応**: 複数条件の組み合わせ判定をサポート
+- **複雑条件サポート**: 複数条件の組み合わせ判定をサポート
 - **パフォーマンス最適化**: 依存フィールド変更時のみ条件を再計算
 - **2つのレンダリング方式**: showとhide属性で異なる表示制御戦略を提供
 
@@ -31,10 +31,10 @@ MaFormでは2種類の条件付きレンダリング方法を提供していま�
 ```
 
 **特徴:**
-- ✅ DOMをレンダリングしないため最高のパフォーマンス
+- ✅ DOMをレンダリングしないためパフォーマンス最適
 - ✅ ページスペースを占有しない
 - ✅ ほとんどのシナリオに適している
-- ⚠️ 初期化時に軽微なちらつきが発生する可能性あり
+- ⚠️ 初期化時にわずかなちらつきが発生する可能性あり
 
 ### hide属性
 
@@ -53,7 +53,7 @@ MaFormでは2種類の条件付きレンダリング方法を提供していま�
 **特徴:**
 - ✅ スムーズな切り替え、ちらつきなし
 - ✅ フォーム構造を安定させる
-- ❌ DOMはレンダリングされる
+- ❌ 依然としてDOMはレンダリングされる
 - ❌ ページスペースを占有する
 
 ## 使用シナリオ比較
@@ -90,7 +90,7 @@ const userTypeFields = [
 ]
 ```
 
-**2. 権限レベル制御**
+**2. 権限レベルによる制御**
 
 ```typescript
 const permissionFields = [
@@ -136,7 +136,7 @@ const notificationFields = [
     label: 'メール通知',
     prop: 'emailNotifications',
     render: 'switch',
-    // hideを使用してレイアウト安定性を保持
+    // hideを使用してレイアウト安定性を維持
     hide: (item, model) => !model.enableNotifications,
     dependencies: ['enableNotifications']
   },
@@ -161,7 +161,7 @@ const notificationFields = [
     readonly: true,
     placeholder: 'パスワード強度: 弱'
   },
-  // hideを使用してレイアウトジャンプを防止
+  // hideを使用してレイアウト変動を防止
   hide: (item, model) => !model.password || model.password.length === 0,
   dependencies: ['password']
 }
@@ -186,7 +186,7 @@ const notificationFields = [
 }
 ```
 
-### 2. 連鎖条件レンダリング
+### 2. カスケード条件レンダリング
 
 ```typescript
 const cascadeFields = [
@@ -206,7 +206,7 @@ const cascadeFields = [
     label: '都道府県',
     prop: 'province',
     render: 'select',
-    // 連鎖条件: 住所が必要かつ中国を選択
+    // カスケード条件: 住所が必要かつ中国を選択
     show: (item, model) => model.needAddress && model.country === 'china',
     dependencies: ['needAddress', 'country']
   },
@@ -214,14 +214,14 @@ const cascadeFields = [
     label: '市区町村',
     prop: 'city',
     render: 'select',
-    // より複雑な連鎖: 住所が必要かつ都道府県が選択済み
+    // より複雑なカスケード: 住所が必要かつ都道府県を選択
     show: (item, model) => model.needAddress && !!model.province,
     dependencies: ['needAddress', 'province']
   }
 ]
 ```
 
-### 3. 動的計算条件
+### 3. 動的条件計算
 
 ```typescript
 // 計算プロパティを使用して複雑条件を最適化
@@ -261,7 +261,7 @@ const advancedField = {
 ### 2. 循環依存の回避
 
 ```typescript
-// ❌ 誤り: 循環依存の可能性あり
+// ❌ 誤り: 循環依存の可能性
 {
   label: 'フィールドA',
   prop: 'fieldA',
@@ -275,7 +275,7 @@ const advancedField = {
   dependencies: ['fieldA']  // 循環依存
 }
 
-// ✅ 正しい: 共通の制御フィールドを使用
+// ✅ 正解: 共通の制御フィールドを使用
 {
   label: '制御スイッチ',
   prop: 'enableFeatures',
@@ -416,22 +416,22 @@ const createDebugShow = (conditionFn: Function, debugName: string) => {
 ### 1. 明確な使用シナリオ
 
 - **show属性**: ほとんどの条件レンダリングシナリオに適し、最高のパフォーマンス
-- **hide属性**: 頻繁な切り替えやレイアウト安定性が必要なシナリオに適している
+- **hide属性**: 頻繁な切り替え、レイアウト安定性が必要なシナリオに適している
 
 ### 2. 適切な依存関係設計
 
 - 表示に実際に影響するフィールドのみを依存関係として宣言
-- 過剰な依存関係や循環依存を避ける
+- 過剰な依存関係と循環依存を回避
 - 計算プロパティを使用して複雑条件をキャッシュ
 
 ### 3. ユーザーエクスペリエンスの考慮
 
-- 頻繁に切り替わるシナリオではhide属性を使用してレイアウトジャンプを防止
+- 頻繁に切り替わるシナリオではhide属性を使用してレイアウト変動を防止
 - 一度きりの表示シナリオではshow属性を使用してパフォーマンスを最適化
 - 適切なトランジションアニメーションでUXを向上
 
 ## 関連リンク
 
-- [MaFormItem 設定詳細](/ja/front/component/ma-form#maformitem-設定詳細)
-- [高度な機能 - 条件付きレンダリング](/ja/front/component/ma-form#条件付きレンダリング)
-- [ネストされたフォーム構造](/ja/front/component/ma-form/examples/nested-forms)
+- [MaFormItem 設定詳細](/front/component/ma-form#maformitem-設定詳細)
+- [高度な機能 - 条件付きレンダリング](/front/component/ma-form#条件付きレンダリング)
+- [ネストされたフォーム構造](/front/component/ma-form/examples/nested-forms)

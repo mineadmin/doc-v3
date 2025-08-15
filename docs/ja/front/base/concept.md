@@ -1,14 +1,14 @@
 # 基本概念
 
-プロジェクト全体がリファクタリングされました。ここでは、ドキュメント全体をよりよく理解するための基本概念を紹介します。まずこの部分を必ずよく読んでください。
+プロジェクト全体がリファクタリングされました。ドキュメント全体をよりよく理解するために、いくつかの基本概念を紹介します。この部分を必ず最初に注意深く読んでください。
 
 ::: tip
-以下で説明する内容はすべてソースコードのルートディレクトリにある `./web` 内の構造を対象としています
+以下で説明する内容はすべてソースコードのルートディレクトリにある `./web` 内の構造に関するものです
 :::
 
 ## プロジェクト全体のアーキテクチャ
 
-このプロジェクトは現代的なフロントエンド開発アーキテクチャを採用し、Vue 3 + TypeScript + Vite を基盤として構築されています。モジュール化とプラグイン化された開発モデルを実現しています。
+このプロジェクトはモダンなフロントエンド開発アーキテクチャを採用し、Vue 3 + TypeScript + Vite をベースに構築されています。モジュール化、プラグイン化された開発モデルを実現しています。
 
 ```plantuml
 @startmindmap
@@ -25,16 +25,16 @@
 **** 機能プラグイン
 *** components グローバルコンポーネント
 *** utils ユーティリティ関数
-** types グローバル型定義
+** types グローバルタイプ
 ** vite.config.ts 設定
 @endmindmap
 ```
 
-## グローバル型システム
+## グローバルタイプシステム
 
-新しいバージョンは `TypeScript` で書かれているため、グローバルな型定義はすべて `./types` ディレクトリに格納されており、関連するデータ型構造を見つけることができます。
+新しいバージョンは `TypeScript` で書かれているため、グローバルな型定義はすべて `./types` ディレクトリに保存されています。関連するデータ型構造はそこで見つけることができます。
 
-### 型ファイルの組織構造
+### タイプファイルの組織構造
 
 ```
 ./types/
@@ -47,7 +47,7 @@
 
 ### 使用例
 
-プロジェクト内ではエイリアス `#` を使用して型を簡単にインポートできます：
+プロジェクトではエイリアス `#` を使用して型を簡単にインポートできます：
 
 ```typescript
 // API型をインポート
@@ -68,7 +68,7 @@ interface ComponentProps {
 - **命名規則**：インターフェースと型にはPascalCaseを使用
 - **ファイル組織**：機能モジュールごとに型ファイルを分割
 - **型エクスポート**：`export type` を使用して型定義をエクスポート
-- **ジェネリックサポート**：型の再利用性を高めるためにジェネリックを適切に使用
+- **ジェネリックサポート**：ジェネリックを適切に使用して型の再利用性を向上
 
 ## モジュール化アーキテクチャ
 
@@ -113,7 +113,7 @@ interface ComponentProps {
 │   └── index.ts        # 言語パックエクスポート
 ├── views/              # ビューページ
 │   ├── user/           # ユーザー管理ページ
-│   │   ├── index.vue   # ユーザー一覧ページ
+│   │   ├── index.vue   # ユーザーリストページ
 │   │   └── detail.vue  # ユーザー詳細ページ
 │   └── dashboard/      # ダッシュボードページ
 │       └── index.vue
@@ -171,186 +171,6 @@ export default defineComponent({
   }
 })
 ```
-
-## プラグインシステム
-
-新しいフロントエンドでは `./src/plugins` ディレクトリが追加され、独立アプリケーションやプラグインなどを格納しています。プラグインシステムは機能のホットプラグをサポートし、システムの拡張性と柔軟性を向上させます。
-
-### プラグインアーキテクチャ設計
-
-```plantuml
-@startmindmap
-* プラグインシステム
-** コアプラグイン
-*** ルートプラグイン
-*** 状態管理プラグイン
-*** 国際化プラグイン
-** 機能プラグイン
-*** チャートプラグイン
-*** エディタープラグイン
-*** マッププラグイン
-** サードパーティプラグイン
-*** サードパーティコンポーネントライブラリ
-*** 外部サービス統合
-@endmindmap
-```
-
-### プラグインディレクトリ構造
-
-```
-./src/plugins/
-├── charts/              # チャートプラグイン
-│   ├── components/      # プラグインコンポーネント
-│   ├── utils/          # ユーティリティ関数
-│   ├── types/          # 型定義
-│   └── index.ts        # プラグインエントリ
-├── editor/             # エディタープラグイン
-│   ├── components/
-│   ├── config/
-│   └── index.ts
-├── map/                # マッププラグイン
-└── shared/             # プラグイン間共有リソース
-    ├── utils/          # 共有ユーティリティ
-    ├── components/     # 共有コンポーネント
-    └── types/          # 共有型定義
-```
-
-### プラグインライフサイクル
-
-```plantuml
-@startuml
-participant "アプリケーションメインプログラム" as App
-participant "プラグインマネージャー" as PM
-participant "プラグインインスタンス" as P
-
-App -> PM: プラグインマネージャー初期化
-PM -> P: プラグインロード
-P -> PM: プラグイン情報登録
-PM -> P: installメソッド呼び出し
-P -> App: コンポーネント/ディレクティブ/サービス登録
-App -> P: プラグイン機能呼び出し
-App -> PM: プラグインアンインストール
-PM -> P: uninstallメソッド呼び出し
-@enduml
-```
-
-### プラグイン開発規範
-
-#### 1. プラグイン基本構造
-
-```typescript
-// ./src/plugins/example/index.ts
-import type { App } from 'vue'
-import type { PluginOptions } from './types'
-
-export interface ExamplePlugin {
-  install(app: App, options?: PluginOptions): void
-  uninstall?(app: App): void
-}
-
-export const examplePlugin: ExamplePlugin = {
-  install(app: App, options?: PluginOptions) {
-    // グローバルコンポーネント登録
-    app.component('ExampleComponent', ExampleComponent)
-    
-    // グローバルディレクティブ登録
-    app.directive('example', exampleDirective)
-    
-    // グローバルメソッド提供
-    app.config.globalProperties.$example = exampleMethod
-    
-    // プラグイン設定登録
-    app.provide('exampleConfig', options)
-  },
-  
-  uninstall(app: App) {
-    // リソースクリーンアップ
-    delete app.config.globalProperties.$example
-  }
-}
-
-export default examplePlugin
-```
-
-#### 2. プラグイン設定ファイル
-
-```typescript
-// ./src/plugins/example/config.ts
-export interface PluginConfig {
-  name: string
-  version: string
-  description: string
-  dependencies?: string[]
-  permissions?: string[]
-}
-
-export const pluginConfig: PluginConfig = {
-  name: 'example-plugin',
-  version: '1.0.0',
-  description: 'サンプルプラグイン',
-  dependencies: ['vue', 'vue-router'],
-  permissions: ['read:user', 'write:user']
-}
-```
-
-### プラグイン使用例
-
-#### 1. プラグイン登録
-
-```typescript
-// main.ts
-import { createApp } from 'vue'
-import App from './App.vue'
-import examplePlugin from '$/example'
-
-const app = createApp(App)
-
-// プラグイン登録
-app.use(examplePlugin, {
-  // プラグイン設定オプション
-  theme: 'dark',
-  locale: 'ja-JP'
-})
-
-app.mount('#app')
-```
-
-#### 2. コンポーネントでプラグインを使用
-
-```vue
-<template>
-  <div>
-    <!-- プラグイン登録のグローバルコンポーネントを使用 -->
-    <ExampleComponent :data="exampleData" />
-    
-    <!-- プラグインディレクティブを使用 -->
-    <div v-example="directiveOptions">
-      プラグインディレクティブサンプル
-    </div>
-  </div>
-</template>
-
-<script setup lang="ts">
-import { getCurrentInstance } from 'vue'
-
-const instance = getCurrentInstance()
-
-// プラグイン提供のグローバルメソッドを使用
-const result = instance?.proxy?.$example('param')
-
-// またはinjectでプラグイン設定を取得
-const exampleConfig = inject('exampleConfig')
-</script>
-```
-
-### プラグイン管理ベストプラクティス
-
-- **命名規則**：プラグインディレクトリにはkebab-caseを使用
-- **バージョン管理**：プラグイン設定で明確なバージョン情報を記載
-- **依存関係宣言**：プラグイン依存関係を明確に宣言
-- **リソースクリーンアップ**：uninstallメソッドを実装してリソースをクリーンアップ
-- **型サポート**：プラグインに完全なTypeScript型定義を提供
-- **ドキュメント整備**：各プラグインに使用ドキュメントとサンプルを提供
 
 ## エイリアスシステム
 
@@ -422,7 +242,7 @@ interface ComponentProps {
 import ChartPlugin from '$/charts'
 import { useChart } from '$/charts/hooks'
 
-// エディタープラグインをインポート
+// エディタプラグインをインポート
 import EditorPlugin from '$/editor'
 import EditorComponent from '$/editor/components/RichEditor.vue'
 ```
@@ -464,11 +284,11 @@ import type { UserModuleState } from '~/user/types'
 @endmindmap
 ```
 
-### エイリアス設定ベストプラクティス
+### エイリアス設定のベストプラクティス
 
 #### 1. IDEサポート設定
 
-より良いIDEのインテリセンスとパスジャンプサポートを得るために、`tsconfig.json` を設定する必要があります：
+より良いIDEのインテリセンスとパスジャンプサポートを得るためには、`tsconfig.json` を設定する必要があります：
 
 ```json
 {
@@ -486,6 +306,78 @@ import type { UserModuleState } from '~/user/types'
 
 #### 2. 使用規範
 
-- **一貫性**：チーム内でエイリアスを統一して使用し、相対パスの混在を避ける
+- **一貫性**：チーム内でエイリアスを統一使用し、相対パスの混在を避ける
 - **可読性**：エイリアスは意味が明確で理解しやすいものにする
-- **階層制御**：深すぎるパス階層を避け、
+- **階層制御**：深すぎるパス階層を避け、エイリアスを適切に使用してパスを簡素化
+- **タイプセーフティ**：TypeScriptと連携してパス参照のタイプセーフティを確保
+
+#### 3. 一般的な使用パターン
+
+```typescript
+// コンポーネント内での総合的な使用例
+<script setup lang="ts">
+// グローバル型
+import type { UserInfo, ApiResponse } from '#/global'
+
+// グローバルユーティリティ
+import { formatDate, validateForm } from '@/utils/common'
+
+// モジュールAPI
+import { userApi } from '~/base/api'
+
+// プラグイン機能
+import { useChart } from '$/charts/hooks'
+
+// グローバルコンポーネント
+import MaButton from '@/components/MaButton.vue'
+
+// モジュールコンポーネント
+import UserForm from '~/user/components/UserForm.vue'
+</script>
+```
+
+### エイリアスシステムの利点
+
+1. **パス簡素化**：複雑な相対パス参照を回避
+2. **保守性向上**：ファイル移動時に多数の参照パスを変更する必要がない
+3. **可読性向上**：エイリアスを通じてファイルの所属モジュールを迅速に識別
+4. **統一規範**：チーム開発で一貫した参照スタイルを維持
+5. **IDEフレンドリー**：TypeScriptとIDEと連携してより良い開発体験を提供
+
+## まとめ
+
+上記の基本概念の紹介を通じて、プロジェクトのコアアーキテクチャ設計を理解しました：
+
+### アーキテクチャの特徴
+
+- **モジュール化設計**：ビジネス機能をモジュールごとに分割し、高凝集低結合を実現
+- **プラグイン化アーキテクチャ**：機能のホットプラグと拡張をサポート
+- **タイプセーフティ**：TypeScriptに基づいて完全な型サポートを提供
+- **パス最適化**：エイリアスシステムを通じてファイル参照を簡素化
+
+### 開発フロー
+
+```plantuml
+@startuml
+(*) --> "プロジェクトアーキテクチャを理解"
+"プロジェクトアーキテクチャを理解" --> "開発環境を設定"
+"開発環境を設定" --> "モジュールを作成/選択"
+"モジュールを作成/選択" --> "ビジネス機能を開発"
+"ビジネス機能を開発" --> "型定義を設定"
+"型定義を設定" --> "プラグインシステムを統合"
+"プラグインシステムを統合" --> "テストとデプロイ"
+"テストとデプロイ" --> (*)
+@enduml
+```
+
+### 次のステップ
+
+これらの基本概念をマスターした後、以下の順序でさらに深く学ぶことをお勧めします：
+
+1. **[開始方法](/front/base/start)** - 環境構築とプロジェクト起動
+2. **[設定説明](/front/base/configure)** - 詳細な設定オプション
+3. **[ルートメニュー](/front/base/route-menu)** - ルートとメニューの設定
+4. **[モジュール開発](/front/advanced/module)** - モジュール化開発の詳細
+5. **[プラグイン開発](/front/high/plugins)** - プラグインシステムの詳細
+
+体系的な学習と実践を通じて、このアーキテクチャに基づいて効率的にフロントエンド開発を行うことができるようになります。

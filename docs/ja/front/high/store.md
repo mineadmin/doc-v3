@@ -1,11 +1,11 @@
 # 状態管理 (Store)
 
-MineAdmin は [Pinia](https://pinia.vuejs.org/) を状態管理ライブラリとして使用し、包括的な状態管理ソリューションを提供しています。システムには、ユーザー管理、タブ、プラグインシステム、辞書データなどのコア機能をカバーする複数の一般的な Store モジュールが組み込まれています。
+MineAdmin は [Pinia](https://pinia.vuejs.org/) を状態管理ライブラリとして使用し、完全な状態管理ソリューションを提供しています。システムには、ユーザー管理、タブ、プラグインシステム、辞書データなどのコア機能をカバーする複数の一般的な Store モジュールが組み込まれています。
 
 ::: tip 自動インポートについて
 フロントエンドの `src/store/modules` ディレクトリ内のすべての Store は自動インポートが設定されており、明示的にインポートせずに直接使用できます。
 
-**自動インポート設定場所**: `vite/auto-import.ts` の `dirs: ['./src/store/modules/**']` 設定
+**自動インポート設定場所**: `vite/auto-import.ts` 内の `dirs: ['./src/store/modules/**']` 設定
 :::
 
 ## useUserStore()
@@ -16,7 +16,7 @@ MineAdmin は [Pinia](https://pinia.vuejs.org/) を状態管理ライブラリ�
 - **ローカルパス**: `web/src/store/modules/useUserStore.ts`  
 - **GitHubアドレス**: [mineadmin/web/src/store/modules/useUserStore.ts](https://github.com/mineadmin/mineadmin/blob/master/web/src/store/modules/useUserStore.ts)
 
-### 主要な状態プロパティ
+### 主な状態プロパティ
 
 | プロパティ名 | 型 | 説明 |
 |--------|------|------|
@@ -60,13 +60,13 @@ await userStore.logout()
 ```
 
 #### requestUserInfo()
-ユーザーの詳細情報（権限やロールデータを含む）を取得します
+ユーザーの詳細情報（権限とロールデータを含む）を取得します
 
 ```typescript
 // ユーザー情報を取得（通常はルートガードで自動的に呼び出されます）
 await userStore.requestUserInfo()
 
-// 取得結果
+// 結果を取得
 const { userInfo, menuList, roleList } = userStore
 ```
 
@@ -79,9 +79,9 @@ const { userInfo, menuList, roleList } = userStore
 const userStore = useUserStore()
 
 if (userStore.isLogin) {
-  console.log('ユーザーはログイン済み')
+  console.log('ユーザーはログイン中です')
 } else {
-  console.log('ユーザーは未ログイン')
+  console.log('ユーザーはログインしていません')
 }
 ```
 
@@ -149,11 +149,11 @@ const hasRole = (role: string) => {
 - **ローカルパス**: `web/src/store/modules/useTabStore.ts`  
 - **GitHubアドレス**: [mineadmin/web/src/store/modules/useTabStore.ts](https://github.com/mineadmin/mineadmin/blob/master/web/src/store/modules/useTabStore.ts)
 
-### 主要な状態プロパティ
+### 主な状態プロパティ
 
 | プロパティ名 | 型 | 説明 |
 |--------|------|------|
-| `tabs` | `MineTabbar[]` | 現在開いているタブリスト |
+| `tabs` | `MineTabbar[]` | 現在開いているタブのリスト |
 | `activeTab` | `string` | 現在アクティブなタブ名 |
 
 ### コアメソッド
@@ -189,7 +189,7 @@ if (targetTab) {
 現在のタブをリフレッシュします
 
 ```typescript
-// 現在のタブをリフレッシュ（ページコンポーネントが再読み込みされます）
+// 現在のタブをリフレッシュ（ページコンポーネントが再ロードされます）
 await tabStore.refreshTab()
 ```
 
@@ -205,7 +205,7 @@ if (currentTab) {
 ```
 
 #### clearTab()
-すべてのタブをクリアします（固定タブは保持）
+すべてのタブをクリアします（固定タブは保持されます）
 
 ```typescript
 // すべてのタブをクリア
@@ -218,9 +218,9 @@ await tabStore.clearTab()
 ```vue
 <template>
   <div class="tab-controls">
-    <el-button @click="refreshCurrentTab">現在のページを更新</el-button>
+    <el-button @click="refreshCurrentTab">現在のページをリフレッシュ</el-button>
     <el-button @click="closeOtherTabs">他のタブを閉じる</el-button>
-    <el-button @click="closeAllTabs">すべて閉じる</el-button>
+    <el-button @click="closeAllTabs">すべてのタブを閉じる</el-button>
   </div>
 </template>
 
@@ -230,7 +230,7 @@ const tabStore = useTabStore()
 // 現在のタブをリフレッシュ
 const refreshCurrentTab = async () => {
   await tabStore.refreshTab()
-  ElMessage.success('ページを更新しました')
+  ElMessage.success('ページがリフレッシュされました')
 }
 
 // 他のタブを閉じる
@@ -262,23 +262,23 @@ const navigateToPage = (routeName: string, routeParams?: any) => {
   router.push({ name: routeName, params: routeParams })
   
   // タブはルートガードで自動的に追加されます
-  // 特定の設定を持つタブを手動で追加することも可能
+  // 特定の設定タブを手動で追加することも可能
 }
 ```
 
 ## usePluginStore()
 
-プラグインシステム状態管理 Store。プラグインの動的読み込み、有効化/無効化制御、フック呼び出しなどの機能を担当します。
+プラグインシステム状態管理 Store。プラグインの動的ロード、有効化/無効化制御、フック呼び出しなどの機能を管理します。
 
 **ソースコードの場所**:
 - **ローカルパス**: `web/src/store/modules/usePluginStore.ts`  
 - **GitHubアドレス**: [mineadmin/web/src/store/modules/usePluginStore.ts](https://github.com/mineadmin/mineadmin/blob/master/web/src/store/modules/usePluginStore.ts)
 
-### 主要な状態プロパティ
+### 主な状態プロパティ
 
 | プロパティ名 | 型 | 説明 |
 |--------|------|------|
-| `plugins` | `Map<string, Plugin.PluginConfig>` | 読み込まれたプラグイン設定マップ |
+| `plugins` | `Map<string, Plugin.PluginConfig>` | ロード済みプラグイン設定マップ |
 | `enabledPlugins` | `Set<string>` | 有効化されたプラグイン名のセット |
 
 ### コアメソッド
@@ -380,13 +380,13 @@ http.interceptors.response.use(async (response) => {
 
 ## useDictStore()
 
-辞書データ状態管理 Store。システム辞書データのキャッシュ、クエリ、更新などの機能を担当します。
+辞書データ状態管理 Store。システム辞書データのキャッシュ、検索、更新などの機能を管理します。
 
 **ソースコードの場所**:
 - **ローカルパス**: `web/src/store/modules/useDictStore.ts`  
 - **GitHubアドレス**: [mineadmin/web/src/store/modules/useDictStore.ts](https://github.com/mineadmin/mineadmin/blob/master/web/src/store/modules/useDictStore.ts)
 
-### 主要な状態プロパティ
+### 主な状態プロパティ
 
 | プロパティ名 | 型 | 説明 |
 |--------|------|------|
@@ -399,7 +399,7 @@ http.interceptors.response.use(async (response) => {
 interface DictItem {
   label: string    // 表示ラベル
   value: any       // 実際の値
-  color?: string   // 色識別
+  color?: string   // カラー識別子
   status?: number  // 状態（1: 有効, 0: 無効）
   sort?: number    // ソート順
   remark?: string  // 備考
@@ -414,7 +414,7 @@ interface DictItem {
 ```typescript
 const dictStore = useDictStore()
 
-// ユーザーステータス辞書を取得
+// ユーザー状態辞書を取得
 const userStatusDict = await dictStore.getDict('user_status')
 console.log(userStatusDict)
 // [
@@ -427,7 +427,7 @@ console.log(userStatusDict)
 辞書値に対応するラベルを取得します
 
 ```typescript
-// ステータス値に対応するラベルを取得
+// 状態値に対応するラベルを取得
 const statusLabel = await dictStore.getDictLabel('user_status', 1)
 console.log(statusLabel) // '正常'
 ```
@@ -449,7 +449,7 @@ await dictStore.refreshDict()
 ```vue
 <template>
   <el-form :model="form">
-    <el-form-item label="ユーザーステータス">
+    <el-form-item label="ユーザー状態">
       <el-select v-model="form.status">
         <el-option
           v-for="item in userStatusOptions"
@@ -468,7 +468,7 @@ const form = ref({
   status: 1
 })
 
-// ユーザーステータス辞書オプションを取得
+// ユーザー状態辞書オプションを取得
 const userStatusOptions = ref<DictItem[]>([])
 
 onMounted(async () => {
@@ -500,12 +500,12 @@ const tableData = ref([
   { id: 2, username: 'user', status: 0 }
 ])
 
-// ステータスラベルを取得
+// 状態ラベルを取得
 const getStatusLabel = async (status: number) => {
   return await dictStore.getDictLabel('user_status', status)
 }
 
-// タグの色タイプを取得
+// タグタイプを取得
 const getStatusTagType = (status: number) => {
   return status === 1 ? 'success' : 'danger'
 }
@@ -536,4 +536,4 @@ interface Props {
 const props = defineProps<Props>()
 const emit = defineEmits(['update:modelValue'])
 
-const dictStore = useDictStore()
+const dict

@@ -6,7 +6,7 @@
 
 ## 開發環境
 
-需要在本地依次安裝好 [Node.js](https://nodejs.org/zh-cn), [pnpm](https://pnpm.io/zh-tw/)。也可以使用 `yarn` 等其他包管理工具，推薦使用 `pnpm`，文件內容以 `pnpm` 為準。
+需要在本地依次安裝好 [Node.js](https://nodejs.org/zh-cn), [pnpm](https://pnpm.io/)。也可以使用 `yarn` 等其他包管理工具，推薦使用 `pnpm`，文件內容以 `pnpm` 為準。
 
 - Node.js >= 20.0.0，推薦 20.x.x 的 LTS 版本
 - PNPM >= 9.0.0

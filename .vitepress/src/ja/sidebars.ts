@@ -3,52 +3,55 @@ import type {DefaultTheme} from "vitepress";
 const sidebar:DefaultTheme.Sidebar = {
   '/guide/': [
     {
-      text: '紹介',
+      text: '📚 紹介',
+      collapsed: false,
       items: [
         {
-          text: 'なぜ私たちを選ぶのか?',
+          text: '💡 なぜ私たちを選ぶのか?',
           link: '/guide/introduce/mineadmin',
         },
         {
-          text: '更新履歴',
+          text: '📝 更新履歴',
           link: '/guide/changelog',
         },
         {
-          text: '免責事項',
+          text: '⚖️ 免責事項',
           link: '/guide/introduce/declaration',
         },
         {
-          text: '謝辞',
+          text: '🙏 謝辞',
           link: '/guide/introduce/thank',
         }
       ]
     },
     {
-      text: 'スタート',
+      text: '🚀 クイックスタート',
+      collapsed: false,
       items: [
         {
-          text: 'クイックインストール',
+          text: '⚡ クイックインストール',
           link: '/guide/start/fast-install',
         },
         {
-          text: "デプロイ",
+          text: "🌐 デプロイ",
           link: "/guide/start/deployment"
         }
       ]
     },
     {
-      text: 'その他',
+      text: '📋 その他のリソース',
+      collapsed: true,
       items: [
         {
-          text:"リリースノート",
+          text:"📦 リリースノート",
           link:'/guide/releases'
         },
         {
-          text:"アップグレードガイド",
+          text:"🔄 アップグレードガイド",
           link:"/guide/upgrade"
         },
         {
-          text:"貢献ガイド",
+          text:"🤝 貢献ガイド",
           link:"/guide/contributions"
         }
       ]
@@ -56,285 +59,289 @@ const sidebar:DefaultTheme.Sidebar = {
   ],
   '/front/': [
     {
-      text: '基礎',
+      text: '🎯 基礎入門',
+      collapsed: false,
       items: [
         {
-          text: '基本概念',
+          text: '📖 基本概念',
           link: '/front/base/concept'
         },
         {
-          text: 'スタート',
+          text: '🎬 クイックスタート',
           link: '/front/base/start'
         },
         {
-          text: 'ルートとメニュー',
+          text: '🧭 ルートとメニュー',
           link: '/front/base/route-menu'
         },
         {
-          text: '設定',
+          text: '⚙️ 設定',
           link: '/front/base/configure'
         },
         {
-          text: 'アイコン',
+          text: '🎨 アイコン',
           link: '/front/base/icon'
         },
         {
-          text: 'ビルドとプレビュー',
+          text: '🔨 ビルドとプレビュー',
           link: '/front/base/build-preview'
         }
       ]
     },
     {
-      text: '応用',
+      text: '🚀 高度な開発',
+      collapsed: false,
       items: [
         {
-          text: 'システムパラメータ設定',
+          text: '⚡ システムパラメータ設定',
           link: '/front/advanced/system-config'
         },
         {
-          text: '自動インポート',
+          text: '🤖 自動インポート',
           link: '/front/advanced/auto-import'
         },
         {
-          text: 'リクエストとインターセプター',
+          text: '🌐 リクエストとインターセプター',
           link: '/front/advanced/request'
         },
         {
-          text: 'ログインとウェルカムページ',
+          text: '🔐 ログインとウェルカムページ',
           link: '/front/advanced/login-welcome'
         },
         {
-          text: 'モジュール化',
+          text: '📦 モジュール化',
           link: '/front/advanced/module'
         },
         {
-          text: 'レイアウト',
+          text: '🎛️ レイアウト',
           link: '/front/advanced/layout'
         },
         {
-          text: 'ツールバー拡張',
+          text: '🛠️ ツールバー拡張',
           link: '/front/advanced/tools'
         },
         {
-          text: '権限',
+          text: '🔒 権限',
           link: '/front/advanced/permission'
         },
         {
-          text: 'ページキャッシュ',
+          text: '💾 ページキャッシュ',
           link: '/front/advanced/cache'
         }
       ]
     },
     {
-      text: '高度',
+      text: '🎪 高度なトピック',
+      collapsed: true,
       items: [
         {
-          text: '国際化設定',
+          text: '🌍 国際化設定',
           link: '/front/high/i18n'
         },
         {
-          text: 'サービスプロバイダー',
+          text: '🔌 サービスプロバイダー',
           link: '/front/high/provider'
         },
         {
-          text: 'Hooks',
+          text: '🪝 フック',
           link: '/front/high/hooks'
         },
         {
-          text: '常用Store',
+          text: '🗄️ 一般的なストア',
           link: '/front/high/store'
         },
         {
-          text: 'プラグインシステム',
+          text: '🧩 プラグインシステム',
           link: '/front/high/plugins'
         },
         {
-          text: 'JSXとTSX開発',
+          text: '⚛️ JSXとTSX開発',
           link: '/front/high/tsx'
         }
       ],
     },
     {
-      text: 'コンポーネントチュートリアル',
+      text: '🧱 コンポーネントチュートリアル',
+      collapsed: false,
       items: [
         {
-          text: 'MaForm',
+          text: '📝 MaForm フォームコンポーネント',
           link: '/front/component/ma-form',
           collapsed: true,
           items: [
             {
-              text: '基本使用法',
+              text: '🎯 基本的な使い方',
               link: '/front/component/ma-form/examples/basic-usage'
             },
             {
-              text: 'レイアウトシステム',
+              text: '🎛️ レイアウトシステム',
               link: '/front/component/ma-form/examples/layout-systems'
             },
             {
-              text: '条件付きレンダリング',
+              text: '🔀 条件付きレンダリング',
               link: '/front/component/ma-form/examples/conditional-rendering'
             },
             {
-              text: '動的バリデーション',
+              text: '✅ 動的バリデーション',
               link: '/front/component/ma-form/examples/dynamic-validation'
             },
             {
-              text: 'コンポーネントレンダリング',
+              text: '🧩 コンポーネントレンダリング',
               link: '/front/component/ma-form/examples/component-rendering'
             },
             {
-              text: 'スロット例',
+              text: '🎪 スロット例',
               link: '/front/component/ma-form/examples/slots-examples'
             },
             {
-              text: '公開メソッド',
+              text: '🔧 公開メソッド',
               link: '/front/component/ma-form/examples/expose-methods'
             },
             {
-              text: 'ローディング状態',
+              text: '⏳ ローディング状態',
               link: '/front/component/ma-form/examples/loading-states'
             },
             {
-              text: 'ネストフォーム',
+              text: '🔗 ネストされたフォーム',
               link: '/front/component/ma-form/examples/nested-forms'
             },
             {
-              text: 'モバイル対応',
+              text: '📱 モバイル対応',
               link: '/front/component/ma-form/examples/mobile-responsive'
             },
             {
-              text: '高度なシナリオ',
+              text: '🎭 高度なシナリオ',
               link: '/front/component/ma-form/examples/advanced-scenarios'
             },
             {
-              text: 'パフォーマンスデモ',
+              text: '⚡ パフォーマンスデモ',
               link: '/front/component/ma-form/examples/performance-demo'
             }
           ]
         },
         {
-          text: 'MaTable',
+          text: '📊 MaTable テーブルコンポーネント',
           link: '/front/component/ma-table',
           collapsed: true,
           items: [
             {
-              text: '基本テーブル',
+              text: '📋 基本テーブル',
               link: '/front/component/ma-table/basic'
             },
             {
-              text: 'テーブルソート',
+              text: '↕️ テーブルソート',
               link: '/front/component/ma-table/sorting'
             },
             {
-              text: 'テーブルフィルタリング',
+              text: '🔍 テーブルフィルタリング',
               link: '/front/component/ma-table/filter'
             },
             {
-              text: 'カスタムレンダリング',
+              text: '🎨 カスタムレンダリング',
               link: '/front/component/ma-table/custom-render'
             },
             {
-              text: '動的カラム管理',
+              text: '🔧 動的カラム管理',
               link: '/front/component/ma-table/dynamic-columns'
             },
             {
-              text: 'ページネーションテーブル',
+              text: '📄 ページネーションテーブル',
               link: '/front/component/ma-table/pagination'
             },
             {
-              text: 'ツリーテーブル',
+              text: '🌲 ツリーテーブル',
               link: '/front/component/ma-table/tree-table'
             },
             {
-              text: '複数選択テーブル',
+              text: '☑️ 複数選択テーブル',
               link: '/front/component/ma-table/selection'
             },
             {
-              text: 'レスポンシブテーブル',
+              text: '📱 レスポンシブテーブル',
               link: '/front/component/ma-table/responsive'
             }
           ]
         },
         {
-          text: 'MaSearch',
+          text: '🔍 MaSearch 検索コンポーネント',
           link: '/front/component/ma-search',
           collapsed: true,
           items: [
             {
-              text: '基本使用法',
+              text: '🎯 基本的な使い方',
               link: '/front/component/ma-search/examples/basic-usage'
             },
             {
-              text: '高度検索',
+              text: '🚀 高度な検索',
               link: '/front/component/ma-search/examples/advanced-search'
             },
             {
-              text: '折りたたみ検索',
+              text: '🔽 折りたたみ検索',
               link: '/front/component/ma-search/examples/collapsible-search'
             },
             {
-              text: 'カスタム操作',
+              text: '⚙️ カスタム操作',
               link: '/front/component/ma-search/examples/custom-actions'
             },
             {
-              text: '動的管理',
+              text: '🔄 動的管理',
               link: '/front/component/ma-search/examples/dynamic-items'
             },
             {
-              text: 'レスポンシブレイアウト',
+              text: '📱 レスポンシブレイアウト',
               link: '/front/component/ma-search/examples/responsive-layout'
             },
             {
-              text: 'テーブル統合',
+              text: '🔗 テーブル統合',
               link: '/front/component/ma-search/examples/table-integration'
             },
             {
-              text: 'フォームバリデーション',
+              text: '✅ フォームバリデーション',
               link: '/front/component/ma-search/examples/form-validation'
             },
             {
-              text: 'メソッドデモ',
+              text: '🔧 メソッドデモ',
               link: '/front/component/ma-search/examples/methods-demo'
             }
           ]
         },
         {
-          text: 'MaProTable',
+          text: '📈 MaProTable 高度なテーブル',
           link: '/front/component/ma-pro-table',
           collapsed: true,
           items: [
             {
-              text: '基本使用法',
+              text: '🎯 基本的な使い方',
               link: '/front/component/ma-pro-table/examples/basic'
             },
             {
-              text: '高度検索',
+              text: '🔍 高度な検索',
               link: '/front/component/ma-pro-table/examples/advanced-search'
             },
             {
-              text: 'カスタム操作',
+              text: '⚙️ カスタム操作',
               link: '/front/component/ma-pro-table/examples/custom-operations'
             },
             {
-              text: 'セルレンダリングプラグイン',
+              text: '🧩 セルレンダリングプラグイン',
               link: '/front/component/ma-pro-table/examples/cell-render-plugins'
             },
             {
-              text: 'ツールバー拡張',
+              text: '🔧 ツールバー拡張',
               link: '/front/component/ma-pro-table/examples/toolbar-extensions'
             },
             {
-              text: 'データ管理',
+              text: '📁 データ管理',
               link: '/front/component/ma-pro-table/examples/data-management'
             },
             {
-              text: 'レスポンシブレイアウト',
+              text: '📱 レスポンシブレイアウト',
               link: '/front/component/ma-pro-table/examples/responsive-layout'
             }
           ]
         },
         {
-          text: 'MaEcharts',
+          text: '📉 MaEcharts チャートコンポーネント',
           link: '/front/component/ma-echarts'
         },
       ]
@@ -342,124 +349,139 @@ const sidebar:DefaultTheme.Sidebar = {
   ],
   '/backend/':[
     {
-      text:"応用",
+      text:"🚀 コア機能",
+      collapsed: false,
       items:[
         {
-          text: "ディレクトリ構造",
+          text: "📁 ディレクトリ構造",
           link: "/backend/base/structure"
         },
         {
-          text: "ライフサイクル",
+          text: "🔄 ライフサイクル",
           link: "/backend/base/lifecycle"
         },
-        { text: "ルートとAPIドキュメント",link: "/backend/base/router"},
-        { text: "エラー処理",link: "/backend/base/error-handler"},
-        {text: "ログ",link: "/backend/base/logger"},
-        {text: "イベント",link: "/backend/base/event-handler"},
-        {text: "ファイルアップロード",link: "/backend/base/upload"},
-        {text: "多言語",link: "/backend/base/lang"},
+        { text: "🌐 ルートとAPIドキュメント",link: "/backend/base/router"},
+        { text: "⚠️ エラー処理",link: "/backend/base/error-handler"},
+        {text: "📄 ログ",link: "/backend/base/logger"},
+        {text: "📡 イベント",link: "/backend/base/event-handler"},
+        {text: "📄 ファイルアップロード",link: "/backend/base/upload"},
+        {text: "🌍 多言語",link: "/backend/base/lang"},
       ]
     },
     {
-      text:"セキュリティ関連",
+      text:"🔒 セキュリティ関連",
+      collapsed: false,
       items:[
         {
-          text: "ユーザー認証",
+          text: "🔑 ユーザー認証",
           link: "/backend/security/passport"
         },
         {
-          text: "ユーザー認可(RBAC)",
+          text: "🔐 ユーザー認可(RBAC)",
           link: "/backend/security/access"
         },
         {
-          text: "クライアントIP取得",
+          text: "🌍 クライアントIP取得",
           link: "/backend/security/client-ip"
         }
       ]
     },{
-      text:"データ権限",
+      text:"🛡️ データ権限",
+      collapsed: true,
       items:[
         {
-          text: "コア概念",
+          text: "💡 コアコンセプト",
           link: "/backend/data-permission/overview"
         },
         {
-          text: "権限設定と効果デモ",
+          text: "⚙️ 権限設定と効果デモ",
           link: "/backend/data-permission/config"
         },
         {
-          text: "使用例",
-            link: "/backend/data-permission/example"
+          text: "📋 APIリファレンスと高度な使い方",
+          link: "/backend/data-permission/example"
         },
         {
-          text: "注意事項",
-            link: "/backend/data-permission/notice"
+          text: "⚡ パフォーマンス最適化ガイド",
+          link: "/backend/data-permission/performance"
+        },
+        {
+          text: "🔧 トラブルシューティングガイド",
+          link: "/backend/data-permission/troubleshooting"
+        },
+        {
+          text: "⚠️ 注意事項とベストプラクティス",
+          link: "/backend/data-permission/notice"
         }
       ]
     }
   ],
   '/plugin/':[
     {
-      text:"クイックスタート",
+      text:"🚀 クイックスタート",
+      collapsed: false,
       items:
           [
             {
-              text:"準備作業",
+              text:"📝 準備作業",
               link:"/plugin"
             },
             {
-              text:"プラグインコマンド",
+              text:"💻 プラグインコマンド",
               link:"/plugin/command"
             },
             {
-              text:"アプリ作成",
+              text:"✨ アプリケーション作成",
               link:"/plugin/create"
             },
             {
-              text:"プラグインディレクトリ構造",
+              text:"📁 プラグインディレクトリ構造",
               link:"/plugin/structure"
             },
             {
-              text:"mine.json 説明と例",
+              text:"📄 mine.json 説明と例",
               link:"/plugin/mineJson"
             },
             {
-            text:"ConfigProvider 説明",
+            text:"⚙️ ConfigProvider 説明",
             link:"/plugin/configProvider"
           }
           ]
     },
     {
-      text:"バックエンド開発",
+      text:"🔧 バックエンド開発",
+      collapsed: false,
       items:[
         {
-          text: "データベースマイグレーション",
+          text: "📀 データベースマイグレーション",
           link: "/plugin/backend/migrate"
         },
         {
-          text: "ユニットテスト",
+          text: "🧪 ユニットテスト",
           link: "/plugin/backend/unit-test"
         },
       ]
     },
     {
-      text:"フロントエンド開発",
+      text:"🎨 フロントエンド開発",
+      collapsed: false,
       items:[
         {
-          text: "フロントエンド開発規約",
+          text: "📋 フロントエンド開発規約",
           link: "/plugin/front/develop"
         }
       ]
     },
     {
-      text:"アプリ公開",
+      text:"🚀 アプリケーション公開",
+      collapsed: true,
       items:[
         {
-          text: "アプリリリース",
+          text: "📦 アプリケーションリリース",
           link: "/plugin/develop/publish"
         },
         {
-          text: "注意事項",
+          text: "⚠️ 注意事項",
           link: "/plugin/develop/question"
         }
       ]

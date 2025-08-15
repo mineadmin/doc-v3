@@ -1,6 +1,6 @@
 # Mobile Responsiveness
 
-Demonstrates MaForm's responsive features on mobile devices, including breakpoint adaptation, mobile optimization, touch interactions, and device-specific configurations.
+Demonstrates MaForm's responsive features on mobile devices, including breakpoint adaptation, mobile optimization, touch interaction, and device-specific configurations.
 
 <DemoPreview dir="demos/ma-form/mobile-responsive" />
 
@@ -9,7 +9,7 @@ Demonstrates MaForm's responsive features on mobile devices, including breakpoin
 - **Breakpoint Responsiveness**: Automatically adapts layout based on screen size
 - **Mobile Optimization**: Special optimizations for mobile devices
 - **Touch-Friendly**: Interaction design optimized for touch operations
-- **Device Recognition**: Automatically detects mobile devices and applies corresponding configurations
+- **Device Detection**: Automatically identifies mobile devices and applies corresponding configurations
 - **Flexible Configuration**: Supports mobile-specific field configurations
 
 ## Responsive Breakpoint System
@@ -268,7 +268,7 @@ const mobileSizedFields = [
     }
   },
   {
-    label: 'Date Picker',
+    label: 'Date Selection',
     prop: 'date',
     render: 'datePicker',
     renderProps: {
@@ -423,7 +423,7 @@ const adaptFormToDevice = () => {
 ### 2. Screen Orientation Change Handling
 
 ```typescript
-// Listen for screen orientation changes
+// Listen for orientation changes
 const handleOrientationChange = () => {
   const isPortrait = window.innerHeight > window.innerWidth
   
@@ -466,7 +466,7 @@ const pwaFormConfig = {
     enabled: true,
     mobileSingleColumn: true,
     breakpoints: {
-      xs: 320,   // Minimum phone screen
+      xs: 320,   // Smallest phone screen
       sm: 768,   // Tablet portrait
       md: 1024,  // Tablet landscape
       lg: 1440,  // Desktop
@@ -503,7 +503,7 @@ const handleOfflineForm = () => {
       }
     })
     
-    ElMessage.warning('You are currently offline, some features are limited')
+    ElMessage.warning('Currently offline, some features are limited')
   }
 }
 ```
@@ -599,6 +599,6 @@ const responsiveTestUtils = {
 
 ## Related Links
 
-- [Layout System - Responsive Configuration](/en/front/component/ma-form/examples/layout-systems#responsive-system)
-- [ResponsiveConfig Settings](/en/front/component/ma-form#responsiveconfig-responsive-configuration)
-- [Mobile Configuration Options](/en/front/component/ma-form#mobile-configuration)
+- [Layout System - Responsive Configuration](/front/component/ma-form/examples/layout-systems#responsive-system)
+- [ResponsiveConfig Settings](/front/component/ma-form#responsiveconfig-responsive-settings)
+- [Mobile Configuration Options](/front/component/ma-form#mobile-configuration)

@@ -223,7 +223,7 @@ const [users, roles, permissions] = await Promise.all([
 // 重新整理完成後，所有請求會使用新 Token 重新發送
 ```
 
-具體重新整理機制詳情可參考 [使用者認證文件](/zh-tw/backend/security/passport.md)。
+具體重新整理機制詳情可參考 [使用者認證文件](/backend/security/passport.md)。
 
 ## 外部請求
 

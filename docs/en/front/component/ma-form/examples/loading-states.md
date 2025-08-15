@@ -6,9 +6,9 @@ Demonstrates various loading state configurations for MaForm, including global l
 
 ## Features
 
-- **Multi-level Loading Control**: Supports global and partial loading states
+- **Multi-level Loading Control**: Supports both global and partial loading states
 - **Custom Loading Styles**: Supports custom loading icons, text, colors, etc.
-- **Dynamic Loading States**: Supports runtime dynamic switching of loading states
+- **Dynamic Loading States**: Supports runtime switching of loading states
 - **Loading Mask Configuration**: Configurable background mask, scroll locking, etc.
 - **Loading Slot Support**: Supports fully customizable loading content
 
@@ -347,7 +347,7 @@ const simulateProgressLoading = async () => {
 >
   <template #loading="{ loading }">
     <div v-if="loading" class="skeleton-loading">
-      <!-- Simulated form structure skeleton -->
+      <!-- Simulate form structure skeleton -->
       <div class="skeleton-item" v-for="n in 4" :key="n">
         <div class="skeleton-label"></div>
         <div class="skeleton-input"></div>
@@ -500,7 +500,7 @@ const getResponsiveLoadingConfig = () => {
   }
 }
 
-// Update loading configuration on responsive changes
+// Watch responsive changes to update loading configuration
 watch(() => formRef.value?.isMobileState(), (isMobile) => {
   if (formRef.value) {
     const loadingConfig = getResponsiveLoadingConfig()
@@ -514,6 +514,6 @@ watch(() => formRef.value?.isMobileState(), (isMobile) => {
 
 ## Related Links
 
-- [LoadingConfig Detailed Configuration](/en/front/component/ma-form#loadingconfig-configuration)
-- [State Management Methods](/en/front/component/ma-form#state-management)
-- [Exposed Methods - Loading States](/en/front/component/ma-form/examples/expose-methods#state-management-methods)
+- [LoadingConfig Detailed Configuration](/front/component/ma-form#loadingconfig-configuration)
+- [State Management Methods](/front/component/ma-form#state-management)
+- [Exposed Methods - Loading States](/front/component/ma-form/examples/expose-methods#state-management-methods)

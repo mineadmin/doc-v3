@@ -6,11 +6,11 @@ MaFormの各種ローディング状態設定を表示します。グローバ�
 
 ## 機能特徴
 
-- **多段階ローディング制御**：グローバルと部分的なローディング状態をサポート
-- **カスタムローディングスタイル**：カスタムローディングアイコン、テキスト、色などをサポート
-- **動的ローディング状態**：実行時に動的にローディング状態を切り替え可能
-- **ローディングマスク設定**：背景マスク、スクロールロックなどを設定可能
-- **ローディングスロットサポート**：完全にカスタマイズ可能なローディングコンテンツをサポート
+- **多段階ローディング制御**: グローバルおよび部分的なローディング状態をサポート
+- **カスタムローディングスタイル**: カスタムローディングアイコン、テキスト、色などをサポート
+- **動的ローディング状態**: 実行時に動的にローディング状態を切り替え可能
+- **ローディングマスク設定**: 背景マスク、スクロールロックなどを設定可能
+- **ローディングスロットサポート**: 完全にカスタマイズ可能なローディングコンテンツをサポート
 
 ## 基本ローディング設定
 
@@ -21,7 +21,7 @@ MaFormの各種ローディング状態設定を表示します。グローバ�
 const formOptions = {
   loading: true,  // ローディング状態を有効化
   loadingConfig: {
-    text: 'フォームをロード中...',
+    text: 'フォームを読み込み中...',
     background: 'rgba(0, 0, 0, 0.8)',
     customClass: 'custom-loading'
   }
@@ -36,7 +36,7 @@ const formOptions = {
 />
 ```
 
-### 2. 動的ローディング制御
+### 2. 動的ローディング状態制御
 
 ```typescript
 // 公開メソッドを使用してローディングを制御
@@ -66,7 +66,7 @@ const handleAsyncOperation = async () => {
 ```typescript
 const loadingConfig = {
   // ローディングテキスト
-  text: 'データ処理中、少々お待ちください...',
+  text: 'データ処理中、お待ちください...',
   
   // カスタムアイコンクラス名
   spinner: 'el-loading-spinner',
@@ -108,7 +108,7 @@ const dataLoadingConfig = {
 
 // フォーム送信ローディング
 const submitLoadingConfig = {
-  text: '送信中、少々お待ちください...',
+  text: '送信中、お待ちください...',
   svg: `
     <svg class="loading-svg" viewBox="0 0 120 30" fill="currentColor">
       <circle cx="15" cy="15" r="15">
@@ -191,12 +191,12 @@ const validationLoadingConfig = {
 const getLoadingConfigByTheme = (theme: 'light' | 'dark') => {
   const configs = {
     light: {
-      text: 'ロード中...',
+      text: '読み込み中...',
       background: 'rgba(255, 255, 255, 0.8)',
       customClass: 'light-loading'
     },
     dark: {
-      text: 'ロード中...',
+      text: '読み込み中...',
       background: 'rgba(0, 0, 0, 0.8)',
       customClass: 'dark-loading'
     }
@@ -228,7 +228,7 @@ const applyThemeLoading = (theme: 'light' | 'dark') => {
   render: 'input',
   renderProps: {
     loading: false,  // フィールドレベルローディング状態
-    placeholder: '入力後、非同期検証が行われます'
+    placeholder: '入力後に非同期検証が行われます'
   },
   asyncValidator: async (rule, value) => {
     // 検証開始時にローディングを表示
@@ -316,9 +316,9 @@ const handleRemoteDataLoad = async () => {
 // ローディングテキストと進捗を動的に更新
 const loadingMessages = [
   'フォームを初期化中...',
-  '設定データをロード中...',
+  '設定データを読み込み中...',
   '権限を検証中...',
-  'ロード完了'
+  '読み込み完了'
 ]
 
 const simulateProgressLoading = async () => {
@@ -332,11 +332,11 @@ const simulateProgressLoading = async () => {
   }
   
   formRef.value.setLoadingState(false)
-  ElMessage.success('ロード完了!')
+  ElMessage.success('読み込みが完了しました!')
 }
 ```
 
-### 3. スケルトンローディング
+### 3. スケルトンスクリーンローディング
 
 ```vue
 <ma-form 
@@ -347,7 +347,7 @@ const simulateProgressLoading = async () => {
 >
   <template #loading="{ loading }">
     <div v-if="loading" class="skeleton-loading">
-      <!-- フォーム構造を模倣したスケルトン -->
+      <!-- フォーム構造を模倣したスケルトンスクリーン -->
       <div class="skeleton-item" v-for="n in 4" :key="n">
         <div class="skeleton-label"></div>
         <div class="skeleton-input"></div>
@@ -404,7 +404,7 @@ const initializeForm = async () => {
   formRef.value.setLoadingState(true)
   
   try {
-    // データを並列でロード
+    // データを並列で読み込み
     const [formConfig, initialData, optionsData] = await Promise.all([
       fetchFormConfig(),
       fetchInitialData(),
@@ -417,7 +417,7 @@ const initializeForm = async () => {
     updateFieldOptions(optionsData)
     
   } catch (error) {
-    ElMessage.error('フォーム初期化に失敗しました')
+    ElMessage.error('フォームの初期化に失敗しました')
   } finally {
     formRef.value.setLoadingState(false)
   }
@@ -493,14 +493,14 @@ const getResponsiveLoadingConfig = () => {
   const isMobile = formRef.value.isMobileState()
   
   return {
-    text: isMobile ? 'ロード中...' : 'データをロード中、少々お待ちください...',
+    text: isMobile ? '読み込み中...' : 'データを読み込み中、お待ちください...',
     customClass: isMobile ? 'mobile-loading' : 'desktop-loading',
-    fullscreen: isMobile,  // モバイルでフルスクリーンローディング
+    fullscreen: isMobile,  // モバイルではフルスクリーンローディング
     lock: true
   }
 }
 
-// レスポンシブ変更を監視してローディング設定を更新
+// レスポンシブ変化を監視してローディング設定を更新
 watch(() => formRef.value?.isMobileState(), (isMobile) => {
   if (formRef.value) {
     const loadingConfig = getResponsiveLoadingConfig()
@@ -514,6 +514,6 @@ watch(() => formRef.value?.isMobileState(), (isMobile) => {
 
 ## 関連リンク
 
-- [LoadingConfig 設定詳細](/ja/front/component/ma-form#loadingconfig-設定)
-- [状態管理方法](/ja/front/component/ma-form#状態管理)
-- [公開メソッド - ローディング状態](/ja/front/component/ma-form/examples/expose-methods#状態管理方法)
+- [LoadingConfig 設定詳細](/front/component/ma-form#loadingconfig-設定)
+- [状態管理方法](/front/component/ma-form#状態管理)
+- [公開メソッド - ローディング状態](/front/component/ma-form/examples/expose-methods#状態管理方法)

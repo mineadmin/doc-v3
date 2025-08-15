@@ -1,6 +1,6 @@
 # パフォーマンス最適化デモ
 
-MaFormの大規模フォームや複雑なシナリオにおけるパフォーマンス最適化戦略を紹介。仮想スクロール、遅延読み込み、キャッシュメカニズムなどの高性能機能を展示。
+MaFormの大規模フォームや複雑なシナリオにおけるパフォーマンス最適化戦略を展示。仮想スクロール、レイジーロード、キャッシュメカニズムなどの高性能機能を含む。
 
 <DemoPreview dir="demos/ma-form/performance-demo" />
 
@@ -8,18 +8,18 @@ MaFormの大規模フォームや複雑なシナリオにおけるパフォー�
 
 - **大規模フォーム最適化**：数百のフォーム項目を処理するパフォーマンス最適化
 - **仮想スクロール**：長いリストフォームの仮想スクロール実装
-- **遅延読み込みメカニズム**：オンデマンドでフォーム項目とデータを読み込み
+- **レイジーロードメカニズム**：必要に応じてフォーム項目とデータをロード
 - **キャッシュ戦略**：インテリジェントキャッシュで応答速度向上
 - **レンダリング最適化**：不要な再レンダリングを削減
 - **メモリ管理**：メモリ使用を効果的に制御
 
 ## 大規模フォームのパフォーマンス最適化
 
-### 1. ページング読み込み戦略
+### 1. ページングロード戦略
 
 ```typescript
 interface FormPageConfig {
-  pageSize: number        // 1ページあたりのフォーム項目数
+  pageSize: number        // ページあたりのフォーム項目数
   currentPage: number     // 現在のページ番号
   totalItems: number      // 総フォーム項目数
   preloadPages: number    // プリロードするページ数
@@ -41,7 +41,7 @@ const largeFormManager = {
     this.pageConfig.value.totalItems = totalItems
     this.allFormItems = await this.generateLargeFormItems(totalItems)
     
-    // 最初のページを読み込み
+    // 最初のページをロード
     await this.loadPage(1)
   },
   
@@ -60,7 +60,7 @@ const largeFormManager = {
         },
         cols: { xs: 24, sm: 12, md: 8, lg: 6 },
         
-        // 遅延読み込み用に優先度を追加
+        // レイジーロード用に優先度を追加
         priority: i <= 20 ? 'high' : i <= 100 ? 'medium' : 'low'
       })
     }
@@ -74,7 +74,7 @@ const largeFormManager = {
     return types[Math.floor(Math.random() * types.length)]
   },
   
-  // 指定ページを読み込み
+  // 指定ページをロード
   async loadPage(page: number) {
     if (this.loadedPages.has(page)) return
     
@@ -90,10 +90,10 @@ const largeFormManager = {
     })
     
     this.loadedPages.add(page)
-    console.log(`ページ ${page} を読み込みました、${pageItems.length} フォーム項目を含む`)
+    console.log(`ページ ${page} をロードしました。${pageItems.length} 項目を含みます`)
   },
   
-  // スクロールでさらに読み込み
+  // スクロールでさらにロード
   async loadMore() {
     const { currentPage, totalItems, pageSize } = this.pageConfig.value
     const totalPages = Math.ceil(totalItems / pageSize)
@@ -113,7 +113,7 @@ const largeFormManager = {
   }
 }
 
-// 無限読み込みのためのスクロール監視
+// 無限ロードのスクロールリスナー実装
 const setupInfiniteLoading = () => {
   const scrollContainer = document.querySelector('.ma-form-container')
   if (!scrollContainer) return
@@ -122,7 +122,7 @@ const setupInfiniteLoading = () => {
     const { scrollTop, scrollHeight, clientHeight } = scrollContainer
     const scrollPercentage = (scrollTop + clientHeight) / scrollHeight
     
-    // 85%スクロール時にさらに読み込み
+    // 85%スクロール時にさらにロード
     if (scrollPercentage > 0.85) {
       largeFormManager.loadMore()
     }
@@ -146,7 +146,7 @@ const setupInfiniteLoading = () => {
 ```typescript
 interface VirtualScrollConfig {
   itemHeight: number      // 各項目の高さ
-  visibleCount: number    // 表示可能な項目数
+  visibleCount: number    // 表示項目数
   bufferSize: number      // バッファサイズ
   scrollTop: number       // スクロール位置
 }
@@ -215,13 +215,13 @@ const virtualScrollManager = {
 }
 ```
 
-## 遅延読み込み最適化
+## レイジーロード最適化
 
-### 1. フィールドの遅延読み込み
+### 1. フィールドのレイジーロード
 
 ```typescript
 const lazyLoadManager = {
-  // 遅延読み込み設定
+  // レイジーロード設定
   lazyConfig: new Map<string, {
     loader: () => Promise<any>
     loading: boolean
@@ -229,7 +229,7 @@ const lazyLoadManager = {
     data: any
   }>(),
   
-  // 遅延読み込みフィールドを登録
+  // レイジーロードフィールドを登録
   registerLazyField(fieldProp: string, loader: () => Promise<any>) {
     this.lazyConfig.set(fieldProp, {
       loader,
@@ -239,7 +239,7 @@ const lazyLoadManager = {
     })
   },
   
-  // フィールドの遅延読み込みをトリガー
+  // フィールドのレイジーロードをトリガー
   async triggerLazyLoad(fieldProp: string) {
     const config = this.lazyConfig.get(fieldProp)
     if (!config || config.loading || config.loaded) return
@@ -256,11 +256,11 @@ const lazyLoadManager = {
       config.data = data
       config.loaded = true
       
-      // 遅延読み込みデータでフィールドを更新
+      // レイジーロードデータでフィールドを更新
       this.updateFieldWithLazyData(fieldProp, data)
       
     } catch (error) {
-      console.error(`フィールド ${fieldProp} の遅延読み込みに失敗:`, error)
+      console.error(`フィールド ${fieldProp} のレイジーロードに失敗:`, error)
     } finally {
       config.loading = false
       formRef.value?.updateItem(fieldProp, {
@@ -269,7 +269,7 @@ const lazyLoadManager = {
     }
   },
   
-  // 遅延読み込みデータでフィールドを更新
+  // レイジーロードデータでフィールドを更新
   updateFieldWithLazyData(fieldProp: string, data: any) {
     const item = formRef.value?.getItemByProp(fieldProp)
     if (!item) return
@@ -295,7 +295,7 @@ const lazyLoadManager = {
   }
 }
 
-// 遅延読み込みフィールドの例
+// レイジーロードフィールドの例
 const createLazyLoadFields = (): MaFormItem[] => [
   {
     label: '都市選択',
@@ -306,9 +306,9 @@ const createLazyLoadFields = (): MaFormItem[] => [
       loading: false
     },
     renderSlots: {
-      default: () => [h('el-option', { label: 'クリックして読み込み...', value: '', disabled: true })]
+      default: () => [h('el-option', { label: 'クリックしてロード...', value: '', disabled: true })]
     },
-    // フィールドがフォーカスされた時に遅延読み込み
+    // フィールドがフォーカスされた時にレイジーロード
     onFocus: () => {
       lazyLoadManager.triggerLazyLoad('city')
     }
@@ -321,22 +321,22 @@ const createLazyLoadFields = (): MaFormItem[] => [
       placeholder: '部門を選択',
       options: []
     },
-    // フィールドがマウントされた時に遅延読み込み
+    // フィールドがマウントされた時にレイジーロード
     onMounted: () => {
       lazyLoadManager.triggerLazyLoad('department')
     }
   }
 ]
 
-// 遅延ローダーを設定
+// レイジーローダーを設定
 const setupLazyLoaders = () => {
-  // 都市データの遅延読み込み
+  // 都市データのレイジーロード
   lazyLoadManager.registerLazyField('city', async () => {
     const response = await fetch('/api/cities')
     return await response.json()
   })
   
-  // 部門データの遅延読み込み
+  // 部門データのレイジーロード
   lazyLoadManager.registerLazyField('department', async () => {
     const response = await fetch('/api/departments')
     const data = await response.json()
@@ -345,13 +345,13 @@ const setupLazyLoaders = () => {
 }
 ```
 
-### 2. 画像の遅延読み込み
+### 2. 画像のレイジーロード
 
 ```typescript
 const imageLazyLoader = {
   observer: null as IntersectionObserver | null,
   
-  // 画像遅延読み込みを初期化
+  // 画像レイジーロードを初期化
   initImageLazyLoading() {
     this.observer = new IntersectionObserver(
       (entries) => {
@@ -368,7 +368,7 @@ const imageLazyLoader = {
     )
   },
   
-  // 画像を読み込み
+  // 画像をロード
   loadImage(img: HTMLImageElement) {
     const src = img.dataset.src
     if (src) {
@@ -414,12 +414,12 @@ interface CacheItem<T = any> {
   data: T
   timestamp: number
   ttl: number           // 生存時間（ミリ秒）
-  hitCount: number      // ヒット回数
+  hitCount: number      // ヒット数
 }
 
 class MultiLevelCache {
   private l1Cache = new Map<string, CacheItem>()  // メモリキャッシュ（高速）
-  private l2Cache: LocalStorage                   // ローカルストレージキャッシュ（永続）
+  private l2Cache: LocalStorage                   // ローカルストレージキャッシュ（永続的）
   private maxL1Size = 100                         // L1キャッシュの最大エントリ数
   private defaultTTL = 5 * 60 * 1000             // デフォルト5分TTL
   
@@ -510,7 +510,7 @@ class MultiLevelCache {
     }
   }
   
-  // 有効期限を確認
+  // 期限切れかどうかを確認
   private isExpired(item: CacheItem): boolean {
     return Date.now() - item.timestamp > item.ttl
   }
@@ -528,7 +528,4 @@ class MultiLevelCache {
     
     // L2の期限切れキャッシュをクリア
     for (let i = localStorage.length - 1; i >= 0; i--) {
-      const key = localStorage.key(i)
-      if (key) {
-        try {
-          const item =
+      const key = localStorage
