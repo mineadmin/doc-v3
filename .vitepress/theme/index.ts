@@ -45,7 +45,6 @@ import './styles/layout-fixes.css'
 import './styles/toc-width-fix.css'
 import { baiduPlugin } from "./plugin/baidu";
 import initEcharts from "./plugin/echarts";
-import enhanceReadingExperience from "./enhanceReadingExperience";
 import { getLanguageDetector } from "./plugins/languageDetector";
 import enhanceTOC from "./enhanceTOC";
 
@@ -81,9 +80,6 @@ export default {
       app.component('CopyOrDownloadAsMarkdownButtons', CopyOrDownloadAsMarkdownButtons)
 
       app.component('DemoPreview', DemoPreview)
-      
-      // Initialize reading experience enhancements
-      enhanceReadingExperience()
       
       // Initialize enhanced Table of Contents
       enhanceTOC({
