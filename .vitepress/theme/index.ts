@@ -11,12 +11,8 @@
 import type { EnhanceAppContext, Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 
-import ElementPlus from 'element-plus'
-
 // @ts-ignore
 import Layout from './components/layout.vue'
-
-import zh from 'element-plus/dist/locale/zh-cn.mjs'
 
 import ContextMenu from '@imengyu/vue3-context-menu'
 import MaTable from '@mineadmin/table/dist/index.umd.js'
@@ -47,25 +43,30 @@ import CopyOrDownloadAsMarkdownButtons from 'vitepress-plugin-llms/vitepress-com
 
 
 export default {
-  enhanceApp(ctx: EnhanceAppContext) {
-
+  async enhanceApp(ctx: EnhanceAppContext) {
     const { app } = ctx;
-    // @ts-ignore
-    app.use(ElementPlus, { locale: zh })
-    app.use(MaTable, { ssr: true })
-    app.use(MaSearch, { ssr: true })
-    app.use(MaForm, { ssr: true })
-    app.use(MaProTable, {
-      ssr: true,
-      provider: {
-        app,
-        contextMenu: ContextMenu.showContextMenu,
-      },
-      app,
-    })
-    app.component('CopyOrDownloadAsMarkdownButtons', CopyOrDownloadAsMarkdownButtons)
 
-    app.component('DemoPreview', DemoPreview)
+    // 条件导入 Element Plus 以避免 SSR 问题
+    if (!import.meta.env.SSR) {
+      const ElementPlus = await import('element-plus')
+      const zh = await import('element-plus/dist/locale/zh-cn.mjs')
+      // @ts-ignore
+      app.use(ElementPlus.default, { locale: zh.default })
+      app.use(MaTable, { ssr: true })
+      app.use(MaSearch, { ssr: true })
+      app.use(MaForm, { ssr: true })
+      app.use(MaProTable, {
+        ssr: true,
+        provider: {
+          app,
+          contextMenu: ContextMenu.showContextMenu,
+        },
+        app,
+      })
+      app.component('CopyOrDownloadAsMarkdownButtons', CopyOrDownloadAsMarkdownButtons)
+
+      app.component('DemoPreview', DemoPreview)
+    }
 
     baiduPlugin()
     initEcharts(app)

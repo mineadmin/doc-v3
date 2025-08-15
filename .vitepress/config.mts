@@ -9,10 +9,8 @@ import llmstxt from 'vitepress-plugin-llms'
 import { copyOrDownloadAsMarkdownButtons } from 'vitepress-plugin-llms'
 import {defineConfig} from "unocss";
 import type {UserConfig as ViteConfig} from "vite"
+import { visualizer } from 'rollup-plugin-visualizer'
 
-if (typeof window === 'undefined') {
-  global.window = {} // 安全垫片
-}
 
 // 根据环境变量获取当前语言，默认为中文
 const currentLanguage = process.env.CURRENT_LANGUAGE || 'zh'
@@ -66,8 +64,12 @@ const viteConfig:ViteConfig = {
     }),
       llmstxt({
         ignoreFiles:['changelog.md','index.md']
-      })
-  ],
+      }),
+    visualizer({
+      filename: 'stats.html',
+      open: true
+    })
+  ]
 }
 
 const config:UserConfig = {

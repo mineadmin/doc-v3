@@ -11,3 +11,4 @@ dist-ssr
 /.vitepress/cache/deps/
 /vendor/
 composer.lock
+stats.html
