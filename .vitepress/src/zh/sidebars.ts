@@ -1,4 +1,4 @@
-import {DefaultTheme} from "vitepress";
+import type {DefaultTheme} from "vitepress";
 
 const sidebar:DefaultTheme.Sidebar = {
   '/zh/guide/': [
@@ -6,8 +6,12 @@ const sidebar:DefaultTheme.Sidebar = {
       text: '介绍',
       items: [
         {
-          text: '关于 MineAdmin',
+          text: '为什么选择我们?',
           link: '/zh/guide/introduce/mineadmin',
+        },
+        {
+          text: '更新日志',
+          link: '/zh/guide/changelog',
         },
         {
           text: '免责声明',
@@ -155,19 +159,179 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: 'MaForm',
-          link: '/zh/front/component/ma-form'
+          link: '/zh/front/component/ma-form',
+          collapsed: true,
+          items: [
+            {
+              text: '基础用法',
+              link: '/zh/front/component/ma-form/examples/basic-usage'
+            },
+            {
+              text: '布局系统',
+              link: '/zh/front/component/ma-form/examples/layout-systems'
+            },
+            {
+              text: '条件渲染',
+              link: '/zh/front/component/ma-form/examples/conditional-rendering'
+            },
+            {
+              text: '动态验证',
+              link: '/zh/front/component/ma-form/examples/dynamic-validation'
+            },
+            {
+              text: '组件渲染',
+              link: '/zh/front/component/ma-form/examples/component-rendering'
+            },
+            {
+              text: '插槽示例',
+              link: '/zh/front/component/ma-form/examples/slots-examples'
+            },
+            {
+              text: '暴露方法',
+              link: '/zh/front/component/ma-form/examples/expose-methods'
+            },
+            {
+              text: '加载状态',
+              link: '/zh/front/component/ma-form/examples/loading-states'
+            },
+            {
+              text: '嵌套表单',
+              link: '/zh/front/component/ma-form/examples/nested-forms'
+            },
+            {
+              text: '移动端适配',
+              link: '/zh/front/component/ma-form/examples/mobile-responsive'
+            },
+            {
+              text: '高级场景',
+              link: '/zh/front/component/ma-form/examples/advanced-scenarios'
+            },
+            {
+              text: '性能演示',
+              link: '/zh/front/component/ma-form/examples/performance-demo'
+            }
+          ]
         },
         {
           text: 'MaTable',
-          link: '/zh/front/component/ma-table'
+          link: '/zh/front/component/ma-table',
+          collapsed: true,
+          items: [
+            {
+              text: '基础表格',
+              link: '/zh/front/component/ma-table/basic'
+            },
+            {
+              text: '表格排序',
+              link: '/zh/front/component/ma-table/sorting'
+            },
+            {
+              text: '表格筛选',
+              link: '/zh/front/component/ma-table/filter'
+            },
+            {
+              text: '自定义渲染',
+              link: '/zh/front/component/ma-table/custom-render'
+            },
+            {
+              text: '动态列管理',
+              link: '/zh/front/component/ma-table/dynamic-columns'
+            },
+            {
+              text: '分页表格',
+              link: '/zh/front/component/ma-table/pagination'
+            },
+            {
+              text: '树形表格',
+              link: '/zh/front/component/ma-table/tree-table'
+            },
+            {
+              text: '多选表格',
+              link: '/zh/front/component/ma-table/selection'
+            },
+            {
+              text: '响应式表格',
+              link: '/zh/front/component/ma-table/responsive'
+            }
+          ]
         },
         {
           text: 'MaSearch',
-          link: '/zh/front/component/ma-search'
+          link: '/zh/front/component/ma-search',
+          collapsed: true,
+          items: [
+            {
+              text: '基础用法',
+              link: '/zh/front/component/ma-search/examples/basic-usage'
+            },
+            {
+              text: '高级搜索',
+              link: '/zh/front/component/ma-search/examples/advanced-search'
+            },
+            {
+              text: '折叠搜索',
+              link: '/zh/front/component/ma-search/examples/collapsible-search'
+            },
+            {
+              text: '自定义操作',
+              link: '/zh/front/component/ma-search/examples/custom-actions'
+            },
+            {
+              text: '动态管理',
+              link: '/zh/front/component/ma-search/examples/dynamic-items'
+            },
+            {
+              text: '响应式布局',
+              link: '/zh/front/component/ma-search/examples/responsive-layout'
+            },
+            {
+              text: '表格集成',
+              link: '/zh/front/component/ma-search/examples/table-integration'
+            },
+            {
+              text: '表单验证',
+              link: '/zh/front/component/ma-search/examples/form-validation'
+            },
+            {
+              text: '方法演示',
+              link: '/zh/front/component/ma-search/examples/methods-demo'
+            }
+          ]
         },
         {
           text: 'MaProTable',
-          link: '/zh/front/component/ma-pro-table'
+          link: '/zh/front/component/ma-pro-table',
+          collapsed: true,
+          items: [
+            {
+              text: '基础用法',
+              link: '/zh/front/component/ma-pro-table/examples/basic'
+            },
+            {
+              text: '高级搜索',
+              link: '/zh/front/component/ma-pro-table/examples/advanced-search'
+            },
+            {
+              text: '自定义操作',
+              link: '/zh/front/component/ma-pro-table/examples/custom-operations'
+            },
+            {
+              text: '单元格渲染插件',
+              link: '/zh/front/component/ma-pro-table/examples/cell-render-plugins'
+            },
+            {
+              text: '工具栏扩展',
+              link: '/zh/front/component/ma-pro-table/examples/toolbar-extensions'
+            },
+            {
+              text: '数据管理',
+              link: '/zh/front/component/ma-pro-table/examples/data-management'
+            },
+            {
+              text: '响应式布局',
+              link: '/zh/front/component/ma-pro-table/examples/responsive-layout'
+            }
+          ]
         },
         {
           text: 'MaEcharts',
@@ -206,6 +370,30 @@ const sidebar:DefaultTheme.Sidebar = {
         {
           text: "用户授权(RBAC)",
           link: "/zh/backend/security/access"
+        },
+        {
+          text: "获取客户端 IP",
+          link: "/zh/backend/security/client-ip"
+        }
+      ]
+    },{
+      text:"数据权限",
+      items:[
+        {
+          text: "核心概念",
+          link: "/zh/backend/data-permission/overview"
+        },
+        {
+          text: "权限配置与效果演示",
+          link: "/zh/backend/data-permission/config"
+        },
+        {
+          text: "使用示例",
+            link: "/zh/backend/data-permission/example"
+        },
+        {
+          text: "注意事项",
+            link: "/zh/backend/data-permission/notice"
         }
       ]
     }

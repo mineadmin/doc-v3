@@ -152,6 +152,8 @@ return [
             'domain' => '',
             'schema' => 'http://',
             'isCName' => false,
+            // oss 域名地址，不填寫則會生成訪問路徑失敗
+            'public_url' => env('APP_URL') . '/uploads',
             // 'timeout'        => 3600,
             // 'connectTimeout' => 10,
             // 'token'          => '',

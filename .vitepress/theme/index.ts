@@ -43,6 +43,8 @@ import "virtual:uno.css";
 import DemoPreview from '../components/demo-preview.vue';
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
+import CopyOrDownloadAsMarkdownButtons from 'vitepress-plugin-llms/vitepress-components/CopyOrDownloadAsMarkdownButtons.vue'
+
 
 export default {
   enhanceApp(ctx: EnhanceAppContext) {
@@ -61,6 +63,7 @@ export default {
       },
       app,
     })
+    app.component('CopyOrDownloadAsMarkdownButtons', CopyOrDownloadAsMarkdownButtons)
 
     app.component('DemoPreview', DemoPreview)
 

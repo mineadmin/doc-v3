@@ -2,9 +2,9 @@
 
 ## Environment Variable Configuration
 
-By default, there are two environment configuration files: `development` and `production`. If you need to extend, you can copy one and modify it according to your needs.
+By default, two environment configuration files are included: `Development` and `Production`. If you need to extend them, you can copy one and modify it according to your needs.
 
-For more details, please refer to the [Vite - Environment Variables and Modes](https://cn.vitejs.dev/guide/env-and-mode) section.
+For details, please refer to the [Vite - Environment Variables and Modes](https://cn.vitejs.dev/guide/env-and-mode) section.
 
 ::: code-group
 
@@ -15,9 +15,9 @@ VITE_APP_TITLE = MineAdmin
 VITE_APP_PORT = 2888
   # Application root path
 VITE_APP_ROOT_BASE = /
-  # API request address, will be set to the baseURL parameter of axios
+  # API request URL, which will be set as the baseURL parameter in axios
 VITE_APP_API_BASEURL = http://127.0.0.1:9501
-  # Routing mode: history and hash, default is hash (with #)
+  # Routing mode: 'history' or 'hash' (default is hash, the one with #)
 VITE_APP_ROUTE_MODE = hash
 
   # Storage prefix
@@ -27,7 +27,7 @@ VITE_APP_STORAGE_PREFIX = mine_
 VITE_OPEN_PROXY = true
   # Proxy prefix identifier
 VITE_PROXY_PREFIX = /dev
-  # Whether to enable vConsole (can be enabled for mobile debugging)
+  # Whether to enable vConsole (useful for mobile debugging)
 VITE_OPEN_vCONSOLE = false
   # Whether to enable developer tools
 VITE_OPEN_DEVTOOLS = false
@@ -39,9 +39,9 @@ VITE_OPEN_DEVTOOLS = false
 VITE_APP_TITLE = MineAdmin
   # Application root path
 VITE_APP_ROOT_BASE = /
-  # API request address, will be set to the baseURL parameter of axios
+  # API request URL, which will be set as the baseURL parameter in axios
 VITE_APP_API_BASEURL = /
-  # Routing mode: history and hash, default is hash (with #)
+  # Routing mode: 'history' or 'hash' (default is hash, the one with #)
 VITE_APP_ROUTE_MODE = hash
 
   # Storage prefix
@@ -56,9 +56,9 @@ VITE_PROXY_PREFIX = /prod
 VITE_BUILD_MOCK = false
   # Whether to generate sourcemap during build
 VITE_BUILD_SOURCEMAP = false
-  # Whether to enable compression during build, supports gzip and brotli
+  # Whether to enable compression during build (supports gzip and brotli)
 VITE_BUILD_COMPRESS = gzip,brotli
-  # Whether to generate archives after build, supports zip and tar
+  # Whether to generate archives after build (supports zip and tar)
 VITE_BUILD_ARCHIVE =
 
 ```

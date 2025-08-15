@@ -1,4 +1,4 @@
-import {DefaultTheme} from "vitepress";
+import type {DefaultTheme} from "vitepress";
 
 const sidebar:DefaultTheme.Sidebar = {
   '/zh-tw/guide/': [
@@ -6,8 +6,12 @@ const sidebar:DefaultTheme.Sidebar = {
       text: '介紹',
       items: [
         {
-          text: '關於 MineAdmin',
+          text: '為什麼選擇我們?',
           link: '/zh-tw/guide/introduce/mineadmin',
+        },
+        {
+          text: '更新日誌',
+          link: '/zh-tw/guide/changelog',
         },
         {
           text: '免責宣告',
@@ -155,19 +159,179 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: 'MaForm',
-          link: '/zh-tw/front/component/ma-form'
+          link: '/zh-tw/front/component/ma-form',
+          collapsed: true,
+          items: [
+            {
+              text: '基礎用法',
+              link: '/zh-tw/front/component/ma-form/examples/basic-usage'
+            },
+            {
+              text: '佈局系統',
+              link: '/zh-tw/front/component/ma-form/examples/layout-systems'
+            },
+            {
+              text: '條件渲染',
+              link: '/zh-tw/front/component/ma-form/examples/conditional-rendering'
+            },
+            {
+              text: '動態驗證',
+              link: '/zh-tw/front/component/ma-form/examples/dynamic-validation'
+            },
+            {
+              text: '元件渲染',
+              link: '/zh-tw/front/component/ma-form/examples/component-rendering'
+            },
+            {
+              text: '插槽示例',
+              link: '/zh-tw/front/component/ma-form/examples/slots-examples'
+            },
+            {
+              text: '暴露方法',
+              link: '/zh-tw/front/component/ma-form/examples/expose-methods'
+            },
+            {
+              text: '載入狀態',
+              link: '/zh-tw/front/component/ma-form/examples/loading-states'
+            },
+            {
+              text: '巢狀表單',
+              link: '/zh-tw/front/component/ma-form/examples/nested-forms'
+            },
+            {
+              text: '移動端適配',
+              link: '/zh-tw/front/component/ma-form/examples/mobile-responsive'
+            },
+            {
+              text: '高階場景',
+              link: '/zh-tw/front/component/ma-form/examples/advanced-scenarios'
+            },
+            {
+              text: '效能演示',
+              link: '/zh-tw/front/component/ma-form/examples/performance-demo'
+            }
+          ]
         },
         {
           text: 'MaTable',
-          link: '/zh-tw/front/component/ma-table'
+          link: '/zh-tw/front/component/ma-table',
+          collapsed: true,
+          items: [
+            {
+              text: '基礎表格',
+              link: '/zh-tw/front/component/ma-table/basic'
+            },
+            {
+              text: '表格排序',
+              link: '/zh-tw/front/component/ma-table/sorting'
+            },
+            {
+              text: '表格篩選',
+              link: '/zh-tw/front/component/ma-table/filter'
+            },
+            {
+              text: '自定義渲染',
+              link: '/zh-tw/front/component/ma-table/custom-render'
+            },
+            {
+              text: '動態列管理',
+              link: '/zh-tw/front/component/ma-table/dynamic-columns'
+            },
+            {
+              text: '分頁表格',
+              link: '/zh-tw/front/component/ma-table/pagination'
+            },
+            {
+              text: '樹形表格',
+              link: '/zh-tw/front/component/ma-table/tree-table'
+            },
+            {
+              text: '多選表格',
+              link: '/zh-tw/front/component/ma-table/selection'
+            },
+            {
+              text: '響應式表格',
+              link: '/zh-tw/front/component/ma-table/responsive'
+            }
+          ]
         },
         {
           text: 'MaSearch',
-          link: '/zh-tw/front/component/ma-search'
+          link: '/zh-tw/front/component/ma-search',
+          collapsed: true,
+          items: [
+            {
+              text: '基礎用法',
+              link: '/zh-tw/front/component/ma-search/examples/basic-usage'
+            },
+            {
+              text: '高階搜尋',
+              link: '/zh-tw/front/component/ma-search/examples/advanced-search'
+            },
+            {
+              text: '摺疊搜尋',
+              link: '/zh-tw/front/component/ma-search/examples/collapsible-search'
+            },
+            {
+              text: '自定義操作',
+              link: '/zh-tw/front/component/ma-search/examples/custom-actions'
+            },
+            {
+              text: '動態管理',
+              link: '/zh-tw/front/component/ma-search/examples/dynamic-items'
+            },
+            {
+              text: '響應式佈局',
+              link: '/zh-tw/front/component/ma-search/examples/responsive-layout'
+            },
+            {
+              text: '表格整合',
+              link: '/zh-tw/front/component/ma-search/examples/table-integration'
+            },
+            {
+              text: '表單驗證',
+              link: '/zh-tw/front/component/ma-search/examples/form-validation'
+            },
+            {
+              text: '方法演示',
+              link: '/zh-tw/front/component/ma-search/examples/methods-demo'
+            }
+          ]
         },
         {
           text: 'MaProTable',
-          link: '/zh-tw/front/component/ma-pro-table'
+          link: '/zh-tw/front/component/ma-pro-table',
+          collapsed: true,
+          items: [
+            {
+              text: '基礎用法',
+              link: '/zh-tw/front/component/ma-pro-table/examples/basic'
+            },
+            {
+              text: '高階搜尋',
+              link: '/zh-tw/front/component/ma-pro-table/examples/advanced-search'
+            },
+            {
+              text: '自定義操作',
+              link: '/zh-tw/front/component/ma-pro-table/examples/custom-operations'
+            },
+            {
+              text: '單元格渲染外掛',
+              link: '/zh-tw/front/component/ma-pro-table/examples/cell-render-plugins'
+            },
+            {
+              text: '工具欄擴充套件',
+              link: '/zh-tw/front/component/ma-pro-table/examples/toolbar-extensions'
+            },
+            {
+              text: '資料管理',
+              link: '/zh-tw/front/component/ma-pro-table/examples/data-management'
+            },
+            {
+              text: '響應式佈局',
+              link: '/zh-tw/front/component/ma-pro-table/examples/responsive-layout'
+            }
+          ]
         },
         {
           text: 'MaEcharts',
@@ -206,6 +370,30 @@ const sidebar:DefaultTheme.Sidebar = {
         {
           text: "使用者授權(RBAC)",
           link: "/zh-tw/backend/security/access"
+        },
+        {
+          text: "獲取客戶端 IP",
+          link: "/zh-tw/backend/security/client-ip"
+        }
+      ]
+    },{
+      text:"資料許可權",
+      items:[
+        {
+          text: "核心概念",
+          link: "/zh-tw/backend/data-permission/overview"
+        },
+        {
+          text: "許可權配置與效果演示",
+          link: "/zh-tw/backend/data-permission/config"
+        },
+        {
+          text: "使用示例",
+            link: "/zh-tw/backend/data-permission/example"
+        },
+        {
+          text: "注意事項",
+            link: "/zh-tw/backend/data-permission/notice"
         }
       ]
     }

@@ -7,8 +7,48 @@
 注意：本组件不再像 `2.0 ma-crud` 那样直接内置支持 `新增` 和 `编辑` 功能，这些需要自己来实现。
 :::
 
-## 使用
+## 快速开始
+
 <DemoPreview dir="demos/ma-pro-table" />
+
+## 示例大全
+
+通过以下示例，你可以快速了解 MaProTable 的各种使用场景和功能特性：
+
+### 基础功能
+- **[基础用法](/zh/front/component/ma-pro-table/examples/basic)** - 最简单的表格使用方式
+- **[高级搜索](/zh/front/component/ma-pro-table/examples/advanced-search)** - 多种搜索组件和复杂搜索逻辑
+- **[自定义操作](/zh/front/component/ma-pro-table/examples/custom-operations)** - 灵活的操作列配置和批量操作
+
+### 扩展功能
+- **[单元格渲染插件](/zh/front/component/ma-pro-table/examples/cell-render-plugins)** - 丰富的单元格渲染效果
+- **[工具栏扩展](/zh/front/component/ma-pro-table/examples/toolbar-extensions)** - 自定义工具栏功能
+- **[数据管理](/zh/front/component/ma-pro-table/examples/data-management)** - 完整的CRUD操作流程
+
+### 高级特性
+- **[响应式布局](/zh/front/component/ma-pro-table/examples/responsive-layout)** - 多设备适配和响应式设计
+
+## 核心特性
+
+### 🚀 快速开发
+- 基于 ma-search 和 ma-table 组合，开箱即用
+- 内置常用的 CRUD 操作模式
+- 支持多种数据源和 API 格式
+
+### 🎨 丰富的渲染
+- 内置单元格渲染插件系统
+- 支持自定义渲染组件
+- 灵活的操作列配置
+
+### 🔧 强大的扩展
+- 工具栏插件系统
+- 完整的 TypeScript 类型支持
+- 丰富的事件和回调
+
+### 📱 响应式设计
+- 自动适配不同设备尺寸
+- 移动端友好的交互体验
+- 灵活的布局配置
 
 ## cellRenderTo 单元格渲染插件
 ::: tip 为什么要存在 cellRenderTo 插件？
@@ -171,6 +211,67 @@ add({
 ```
 :::
 
+## TypeScript 类型定义
+
+### 核心类型
+
+```typescript
+// 组件主要接口
+interface MaProTableProps {
+  options: MaProTableOptions    // 组件配置
+  schema: MaProTableSchema      // 表格架构
+}
+
+// 组件暴露的方法和属性
+interface MaProTableExpose {
+  // 子组件访问
+  getSearchRef(): MaSearchExpose
+  getTableRef(): MaTableExpose
+  getElTableStates(): Record<string, any>
+  
+  // 数据操作
+  refresh(): Promise<void>
+  requestData(): Promise<void>
+  changeApi(api: () => any, isRequestNow: boolean): void
+  setRequestParams(params: Record<string, any>, isRequestNow: boolean): void
+  
+  // 列管理
+  setTableColumns(cols: MaProTableColumns[]): void
+  getTableColumns(): MaProTableColumns[]
+  
+  // 搜索管理
+  setSearchForm(form: Record<string, any>): void
+  getSearchForm(): Record<string, any>
+  search(form: Record<string, any>): void
+  
+  // 配置管理
+  setProTableOptions(opts: MaProTableOptions): void
+  getProTableOptions(): MaProTableOptions
+  
+  // 工具方法
+  resizeHeight(): Promise<void>
+  getCurrentId(): string
+}
+```
+
+### 插件系统类型
+
+```typescript
+// 单元格渲染插件
+interface MaProTableRenderPlugin {
+  name: string
+  render: (data: TableColumnRenderer, props: any, proxy: MaProTableExpose) => VNode | string
+}
+
+// 工具栏插件
+interface MaProTableToolbar {
+  name: string
+  render: (props: { proxy: MaProTableExpose }) => VNode | Component
+  show: boolean | (() => boolean)
+  order: number
+}
+```
+
 ## Props
 | 参数       | 说明                  | 类型         | 版本    |
 |----------|---------------------|-------------------|--------|
@@ -178,21 +279,22 @@ add({
 | `schema`  | `ma-pro-table` 架构配置 | `MaProTableSchema` | 1.0.0 |
 
 ### MaProTableOptions
-| 参数                     | 说明                                        | 类型                                  | 默认值    | 版本    |
-|------------------------|-------------------------------------------|-------------------------------------|--------|-------|
-| `tableOptions`         | `ma-table` 参数                             | `MaTableOptions`                    | -      | 1.0.0 |
-| `searchOptions`        | `ma-search` 参数                            | `MaSearchOptions`                   | -      | 1.0.0 |
-| `searchFormOptions`    | `ma-form` 参数                              | `MaFormOptions`                     | -      | 1.0.0 |
-| -                      | -                                         | -                                   | -      | -     |
-| `id`                   | 当前id，全局唯一，不指定则随机生成一个                      | `string`                            | -      | 1.0.0 |
-| `adaptionOffsetBottom` | 距离底部偏移量                                   | `number`                            | 0      | 1.0.0 |
-| `actionBtnPosition`    | 动作按钮放置位置，自动模式下，如果开启标题栏，则显示在标题栏，否则显示在表格左上方 | `auto, header, table`               | `auto` | 1.0.0 |
-| `header`               | 头部配置                                      | 查看 [参数配置](#headerconfig)            | -      | 1.0.0 |
-| `toolbar`              | 工具栏是否显示                                   | `boolean, (() => boolean)`          | `true` | 1.0.0 |
-| `rowContextMenu`       | 右键配置                                      | 查看 [参数配置](#rowcontextmenu)          | -      | 1.0.0 |
-| `requestOptions`       | 列表网络请求配置                                  | 查看 [参数配置](#requestoptions)          | -      | 1.0.0 |
-| `onSearchSubmit`       | 搜索提交事件                                    | `(form: Record<string, any>) => void` | -      | 1.0.0 |
-| `onSearchReset`        | 搜索重置事件                                    | `(form: Record<string, any>) => void`          | -      | 1.0.0 |
+| 参数                     | 说明                                        | 类型                                          | 默认值    | 版本     |
+|------------------------|-------------------------------------------|---------------------------------------------|--------|--------|
+| `tableOptions`         | `ma-table` 参数                             | `MaTableOptions`                            | -      | 1.0.0  |
+| `searchOptions`        | `ma-search` 参数                            | `MaSearchOptions`                           | -      | 1.0.0  |
+| `searchFormOptions`    | `ma-form` 参数                              | `MaFormOptions`                             | -      | 1.0.0  |
+| -                      | -                                         | -                                           | -      | -      |
+| `id`                   | 当前id，全局唯一，不指定则随机生成一个                      | `string`                                    | -      | 1.0.0  |
+| `adaptionOffsetBottom` | 距离底部偏移量                                   | `number`                                    | 0      | 1.0.0  |
+| `actionBtnPosition`    | 动作按钮放置位置，自动模式下，如果开启标题栏，则显示在标题栏，否则显示在表格左上方 | `auto, header, table`                       | `auto` | 1.0.0  |
+| `header`               | 头部配置                                      | 查看 [参数配置](#headerconfig)                    | -      | 1.0.0  |
+| `toolbar`              | 工具栏是否显示                                   | `boolean, (() => boolean)`                  | `true` | 1.0.0  |
+| `toolStates`           | 按需设置工具是否显示                                | { `[key:string]` : `boolean, (() => boolean)` | -      | 1.0.69 |
+| `rowContextMenu`       | 右键配置                                      | 查看 [参数配置](#rowcontextmenu)                  | -      | 1.0.0  |
+| `requestOptions`       | 列表网络请求配置                                  | 查看 [参数配置](#requestoptions)                  | -      | 1.0.0  |
+| `onSearchSubmit`       | 搜索提交事件                                    | `(form: Record<string, any>) => void`       | -      | 1.0.0  |
+| `onSearchReset`        | 搜索重置事件                                    | `(form: Record<string, any>) => void`       | -      | 1.0.0  |
 
 
 #### HeaderConfig
@@ -261,7 +363,8 @@ add({
 :::
 | 参数      | 说明        | 类型           | 默认值 | 版本    |
 |---------|-----------|--------------|-----|-------|
-| `type`  | 显示方式，下拉菜单：`dropdown`, 平铺：`tile`  | `string`     | `dropdown`   | 1.0.0 |
+| `type`  | 显示方式，自动模式：`auto`, 下拉菜单：`dropdown`, 平铺：`tile`  | `string`     | `auto`   | `auto` 所需 `1.0.75` |
+| `fold`  | 自动模式下，平铺几个后自动折叠，默认为：`1` 个  | `number`     | `1`   | 1.0.75 |
 | `actions` | 操作栏配置列表 | `OperationAction[]` | -   | 1.0.0 |
 
 ###### OperationAction 操作栏列表配置
@@ -284,47 +387,179 @@ add({
 | `search-submit` | 搜索提交事件  | `(form: Record<string, any>) => Record<string, any>, void` |
 | `search-reset`  | 搜索重置事件  | `(form: Record<string, any>) => Record<string, any>, void`                              |
 
-## Slot
+## Slot 插槽系统
 
-| 名称                                             | 说明                                                      | 参数 |
-|------------------------------------------------|---------------------------------------------------------|----|
-| `default`                                      | 默认插槽及 `el-table` 原生插槽                                   | -  |
-| `empty`                                        | 原生插槽，空数据时显示                                             | -  |
-| `append`                                       | 原生插槽，表格最后一行                                             | -  |
-| `pageLeft`                                     | 分页那行左边区域插槽                                              |    |
-| `column-[prop]`                                | 表格列插槽，`prop` 为字段名                                       |  scope  |
-| `header-[prop]`                                | 表格头插槽，`prop` 为字段名                                       |  scope  |
-| `middle`                                       | 表格与搜索栏中间区域插槽                                            | -  |
-| `tableHeader`                                  | `header` 整个区域插槽                                         | -  |
-| `headerTitle`                                  | `header` 标题区域插槽                                         | -  |
-| `headerRight`                                  | `header` 右侧区域插槽                                         | -  |
-| `toolbarLeft`                                  | `toolbar` 左侧区域插槽                                        | -  |
-| `toolbar`                                      | `toolbar` 工具栏列表插槽，不建议使用，推荐[API扩展](#toolbarplugin-工具栏插件) | -  |
-| `beforeToolbar`                                | `toolbar` 工具栏列表前置插槽                                     | -  |
-| `afterToolbar`                                 | `toolbar` 工具栏列表后置插槽                                     | -  |
-| `tableTop`                                     | `table` 容器内顶部插槽，位于工具栏上方                                 | -  |
-| `tableCranny`         |  `table` 容器内表格与工具栏中间缝隙插槽                                | -  |
-| `search`                                       | 搜索组件插槽，使用后，搜索项配置失效                                      | -  |
-| `searchActions`                                | 搜索 `操作按钮` 内容插槽                                          | -  |
-| `searchBeforeActions`                          | 搜索 `操作按钮` 前置内容插槽                                        | -  |
-| `searchAfterActions`                           | 搜索 `操作按钮` 后置内容插槽                                        | -  |
-| `searchAfterActions`                           | 搜索 `操作按钮` 后置内容插槽                                        | -  |
+MaProTable 提供了丰富的插槽系统，让你可以灵活地自定义各个区域的内容。
 
-## Expose
-| 名称                     | 说明                           | 参数                                                              | 返回值                   |
-|------------------------|------------------------------|-----------------------------------------------------------------|-----------------------|
-| `getSearchRef()`       | 获取 `ma-search` 的Ref          | -                                                               | `MaSearchExpose`      |
-| `getTableRef()`        | 获取 `ma-table` 的Ref           | -                                                               | `MaTableExpose`       |
-| `getElTableStates()`   | 获取 `el-table` 的暴露的states属性列表 | -                                                               | `any`                 |
-| `setTableColumns()`    | 设置表格列                        | `(cols: MaProTableColumns[]) => void`                           | `void`                |
-| `getTableColumns()`    | 获取表格列                        | `() => MaProTableColumns[]`                                     | `MaProTableColumns[]` |
-| `refresh()`            | 刷新表格数据                       | `() => Promise<void>`                                           | `Promise<void>`       |
-| `requestData()`        | 请求表格数据                       | `() => Promise<void>`                                           | `Promise<void>`       |
-| `changeApi()`          | 变更请求api                      | `( api: () => any, isRequestNow: boolean ) => void`             | `void`                |
-| `setRequestParams()`   | 设置请求参数                       | `( params: Record<string, any>, isRequestNow: boolean) => void` | `void`                |
-| `setSearchForm()`      | 设置搜索表单默认值                    | `(form: Record<string, any>) => void`                           | `void`                |
-| `getSearchForm()`      | 获取搜索表单数据                     | `() => Record<string, any>`                                     | `Record<string, any>` |
-| `setProTableOptions()` | 设置 `ma-pro-table` 的参数        | `(opts: MaProTableOptions) => void`                             | `void`                |
-| `getProTableOptions()` | 获取 `ma-pro-table` 的参数        | `() => MaProTableOptions`                                       | `MaProTableOptions`   |
-| `resizeHeight()`       | 重置表格高度                       | `() => Promise<void>`                                           | `Promise<void>`       |
-| `getCurrentId()`       | 获取当前组件ID                     | -                                                               | `string`              |**
+### 核心插槽
+
+| 名称                | 说明                                      | 参数    | 使用场景 |
+|-------------------|-------------------------------------------|---------|----------|
+| `default`         | 默认插槽及 `el-table` 原生插槽               | -       | 表格内容扩展 |
+| `empty`           | 空数据时显示的内容                           | -       | 自定义空状态 |
+| `append`          | 表格最后一行内容                            | -       | 总计行等 |
+
+### 布局插槽
+
+| 名称                | 说明                                      | 参数    | 使用场景 |
+|-------------------|-------------------------------------------|---------|----------|
+| `middle`          | 搜索栏与表格中间区域                         | -       | 添加统计信息 |
+| `tableHeader`     | 表格头部整个区域                            | -       | 完全自定义头部 |
+| `headerTitle`     | 表格头部标题区域                            | -       | 自定义标题 |
+| `headerRight`     | 表格头部右侧区域                            | -       | 添加快捷操作 |
+| `tableTop`        | 表格容器顶部，工具栏上方                     | -       | 批量操作按钮 |
+| `tableCranny`     | 表格与工具栏中间缝隙                         | -       | 状态提示 |
+| `pageLeft`        | 分页左侧区域                               | -       | 统计信息 |
+
+### 工具栏插槽
+
+| 名称                | 说明                                      | 参数    | 使用场景 |
+|-------------------|-------------------------------------------|---------|----------|
+| `toolbarLeft`     | 工具栏左侧区域                              | -       | 统计数据展示 |
+| `toolbar`         | 工具栏列表（不推荐，建议用API扩展）           | -       | 自定义工具 |
+| `beforeToolbar`   | 工具栏前置内容                              | -       | 前置按钮 |
+| `afterToolbar`    | 工具栏后置内容                              | -       | 后置按钮 |
+
+### 搜索插槽
+
+| 名称                   | 说明                                      | 参数    | 使用场景 |
+|----------------------|-------------------------------------------|---------|----------|
+| `search`             | 搜索组件整体替换                            | -       | 完全自定义搜索 |
+| `searchActions`      | 搜索操作按钮区域                            | -       | 自定义搜索按钮 |
+| `searchBeforeActions`| 搜索按钮前置内容                            | -       | 添加前置操作 |
+| `searchAfterActions` | 搜索按钮后置内容                            | -       | 添加后置操作 |
+
+### 动态插槽
+
+| 名称                | 说明                                      | 参数    | 使用场景 |
+|-------------------|-------------------------------------------|---------|----------|
+| `column-[prop]`   | 表格列内容插槽                              | scope   | 自定义列渲染 |
+| `header-[prop]`   | 表格头部插槽                               | scope   | 自定义表头 |
+
+### 插槽使用示例
+
+```vue
+<template>
+  <MaProTable :options="options" :schema="schema">
+    <!-- 工具栏左侧统计 -->
+    <template #toolbarLeft>
+      <div class="stats">
+        <el-text>总计: {{ total }} 条</el-text>
+      </div>
+    </template>
+    
+    <!-- 表格顶部批量操作 -->
+    <template #tableTop>
+      <div class="batch-actions">
+        <el-button @click="batchDelete">批量删除</el-button>
+      </div>
+    </template>
+    
+    <!-- 自定义列内容 -->
+    <template #column-status="{ row }">
+      <el-switch v-model="row.status" />
+    </template>
+  </MaProTable>
+</template>
+```
+
+## Expose 暴露方法
+
+MaProTable 组件暴露了丰富的方法和属性，让你可以完全控制表格的行为。
+
+### 子组件访问
+
+| 方法名                 | 说明                                  | 返回值                |
+|-----------------------|---------------------------------------|----------------------|
+| `getSearchRef()`      | 获取搜索组件实例                       | `MaSearchExpose`     |
+| `getTableRef()`       | 获取表格组件实例                       | `MaTableExpose`      |
+| `getElTableStates()`  | 获取 Element Plus 表格状态            | `any`                |
+
+### 数据操作
+
+| 方法名                | 说明                                  | 参数                                                            | 返回值              |
+|----------------------|---------------------------------------|----------------------------------------------------------------|--------------------|
+| `refresh()`          | 刷新表格数据                           | -                                                              | `Promise<void>`    |
+| `requestData()`      | 重新请求表格数据                       | -                                                              | `Promise<void>`    |
+| `changeApi()`        | 动态更换数据接口                       | `(api: () => any, isRequestNow: boolean) => void`             | `void`             |
+| `setRequestParams()` | 设置请求参数                           | `(params: Record<string, any>, isRequestNow: boolean) => void` | `void`             |
+
+### 列管理
+
+| 方法名                | 说明                                  | 参数                                         | 返回值                    |
+|----------------------|---------------------------------------|---------------------------------------------|-------------------------|
+| `setTableColumns()`  | 动态设置表格列                         | `(cols: MaProTableColumns[]) => void`      | `void`                  |
+| `getTableColumns()`  | 获取当前表格列配置                     | -                                           | `MaProTableColumns[]`   |
+
+### 搜索管理
+
+| 方法名               | 说明                                  | 参数                                         | 返回值                    |
+|---------------------|---------------------------------------|---------------------------------------------|-------------------------|
+| `setSearchForm()`   | 设置搜索表单数据                       | `(form: Record<string, any>) => void`      | `void`                  |
+| `getSearchForm()`   | 获取搜索表单数据                       | -                                           | `Record<string, any>`   |
+| `search()`          | 执行搜索操作                           | `(form: Record<string, any>) => void`      | `void`                  |
+
+### 配置管理
+
+| 方法名                  | 说明                                  | 参数                                         | 返回值                |
+|------------------------|---------------------------------------|---------------------------------------------|----------------------|
+| `setProTableOptions()` | 动态设置组件配置                       | `(opts: MaProTableOptions) => void`        | `void`               |
+| `getProTableOptions()` | 获取当前组件配置                       | -                                           | `MaProTableOptions`  |
+
+### 工具方法
+
+| 方法名              | 说明                                  | 参数 | 返回值              |
+|--------------------|---------------------------------------|------|--------------------|
+| `resizeHeight()`   | 重新计算表格高度                       | -    | `Promise<void>`    |
+| `getCurrentId()`   | 获取组件唯一标识                       | -    | `string`           |
+
+### 使用示例
+
+```vue
+<template>
+  <div>
+    <el-button @click="handleRefresh">刷新数据</el-button>
+    <el-button @click="handleSearch">搜索</el-button>
+    <el-button @click="handleChangeApi">切换接口</el-button>
+    
+    <MaProTable ref="tableRef" :options="options" :schema="schema" />
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const tableRef = ref()
+
+// 刷新数据
+const handleRefresh = async () => {
+  await tableRef.value?.refresh()
+  console.log('数据刷新完成')
+}
+
+// 执行搜索
+const handleSearch = () => {
+  tableRef.value?.search({ name: '张三', status: 1 })
+}
+
+// 动态切换接口
+const handleChangeApi = () => {
+  tableRef.value?.changeApi(newApiFunction, true)
+}
+
+// 获取选中行
+const getSelectedRows = () => {
+  const tableInstance = tableRef.value?.getTableRef()
+  return tableInstance?.getSelectionRows()
+}
+
+// 动态更新列配置
+const updateColumns = () => {
+  const newColumns = [
+    { label: 'ID', prop: 'id' },
+    { label: '姓名', prop: 'name' }
+  ]
+  tableRef.value?.setTableColumns(newColumns)
+}
+</script>
+```

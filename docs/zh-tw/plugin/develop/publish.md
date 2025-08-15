@@ -1,27 +1,44 @@
 # 應用釋出
 
-打包應用併發布
-
----
+打包應用併發布到應用市場, 供其他使用者下載使用。
 
 ## 應用打包
-應用開發完畢後，你可以上傳到官方應用市場，其他人可以下載並使用。
 
-### 打包注意事項
+目前提供一種打包方式，將外掛應用整個目錄作為一個 git 倉庫專案。可以託管到 `github`、`gitee` 等程式碼託管平臺。
+也可以託管到 MineAdmin 自建的 GIT 伺服器上。 http://git.mineadmin.com
 
-* 請在根目錄壓縮檔案，即壓縮包開啟，就是檔案列表，不要最外層有資料夾包裹一層，例如下面這個結構下打包
+
+### 打包步驟
+
+1. 將應用目錄作為一個 git 倉庫專案，提交到程式碼託管平臺。
 
 ```shell
-xmo@XMo:/opt/www/plugin/mine-admin/app-store$ ls -l
-total 0
--rwxrwxrwx 1 xmo xmo   1 Apr 22 16:34 install.lock
--rwxrwxrwx 1 xmo xmo 420 May 27 10:11 mine.json
-drwxrwxrwx 1 xmo xmo 512 May 27 10:11 src
+cd 你的外掛應用目錄
+
+git init
+
+git add .
+
+git commit -m "first commit"
+
+git remote add origin 你的程式碼倉庫地址
+
+git push -u origin master
 ```
+
+2. 進入 [MineAdmin 外掛建立頁](https://www.mineadmin.com/member/createApp) 輸入程式碼倉庫地址並提交
+
+<ElImage :preview-src-list="['/public/images/create_app.png']" src="/public/images/create_app.png"></ElImage>
+
+3. 等待 MineAdmin 稽核通過後，應用會顯示在應用市場中。
+
+::: warning 打包注意事項
 
 * 一定要將 `mine.json` 必填資訊填寫完整，否則應用無法正常釋出。
 * 應用上傳後，會經過我們稽核，稽核通過後，才會顯示到應用市場，請知悉。
+* 請確保你的外掛目錄中不包含 `install.lock` 檔案，否則會導致應用無法正常安裝。
 
+:::
 
 ## 應用版本控制
 

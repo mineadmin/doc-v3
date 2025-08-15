@@ -1,4 +1,4 @@
-import {DefaultTheme} from "vitepress";
+import type {DefaultTheme} from "vitepress";
 
 const sidebar:DefaultTheme.Sidebar = {
   '/en/guide/': [
@@ -6,8 +6,12 @@ const sidebar:DefaultTheme.Sidebar = {
       text: 'Introduction',
       items: [
         {
-          text: 'About MineAdmin',
+          text: 'Why Choose Us?',
           link: '/en/guide/introduce/mineadmin',
+        },
+        {
+          text: 'Changelog',
+          link: '/en/guide/changelog',
         },
         {
           text: 'Disclaimer',
@@ -63,7 +67,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/en/front/base/start'
         },
         {
-          text: 'Routing and Menus',
+          text: 'Routes & Menus',
           link: '/en/front/base/route-menu'
         },
         {
@@ -75,7 +79,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/en/front/base/icon'
         },
         {
-          text: 'Build and Preview',
+          text: 'Build & Preview',
           link: '/en/front/base/build-preview'
         }
       ]
@@ -84,7 +88,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text: 'Advanced',
       items: [
         {
-          text: 'System Parameter Configuration',
+          text: 'System Configuration',
           link: '/en/front/advanced/system-config'
         },
         {
@@ -92,11 +96,11 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/en/front/advanced/auto-import'
         },
         {
-          text: 'Requests and Interceptors',
+          text: 'Requests & Interceptors',
           link: '/en/front/advanced/request'
         },
         {
-          text: 'Login and Welcome Page',
+          text: 'Login & Welcome Page',
           link: '/en/front/advanced/login-welcome'
         },
         {
@@ -122,10 +126,10 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text: 'Advanced',
+      text: 'Expert',
       items: [
         {
-          text: 'Internationalization Configuration',
+          text: 'Internationalization',
           link: '/en/front/high/i18n'
         },
         {
@@ -145,7 +149,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/en/front/high/plugins'
         },
         {
-          text: 'JSX and TSX Development',
+          text: 'JSX & TSX Development',
           link: '/en/front/high/tsx'
         }
       ],
@@ -155,19 +159,179 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: 'MaForm',
-          link: '/en/front/component/ma-form'
+          link: '/en/front/component/ma-form',
+          collapsed: true,
+          items: [
+            {
+              text: 'Basic Usage',
+              link: '/en/front/component/ma-form/examples/basic-usage'
+            },
+            {
+              text: 'Layout System',
+              link: '/en/front/component/ma-form/examples/layout-systems'
+            },
+            {
+              text: 'Conditional Rendering',
+              link: '/en/front/component/ma-form/examples/conditional-rendering'
+            },
+            {
+              text: 'Dynamic Validation',
+              link: '/en/front/component/ma-form/examples/dynamic-validation'
+            },
+            {
+              text: 'Component Rendering',
+              link: '/en/front/component/ma-form/examples/component-rendering'
+            },
+            {
+              text: 'Slot Examples',
+              link: '/en/front/component/ma-form/examples/slots-examples'
+            },
+            {
+              text: 'Exposed Methods',
+              link: '/en/front/component/ma-form/examples/expose-methods'
+            },
+            {
+              text: 'Loading States',
+              link: '/en/front/component/ma-form/examples/loading-states'
+            },
+            {
+              text: 'Nested Forms',
+              link: '/en/front/component/ma-form/examples/nested-forms'
+            },
+            {
+              text: 'Mobile Responsive',
+              link: '/en/front/component/ma-form/examples/mobile-responsive'
+            },
+            {
+              text: 'Advanced Scenarios',
+              link: '/en/front/component/ma-form/examples/advanced-scenarios'
+            },
+            {
+              text: 'Performance Demo',
+              link: '/en/front/component/ma-form/examples/performance-demo'
+            }
+          ]
         },
         {
           text: 'MaTable',
-          link: '/en/front/component/ma-table'
+          link: '/en/front/component/ma-table',
+          collapsed: true,
+          items: [
+            {
+              text: 'Basic Table',
+              link: '/en/front/component/ma-table/basic'
+            },
+            {
+              text: 'Table Sorting',
+              link: '/en/front/component/ma-table/sorting'
+            },
+            {
+              text: 'Table Filtering',
+              link: '/en/front/component/ma-table/filter'
+            },
+            {
+              text: 'Custom Rendering',
+              link: '/en/front/component/ma-table/custom-render'
+            },
+            {
+              text: 'Dynamic Columns',
+              link: '/en/front/component/ma-table/dynamic-columns'
+            },
+            {
+              text: 'Pagination Table',
+              link: '/en/front/component/ma-table/pagination'
+            },
+            {
+              text: 'Tree Table',
+              link: '/en/front/component/ma-table/tree-table'
+            },
+            {
+              text: 'Multi-select Table',
+              link: '/en/front/component/ma-table/selection'
+            },
+            {
+              text: 'Responsive Table',
+              link: '/en/front/component/ma-table/responsive'
+            }
+          ]
         },
         {
           text: 'MaSearch',
-          link: '/en/front/component/ma-search'
+          link: '/en/front/component/ma-search',
+          collapsed: true,
+          items: [
+            {
+              text: 'Basic Usage',
+              link: '/en/front/component/ma-search/examples/basic-usage'
+            },
+            {
+              text: 'Advanced Search',
+              link: '/en/front/component/ma-search/examples/advanced-search'
+            },
+            {
+              text: 'Collapsible Search',
+              link: '/en/front/component/ma-search/examples/collapsible-search'
+            },
+            {
+              text: 'Custom Actions',
+              link: '/en/front/component/ma-search/examples/custom-actions'
+            },
+            {
+              text: 'Dynamic Items',
+              link: '/en/front/component/ma-search/examples/dynamic-items'
+            },
+            {
+              text: 'Responsive Layout',
+              link: '/en/front/component/ma-search/examples/responsive-layout'
+            },
+            {
+              text: 'Table Integration',
+              link: '/en/front/component/ma-search/examples/table-integration'
+            },
+            {
+              text: 'Form Validation',
+              link: '/en/front/component/ma-search/examples/form-validation'
+            },
+            {
+              text: 'Methods Demo',
+              link: '/en/front/component/ma-search/examples/methods-demo'
+            }
+          ]
         },
         {
           text: 'MaProTable',
-          link: '/en/front/component/ma-pro-table'
+          link: '/en/front/component/ma-pro-table',
+          collapsed: true,
+          items: [
+            {
+              text: 'Basic Usage',
+              link: '/en/front/component/ma-pro-table/examples/basic'
+            },
+            {
+              text: 'Advanced Search',
+              link: '/en/front/component/ma-pro-table/examples/advanced-search'
+            },
+            {
+              text: 'Custom Operations',
+              link: '/en/front/component/ma-pro-table/examples/custom-operations'
+            },
+            {
+              text: 'Cell Render Plugins',
+              link: '/en/front/component/ma-pro-table/examples/cell-render-plugins'
+            },
+            {
+              text: 'Toolbar Extensions',
+              link: '/en/front/component/ma-pro-table/examples/toolbar-extensions'
+            },
+            {
+              text: 'Data Management',
+              link: '/en/front/component/ma-pro-table/examples/data-management'
+            },
+            {
+              text: 'Responsive Layout',
+              link: '/en/front/component/ma-pro-table/examples/responsive-layout'
+            }
+          ]
         },
         {
           text: 'MaEcharts',
@@ -188,12 +352,12 @@ const sidebar:DefaultTheme.Sidebar = {
           text: "Lifecycle",
           link: "/en/backend/base/lifecycle"
         },
-        { text: "Routing and API Documentation",link: "/en/backend/base/router"},
+        { text: "Routes & API Docs",link: "/en/backend/base/router"},
         { text: "Error Handling",link: "/en/backend/base/error-handler"},
         {text: "Logging",link: "/en/backend/base/logger"},
         {text: "Events",link: "/en/backend/base/event-handler"},
         {text: "File Upload",link: "/en/backend/base/upload"},
-        {text: "Multilingual",link: "/en/backend/base/lang"},
+        {text: "Internationalization",link: "/en/backend/base/lang"},
       ]
     },
     {
@@ -206,6 +370,30 @@ const sidebar:DefaultTheme.Sidebar = {
         {
           text: "User Authorization (RBAC)",
           link: "/en/backend/security/access"
+        },
+        {
+          text: "Client IP Retrieval",
+          link: "/en/backend/security/client-ip"
+        }
+      ]
+    },{
+      text:"Data Permissions",
+      items:[
+        {
+          text: "Core Concepts",
+          link: "/en/backend/data-permission/overview"
+        },
+        {
+          text: "Permission Configuration & Demo",
+          link: "/en/backend/data-permission/config"
+        },
+        {
+          text: "Usage Examples",
+            link: "/en/backend/data-permission/example"
+        },
+        {
+          text: "Notes",
+            link: "/en/backend/data-permission/notice"
         }
       ]
     }
@@ -232,11 +420,11 @@ const sidebar:DefaultTheme.Sidebar = {
               link:"/en/plugin/structure"
             },
             {
-              text:"mine.json Explanation and Example",
+              text:"mine.json Documentation & Examples",
               link:"/en/plugin/mineJson"
             },
             {
-            text:"ConfigProvider Explanation",
+            text:"ConfigProvider Documentation",
             link:"/en/plugin/configProvider"
           }
           ]
@@ -245,7 +433,7 @@ const sidebar:DefaultTheme.Sidebar = {
       text:"Backend Development",
       items:[
         {
-          text: "Database Migration",
+          text: "Database Migrations",
           link: "/en/plugin/backend/migrate"
         },
         {
@@ -264,14 +452,14 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text:"Application Publishing",
+      text:"App Publishing",
       items:[
         {
-          text: "Application Release",
+          text: "App Release",
           link: "/en/plugin/develop/publish"
         },
         {
-          text: "Considerations",
+          text: "Notes",
           link: "/en/plugin/develop/question"
         }
       ]
