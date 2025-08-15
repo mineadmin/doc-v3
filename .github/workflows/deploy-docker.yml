@@ -15,31 +15,16 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        memory: [ 24200 ]
+    runs-on: wsl
     env:
-      NODE_OPTIONS: "--max-old-space-size=${{ matrix.memory }}"
+      NODE_OPTIONS: "--max-old-space-size=64000"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9.11.0
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: pnpm
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      - name: Install dependencies
-        run: pnpm install
       - name: Build with VitePress
-        run: make build
+        run: pnpm build
       - name: Push Image
         env:
             DOCKER_USERNAME: ${{ secrets.ALIYUN_USERNAME }}

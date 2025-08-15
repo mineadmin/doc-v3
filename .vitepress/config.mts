@@ -205,6 +205,17 @@ const config:UserConfig = {
   srcDir: 'docs',
   markdown:{
     lineNumbers: true,
+    languages: [
+      'javascript', 'typescript', 'php', 'html', 'css', 'vue', 'json', 
+      'yaml', 'xml', 'bash', 'shell', 'sql', 'python', 'java', 'go',
+      'dotenv', 'properties', 'nginx', 'apache', 'toml', 'ini'
+    ],
+    languageAlias: {
+      'env': 'dotenv',
+      'conf': 'properties', 
+      'haproxy': 'nginx',
+      'redis': 'properties'
+    },
     config:(md:MarkdownRenderer)=>{
       md.use(demoPreviewPlugin)
       md.use(copyOrDownloadAsMarkdownButtons)
