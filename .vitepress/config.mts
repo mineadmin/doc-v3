@@ -1,4 +1,4 @@
-import {defineConfigWithTheme, type MarkdownRenderer} from 'vitepress'
+import {defineConfigWithTheme, type MarkdownRenderer, type UserConfig} from 'vitepress'
 
 import enGetNavs from "./src/en/nav";
 import enGetConfig from "./src/en/config";
@@ -28,30 +28,23 @@ import UnoCSS from 'unocss/vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import llmstxt from 'vitepress-plugin-llms'
 import { copyOrDownloadAsMarkdownButtons } from 'vitepress-plugin-llms'
+import {defineConfig} from "unocss";
+import type {UserConfig as ViteConfig} from "vite"
+const viteConfig:ViteConfig = {
+  plugins:[
+    vueJsx(),
+    UnoCSS(),
+    AnnouncementPlugin({
+      title:"MineAdmin 交流群",
+      body:[
+        {type:"text",content:"官方QQ群: 150105478"}
+      ]
+    }),
+  ],
+}
 
-
-// https://vitepress.dev/reference/site-config
-export default defineConfigWithTheme ({
-  build:{
-
-  },
-  vite:{
-    plugins:[
-      vueJsx(),
-      UnoCSS(),
-      AnnouncementPlugin({
-        title:"MineAdmin 交流群",
-        body:[
-          {type:"text",content:"官方QQ群: 150105478"}
-        ]
-      }),
-      // llmstxt({
-      //   domain:'https://doc.mineadmin.com',
-      //   workDir:'en',
-      //   ignoreFiles:['guide/changelog.md']
-      // })
-    ]
-  },
+const config:UserConfig = {
+  vite:viteConfig,
   ignoreDeadLinks: true,
   locales:{
     root:{
@@ -224,4 +217,6 @@ export default defineConfigWithTheme ({
   sitemap:{
     hostname: 'https://doc.mineadmin.com'
   }
-})
+};
+
+export default defineConfig(config)

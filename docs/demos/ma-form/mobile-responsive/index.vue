@@ -86,10 +86,7 @@ const formData = ref({
 const formOptions = ref({
   labelWidth: '120px',
   labelPosition: 'right',
-  size: 'default',
-  gutter: 20,
-  justify: 'start',
-  align: 'top'
+  size: 'default'
 })
 
 // 更新表单配置
@@ -99,30 +96,21 @@ const updateFormConfig = () => {
     formOptions.value = {
       labelWidth: 'auto',
       labelPosition: 'top',  // 移动端标签在上方
-      size: 'default',
-      gutter: 16,
-      justify: 'start',
-      align: 'top'
+      size: 'default'
     }
   } else if (deviceType.value === 'tablet') {
     // 平板配置
     formOptions.value = {
       labelWidth: '100px',
       labelPosition: 'right',
-      size: 'default',
-      gutter: 18,
-      justify: 'start',
-      align: 'top'
+      size: 'default'
     }
   } else {
     // 桌面端配置
     formOptions.value = {
       labelWidth: '120px',
       labelPosition: 'right',
-      size: 'default',
-      gutter: 20,
-      justify: 'start',
-      align: 'top'
+      size: 'default'
     }
   }
 }
@@ -280,55 +268,56 @@ const formItems = computed(() => [
   {
     label: '所在地区',
     prop: 'region',
-    render: 'cascader',
-    renderProps: {
-      placeholder: '请选择所在地区',
-      options: [
-        {
-          value: 'guangdong',
-          label: '广东省',
-          children: [
-            {
-              value: 'shenzhen',
-              label: '深圳市',
-              children: [
-                { value: 'nanshan', label: '南山区' },
-                { value: 'futian', label: '福田区' },
-                { value: 'luohu', label: '罗湖区' }
-              ]
-            },
-            {
-              value: 'guangzhou',
-              label: '广州市',
-              children: [
-                { value: 'tianhe', label: '天河区' },
-                { value: 'yuexiu', label: '越秀区' }
-              ]
-            }
-          ]
-        },
-        {
-          value: 'beijing',
-          label: '北京市',
-          children: [
-            {
-              value: 'beijing-city',
-              label: '北京市',
-              children: [
-                { value: 'chaoyang', label: '朝阳区' },
-                { value: 'haidian', label: '海淀区' }
-              ]
-            }
-          ]
-        }
-      ],
-      style: { width: '100%' },
-      clearable: true,
-      'show-all-levels': false,
-      props: {
-        expandTrigger: isMobile.value ? 'click' : 'hover'
-      }
-    },
+    render: () => (
+      <el-cascader
+        placeholder="请选择所在地区"
+        style={{ width: '100%' }}
+        clearable={true}
+        show-all-levels={false}
+        props={{
+          expandTrigger: isMobile.value ? 'click' : 'hover'
+        }}
+        options={[
+          {
+            value: 'guangdong',
+            label: '广东省',
+            children: [
+              {
+                value: 'shenzhen',
+                label: '深圳市',
+                children: [
+                  { value: 'nanshan', label: '南山区' },
+                  { value: 'futian', label: '福田区' },
+                  { value: 'luohu', label: '罗湖区' }
+                ]
+              },
+              {
+                value: 'guangzhou',
+                label: '广州市',
+                children: [
+                  { value: 'tianhe', label: '天河区' },
+                  { value: 'yuexiu', label: '越秀区' }
+                ]
+              }
+            ]
+          },
+          {
+            value: 'beijing',
+            label: '北京市',
+            children: [
+              {
+                value: 'beijing-city',
+                label: '北京市',
+                children: [
+                  { value: 'chaoyang', label: '朝阳区' },
+                  { value: 'haidian', label: '海淀区' }
+                ]
+              }
+            ]
+          }
+        ]}
+      />
+    ),
     cols: { 
       span: isMobile.value ? 24 : 12,
       xs: 24, sm: 12, md: 12, lg: 8, xl: 8

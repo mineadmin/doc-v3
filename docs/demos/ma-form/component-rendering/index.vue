@@ -537,28 +537,30 @@ const formItems:Ref<MaFormItem[]> = ref([
   {
     label: '级联选择',
     prop: 'cascader',
-    render: 'cascader',
-    renderProps: {
-      options: mockData.cascaderOptions,
-      placeholder: '请选择级联选项',
-      clearable: true,
-      filterable: true,
-      'show-all-levels': false
-    },
+    render: () => (
+      <el-cascader
+        options={mockData.cascaderOptions}
+        placeholder="请选择级联选项"
+        clearable={true}
+        filterable={true}
+        show-all-levels={false}
+      />
+    ),
     cols: { span: 8 }
   },
   
   {
     label: '多选级联',
     prop: 'cascaderMultiple',
-    render: 'cascader',
-    renderProps: {
-      options: mockData.cascaderOptions,
-      props: { multiple: true },
-      placeholder: '请选择多个级联选项',
-      clearable: true,
-      'collapse-tags': true
-    },
+    render: () => (
+      <el-cascader
+        options={mockData.cascaderOptions}
+        props={{ multiple: true }}
+        placeholder="请选择多个级联选项"
+        clearable={true}
+        collapse-tags={true}
+      />
+    ),
     cols: { span: 8 }
   },
   
@@ -697,8 +699,7 @@ const formItems:Ref<MaFormItem[]> = ref([
 const formOptions = ref({
   labelWidth: '120px',
   labelPosition: 'right' as const,
-  size: 'default' as const,
-  gutter: 20
+  size: 'default' as const
 })
 
 // 当前组件分类

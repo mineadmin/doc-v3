@@ -852,10 +852,7 @@ const currentFormItems = computed(() => {
 const formOptions = ref({
   labelWidth: '120px',
   labelPosition: 'right',
-  size: 'default',
-  gutter: 20,
-  justify: 'start',
-  align: 'top'
+  size: 'default'
 })
 
 // 步骤导航

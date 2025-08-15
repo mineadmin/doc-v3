@@ -54,122 +54,32 @@
       width="600px"
       destroy-on-close
     >
-      <el-form 
+      <ma-form 
+        v-if="dialogVisible"
         ref="formRef"
-        :model="employeeForm" 
-        :rules="formRules"
-        label-width="100px"
-      >
-        <el-row :gutter="20">
-          <el-col :span="12">
-            <el-form-item label="姓名" prop="name">
-              <el-input v-model="employeeForm.name" placeholder="请输入姓名" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="部门" prop="department">
-              <el-select v-model="employeeForm.department" placeholder="请选择部门" style="width: 100%">
-                <el-option label="技术部" value="技术部" />
-                <el-option label="产品部" value="产品部" />
-                <el-option label="设计部" value="设计部" />
-                <el-option label="运营部" value="运营部" />
-                <el-option label="财务部" value="财务部" />
-                <el-option label="人事部" value="人事部" />
-              </el-select>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        
-        <el-row :gutter="20">
-          <el-col :span="12">
-            <el-form-item label="职位" prop="position">
-              <el-input v-model="employeeForm.position" placeholder="请输入职位" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="薪资" prop="salary">
-              <el-input-number 
-                v-model="employeeForm.salary" 
-                :min="3000" 
-                :max="100000" 
-                controls-position="right"
-                style="width: 100%"
-              />
-            </el-form-item>
-          </el-col>
-        </el-row>
-        
-        <el-row :gutter="20">
-          <el-col :span="12">
-            <el-form-item label="状态" prop="status">
-              <el-radio-group v-model="employeeForm.status">
-                <el-radio :label="1">在职</el-radio>
-                <el-radio :label="0">离职</el-radio>
-              </el-radio-group>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="入职时间" prop="createTime">
-              <el-date-picker
-                v-model="employeeForm.createTime"
-                type="date"
-                placeholder="选择入职时间"
-                style="width: 100%"
-                value-format="YYYY-MM-DD"
-              />
-            </el-form-item>
-          </el-col>
-        </el-row>
-        
-        <el-form-item label="技能标签" prop="skills">
-          <el-select 
-            v-model="employeeForm.skills" 
-            multiple 
-            placeholder="请选择技能标签"
-            style="width: 100%"
-          >
-            <el-option label="Vue" value="Vue" />
-            <el-option label="React" value="React" />
-            <el-option label="TypeScript" value="TypeScript" />
-            <el-option label="Java" value="Java" />
-            <el-option label="Python" value="Python" />
-            <el-option label="UI设计" value="UI设计" />
-            <el-option label="产品设计" value="产品设计" />
-            <el-option label="数据分析" value="数据分析" />
-          </el-select>
-        </el-form-item>
-        
-        <el-form-item label="备注">
-          <el-input 
-            v-model="employeeForm.remark" 
-            type="textarea" 
-            :rows="3"
-            placeholder="请输入备注信息"
-          />
-        </el-form-item>
-      </el-form>
-      
-      <template #footer>
-        <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">取消</el-button>
-          <el-button type="primary" @click="handleSaveEmployee" :loading="saving">
-            {{ editingEmployee ? '保存' : '新增' }}
-          </el-button>
-        </span>
-      </template>
+        v-model="employeeForm" 
+        :options="formOptions"
+        :items="formItems"
+      />
+      <div class="dialog-footer">
+        <el-button @click="dialogVisible = false">取消</el-button>
+        <el-button type="primary" @click="handleSaveEmployee" :loading="saving">
+          {{ editingEmployee ? '保存' : '新增' }}
+        </el-button>
+      </div>
     </el-dialog>
   </div>
 </template>
 
 <script setup lang="tsx">
-import { ref, reactive, computed, nextTick } from 'vue'
+import {ref, reactive, computed, nextTick, Ref} from 'vue'
 import type { MaProTableExpose, MaProTableOptions, MaProTableSchema } from "@mineadmin/pro-table"
+import type {MaFormExpose, MaFormItem, MaFormOptions} from "@mineadmin/form"
 import { ElMessage, ElMessageBox, ElNotification } from 'element-plus'
 import { Plus, Download, Edit, Delete, View } from '@element-plus/icons-vue'
-import type { FormInstance, FormRules } from 'element-plus'
 
 const tableRef = ref<MaProTableExpose>()
-const formRef = ref<FormInstance>()
+const formRef = ref<MaFormExpose>()
 const dialogVisible = ref(false)
 const saving = ref(false)
 const editingEmployee = ref<any>(null)
@@ -188,26 +98,153 @@ const employeeForm = reactive({
   remark: ''
 })
 
-// 表单验证规则
-const formRules: FormRules = {
-  name: [
-    { required: true, message: '请输入员工姓名', trigger: 'blur' },
-    { min: 2, max: 10, message: '姓名长度在 2 到 10 个字符', trigger: 'blur' }
-  ],
-  department: [
-    { required: true, message: '请选择部门', trigger: 'change' }
-  ],
-  position: [
-    { required: true, message: '请输入职位', trigger: 'blur' }
-  ],
-  salary: [
-    { required: true, message: '请输入薪资', trigger: 'blur' },
-    { type: 'number', min: 3000, max: 100000, message: '薪资范围 3000-100000', trigger: 'blur' }
-  ],
-  createTime: [
-    { required: true, message: '请选择入职时间', trigger: 'change' }
-  ]
-}
+// ma-form 表单项配置
+const formItems = ref<MaFormItem[]>([
+  {
+    label: '姓名',
+    prop: 'name',
+    render: 'input',
+    renderProps: {
+      placeholder: '请输入姓名',
+      clearable: true
+    },
+    itemProps: {
+      rules: [
+        { required: true, message: '请输入员工姓名', trigger: 'blur' },
+        { min: 2, max: 10, message: '姓名长度在 2 到 10 个字符', trigger: 'blur' }
+      ]
+    },
+    cols: { span: 12 }
+  },
+  {
+    label: '部门',
+    prop: 'department',
+    render: 'select',
+    renderProps: {
+      placeholder: '请选择部门',
+      clearable: true,
+      options: [
+        { label: '技术部', value: '技术部' },
+        { label: '产品部', value: '产品部' },
+        { label: '设计部', value: '设计部' },
+        { label: '运营部', value: '运营部' },
+        { label: '财务部', value: '财务部' },
+        { label: '人事部', value: '人事部' }
+      ]
+    },
+    itemProps: {
+      rules: [
+        { required: true, message: '请选择部门', trigger: 'change' }
+      ]
+    },
+    cols: { span: 12 }
+  },
+  {
+    label: '职位',
+    prop: 'position',
+    render: 'input',
+    renderProps: {
+      placeholder: '请输入职位',
+      clearable: true
+    },
+    itemProps: {
+      rules: [
+        { required: true, message: '请输入职位', trigger: 'blur' }
+      ]
+    },
+    cols: { span: 12 }
+  },
+  {
+    label: '薪资',
+    prop: 'salary',
+    render: 'inputNumber',
+    renderProps: {
+      min: 3000,
+      max: 100000,
+      step: 100,
+      placeholder: '请输入薪资',
+      controlsPosition: 'right',
+      style: { width: '100%' }
+    },
+    itemProps: {
+      rules: [
+        { required: true, message: '请输入薪资', trigger: 'blur' },
+        { type: 'number', min: 3000, max: 100000, message: '薪资范围 3000-100000', trigger: 'blur' }
+      ]
+    },
+    cols: { span: 12 }
+  },
+  {
+    label: '状态',
+    prop: 'status',
+    render: ({formData}) => (
+      <el-radio-group v-model={formData.status}>
+        <el-radio label={1} value={1}>在职</el-radio>
+        <el-radio label={0} value={0}>离职</el-radio>
+      </el-radio-group>
+    ),
+    cols: { span: 12 }
+  },
+  {
+    label: '入职时间',
+    prop: 'createTime',
+    render: 'datePicker',
+    renderProps: {
+      type: 'date',
+      placeholder: '选择入职时间',
+      style: { width: '100%' },
+      format: 'YYYY-MM-DD',
+      'value-format': 'YYYY-MM-DD'
+    },
+    itemProps: {
+      rules: [
+        { required: true, message: '请选择入职时间', trigger: 'change' }
+      ]
+    },
+    cols: { span: 12 }
+  },
+  {
+    label: '技能标签',
+    prop: 'skills',
+    render: 'select',
+    renderProps: {
+      multiple: true,
+      placeholder: '请选择技能标签',
+      style: { width: '100%' },
+      options: [
+        { label: 'Vue', value: 'Vue' },
+        { label: 'React', value: 'React' },
+        { label: 'TypeScript', value: 'TypeScript' },
+        { label: 'Java', value: 'Java' },
+        { label: 'Python', value: 'Python' },
+        { label: 'UI设计', value: 'UI设计' },
+        { label: '产品设计', value: '产品设计' },
+        { label: '数据分析', value: '数据分析' }
+      ]
+    },
+    cols: { span: 24 }
+  },
+  {
+    label: '备注',
+    prop: 'remark',
+    render: 'input',
+    renderProps: {
+      type: 'textarea',
+      rows: 3,
+      placeholder: '请输入备注信息',
+      showWordLimit: true,
+      maxlength: 200
+    },
+    cols: { span: 24 }
+  }
+])
+
+// ma-form 表单选项配置
+const formOptions:Ref<MaFormOptions> = ref({
+  labelWidth: '100px',
+  labelPosition: 'right',
+  size: 'default'
+})
 
 // 统计数据
 const statistics = computed(() => {
@@ -255,7 +292,7 @@ const resetForm = () => {
     remark: ''
   })
   nextTick(() => {
-    formRef.value?.clearValidate()
+    formRef.value?.getElFormRef()?.clearValidate()
   })
 }
 
@@ -263,7 +300,7 @@ const handleSaveEmployee = async () => {
   if (!formRef.value) return
   
   try {
-    await formRef.value.validate()
+    await formRef.value.getElFormRef()?.validate()
     saving.value = true
     
     // 模拟API调用
@@ -410,10 +447,7 @@ const options = reactive<MaProTableOptions>({
   requestOptions: {
     api: getManagementList,
     autoRequest: true,
-    response: {
-      totalKey: 'data.total',
-      dataKey: 'data.list'
-    }
+
   },
   tableOptions: {
     adaption: true,
@@ -421,7 +455,6 @@ const options = reactive<MaProTableOptions>({
       total: 0,
       pageSize: 10
     },
-    selection: true
   },
   header: {
     show: true,
@@ -597,5 +630,6 @@ const schema = reactive<MaProTableSchema>({
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  padding: 20px 0 0 0;
 }
 </style>

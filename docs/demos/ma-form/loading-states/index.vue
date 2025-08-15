@@ -448,8 +448,7 @@ const formItems = computed<MaFormItem[]>(() => [
 const formOptions: MaFormOptions = {
   labelWidth: '100px',
   labelPosition: 'right',
-  size: 'default',
-  gutter: 20
+  size: 'default'
 }
 
 // 计算加载状态统计

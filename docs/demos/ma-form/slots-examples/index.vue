@@ -368,8 +368,7 @@ const formItems = ref<MaFormItem[]>([
 const formOptions: MaFormOptions = {
   labelWidth: '120px',
   labelPosition: 'right',
-  size: 'default',
-  gutter: 20
+  size: 'default'
 }
 
 // 提交表单

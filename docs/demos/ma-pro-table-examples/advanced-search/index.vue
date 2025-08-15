@@ -118,10 +118,7 @@ const options = reactive<MaProTableOptions>({
   requestOptions: {
     api: getAdvancedList,
     autoRequest: true,
-    response: {
-      totalKey: 'data.total',
-      dataKey: 'data.list'
-    }
+
   },
   tableOptions: {
     adaption: true,
@@ -131,8 +128,7 @@ const options = reactive<MaProTableOptions>({
     }
   },
   searchOptions: {
-    showNumber: 3, // 默认显示3个搜索项
-    layout: 'auto'
+    fold: true
   },
   header: {
     show: true,
@@ -165,18 +161,18 @@ const schema = reactive<MaProTableSchema>({
       label: '部门',
       prop: 'department',
       render: 'select',
-      options: [
-        { label: '技术部', value: '技术部' },
-        { label: '产品部', value: '产品部' },
-        { label: '设计部', value: '设计部' },
-        { label: '运营部', value: '运营部' },
-        { label: '研发中心', value: '研发中心' },
-        { label: '架构组', value: '架构组' },
-        { label: '增长团队', value: '增长团队' }
-      ],
       renderProps: {
         multiple: true,
-        placeholder: '请选择部门'
+        placeholder: '请选择部门',
+        options: [
+          { label: '技术部', value: '技术部' },
+          { label: '产品部', value: '产品部' },
+          { label: '设计部', value: '设计部' },
+          { label: '运营部', value: '运营部' },
+          { label: '研发中心', value: '研发中心' },
+          { label: '架构组', value: '架构组' },
+          { label: '增长团队', value: '增长团队' }
+        ],
       }
     },
     {
@@ -224,27 +220,30 @@ const schema = reactive<MaProTableSchema>({
     {
       label: '入职时间',
       prop: 'joinDateRange',
-      render: 'date-picker',
-      renderProps: {
-        type: 'daterange',
-        startPlaceholder: '开始日期',
-        endPlaceholder: '结束日期',
-        format: 'YYYY-MM-DD',
-        valueFormat: 'YYYY-MM-DD'
-      }
+      render: ({ formData }: any) => (
+        <el-date-picker
+          v-model={formData.joinDateRange}
+          type="daterange"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          format="YYYY-MM-DD"
+          value-format="YYYY-MM-DD"
+        />
+      )
     },
     {
       label: '职级',
       prop: 'level',
-      render: 'checkbox-group',
-      options: [
-        { label: 'P4', value: 'P4' },
-        { label: 'P5', value: 'P5' },
-        { label: 'P6', value: 'P6' },
-        { label: 'P7', value: 'P7' },
-        { label: 'P8', value: 'P8' },
-        { label: 'P9', value: 'P9' }
-      ]
+      render: ({ formData }: any) => (
+        <el-checkbox-group v-model={formData.level}>
+          <el-checkbox label="P4" value="P4" />
+          <el-checkbox label="P5" value="P5" />
+          <el-checkbox label="P6" value="P6" />
+          <el-checkbox label="P7" value="P7" />
+          <el-checkbox label="P8" value="P8" />
+          <el-checkbox label="P9" value="P9" />
+        </el-checkbox-group>
+      )
     },
     {
       label: '绩效评分',
@@ -275,12 +274,13 @@ const schema = reactive<MaProTableSchema>({
     {
       label: '在职状态',
       prop: 'status',
-      render: 'radio-group',
-      options: [
-        { label: '全部', value: '' },
-        { label: '在职', value: 1 },
-        { label: '离职', value: 0 }
-      ]
+      render: ({ formData }: any) => (
+        <el-radio-group v-model={formData.status}>
+          <el-radio label="" value="">全部</el-radio>
+          <el-radio label={1} value={1}>在职</el-radio>
+          <el-radio label={0} value={0}>离职</el-radio>
+        </el-radio-group>
+      )
     }
   ],
   tableColumns: [

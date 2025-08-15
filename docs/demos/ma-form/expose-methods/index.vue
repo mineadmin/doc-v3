@@ -228,8 +228,7 @@ const formItems = ref<MaFormItem[]>([
 const formOptions: MaFormOptions = {
   labelWidth: '100px',
   labelPosition: 'right',
-  size: 'default',
-  gutter: 20
+  size: 'default'
 }
 
 // ============ MaForm 暴露方法演示 ============

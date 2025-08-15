@@ -491,10 +491,7 @@ const formItems = ref([
 const formOptions = ref({
   labelWidth: '140px',
   labelPosition: 'right',
-  size: 'default',
-  gutter: 20,
-  justify: 'start',
-  align: 'top'
+  size: 'default'
 })
 
 // 验证嵌套表单

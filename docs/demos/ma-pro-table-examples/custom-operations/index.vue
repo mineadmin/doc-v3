@@ -152,10 +152,7 @@ const options = reactive<MaProTableOptions>({
   requestOptions: {
     api: getOperationsList,
     autoRequest: true,
-    response: {
-      totalKey: 'data.total',
-      dataKey: 'data.list'
-    }
+
   },
   tableOptions: {
     adaption: true,

@@ -69,7 +69,7 @@ onMounted(() => {
   // 数据统计工具
   add({
     name: 'statistics',
-    render: ({ proxy }: any) => (
+    render: () => (
       <el-button
         circle
         type="info"
@@ -86,12 +86,12 @@ onMounted(() => {
   // 批量导出工具
   add({
     name: 'export',
-    render: ({ proxy }: any) => (
+    render: () => (
       <el-button
         circle
         type="success"
         title="导出数据"
-        onClick={() => handleExport(proxy)}
+        onClick={() => handleExport(tableRef.value)}
       >
         <el-icon><Download /></el-icon>
       </el-button>
@@ -103,12 +103,12 @@ onMounted(() => {
   // 批量导入工具
   add({
     name: 'import',
-    render: ({ proxy }: any) => (
+    render: () => (
       <el-button
         circle
         type="warning"
         title="导入数据"
-        onClick={() => handleImport(proxy)}
+        onClick={() => handleImport(tableRef.value)}
       >
         <el-icon><Upload /></el-icon>
       </el-button>
@@ -120,12 +120,12 @@ onMounted(() => {
   // 高级设置工具
   add({
     name: 'settings',
-    render: ({ proxy }: any) => (
+    render: () => (
       <el-button
         circle
         type="primary"
         title="高级设置"
-        onClick={() => showSettings(proxy)}
+        onClick={() => showSettings(tableRef.value)}
       >
         <el-icon><Setting /></el-icon>
       </el-button>
@@ -137,7 +137,7 @@ onMounted(() => {
   // 系统监控工具
   add({
     name: 'monitor',
-    render: ({ proxy }: any) => (
+    render: () => (
       <el-button
         circle
         type="danger"
@@ -154,11 +154,11 @@ onMounted(() => {
   // 手动刷新工具（覆盖默认的刷新工具）
   add({
     name: 'refresh',
-    render: ({ proxy }: any) => (
+    render: () => (
       <el-button
         circle
         title="刷新数据"
-        onClick={() => handleCustomRefresh(proxy)}
+        onClick={() => handleCustomRefresh(tableRef.value)}
       >
         <el-icon><Refresh /></el-icon>
       </el-button>
@@ -357,10 +357,7 @@ const options = reactive<MaProTableOptions>({
   requestOptions: {
     api: getToolbarList,
     autoRequest: true,
-    response: {
-      totalKey: 'data.total',
-      dataKey: 'data.list'
-    }
+
   },
   tableOptions: {
     adaption: true,
@@ -368,7 +365,6 @@ const options = reactive<MaProTableOptions>({
       total: 0,
       pageSize: 10
     },
-    selection: true // 开启多选，配合批量操作
   },
   header: {
     show: true,

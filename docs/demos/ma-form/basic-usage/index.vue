@@ -229,12 +229,7 @@ const formOptions = ref({
   // Element Plus 原生属性
   labelWidth: '120px',
   labelPosition: 'right',
-  size: 'default',
-  
-  // MaForm 扩展属性
-  gutter: 20,
-  justify: 'start',
-  align: 'top'
+  size: 'default'
 })
 
 // 提交处理

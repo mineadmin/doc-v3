@@ -669,8 +669,7 @@ const formItems = computed<MaFormItem[]>(() => [
 const formOptions: MaFormOptions = {
   labelWidth: '130px',
   labelPosition: 'right',
-  size: 'default',
-  gutter: 20
+  size: 'default'
 }
 
 // 计算密码强度

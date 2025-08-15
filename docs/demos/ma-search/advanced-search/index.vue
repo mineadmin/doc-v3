@@ -21,11 +21,12 @@
 <script setup lang="tsx">
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
+import {MaSearchItem, MaSearchOptions} from "@mineadmin/search";
 
 const searchResult = ref<any>(null)
 
 // 高级搜索配置
-const searchItems = ref([
+const searchItems = ref<MaSearchItem[]>([
   {
     label: '用户账号',
     prop: 'username',
@@ -39,16 +40,16 @@ const searchItems = ref([
     label: '用户角色',
     prop: 'role',
     render: 'select',
-    options: [
-      { label: '全部角色', value: '' },
-      { label: '管理员', value: 'admin' },
-      { label: '编辑者', value: 'editor' },
-      { label: '查看者', value: 'viewer' }
-    ],
     renderProps: {
       multiple: true,
       placeholder: '可多选',
-      clearable: true
+      clearable: true,
+      options: [
+        { label: '全部角色', value: '' },
+        { label: '管理员', value: 'admin' },
+        { label: '编辑者', value: 'editor' },
+        { label: '查看者', value: 'viewer' }
+      ],
     }
   },
   {
@@ -89,42 +90,44 @@ const searchItems = ref([
   {
     label: '账户状态',
     prop: 'status',
-    render: 'radio',
-    options: [
-      { label: '全部', value: '' },
-      { label: '正常', value: 1 },
-      { label: '禁用', value: 0 },
-      { label: '锁定', value: -1 }
-    ],
+    render: () => (
+      <el-radio-group>
+        <el-radio label="" value="">全部</el-radio>
+        <el-radio label={1} value={1}>正常</el-radio>
+        <el-radio label={0} value={0}>禁用</el-radio>
+        <el-radio label={-1} value={-1}>锁定</el-radio>
+      </el-radio-group>
+    ),
     span: 2
   },
   {
     label: '所属部门',
     prop: 'department',
-    render: 'cascader',
-    options: [
-      {
-        value: 'tech',
-        label: '技术部',
-        children: [
-          { value: 'frontend', label: '前端组' },
-          { value: 'backend', label: '后端组' },
-          { value: 'mobile', label: '移动端组' }
-        ]
-      },
-      {
-        value: 'product',
-        label: '产品部',
-        children: [
-          { value: 'design', label: '设计组' },
-          { value: 'pm', label: '产品组' }
-        ]
-      }
-    ],
-    renderProps: {
-      props: { multiple: true },
-      placeholder: '请选择部门'
-    }
+    render: () => (
+      <el-cascader
+        placeholder="请选择部门"
+        props={{ multiple: true }}
+        options={[
+          {
+            value: 'tech',
+            label: '技术部',
+            children: [
+              { value: 'frontend', label: '前端组' },
+              { value: 'backend', label: '后端组' },
+              { value: 'mobile', label: '移动端组' }
+            ]
+          },
+          {
+            value: 'product',
+            label: '产品部',
+            children: [
+              { value: 'design', label: '设计组' },
+              { value: 'pm', label: '产品组' }
+            ]
+          }
+        ]}
+      />
+    )
   },
   {
     label: '特殊标签',
@@ -140,16 +143,16 @@ const searchItems = ref([
   }
 ])
 
-const formOptions = {
-  labelWidth: '120px'
+const formOptions:MaSearchOptions = {
+  fold: true
 }
 
-const searchOptions = {
+const searchOptions:MaSearchOptions = {
   fold: true,
   foldRows: 2,
   text: {
-    searchBtn: '高级搜索',
-    resetBtn: '清空条件'
+    searchBtn:()=> '高级搜索',
+    resetBtn: ()=>'清空条件'
   }
 }
 

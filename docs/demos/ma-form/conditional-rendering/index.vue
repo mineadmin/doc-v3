@@ -388,13 +388,12 @@ const formItems = computed((): MaFormItem[] => [
   {
     label: '支付方式',
     prop: 'paymentMethod',
-    render: 'radio',
-    renderProps:{
-      options: [
-        { label: '银行卡', value: 'bank' },
-        { label: '支付宝', value: 'alipay' }
-      ],
-    },
+    render: () => (
+      <el-radio-group>
+        <el-radio label="bank" value="bank">银行卡</el-radio>
+        <el-radio label="alipay" value="alipay">支付宝</el-radio>
+      </el-radio-group>
+    ),
     // 仅VIP用户可选择支付方式
     show: (item: MaFormItem, model: FormData) => model.isVip === true,
     dependencies: ['isVip'],

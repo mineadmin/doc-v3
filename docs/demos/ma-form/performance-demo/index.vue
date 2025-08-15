@@ -242,10 +242,7 @@ const formItems = ref(generateLargeFormItems(fieldCount.value))
 const formOptions = ref({
   labelWidth: '120px',
   labelPosition: 'right',
-  size: 'default',
-  gutter: 20,
-  justify: 'start',
-  align: 'top'
+  size: 'default'
 })
 
 // 性能监控工具

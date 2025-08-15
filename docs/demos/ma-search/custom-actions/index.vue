@@ -11,10 +11,9 @@
         @search="handleSearch"
         @reset="handleReset"
       >
-        <template #actions="{ searchLoading, resetLoading }">
+        <template #actions>
           <el-button 
-            type="primary" 
-            :loading="searchLoading"
+            type="primary"
             @click="handleCustomSearch"
             icon="Search"
           >
@@ -22,7 +21,6 @@
           </el-button>
           <el-button 
             type="warning"
-            :loading="resetLoading"
             @click="handleCustomReset"
             icon="Refresh"
           >
@@ -131,7 +129,7 @@
 
 <script setup lang="tsx">
 import { ref } from 'vue'
-import type { MaSearchItem } from '@mineadmin/search'
+import type {MaSearchItem, MaSearchOptions} from '@mineadmin/search'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { ArrowDown } from '@element-plus/icons-vue'
 
@@ -142,25 +140,34 @@ const searchItems = ref<MaSearchItem[]>([
     label: '订单号',
     prop: 'order_no',
     render: 'input',
-    props: { placeholder: '请输入订单号' }
+    cols:{
+      xs: 24,
+      sm: 12,
+      md: 8,
+      lg: 6,
+      xl: 4
+    },
+    renderProps: { placeholder: '请输入订单号' }
   },
   {
     label: '客户名称',
     prop: 'customer',
     render: 'input',
-    props: { placeholder: '请输入客户名称' }
+    renderProps: { placeholder: '请输入客户名称' }
   },
   {
     label: '订单状态',
     prop: 'status',
     render: 'select',
-    options: [
-      { label: '全部', value: '' },
-      { label: '待付款', value: 'pending' },
-      { label: '已付款', value: 'paid' },
-      { label: '已发货', value: 'shipped' },
-      { label: '已完成', value: 'completed' }
-    ]
+    renderProps:{
+      options: [
+        { label: '全部', value: '' },
+        { label: '待付款', value: 'pending' },
+        { label: '已付款', value: 'paid' },
+        { label: '已发货', value: 'shipped' },
+        { label: '已完成', value: 'completed' }
+      ]
+    },
   }
 ])
 
@@ -170,24 +177,24 @@ const moreSearchItems = ref<MaSearchItem[]>([
     label: '订单金额',
     prop: 'amount_range',
     render: 'input',
-    props: { placeholder: '最小金额' }
+    renderProps: { placeholder: '最小金额' }
   },
   {
     label: '创建时间',
     prop: 'create_time',
     render: 'date-picker',
-    props: { type: 'datetimerange', placeholder: ['开始时间', '结束时间'] }
+    renderProps: { type: 'datetimerange', placeholder: ['开始时间', '结束时间'] }
   },
   {
     label: '备注',
     prop: 'remark',
     render: 'input',
-    props: { placeholder: '请输入备注信息' }
+    renderProps: { placeholder: '请输入备注信息' }
   }
 ])
 
-const formOptions = {
-  labelWidth: '100px'
+const formOptions:MaSearchOptions = {
+  fold:true
 }
 
 const addLog = (action: string, data?: any) => {

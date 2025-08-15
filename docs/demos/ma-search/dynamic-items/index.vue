@@ -130,40 +130,44 @@ const availableItems: MaSearchItem[] = [
     label: '手机号',
     prop: 'phone',
     render: 'input',
-    props: { placeholder: '请输入手机号' }
+    renderProps: { placeholder: '请输入手机号' }
   },
   {
     label: '状态',
     prop: 'status',
     render: 'select',
-    options: [
-      { label: '全部', value: '' },
-      { label: '启用', value: 1 },
-      { label: '禁用', value: 0 }
-    ]
+    renderProps: {
+      options: [
+        {label: '全部', value: ''},
+        {label: '启用', value: 1},
+        {label: '禁用', value: 0}
+      ]
+    }
   },
   {
     label: '部门',
     prop: 'department',
     render: 'select',
-    options: [
-      { label: '全部部门', value: '' },
-      { label: '技术部', value: 'tech' },
-      { label: '产品部', value: 'product' },
-      { label: '运营部', value: 'operation' }
-    ]
+    renderProps: {
+      options: [
+        {label: '全部部门', value: ''},
+        {label: '技术部', value: 'tech'},
+        {label: '产品部', value: 'product'},
+        {label: '运营部', value: 'operation'}
+      ]
+    }
   },
   {
     label: '注册时间',
     prop: 'register_date',
     render: 'date-picker',
-    props: { type: 'daterange', placeholder: ['开始日期', '结束日期'] }
+    renderProps: { type: 'daterange', placeholder: ['开始日期', '结束日期'] }
   },
   {
     label: '年龄',
     prop: 'age',
     render: 'input-number',
-    props: { min: 0, max: 120, placeholder: '请输入年龄' }
+    renderProps: { min: 0, max: 120, placeholder: '请输入年龄' }
   }
 ]
 
