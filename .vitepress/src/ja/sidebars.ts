@@ -1,25 +1,25 @@
 import type {DefaultTheme} from "vitepress";
 
 const sidebar:DefaultTheme.Sidebar = {
-  '/ja/guide/': [
+  '/guide/': [
     {
       text: '紹介',
       items: [
         {
           text: 'なぜ私たちを選ぶのか?',
-          link: '/ja/guide/introduce/mineadmin',
+          link: '/guide/introduce/mineadmin',
         },
         {
           text: '更新履歴',
-          link: '/ja/guide/changelog',
+          link: '/guide/changelog',
         },
         {
           text: '免責事項',
-          link: '/ja/guide/introduce/declaration',
+          link: '/guide/introduce/declaration',
         },
         {
           text: '謝辞',
-          link: '/ja/guide/introduce/thank',
+          link: '/guide/introduce/thank',
         }
       ]
     },
@@ -28,11 +28,11 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: 'クイックインストール',
-          link: '/ja/guide/start/fast-install',
+          link: '/guide/start/fast-install',
         },
         {
           text: "デプロイ",
-          link: "/ja/guide/start/deployment"
+          link: "/guide/start/deployment"
         }
       ]
     },
@@ -41,46 +41,46 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text:"リリースノート",
-          link:'/ja/guide/releases'
+          link:'/guide/releases'
         },
         {
           text:"アップグレードガイド",
-          link:"/ja/guide/upgrade"
+          link:"/guide/upgrade"
         },
         {
           text:"貢献ガイド",
-          link:"/ja/guide/contributions"
+          link:"/guide/contributions"
         }
       ]
     }
   ],
-  '/ja/front/': [
+  '/front/': [
     {
       text: '基礎',
       items: [
         {
           text: '基本概念',
-          link: '/ja/front/base/concept'
+          link: '/front/base/concept'
         },
         {
           text: 'スタート',
-          link: '/ja/front/base/start'
+          link: '/front/base/start'
         },
         {
           text: 'ルートとメニュー',
-          link: '/ja/front/base/route-menu'
+          link: '/front/base/route-menu'
         },
         {
           text: '設定',
-          link: '/ja/front/base/configure'
+          link: '/front/base/configure'
         },
         {
           text: 'アイコン',
-          link: '/ja/front/base/icon'
+          link: '/front/base/icon'
         },
         {
           text: 'ビルドとプレビュー',
-          link: '/ja/front/base/build-preview'
+          link: '/front/base/build-preview'
         }
       ]
     },
@@ -89,39 +89,39 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: 'システムパラメータ設定',
-          link: '/ja/front/advanced/system-config'
+          link: '/front/advanced/system-config'
         },
         {
           text: '自動インポート',
-          link: '/ja/front/advanced/auto-import'
+          link: '/front/advanced/auto-import'
         },
         {
           text: 'リクエストとインターセプター',
-          link: '/ja/front/advanced/request'
+          link: '/front/advanced/request'
         },
         {
           text: 'ログインとウェルカムページ',
-          link: '/ja/front/advanced/login-welcome'
+          link: '/front/advanced/login-welcome'
         },
         {
           text: 'モジュール化',
-          link: '/ja/front/advanced/module'
+          link: '/front/advanced/module'
         },
         {
           text: 'レイアウト',
-          link: '/ja/front/advanced/layout'
+          link: '/front/advanced/layout'
         },
         {
           text: 'ツールバー拡張',
-          link: '/ja/front/advanced/tools'
+          link: '/front/advanced/tools'
         },
         {
           text: '権限',
-          link: '/ja/front/advanced/permission'
+          link: '/front/advanced/permission'
         },
         {
           text: 'ページキャッシュ',
-          link: '/ja/front/advanced/cache'
+          link: '/front/advanced/cache'
         }
       ]
     },
@@ -130,27 +130,27 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: '国際化設定',
-          link: '/ja/front/high/i18n'
+          link: '/front/high/i18n'
         },
         {
           text: 'サービスプロバイダー',
-          link: '/ja/front/high/provider'
+          link: '/front/high/provider'
         },
         {
           text: 'Hooks',
-          link: '/ja/front/high/hooks'
+          link: '/front/high/hooks'
         },
         {
           text: '常用Store',
-          link: '/ja/front/high/store'
+          link: '/front/high/store'
         },
         {
           text: 'プラグインシステム',
-          link: '/ja/front/high/plugins'
+          link: '/front/high/plugins'
         },
         {
           text: 'JSXとTSX開発',
-          link: '/ja/front/high/tsx'
+          link: '/front/high/tsx'
         }
       ],
     },
@@ -159,205 +159,205 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: 'MaForm',
-          link: '/ja/front/component/ma-form',
+          link: '/front/component/ma-form',
           collapsed: true,
           items: [
             {
               text: '基本使用法',
-              link: '/ja/front/component/ma-form/examples/basic-usage'
+              link: '/front/component/ma-form/examples/basic-usage'
             },
             {
               text: 'レイアウトシステム',
-              link: '/ja/front/component/ma-form/examples/layout-systems'
+              link: '/front/component/ma-form/examples/layout-systems'
             },
             {
               text: '条件付きレンダリング',
-              link: '/ja/front/component/ma-form/examples/conditional-rendering'
+              link: '/front/component/ma-form/examples/conditional-rendering'
             },
             {
               text: '動的バリデーション',
-              link: '/ja/front/component/ma-form/examples/dynamic-validation'
+              link: '/front/component/ma-form/examples/dynamic-validation'
             },
             {
               text: 'コンポーネントレンダリング',
-              link: '/ja/front/component/ma-form/examples/component-rendering'
+              link: '/front/component/ma-form/examples/component-rendering'
             },
             {
               text: 'スロット例',
-              link: '/ja/front/component/ma-form/examples/slots-examples'
+              link: '/front/component/ma-form/examples/slots-examples'
             },
             {
               text: '公開メソッド',
-              link: '/ja/front/component/ma-form/examples/expose-methods'
+              link: '/front/component/ma-form/examples/expose-methods'
             },
             {
               text: 'ローディング状態',
-              link: '/ja/front/component/ma-form/examples/loading-states'
+              link: '/front/component/ma-form/examples/loading-states'
             },
             {
               text: 'ネストフォーム',
-              link: '/ja/front/component/ma-form/examples/nested-forms'
+              link: '/front/component/ma-form/examples/nested-forms'
             },
             {
               text: 'モバイル対応',
-              link: '/ja/front/component/ma-form/examples/mobile-responsive'
+              link: '/front/component/ma-form/examples/mobile-responsive'
             },
             {
               text: '高度なシナリオ',
-              link: '/ja/front/component/ma-form/examples/advanced-scenarios'
+              link: '/front/component/ma-form/examples/advanced-scenarios'
             },
             {
               text: 'パフォーマンスデモ',
-              link: '/ja/front/component/ma-form/examples/performance-demo'
+              link: '/front/component/ma-form/examples/performance-demo'
             }
           ]
         },
         {
           text: 'MaTable',
-          link: '/ja/front/component/ma-table',
+          link: '/front/component/ma-table',
           collapsed: true,
           items: [
             {
               text: '基本テーブル',
-              link: '/ja/front/component/ma-table/basic'
+              link: '/front/component/ma-table/basic'
             },
             {
               text: 'テーブルソート',
-              link: '/ja/front/component/ma-table/sorting'
+              link: '/front/component/ma-table/sorting'
             },
             {
               text: 'テーブルフィルタリング',
-              link: '/ja/front/component/ma-table/filter'
+              link: '/front/component/ma-table/filter'
             },
             {
               text: 'カスタムレンダリング',
-              link: '/ja/front/component/ma-table/custom-render'
+              link: '/front/component/ma-table/custom-render'
             },
             {
               text: '動的カラム管理',
-              link: '/ja/front/component/ma-table/dynamic-columns'
+              link: '/front/component/ma-table/dynamic-columns'
             },
             {
               text: 'ページネーションテーブル',
-              link: '/ja/front/component/ma-table/pagination'
+              link: '/front/component/ma-table/pagination'
             },
             {
               text: 'ツリーテーブル',
-              link: '/ja/front/component/ma-table/tree-table'
+              link: '/front/component/ma-table/tree-table'
             },
             {
               text: '複数選択テーブル',
-              link: '/ja/front/component/ma-table/selection'
+              link: '/front/component/ma-table/selection'
             },
             {
               text: 'レスポンシブテーブル',
-              link: '/ja/front/component/ma-table/responsive'
+              link: '/front/component/ma-table/responsive'
             }
           ]
         },
         {
           text: 'MaSearch',
-          link: '/ja/front/component/ma-search',
+          link: '/front/component/ma-search',
           collapsed: true,
           items: [
             {
               text: '基本使用法',
-              link: '/ja/front/component/ma-search/examples/basic-usage'
+              link: '/front/component/ma-search/examples/basic-usage'
             },
             {
               text: '高度検索',
-              link: '/ja/front/component/ma-search/examples/advanced-search'
+              link: '/front/component/ma-search/examples/advanced-search'
             },
             {
               text: '折りたたみ検索',
-              link: '/ja/front/component/ma-search/examples/collapsible-search'
+              link: '/front/component/ma-search/examples/collapsible-search'
             },
             {
               text: 'カスタム操作',
-              link: '/ja/front/component/ma-search/examples/custom-actions'
+              link: '/front/component/ma-search/examples/custom-actions'
             },
             {
               text: '動的管理',
-              link: '/ja/front/component/ma-search/examples/dynamic-items'
+              link: '/front/component/ma-search/examples/dynamic-items'
             },
             {
               text: 'レスポンシブレイアウト',
-              link: '/ja/front/component/ma-search/examples/responsive-layout'
+              link: '/front/component/ma-search/examples/responsive-layout'
             },
             {
               text: 'テーブル統合',
-              link: '/ja/front/component/ma-search/examples/table-integration'
+              link: '/front/component/ma-search/examples/table-integration'
             },
             {
               text: 'フォームバリデーション',
-              link: '/ja/front/component/ma-search/examples/form-validation'
+              link: '/front/component/ma-search/examples/form-validation'
             },
             {
               text: 'メソッドデモ',
-              link: '/ja/front/component/ma-search/examples/methods-demo'
+              link: '/front/component/ma-search/examples/methods-demo'
             }
           ]
         },
         {
           text: 'MaProTable',
-          link: '/ja/front/component/ma-pro-table',
+          link: '/front/component/ma-pro-table',
           collapsed: true,
           items: [
             {
               text: '基本使用法',
-              link: '/ja/front/component/ma-pro-table/examples/basic'
+              link: '/front/component/ma-pro-table/examples/basic'
             },
             {
               text: '高度検索',
-              link: '/ja/front/component/ma-pro-table/examples/advanced-search'
+              link: '/front/component/ma-pro-table/examples/advanced-search'
             },
             {
               text: 'カスタム操作',
-              link: '/ja/front/component/ma-pro-table/examples/custom-operations'
+              link: '/front/component/ma-pro-table/examples/custom-operations'
             },
             {
               text: 'セルレンダリングプラグイン',
-              link: '/ja/front/component/ma-pro-table/examples/cell-render-plugins'
+              link: '/front/component/ma-pro-table/examples/cell-render-plugins'
             },
             {
               text: 'ツールバー拡張',
-              link: '/ja/front/component/ma-pro-table/examples/toolbar-extensions'
+              link: '/front/component/ma-pro-table/examples/toolbar-extensions'
             },
             {
               text: 'データ管理',
-              link: '/ja/front/component/ma-pro-table/examples/data-management'
+              link: '/front/component/ma-pro-table/examples/data-management'
             },
             {
               text: 'レスポンシブレイアウト',
-              link: '/ja/front/component/ma-pro-table/examples/responsive-layout'
+              link: '/front/component/ma-pro-table/examples/responsive-layout'
             }
           ]
         },
         {
           text: 'MaEcharts',
-          link: '/ja/front/component/ma-echarts'
+          link: '/front/component/ma-echarts'
         },
       ]
     }
   ],
-  '/ja/backend/':[
+  '/backend/':[
     {
       text:"応用",
       items:[
         {
           text: "ディレクトリ構造",
-          link: "/ja/backend/base/structure"
+          link: "/backend/base/structure"
         },
         {
           text: "ライフサイクル",
-          link: "/ja/backend/base/lifecycle"
+          link: "/backend/base/lifecycle"
         },
-        { text: "ルートとAPIドキュメント",link: "/ja/backend/base/router"},
-        { text: "エラー処理",link: "/ja/backend/base/error-handler"},
-        {text: "ログ",link: "/ja/backend/base/logger"},
-        {text: "イベント",link: "/ja/backend/base/event-handler"},
-        {text: "ファイルアップロード",link: "/ja/backend/base/upload"},
-        {text: "多言語",link: "/ja/backend/base/lang"},
+        { text: "ルートとAPIドキュメント",link: "/backend/base/router"},
+        { text: "エラー処理",link: "/backend/base/error-handler"},
+        {text: "ログ",link: "/backend/base/logger"},
+        {text: "イベント",link: "/backend/base/event-handler"},
+        {text: "ファイルアップロード",link: "/backend/base/upload"},
+        {text: "多言語",link: "/backend/base/lang"},
       ]
     },
     {
@@ -365,15 +365,15 @@ const sidebar:DefaultTheme.Sidebar = {
       items:[
         {
           text: "ユーザー認証",
-          link: "/ja/backend/security/passport"
+          link: "/backend/security/passport"
         },
         {
           text: "ユーザー認可(RBAC)",
-          link: "/ja/backend/security/access"
+          link: "/backend/security/access"
         },
         {
           text: "クライアントIP取得",
-          link: "/ja/backend/security/client-ip"
+          link: "/backend/security/client-ip"
         }
       ]
     },{
@@ -381,51 +381,51 @@ const sidebar:DefaultTheme.Sidebar = {
       items:[
         {
           text: "コア概念",
-          link: "/ja/backend/data-permission/overview"
+          link: "/backend/data-permission/overview"
         },
         {
           text: "権限設定と効果デモ",
-          link: "/ja/backend/data-permission/config"
+          link: "/backend/data-permission/config"
         },
         {
           text: "使用例",
-            link: "/ja/backend/data-permission/example"
+            link: "/backend/data-permission/example"
         },
         {
           text: "注意事項",
-            link: "/ja/backend/data-permission/notice"
+            link: "/backend/data-permission/notice"
         }
       ]
     }
   ],
-  '/ja/plugin/':[
+  '/plugin/':[
     {
       text:"クイックスタート",
       items:
           [
             {
               text:"準備作業",
-              link:"/ja/plugin"
+              link:"/plugin"
             },
             {
               text:"プラグインコマンド",
-              link:"/ja/plugin/command"
+              link:"/plugin/command"
             },
             {
               text:"アプリ作成",
-              link:"/ja/plugin/create"
+              link:"/plugin/create"
             },
             {
               text:"プラグインディレクトリ構造",
-              link:"/ja/plugin/structure"
+              link:"/plugin/structure"
             },
             {
               text:"mine.json 説明と例",
-              link:"/ja/plugin/mineJson"
+              link:"/plugin/mineJson"
             },
             {
             text:"ConfigProvider 説明",
-            link:"/ja/plugin/configProvider"
+            link:"/plugin/configProvider"
           }
           ]
     },
@@ -434,11 +434,11 @@ const sidebar:DefaultTheme.Sidebar = {
       items:[
         {
           text: "データベースマイグレーション",
-          link: "/ja/plugin/backend/migrate"
+          link: "/plugin/backend/migrate"
         },
         {
           text: "ユニットテスト",
-          link: "/ja/plugin/backend/unit-test"
+          link: "/plugin/backend/unit-test"
         },
       ]
     },
@@ -447,7 +447,7 @@ const sidebar:DefaultTheme.Sidebar = {
       items:[
         {
           text: "フロントエンド開発規約",
-          link: "/ja/plugin/front/develop"
+          link: "/plugin/front/develop"
         }
       ]
     },
@@ -456,11 +456,11 @@ const sidebar:DefaultTheme.Sidebar = {
       items:[
         {
           text: "アプリリリース",
-          link: "/ja/plugin/develop/publish"
+          link: "/plugin/develop/publish"
         },
         {
           text: "注意事項",
-          link: "/ja/plugin/develop/question"
+          link: "/plugin/develop/question"
         }
       ]
     }

@@ -1,25 +1,25 @@
 import type {DefaultTheme} from "vitepress";
 
 const sidebar:DefaultTheme.Sidebar = {
-  '/zh/guide/': [
+  '/guide/': [
     {
       text: '介绍',
       items: [
         {
           text: '为什么选择我们?',
-          link: '/zh/guide/introduce/mineadmin',
+          link: '/guide/introduce/mineadmin',
         },
         {
           text: '更新日志',
-          link: '/zh/guide/changelog',
+          link: '/guide/changelog',
         },
         {
           text: '免责声明',
-          link: '/zh/guide/introduce/declaration',
+          link: '/guide/introduce/declaration',
         },
         {
           text: '鸣谢',
-          link: '/zh/guide/introduce/thank',
+          link: '/guide/introduce/thank',
         }
       ]
     },
@@ -28,11 +28,11 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: '快速安装',
-          link: '/zh/guide/start/fast-install',
+          link: '/guide/start/fast-install',
         },
         {
           text: "部署",
-          link: "/zh/guide/start/deployment"
+          link: "/guide/start/deployment"
         }
       ]
     },
@@ -41,46 +41,46 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text:"发行说明",
-          link:'/zh/guide/releases'
+          link:'/guide/releases'
         },
         {
           text:"升级指南",
-          link:"/zh/guide/upgrade"
+          link:"/guide/upgrade"
         },
         {
           text:"贡献指南",
-          link:"/zh/guide/contributions"
+          link:"/guide/contributions"
         }
       ]
     }
   ],
-  '/zh/front/': [
+  '/front/': [
     {
       text: '基础',
       items: [
         {
           text: '基础概念',
-          link: '/zh/front/base/concept'
+          link: '/front/base/concept'
         },
         {
           text: '开始',
-          link: '/zh/front/base/start'
+          link: '/front/base/start'
         },
         {
           text: '路由和菜单',
-          link: '/zh/front/base/route-menu'
+          link: '/front/base/route-menu'
         },
         {
           text: '配置',
-          link: '/zh/front/base/configure'
+          link: '/front/base/configure'
         },
         {
           text: '图标',
-          link: '/zh/front/base/icon'
+          link: '/front/base/icon'
         },
         {
           text: '构建与预览',
-          link: '/zh/front/base/build-preview'
+          link: '/front/base/build-preview'
         }
       ]
     },
@@ -89,39 +89,39 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: '系统参数配置',
-          link: '/zh/front/advanced/system-config'
+          link: '/front/advanced/system-config'
         },
         {
           text: '自动导入',
-          link: '/zh/front/advanced/auto-import'
+          link: '/front/advanced/auto-import'
         },
         {
           text: '请求与拦截器',
-          link: '/zh/front/advanced/request'
+          link: '/front/advanced/request'
         },
         {
           text: '登录与欢迎页',
-          link: '/zh/front/advanced/login-welcome'
+          link: '/front/advanced/login-welcome'
         },
         {
           text: '模块化',
-          link: '/zh/front/advanced/module'
+          link: '/front/advanced/module'
         },
         {
           text: '布局',
-          link: '/zh/front/advanced/layout'
+          link: '/front/advanced/layout'
         },
         {
           text: '工具栏扩展',
-          link: '/zh/front/advanced/tools'
+          link: '/front/advanced/tools'
         },
         {
           text: '权限',
-          link: '/zh/front/advanced/permission'
+          link: '/front/advanced/permission'
         },
         {
           text: '页面缓存',
-          link: '/zh/front/advanced/cache'
+          link: '/front/advanced/cache'
         }
       ]
     },
@@ -130,27 +130,27 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: '国际化配置',
-          link: '/zh/front/high/i18n'
+          link: '/front/high/i18n'
         },
         {
           text: '服务提供器',
-          link: '/zh/front/high/provider'
+          link: '/front/high/provider'
         },
         {
           text: 'Hooks',
-          link: '/zh/front/high/hooks'
+          link: '/front/high/hooks'
         },
         {
           text: '常用Store',
-          link: '/zh/front/high/store'
+          link: '/front/high/store'
         },
         {
           text: '插件系统',
-          link: '/zh/front/high/plugins'
+          link: '/front/high/plugins'
         },
         {
           text: 'JSX和TSX开发',
-          link: '/zh/front/high/tsx'
+          link: '/front/high/tsx'
         }
       ],
     },
@@ -159,205 +159,205 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text: 'MaForm',
-          link: '/zh/front/component/ma-form',
+          link: '/front/component/ma-form',
           collapsed: true,
           items: [
             {
               text: '基础用法',
-              link: '/zh/front/component/ma-form/examples/basic-usage'
+              link: '/front/component/ma-form/examples/basic-usage'
             },
             {
               text: '布局系统',
-              link: '/zh/front/component/ma-form/examples/layout-systems'
+              link: '/front/component/ma-form/examples/layout-systems'
             },
             {
               text: '条件渲染',
-              link: '/zh/front/component/ma-form/examples/conditional-rendering'
+              link: '/front/component/ma-form/examples/conditional-rendering'
             },
             {
               text: '动态验证',
-              link: '/zh/front/component/ma-form/examples/dynamic-validation'
+              link: '/front/component/ma-form/examples/dynamic-validation'
             },
             {
               text: '组件渲染',
-              link: '/zh/front/component/ma-form/examples/component-rendering'
+              link: '/front/component/ma-form/examples/component-rendering'
             },
             {
               text: '插槽示例',
-              link: '/zh/front/component/ma-form/examples/slots-examples'
+              link: '/front/component/ma-form/examples/slots-examples'
             },
             {
               text: '暴露方法',
-              link: '/zh/front/component/ma-form/examples/expose-methods'
+              link: '/front/component/ma-form/examples/expose-methods'
             },
             {
               text: '加载状态',
-              link: '/zh/front/component/ma-form/examples/loading-states'
+              link: '/front/component/ma-form/examples/loading-states'
             },
             {
               text: '嵌套表单',
-              link: '/zh/front/component/ma-form/examples/nested-forms'
+              link: '/front/component/ma-form/examples/nested-forms'
             },
             {
               text: '移动端适配',
-              link: '/zh/front/component/ma-form/examples/mobile-responsive'
+              link: '/front/component/ma-form/examples/mobile-responsive'
             },
             {
               text: '高级场景',
-              link: '/zh/front/component/ma-form/examples/advanced-scenarios'
+              link: '/front/component/ma-form/examples/advanced-scenarios'
             },
             {
               text: '性能演示',
-              link: '/zh/front/component/ma-form/examples/performance-demo'
+              link: '/front/component/ma-form/examples/performance-demo'
             }
           ]
         },
         {
           text: 'MaTable',
-          link: '/zh/front/component/ma-table',
+          link: '/front/component/ma-table',
           collapsed: true,
           items: [
             {
               text: '基础表格',
-              link: '/zh/front/component/ma-table/basic'
+              link: '/front/component/ma-table/basic'
             },
             {
               text: '表格排序',
-              link: '/zh/front/component/ma-table/sorting'
+              link: '/front/component/ma-table/sorting'
             },
             {
               text: '表格筛选',
-              link: '/zh/front/component/ma-table/filter'
+              link: '/front/component/ma-table/filter'
             },
             {
               text: '自定义渲染',
-              link: '/zh/front/component/ma-table/custom-render'
+              link: '/front/component/ma-table/custom-render'
             },
             {
               text: '动态列管理',
-              link: '/zh/front/component/ma-table/dynamic-columns'
+              link: '/front/component/ma-table/dynamic-columns'
             },
             {
               text: '分页表格',
-              link: '/zh/front/component/ma-table/pagination'
+              link: '/front/component/ma-table/pagination'
             },
             {
               text: '树形表格',
-              link: '/zh/front/component/ma-table/tree-table'
+              link: '/front/component/ma-table/tree-table'
             },
             {
               text: '多选表格',
-              link: '/zh/front/component/ma-table/selection'
+              link: '/front/component/ma-table/selection'
             },
             {
               text: '响应式表格',
-              link: '/zh/front/component/ma-table/responsive'
+              link: '/front/component/ma-table/responsive'
             }
           ]
         },
         {
           text: 'MaSearch',
-          link: '/zh/front/component/ma-search',
+          link: '/front/component/ma-search',
           collapsed: true,
           items: [
             {
               text: '基础用法',
-              link: '/zh/front/component/ma-search/examples/basic-usage'
+              link: '/front/component/ma-search/examples/basic-usage'
             },
             {
               text: '高级搜索',
-              link: '/zh/front/component/ma-search/examples/advanced-search'
+              link: '/front/component/ma-search/examples/advanced-search'
             },
             {
               text: '折叠搜索',
-              link: '/zh/front/component/ma-search/examples/collapsible-search'
+              link: '/front/component/ma-search/examples/collapsible-search'
             },
             {
               text: '自定义操作',
-              link: '/zh/front/component/ma-search/examples/custom-actions'
+              link: '/front/component/ma-search/examples/custom-actions'
             },
             {
               text: '动态管理',
-              link: '/zh/front/component/ma-search/examples/dynamic-items'
+              link: '/front/component/ma-search/examples/dynamic-items'
             },
             {
               text: '响应式布局',
-              link: '/zh/front/component/ma-search/examples/responsive-layout'
+              link: '/front/component/ma-search/examples/responsive-layout'
             },
             {
               text: '表格集成',
-              link: '/zh/front/component/ma-search/examples/table-integration'
+              link: '/front/component/ma-search/examples/table-integration'
             },
             {
               text: '表单验证',
-              link: '/zh/front/component/ma-search/examples/form-validation'
+              link: '/front/component/ma-search/examples/form-validation'
             },
             {
               text: '方法演示',
-              link: '/zh/front/component/ma-search/examples/methods-demo'
+              link: '/front/component/ma-search/examples/methods-demo'
             }
           ]
         },
         {
           text: 'MaProTable',
-          link: '/zh/front/component/ma-pro-table',
+          link: '/front/component/ma-pro-table',
           collapsed: true,
           items: [
             {
               text: '基础用法',
-              link: '/zh/front/component/ma-pro-table/examples/basic'
+              link: '/front/component/ma-pro-table/examples/basic'
             },
             {
               text: '高级搜索',
-              link: '/zh/front/component/ma-pro-table/examples/advanced-search'
+              link: '/front/component/ma-pro-table/examples/advanced-search'
             },
             {
               text: '自定义操作',
-              link: '/zh/front/component/ma-pro-table/examples/custom-operations'
+              link: '/front/component/ma-pro-table/examples/custom-operations'
             },
             {
               text: '单元格渲染插件',
-              link: '/zh/front/component/ma-pro-table/examples/cell-render-plugins'
+              link: '/front/component/ma-pro-table/examples/cell-render-plugins'
             },
             {
               text: '工具栏扩展',
-              link: '/zh/front/component/ma-pro-table/examples/toolbar-extensions'
+              link: '/front/component/ma-pro-table/examples/toolbar-extensions'
             },
             {
               text: '数据管理',
-              link: '/zh/front/component/ma-pro-table/examples/data-management'
+              link: '/front/component/ma-pro-table/examples/data-management'
             },
             {
               text: '响应式布局',
-              link: '/zh/front/component/ma-pro-table/examples/responsive-layout'
+              link: '/front/component/ma-pro-table/examples/responsive-layout'
             }
           ]
         },
         {
           text: 'MaEcharts',
-          link: '/zh/front/component/ma-echarts'
+          link: '/front/component/ma-echarts'
         },
       ]
     }
   ],
-  '/zh/backend/':[
+  '/backend/':[
     {
       text:"进阶",
       items:[
         {
           text: "目录结构",
-          link: "/zh/backend/base/structure"
+          link: "/backend/base/structure"
         },
         {
           text: "生命周期",
-          link: "/zh/backend/base/lifecycle"
+          link: "/backend/base/lifecycle"
         },
-        { text: "路由与API文档",link: "/zh/backend/base/router"},
-        { text: "错误处理",link: "/zh/backend/base/error-handler"},
-        {text: "日志",link: "/zh/backend/base/logger"},
-        {text: "事件",link: "/zh/backend/base/event-handler"},
-        {text: "文件上传",link: "/zh/backend/base/upload"},
-        {text: "多语言",link: "/zh/backend/base/lang"},
+        { text: "路由与API文档",link: "/backend/base/router"},
+        { text: "错误处理",link: "/backend/base/error-handler"},
+        {text: "日志",link: "/backend/base/logger"},
+        {text: "事件",link: "/backend/base/event-handler"},
+        {text: "文件上传",link: "/backend/base/upload"},
+        {text: "多语言",link: "/backend/base/lang"},
       ]
     },
     {
@@ -365,15 +365,15 @@ const sidebar:DefaultTheme.Sidebar = {
       items:[
         {
           text: "用户认证",
-          link: "/zh/backend/security/passport"
+          link: "/backend/security/passport"
         },
         {
           text: "用户授权(RBAC)",
-          link: "/zh/backend/security/access"
+          link: "/backend/security/access"
         },
         {
           text: "获取客户端 IP",
-          link: "/zh/backend/security/client-ip"
+          link: "/backend/security/client-ip"
         }
       ]
     },{
@@ -381,51 +381,51 @@ const sidebar:DefaultTheme.Sidebar = {
       items:[
         {
           text: "核心概念",
-          link: "/zh/backend/data-permission/overview"
+          link: "/backend/data-permission/overview"
         },
         {
           text: "权限配置与效果演示",
-          link: "/zh/backend/data-permission/config"
+          link: "/backend/data-permission/config"
         },
         {
           text: "使用示例",
-            link: "/zh/backend/data-permission/example"
+            link: "/backend/data-permission/example"
         },
         {
           text: "注意事项",
-            link: "/zh/backend/data-permission/notice"
+            link: "/backend/data-permission/notice"
         }
       ]
     }
   ],
-  '/zh/plugin/':[
+  '/plugin/':[
     {
       text:"快速开始",
       items:
           [
             {
               text:"准备工作",
-              link:"/zh/plugin"
+              link:"/plugin"
             },
             {
               text:"插件命令",
-              link:"/zh/plugin/command"
+              link:"/plugin/command"
             },
             {
               text:"创建应用",
-              link:"/zh/plugin/create"
+              link:"/plugin/create"
             },
             {
               text:"插件目录结构",
-              link:"/zh/plugin/structure"
+              link:"/plugin/structure"
             },
             {
               text:"mine.json 说明及示例",
-              link:"/zh/plugin/mineJson"
+              link:"/plugin/mineJson"
             },
             {
             text:"ConfigProvider 说明",
-            link:"/zh/plugin/configProvider"
+            link:"/plugin/configProvider"
           }
           ]
     },
@@ -434,11 +434,11 @@ const sidebar:DefaultTheme.Sidebar = {
       items:[
         {
           text: "数据库迁移",
-          link: "/zh/plugin/backend/migrate"
+          link: "/plugin/backend/migrate"
         },
         {
           text: "单元测试",
-          link: "/zh/plugin/backend/unit-test"
+          link: "/plugin/backend/unit-test"
         },
       ]
     },
@@ -447,7 +447,7 @@ const sidebar:DefaultTheme.Sidebar = {
       items:[
         {
           text: "前端开发规范",
-          link: "/zh/plugin/front/develop"
+          link: "/plugin/front/develop"
         }
       ]
     },
@@ -456,11 +456,11 @@ const sidebar:DefaultTheme.Sidebar = {
       items:[
         {
           text: "应用发布",
-          link: "/zh/plugin/develop/publish"
+          link: "/plugin/develop/publish"
         },
         {
           text: "注意事项",
-          link: "/zh/plugin/develop/question"
+          link: "/plugin/develop/question"
         }
       ]
     }

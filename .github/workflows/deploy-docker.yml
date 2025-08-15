@@ -10,29 +10,37 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: deploy-docker-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
   build:
     runs-on: wsl
+    strategy:
+      matrix:
+        language: [zh, en, ja, zh-hk, zh-tw]
     env:
       NODE_OPTIONS: "--max-old-space-size=64000"
+      CURRENT_LANGUAGE: ${{ matrix.language }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Build with VitePress
+      - name: Build with VitePress for ${{ matrix.language }}
         run: pnpm build
+      - name: Get Date
+        id: date
+        run: echo "date=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
       - name: Push Image
         env:
             DOCKER_USERNAME: ${{ secrets.ALIYUN_USERNAME }}
             DOCKER_PASSWORD: ${{ secrets.ALIYUN_PASSWORD }}
             DOCKER_REGISTRY: ${{ secrets.ALIYUN_REGISTRY }}
             SHA: ${{ github.sha }}
+            DATE: ${{ steps.date.outputs.date }}
         run: |
-          docker build . -t doc-v3:latest
+          docker build . -t doc-v3:${{ matrix.language }}-latest
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY
-          docker tag doc-v3:latest $DOCKER_REGISTRY/mineadmins/docs:$SHA
-          docker push $DOCKER_REGISTRY/mineadmins/docs:$SHA
+          docker tag doc-v3:${{ matrix.language }}-latest $DOCKER_REGISTRY/mineadmins/docs:${{ matrix.language }}-$DATE
+          docker push $DOCKER_REGISTRY/mineadmins/docs:${{ matrix.language }}-$DATE
