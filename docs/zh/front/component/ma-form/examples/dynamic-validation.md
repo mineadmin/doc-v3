@@ -393,6 +393,6 @@ const validateForm = async () => {
 
 ## 相关链接
 
-- [MaFormItem 验证配置](/zh/front/component/ma-form#验证配置)
-- [高级特性 - 动态验证](/zh/front/component/ma-form#动态验证)
-- [暴露方法 - 表单验证](/zh/front/component/ma-form#表单验证)
+- [MaFormItem 验证配置](/front/component/ma-form#验证配置)
+- [高级特性 - 动态验证](/front/component/ma-form#动态验证)
+- [暴露方法 - 表单验证](/front/component/ma-form#表单验证)

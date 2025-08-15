@@ -1015,6 +1015,6 @@ const startPerformanceMonitoring = () => {
 
 ## 相关链接
 
-- [大表单优化策略](/zh/front/component/ma-form#性能优化)
-- [缓存系统设计](/zh/front/component/ma-form/examples/advanced-scenarios#缓存优化策略)
-- [内存管理最佳实践](/zh/front/component/ma-form#最佳实践)
+- [大表单优化策略](/front/component/ma-form#性能优化)
+- [缓存系统设计](/front/component/ma-form/examples/advanced-scenarios#缓存优化策略)
+- [内存管理最佳实践](/front/component/ma-form#最佳实践)

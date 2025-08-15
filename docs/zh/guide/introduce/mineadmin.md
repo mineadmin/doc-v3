@@ -22,7 +22,7 @@ const daysPassed = computed(() => {
 })
 </script>
 
-自 [2021 年 10 月 14 日](https://github.com/mineadmin/MineAdmin/commit/670f6439ba2a6fe8181bbf138c247bfb1d26601c)首次发布以来，MineAdmin 已经走过了 {{ daysPassed }} 天的发展历程。我们始终坚持长期稳定的开发路线，严格把控代码质量，确保每个版本都经过充分的测试和验证。
+自 [2021 年 10 月 14 日](https://github.com/mineadmin/MineAdmin/commit/670f6439ba2a6fe8181bbf138c247bfb1d26601c)首次发布以来，`MineAdmin 已经走过了 {{ daysPassed }} 天的发展历程`。我们始终坚持长期稳定的开发路线，严格把控代码质量，确保每个版本都经过充分的测试和验证。
 
 **稳定性承诺：**
 - 持续的版本迭代与维护

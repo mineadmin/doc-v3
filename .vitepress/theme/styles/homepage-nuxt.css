@@ -1,0 +1,639 @@
+/**
+ * MineAdmin Homepage - Nuxt-inspired Design
+ * Modern, clean, and professional enterprise documentation site
+ * Optimized for performance and multi-language support
+ */
+
+/* ===================================================================
+   CSS Variables & Theme Setup
+   =================================================================== */
+
+:root {
+  /* Brand Colors - Professional Blue/Purple Gradient */
+  --ma-brand-primary: #4f46e5;
+  --ma-brand-secondary: #7c3aed;
+  --ma-brand-tertiary: #06b6d4;
+  
+  /* Gradient Colors */
+  --ma-gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --ma-gradient-2: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  --ma-gradient-3: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+  
+  /* Neutral Colors */
+  --ma-surface: #ffffff;
+  --ma-surface-soft: #f9fafb;
+  --ma-surface-mute: #f3f4f6;
+  --ma-border: #e5e7eb;
+  --ma-border-soft: #f3f4f6;
+  
+  /* Text Colors */
+  --ma-text-primary: #111827;
+  --ma-text-secondary: #6b7280;
+  --ma-text-tertiary: #9ca3af;
+  
+  /* Effects */
+  --ma-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --ma-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --ma-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --ma-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+  --ma-shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  
+  /* Animations */
+  --ma-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Theme Variables */
+.dark {
+  --ma-brand-primary: #6366f1;
+  --ma-brand-secondary: #8b5cf6;
+  --ma-brand-tertiary: #22d3ee;
+  
+  --ma-surface: #0f172a;
+  --ma-surface-soft: #1e293b;
+  --ma-surface-mute: #334155;
+  --ma-border: #334155;
+  --ma-border-soft: #1e293b;
+  
+  --ma-text-primary: #f1f5f9;
+  --ma-text-secondary: #cbd5e1;
+  --ma-text-tertiary: #94a3b8;
+}
+
+/* ===================================================================
+   Hero Section - Nuxt-style Design
+   =================================================================== */
+
+.VPHome {
+  min-height: 100vh;
+  background: var(--ma-surface);
+}
+
+/* Hero Container */
+.VPHero {
+  position: relative;
+  padding: 80px 24px 120px;
+  overflow: hidden;
+  background: var(--ma-surface);
+}
+
+/* Nuxt-style Gradient Mesh Background */
+.VPHero::before {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  background: 
+    radial-gradient(ellipse at 20% 0%, rgba(79, 70, 229, 0.15) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 0%, rgba(124, 58, 237, 0.1) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.05) 0%, transparent 50%);
+  filter: blur(60px);
+  animation: gradientFlow 20s ease infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Animated Gradient Flow */
+@keyframes gradientFlow {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(-5%, 5%) rotate(1deg);
+  }
+  50% {
+    transform: translate(5%, -5%) rotate(-1deg);
+  }
+  75% {
+    transform: translate(-3%, -3%) rotate(0.5deg);
+  }
+}
+
+/* Hero Content Layout */
+.VPHero .container {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* Hero Text Content */
+.VPHero .content {
+  max-width: 600px;
+}
+
+/* Hero Title - Large & Bold */
+.VPHero .name {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin: 0;
+  background: var(--ma-gradient-2);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fadeInUp 0.8s ease;
+}
+
+/* Hero Subtitle */
+.VPHero .text {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 600;
+  color: var(--ma-text-primary);
+  margin: 16px 0;
+  animation: fadeInUp 0.8s ease 0.1s both;
+}
+
+/* Hero Tagline */
+.VPHero .tagline {
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  color: var(--ma-text-secondary);
+  line-height: 1.7;
+  margin: 24px 0 40px;
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+/* Action Buttons Container */
+.VPHero .actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease 0.3s both;
+}
+
+/* Primary CTA Button */
+.VPButton.brand {
+  background: var(--ma-gradient-2);
+  color: white;
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: var(--ma-transition);
+  box-shadow: var(--ma-shadow-md);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.VPButton.brand::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.VPButton.brand:hover::before {
+  left: 100%;
+}
+
+.VPButton.brand:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ma-shadow-xl);
+}
+
+/* Secondary Button */
+.VPButton.alt {
+  background: transparent;
+  color: var(--ma-text-primary);
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  border: 2px solid var(--ma-border);
+  cursor: pointer;
+  transition: var(--ma-transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.VPButton.alt:hover {
+  background: var(--ma-surface-soft);
+  border-color: var(--ma-brand-primary);
+  color: var(--ma-brand-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--ma-shadow-md);
+}
+
+/* ===================================================================
+   Code Showcase Section (Hero Right Side)
+   =================================================================== */
+
+.VPHero .image {
+  position: relative;
+  animation: fadeInRight 0.8s ease 0.4s both;
+}
+
+/* Code Window Container */
+.code-showcase {
+  background: var(--ma-surface-soft);
+  border: 1px solid var(--ma-border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--ma-shadow-2xl);
+  transform: perspective(1000px) rotateY(-5deg);
+  transition: var(--ma-transition);
+}
+
+.code-showcase:hover {
+  transform: perspective(1000px) rotateY(0deg);
+  box-shadow: var(--ma-shadow-xl);
+}
+
+/* Code Window Header */
+.code-header {
+  background: var(--ma-surface-mute);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--ma-border);
+}
+
+.code-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.code-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--ma-border);
+}
+
+.code-dot:nth-child(1) { background: #ef4444; }
+.code-dot:nth-child(2) { background: #eab308; }
+.code-dot:nth-child(3) { background: #22c55e; }
+
+/* Code Content */
+.code-content {
+  padding: 24px;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ma-text-primary);
+  background: var(--ma-surface);
+  min-height: 300px;
+}
+
+/* Syntax Highlighting */
+.code-keyword { color: #7c3aed; font-weight: 600; }
+.code-string { color: #059669; }
+.code-function { color: #2563eb; }
+.code-comment { color: #6b7280; font-style: italic; }
+.code-variable { color: #dc2626; }
+
+/* ===================================================================
+   Features Section - Grid Layout
+   =================================================================== */
+
+.VPFeatures {
+  padding: 80px 24px;
+  background: var(--ma-surface-soft);
+  position: relative;
+}
+
+/* Features Container */
+.VPFeatures .container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Features Grid */
+.VPFeatures .items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 32px;
+  margin-top: 60px;
+}
+
+/* Feature Card */
+.VPFeature {
+  background: var(--ma-surface);
+  border: 1px solid var(--ma-border);
+  border-radius: 16px;
+  padding: 32px;
+  transition: var(--ma-transition);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Feature Hover Effect */
+.VPFeature::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--ma-gradient-2);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.VPFeature:hover::before {
+  transform: scaleX(1);
+}
+
+.VPFeature:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ma-shadow-xl);
+  border-color: transparent;
+  background: var(--ma-surface);
+}
+
+/* Feature Icon Container */
+.VPFeature .icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ma-gradient-2);
+  border-radius: 12px;
+  color: white;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+/* SVG Icon Support */
+.VPFeature .icon img,
+.VPFeature .icon svg {
+  width: 28px;
+  height: 28px;
+  filter: brightness(0) invert(1);
+}
+
+/* Feature Content */
+.VPFeature .title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ma-text-primary);
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.VPFeature:hover .title {
+  color: var(--ma-brand-primary);
+}
+
+.VPFeature .details {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ma-text-secondary);
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* Feature Link */
+.VPFeature .link-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--ma-brand-primary);
+  font-weight: 600;
+  font-size: 14px;
+  transition: gap 0.3s ease;
+}
+
+.VPFeature:hover .link-text {
+  gap: 8px;
+}
+
+.VPFeature .link-text::after {
+  content: '→';
+  transition: transform 0.3s ease;
+}
+
+.VPFeature:hover .link-text::after {
+  transform: translateX(4px);
+}
+
+/* ===================================================================
+   Stats Section (Optional Enhancement)
+   =================================================================== */
+
+.stats-section {
+  padding: 60px 24px;
+  background: var(--ma-surface);
+  border-top: 1px solid var(--ma-border);
+}
+
+.stats-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  text-align: center;
+}
+
+.stat-item {
+  animation: fadeInUp 0.8s ease both;
+}
+
+.stat-number {
+  font-size: 48px;
+  font-weight: 900;
+  background: var(--ma-gradient-2);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+.stat-label {
+  font-size: 16px;
+  color: var(--ma-text-secondary);
+  margin-top: 8px;
+}
+
+/* ===================================================================
+   Animations
+   =================================================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* ===================================================================
+   Responsive Design
+   =================================================================== */
+
+@media (max-width: 960px) {
+  .VPHero .container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .VPHero .content {
+    max-width: 100%;
+  }
+  
+  .VPHero .actions {
+    justify-content: center;
+  }
+  
+  .VPHero .image {
+    display: none;
+  }
+  
+  .VPFeatures .items {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .VPHero {
+    padding: 60px 20px 80px;
+  }
+  
+  .VPHero .name {
+    font-size: 2rem;
+  }
+  
+  .VPHero .text {
+    font-size: 1.125rem;
+  }
+  
+  .VPHero .tagline {
+    font-size: 1rem;
+  }
+  
+  .VPHero .actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .VPButton {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .VPFeatures {
+    padding: 60px 20px;
+  }
+  
+  .VPFeatures .items {
+    grid-template-columns: 1fr;
+  }
+  
+  .VPFeature {
+    padding: 24px;
+  }
+}
+
+/* ===================================================================
+   Dark Mode Optimizations
+   =================================================================== */
+
+.dark .VPHero::before {
+  background: 
+    radial-gradient(ellipse at 20% 0%, rgba(99, 102, 241, 0.2) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 0%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 50%, rgba(34, 211, 238, 0.1) 0%, transparent 50%);
+}
+
+.dark .code-showcase {
+  background: var(--ma-surface-soft);
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+}
+
+.dark .VPFeature {
+  background: var(--ma-surface-soft);
+}
+
+.dark .VPFeature:hover {
+  background: var(--ma-surface-mute);
+}
+
+.dark .VPFeature .icon {
+  background: var(--ma-gradient-2);
+}
+
+/* ===================================================================
+   Language-Specific Typography
+   =================================================================== */
+
+/* Chinese/Japanese - Optimize spacing */
+:root:lang(zh) .VPHero .name,
+:root:lang(zh-hk) .VPHero .name,
+:root:lang(zh-tw) .VPHero .name,
+:root:lang(ja) .VPHero .name {
+  letter-spacing: 0.02em;
+}
+
+/* English - Tighter letter spacing */
+:root:lang(en) .VPHero .name {
+  letter-spacing: -0.04em;
+}
+
+/* ===================================================================
+   Print Styles
+   =================================================================== */
+
+@media print {
+  .VPHero::before,
+  .VPHero::after,
+  .code-showcase {
+    display: none;
+  }
+  
+  .VPHero,
+  .VPFeatures {
+    padding: 20px;
+  }
+  
+  .VPFeature {
+    break-inside: avoid;
+  }
+}

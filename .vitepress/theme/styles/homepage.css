@@ -1,0 +1,495 @@
+/**
+ * MineAdmin Homepage Enhanced Styles
+ * Modern enterprise-level documentation site design
+ * Supports light/dark themes and internationalization
+ */
+
+/* ===================================================================
+   Hero Section - Modern Gradient Background with Animation
+   =================================================================== */
+
+/* Remove external image and create dynamic gradient background */
+.VPHero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, 
+    var(--vp-c-bg) 0%, 
+    var(--vp-c-bg-soft) 100%);
+}
+
+/* Professional animated gradient mesh background */
+.VPHero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at 20% 50%,
+    rgba(102, 126, 234, 0.08) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    circle at 80% 80%,
+    rgba(118, 75, 162, 0.06) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    circle at 40% 20%,
+    rgba(240, 147, 251, 0.04) 0%,
+    transparent 50%
+  );
+  animation: gradientShift 20s ease infinite;
+  pointer-events: none;
+}
+
+/* Dark mode gradient adjustments */
+.dark .VPHero::before {
+  background: radial-gradient(
+    circle at 20% 50%,
+    rgba(102, 126, 234, 0.15) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    circle at 80% 80%,
+    rgba(118, 75, 162, 0.12) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    circle at 40% 20%,
+    rgba(240, 147, 251, 0.08) 0%,
+    transparent 50%
+  );
+}
+
+/* Subtle animation for gradient background */
+@keyframes gradientShift {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  33% {
+    transform: rotate(120deg) scale(1.1);
+  }
+  66% {
+    transform: rotate(240deg) scale(0.95);
+  }
+}
+
+/* Enhanced hero content styling */
+.VPHero .VPHeroContent {
+  position: relative;
+  z-index: 1;
+  padding: 48px 24px;
+}
+
+/* Professional title gradient */
+.VPHero .name {
+  background: linear-gradient(
+    120deg,
+    var(--vp-c-brand-1) 0%,
+    var(--vp-c-purple-1) 50%,
+    var(--vp-c-brand-2) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  animation: shimmer 3s ease-in-out infinite;
+  background-size: 200% auto;
+}
+
+/* Shimmer effect for title */
+@keyframes shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Tagline enhancement */
+.VPHero .tagline {
+  color: var(--vp-c-text-2);
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-top: 1rem;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+  animation-delay: 0.2s;
+}
+
+/* ===================================================================
+   Visual Code Block Decoration (Replaces external image)
+   =================================================================== */
+
+/* Add a decorative code block visual to hero section */
+.VPHero .VPHeroContent::after {
+  content: '';
+  position: absolute;
+  right: -100px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 400px;
+  height: 300px;
+  background: linear-gradient(135deg, 
+    rgba(102, 126, 234, 0.1) 0%, 
+    rgba(118, 75, 162, 0.1) 100%);
+  border-radius: 12px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Code block decoration for larger screens */
+@media (min-width: 960px) {
+  .VPHero .VPHeroContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1152px;
+    margin: 0 auto;
+  }
+  
+  /* Decorative code window */
+  .VPHero .VPHeroContent::before {
+    content: '';
+    position: absolute;
+    right: -20%;
+    top: 50%;
+    transform: translateY(-50%) perspective(1000px) rotateY(-25deg);
+    width: 450px;
+    height: 320px;
+    background: var(--vp-c-bg-elv);
+    border: 1px solid var(--vp-c-border);
+    border-radius: 8px;
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    opacity: 0;
+    animation: slideInRight 0.8s ease forwards;
+    animation-delay: 0.4s;
+  }
+  
+  /* Code window title bar */
+  .VPHero .VPHeroContent::after {
+    content: '● ● ●';
+    position: absolute;
+    right: -20%;
+    top: calc(50% - 145px);
+    transform: translateY(-50%) perspective(1000px) rotateY(-25deg);
+    width: 450px;
+    height: 32px;
+    background: var(--vp-c-bg-soft);
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    align-items: center;
+    padding-left: 12px;
+    color: var(--vp-c-text-3);
+    font-size: 24px;
+    letter-spacing: 6px;
+    border: 1px solid var(--vp-c-border);
+    border-bottom: none;
+    opacity: 0;
+    animation: slideInRight 0.8s ease forwards;
+    animation-delay: 0.4s;
+  }
+}
+
+/* ===================================================================
+   Action Buttons Enhancement
+   =================================================================== */
+
+.VPHero .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+  animation-delay: 0.4s;
+}
+
+/* Enhanced brand button */
+.VPHero .action .VPButton.brand {
+  background: linear-gradient(135deg, 
+    var(--vp-c-brand-1) 0%, 
+    var(--vp-c-purple-2) 100%);
+  border: none;
+  font-weight: 600;
+  padding: 12px 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.VPHero .action .VPButton.brand::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.2), 
+    transparent);
+  transition: left 0.5s ease;
+}
+
+.VPHero .action .VPButton.brand:hover::before {
+  left: 100%;
+}
+
+.VPHero .action .VPButton.brand:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+/* Enhanced alt buttons */
+.VPHero .action .VPButton.alt {
+  background: var(--vp-c-bg);
+  border: 2px solid var(--vp-c-border);
+  font-weight: 600;
+  padding: 10px 22px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.VPHero .action .VPButton.alt:hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ===================================================================
+   Feature Cards Enhancement
+   =================================================================== */
+
+.VPFeatures {
+  position: relative;
+  padding: 64px 24px;
+  background: var(--vp-c-bg);
+}
+
+/* Feature grid enhancement */
+.VPFeatures .container {
+  max-width: 1152px;
+  margin: 0 auto;
+}
+
+.VPFeatures .items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+/* Enhanced feature card */
+.VPFeature {
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
+  border-radius: 12px;
+  padding: 32px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gradient border on hover */
+.VPFeature::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  padding: 1px;
+  background: linear-gradient(135deg, 
+    var(--vp-c-brand-1), 
+    var(--vp-c-purple-1));
+  mask: linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.VPFeature:hover::before {
+  opacity: 1;
+}
+
+.VPFeature:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  background: var(--vp-c-bg);
+}
+
+/* Feature icon enhancement */
+.VPFeature .icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+  display: inline-block;
+  animation: float 3s ease-in-out infinite;
+  animation-delay: calc(var(--index) * 0.1s);
+}
+
+/* Floating animation for icons */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Add animation delay based on card index */
+.VPFeature:nth-child(1) .icon { --index: 1; }
+.VPFeature:nth-child(2) .icon { --index: 2; }
+.VPFeature:nth-child(3) .icon { --index: 3; }
+.VPFeature:nth-child(4) .icon { --index: 4; }
+.VPFeature:nth-child(5) .icon { --index: 5; }
+.VPFeature:nth-child(6) .icon { --index: 6; }
+
+/* Feature title */
+.VPFeature .title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--vp-c-text-1);
+  transition: color 0.3s ease;
+}
+
+.VPFeature:hover .title {
+  color: var(--vp-c-brand-1);
+}
+
+/* Feature description */
+.VPFeature .details {
+  color: var(--vp-c-text-2);
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* ===================================================================
+   Animations
+   =================================================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px) translateY(-50%) perspective(1000px) rotateY(-25deg);
+  }
+  to {
+    opacity: 0.6;
+    transform: translateX(0) translateY(-50%) perspective(1000px) rotateY(-25deg);
+  }
+}
+
+/* ===================================================================
+   Responsive Design
+   =================================================================== */
+
+@media (max-width: 960px) {
+  .VPHero .VPHeroContent::before,
+  .VPHero .VPHeroContent::after {
+    display: none;
+  }
+  
+  .VPHero .tagline {
+    font-size: 1.1rem;
+  }
+  
+  .VPFeatures {
+    padding: 48px 20px;
+  }
+  
+  .VPFeature {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .VPHero .actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .VPHero .action {
+    width: 100%;
+  }
+  
+  .VPHero .action .VPButton {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .VPFeatures .items {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===================================================================
+   Dark Mode Optimizations
+   =================================================================== */
+
+.dark .VPFeature {
+  background: rgba(30, 30, 34, 0.5);
+  border-color: rgba(82, 82, 89, 0.3);
+}
+
+.dark .VPFeature:hover {
+  background: rgba(38, 38, 42, 0.8);
+  border-color: var(--vp-c-brand-1);
+}
+
+.dark .VPHero .action .VPButton.alt {
+  background: rgba(30, 30, 34, 0.8);
+  border-color: rgba(82, 82, 89, 0.5);
+}
+
+.dark .VPHero .action .VPButton.alt:hover {
+  background: rgba(38, 38, 42, 1);
+}
+
+/* ===================================================================
+   Language-specific Adjustments
+   =================================================================== */
+
+/* Chinese typography optimization */
+:root:lang(zh) .VPHero .name,
+:root:lang(zh-hk) .VPHero .name,
+:root:lang(zh-tw) .VPHero .name {
+  letter-spacing: 0.05em;
+}
+
+/* Japanese typography optimization */
+:root:lang(ja) .VPHero .name {
+  letter-spacing: 0.02em;
+  font-weight: 700;
+}
+
+/* English typography optimization */
+:root:lang(en) .VPHero .name {
+  letter-spacing: -0.03em;
+  font-weight: 900;
+}

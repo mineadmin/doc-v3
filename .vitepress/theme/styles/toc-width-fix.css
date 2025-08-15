@@ -1,0 +1,123 @@
+/**
+ * TOC Width Fix - High Priority Override
+ * Addresses persistent TOC width issues with stronger selectors
+ */
+
+/* ========================================================================
+   Force TOC Container Width - Highest Priority
+   ======================================================================== */
+
+/* Target the aside container directly with highest specificity */
+.VPDocAside,
+.VPDocAside .VPDocAsideOutline,
+.VPDoc .VPDocAside .VPDocAsideOutline {
+  min-width: 300px !important;
+  max-width: 380px !important;
+  width: 300px !important;
+}
+
+/* Ensure the outline content has proper width */
+.VPDocAsideOutline .content,
+.VPDocAsideOutline .outline-title,
+.VPDocAsideOutline .outline-link {
+  width: 100% !important;
+  max-width: none !important;
+  min-width: auto !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: initial !important;
+}
+
+/* Force remove any width restrictions on TOC items */
+.VPDocAsideOutline .outline-link {
+  display: block !important;
+  padding: 0.5rem 0.75rem !important;
+  line-height: 1.5 !important;
+  word-wrap: break-word !important;
+  hyphens: auto !important;
+}
+
+/* Override VitePress default truncation */
+.VPDocAsideOutline .outline-marker + .outline-text,
+.VPDocAsideOutline .outline-text {
+  display: block !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: initial !important;
+  max-width: none !important;
+}
+
+/* ========================================================================
+   Responsive Width Adjustments
+   ======================================================================== */
+
+@media (min-width: 1280px) {
+  .VPDocAside,
+  .VPDocAside .VPDocAsideOutline,
+  .VPDoc .VPDocAside .VPDocAsideOutline {
+    min-width: 320px !important;
+    width: 320px !important;
+    max-width: 400px !important;
+  }
+}
+
+@media (min-width: 1600px) {
+  .VPDocAside,
+  .VPDocAside .VPDocAsideOutline,
+  .VPDoc .VPDocAside .VPDocAsideOutline {
+    min-width: 360px !important;
+    width: 360px !important;
+    max-width: 450px !important;
+  }
+}
+
+/* ========================================================================
+   Fix Layout to Accommodate Wider TOC
+   ======================================================================== */
+
+/* Adjust content area to give more space to TOC */
+@media (min-width: 960px) {
+  .VPContent.has-sidebar.has-aside {
+    padding-right: 340px !important; /* Increased padding for wider TOC */
+  }
+  
+  .VPDoc.has-aside {
+    padding-right: 340px !important; /* Match the padding */
+  }
+}
+
+@media (min-width: 1280px) {
+  .VPContent.has-sidebar.has-aside {
+    padding-right: 380px !important;
+  }
+  
+  .VPDoc.has-aside {
+    padding-right: 380px !important;
+  }
+}
+
+@media (min-width: 1600px) {
+  .VPContent.has-sidebar.has-aside {
+    padding-right: 420px !important;
+  }
+  
+  .VPDoc.has-aside {
+    padding-right: 420px !important;
+  }
+}
+
+/* ========================================================================
+   Clean Layout - Debug borders removed
+   ======================================================================== */
+
+/* Restore normal appearance */
+.VPDocAsideOutline {
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+}
+
+.VPDocAside {
+  background: transparent;
+  border: none;
+}

@@ -455,7 +455,7 @@ const devTools = {
 
 ## 相关链接
 
-- [MaForm 基础用法](/zh/front/component/ma-form/examples/basic-usage)
-- [表单验证示例](/zh/front/component/ma-form/examples/dynamic-validation)
-- [加载状态演示](/zh/front/component/ma-form/examples/loading-states)
+- [MaForm 基础用法](/front/component/ma-form/examples/basic-usage)
+- [表单验证示例](/front/component/ma-form/examples/dynamic-validation)
+- [加载状态演示](/front/component/ma-form/examples/loading-states)
 - [Element Plus Form 文档](https://element-plus.org/zh-CN/component/form.html)

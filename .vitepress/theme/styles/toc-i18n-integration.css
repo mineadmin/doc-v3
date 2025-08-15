@@ -1,0 +1,334 @@
+/**
+ * TOC Integration with i18n and Theme Consistency
+ * Ensures perfect harmony with existing MineAdmin documentation styles
+ */
+
+/* ========================================================================
+   Language-Specific TOC Headers
+   ======================================================================== */
+
+/* Chinese Variants */
+:root:lang(zh) {
+  --toc-header-text: '本页目录';
+  --toc-header-font: 'PingFang SC', 'Microsoft YaHei UI', sans-serif;
+  --toc-reading-time-suffix: ' 阅读';
+}
+
+:root:lang(zh-hk),
+:root:lang(zh-tw) {
+  --toc-header-text: '本頁目錄';
+  --toc-header-font: 'PingFang TC', 'Microsoft JhengHei UI', sans-serif;
+  --toc-reading-time-suffix: ' 閱讀';
+}
+
+/* Japanese */
+:root:lang(ja) {
+  --toc-header-text: 'このページの目次';
+  --toc-header-font: 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
+  --toc-reading-time-suffix: ' 読了時間';
+}
+
+/* English (default) */
+:root {
+  --toc-header-text: 'On this page';
+  --toc-header-font: 'Inter', system-ui, sans-serif;
+  --toc-reading-time-suffix: ' read';
+}
+
+/* ========================================================================
+   Theme Color Integration
+   ======================================================================== */
+
+/* Use MineAdmin brand colors */
+.VPDocAsideOutline {
+  --toc-brand-color: var(--ma-color-primary, var(--vp-c-brand-1));
+  --toc-brand-light: var(--ma-color-primary-light, var(--vp-c-brand-2));
+  --toc-brand-dark: var(--ma-color-primary-dark, var(--vp-c-brand-3));
+  --toc-gradient: var(--ma-gradient-primary, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+}
+
+/* Sync with MineAdmin shadow system */
+.VPDocAsideOutline {
+  box-shadow: var(--ma-shadow-sm, var(--toc-shadow-subtle));
+}
+
+.VPDocAsideOutline:hover {
+  box-shadow: var(--ma-shadow-md, var(--toc-shadow-hover));
+}
+
+/* ========================================================================
+   Typography Alignment
+   ======================================================================== */
+
+/* Ensure consistent font family with main content */
+.VPDocAsideOutline {
+  font-family: var(--ma-font-body-enhanced, var(--vp-font-family-base));
+}
+
+.VPDocAsideOutline::before {
+  font-family: var(--toc-header-font, var(--ma-font-display));
+}
+
+/* CJK-specific optimizations */
+:lang(zh) .VPDocAsideOutline .outline-link,
+:lang(zh-hk) .VPDocAsideOutline .outline-link,
+:lang(zh-tw) .VPDocAsideOutline .outline-link,
+:lang(ja) .VPDocAsideOutline .outline-link {
+  font-feature-settings: 'halt' 1;
+  text-rendering: optimizeLegibility;
+}
+
+/* ========================================================================
+   Mobile Responsiveness Enhancements
+   ======================================================================== */
+
+/* Mobile toggle button with i18n support */
+.toc-mobile-toggle::after {
+  content: 'TOC';
+  font-size: 0.65rem;
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--vp-c-bg);
+  font-weight: 600;
+}
+
+:lang(zh) .toc-mobile-toggle::after {
+  content: '目录';
+}
+
+:lang(zh-hk) .toc-mobile-toggle::after,
+:lang(zh-tw) .toc-mobile-toggle::after {
+  content: '目錄';
+}
+
+:lang(ja) .toc-mobile-toggle::after {
+  content: '目次';
+}
+
+/* ========================================================================
+   Reading Time Localization
+   ======================================================================== */
+
+/* Format reading time for different languages */
+.VPDocAsideOutline[data-reading-time]::before {
+  font-family: var(--toc-header-font);
+}
+
+:lang(zh) .VPDocAsideOutline[data-reading-time*="min"]::before {
+  content: attr(data-reading-time-zh) ' · 本页目录' !important;
+}
+
+:lang(ja) .VPDocAsideOutline[data-reading-time*="min"]::before {
+  content: attr(data-reading-time-ja) ' · このページ' !important;
+}
+
+/* ========================================================================
+   Smooth Integration with Existing Components
+   ======================================================================== */
+
+/* Align with VPDoc content area */
+.VPDoc:has(.VPDocAsideOutline) {
+  --vp-doc-aside-outline-offset: 2rem;
+}
+
+/* Coordinate with sidebar */
+@media (min-width: 960px) {
+  .VPSidebar:has(~ .VPDoc .VPDocAsideOutline) {
+    transition: all 0.3s var(--ma-ease-smooth);
+  }
+}
+
+/* ========================================================================
+   Dark Mode Refinements
+   ======================================================================== */
+
+.dark .VPDocAsideOutline {
+  background: linear-gradient(
+    135deg,
+    rgba(30, 30, 34, 0.8) 0%,
+    rgba(30, 30, 34, 0.6) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.dark .VPDocAsideOutline .outline-link:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(91, 103, 234, 0.15) 0%,
+    transparent 100%
+  );
+}
+
+.dark .VPDocAsideOutline .outline-link.active {
+  background: linear-gradient(
+    90deg,
+    rgba(91, 103, 234, 0.25) 0%,
+    transparent 100%
+  );
+}
+
+/* ========================================================================
+   Animation Consistency
+   ======================================================================== */
+
+/* Use MineAdmin animation timing */
+.VPDocAsideOutline,
+.VPDocAsideOutline .outline-link {
+  transition-timing-function: var(--ma-ease-smooth, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+.VPDocAsideOutline .outline-link:hover {
+  animation-timing-function: var(--ma-ease-bounce, cubic-bezier(0.68, -0.55, 0.265, 1.55));
+}
+
+/* ========================================================================
+   Accessibility Enhancements
+   ======================================================================== */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .VPDocAsideOutline {
+    border: 2px solid var(--vp-c-text-1);
+  }
+  
+  .VPDocAsideOutline .outline-link.active {
+    background: var(--vp-c-brand-1);
+    color: var(--vp-c-bg);
+  }
+}
+
+/* Focus visible improvements */
+.VPDocAsideOutline .outline-link:focus-visible {
+  outline: 2px solid var(--toc-brand-color);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ========================================================================
+   Performance Optimizations
+   ======================================================================== */
+
+/* Reduce repaints during scroll */
+@supports (contain: layout style paint) {
+  .VPDocAsideOutline {
+    contain: layout style paint;
+  }
+}
+
+/* GPU acceleration for smooth animations */
+.VPDocAsideOutline .outline-link {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* ========================================================================
+   Print Media Queries
+   ======================================================================== */
+
+@media print {
+  .VPDocAsideOutline,
+  .toc-mobile-toggle,
+  .scroll-progress {
+    display: none !important;
+  }
+}
+
+/* ========================================================================
+   Special States and Edge Cases
+   ======================================================================== */
+
+/* Empty TOC state */
+.VPDocAsideOutline:empty::after {
+  content: 'No headings found';
+  color: var(--vp-c-text-3);
+  font-style: italic;
+  display: block;
+  padding: 1rem;
+  text-align: center;
+}
+
+:lang(zh) .VPDocAsideOutline:empty::after {
+  content: '未找到标题';
+}
+
+:lang(ja) .VPDocAsideOutline:empty::after {
+  content: '見出しが見つかりません';
+}
+
+/* Loading state */
+.VPDocAsideOutline.loading {
+  position: relative;
+  min-height: 200px;
+}
+
+.VPDocAsideOutline.loading::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--vp-c-divider);
+  border-top-color: var(--toc-brand-color);
+  border-radius: 50%;
+  animation: tocLoading 0.8s linear infinite;
+}
+
+@keyframes tocLoading {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* ========================================================================
+   Responsive Breakpoint Adjustments
+   ======================================================================== */
+
+/* Tablet landscape */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .VPDocAsideOutline {
+    font-size: 0.925rem;
+    padding: 1.25rem;
+  }
+}
+
+/* Small desktop */
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .VPDocAsideOutline {
+    max-width: 220px;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1920px) {
+  .VPDocAsideOutline {
+    max-width: 280px;
+    font-size: 0.975rem;
+  }
+}
+
+/* ========================================================================
+   Browser Compatibility Fallbacks
+   ======================================================================== */
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(12px)) {
+  .VPDocAsideOutline {
+    background: var(--vp-c-bg);
+  }
+  
+  .dark .VPDocAsideOutline {
+    background: rgba(30, 30, 34, 0.95);
+  }
+}
+
+/* Fallback for browsers without CSS gradient support */
+@supports not (background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)) {
+  .VPDocAsideOutline .outline-link.active::after {
+    background: var(--toc-brand-color);
+  }
+}

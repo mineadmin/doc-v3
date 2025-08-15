@@ -223,7 +223,7 @@ const [users, roles, permissions] = await Promise.all([
 // 刷新完成后，所有请求会使用新 Token 重新发送
 ```
 
-具体刷新机制详情可参考 [用户认证文档](/zh/backend/security/passport.md)。
+具体刷新机制详情可参考 [用户认证文档](/backend/security/passport.md)。
 
 ## 外部请求
 

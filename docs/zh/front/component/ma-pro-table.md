@@ -16,17 +16,17 @@
 通过以下示例，你可以快速了解 MaProTable 的各种使用场景和功能特性：
 
 ### 基础功能
-- **[基础用法](/zh/front/component/ma-pro-table/examples/basic)** - 最简单的表格使用方式
-- **[高级搜索](/zh/front/component/ma-pro-table/examples/advanced-search)** - 多种搜索组件和复杂搜索逻辑
-- **[自定义操作](/zh/front/component/ma-pro-table/examples/custom-operations)** - 灵活的操作列配置和批量操作
+- **[基础用法](/front/component/ma-pro-table/examples/basic)** - 最简单的表格使用方式
+- **[高级搜索](/front/component/ma-pro-table/examples/advanced-search)** - 多种搜索组件和复杂搜索逻辑
+- **[自定义操作](/front/component/ma-pro-table/examples/custom-operations)** - 灵活的操作列配置和批量操作
 
 ### 扩展功能
-- **[单元格渲染插件](/zh/front/component/ma-pro-table/examples/cell-render-plugins)** - 丰富的单元格渲染效果
-- **[工具栏扩展](/zh/front/component/ma-pro-table/examples/toolbar-extensions)** - 自定义工具栏功能
-- **[数据管理](/zh/front/component/ma-pro-table/examples/data-management)** - 完整的CRUD操作流程
+- **[单元格渲染插件](/front/component/ma-pro-table/examples/cell-render-plugins)** - 丰富的单元格渲染效果
+- **[工具栏扩展](/front/component/ma-pro-table/examples/toolbar-extensions)** - 自定义工具栏功能
+- **[数据管理](/front/component/ma-pro-table/examples/data-management)** - 完整的CRUD操作流程
 
 ### 高级特性
-- **[响应式布局](/zh/front/component/ma-pro-table/examples/responsive-layout)** - 多设备适配和响应式设计
+- **[响应式布局](/front/component/ma-pro-table/examples/responsive-layout)** - 多设备适配和响应式设计
 
 ## 核心特性
 

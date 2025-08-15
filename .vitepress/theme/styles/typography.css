@@ -1,0 +1,550 @@
+/**
+ * MineAdmin Enhanced Typography System
+ * Optimized for multilingual content with focus on CJK languages
+ */
+
+/* ========================================================================
+   Font Import & Setup
+   ======================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* Chinese web fonts (using system fonts for better performance) */
+:root {
+  --font-sans-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-sans-cn: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei UI', 'Microsoft YaHei', 'Source Han Sans CN', sans-serif;
+  --font-sans-tw: 'PingFang TC', 'Hiragino Sans CNS', 'Microsoft JhengHei UI', 'Microsoft JhengHei', 'Source Han Sans TW', sans-serif;
+  --font-sans-ja: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Source Han Sans JP', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+}
+
+/* ========================================================================
+   Global Typography Settings
+   ======================================================================== */
+
+html {
+  font-size: 16px;
+  line-height: 1.6;
+  font-feature-settings: 'liga' 1, 'kern' 1, 'calt' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+}
+
+body {
+  font-family: var(--font-sans-primary), var(--font-sans-cn);
+  color: var(--vp-c-text-1);
+  font-weight: 400;
+}
+
+/* Language-specific font stacks */
+:lang(zh),
+:lang(zh-CN) {
+  font-family: var(--font-sans-primary), var(--font-sans-cn);
+}
+
+:lang(zh-TW),
+:lang(zh-HK) {
+  font-family: var(--font-sans-primary), var(--font-sans-tw);
+}
+
+:lang(ja) {
+  font-family: var(--font-sans-primary), var(--font-sans-ja);
+}
+
+/* ========================================================================
+   Heading Styles
+   ======================================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans-primary), var(--font-sans-cn);
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  scroll-margin-top: calc(var(--vp-nav-height) + 1rem);
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--vp-c-divider);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+  font-weight: 600;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+h5 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--vp-c-text-2);
+}
+
+/* Enhanced heading anchors */
+h1 .header-anchor,
+h2 .header-anchor,
+h3 .header-anchor,
+h4 .header-anchor,
+h5 .header-anchor,
+h6 .header-anchor {
+  float: left;
+  margin-left: -0.87em;
+  padding-right: 0.23em;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.25s, color 0.25s;
+}
+
+h1:hover .header-anchor,
+h2:hover .header-anchor,
+h3:hover .header-anchor,
+h4:hover .header-anchor,
+h5:hover .header-anchor,
+h6:hover .header-anchor {
+  opacity: 1;
+}
+
+/* ========================================================================
+   Body Text Typography
+   ======================================================================== */
+
+p {
+  margin: 1.25rem 0;
+  line-height: 1.75;
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* Improved readability for CJK languages */
+:lang(zh) p,
+:lang(zh-CN) p,
+:lang(zh-TW) p,
+:lang(zh-HK) p,
+:lang(ja) p {
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  text-align: left;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* Lead paragraph */
+.lead {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--vp-c-text-2);
+  margin-bottom: 2rem;
+}
+
+/* Small text */
+small,
+.small {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* ========================================================================
+   List Styles
+   ======================================================================== */
+
+ul, ol {
+  margin: 1.25rem 0;
+  padding-left: 1.5rem;
+}
+
+ul ul, ol ol, ul ol, ol ul {
+  margin: 0.5rem 0;
+}
+
+li {
+  margin: 0.5rem 0;
+  line-height: 1.7;
+}
+
+/* Custom list markers */
+ul li::marker {
+  color: var(--vp-c-brand-1);
+}
+
+ol li::marker {
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+
+/* Definition lists */
+dl {
+  margin: 1.25rem 0;
+}
+
+dt {
+  font-weight: 600;
+  margin-top: 1rem;
+  color: var(--vp-c-text-1);
+}
+
+dd {
+  margin-left: 1.5rem;
+  margin-top: 0.25rem;
+  color: var(--vp-c-text-2);
+}
+
+/* ========================================================================
+   Emphasis & Highlights
+   ======================================================================== */
+
+strong, b {
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+}
+
+em, i {
+  font-style: italic;
+}
+
+mark {
+  background: linear-gradient(105deg, transparent 0.5em, #fef08a 0);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.highlight {
+  background: linear-gradient(105deg, transparent 0.5em, var(--vp-c-brand-soft) 0);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+}
+
+/* Text selection */
+::selection {
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+
+/* ========================================================================
+   Code Typography
+   ======================================================================== */
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  font-weight: 500;
+  font-feature-settings: 'liga' 0;
+}
+
+pre {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  tab-size: 2;
+  hyphens: none;
+  overflow-x: auto;
+}
+
+/* Inline code */
+:not(pre) > code {
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  font-size: 0.875em;
+  white-space: nowrap;
+}
+
+/* Keyboard input */
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  background: linear-gradient(180deg, #f9f9f9 0%, #e9e9e9 100%);
+  border: 1px solid #d1d1d1;
+  box-shadow: 0 2px 0 #d1d1d1;
+  color: #333;
+  font-weight: 500;
+}
+
+.dark kbd {
+  background: linear-gradient(180deg, #4a4a4a 0%, #2a2a2a 100%);
+  border-color: #555;
+  box-shadow: 0 2px 0 #555;
+  color: #f0f0f0;
+}
+
+/* ========================================================================
+   Blockquotes & Citations
+   ======================================================================== */
+
+blockquote {
+  margin: 2rem 0;
+  padding: 1rem 1.5rem;
+  border-left: 4px solid var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-style: italic;
+  position: relative;
+}
+
+blockquote::before {
+  content: '"';
+  position: absolute;
+  top: -0.5rem;
+  left: 1rem;
+  font-size: 3rem;
+  color: var(--vp-c-brand-1);
+  opacity: 0.3;
+  font-family: Georgia, serif;
+}
+
+blockquote p {
+  margin: 0.5rem 0;
+}
+
+blockquote cite {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--vp-c-text-2);
+  font-style: normal;
+}
+
+blockquote cite::before {
+  content: '— ';
+}
+
+/* ========================================================================
+   Abbreviations & Definitions
+   ======================================================================== */
+
+abbr[title] {
+  text-decoration: underline dotted;
+  cursor: help;
+  text-decoration-color: var(--vp-c-brand-1);
+  text-underline-offset: 0.125rem;
+}
+
+dfn {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--vp-c-brand-1);
+}
+
+/* ========================================================================
+   Superscript & Subscript
+   ======================================================================== */
+
+sup, sub {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+/* ========================================================================
+   Horizontal Rules
+   ======================================================================== */
+
+hr {
+  margin: 3rem 0;
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--vp-c-divider), transparent);
+  position: relative;
+}
+
+hr::after {
+  content: '§';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--vp-c-bg);
+  padding: 0 1rem;
+  color: var(--vp-c-text-3);
+  font-size: 1.25rem;
+}
+
+/* ========================================================================
+   Text Utilities
+   ======================================================================== */
+
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+.text-lowercase { text-transform: lowercase; }
+.text-uppercase { text-transform: uppercase; }
+.text-capitalize { text-transform: capitalize; }
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-nowrap { white-space: nowrap; }
+.text-break { word-wrap: break-word; word-break: break-word; }
+
+/* Font weights */
+.font-light { font-weight: 300; }
+.font-normal { font-weight: 400; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+.font-black { font-weight: 900; }
+
+/* Font sizes */
+.text-xs { font-size: 0.75rem; line-height: 1rem; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.text-base { font-size: 1rem; line-height: 1.5rem; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+.text-2xl { font-size: 1.5rem; line-height: 2rem; }
+.text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+.text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+.text-5xl { font-size: 3rem; line-height: 1; }
+.text-6xl { font-size: 3.75rem; line-height: 1; }
+
+/* ========================================================================
+   Responsive Typography
+   ======================================================================== */
+
+@media (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+  }
+  
+  h4 {
+    font-size: 1.125rem;
+  }
+  
+  .lead {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+  
+  h1 {
+    font-size: 1.75rem;
+  }
+  
+  h2 {
+    font-size: 1.375rem;
+  }
+  
+  h3 {
+    font-size: 1.125rem;
+  }
+}
+
+/* ========================================================================
+   Print Typography
+   ======================================================================== */
+
+@media print {
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000;
+  }
+  
+  h1 {
+    font-size: 24pt;
+    page-break-after: avoid;
+  }
+  
+  h2 {
+    font-size: 18pt;
+    page-break-after: avoid;
+  }
+  
+  h3 {
+    font-size: 14pt;
+    page-break-after: avoid;
+  }
+  
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  
+  blockquote {
+    border-left: 2pt solid #000;
+    padding-left: 12pt;
+  }
+  
+  pre, code {
+    font-size: 10pt;
+  }
+  
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+  
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+  }
+}

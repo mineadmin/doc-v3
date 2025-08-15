@@ -398,12 +398,20 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/backend/data-permission/config"
         },
         {
-          text: "📋 使用示例",
-            link: "/backend/data-permission/example"
+          text: "📋 API 参考与高级用法",
+          link: "/backend/data-permission/example"
         },
         {
-          text: "⚠️ 注意事项",
-            link: "/backend/data-permission/notice"
+          text: "⚡ 性能优化指南",
+          link: "/backend/data-permission/performance"
+        },
+        {
+          text: "🔧 故障排除指南",
+          link: "/backend/data-permission/troubleshooting"
+        },
+        {
+          text: "⚠️ 注意事项与最佳实践",
+          link: "/backend/data-permission/notice"
         }
       ]
     }

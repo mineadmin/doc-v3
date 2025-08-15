@@ -7,14 +7,10 @@ hero:
   name: MineAdmin
   text: 企业级后台管理系统
   tagline: 全新版本，全新架构，开箱即用，免费开源
-  image: 
-    src: https://s21.ax1x.com/2024/10/10/pAJHfgJ.jpg
-    style: 'max-width: 520px !important; box-shadow: 2px 2px 8px #555; border-radius: 5px; margin-top: 0px;'
-    alt: MineAdmin
   actions:
     - theme: brand
       text: 快速开始 ->
-      link: /zh/guide/introduce/mineadmin
+      link: /guide/introduce/mineadmin
     - theme: alt
       text: 查看演示
       link: https://demo.mineadmin.com

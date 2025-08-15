@@ -3,20 +3,72 @@
 ::: tip
 
 MineAdmin 的认证流程由 [mineadmin/auth-jwt](https://github.com/mineadmin/JwtAuth) 组件加 [mineadmin/jwt](https://github.com/mineadmin/jwt) 组件接入 [lcobucci/jwt](https://github.com/lcobucci/jwt)
-构建而成，本文将着重讲解如何在 MineAdmin 中使用 jwt 进行用户认证
+构建而成，本文将着重讲解如何在 MineAdmin 中使用 JWT 进行用户认证。
+
+本文涵盖 JWT 认证的基本使用、安全配置、性能优化以及最佳实践，帮助开发者构建安全可靠的认证系统。
 
 :::
+
+## 认证机制概述
+
+MineAdmin 采用 JWT（JSON Web Token）双 token 认证机制：
+
+- **access_token**: 用于业务接口访问，有效期较短（默认 1 小时）
+- **refresh_token**: 用于无感刷新 access_token，有效期较长（默认 2 小时）
+
+这种设计在保证安全性的同时，提供了良好的用户体验。
+
+## 安全配置指南
+
+::: warning 重要安全提醒
+
+1. **密钥安全**: JWT 密钥必须使用强随机字符串，长度至少 256 位
+2. **环境隔离**: 生产环境和测试环境必须使用不同的 JWT 密钥
+3. **传输安全**: 生产环境必须使用 HTTPS 传输 JWT token
+4. **存储安全**: 客户端应将 token 存储在安全的地方（如 httpOnly cookie）
+5. **时效控制**: 合理设置 token 有效期，避免长期有效的 token
+
+:::
+
+### JWT 密钥生成
+
+生成安全的 JWT 密钥：
+
+```bash
+# 生成 256 位随机密钥
+openssl rand -base64 64
+
+# 或使用 PHP 生成
+php -r "echo base64_encode(random_bytes(64)) . PHP_EOL;"
+```
 
 ## 在控制器中快速获取当前用户
 
-::: danger
+::: danger 依赖注入范围限制
 
 不建议在控制器以外注入此对象。对于 service 中操作 user、应将 user 实例传入到 service 方法中
-从而保证获取用户是在 http 请求周期内
+从而保证获取用户是在 http 请求周期内。
+
+**原因说明**：
+- `CurrentUser` 依赖于请求上下文中的 JWT token
+- 在非 HTTP 请求环境（如定时任务、队列消费者）中使用会导致错误
+- Service 层应该保持无状态，便于测试和维护
 
 :::
 
-使用 `App\Http\CurrentUser` 快速获取当前请求的用户对象
+### 基本用法
+
+使用 `App\Http\CurrentUser` 快速获取当前请求的用户对象。该类提供了多种便捷方法来访问用户信息，无需每次都查询数据库。
+
+### 核心方法说明
+
+- `user()`: 获取完整的用户模型实例（会触发数据库查询）
+- `id()`: 快速获取用户 ID（从 JWT token 直接读取，无数据库查询）
+- `refresh()`: 刷新当前用户的认证 token
+- `menus()`: 获取用户有权限的菜单列表
+- `roles()`: 获取用户的角色信息
+- `isSystem()`: 判断是否为系统用户
+- `isSuperAdmin()`: 判断是否为超级管理员
 
 ::: code-group
 
@@ -125,17 +177,57 @@ final class CurrentUser
 
 :::
 
-::: code-group
+## 为外部程序创建单独的 JWT 生成规则
 
-## 为外部程序创建单独的 jwt 生成规则
+### 应用场景
 
-在日常的应用开发中。业务后台与前台应用通常使用两个不同的生成规则。在 MineAdmin 中需要此项参考本章节内容
+在企业级应用开发中，通常需要将系统分为多个独立的应用域：
 
-1. env 文件中新建一个 JWT_API_SECRET 。值为随机字符串 base64 编码后的内容
-2. 在 `config/autoload/jwt.php` 中新建一个场景
-3. 新建一个 `ApiTokenMiddleware` 中间件专门用来验证新的场景 jwt
-4. 在你的前台控制器中使用 `ApiTokenMiddleware` 中间件进行用户验证
-5. 在 `PassportService` 新增一个 `loginApi` 方法
+- **管理后台**：供管理员使用的后台管理系统
+- **前台应用**：面向最终用户的应用接口
+- **第三方接入**：提供给合作伙伴的 API 接口
+- **移动端应用**：iOS/Android 等移动端专用接口
+
+每个应用域都应该使用独立的 JWT 配置，以实现：
+- **安全隔离**：不同应用使用不同的签名密钥
+- **权限控制**：不同应用有不同的权限范围
+- **配置独立**：可以为不同应用设置不同的过期时间等参数
+
+### 实施步骤
+
+#### 步骤 1: 配置环境变量
+
+在 `.env` 文件中新建独立的 JWT 密钥。建议为每个应用域配置独立的密钥：
+
+```bash
+# 管理后台（默认）
+JWT_SECRET=your_admin_secret_here
+
+# 前台 API
+JWT_API_SECRET=your_api_secret_here
+
+# 移动端应用
+JWT_MOBILE_SECRET=your_mobile_secret_here
+
+# 第三方接入
+JWT_PARTNER_SECRET=your_partner_secret_here
+```
+
+#### 步骤 2: 配置 JWT 场景
+
+在 `config/autoload/jwt.php` 中新建多个场景配置：
+
+#### 步骤 3: 创建专用中间件
+
+为每个应用域创建专门的 token 验证中间件：
+
+#### 步骤 4: 控制器中使用中间件
+
+在对应的控制器中使用相应的中间件进行用户验证：
+
+#### 步骤 5: 扩展认证服务
+
+在 `PassportService` 中新增对应的登录方法：
 
 ::: code-group
 
@@ -146,7 +238,7 @@ MINE_API_SECERT=azOVxsOWt3r0ozZNz8Ss429ht0T8z6OpeIJAIwNp6X0xqrbEY2epfIWyxtC1qSNM
 
 ```
 
-```php{46-50} [jwt.php]
+```php{46-80} [jwt.php]
 // config/autoload/jwt.php
 <?php
 
@@ -165,6 +257,7 @@ use Lcobucci\JWT\Token\RegisteredClaims;
 use Mine\Jwt\Jwt;
 
 return [
+    // 默认场景：管理后台
     'default' => [
         // jwt 配置 https://lcobucci-jwt.readthedocs.io/en/latest/
         'driver' => Jwt::class,
@@ -172,14 +265,14 @@ return [
         'key' => InMemory::base64Encoded(env('JWT_SECRET')),
         // jwt 签名算法 可选 https://lcobucci-jwt.readthedocs.io/en/latest/supported-algorithms/
         'alg' => new Sha256(),
-        // token过期时间，单位为秒
-        'ttl' => (int) env('JWT_TTL', 3600),
+        // token过期时间，单位为秒 (管理后台建议短一些)
+        'ttl' => (int) env('JWT_TTL', 3600), // 1小时
         // 刷新token过期时间，单位为秒
-        'refresh_ttl' => (int) env('JWT_REFRESH_TTL', 7200),
+        'refresh_ttl' => (int) env('JWT_REFRESH_TTL', 7200), // 2小时
         // 黑名单模式
         'blacklist' => [
             // 是否开启黑名单
-            'enable' => true,
+            'enable' => env('JWT_BLACKLIST_ENABLE', true),
             // 黑名单缓存前缀
             'prefix' => 'jwt_blacklist',
             // 黑名单缓存驱动
@@ -190,11 +283,46 @@ return [
         'claims' => [
             // 默认的jwt claims
             RegisteredClaims::ISSUER => (string) env('APP_NAME'),
+            RegisteredClaims::AUDIENCE => 'admin', // 明确标识受众
         ],
     ],
-    // 在你想要使用不同的场景时，可以在这里添加配置.可以填一个。其他会使用默认配置
+    
+    // 前台 API 场景
     'api' => [
         'key' => InMemory::base64Encoded(env('JWT_API_SECRET')),
+        'ttl' => (int) env('JWT_API_TTL', 7200), // 2小时，前台可以长一些
+        'refresh_ttl' => (int) env('JWT_API_REFRESH_TTL', 86400), // 24小时
+        'claims' => [
+            RegisteredClaims::ISSUER => (string) env('APP_NAME'),
+            RegisteredClaims::AUDIENCE => 'api',
+        ],
+    ],
+    
+    // 移动端场景
+    'mobile' => [
+        'key' => InMemory::base64Encoded(env('JWT_MOBILE_SECRET')),
+        'ttl' => (int) env('JWT_MOBILE_TTL', 86400), // 24小时，移动端更长
+        'refresh_ttl' => (int) env('JWT_MOBILE_REFRESH_TTL', 604800), // 7天
+        'blacklist' => [
+            'enable' => true,
+            'prefix' => 'jwt_mobile_blacklist',
+            'ttl' => (int) env('JWT_MOBILE_BLACKLIST_TTL', 604801),
+        ],
+        'claims' => [
+            RegisteredClaims::ISSUER => (string) env('APP_NAME'),
+            RegisteredClaims::AUDIENCE => 'mobile',
+        ],
+    ],
+    
+    // 第三方合作伙伴场景
+    'partner' => [
+        'key' => InMemory::base64Encoded(env('JWT_PARTNER_SECRET')),
+        'ttl' => (int) env('JWT_PARTNER_TTL', 3600), // 1小时，第三方建议短期
+        'refresh_ttl' => (int) env('JWT_PARTNER_REFRESH_TTL', 7200), // 2小时
+        'claims' => [
+            RegisteredClaims::ISSUER => (string) env('APP_NAME'),
+            RegisteredClaims::AUDIENCE => 'partner',
+        ],
     ],
 ];
 
@@ -396,25 +524,204 @@ final class PassportService extends IService implements CheckTokenInterface
 :::
 
 
-## jwt 
+## JWT 核心概念详解
 
-::: tip
+::: tip JWT 基础知识
 
-查看本文档前，需要对 jwt 的知识有一定了解。本文不再另行解释相关基础知识
+如果您对 JWT（JSON Web Token）的基础概念还不够熟悉，建议先阅读 [JWT 官方文档](https://jwt.io/introduction) 了解基本原理。
 
 :::
 
-### 双 token 的区别
+### JWT 结构分析
 
-在 MineAdmin 中、登录成功后会返回两个 token。即 `access_token` 和 `refresh_token`
-前者 `access_token` 用来作业务用户认证。后者 `refresh_token` 用来做无感刷新 `access_token`。具体刷新流程可查看 [ 双 token 刷新机制](../base/lifecycle.md#双-token-认证刷新)
+JWT 由三部分组成，用点（.）分隔：
 
-`refresh_token` 相比较 `access_token` 多了一个 `sub` 属性。值为 `refresh` 作用标明该 token 只能用于刷新 access_token
-同时该 token 只能刷新一次即失效。下次刷新必须选择新的 refresh_token
+```
+header.payload.signature
+```
 
-前后者的 `id` 属性则都是存储用户的 id
+#### 1. Header（头部）
+```json
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+```
 
-access_token 的验证由 `App\Http\Common\Middleware\AccessTokenMiddleware` 中间件决定
-refresh_token 的验证由 `App\Http\Common\Middleware\RefreshTokenMiddleware` 中间件决定
+#### 2. Payload（载荷）
+```json
+{
+  "id": "123",
+  "iss": "MineAdmin",
+  "aud": "admin",
+  "exp": 1640995200,
+  "iat": 1640991600,
+  "nbf": 1640991600
+}
+```
 
-而这两个都是继承于 `Mine\JwtAuth\Middleware\AbstractTokenMiddleware`
+字段说明：
+- `id`: 用户 ID
+- `iss`: 签发者（Issuer）
+- `aud`: 受众（Audience）
+- `exp`: 过期时间（Expiration Time）
+- `iat`: 签发时间（Issued At）
+- `nbf`: 生效时间（Not Before）
+
+#### 3. Signature（签名）
+```
+HMACSHA256(
+  base64UrlEncode(header) + "." +
+  base64UrlEncode(payload),
+  secret
+)
+```
+
+### 双 Token 认证机制详解
+
+MineAdmin 采用双 token 设计，这是一种安全性和用户体验的最佳平衡方案。
+
+#### Token 类型对比
+
+| 特性       | Access Token     | Refresh Token     |
+|------------|------------------|-------------------|
+| **用途**   | 业务接口访问     | 刷新 access_token |
+| **有效期** | 短期（1-4小时）  | 长期（2-24小时）  |
+| **使用频率** | 每次 API 调用   | 仅在刷新时使用    |
+| **安全风险** | 低（短期有效）   | 中（需妥善保管）  |
+| **存储位置** | 内存/临时存储    | 安全存储          |
+
+#### 双 Token 工作流程
+
+```mermaid
+sequenceDiagram
+    participant Client as 客户端
+    participant Server as 服务器
+    participant Redis as Redis缓存
+
+    Client->>Server: 1. 登录请求
+    Server->>Redis: 2. 验证用户凭据
+    Server->>Client: 3. 返回 access_token + refresh_token
+    
+    loop 业务请求
+        Client->>Server: 4. 携带 access_token 访问 API
+        Server->>Client: 5. 返回业务数据
+    end
+    
+    Client->>Server: 6. access_token 过期，使用 refresh_token 刷新
+    Server->>Redis: 7. 验证 refresh_token 并标记为已使用
+    Server->>Client: 8. 返回新的 access_token + refresh_token
+```
+
+#### Token 内容差异
+
+**Access Token Claims:**
+```json
+{
+  "id": "123",
+  "iss": "MineAdmin", 
+  "aud": "admin",
+  "exp": 1640995200,
+  "iat": 1640991600,
+  "nbf": 1640991600
+}
+```
+
+**Refresh Token Claims:**
+```json
+{
+  "id": "123",
+  "iss": "MineAdmin",
+  "aud": "admin", 
+  "sub": "refresh",
+  "exp": 1641002400,
+  "iat": 1640991600,
+  "nbf": 1640991600
+}
+```
+
+关键字段说明：
+- `sub`: 标识这是刷新 token
+- `exp`: 更长的过期时间
+
+#### 关键差异说明
+
+1. **`sub` 声明**: refresh_token 包含 `"sub": "refresh"` 声明，用于标识其用途
+2. **使用限制**: 每个 refresh_token 只能使用一次，使用后立即失效
+3. **安全机制**: 刷新时会生成全新的 token 对，防止 token 重放攻击
+
+### 中间件验证机制
+
+MineAdmin 提供了两个专门的中间件来处理不同类型的 token：
+
+#### AccessTokenMiddleware
+- **职责**: 验证业务访问 token
+- **应用场景**: 所有需要用户身份认证的业务接口
+- **验证逻辑**: 检查 token 有效性、是否在黑名单、权限范围等
+
+#### RefreshTokenMiddleware  
+- **职责**: 验证刷新 token
+- **应用场景**: 仅用于 token 刷新接口
+- **验证逻辑**: 检查 `sub` 声明、一次性使用限制等
+
+#### 自定义中间件示例
+
+```php
+namespace App\Http\Common\Middleware;
+
+use Mine\JwtAuth\Middleware\AbstractTokenMiddleware;
+
+class CustomTokenMiddleware extends AbstractTokenMiddleware
+{
+    public function getJwt(): JwtInterface
+    {
+        // 指定使用的 JWT 场景
+        return $this->jwtFactory->get('api');
+    }
+    
+    protected function validateCustomClaims(UnencryptedToken $token): void
+    {
+        // 自定义验证逻辑
+        $audience = $token->claims()->get(RegisteredClaims::AUDIENCE);
+        if ($audience !== 'api') {
+            throw new InvalidTokenException('Invalid token audience');
+        }
+    }
+}
+```
+
+### 安全考虑
+
+#### 1. Token 生命周期管理
+- Access token 应该设置较短的有效期（1-4小时）
+- Refresh token 有效期应该适中（2-24小时）
+- 避免设置永不过期的 token
+
+#### 2. 黑名单机制
+- 登出时应该将 token 加入黑名单
+- 密码修改时应该使所有 token 失效
+- 定期清理过期的黑名单记录
+
+#### 3. 安全存储
+- 客户端应该安全存储 refresh token
+- 避免将敏感信息放入 JWT payload
+- 使用 HTTPS 传输所有包含 token 的请求
+
+## 安全最佳实践
+
+### 1. 生产环境安全配置
+
+::: danger 生产环境必读
+
+在生产环境部署前，请务必检查以下安全配置：
+
+:::
+
+```php
+// .env 生产环境配置示例
+JWT_SECRET=your_super_secure_256_bit_key_here
+JWT_API_SECRET=another_super_secure_256_bit_key_here
+JWT_TTL=3600          // 1小时，建议不超过4小时
+JWT_REFRESH_TTL=7200  // 2小时，建议不超过24小时
+JWT_BLACKLIST_TTL=7201 // 比 refresh_ttl 多1秒
+```

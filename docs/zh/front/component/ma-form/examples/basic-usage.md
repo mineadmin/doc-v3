@@ -72,6 +72,6 @@ MaForm 的基础用法演示，包含常见表单控件的配置方式和基本�
 
 ## 相关链接
 
-- [Props 配置](/zh/front/component/ma-form#props)
-- [MaFormItem 配置](/zh/front/component/ma-form#maformitem-配置详解)
-- [组件渲染系统](/zh/front/component/ma-form#组件渲染系统)
+- [Props 配置](/front/component/ma-form#props)
+- [MaFormItem 配置](/front/component/ma-form#maformitem-配置详解)
+- [组件渲染系统](/front/component/ma-form#组件渲染系统)

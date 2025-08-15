@@ -29,10 +29,25 @@ import '@mineadmin/pro-table/dist/style.css'
 // ContextMenu 样式
 import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 
+import './styles/fonts.css'
 import './styles/var.css'
 import './styles/element.css'
+import './styles/i18n-typography.css'
+import './styles/i18n-components.css'
+import './styles/modern-components.css'
+import './styles/animations.css'
+import './styles/enhancements.css'
+import './styles/enhanced-tables.css'
+import './styles/table-override.css'
+import './styles/enhanced-toc.css'
+import './styles/toc-i18n-integration.css'
+import './styles/layout-fixes.css'
+import './styles/toc-width-fix.css'
 import { baiduPlugin } from "./plugin/baidu";
 import initEcharts from "./plugin/echarts";
+import enhanceReadingExperience from "./enhanceReadingExperience";
+import { getLanguageDetector } from "./plugins/languageDetector";
+import enhanceTOC from "./enhanceTOC";
 
 import "virtual:uno.css";
 
@@ -66,6 +81,25 @@ export default {
       app.component('CopyOrDownloadAsMarkdownButtons', CopyOrDownloadAsMarkdownButtons)
 
       app.component('DemoPreview', DemoPreview)
+      
+      // Initialize reading experience enhancements
+      enhanceReadingExperience()
+      
+      // Initialize enhanced Table of Contents
+      enhanceTOC({
+        enableReadingTime: true,
+        enableProgress: true,
+        enableCollapse: true,
+        enableSmoothScroll: true,
+        enableKeyboardNav: true,
+        enableMobileFloat: true,
+        enableSearchHighlight: true
+      })
+      
+      // Initialize language detection and optimization
+      const detector = getLanguageDetector()
+      const currentLang = detector.getCurrentLanguage()
+      detector.applyLanguageToUI(currentLang)
     }
 
     baiduPlugin()
