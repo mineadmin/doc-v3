@@ -223,7 +223,7 @@ const [users, roles, permissions] = await Promise.all([
 // 刷新完成後，所有請求會使用新 Token 重新發送
 ```
 
-具體刷新機制詳情可參考 [用户認證文檔](/zh-hk/backend/security/passport.md)。
+具體刷新機制詳情可參考 [用户認證文檔](/backend/security/passport.md)。
 
 ## 外部請求
 

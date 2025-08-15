@@ -169,7 +169,7 @@ const linkedValidationFields = [
     const isRequired = userType === 'individual'
     
     if (isRequired && !value) {
-      callback(new Error('Phone number is required for individual users'))
+      callback(new Error('Individual users must provide phone number'))
       return
     }
     
@@ -207,10 +207,10 @@ const linkedValidationFields = [
       return
     }
     
-    // Business rule: VIP product price cannot be below 100
+    // Business rule: VIP product price cannot be lower than 100
     const isVipProduct = formData.isVipProduct
     if (isVipProduct && value < 100) {
-      callback(new Error('VIP product price cannot be below 100'))
+      callback(new Error('VIP product price cannot be lower than 100'))
       return
     }
     
@@ -245,7 +245,7 @@ const debounce = (func, wait) => {
   }
 }
 
-// Debounced asynchronous validation
+// Debounced async validation
 const debouncedUsernameCheck = debounce(async (username) => {
   return await checkUsernameExists(username)
 }, 500)
@@ -267,7 +267,7 @@ const debouncedUsernameCheck = debounce(async (username) => {
 }
 ```
 
-### 2. Loading State Indication
+### 2. Loading State Indicator
 
 ```typescript
 {
@@ -343,7 +343,7 @@ const debouncedUsernameCheck = debounce(async (username) => {
 
 ```typescript
 {
-  label: 'Realtime Validation Field',
+  label: 'Real-time Validation Field',
   prop: 'realtime',
   render: 'input',
   itemProps: {
@@ -393,6 +393,6 @@ const validateForm = async () => {
 
 ## Related Links
 
-- [MaFormItem Validation Configuration](/en/front/component/ma-form#validation-configuration)
-- [Advanced Features - Dynamic Validation](/en/front/component/ma-form#dynamic-validation)
-- [Exposed Methods - Form Validation](/en/front/component/ma-form#form-validation)
+- [MaFormItem Validation Configuration](/front/component/ma-form#validation-configuration)
+- [Advanced Features - Dynamic Validation](/front/component/ma-form#dynamic-validation)
+- [Exposed Methods - Form Validation](/front/component/ma-form#form-validation)

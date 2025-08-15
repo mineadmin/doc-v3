@@ -42,7 +42,7 @@ end
 逻辑代码为
 
 ```php
-// app/Model/Permission/User.php:167~186
+// /mineadmin/app/Model/Permission/User.php:160-179
 
 public function getPolicy(): ?Policy
 {
@@ -245,27 +245,10 @@ SELECT * FROM user WHERE created_by in(2,4,5) OR dept_id in(2,3);
 
 假设当前用户 id 为 2 的 a1 用户，设置了自定义函 `testction` 的策略
 
-在 `config/autoload/department/custom.php` 中定义了自定义函数 `testction`：
+在 `/Users/zhuzhu/project/mineadmin/config/autoload/department/custom.php` 中定义了自定义函数 `testction`：
 
 ```php
-<?php
-
-declare(strict_types=1);
-/**
- * This file is part of MineAdmin.
- *
- * @link     https://www.mineadmin.com
- * @document https://doc.mineadmin.com
- * @contact  root@imoi.cn
- * @license  https://github.com/mineadmin/MineAdmin/blob/master/LICENSE
- */
-
-use App\Library\DataPermission\Context;
-use App\Library\DataPermission\ScopeType;
-use App\Model\DataPermission\Policy;
-use App\Model\Permission\User;
-use Hyperf\Database\Query\Builder;
-
+// /mineadmin/config/autoload/department/custom.php
 return [
     'testction' =>  function (Builder $builder, ScopeType $scopeType, Policy $policy, User $user) {
         // 只针对 id 为 2 的用户生效

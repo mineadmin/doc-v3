@@ -109,7 +109,7 @@ LoginIndex --> Background
 
 **自定义建议**：
 - 不建议直接修改源码，以免影响后续版本升级
-- 推荐通过[插件系统](/zh/front/high/plugins.md)替换登录组件
+- 推荐通过[插件系统](/front/high/plugins.md)替换登录组件
 - 可通过路由配置覆盖默认的 `login` 路由组件
 :::
 
@@ -282,7 +282,7 @@ async initRoutes() {
 - **Access Token**：短期有效（默认 1 小时），用于 API 请求认证
 - **Refresh Token**：长期有效（默认 2 小时），用于刷新 Access Token
 
-详细的 Token 刷新机制请参考 [请求与拦截器](/zh/front/advanced/request.md#token-刷新机制) 文档。
+详细的 Token 刷新机制请参考 [请求与拦截器](/front/advanced/request.md#token-刷新机制) 文档。
 
 ## 欢迎页配置与路由管理
 
@@ -673,9 +673,9 @@ async login(params: LoginParams) {
 
 ## 相关文档链接
 
-- [系统配置详解](/zh/front/advanced/system-config.md) - 系统全局配置说明
-- [请求与拦截器](/zh/front/advanced/request.md) - HTTP 请求和 Token 管理
-- [路由与菜单](/zh/front/base/route-menu.md) - 路由系统配置
-- [插件系统](/zh/front/high/plugins.md) - 插件开发与配置
-- [后端认证机制](/zh/backend/security/passport.md) - 后端 JWT 认证实现
+- [系统配置详解](/front/advanced/system-config.md) - 系统全局配置说明
+- [请求与拦截器](/front/advanced/request.md) - HTTP 请求和 Token 管理
+- [路由与菜单](/front/base/route-menu.md) - 路由系统配置
+- [插件系统](/front/high/plugins.md) - 插件开发与配置
+- [后端认证机制](/backend/security/passport.md) - 后端 JWT 认证实现
 

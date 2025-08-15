@@ -21,7 +21,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
   prop: 'username',
   render: 'input',
   renderProps: {
-    placeholder: 'Please enter username',
+    placeholder: 'Enter username',
     clearable: true,
     prefixIcon: 'User',
     maxlength: 20,
@@ -55,7 +55,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
   render: 'textarea',
   renderProps: {
     rows: 4,
-    placeholder: 'Please enter description',
+    placeholder: 'Enter description',
     maxlength: 500,
     showWordLimit: true,
     autosize: { minRows: 2, maxRows: 6 },
@@ -73,7 +73,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
   prop: 'city',
   render: 'select',
   renderProps: {
-    placeholder: 'Please select city',
+    placeholder: 'Select city',
     clearable: true,
     filterable: true,
     multiple: false,
@@ -100,10 +100,10 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
     options: [
       {
         value: 'guangdong',
-        label: 'Guangdong Province',
+        label: 'Guangdong',
         children: [
-          { value: 'guangzhou', label: 'Guangzhou City' },
-          { value: 'shenzhen', label: 'Shenzhen City' }
+          { value: 'guangzhou', label: 'Guangzhou' },
+          { value: 'shenzhen', label: 'Shenzhen' }
         ]
       }
     ],
@@ -234,7 +234,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
 ### Switch
 ```typescript
 {
-  label: 'Enabled Status',
+  label: 'Enabled',
   prop: 'enabled',
   render: 'switch',
   renderProps: {
@@ -267,7 +267,7 @@ Demonstrates all Element Plus component rendering methods supported by MaForm, i
     showText: true,
     showScore: true,
     scoreTemplate: '{value} points',
-    texts: ['Very Poor', 'Disappointed', 'Average', 'Satisfied', 'Surprised'],
+    texts: ['Terrible', 'Disappointed', 'Normal', 'Satisfied', 'Surprised'],
     colors: ['#99A9BF', '#F7BA2A', '#FF9900']
   }
 }
@@ -436,6 +436,6 @@ import CustomComponent from './CustomComponent.vue'
 
 ## Related Links
 
-- [Component Rendering System](/en/front/component/ma-form#component-rendering-system)
-- [Supported Element Plus Components](/en/front/component/ma-form#supported-element-plus-components)
-- [Slot System](/en/front/component/ma-form#slot-system)
+- [Component Rendering System](/front/component/ma-form#component-rendering-system)
+- [Supported Element Plus Components](/front/component/ma-form#supported-element-plus-components)
+- [Slot System](/front/component/ma-form#slot-system)

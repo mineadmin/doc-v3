@@ -1,6 +1,6 @@
 # Layout System
 
-MineAdmin 3.0's layout system is a flexible and powerful frontend layout solution that supports multiple layout modes and dynamic switching. Compared to version 2.0, the new layout system adopts a unified architectural design, with all layout logic centralized in the `src/layouts/index.tsx` file, providing better maintainability and extensibility.
+The layout system in MineAdmin 3.0 is a flexible and powerful frontend layout solution that supports multiple layout modes and dynamic switching. Compared to version 2.0, the new layout system adopts a unified architectural design, with all layout logic centralized in the `src/layouts/index.tsx` file, providing better maintainability and extensibility.
 
 ## Layout Architecture Overview
 
@@ -54,20 +54,20 @@ MineAdmin supports three main layout modes:
 ### 3. Columns Layout
 - **Features**: Multi-column menu layout
 - **Use Case**: Large applications with many menu categories
-- **Component Structure**: Left main menu column, middle submenu column, right content area
+- **Component Structure**: Left main menu bar, middle submenu bar, right content area
 
-## Layout Related APIs
+## Layout-Related APIs
 
 ### useSettingStore API Reference
 
 | Method Name | Return Type | Description | Usage Example |
 |-------------|-------------|-------------|---------------|
-| `isMixedLayout()` | `boolean` | Check if current mode is mixed layout | `store.isMixedLayout()` |
-| `isColumnsLayout()` | `boolean` | Check if current mode is columns layout | `store.isColumnsLayout()` |
-| `isClassicLayout()` | `boolean` | Check if current mode is classic layout | `store.isClassicLayout()` |
-| `getFixedAsideState()` | `boolean` | Get sub sidebar fixed state | `store.getFixedAsideState()` |
-| `getMenuCollapseState()` | `boolean` | Get menu collapse state | `store.getMenuCollapseState()` |
-| `getMobileState()` | `boolean` | Check if current is mobile state | `store.getMobileState()` |
+| `isMixedLayout()` | `boolean` | Checks if current mode is mixed layout | `store.isMixedLayout()` |
+| `isColumnsLayout()` | `boolean` | Checks if current mode is columns layout | `store.isColumnsLayout()` |
+| `isClassicLayout()` | `boolean` | Checks if current mode is classic layout | `store.isClassicLayout()` |
+| `getFixedAsideState()` | `boolean` | Gets whether sub-sidebar is fixed | `store.getFixedAsideState()` |
+| `getMenuCollapseState()` | `boolean` | Gets whether menu is collapsed | `store.getMenuCollapseState()` |
+| `getMobileState()` | `boolean` | Checks if current device is mobile | `store.getMobileState()` |
 
 ::: tip API Source Location
 - **GitHub**: [useSettingStore.ts](https://github.com/mineadmin/MineAdmin/blob/master/web/src/store/modules/useSettingStore.ts)
@@ -89,11 +89,11 @@ export default defineComponent({
     const isMixed = computed(() => settingStore.isMixedLayout())
     const isColumns = computed(() => settingStore.isColumnsLayout())
     
-    // Get menu states
+    // Get menu state
     const isMenuCollapsed = computed(() => settingStore.getMenuCollapseState())
     const isAsideFixed = computed(() => settingStore.getFixedAsideState())
     
-    // Responsive device detection
+    // Responsive device check
     const isMobile = computed(() => settingStore.getMobileState())
     
     return {
@@ -166,8 +166,8 @@ const toggleMenuCollapse = () => {
   
   /* ========== Sidebar Area ========== */
   --mine-g-main-aside-width: 80px;           /* Main sidebar width */
-  --mine-g-sub-aside-width: 200px;           /* Expanded sub sidebar width */
-  --mine-g-sub-aside-collapse-width: 65px;   /* Collapsed sub sidebar width */
+  --mine-g-sub-aside-width: 200px;           /* Expanded sub-sidebar width */
+  --mine-g-sub-aside-collapse-width: 65px;   /* Collapsed sub-sidebar width */
   --mine-g-menu-retract-width: 15px;         /* Menu indent width */
   
   /* ========== Tab Bar ========== */
@@ -263,7 +263,7 @@ export const useLayoutStore = defineStore('layout', {
 ### Lazy Loading Layout Components
 
 ```typescript
-// Async loading layout components
+// Asynchronous loading of layout components
 import { defineAsyncComponent } from 'vue'
 
 export const LayoutComponents = {
@@ -274,10 +274,10 @@ export const LayoutComponents = {
 }
 ```
 
-### Layout Switching Animation Optimization
+### Layout Transition Optimization
 
 ```scss
-/* Layout switching animation optimization */
+/* Layout transition optimization */
 .layout-transition {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, width, margin;
@@ -326,7 +326,7 @@ const isDesktop = breakpoints.greater('desktop')
 ### 3. Sidebar Scrolling Issues
 
 ```scss
-/* Sidebar scrolling optimization */
+/* Sidebar scroll optimization */
 .layout-aside {
   overflow-y: auto;
   scrollbar-width: thin;
@@ -345,7 +345,7 @@ const isDesktop = breakpoints.greater('desktop')
 
 ## Related Documentation
 
-- [Common Stores](/en/front/high/store) - State management related documentation
+- [Common Stores](/front/high/store) - State management related documentation
 
 ::: tip Source Code Reference
 Complete layout system source code can be found at:

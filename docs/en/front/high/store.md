@@ -1,8 +1,8 @@
 # State Management (Store)
 
-MineAdmin uses [Pinia](https://pinia.vuejs.org/) as its state management library, providing a comprehensive solution for state management. The system comes with several built-in Store modules covering core functionalities such as user management, tabs, plugin systems, dictionary data, and more.
+MineAdmin uses [Pinia](https://pinia.vuejs.org/) as its state management library, providing a comprehensive state management solution. The system includes several built-in Store modules covering core functionalities such as user management, tabs, plugin systems, and dictionary data.
 
-::: tip Auto-import Note
+::: tip Auto-Import Note
 All Stores in the frontend `src/store/modules` directory are configured for automatic import and can be used directly without explicit imports.
 
 **Auto-import configuration location**: `dirs: ['./src/store/modules/**']` in `vite/auto-import.ts`
@@ -10,13 +10,13 @@ All Stores in the frontend `src/store/modules` directory are configured for auto
 
 ## useUserStore()
 
-User state management Store, responsible for core functionalities such as user authentication, permission management, and user information maintenance.
+User state management Store, responsible for core functionalities like user authentication, permission management, and user information maintenance.
 
-**Source locations**:
-- **Local path**: `web/src/store/modules/useUserStore.ts`  
+**Source Code Location**:
+- **Local Path**: `web/src/store/modules/useUserStore.ts`  
 - **GitHub URL**: [mineadmin/web/src/store/modules/useUserStore.ts](https://github.com/mineadmin/mineadmin/blob/master/web/src/store/modules/useUserStore.ts)
 
-### Key State Properties
+### Main State Properties
 
 | Property | Type | Description |
 |--------|------|------|
@@ -63,7 +63,7 @@ await userStore.logout()
 Fetches detailed user information, including permissions and role data
 
 ```typescript
-// Get user info (typically called automatically in route guards)
+// Get user info (usually called automatically in route guards)
 await userStore.requestUserInfo()
 
 // Get results
@@ -96,7 +96,7 @@ if (userStore.isLogin) {
       <el-button @click="handleLogout">Logout</el-button>
     </div>
     <div v-else>
-      <el-button @click="toLogin">Go to Login</el-button>
+      <el-button @click="toLogin">Login</el-button>
     </div>
   </div>
 </template>
@@ -122,7 +122,7 @@ const toLogin = () => {
 </script>
 ```
 
-#### Using in Permission Checks
+#### Using in Permission Verification
 ```typescript
 // Check user permissions
 const hasPermission = (permission: string) => {
@@ -134,7 +134,7 @@ const hasPermission = (permission: string) => {
   )
 }
 
-// Check user roles
+// Check user role
 const hasRole = (role: string) => {
   const userStore = useUserStore()
   return userStore.roleList.some(r => r.code === role)
@@ -145,16 +145,16 @@ const hasRole = (role: string) => {
 
 Tab state management Store, responsible for managing multi-tab navigation, tab caching, and page state persistence.
 
-**Source locations**:
-- **Local path**: `web/src/store/modules/useTabStore.ts`  
+**Source Code Location**:
+- **Local Path**: `web/src/store/modules/useTabStore.ts`  
 - **GitHub URL**: [mineadmin/web/src/store/modules/useTabStore.ts](https://github.com/mineadmin/mineadmin/blob/master/web/src/store/modules/useTabStore.ts)
 
-### Key State Properties
+### Main State Properties
 
 | Property | Type | Description |
 |--------|------|------|
 | `tabs` | `MineTabbar[]` | List of currently open tabs |
-| `activeTab` | `string` | Name of the currently active tab |
+| `activeTab` | `string` | Currently active tab name |
 
 ### Core Methods
 
@@ -164,7 +164,7 @@ Adds a new tab
 ```typescript
 const tabStore = useTabStore()
 
-// Add a new tab
+// Add new tab
 tabStore.addTab({
   name: 'user-list',
   title: 'User List',
@@ -178,7 +178,7 @@ tabStore.addTab({
 Closes the specified tab
 
 ```typescript
-// Close a tab
+// Close tab
 const targetTab = tabStore.tabs.find(tab => tab.name === 'user-list')
 if (targetTab) {
   tabStore.closeTab(targetTab)
@@ -189,7 +189,7 @@ if (targetTab) {
 Refreshes the current tab
 
 ```typescript
-// Refresh current tab (reloads page components)
+// Refresh current tab (reloads page component)
 await tabStore.refreshTab()
 ```
 
@@ -250,7 +250,7 @@ const closeAllTabs = async () => {
 </script>
 ```
 
-#### Using in Programmatic Navigation
+#### Using in Route Navigation
 ```typescript
 import { useRouter } from 'vue-router'
 
@@ -270,11 +270,11 @@ const navigateToPage = (routeName: string, routeParams?: any) => {
 
 Plugin system state management Store, responsible for dynamic plugin loading, enable/disable control, and hook invocation.
 
-**Source locations**:
-- **Local path**: `web/src/store/modules/usePluginStore.ts`  
+**Source Code Location**:
+- **Local Path**: `web/src/store/modules/usePluginStore.ts`  
 - **GitHub URL**: [mineadmin/web/src/store/modules/usePluginStore.ts](https://github.com/mineadmin/mineadmin/blob/master/web/src/store/modules/usePluginStore.ts)
 
-### Key State Properties
+### Main State Properties
 
 | Property | Type | Description |
 |--------|------|------|
@@ -382,11 +382,11 @@ http.interceptors.response.use(async (response) => {
 
 Dictionary data state management Store, responsible for caching, querying, and updating system dictionary data.
 
-**Source locations**:
-- **Local path**: `web/src/store/modules/useDictStore.ts`  
+**Source Code Location**:
+- **Local Path**: `web/src/store/modules/useDictStore.ts`  
 - **GitHub URL**: [mineadmin/web/src/store/modules/useDictStore.ts](https://github.com/mineadmin/mineadmin/blob/master/web/src/store/modules/useDictStore.ts)
 
-### Key State Properties
+### Main State Properties
 
 | Property | Type | Description |
 |--------|------|------|
@@ -445,7 +445,7 @@ await dictStore.refreshDict()
 
 ### Usage Examples
 
-#### Using Dictionaries in Forms
+#### Using Dictionary in Forms
 ```vue
 <template>
   <el-form :model="form">
@@ -556,7 +556,7 @@ watch(
 In addition to the core Stores mentioned above, the system provides other auxiliary Store modules:
 
 ### useKeepAliveStore()
-Page caching management, see [Frontend Cache System](/en/front/advanced/cache.md#page-caching-keep-alive)
+Page cache management, see [Frontend Cache System](/front/advanced/cache.md#page-caching-keep-alive)
 
 ```typescript
 const keepAliveStore = useKeepAliveStore()
@@ -660,3 +660,4 @@ const { userInfo, isLogin } = userStore // Will lose reactivity
 
 ## Related Documentation
 
+- [Auto-Import Configuration](/front/advanced/

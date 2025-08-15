@@ -9,7 +9,7 @@ Demonstrates the conditional rendering functionality for dynamically controlling
 - **Dynamic Visibility Control**: Control field show/hide based on form data
 - **Dependency Management**: Declare field dependencies through dependencies
 - **Complex Condition Support**: Supports multi-condition combination judgments
-- **Performance Optimization**: Recalculates conditions only when dependent fields change
+- **Performance Optimization**: Only recalculates conditions when dependent fields change
 - **Two Rendering Modes**: show and hide properties provide different display control strategies
 
 ## Conditional Rendering Methods
@@ -34,11 +34,11 @@ Does not render DOM when conditions are not met, offering optimal performance fo
 - ✅ No DOM rendering, best performance
 - ✅ Doesn't occupy page space
 - ✅ Suitable for most scenarios
-- ⚠️ Slight flicker possible during initialization
+- ⚠️ Slight initial flickering possible
 
 ### hide Property
 
-Hides but still renders DOM when conditions aren't met, suitable for frequently toggled scenarios:
+Hides DOM when conditions aren't met but still renders it, suitable for frequently toggled scenarios:
 
 ```typescript
 {
@@ -51,12 +51,12 @@ Hides but still renders DOM when conditions aren't met, suitable for frequently 
 ```
 
 **Characteristics:**
-- ✅ Smooth transitions without flickering
+- ✅ Smooth switching without flickering
 - ✅ Maintains stable form structure
 - ❌ Still renders DOM
 - ❌ Occupies page space
 
-## Usage Scenario Comparison
+## Use Case Comparison
 
 ### show Property Use Cases
 
@@ -69,7 +69,7 @@ const userTypeFields = [
     prop: 'userType',
     render: 'select',
     options: [
-      { label: 'Personal User', value: 'personal' },
+      { label: 'Individual User', value: 'personal' },
       { label: 'Enterprise User', value: 'company' }
     ]
   },
@@ -136,7 +136,7 @@ const notificationFields = [
     label: 'Email Notifications',
     prop: 'emailNotifications',
     render: 'switch',
-    // Using hide maintains layout stability with smoother transitions
+    // Using hide maintains layout stability with smoother switching
     hide: (item, model) => !model.enableNotifications,
     dependencies: ['enableNotifications']
   },
@@ -161,7 +161,7 @@ const notificationFields = [
     readonly: true,
     placeholder: 'Password Strength: Weak'
   },
-  // Using hide prevents layout jumps
+  // Using hide avoids layout jumps
   hide: (item, model) => !model.password || model.password.length === 0,
   dependencies: ['password']
 }
@@ -224,7 +224,7 @@ const cascadeFields = [
 ### 3. Dynamic Condition Calculation
 
 ```typescript
-// Using computed properties to optimize complex conditions
+// Use computed properties to optimize complex conditions
 const isAdvancedUser = computed(() => {
   return formData.value.userLevel >= 10 && 
          formData.value.vipStatus === 'active' &&
@@ -261,7 +261,7 @@ const advancedField = {
 ### 2. Avoid Circular Dependencies
 
 ```typescript
-// ❌ Wrong: May cause circular dependencies
+// ❌ Error: May cause circular dependencies
 {
   label: 'Field A',
   prop: 'fieldA',
@@ -295,7 +295,7 @@ const advancedField = {
 }
 ```
 
-## Performance Optimization Tips
+## Performance Optimization Recommendations
 
 ### 1. Prefer show Property
 
@@ -362,7 +362,7 @@ const field = {
   show: (item, model) => {
     const condition = model.userType === 'admin'
     
-    // Debug info in development environment
+    // Debug information in development environment
     if (process.env.NODE_ENV === 'development') {
       console.log(`Field ${item.prop} display condition:`, {
         userType: model.userType,
@@ -398,7 +398,7 @@ const createDebugShow = (conditionFn: Function, debugName: string) => {
   }
 }
 
-// Using debug utility
+// Use debug utility
 {
   label: 'Test Field',
   prop: 'testField',
@@ -426,12 +426,12 @@ const createDebugShow = (conditionFn: Function, debugName: string) => {
 
 ### 3. Consider User Experience
 
-- For frequently toggled scenarios, use hide property to prevent layout jumps
+- For frequently toggled scenarios, use hide property to avoid layout jumps
 - For one-time display scenarios, use show property to save performance
 - Provide appropriate transition animations to enhance experience
 
 ## Related Links
 
-- [MaFormItem Configuration Details](/en/front/component/ma-form#maformitem-configuration-details)
-- [Advanced Features - Conditional Rendering](/en/front/component/ma-form#conditional-rendering)
-- [Nested Form Structures](/en/front/component/ma-form/examples/nested-forms)
+- [MaFormItem Configuration Details](/front/component/ma-form#maformitem-configuration-details)
+- [Advanced Features - Conditional Rendering](/front/component/ma-form#conditional-rendering)
+- [Nested Form Structure](/front/component/ma-form/examples/nested-forms)

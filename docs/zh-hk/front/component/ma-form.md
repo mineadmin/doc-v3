@@ -31,23 +31,23 @@
 :::
 
 ### 基礎功能示例
-- [基礎用法](/zh-hk/front/component/ma-form/examples/basic-usage) - 常見表單控件的基礎配置和使用方法
-- [佈局系統](/zh-hk/front/component/ma-form/examples/layout-systems) - Flex 和 Grid 佈局的響應式設計
-- [組件渲染](/zh-hk/front/component/ma-form/examples/component-rendering) - 所有支持的 Element Plus 組件展示
+- [基礎用法](/front/component/ma-form/examples/basic-usage) - 常見表單控件的基礎配置和使用方法
+- [佈局系統](/front/component/ma-form/examples/layout-systems) - Flex 和 Grid 佈局的響應式設計
+- [組件渲染](/front/component/ma-form/examples/component-rendering) - 所有支持的 Element Plus 組件展示
 
 ### 高級功能示例
-- [條件渲染](/zh-hk/front/component/ma-form/examples/conditional-rendering) - 基於表單數據的字段顯示控制
-- [動態驗證](/zh-hk/front/component/ma-form/examples/dynamic-validation) - 自定義驗證規則和異步驗證
-- [插槽系統](/zh-hk/front/component/ma-form/examples/slots-examples) - 多級插槽的靈活使用方法
+- [條件渲染](/front/component/ma-form/examples/conditional-rendering) - 基於表單數據的字段顯示控制
+- [動態驗證](/front/component/ma-form/examples/dynamic-validation) - 自定義驗證規則和異步驗證
+- [插槽系統](/front/component/ma-form/examples/slots-examples) - 多級插槽的靈活使用方法
 
 ### 功能演示示例
-- [暴露方法](/zh-hk/front/component/ma-form/examples/expose-methods) - 所有 API 方法的使用演示
-- [加載狀態](/zh-hk/front/component/ma-form/examples/loading-states) - 各種加載場景的處理方式
-- [嵌套表單](/zh-hk/front/component/ma-form/examples/nested-forms) - 複雜層級結構的表單處理
+- [暴露方法](/front/component/ma-form/examples/expose-methods) - 所有 API 方法的使用演示
+- [加載狀態](/front/component/ma-form/examples/loading-states) - 各種加載場景的處理方式
+- [嵌套表單](/front/component/ma-form/examples/nested-forms) - 複雜層級結構的表單處理
 
 ### 實際應用示例
-- [高級場景](/zh-hk/front/component/ma-form/examples/advanced-scenarios) - 多步驟流程和複雜業務邏輯
-- [性能優化](/zh-hk/front/component/ma-form/examples/performance-demo) - 大表單性能優化策略
+- [高級場景](/front/component/ma-form/examples/advanced-scenarios) - 多步驟流程和複雜業務邏輯
+- [性能優化](/front/component/ma-form/examples/performance-demo) - 大表單性能優化策略
 
 ## TypeScript 類型定義
 

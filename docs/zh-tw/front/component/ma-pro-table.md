@@ -16,17 +16,17 @@
 透過以下示例，你可以快速瞭解 MaProTable 的各種使用場景和功能特性：
 
 ### 基礎功能
-- **[基礎用法](/zh-tw/front/component/ma-pro-table/examples/basic)** - 最簡單的表格使用方式
-- **[高階搜尋](/zh-tw/front/component/ma-pro-table/examples/advanced-search)** - 多種搜尋元件和複雜搜尋邏輯
-- **[自定義操作](/zh-tw/front/component/ma-pro-table/examples/custom-operations)** - 靈活的操作列配置和批次操作
+- **[基礎用法](/front/component/ma-pro-table/examples/basic)** - 最簡單的表格使用方式
+- **[高階搜尋](/front/component/ma-pro-table/examples/advanced-search)** - 多種搜尋元件和複雜搜尋邏輯
+- **[自定義操作](/front/component/ma-pro-table/examples/custom-operations)** - 靈活的操作列配置和批次操作
 
 ### 擴充套件功能
-- **[單元格渲染外掛](/zh-tw/front/component/ma-pro-table/examples/cell-render-plugins)** - 豐富的單元格渲染效果
-- **[工具欄擴充套件](/zh-tw/front/component/ma-pro-table/examples/toolbar-extensions)** - 自定義工具欄功能
-- **[資料管理](/zh-tw/front/component/ma-pro-table/examples/data-management)** - 完整的CRUD操作流程
+- **[單元格渲染外掛](/front/component/ma-pro-table/examples/cell-render-plugins)** - 豐富的單元格渲染效果
+- **[工具欄擴充套件](/front/component/ma-pro-table/examples/toolbar-extensions)** - 自定義工具欄功能
+- **[資料管理](/front/component/ma-pro-table/examples/data-management)** - 完整的CRUD操作流程
 
 ### 高階特性
-- **[響應式佈局](/zh-tw/front/component/ma-pro-table/examples/responsive-layout)** - 多裝置適配和響應式設計
+- **[響應式佈局](/front/component/ma-pro-table/examples/responsive-layout)** - 多裝置適配和響應式設計
 
 ## 核心特性
 

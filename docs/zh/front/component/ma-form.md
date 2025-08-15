@@ -31,23 +31,23 @@
 :::
 
 ### 基础功能示例
-- [基础用法](/zh/front/component/ma-form/examples/basic-usage) - 常见表单控件的基础配置和使用方法
-- [布局系统](/zh/front/component/ma-form/examples/layout-systems) - Flex 和 Grid 布局的响应式设计
-- [组件渲染](/zh/front/component/ma-form/examples/component-rendering) - 所有支持的 Element Plus 组件展示
+- [基础用法](/front/component/ma-form/examples/basic-usage) - 常见表单控件的基础配置和使用方法
+- [布局系统](/front/component/ma-form/examples/layout-systems) - Flex 和 Grid 布局的响应式设计
+- [组件渲染](/front/component/ma-form/examples/component-rendering) - 所有支持的 Element Plus 组件展示
 
 ### 高级功能示例
-- [条件渲染](/zh/front/component/ma-form/examples/conditional-rendering) - 基于表单数据的字段显示控制
-- [动态验证](/zh/front/component/ma-form/examples/dynamic-validation) - 自定义验证规则和异步验证
-- [插槽系统](/zh/front/component/ma-form/examples/slots-examples) - 多级插槽的灵活使用方法
+- [条件渲染](/front/component/ma-form/examples/conditional-rendering) - 基于表单数据的字段显示控制
+- [动态验证](/front/component/ma-form/examples/dynamic-validation) - 自定义验证规则和异步验证
+- [插槽系统](/front/component/ma-form/examples/slots-examples) - 多级插槽的灵活使用方法
 
 ### 功能演示示例
-- [暴露方法](/zh/front/component/ma-form/examples/expose-methods) - 所有 API 方法的使用演示
-- [加载状态](/zh/front/component/ma-form/examples/loading-states) - 各种加载场景的处理方式
-- [嵌套表单](/zh/front/component/ma-form/examples/nested-forms) - 复杂层级结构的表单处理
+- [暴露方法](/front/component/ma-form/examples/expose-methods) - 所有 API 方法的使用演示
+- [加载状态](/front/component/ma-form/examples/loading-states) - 各种加载场景的处理方式
+- [嵌套表单](/front/component/ma-form/examples/nested-forms) - 复杂层级结构的表单处理
 
 ### 实际应用示例
-- [高级场景](/zh/front/component/ma-form/examples/advanced-scenarios) - 多步骤流程和复杂业务逻辑
-- [性能优化](/zh/front/component/ma-form/examples/performance-demo) - 大表单性能优化策略
+- [高级场景](/front/component/ma-form/examples/advanced-scenarios) - 多步骤流程和复杂业务逻辑
+- [性能优化](/front/component/ma-form/examples/performance-demo) - 大表单性能优化策略
 
 ## TypeScript 类型定义
 

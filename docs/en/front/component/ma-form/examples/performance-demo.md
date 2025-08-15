@@ -55,7 +55,7 @@ const largeFormManager = {
         prop: `field_${i}`,
         render: this.getRandomRenderType(),
         renderProps: {
-          placeholder: `Please enter field ${i}`,
+          placeholder: `Enter field ${i}`,
           clearable: true
         },
         cols: { xs: 24, sm: 12, md: 8, lg: 6 },
@@ -145,7 +145,7 @@ const setupInfiniteLoading = () => {
 
 ```typescript
 interface VirtualScrollConfig {
-  itemHeight: number      // Height per item
+  itemHeight: number      // Height of each item
   visibleCount: number    // Number of visible items
   bufferSize: number      // Buffer size
   scrollTop: number       // Scroll position
@@ -295,7 +295,7 @@ const lazyLoadManager = {
   }
 }
 
-// Example lazy loading fields
+// Example of lazy loading fields
 const createLazyLoadFields = (): MaFormItem[] => [
   {
     label: 'City Selection',
@@ -420,8 +420,8 @@ interface CacheItem<T = any> {
 class MultiLevelCache {
   private l1Cache = new Map<string, CacheItem>()  // Memory cache (fast)
   private l2Cache: LocalStorage                   // Local storage cache (persistent)
-  private maxL1Size = 100                         // Max L1 cache entries
-  private defaultTTL = 5 * 60 * 1000             // Default 5 minute TTL
+  private maxL1Size = 100                         // Maximum L1 cache entries
+  private defaultTTL = 5 * 60 * 1000             // Default 5 minutes TTL
   
   constructor() {
     this.l2Cache = {
@@ -433,14 +433,14 @@ class MultiLevelCache {
   
   // Get cached data
   async get<T>(key: string): Promise<T | null> {
-    // Check L1 cache first
+    // First check L1 cache
     const l1Item = this.l1Cache.get(key)
     if (l1Item && !this.isExpired(l1Item)) {
       l1Item.hitCount++
       return l1Item.data
     }
     
-    // Check L2 cache next
+    // Then check L2 cache
     const l2Data = this.l2Cache.getItem(key)
     if (l2Data) {
       try {
@@ -536,7 +536,7 @@ class MultiLevelCache {
             localStorage.removeItem(key)
           }
         } catch (error) {
-          // Ignore parse errors
+          // Ignore parsing errors
         }
       }
     }
@@ -563,14 +563,14 @@ const formCache = new MultiLevelCache()
 
 ```typescript
 const smartPreCache = {
-  // Pre-cache configuration
+  // Pre-caching configuration
   preCacheRules: new Map<string, {
     condition: (context: any) => boolean
     loader: () => Promise<any>
     priority: number
   }>(),
   
-  // Register pre-cache rule
+  // Register pre-caching rule
   registerPreCacheRule(key: string, rule: {
     condition: (context: any) => boolean
     loader: () => Promise<any>
@@ -592,12 +592,12 @@ const smartPreCache = {
       .map(async ([key, rule]) => {
         try {
           const data = await rule.loader()
-          await formCache.set(key, data, 10 * 60 * 1000) // 10 minute cache
+          await formCache.set(key, data, 10 * 60 * 1000) // 10 minutes cache
         } catch (error) {
-          console.warn(`Pre-cache failed: ${key}`, error)
+          console.warn(`Pre-caching failed: ${key}`, error)
         }
       })
     
     await Promise.all(highPriorityTasks)
     
-    //
+   

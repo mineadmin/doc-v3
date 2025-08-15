@@ -556,7 +556,7 @@ watch(
 除了上述核心 Store 外，系統還提供了其他輔助性的 Store 模塊：
 
 ### useKeepAliveStore()
-頁面緩存管理，詳見 [前端緩存系統](/zh-hk/front/advanced/cache.md#頁面緩存-keep-alive)
+頁面緩存管理，詳見 [前端緩存系統](/front/advanced/cache.md#頁面緩存-keep-alive)
 
 ```typescript
 const keepAliveStore = useKeepAliveStore()
@@ -660,7 +660,7 @@ const { userInfo, isLogin } = userStore // 會丟失響應性
 
 ## 相關文檔
 
-- [自動導入配置](/zh-hk/front/advanced/auto-import.md) - Store 自動導入機制
-- [前端緩存系統](/zh-hk/front/advanced/cache.md) - 頁面和數據緩存
-- [插件系統](/zh-hk/front/high/plugins.md) - 插件開發與管理
-- [請求與攔截器](/zh-hk/front/advanced/request.md) - HTTP 請求中的 Store 使用
+- [自動導入配置](/front/advanced/auto-import.md) - Store 自動導入機制
+- [前端緩存系統](/front/advanced/cache.md) - 頁面和數據緩存
+- [插件系統](/front/high/plugins.md) - 插件開發與管理
+- [請求與攔截器](/front/advanced/request.md) - HTTP 請求中的 Store 使用

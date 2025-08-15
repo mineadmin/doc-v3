@@ -1,0 +1,25 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#667eea" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#764ba2" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="gradient2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f093fb" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#f5576c" stop-opacity="0.15"/>
+    </linearGradient>
+    <radialGradient id="gradient3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4facfe" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00f2fe" stop-opacity="0.1"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Background shapes -->
+  <circle cx="200" cy="150" r="180" fill="url(#gradient1)" />
+  <ellipse cx="600" cy="450" rx="200" ry="150" fill="url(#gradient2)" />
+  <circle cx="400" cy="300" r="250" fill="url(#gradient3)" />
+  
+  <!-- Decorative elements -->
+  <path d="M100,300 Q250,200 400,300 T700,300" stroke="#667eea" stroke-width="2" stroke-opacity="0.2" fill="none"/>
+  <path d="M100,400 Q300,300 500,400 T700,350" stroke="#764ba2" stroke-width="2" stroke-opacity="0.2" fill="none"/>
+</svg>

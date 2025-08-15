@@ -1,21 +1,21 @@
 # Slot System
 
-Demonstrates MaForm's slot system, including global slots, form item-level slots, dynamic slot naming, and nested component slot usage.
+Demonstrates MaForm's slot system, including global slots, form-item level slots, dynamic slot naming, and nested component slot usage.
 
 <DemoPreview dir="demos/ma-form/slots-examples" />
 
 ## Features
 
-- **Multi-level slots**: Supports global, form item, and component-level slots
-- **Dynamic slot naming**: Dynamic slot naming mechanism based on props
-- **Configurable slots**: Define slot content through configuration
-- **Template slots**: Support template-based slot usage
-- **Scoped slots**: Provide rich scoped data
+- **Multi-level Slots**: Supports global, form-item, and component-level slots
+- **Dynamic Slot Naming**: Dynamic slot naming mechanism based on props
+- **Configurable Slots**: Define slot content through configuration
+- **Template Slots**: Supports template-based slot usage
+- **Scoped Slots**: Provides rich scoped data
 
 ## Global Slots
 
 ### 1. Default Slot
-When using the default slot, the configuration method will automatically become invalid, completely using the template approach:
+When using the default slot, the configuration method will automatically become invalid, and template mode will be fully used:
 
 ```vue
 <ma-form v-model="formData" :options="formOptions">
@@ -34,7 +34,7 @@ When using the default slot, the configuration method will automatically become 
 ```
 
 ### 2. Footer Slot
-Used to place form bottom action buttons:
+Used to place form action buttons at the bottom:
 
 ```vue
 <ma-form 
@@ -112,7 +112,7 @@ Format: `#label-{prop}`
     <span class="custom-label">
       <el-icon color="#409EFF"><Lock /></el-icon>
       <span style="margin-left: 4px;">Login Password</span>
-      <el-tooltip content="Password length 8-16 characters, containing letters and numbers" placement="top">
+      <el-tooltip content="Password length 8-16 characters, including letters and numbers" placement="top">
         <el-icon style="margin-left: 4px;"><QuestionFilled /></el-icon>
       </el-tooltip>
     </span>
@@ -223,7 +223,7 @@ Define form item slots through configuration:
     
     help: ({ item, model }) => {
       return h('div', { class: 'upload-help' }, [
-        h('el-text', { type: 'info', size: 'small' }, 'Supports JPG, PNG format, file size no more than 2MB')
+        h('el-text', { type: 'info', size: 'small' }, 'Supports JPG, PNG formats, file size under 2MB')
       ])
     }
   }
@@ -287,7 +287,7 @@ Configure slots for rendered components:
     
     // Hint text
     tip: () => h('div', { class: 'upload-tip' }, [
-      h('el-text', { type: 'info', size: 'small' }, 'Supports PDF, Word format, single file no more than 10MB')
+      h('el-text', { type: 'info', size: 'small' }, 'Supports PDF, Word formats, single file under 10MB')
     ]),
     
     // File list
@@ -353,10 +353,10 @@ interface FormItemScope {
 
 When multiple slot definition methods exist simultaneously, the priority is as follows:
 
-1. **Template slots** (highest priority)
-2. **itemSlots configuration slots**
-3. **renderSlots configuration slots**
-4. **Default rendering** (lowest priority)
+1. **Template Slots** (highest priority)
+2. **itemSlots Configuration Slots**
+3. **renderSlots Configuration Slots**
+4. **Default Rendering** (lowest priority)
 
 ### Example
 
@@ -367,7 +367,7 @@ When multiple slot definition methods exist simultaneously, the priority is as f
   prop: 'testField',
   render: 'input',
   itemSlots: {
-    label: () => h('span', 'Config slot label')
+    label: () => h('span', 'Config Slot Label')
   }
 }
 ```
@@ -376,7 +376,7 @@ When multiple slot definition methods exist simultaneously, the priority is as f
 <!-- Template slots will override config slots -->
 <ma-form v-model="formData" :items="items">
   <template #label-testField>
-    <span>Template slot label</span>  <!-- This will take effect -->
+    <span>Template Slot Label</span>  <!-- This will take effect -->
   </template>
 </ma-form>
 ```
@@ -433,6 +433,6 @@ itemSlots: {
 
 ## Related Links
 
-- [Slot System Details](/en/front/component/ma-form#slot-system)
-- [MaFormItem itemSlots Configuration](/en/front/component/ma-form#layout-configuration)
-- [Component Rendering renderSlots](/en/front/component/ma-form/examples/component-rendering)
+- [Slot System Details](/front/component/ma-form#slot-system)
+- [MaFormItem itemSlots Configuration](/front/component/ma-form#layout-configuration)
+- [Component Rendering renderSlots](/front/component/ma-form/examples/component-rendering)

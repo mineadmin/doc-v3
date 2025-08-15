@@ -28,7 +28,7 @@ git push -u origin master
 
 2. 进入 [MineAdmin 插件创建页](https://www.mineadmin.com/member/createApp) 输入代码仓库地址并提交
 
-<ElImage :preview-src-list="['/public/images/create_app.png']" src="/public/images/create_app.png"></ElImage>
+<ElImage :preview-src-list="['/images/create_app.png']" src="/images/create_app.png"></ElImage>
 
 3. 等待 MineAdmin 审核通过后，应用会显示在应用市场中。
 

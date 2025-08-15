@@ -436,6 +436,6 @@ import CustomComponent from './CustomComponent.vue'
 
 ## 相關鏈接
 
-- [組件渲染系統](/zh-hk/front/component/ma-form#組件渲染系統)
-- [支持的 Element Plus 組件](/zh-hk/front/component/ma-form#支持的-element-plus-組件)
-- [插槽系統](/zh-hk/front/component/ma-form#插槽系統)
+- [組件渲染系統](/front/component/ma-form#組件渲染系統)
+- [支持的 Element Plus 組件](/front/component/ma-form#支持的-element-plus-組件)
+- [插槽系統](/front/component/ma-form#插槽系統)

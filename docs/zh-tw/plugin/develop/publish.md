@@ -28,7 +28,7 @@ git push -u origin master
 
 2. 進入 [MineAdmin 外掛建立頁](https://www.mineadmin.com/member/createApp) 輸入程式碼倉庫地址並提交
 
-<ElImage :preview-src-list="['/public/images/create_app.png']" src="/public/images/create_app.png"></ElImage>
+<ElImage :preview-src-list="['/images/create_app.png']" src="/images/create_app.png"></ElImage>
 
 3. 等待 MineAdmin 稽核通過後，應用會顯示在應用市場中。
 

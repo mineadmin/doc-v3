@@ -374,10 +374,10 @@ import UserForm from '~/user/components/UserForm.vue'
 
 在掌握了这些基础概念后，建议按以下顺序深入学习：
 
-1. **[开始使用](/zh/front/base/start)** - 环境搭建和项目启动
-2. **[配置说明](/zh/front/base/configure)** - 详细配置选项
-3. **[路由菜单](/zh/front/base/route-menu)** - 路由和菜单配置
-4. **[模块开发](/zh/front/advanced/module)** - 深入模块化开发
-5. **[插件开发](/zh/front/high/plugins)** - 插件系统详解
+1. **[开始使用](/front/base/start)** - 环境搭建和项目启动
+2. **[配置说明](/front/base/configure)** - 详细配置选项
+3. **[路由菜单](/front/base/route-menu)** - 路由和菜单配置
+4. **[模块开发](/front/advanced/module)** - 深入模块化开发
+5. **[插件开发](/front/high/plugins)** - 插件系统详解
 
 通过系统性的学习和实践，你将能够高效地在此架构基础上进行前端开发工作。

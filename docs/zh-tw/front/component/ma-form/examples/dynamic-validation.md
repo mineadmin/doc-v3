@@ -393,6 +393,6 @@ const validateForm = async () => {
 
 ## 相關連結
 
-- [MaFormItem 驗證配置](/zh-tw/front/component/ma-form#驗證配置)
-- [高階特性 - 動態驗證](/zh-tw/front/component/ma-form#動態驗證)
-- [暴露方法 - 表單驗證](/zh-tw/front/component/ma-form#表單驗證)
+- [MaFormItem 驗證配置](/front/component/ma-form#驗證配置)
+- [高階特性 - 動態驗證](/front/component/ma-form#動態驗證)
+- [暴露方法 - 表單驗證](/front/component/ma-form#表單驗證)

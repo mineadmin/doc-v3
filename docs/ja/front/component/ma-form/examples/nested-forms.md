@@ -1,6 +1,6 @@
 # ネストフォーム
 
-MaFormのネストフォーム構造の実装を紹介します。階層フォーム、動的ネスト、オブジェクト配列フォーム、複雑なデータ構造処理を含みます。
+MaFormのネストフォーム構造の実装を展示します。階層フォーム、動的ネスト、オブジェクト配列フォーム、複雑なデータ構造処理を含みます。
 
 <DemoPreview dir="demos/ma-form/nested-forms" />
 
@@ -42,7 +42,7 @@ const nestedFormItems = [
         cols: { xs: 24, sm: 12 }
       },
       {
-        label: 'メールアドレス',
+        label: 'メール',
         prop: 'userInfo.email',
         render: 'input',
         renderProps: {
@@ -97,7 +97,7 @@ const multiLevelNested = [
             render: 'textarea',
             renderProps: {
               rows: 3,
-              placeholder: '詳細な住所を入力してください'
+              placeholder: '詳細住所を入力してください'
             }
           },
           {
@@ -117,7 +117,7 @@ const multiLevelNested = [
 
 ## 動的ネストフォーム
 
-### 1. 動的子項目追加/削除
+### 1. 動的追加/削除子項目
 
 ```typescript
 // ネストフォーム項目の動的管理
@@ -186,7 +186,7 @@ const addContact = () => {
           cols: { xs: 24, sm: 8 }
         },
         {
-          label: '電話番号',
+          label: '電話',
           prop: `contacts.${contactIndex}.phone`,
           render: 'input',
           cols: { xs: 24, sm: 8 }
@@ -380,7 +380,7 @@ const rebuildEducationItems = () => {
 }
 ```
 
-### 2. 複雑オブジェクト配列
+### 2. 複雑なオブジェクト配列
 
 ```typescript
 const complexArrayForm = [
@@ -569,7 +569,7 @@ const nestedValidationItems = [
         prop: 'profile.contact',
         children: [
           {
-            label: 'メールアドレス',
+            label: 'メール',
             prop: 'profile.contact.email',
             render: 'input',
             renderProps: { type: 'email' },
@@ -584,7 +584,7 @@ const nestedValidationItems = [
             }
           },
           {
-            label: '電話番号',
+            label: '電話',
             prop: 'profile.contact.phone',
             render: 'input',
             asyncValidator: async (rule, value) => {
@@ -607,3 +607,4 @@ const nestedValidationItems = [
 
 ```typescript
 // 全ての配列項目を検証
+const validateArrayItems = async

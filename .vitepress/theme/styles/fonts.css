@@ -1,0 +1,364 @@
+/**
+ * Optimized Font Loading for International Documentation
+ * Progressive font loading with language-specific optimization
+ */
+
+/* ========================================================================
+   Web Font Imports (CDN with fallbacks)
+   ======================================================================== */
+
+/* Inter for English and Latin text */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* JetBrains Mono for code blocks */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* Source Sans 3 as fallback */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap');
+
+/* ========================================================================
+   Font Face Definitions with Local Fallbacks
+   ======================================================================== */
+
+/* System font stacks as immediate fallbacks */
+@font-face {
+  font-family: 'System UI';
+  font-style: normal;
+  font-weight: 300 900;
+  src: local('SF Pro Display'), local('Segoe UI'), local('Ubuntu'), 
+       local('Roboto'), local('Noto Sans'), local('Droid Sans'), 
+       local('Helvetica Neue');
+}
+
+/* Chinese fonts - using system fonts for better performance */
+@font-face {
+  font-family: 'Chinese Sans';
+  src: local('PingFang SC'), local('Microsoft YaHei UI'), 
+       local('Microsoft YaHei'), local('Source Han Sans CN'),
+       local('Noto Sans CJK SC'), local('Hiragino Sans GB'),
+       local('WenQuanYi Micro Hei');
+  unicode-range: U+4E00-9FFF, U+3400-4DBF, U+20000-2A6DF, U+2A700-2B73F,
+                 U+2B740-2B81F, U+2B820-2CEAF, U+F900-FAFF, U+2F800-2FA1F;
+}
+
+/* Traditional Chinese - Hong Kong */
+@font-face {
+  font-family: 'Chinese Traditional HK';
+  src: local('PingFang HK'), local('PingFang TC'), 
+       local('Microsoft JhengHei UI'), local('Microsoft JhengHei'),
+       local('Source Han Sans HC'), local('Noto Sans CJK HK');
+  unicode-range: U+4E00-9FFF, U+3400-4DBF, U+20000-2A6DF, U+2A700-2B73F,
+                 U+2B740-2B81F, U+2B820-2CEAF, U+F900-FAFF, U+2F800-2FA1F;
+}
+
+/* Traditional Chinese - Taiwan */
+@font-face {
+  font-family: 'Chinese Traditional TW';
+  src: local('PingFang TC'), local('Microsoft JhengHei UI'),
+       local('Microsoft JhengHei'), local('Source Han Sans TC'),
+       local('Noto Sans CJK TC');
+  unicode-range: U+4E00-9FFF, U+3400-4DBF, U+20000-2A6DF, U+2A700-2B73F,
+                 U+2B740-2B81F, U+2B820-2CEAF, U+F900-FAFF, U+2F800-2FA1F;
+}
+
+/* Japanese fonts */
+@font-face {
+  font-family: 'Japanese Sans';
+  src: local('Hiragino Kaku Gothic ProN'), local('Hiragino Sans'),
+       local('Yu Gothic UI'), local('Yu Gothic'), local('Meiryo UI'),
+       local('Meiryo'), local('Source Han Sans JP'), local('Noto Sans CJK JP');
+  unicode-range: U+3000-303F, U+3040-309F, U+30A0-30FF, U+FF00-FFEF,
+                 U+4E00-9FAF, U+2605-2606, U+2190-2195, U+203B;
+}
+
+/* ========================================================================
+   Font Loading Optimization
+   ======================================================================== */
+
+/* Preload critical fonts */
+@media screen {
+  /* Preconnect to Google Fonts */
+  link[rel="preconnect"][href*="fonts.googleapis.com"],
+  link[rel="preconnect"][href*="fonts.gstatic.com"] {
+    crossorigin: anonymous;
+  }
+}
+
+/* Font display swap for better performance */
+* {
+  font-display: swap;
+}
+
+/* ========================================================================
+   Font Smoothing and Rendering
+   ======================================================================== */
+
+/* Global font smoothing */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+}
+
+/* CJK-specific rendering optimization */
+:lang(zh),
+:lang(zh-CN),
+:lang(zh-HK),
+:lang(zh-TW),
+:lang(ja) {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'kern' 1;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  line-break: strict;
+}
+
+/* ========================================================================
+   Font Weight Adjustments for Different Languages
+   ======================================================================== */
+
+/* Lighter weights for CJK to improve readability */
+:lang(zh) body,
+:lang(zh-CN) body,
+:lang(zh-HK) body,
+:lang(zh-TW) body {
+  font-weight: 400;
+}
+
+:lang(ja) body {
+  font-weight: 400;
+}
+
+/* Normal weight for Latin text */
+:lang(en) body {
+  font-weight: 400;
+}
+
+/* Bold text adjustments */
+:lang(zh) strong,
+:lang(zh-CN) strong,
+:lang(zh-HK) strong,
+:lang(zh-TW) strong,
+:lang(ja) strong {
+  font-weight: 700;
+}
+
+:lang(en) strong {
+  font-weight: 600;
+}
+
+/* ========================================================================
+   Code Font Optimization
+   ======================================================================== */
+
+code,
+kbd,
+samp,
+pre {
+  font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Monaco, 
+               'Cascadia Code', 'Roboto Mono', Menlo, Consolas, 
+               'Liberation Mono', 'Courier New', monospace;
+  font-feature-settings: 'liga' 1, 'calt' 1;
+  font-variant-ligatures: contextual;
+}
+
+/* Adjust code font size for CJK content */
+:lang(zh) code,
+:lang(zh-CN) code,
+:lang(zh-HK) code,
+:lang(zh-TW) code,
+:lang(ja) code {
+  font-size: 0.9em;
+}
+
+/* ========================================================================
+   Font Size Scaling for Different Languages
+   ======================================================================== */
+
+/* Base font sizes */
+:root {
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+}
+
+/* CJK font size adjustments */
+:lang(zh),
+:lang(zh-CN),
+:lang(zh-HK),
+:lang(zh-TW) {
+  --font-size-base: 16px;
+}
+
+:lang(ja) {
+  --font-size-base: 15px;
+}
+
+:lang(en) {
+  --font-size-base: 16px;
+}
+
+/* ========================================================================
+   Font Loading States
+   ======================================================================== */
+
+/* Loading state for fonts */
+.fonts-loading body {
+  opacity: 0.9;
+}
+
+.fonts-loaded body {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Fallback font adjustments */
+.fonts-loading {
+  letter-spacing: 0;
+  word-spacing: 0;
+}
+
+/* ========================================================================
+   Print Media Font Optimization
+   ======================================================================== */
+
+@media print {
+  body {
+    font-family: 'Times New Roman', 'Songti SC', 'SimSun', serif;
+  }
+  
+  :lang(zh),
+  :lang(zh-CN) {
+    font-family: 'Songti SC', 'SimSun', serif;
+  }
+  
+  :lang(zh-HK),
+  :lang(zh-TW) {
+    font-family: 'Songti TC', 'MingLiU', serif;
+  }
+  
+  :lang(ja) {
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  }
+  
+  code, pre {
+    font-family: 'Courier New', monospace;
+  }
+}
+
+/* ========================================================================
+   Responsive Font Sizing
+   ======================================================================== */
+
+/* Mobile devices */
+@media (max-width: 640px) {
+  :root {
+    --font-size-base: 14px;
+  }
+  
+  :lang(zh),
+  :lang(zh-CN),
+  :lang(zh-HK),
+  :lang(zh-TW),
+  :lang(ja) {
+    --font-size-base: 14px;
+  }
+}
+
+/* Tablet devices */
+@media (min-width: 641px) and (max-width: 1024px) {
+  :root {
+    --font-size-base: 15px;
+  }
+  
+  :lang(zh),
+  :lang(zh-CN),
+  :lang(zh-HK),
+  :lang(zh-TW),
+  :lang(ja) {
+    --font-size-base: 15px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1920px) {
+  :root {
+    --font-size-base: 18px;
+  }
+  
+  :lang(zh),
+  :lang(zh-CN),
+  :lang(zh-HK),
+  :lang(zh-TW),
+  :lang(ja) {
+    --font-size-base: 17px;
+  }
+}
+
+/* ========================================================================
+   Font Feature Settings for Advanced Typography
+   ======================================================================== */
+
+/* Enable advanced OpenType features */
+.vp-doc {
+  font-feature-settings: 
+    'kern' 1,    /* Kerning */
+    'liga' 1,    /* Standard ligatures */
+    'clig' 1,    /* Contextual ligatures */
+    'calt' 1,    /* Contextual alternates */
+    'ss01' 1,    /* Stylistic set 1 */
+    'ss02' 1,    /* Stylistic set 2 */
+    'zero' 1,    /* Slashed zero */
+    'tnum' 0,    /* Tabular numbers off */
+    'pnum' 1,    /* Proportional numbers */
+    'case' 1;    /* Case-sensitive forms */
+}
+
+/* Tabular numbers for tables */
+.vp-doc table {
+  font-feature-settings: 
+    'kern' 1,
+    'liga' 1,
+    'tnum' 1,    /* Tabular numbers on */
+    'pnum' 0;    /* Proportional numbers off */
+}
+
+/* Code blocks with ligatures */
+.vp-doc pre code {
+  font-feature-settings: 
+    'liga' 1,    /* Standard ligatures */
+    'calt' 1,    /* Contextual alternates */
+    'zero' 1;    /* Slashed zero */
+}
+
+/* ========================================================================
+   Font Weight Variables for Consistent Typography
+   ======================================================================== */
+
+:root {
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+}
+
+/* CJK font weight adjustments */
+:lang(zh),
+:lang(zh-CN),
+:lang(zh-HK),
+:lang(zh-TW),
+:lang(ja) {
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+}

@@ -1166,7 +1166,7 @@ watch(
 
 ## 相關鏈接
 
-- [條件渲染](/zh-hk/front/component/ma-form/examples/conditional-rendering)
-- [動態驗證](/zh-hk/front/component/ma-form/examples/dynamic-validation)
-- [嵌套表單](/zh-hk/front/component/ma-form/examples/nested-forms)
-- [暴露方法](/zh-hk/front/component/ma-form/examples/expose-methods)
+- [條件渲染](/front/component/ma-form/examples/conditional-rendering)
+- [動態驗證](/front/component/ma-form/examples/dynamic-validation)
+- [嵌套表單](/front/component/ma-form/examples/nested-forms)
+- [暴露方法](/front/component/ma-form/examples/expose-methods)

@@ -1,6 +1,5 @@
 node_modules
 .DS_Store
-dist*
 dist-ssr
 *.local
 .eslintcache
@@ -12,3 +11,4 @@ dist-ssr
 /vendor/
 composer.lock
 stats.html
+CLAUDE.md

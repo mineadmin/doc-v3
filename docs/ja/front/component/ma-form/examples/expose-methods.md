@@ -1,6 +1,6 @@
 # 公開メソッド
 
-MaFormコンポーネントがdefineExposeを通じて公開するすべてのAPIメソッドを紹介します。これにはローディング状態の制御、リアクティブな状態管理、インスタンスアクセスなどの機能が含まれます。
+MaFormコンポーネントがdefineExposeを通じて公開するすべてのAPIメソッドを紹介します。ローディング状態の制御、リアクティブな状態管理、インスタンスアクセスなどの機能を含みます。
 
 <DemoPreview dir="demos/ma-form/expose-methods" />
 
@@ -8,7 +8,7 @@ MaFormコンポーネントがdefineExposeを通じて公開するすべてのAP
 
 - **ローディング状態制御**: フォームのローディング状態を設定
 - **リアクティブ状態管理**: モバイル状態の検出
-- **フォームアイテム管理**: 動的にフォームアイテム設定を変更
+- **フォーム項目管理**: 動的にフォーム項目の設定を変更
 - **インスタンスアクセス**: 基盤のElement Plus Formインスタンスを取得して高度な操作を実行
 
 ## MaForm公開メソッド詳細
@@ -56,7 +56,7 @@ const handleSubmit = async () => {
 // モバイル状態かどうかをチェック
 const isMobile = formRef.value?.isMobileState?.()
 
-// 手動でリアクティブ状態を更新（ウィンドウサイズ変更時）
+// 手動でレスポンシブ状態を更新（ウィンドウサイズ変更時）
 window.addEventListener('resize', () => {
   formRef.value?.updateResponsiveState?.()
 })
@@ -66,10 +66,10 @@ const adjustFormLayout = () => {
   const isMobile = formRef.value?.isMobileState?.()
   if (isMobile) {
     // モバイルではシングルカラムレイアウトを使用
-    console.log('現在モバイルモードです。レスポンシブレイアウトを使用します')
+    console.log('現在モバイルモード、レスポンシブレイアウトを適用')
   } else {
     // デスクトップではマルチカラムレイアウトを使用
-    console.log('現在デスクトップモードです。標準レイアウトを使用します')
+    console.log('現在デスクトップモード、標準レイアウトを適用')
   }
 }
 ```
@@ -78,7 +78,7 @@ const adjustFormLayout = () => {
 
 ### ネイティブフォームインスタンスの取得
 
-MaFormで最も重要な公開メソッドの1つが`getElFormRef()`で、基盤のElement Plus Formインスタンスにアクセスし、すべてのネイティブフォームメソッドを使用できます:
+MaFormの最も重要な公開メソッドの1つは`getElFormRef()`で、基盤のElement Plus Formインスタンスにアクセスし、すべてのネイティブフォームメソッドを使用できます:
 
 ```typescript
 // Element Plus el-formインスタンスを取得
@@ -134,7 +134,7 @@ const validateSingleField = async (prop: string) => {
   }
 }
 
-// 複数フィールドを一括バリデーション
+// 複数フィールドをバッチバリデーション
 const validateMultipleFields = async (props: string[]) => {
   const elFormRef = formRef.value?.getElFormRef()
   if (!elFormRef) return false
@@ -150,7 +150,7 @@ const validateMultipleFields = async (props: string[]) => {
     console.log(`バリデーション完了，${successCount}/${results.length} フィールド成功`)
     return failedCount === 0
   } catch (error) {
-    console.error('一括バリデーション失敗:', error)
+    console.error('バッチバリデーション失敗:', error)
     return false
   }
 }
@@ -199,12 +199,12 @@ const clearFieldErrors = (props: string[]) => {
 ### 高度なインスタンス操作
 
 ```typescript
-// 指定フィールドまでスクロール
+// 指定フィールドにスクロール
 const scrollToField = (prop: string) => {
   const elFormRef = formRef.value?.getElFormRef()
   if (elFormRef) {
     elFormRef.scrollToField(prop)
-    console.log(`フィールド ${prop} までスクロールしました`)
+    console.log(`フィールド ${prop} にスクロールしました`)
   }
 }
 
@@ -224,7 +224,7 @@ const getFieldInstance = (prop: string) => {
 
 ### フォーム送信フロー
 
-公開メソッドをすべて組み合わせて、完全なフォーム送信フローを実装できます:
+公開メソッドを組み合わせて、完全なフォーム送信フローを実装できます:
 
 ```typescript
 const handleFormSubmit = async () => {
@@ -251,10 +251,10 @@ const handleFormSubmit = async () => {
     
   } catch (error) {
     // バリデーション失敗または送信エラー処理
-    ElMessage.error('送信失敗。フォームを確認してください')
+    ElMessage.error('送信失敗、フォームを確認してください')
     console.error('送信エラー:', error)
     
-    // 最初のエラーフィールドまでスクロール
+    // 最初のエラーフィールドにスクロール
     const firstErrorField = document.querySelector('.el-form-item.is-error')
     if (firstErrorField) {
       firstErrorField.scrollIntoView({ behavior: 'smooth' })
@@ -268,7 +268,7 @@ const handleFormSubmit = async () => {
 
 ### レスポンシブレイアウト適応
 
-リアクティブ状態管理を使用して、異なるデバイスでの最適な体験を実現:
+レスポンシブ状態管理を使用して、異なるデバイスでの最適な体験を実現:
 
 ```typescript
 const handleResponsiveLayout = () => {
@@ -283,10 +283,10 @@ const handleResponsiveLayout = () => {
     })
     
     // モバイルで特別な処理が必要なロジック
-    console.log('現在モバイルモードです。シングルカラムレイアウトを使用します')
+    console.log('現在モバイルモード、シングルカラムレイアウトを使用')
   } else {
     // デスクトップレイアウト
-    console.log('現在デスクトップモードです。マルチカラムレイアウトを使用します')
+    console.log('現在デスクトップモード、マルチカラムレイアウトを使用')
   }
 }
 
@@ -392,16 +392,16 @@ const devTools = {
     formRef.value?.setLoadingState(false)
     console.log('ローディング状態をfalseに設定')
     
-    // リアクティブ状態をテスト
+    // レスポンシブ状態をテスト
     const isMobile = formRef.value?.isMobileState?.()
     console.log('現在のモバイル状態:', isMobile)
     
     formRef.value?.updateResponsiveState?.()
-    console.log('リアクティブ状態を更新しました')
+    console.log('レスポンシブ状態を更新しました')
     
     // フォームインスタンスをテスト
     const elFormRef = formRef.value?.getElFormRef()
-    console.log('フォームインスタンスが利用可能か:', !!elFormRef)
+    console.log('フォームインスタンスが利用可能:', !!elFormRef)
     
     console.log('✅ すべてのメソッドテスト完了')
   }
@@ -417,11 +417,11 @@ const devTools = {
 | `setLoadingState` | `loading: boolean` | `void` | フォームのグローバルローディング状態を設定 |
 | `setOptions` | `opts: MaFormOptions` | `void` | フォーム設定オプションを設定 |
 | `getOptions` | - | `MaFormOptions` | 現在のフォーム設定を取得 |
-| `setItems` | `items: MaFormItem[]` | `void` | フォームアイテム配列を設定 |
-| `getItems` | - | `MaFormItem[]` | 現在のフォームアイテム配列を取得 |
-| `appendItem` | `item: MaFormItem` | `void` | フォームアイテムを追加 |
-| `removeItem` | `prop: string` | `void` | propでフォームアイテムを削除 |
-| `getItemByProp` | `prop: string` | `MaFormItem \| null` | propでフォームアイテムを取得 |
+| `setItems` | `items: MaFormItem[]` | `void` | フォーム項目配列を設定 |
+| `getItems` | - | `MaFormItem[]` | 現在のフォーム項目配列を取得 |
+| `appendItem` | `item: MaFormItem` | `void` | フォーム項目を追加 |
+| `removeItem` | `prop: string` | `void` | propで指定したフォーム項目を削除 |
+| `getItemByProp` | `prop: string` | `MaFormItem \| null` | propで指定したフォーム項目を取得 |
 | `getElFormRef` | - | `FormInstance \| undefined` | Element Plus Formインスタンスを取得 |
 | `isMobileState` | - | `boolean` | 現在がモバイル状態かどうかをチェック |
 
@@ -431,8 +431,8 @@ const devTools = {
 
 | メソッド名 | 説明 |
 |-------|----- |
-| `getLoadingState` | 現在のローディング状態を取得（ローディング状態は自身で管理してください） |
-| `updateResponsiveState` | 手動でリアクティブ状態を更新（フォームが自動的に処理します） |
+| `getLoadingState` | 現在のローディング状態を取得（ローディング状態は自行で管理してください） |
+| `updateResponsiveState` | レスポンシブ状態を手動で更新（フォームが自動的に処理します） |
 
 ### Element Plus Formインスタンスメソッド
 
@@ -444,15 +444,16 @@ const devTools = {
 | `validateField` | `props: string \| string[]` | `Promise<void>` | 指定フィールドをバリデーション |
 | `resetFields` | `props?: string \| string[]` | `void` | フィールド値とバリデーション状態をリセット |
 | `clearValidate` | `props?: string \| string[]` | `void` | バリデーション状態をクリア |
-| `scrollToField` | `prop: string` | `void` | 指定フィールドまでスクロール |
+| `scrollToField` | `prop: string` | `void` | 指定フィールドにスクロール |
 
 ## 注意事項
 
-1. **安全な呼び出し**: コンポーネントがマウントされていない場合のエラーを避けるため、オプショナルチェーン(`?.`)を使用して安全にメソッドを呼び出してください
-2. **タイミング**: コンポーネントがマウント完了後にこれらのメソッドを呼び出すようにしてください
-3. **エラー処理**: `validate`などの非同期メソッドでは適切なエラー処理を行ってください
-4. **型安全**: TypeScriptを使用する場合は、正しい型定義をインポートしてください
+1. **安全な呼び出し**: オプショナルチェーン(`?.`)を使用して安全にメソッドを呼び出し、コンポーネントがマウントされる前にエラーが発生しないようにします
+2. **タイミング**: コンポーネントがマウント完了後にこれらのメソッドを呼び出すようにします
+3. **エラー処理**: 非同期メソッド（`validate`など）に対して適切なエラー処理を行います
+4. **型安全**: TypeScriptを使用する場合は、正しい型定義をインポートします
 
 ## 関連リンク
 
-- [MaForm 基本使用法](/ja/front/component/ma-form/ex
+- [MaForm基本使用法](/front/component/ma-form/examples/basic-usage)
+- [フォームバリデーション例](/front

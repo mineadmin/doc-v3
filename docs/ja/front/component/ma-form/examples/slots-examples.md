@@ -1,6 +1,6 @@
 # スロットシステム
 
-MaFormのスロットシステムを紹介します。グローバルスロット、フォームアイテムレベルのスロット、動的スロット命名、およびネストされたコンポーネントスロットの使用方法を含みます。
+MaFormのスロットシステムを紹介します。グローバルスロット、フォームアイテムレベルのスロット、動的スロット命名、ネストされたコンポーネントスロットの使用方法を含みます。
 
 <DemoPreview dir="demos/ma-form/slots-examples" />
 
@@ -112,7 +112,7 @@ MaFormのスロットシステムを紹介します。グローバルスロッ�
     <span class="custom-label">
       <el-icon color="#409EFF"><Lock /></el-icon>
       <span style="margin-left: 4px;">ログインパスワード</span>
-      <el-tooltip content="パスワード長さ8-16文字、英数字を含む" placement="top">
+      <el-tooltip content="パスワード長8-16文字、英数字を含む" placement="top">
         <el-icon style="margin-left: 4px;"><QuestionFilled /></el-icon>
       </el-tooltip>
     </span>
@@ -161,7 +161,7 @@ MaFormのスロットシステムを紹介します。グローバルスロッ�
       ])
     },
     
-    // アペンド内容
+    // サフィックス内容
     append: ({ item, model }) => {
       return h('div', { class: 'append-content' }, [
         h('el-button', {
@@ -282,7 +282,7 @@ MaFormのスロットシステムを紹介します。グローバルスロッ�
     // アップロードトリガー
     trigger: () => h('div', { class: 'upload-trigger' }, [
       h('el-icon', { size: 32, color: '#409EFF' }, [h('UploadFilled')]),
-      h('div', { style: 'margin-top: 8px;' }, 'クリックまたはドラッグでファイルをアップロード')
+      h('div', { style: 'margin-top: 8px;' }, 'クリックまたはドラッグしてファイルをアップロード')
     ]),
     
     // ヒント情報
@@ -353,10 +353,10 @@ interface FormItemScope {
 
 複数のスロット定義方法が同時に存在する場合、優先順位は次のとおりです:
 
-1. **テンプレートスロット** (最高優先順位)
+1. **テンプレートスロット** (最高優先度)
 2. **itemSlots設定スロット**
 3. **renderSlots設定スロット**
-4. **デフォルトレンダリング** (最低優先順位)
+4. **デフォルトレンダリング** (最低優先度)
 
 ### 例
 
@@ -389,7 +389,7 @@ interface FormItemScope {
 // ✅ 推奨: アロー関数でキャッシュ
 const labelSlot = () => h('span', 'ラベル')
 
-// ❌ 回避: 毎回新しい関数を作成しない
+// ❌ 回避: 毎回新しい関数を作成
 itemSlots: {
   label: () => h('span', 'ラベル')  // 毎回新しい関数
 }
@@ -404,7 +404,7 @@ itemSlots: {
   render: 'input',
   itemSlots: {
     append: ({ item, model }) => {
-      // 条件に基づいて異なる内容を表示
+      // 条件に応じて異なる内容を表示
       return model.showButton 
         ? h('el-button', { size: 'small' }, '操作')
         : null
@@ -433,6 +433,6 @@ itemSlots: {
 
 ## 関連リンク
 
-- [スロットシステム詳細](/ja/front/component/ma-form#スロットシステム)
-- [MaFormItem itemSlots設定](/ja/front/component/ma-form#レイアウト設定)
-- [コンポーネントレンダリング renderSlots](/ja/front/component/ma-form/examples/component-rendering)
+- [スロットシステム詳細](/front/component/ma-form#スロットシステム)
+- [MaFormItem itemSlots設定](/front/component/ma-form#レイアウト設定)
+- [コンポーネントレンダリング renderSlots](/front/component/ma-form/examples/component-rendering)

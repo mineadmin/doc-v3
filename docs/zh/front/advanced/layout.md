@@ -345,7 +345,7 @@ const isDesktop = breakpoints.greater('desktop')
 
 ## 相关文档
 
-- [常用 Store](/zh/front/high/store) - 状态管理相关文档
+- [常用 Store](/front/high/store) - 状态管理相关文档
 
 ::: tip 源码参考
 完整的布局系统源码可以在以下位置找到：

@@ -432,6 +432,6 @@ const createDebugShow = (conditionFn: Function, debugName: string) => {
 
 ## 相关链接
 
-- [MaFormItem 配置详解](/zh/front/component/ma-form#maformitem-配置详解)
-- [高级特性 - 条件渲染](/zh/front/component/ma-form#条件渲染)
-- [嵌套表单结构](/zh/front/component/ma-form/examples/nested-forms)
+- [MaFormItem 配置详解](/front/component/ma-form#maformitem-配置详解)
+- [高级特性 - 条件渲染](/front/component/ma-form#条件渲染)
+- [嵌套表单结构](/front/component/ma-form/examples/nested-forms)

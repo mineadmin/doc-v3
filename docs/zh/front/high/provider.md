@@ -119,7 +119,7 @@ const { $echarts } = useGlobal()
 const chartInstance = $echarts.init(chartRef.value)
 ```
 
-参考组件: [MaEcharts](/zh/front/component/ma-echarts)
+参考组件: [MaEcharts](/front/component/ma-echarts)
 
 ### Plugins（插件配置服务）
 
@@ -135,7 +135,7 @@ const chartInstance = $echarts.init(chartRef.value)
 - 配置热更新支持
 - 插件依赖关系管理
 
-参考文档: [插件系统](/zh/front/high/plugins)
+参考文档: [插件系统](/front/high/plugins)
 
 ### MineCore（核心组件服务）
 
@@ -464,5 +464,5 @@ const provider: ProviderService.Provider = {
 - 本地源码: `/Users/zhuzhu/project/mineadmin/web/src/provider/`
 
 **相关文档**:
-- [插件系统](/zh/front/high/plugins)
-- [MaEcharts 组件](/zh/front/component/ma-echarts)
+- [插件系统](/front/high/plugins)
+- [MaEcharts 组件](/front/component/ma-echarts)
