@@ -6,7 +6,6 @@ on:
     paths:
       - 'docs/zh/**'
       - '.vitepress/src/zh/**'
-      - '.github/workflows/auto-translate.yml'
   workflow_dispatch:
 
 permissions:
