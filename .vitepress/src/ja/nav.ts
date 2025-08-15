@@ -10,6 +10,13 @@ const nav:DefaultTheme.NavItem[] = [
         { text: '旧版ドキュメント', link: 'https://docv2.mineadmin.com' },
         { text: 'すぐ使えるHyperfコンポーネントライブラリ', link: 'https://hyperf.fans/' },
         { text: 'Fantastic-adminフロントエンドフレームワーク',link: 'https://fantastic-admin.hurui.me/'},
+    ]},
+    { text: '言語', items: [
+        { text: '🇨🇳 中文 (简体)', link: 'https://doc.mineadmin.com' },
+        { text: '🇺🇸 English', link: 'https://en.doc.mineadmin.com' },
+        { text: '🇯🇵 日本語', link: 'https://ja.doc.mineadmin.com' },
+        { text: '🇭🇰 繁體中文 (香港)', link: 'https://zh-hk.doc.mineadmin.com' },
+        { text: '🇹🇼 繁體中文 (台灣)', link: 'https://zh-tw.doc.mineadmin.com' }
     ]}
 ]
 

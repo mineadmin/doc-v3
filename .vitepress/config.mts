@@ -10,6 +10,10 @@ import { copyOrDownloadAsMarkdownButtons } from 'vitepress-plugin-llms'
 import {defineConfig} from "unocss";
 import type {UserConfig as ViteConfig} from "vite"
 
+if (typeof window === 'undefined') {
+  global.window = {} // 安全垫片
+}
+
 // 根据环境变量获取当前语言，默认为中文
 const currentLanguage = process.env.CURRENT_LANGUAGE || 'zh'
 
