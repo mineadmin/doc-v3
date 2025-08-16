@@ -423,8 +423,12 @@ const sidebar:DefaultTheme.Sidebar = {
       items:
           [
             {
-              text:"📝 準備工作",
-              link:"/plugin"
+              text:"📖 外掛系統概述",
+              link:"/plugin/index"
+            },
+            {
+              text:"🎯 快速入門指南",
+              link:"/plugin/guide"
             },
             {
               text:"💻 外掛命令",
@@ -433,19 +437,49 @@ const sidebar:DefaultTheme.Sidebar = {
             {
               text:"✨ 建立應用",
               link:"/plugin/create"
-            },
+            }
+          ]
+    },
+    {
+      text:"📚 核心概念",
+      collapsed: false,
+      items:
+          [
             {
               text:"📁 外掛目錄結構",
               link:"/plugin/structure"
             },
             {
-              text:"📄 mine.json 說明及示例",
+              text:"📄 mine.json 配置",
               link:"/plugin/mineJson"
             },
             {
-            text:"⚙️ ConfigProvider 說明",
-            link:"/plugin/configProvider"
-          }
+              text:"⚙️ ConfigProvider 說明",
+              link:"/plugin/configProvider"
+            },
+            {
+              text:"🔄 生命週期管理",
+              link:"/plugin/lifecycle"
+            }
+          ]
+    },
+    {
+      text:"💡 開發指南",
+      collapsed: false,
+      items:
+          [
+            {
+              text:"🛠️ 外掛開發指南",
+              link:"/plugin/develop"
+            },
+            {
+              text:"📚 API 參考文件",
+              link:"/plugin/api"
+            },
+            {
+              text:"📝 示例程式碼",
+              link:"/plugin/examples"
+            }
           ]
     },
     {

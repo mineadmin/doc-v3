@@ -19,7 +19,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/guide/introduce/declaration',
         },
         {
-          text: '🙏 Acknowledgments',
+          text: '🙏 Acknowledgements',
           link: '/guide/introduce/thank',
         }
       ]
@@ -39,7 +39,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text: '📋 Additional Resources',
+      text: '📋 Other Resources',
       collapsed: true,
       items: [
         {
@@ -59,7 +59,7 @@ const sidebar:DefaultTheme.Sidebar = {
   ],
   '/front/': [
     {
-      text: '🎯 Getting Started',
+      text: '🎯 Basics',
       collapsed: false,
       items: [
         {
@@ -71,7 +71,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/front/base/start'
         },
         {
-          text: '🧭 Routes & Menus',
+          text: '🧭 Routing & Menus',
           link: '/front/base/route-menu'
         },
         {
@@ -253,7 +253,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/front/component/ma-table/tree-table'
             },
             {
-              text: '☑️ Multi-select Table',
+              text: '☑️ Multi-Select',
               link: '/front/component/ma-table/selection'
             },
             {
@@ -360,7 +360,7 @@ const sidebar:DefaultTheme.Sidebar = {
           text: "🔄 Lifecycle",
           link: "/backend/base/lifecycle"
         },
-        { text: "🌐 Routes & API Docs",link: "/backend/base/router"},
+        { text: "🌐 Routing & API Docs",link: "/backend/base/router"},
         { text: "⚠️ Error Handling",link: "/backend/base/error-handler"},
         {text: "📄 Logging",link: "/backend/base/logger"},
         {text: "📡 Events",link: "/backend/base/event-handler"},
@@ -381,7 +381,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/backend/security/access"
         },
         {
-          text: "🌍 Client IP",
+          text: "🌍 Client IP Detection",
           link: "/backend/security/client-ip"
         }
       ]
@@ -423,29 +423,63 @@ const sidebar:DefaultTheme.Sidebar = {
       items:
           [
             {
-              text:"📝 Preparation",
-              link:"/plugin"
+              text:"📖 Plugin System Overview",
+              link:"/plugin/index"
+            },
+            {
+              text:"🎯 Quick Start Guide",
+              link:"/plugin/guide"
             },
             {
               text:"💻 Plugin Commands",
               link:"/plugin/command"
             },
             {
-              text:"✨ Create App",
+              text:"✨ Create Application",
               link:"/plugin/create"
-            },
+            }
+          ]
+    },
+    {
+      text:"📚 Core Concepts",
+      collapsed: false,
+      items:
+          [
             {
               text:"📁 Plugin Structure",
               link:"/plugin/structure"
             },
             {
-              text:"📄 mine.json Documentation",
+              text:"📄 mine.json Configuration",
               link:"/plugin/mineJson"
             },
             {
-            text:"⚙️ ConfigProvider Guide",
-            link:"/plugin/configProvider"
-          }
+              text:"⚙️ ConfigProvider Guide",
+              link:"/plugin/configProvider"
+            },
+            {
+              text:"🔄 Lifecycle Management",
+              link:"/plugin/lifecycle"
+            }
+          ]
+    },
+    {
+      text:"💡 Development Guide",
+      collapsed: false,
+      items:
+          [
+            {
+              text:"🛠️ Plugin Development Guide",
+              link:"/plugin/develop"
+            },
+            {
+              text:"📚 API Reference",
+              link:"/plugin/api"
+            },
+            {
+              text:"📝 Example Code",
+              link:"/plugin/examples"
+            }
           ]
     },
     {
@@ -467,7 +501,7 @@ const sidebar:DefaultTheme.Sidebar = {
       collapsed: false,
       items:[
         {
-          text: "📋 Frontend Standards",
+          text: "📋 Frontend Development Standards",
           link: "/plugin/front/develop"
         }
       ]

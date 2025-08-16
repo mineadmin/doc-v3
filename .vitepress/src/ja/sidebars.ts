@@ -7,7 +7,7 @@ const sidebar:DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         {
-          text: '💡 なぜ私たちを選ぶのか?',
+          text: '💡 なぜ私たちを選ぶのか？',
           link: '/guide/introduce/mineadmin',
         },
         {
@@ -51,7 +51,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link:"/guide/upgrade"
         },
         {
-          text:"🤝 貢献ガイド",
+          text:"🤝 コントリビューションガイド",
           link:"/guide/contributions"
         }
       ]
@@ -131,7 +131,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text: '🎪 高度なトピック',
+      text: '🎪 高度なテーマ',
       collapsed: true,
       items: [
         {
@@ -361,7 +361,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/backend/base/lifecycle"
         },
         { text: "🌐 ルートとAPIドキュメント",link: "/backend/base/router"},
-        { text: "⚠️ エラー処理",link: "/backend/base/error-handler"},
+        { text: "⚠️ エラーハンドリング",link: "/backend/base/error-handler"},
         {text: "📄 ログ",link: "/backend/base/logger"},
         {text: "📡 イベント",link: "/backend/base/event-handler"},
         {text: "📄 ファイルアップロード",link: "/backend/base/upload"},
@@ -423,8 +423,12 @@ const sidebar:DefaultTheme.Sidebar = {
       items:
           [
             {
-              text:"📝 準備作業",
-              link:"/plugin"
+              text:"📖 プラグインシステム概要",
+              link:"/plugin/index"
+            },
+            {
+              text:"🎯 クイックスタートガイド",
+              link:"/plugin/guide"
             },
             {
               text:"💻 プラグインコマンド",
@@ -433,19 +437,49 @@ const sidebar:DefaultTheme.Sidebar = {
             {
               text:"✨ アプリケーション作成",
               link:"/plugin/create"
-            },
+            }
+          ]
+    },
+    {
+      text:"📚 コアコンセプト",
+      collapsed: false,
+      items:
+          [
             {
               text:"📁 プラグインディレクトリ構造",
               link:"/plugin/structure"
             },
             {
-              text:"📄 mine.json 説明と例",
+              text:"📄 mine.json 設定",
               link:"/plugin/mineJson"
             },
             {
-            text:"⚙️ ConfigProvider 説明",
-            link:"/plugin/configProvider"
-          }
+              text:"⚙️ ConfigProvider 説明",
+              link:"/plugin/configProvider"
+            },
+            {
+              text:"🔄 ライフサイクル管理",
+              link:"/plugin/lifecycle"
+            }
+          ]
+    },
+    {
+      text:"💡 開発ガイド",
+      collapsed: false,
+      items:
+          [
+            {
+              text:"🛠️ プラグイン開発ガイド",
+              link:"/plugin/develop"
+            },
+            {
+              text:"📚 API リファレンスドキュメント",
+              link:"/plugin/api"
+            },
+            {
+              text:"📝 サンプルコード",
+              link:"/plugin/examples"
+            }
           ]
     },
     {

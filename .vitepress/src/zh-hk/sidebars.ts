@@ -423,8 +423,12 @@ const sidebar:DefaultTheme.Sidebar = {
       items:
           [
             {
-              text:"📝 準備工作",
-              link:"/plugin"
+              text:"📖 插件系統概述",
+              link:"/plugin/index"
+            },
+            {
+              text:"🎯 快速入門指南",
+              link:"/plugin/guide"
             },
             {
               text:"💻 插件命令",
@@ -433,19 +437,49 @@ const sidebar:DefaultTheme.Sidebar = {
             {
               text:"✨ 創建應用",
               link:"/plugin/create"
-            },
+            }
+          ]
+    },
+    {
+      text:"📚 核心概念",
+      collapsed: false,
+      items:
+          [
             {
               text:"📁 插件目錄結構",
               link:"/plugin/structure"
             },
             {
-              text:"📄 mine.json 説明及示例",
+              text:"📄 mine.json 配置",
               link:"/plugin/mineJson"
             },
             {
-            text:"⚙️ ConfigProvider 説明",
-            link:"/plugin/configProvider"
-          }
+              text:"⚙️ ConfigProvider 説明",
+              link:"/plugin/configProvider"
+            },
+            {
+              text:"🔄 生命週期管理",
+              link:"/plugin/lifecycle"
+            }
+          ]
+    },
+    {
+      text:"💡 開發指南",
+      collapsed: false,
+      items:
+          [
+            {
+              text:"🛠️ 插件開發指南",
+              link:"/plugin/develop"
+            },
+            {
+              text:"📚 API 參考文檔",
+              link:"/plugin/api"
+            },
+            {
+              text:"📝 示例代碼",
+              link:"/plugin/examples"
+            }
           ]
     },
     {
