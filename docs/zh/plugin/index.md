@@ -1,49 +1,117 @@
-# 准备工作
+# MineAdmin 插件系统
 
-::: tip
-如果开发 MineAdmin 应用；首先，得熟悉 MineAdmin 和 Hyperf 框架，然后做以下的准备工作。
-:::
+MineAdmin 插件系统提供了强大的扩展能力，允许开发者创建可复用的功能模块，实现系统的模块化和可扩展性。
 
-## 获取AccessToken
+## 插件系统架构
 
-MineAdmin不管下载插件应用、更新插件应用还是开发插件应用都需要 `ACCESS_TOKEN`
+MineAdmin 的插件系统基于 Hyperf 框架的 ConfigProvider 机制，提供了完整的插件生命周期管理和自动化部署能力。
 
-获取步骤：
+```plantuml
+@startuml
+!define RECTANGLE class
 
-- 登录 [MineAdmin](https://www.mineadmin.com/login) 官网
-- 进入 `个人中心`  的 [_设置_](https://www.mineadmin.com/member/setting) 页面
-- 点击查看`我的AccessToken`
+RECTANGLE "MineAdmin Core" as core {
+  + bin/hyperf.php
+  + Plugin::init()
+}
 
-::: danger
+RECTANGLE "Plugin Management" as mgmt {
+  + App-Store Component
+  + Extension Commands
+  + Plugin Loader
+}
 
----
- 
-注意
+RECTANGLE "Plugin Structure" as structure {
+  + mine.json (配置文件)
+  + src/ (后端代码)
+  + web/ (前端代码)
+  + Database/ (数据库)
+}
 
-请保管好自己的 AccessToken，不要泄露！！！
+RECTANGLE "Official Plugins" as official {
+  + app-store
+}
 
----
+core --> mgmt : 插件初始化
+mgmt --> structure : 加载插件
+mgmt --> official : 管理官方插件
+structure --> core : 注册服务
 
-:::
-
-## 配置后端 .env 文件
-
-打开后端根目录的 _.env_ 文件，找到 **MINE_ACCESS_TOKEN** 项，把刚复制的字符串粘贴到 **等号** 后面
-
-```ini [.env]
-APP_NAME = MineAdmin
-
-APP_ENV = dev
-
-# 省略...
-
-MINE_ACCESS_TOKEN = 107299501236086
+@enduml
 ```
 
-## 申请开发者
+## 核心组件
 
-如果仅是本地开发应用并且自己使用，这种情况不需要有开发者认证权限，你也可以分发给其他任何人。
+### 1. 插件加载器
+- **文件**: `bin/hyperf.php` ([GitHub](https://github.com/mineadmin/mineadmin/blob/master/bin/hyperf.php))
+- **原理**: 通过 `Plugin::init()` 方法在应用启动时自动加载所有已安装的插件
+- **实现**: 扫描 `plugin/` 目录下的所有插件并注册其 ConfigProvider
 
-如果打算上架官方应用市场，需要进行开发者认证后，才可发布你的应用，并且受到官方版权保护。
+### 2. App-Store 组件
+- **仓库**: [mineadmin/appstore](https://github.com/mineadmin/appstore)
+- **功能**: 提供插件的下载、安装、卸载、更新等管理功能
+- **配置**: 通过 `ConfigProvider` 注册服务和配置
 
-目前还未支持线上直接申请认证，需要通过联系 **MineAdmin团队成员** 给你开通开发者权限
+### 3. 插件配置系统
+- **核心文件**: `mine.json` 
+- **原理**: 定义插件的元数据、依赖关系、安装脚本等信息
+- **加载**: 在插件安装时解析并注册到系统中
+
+## 官方插件
+
+MineAdmin 默认提供以下官方插件：
+
+| 插件名称 | 功能描述 | 仓库地址 |
+|---------|----------|----------|
+| app-store | 应用市场管理插件，提供插件的下载、安装、卸载、更新等管理功能 | [GitHub](https://github.com/mineadmin/appstore) |
+
+> 注：其他插件如代码生成器、定时任务管理等可通过应用市场获取或自行开发
+
+## 插件类型
+
+MineAdmin 支持三种类型的插件：
+
+### Mixed (混合型插件)
+包含前端和后端完整功能的插件，提供完整的业务模块。
+
+### Backend (后端插件) 
+仅包含后端逻辑的插件，主要提供 API 服务和业务逻辑。
+
+### Frontend (前端插件)
+仅包含前端界面的插件，主要提供用户界面组件。
+
+## 快速开始
+
+### 环境准备
+
+开发 MineAdmin 插件需要：
+
+1. **熟悉技术栈**：MineAdmin 和 Hyperf 框架
+2. **获取 AccessToken**：
+   - 登录 [MineAdmin 官网](https://www.mineadmin.com/login)
+   - 进入个人中心 → [设置页面](https://www.mineadmin.com/member/setting)
+   - 获取 AccessToken
+
+3. **配置环境变量**：
+```ini
+# .env 文件
+MINE_ACCESS_TOKEN=你的AccessToken
+```
+
+::: warning 注意
+请妥善保管 AccessToken，避免泄露！
+:::
+
+### 开发者认证
+
+- **本地开发**：无需认证，可自由开发和分发
+- **应用市场发布**：需要开发者认证，联系 MineAdmin 团队开通权限
+
+## 相关文档
+
+- [快速入门指南](./guide.md) - 创建第一个插件
+- [开发指南](./develop.md) - 详细开发流程
+- [插件结构](./structure.md) - 目录结构规范
+- [生命周期管理](./lifecycle.md) - 安装卸载流程
+- [API 参考](./api.md) - 接口文档
+- [示例代码](./examples.md) - 实际案例
