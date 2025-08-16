@@ -70,7 +70,34 @@ const viteConfig:ViteConfig = {
       filename: 'stats.html',
       open: true
     })
-  ]
+  ],
+  build: {
+    // 修复生产环境样式丢失问题
+    cssCodeSplit: false,
+    rollupOptions: {
+      output: {
+        assetFileNames: (assetInfo) => {
+          // 确保 CSS 文件使用相对路径
+          const info = assetInfo.name?.split('.') ?? []
+          const extType = info[info.length - 1]
+          if (/\.(css)$/i.test(assetInfo.name ?? '')) {
+            return `assets/[name]-[hash][extname]`
+          }
+          return `assets/[name]-[hash][extname]`
+        }
+      }
+    }
+  },
+  css: {
+    postcss: {
+      plugins: []
+    }
+  },
+  define: {
+    // 确保生产环境变量正确设置
+    __VUE_OPTIONS_API__: true,
+    __VUE_PROD_DEVTOOLS__: false
+  }
 }
 
 const config:UserConfig = {
@@ -79,6 +106,15 @@ const config:UserConfig = {
   lang: currentLanguage,
   ...langConfig,
   srcDir: `docs/${currentLanguage}`,
+  head: [
+    ['meta', { name: 'algolia-site-verification', content: '28481EEA8E61E1C8' }],
+    // Element Plus CDN CSS - 使用多个备用源确保可靠性
+    ['link', { rel: 'stylesheet', href: 'https://unpkg.com/element-plus@2.10.6/dist/index.css' }],
+    ['link', { rel: 'stylesheet', href: 'https://unpkg.com/element-plus@2.10.6/theme-chalk/dark/css-vars.css' }],
+    // 备用CDN源
+    ['link', { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/element-plus@2.10.6/dist/index.css', media: 'print', onload: "this.media='all'" }],
+    ['noscript', {}, '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-plus@2.10.6/dist/index.css">']
+  ],
   themeConfig: {
     logo: '/logo.svg',
     outline:{
@@ -95,7 +131,6 @@ const config:UserConfig = {
     ],
     ...langConfig.themeConfig
   },
-  assetsDir:'/static',
   markdown:{
     lineNumbers: true,
     languages: [

@@ -51,8 +51,6 @@ import enhanceTOC from "./enhanceTOC";
 import "virtual:uno.css";
 
 import DemoPreview from '../components/demo-preview.vue';
-import 'element-plus/dist/index.css'
-import 'element-plus/theme-chalk/dark/css-vars.css'
 import CopyOrDownloadAsMarkdownButtons from 'vitepress-plugin-llms/vitepress-components/CopyOrDownloadAsMarkdownButtons.vue'
 
 
