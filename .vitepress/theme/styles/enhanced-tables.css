@@ -122,7 +122,7 @@
   white-space: nowrap;
   border-bottom: 2px solid rgba(255, 255, 255, 0.2);
   background: transparent !important;
-
+}
 /* Header cell dividers */
 .VPDoc table thead th:not(:last-child)::after {
   content: '';

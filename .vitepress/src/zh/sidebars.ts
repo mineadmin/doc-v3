@@ -21,6 +21,10 @@ const sidebar:DefaultTheme.Sidebar = {
         {
           text: '🙏 鸣谢',
           link: '/guide/introduce/thank',
+        },
+        {
+          text: '🗣️ 联系我们',
+          link: '/guide/introduce/contact',
         }
       ]
     },

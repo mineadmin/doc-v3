@@ -57,47 +57,14 @@ const viteConfig:ViteConfig = {
   plugins:[
     vueJsx(),
     UnoCSS(),
-    // AnnouncementPlugin({
-    //   title:"MineAdmin 交流群",
-    //   body:[
-    //     {type:"text",content:"官方QQ群: 150105478"}
-    //   ]
-    // }),
-      llmstxt({
-        ignoreFiles:['changelog.md','index.md']
-      }),
+    llmstxt({
+      ignoreFiles:['changelog.md','index.md']
+    }),
     visualizer({
       filename: 'stats.html',
       open: true
     })
   ],
-  build: {
-    // 修复生产环境样式丢失问题
-    cssCodeSplit: false,
-    rollupOptions: {
-      output: {
-        assetFileNames: (assetInfo) => {
-          // 确保 CSS 文件使用相对路径
-          const info = assetInfo.name?.split('.') ?? []
-          const extType = info[info.length - 1]
-          if (/\.(css)$/i.test(assetInfo.name ?? '')) {
-            return `assets/[name]-[hash][extname]`
-          }
-          return `assets/[name]-[hash][extname]`
-        }
-      }
-    }
-  },
-  css: {
-    postcss: {
-      plugins: []
-    }
-  },
-  define: {
-    // 确保生产环境变量正确设置
-    __VUE_OPTIONS_API__: true,
-    __VUE_PROD_DEVTOOLS__: false
-  }
 }
 
 const config:UserConfig = {
