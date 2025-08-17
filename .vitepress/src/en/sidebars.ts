@@ -19,8 +19,12 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/guide/introduce/declaration',
         },
         {
-          text: '🙏 Acknowledgements',
+          text: '🙏 Acknowledgments',
           link: '/guide/introduce/thank',
+        },
+        {
+          text: '🗣️ Contact Us',
+          link: '/guide/introduce/contact',
         }
       ]
     },
@@ -71,7 +75,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/front/base/start'
         },
         {
-          text: '🧭 Routing & Menus',
+          text: '🧭 Routes & Menus',
           link: '/front/base/route-menu'
         },
         {
@@ -206,7 +210,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/front/component/ma-form/examples/nested-forms'
             },
             {
-              text: '📱 Mobile Responsive',
+              text: '📱 Mobile Adaptation',
               link: '/front/component/ma-form/examples/mobile-responsive'
             },
             {
@@ -245,7 +249,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/front/component/ma-table/dynamic-columns'
             },
             {
-              text: '📄 Pagination',
+              text: '📄 Pagination Table',
               link: '/front/component/ma-table/pagination'
             },
             {
@@ -253,7 +257,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/front/component/ma-table/tree-table'
             },
             {
-              text: '☑️ Multi-Select',
+              text: '☑️ Multi-select Table',
               link: '/front/component/ma-table/selection'
             },
             {
@@ -284,7 +288,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/front/component/ma-search/examples/custom-actions'
             },
             {
-              text: '🔄 Dynamic Items',
+              text: '🔄 Dynamic Management',
               link: '/front/component/ma-search/examples/dynamic-items'
             },
             {
@@ -360,7 +364,7 @@ const sidebar:DefaultTheme.Sidebar = {
           text: "🔄 Lifecycle",
           link: "/backend/base/lifecycle"
         },
-        { text: "🌐 Routing & API Docs",link: "/backend/base/router"},
+        { text: "🌐 Routes & API Docs",link: "/backend/base/router"},
         { text: "⚠️ Error Handling",link: "/backend/base/error-handler"},
         {text: "📄 Logging",link: "/backend/base/logger"},
         {text: "📡 Events",link: "/backend/base/event-handler"},
@@ -373,11 +377,11 @@ const sidebar:DefaultTheme.Sidebar = {
       collapsed: false,
       items:[
         {
-          text: "🔑 Authentication",
+          text: "🔑 User Authentication",
           link: "/backend/security/passport"
         },
         {
-          text: "🔐 Authorization (RBAC)",
+          text: "🔐 User Authorization (RBAC)",
           link: "/backend/security/access"
         },
         {
@@ -446,7 +450,7 @@ const sidebar:DefaultTheme.Sidebar = {
       items:
           [
             {
-              text:"📁 Plugin Structure",
+              text:"📁 Plugin Directory Structure",
               link:"/plugin/structure"
             },
             {
@@ -507,11 +511,11 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text:"🚀 App Publishing",
+      text:"🚀 Application Publishing",
       collapsed: true,
       items:[
         {
-          text: "📦 App Release",
+          text: "📦 App Publishing",
           link: "/plugin/develop/publish"
         },
         {
