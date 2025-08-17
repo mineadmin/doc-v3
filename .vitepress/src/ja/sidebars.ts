@@ -7,7 +7,7 @@ const sidebar:DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         {
-          text: '💡 なぜ私たちを選ぶのか？',
+          text: '💡 なぜ私たちを選ぶのか?',
           link: '/guide/introduce/mineadmin',
         },
         {
@@ -21,6 +21,10 @@ const sidebar:DefaultTheme.Sidebar = {
         {
           text: '🙏 謝辞',
           link: '/guide/introduce/thank',
+        },
+        {
+          text: '🗣️ お問い合わせ',
+          link: '/guide/introduce/contact',
         }
       ]
     },
@@ -51,7 +55,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link:"/guide/upgrade"
         },
         {
-          text:"🤝 コントリビューションガイド",
+          text:"🤝 貢献ガイド",
           link:"/guide/contributions"
         }
       ]
@@ -131,7 +135,7 @@ const sidebar:DefaultTheme.Sidebar = {
       ]
     },
     {
-      text: '🎪 高度なテーマ',
+      text: '🎪 高度なトピック',
       collapsed: true,
       items: [
         {
@@ -233,7 +237,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link: '/front/component/ma-table/sorting'
             },
             {
-              text: '🔍 テーブルフィルタリング',
+              text: '🔍 テーブルフィルター',
               link: '/front/component/ma-table/filter'
             },
             {
@@ -361,7 +365,7 @@ const sidebar:DefaultTheme.Sidebar = {
           link: "/backend/base/lifecycle"
         },
         { text: "🌐 ルートとAPIドキュメント",link: "/backend/base/router"},
-        { text: "⚠️ エラーハンドリング",link: "/backend/base/error-handler"},
+        { text: "⚠️ エラー処理",link: "/backend/base/error-handler"},
         {text: "📄 ログ",link: "/backend/base/logger"},
         {text: "📡 イベント",link: "/backend/base/event-handler"},
         {text: "📄 ファイルアップロード",link: "/backend/base/upload"},
@@ -473,7 +477,7 @@ const sidebar:DefaultTheme.Sidebar = {
               link:"/plugin/develop"
             },
             {
-              text:"📚 API リファレンスドキュメント",
+              text:"📚 API リファレンス",
               link:"/plugin/api"
             },
             {
