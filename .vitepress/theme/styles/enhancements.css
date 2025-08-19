@@ -1,414 +1,54 @@
 /**
- * MineAdmin Documentation Visual Enhancements
- * Professional enterprise-grade UI improvements for VitePress
- * Optimized for multilingual support with Asian market aesthetics
- */
+ * Professional Documentation Enhancements
+ * Clean, minimal styling for improved UX
+ * Inspired by modern open-source project documentation
+ * -------------------------------------------------------------------------- */
 
-/* ========================================================================
-   1. Enhanced Color Palette & CSS Variables
-   ======================================================================== */
-
-:root {
-  /* Enhanced Brand Colors - Modern gradient palette */
-  --ma-gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --ma-gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --ma-gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  --ma-gradient-subtle: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-  
-  /* Professional Color System */
-  --ma-color-primary: #5b67ea;
-  --ma-color-primary-light: #7b84ff;
-  --ma-color-primary-dark: #4651d8;
-  --ma-color-secondary: #f2576c;
-  --ma-color-accent: #00d4ff;
-  
-  /* Depth & Elevation Shadows */
-  --ma-shadow-xs: 0 2px 4px rgba(0, 0, 0, 0.02);
-  --ma-shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.06);
-  --ma-shadow-md: 0 10px 15px rgba(0, 0, 0, 0.05), 0 4px 6px rgba(0, 0, 0, 0.08);
-  --ma-shadow-lg: 0 20px 25px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.04);
-  --ma-shadow-xl: 0 25px 50px rgba(0, 0, 0, 0.12);
-  --ma-shadow-glow: 0 0 40px rgba(91, 103, 234, 0.15);
-  
-  /* Improved Typography Scale */
-  --ma-font-display: 'Inter Display', 'PingFang SC', 'Microsoft YaHei UI', system-ui;
-  --ma-font-body-enhanced: 'Inter', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui;
-  
-  /* Animation Timing Functions */
-  --ma-ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-  --ma-ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  
-  /* Spacing Rhythm */
-  --ma-space-xs: 0.5rem;
-  --ma-space-sm: 0.75rem;
-  --ma-space-md: 1.25rem;
-  --ma-space-lg: 2rem;
-  --ma-space-xl: 3rem;
-}
-
-/* Dark mode color adjustments */
-.dark {
-  --ma-gradient-primary: linear-gradient(135deg, #667eea 0%, #9f7aea 100%);
-  --ma-shadow-glow: 0 0 40px rgba(159, 122, 234, 0.2);
-  --ma-color-primary: #8b92ff;
-  --ma-color-primary-light: #a8b1ff;
-  --ma-color-primary-dark: #6b73ea;
-}
-
-/* ========================================================================
-   2. Enhanced Typography & Font System
-   ======================================================================== */
-
-/* Improved font rendering for better readability */
-html {
-  font-feature-settings: 'liga' 1, 'kern' 1;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Enhanced heading hierarchy */
-.VPDoc h1 {
-  font-family: var(--ma-font-display);
-  font-weight: 800;
-  background: var(--ma-gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -0.02em;
-  margin-bottom: 1.5rem;
-  position: relative;
-  padding-bottom: 0.75rem;
-}
-
-.VPDoc h1::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 60px;
-  height: 4px;
-  background: var(--ma-gradient-primary);
-  border-radius: 2px;
-  transition: width 0.3s var(--ma-ease-smooth);
-}
-
-.VPDoc h1:hover::after {
-  width: 100px;
-}
-
-.VPDoc h2 {
-  font-family: var(--ma-font-display);
-  font-weight: 700;
-  color: var(--vp-c-brand-1);
-  letter-spacing: -0.01em;
-  margin-top: 2.5rem;
-  position: relative;
-  padding-left: 1rem;
-}
-
-.VPDoc h2::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 4px;
-  height: 1.5em;
-  background: var(--ma-gradient-primary);
-  border-radius: 2px;
-}
-
-/* Better paragraph spacing and line height for Asian languages */
-.VPDoc p {
-  line-height: 1.8;
-  color: var(--vp-c-text-1);
-  margin: 1.25rem 0;
-}
-
-:root:where(:lang(zh)), 
-:root:where(:lang(ja)),
-:root:where(:lang(zh-hk)),
-:root:where(:lang(zh-tw)) {
-  .VPDoc p {
-    line-height: 1.9;
-    letter-spacing: 0.02em;
-  }
-}
-
-/* ========================================================================
-   3. Enhanced Hero Section
-   ======================================================================== */
-
-.VPHero {
-  position: relative;
-  overflow: hidden;
-}
-
-.VPHero::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at 30% 107%, rgba(91, 103, 234, 0.05) 0%, transparent 50%),
-              radial-gradient(circle at 70% 50%, rgba(159, 122, 234, 0.05) 0%, transparent 50%);
-  animation: float 20s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(5deg); }
-}
-
-.VPHeroInfo {
-  position: relative;
-  z-index: 1;
-}
-
-.VPHero .name {
-  font-family: var(--ma-font-display);
-  font-weight: 900;
-  background: linear-gradient(120deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-  background-size: 200% 200%;
-  animation: gradient-shift 4s ease infinite;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 4px 8px rgba(91, 103, 234, 0.2));
-}
-
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.VPHero .text {
-  font-size: 1.5rem;
-  color: var(--vp-c-text-2);
-  margin: 1rem 0 1.5rem;
-  opacity: 0;
-  animation: fadeInUp 0.8s ease-out 0.2s forwards;
-}
-
-.VPHero .tagline {
-  font-size: 1.25rem;
-  color: var(--vp-c-text-3);
-  opacity: 0;
-  animation: fadeInUp 0.8s ease-out 0.4s forwards;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Enhanced Hero Actions */
-.VPHeroActions {
-  margin-top: 2rem;
-  opacity: 0;
-  animation: fadeInUp 0.8s ease-out 0.6s forwards;
-}
-
-.VPHeroActions .VPButton {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s var(--ma-ease-smooth);
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  box-shadow: var(--ma-shadow-sm);
-}
-
-.VPHeroActions .VPButton.brand {
-  background: var(--ma-gradient-primary);
-  border: none;
-}
-
-.VPHeroActions .VPButton.brand::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.VPHeroActions .VPButton.brand:hover::before {
-  left: 100%;
-}
-
-.VPHeroActions .VPButton.brand:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--ma-shadow-lg);
-}
-
-.VPHeroActions .VPButton.alt {
-  background: rgba(255, 255, 255, 0.95);
-  border: 2px solid transparent;
-  background-clip: padding-box;
-  position: relative;
-}
-
-.VPHeroActions .VPButton.alt::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: var(--ma-gradient-primary);
-  border-radius: inherit;
-  z-index: -1;
-}
-
-.VPHeroActions .VPButton.alt:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(91, 103, 234, 0.2);
-}
-
-/* Enhanced Hero Image */
-.VPHeroImage {
-  opacity: 0;
-  animation: fadeInScale 1s ease-out 0.8s forwards;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
-}
-
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* ========================================================================
-   4. Enhanced Feature Cards
-   ======================================================================== */
-
-.VPFeatures {
-  position: relative;
-  padding: 4rem 0;
-  background: linear-gradient(180deg, transparent 0%, var(--vp-c-bg-soft) 50%, transparent 100%);
-}
-
-.VPFeature {
-  position: relative;
-  background: var(--vp-c-bg);
-  border-radius: 16px;
-  padding: 2rem;
-  transition: all 0.3s var(--ma-ease-smooth);
-  border: 1px solid var(--vp-c-border);
-  overflow: hidden;
-}
-
-.VPFeature::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--ma-gradient-primary);
-  transform: scaleX(0);
-  transition: transform 0.3s var(--ma-ease-smooth);
-}
-
-.VPFeature:hover::before {
-  transform: scaleX(1);
-}
-
-.VPFeature:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--ma-shadow-xl);
-  border-color: var(--vp-c-brand-1);
-}
-
-.VPFeature .icon {
-  font-size: 2.5rem;
-  display: inline-block;
-  margin-bottom: 1rem;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
-.VPFeature .title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-  color: var(--vp-c-brand-1);
-  font-family: var(--ma-font-display);
-}
-
-.VPFeature .details {
-  color: var(--vp-c-text-2);
-  line-height: 1.7;
-}
-
-/* ========================================================================
-   5. Enhanced Navigation Bar
-   ======================================================================== */
+/* ===================================================================
+   Navigation Bar - Clean & Professional
+   =================================================================== */
 
 .VPNav {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: var(--ma-shadow-xs);
-  transition: all 0.3s var(--ma-ease-smooth);
+  border-bottom: 1px solid var(--vp-c-divider);
+  transition: all 0.25s ease;
 }
 
 .dark .VPNav {
-  background: rgba(27, 27, 31, 0.85);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(17, 24, 39, 0.85);
 }
 
-.VPNav.has-sidebar {
-  box-shadow: var(--ma-shadow-sm);
-}
-
+/* Clean nav logo and title */
 .VPNavBar .title {
-  font-weight: 700;
-  background: var(--ma-gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
 }
 
-.VPNavBarMenuLink,
-.VPNavBarMenuGroup .text {
+/* Simple nav links */
+.VPNavBarMenuLink {
   position: relative;
   font-weight: 500;
   transition: color 0.25s;
+  color: var(--vp-c-text-2);
+}
+
+.VPNavBarMenuLink:hover,
+.VPNavBarMenuLink.active {
+  color: var(--vp-c-brand-1);
 }
 
 .VPNavBarMenuLink::after {
   content: '';
   position: absolute;
-  bottom: -2px;
+  bottom: -4px;
   left: 50%;
   transform: translateX(-50%) scaleX(0);
   width: 100%;
   height: 2px;
-  background: var(--ma-gradient-primary);
-  transition: transform 0.3s var(--ma-ease-smooth);
+  background: var(--vp-c-brand-1);
+  transition: transform 0.25s ease;
 }
 
 .VPNavBarMenuLink:hover::after,
@@ -416,42 +56,31 @@ html {
   transform: translateX(-50%) scaleX(1);
 }
 
-/* ========================================================================
-   6. Enhanced Sidebar
-   ======================================================================== */
+/* ===================================================================
+   Sidebar - Clean List Design
+   =================================================================== */
 
 .VPSidebar {
-  background: linear-gradient(180deg, var(--vp-c-bg-alt) 0%, var(--vp-c-bg) 100%);
+  background: var(--vp-c-bg-alt);
   border-right: 1px solid var(--vp-c-divider);
 }
 
 .VPSidebarItem {
-  margin: 0.25rem 0;
+  margin: 0.125rem 0;
 }
 
 .VPSidebarItem .item {
-  padding: 0.625rem 1rem;
-  border-radius: 8px;
-  transition: all 0.25s var(--ma-ease-smooth);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  color: var(--vp-c-text-2);
+  font-weight: 500;
   position: relative;
-  overflow: hidden;
-}
-
-.VPSidebarItem .item::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%) scaleY(0);
-  width: 3px;
-  height: 70%;
-  background: var(--ma-gradient-primary);
-  transition: transform 0.25s var(--ma-ease-smooth);
-  border-radius: 0 2px 2px 0;
 }
 
 .VPSidebarItem .item:hover {
-  background: var(--vp-c-default-soft);
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
   padding-left: 1.25rem;
 }
 
@@ -462,308 +91,117 @@ html {
 }
 
 .VPSidebarItem .item.active::before {
-  transform: translateY(-50%) scaleY(1);
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  background: var(--vp-c-brand-1);
+  border-radius: 0 2px 2px 0;
 }
 
-/* Section headers in sidebar */
+/* Sidebar group headers */
 .VPSidebarItem.level-0 > .item {
   font-weight: 700;
-  color: var(--vp-c-brand-1);
+  color: var(--vp-c-text-1);
   text-transform: uppercase;
   font-size: 0.75rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
   opacity: 0.8;
 }
 
-/* ========================================================================
-   7. Enhanced Content Area
-   ======================================================================== */
+/* ===================================================================
+   Content Area - Enhanced Typography
+   =================================================================== */
 
 .VPDoc {
   padding-top: 2rem;
 }
 
+/* Smooth content transitions */
 .VPDocContent {
-  animation: fadeIn 0.5s ease-out;
+  animation: fadeIn 0.3s ease-out;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Enhanced blockquotes */
+/* Better blockquote styling */
 .VPDoc blockquote {
-  border-left: 4px solid;
-  border-image: var(--ma-gradient-primary) 1;
-  background: var(--vp-c-default-soft);
+  border-left: 4px solid var(--vp-c-brand-1);
+  background: var(--vp-c-bg-soft);
   padding: 1rem 1.5rem;
   border-radius: 0 8px 8px 0;
   margin: 1.5rem 0;
-  position: relative;
+  font-style: italic;
+  color: var(--vp-c-text-2);
 }
 
-.VPDoc blockquote::before {
-  content: '"';
-  position: absolute;
-  top: -10px;
-  left: 10px;
-  font-size: 3rem;
-  color: var(--vp-c-brand-1);
-  opacity: 0.2;
-  font-family: Georgia, serif;
+.VPDoc blockquote p {
+  margin: 0;
 }
 
-/* Enhanced code blocks */
-.VPDoc div[class*='language-'] {
-  border-radius: 12px;
-  box-shadow: var(--ma-shadow-md);
-  border: 1px solid var(--vp-c-divider);
-  margin: 1.5rem 0;
-  overflow: hidden;
-}
-
-.VPDoc div[class*='language-'] > span.lang {
-  background: var(--ma-gradient-primary);
-  color: white;
-  padding: 0.125rem 0.5rem;
-  border-radius: 0 0 0 8px;
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
-}
-
-.VPDoc div[class*='language-'] pre {
-  background: linear-gradient(180deg, var(--vp-code-block-bg) 0%, rgba(0, 0, 0, 0.02) 100%);
-}
-
-.dark .VPDoc div[class*='language-'] pre {
-  background: linear-gradient(180deg, var(--vp-code-block-bg) 0%, rgba(255, 255, 255, 0.02) 100%);
-}
-
-/* Enhanced inline code */
-.VPDoc :not(pre) > code {
-  background: var(--vp-c-brand-soft);
-  color: var(--vp-c-brand-1);
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
-  font-weight: 500;
-  font-size: 0.9em;
-  border: 1px solid var(--vp-c-brand-1);
-  border-opacity: 0.2;
-}
-
-/* Enhanced tables */
-.VPDoc table {
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: var(--ma-shadow-sm);
-  border: 1px solid var(--vp-c-divider);
-  margin: 2rem 0;
-}
-
-.VPDoc table thead {
-  background: var(--ma-gradient-primary);
-}
-
-.VPDoc table thead th {
-  color: white;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  letter-spacing: 0.05em;
-  padding: 1rem;
-}
-
-.VPDoc table tbody tr {
-  transition: background-color 0.2s;
-}
-
-.VPDoc table tbody tr:hover {
-  background: var(--vp-c-brand-soft);
-}
-
-.VPDoc table td {
-  padding: 0.875rem 1rem;
-}
-
-/* Enhanced links */
-.VPDoc a {
-  color: var(--vp-c-brand-1);
-  text-decoration: none;
-  position: relative;
-  font-weight: 500;
-  transition: color 0.25s;
-}
-
-.VPDoc a::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--ma-gradient-primary);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s var(--ma-ease-smooth);
-}
-
-.VPDoc a:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-/* ========================================================================
-   8. Enhanced Custom Blocks
-   ======================================================================== */
-
-.VPDoc .custom-block {
-  border-radius: 12px;
-  padding: 1.25rem;
-  margin: 1.5rem 0;
-  border: 1px solid transparent;
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--ma-shadow-sm);
-}
-
-.VPDoc .custom-block::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: var(--ma-gradient-primary);
-}
-
-.VPDoc .custom-block.tip {
-  background: linear-gradient(135deg, var(--vp-c-tip-soft) 0%, rgba(91, 103, 234, 0.05) 100%);
-  border-color: var(--vp-c-tip-1);
-}
-
-.VPDoc .custom-block.tip::before {
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-}
-
-.VPDoc .custom-block.warning {
-  background: linear-gradient(135deg, var(--vp-c-warning-soft) 0%, rgba(234, 179, 8, 0.05) 100%);
-  border-color: var(--vp-c-warning-1);
-}
-
-.VPDoc .custom-block.warning::before {
-  background: linear-gradient(90deg, #f9b44e 0%, #da8b17 100%);
-}
-
-.VPDoc .custom-block.danger {
-  background: linear-gradient(135deg, var(--vp-c-danger-soft) 0%, rgba(244, 63, 94, 0.05) 100%);
-  border-color: var(--vp-c-danger-1);
-}
-
-.VPDoc .custom-block.danger::before {
-  background: linear-gradient(90deg, #f66f81 0%, #f14158 100%);
-}
-
-.VPDoc .custom-block.info {
-  background: linear-gradient(135deg, var(--vp-c-default-soft) 0%, rgba(142, 150, 170, 0.05) 100%);
-  border-color: var(--vp-c-default-1);
-}
-
-.VPDoc .custom-block-title {
-  font-weight: 700;
-  color: var(--vp-c-brand-1);
-  margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-/* ========================================================================
-   9. Enhanced Search
-   ======================================================================== */
+/* ===================================================================
+   Search - Clean Interface
+   =================================================================== */
 
 .VPLocalSearchBox {
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: var(--ma-shadow-xl);
+  box-shadow: var(--vp-shadow-3);
+  border: 1px solid var(--vp-c-border);
 }
 
 .VPLocalSearchBox .search-input {
-  font-size: 1.125rem;
-  padding: 1rem 1.5rem;
-  border-bottom: 2px solid var(--vp-c-divider);
+  font-size: 1rem;
+  padding: 1rem 1.25rem;
+  border: none;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-1);
 }
 
 .VPLocalSearchBox .search-input:focus {
-  border-bottom-color: var(--vp-c-brand-1);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--vp-c-brand-1) inset;
 }
 
 .VPLocalSearchBox .results {
   max-height: 400px;
+  background: var(--vp-c-bg);
 }
 
 .VPLocalSearchBox .result {
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
-  margin: 0.5rem;
-  transition: all 0.2s var(--ma-ease-smooth);
+  padding: 0.75rem 1.25rem;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid var(--vp-c-divider);
 }
 
-.VPLocalSearchBox .result:hover {
-  background: var(--vp-c-brand-soft);
-  transform: translateX(4px);
-}
-
+.VPLocalSearchBox .result:hover,
 .VPLocalSearchBox .result.selected {
   background: var(--vp-c-brand-soft);
-  border-left: 3px solid var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
 }
 
-/* ========================================================================
-   10. Mobile & Responsive Enhancements
-   ======================================================================== */
-
-@media (max-width: 768px) {
-  .VPHero .name {
-    font-size: 2.5rem;
-  }
-  
-  .VPHero .text {
-    font-size: 1.25rem;
-  }
-  
-  .VPHero .tagline {
-    font-size: 1rem;
-  }
-  
-  .VPFeature {
-    padding: 1.5rem;
-  }
-  
-  .VPDoc h1 {
-    font-size: 2rem;
-  }
-  
-  .VPDoc h2 {
-    font-size: 1.5rem;
-  }
-  
-  /* Better touch targets for mobile */
-  .VPButton {
-    min-height: 48px;
-    padding: 0.75rem 1.5rem;
-  }
-  
-  .VPSidebarItem .item {
-    padding: 0.875rem 1rem;
-    min-height: 44px;
-  }
+.VPLocalSearchBox .result:last-child {
+  border-bottom: none;
 }
 
-/* Improved mobile menu */
+/* ===================================================================
+   Mobile Navigation - Improved UX
+   =================================================================== */
+
 @media (max-width: 959px) {
   .VPNavScreen {
     background: rgba(255, 255, 255, 0.95);
@@ -772,71 +210,242 @@ html {
   }
   
   .dark .VPNavScreen {
-    background: rgba(27, 27, 31, 0.95);
+    background: rgba(17, 24, 39, 0.95);
   }
   
   .VPNavScreenMenuLink {
-    padding: 1rem 1.5rem;
+    padding: 0.75rem 1.25rem;
     border-radius: 8px;
     margin: 0.25rem 1rem;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
+    color: var(--vp-c-text-2);
+    font-weight: 500;
   }
   
-  .VPNavScreenMenuLink:hover {
+  .VPNavScreenMenuLink:hover,
+  .VPNavScreenMenuLink.active {
     background: var(--vp-c-brand-soft);
+    color: var(--vp-c-brand-1);
     transform: translateX(4px);
   }
 }
 
-/* ========================================================================
-   11. Smooth Transitions & Micro-interactions
-   ======================================================================== */
+/* ===================================================================
+   Improved Buttons
+   =================================================================== */
 
-/* Page transitions */
-.VPContent {
-  animation: pageEnter 0.5s ease-out;
+.VPButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
 }
 
-@keyframes pageEnter {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Smooth scroll behavior */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Enhanced focus states */
-*:focus-visible {
+.VPButton:focus-visible {
   outline: 2px solid var(--vp-c-brand-1);
   outline-offset: 2px;
+}
+
+.VPButton:active {
+  transform: translateY(1px);
+}
+
+/* ===================================================================
+   Scrollbar Styling
+   =================================================================== */
+
+/* Clean scrollbars for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--vp-c-bg-soft);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--vp-c-text-3);
   border-radius: 4px;
 }
 
-/* Button press effect */
-.VPButton:active {
-  transform: scale(0.98);
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-text-2);
 }
 
-/* Link hover effects */
-a {
-  transition: color 0.25s, transform 0.25s;
+.dark ::-webkit-scrollbar-track {
+  background: var(--vp-c-bg-alt);
 }
 
-a:hover {
-  color: var(--vp-c-brand-2);
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--vp-c-text-3);
 }
 
-/* ========================================================================
-   12. Print Styles
-   ======================================================================== */
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-text-2);
+}
+
+/* ===================================================================
+   Copy Code Button Enhancement
+   =================================================================== */
+
+.VPDoc div[class*='language-'] .copy {
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
+  color: var(--vp-c-text-2);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.VPDoc div[class*='language-'] .copy:hover {
+  background: var(--vp-c-brand-1);
+  color: var(--vp-c-white);
+  border-color: var(--vp-c-brand-1);
+}
+
+/* ===================================================================
+   Breadcrumb Styling
+   =================================================================== */
+
+.VPDocBreadcrumb {
+  padding: 0 0 1rem 0;
+  border-bottom: 1px solid var(--vp-c-divider);
+  margin-bottom: 2rem;
+}
+
+.VPDocBreadcrumb a {
+  color: var(--vp-c-text-3);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s;
+}
+
+.VPDocBreadcrumb a:hover {
+  color: var(--vp-c-brand-1);
+}
+
+.VPDocBreadcrumb .separator {
+  color: var(--vp-c-text-3);
+  margin: 0 0.5rem;
+}
+
+/* ===================================================================
+   Footer Styling
+   =================================================================== */
+
+.VPDocFooter {
+  border-top: 1px solid var(--vp-c-divider);
+  padding-top: 2rem;
+  margin-top: 4rem;
+}
+
+.VPDocFooterPrev,
+.VPDocFooterNext {
+  padding: 1rem;
+  border: 1px solid var(--vp-c-border);
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  display: block;
+}
+
+.VPDocFooterPrev:hover,
+.VPDocFooterNext:hover {
+  border-color: var(--vp-c-brand-1);
+  box-shadow: var(--vp-shadow-2);
+  transform: translateY(-1px);
+}
+
+/* ===================================================================
+   Improved Form Elements
+   =================================================================== */
+
+.VPDoc input,
+.VPDoc textarea,
+.VPDoc select {
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-border);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  color: var(--vp-c-text-1);
+  transition: border-color 0.2s ease;
+}
+
+.VPDoc input:focus,
+.VPDoc textarea:focus,
+.VPDoc select:focus {
+  outline: none;
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 0 0 2px var(--vp-c-brand-soft);
+}
+
+/* ===================================================================
+   Badge Styling
+   =================================================================== */
+
+.VPBadge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.VPBadge.info {
+  background: var(--vp-c-default-soft);
+  color: var(--vp-c-default-1);
+}
+
+.VPBadge.tip {
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+
+.VPBadge.warning {
+  background: var(--vp-c-warning-soft);
+  color: var(--vp-c-warning-1);
+}
+
+.VPBadge.danger {
+  background: var(--vp-c-danger-soft);
+  color: var(--vp-c-danger-1);
+}
+
+/* ===================================================================
+   Performance Optimizations
+   =================================================================== */
+
+/* Enable hardware acceleration for smooth animations */
+.VPButton,
+.VPFeature,
+.VPSidebarItem .item,
+.VPNavBarMenuLink {
+  will-change: transform;
+}
+
+/* Remove will-change after hover for better performance */
+@media (hover: hover) {
+  .VPButton:not(:hover),
+  .VPFeature:not(:hover),
+  .VPSidebarItem .item:not(:hover),
+  .VPNavBarMenuLink:not(:hover) {
+    will-change: auto;
+  }
+}
+
+/* ===================================================================
+   Print Optimizations
+   =================================================================== */
 
 @media print {
   .VPNav,
@@ -849,106 +458,70 @@ a:hover {
   .VPDoc {
     max-width: 100%;
     padding: 0;
+    margin: 0;
   }
   
   .VPDoc h1,
   .VPDoc h2,
-  .VPDoc h3 {
+  .VPDoc h3,
+  .VPDoc h4,
+  .VPDoc h5,
+  .VPDoc h6 {
     page-break-after: avoid;
+    color: #000 !important;
   }
   
   .VPDoc pre,
-  .VPDoc .custom-block {
+  .VPDoc .custom-block,
+  .VPDoc table {
     page-break-inside: avoid;
+    border: 1px solid #ddd !important;
+  }
+  
+  .VPDoc a {
+    color: #000 !important;
+    text-decoration: underline !important;
   }
 }
 
-/* ========================================================================
-   13. Asian Market Specific Enhancements
-   ======================================================================== */
+/* ===================================================================
+   Accessibility Enhancements
+   =================================================================== */
 
-/* Better CJK font rendering */
-:lang(zh),
-:lang(ja),
-:lang(zh-hk),
-:lang(zh-tw) {
-  font-feature-settings: 'halt' 1;
-}
-
-/* Adjusted spacing for CJK text */
-:lang(zh) .VPDoc p,
-:lang(ja) .VPDoc p,
-:lang(zh-hk) .VPDoc p,
-:lang(zh-tw) .VPDoc p {
-  text-align: justify;
-  text-justify: inter-ideograph;
-}
-
-/* Better emphasis for CJK */
-:lang(zh) strong,
-:lang(ja) strong,
-:lang(zh-hk) strong,
-:lang(zh-tw) strong {
-  font-weight: 700;
-  color: var(--vp-c-brand-1);
-}
-
-/* Improved readability for dense CJK text */
-:lang(zh) .VPDoc,
-:lang(ja) .VPDoc,
-:lang(zh-hk) .VPDoc,
-:lang(zh-tw) .VPDoc {
-  word-break: keep-all;
-  overflow-wrap: break-word;
-}
-
-/* ========================================================================
-   14. Loading States & Skeletons
-   ======================================================================== */
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.loading-skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--vp-c-bg-soft) 0%,
-    var(--vp-c-bg-alt) 50%,
-    var(--vp-c-bg-soft) 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.5s ease-in-out infinite;
+/* Skip link for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--vp-c-brand-1);
+  color: var(--vp-c-white);
+  padding: 8px;
+  text-decoration: none;
+  z-index: 100;
   border-radius: 4px;
+  transition: top 0.3s;
 }
 
-/* ========================================================================
-   15. Performance Optimizations
-   ======================================================================== */
-
-/* Use GPU acceleration for animations */
-.VPButton,
-.VPFeature,
-.VPSidebarItem .item,
-.VPLocalSearchBox .result {
-  will-change: transform;
+.skip-link:focus {
+  top: 6px;
 }
 
-/* Optimize hover states */
-@media (hover: hover) {
-  .VPButton:hover,
-  .VPFeature:hover,
-  .VPSidebarItem .item:hover {
-    will-change: auto;
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .VPDoc a {
+    text-decoration: underline;
+  }
+  
+  .VPButton {
+    border: 2px solid currentColor;
+  }
+  
+  .VPFeature {
+    border-width: 2px;
   }
 }
 
-/* Reduce motion for accessibility */
+/* Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -957,5 +530,9 @@ a:hover {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  
+  .VPDocContent {
+    animation: none;
   }
 }
