@@ -1,5 +1,6 @@
 /**
- * Colors: Solid
+ * Professional Documentation Theme Variables
+ * Clean, minimal design inspired by modern open-source documentation
  * -------------------------------------------------------------------------- */
 
 :root {
@@ -16,194 +17,144 @@
 }
 
 /**
- * Colors: Palette
- *
- * The primitive colors used for accent colors. These colors are referenced
- * by functional colors such as "Text", "Background", or "Brand".
- *
- * Each colors have exact same color scale system with 3 levels of solid
- * colors with different brightness, and 1 soft color.
- *
- * - `XXX-1`: The most solid color used mainly for colored text. It must
- *   satisfy the contrast ratio against when used on top of `XXX-soft`.
- *
- * - `XXX-2`: The color used mainly for hover state of the button.
- *
- * - `XXX-3`: The color for solid background, such as bg color of the button.
- *    It must satisfy the contrast ratio with pure white (#ffffff) text on
- *    top of it.
- *
- * - `XXX-soft`: The color used for subtle background such as custom container
- *    or badges. It must satisfy the contrast ratio when putting `XXX-1` colors
- *    on top of it.
- *
- *    The soft color must be semi transparent alpha channel. This is crucial
- *    because it allows adding multiple "soft" colors on top of each other
- *    to create a accent, such as when having inline code block inside
- *    custom containers.
+ * Colors: Professional Palette
+ * Refined colors with lower saturation for professional appearance
  * -------------------------------------------------------------------------- */
 
 :root {
-    --vp-c-gray-1: #dddde3;
-    --vp-c-gray-2: #e4e4e9;
-    --vp-c-gray-3: #ebebef;
-    --vp-c-gray-soft: rgba(142, 150, 170, 0.14);
+    /* Professional Gray Scale */
+    --vp-c-gray-1: #6b7280;
+    --vp-c-gray-2: #9ca3af;
+    --vp-c-gray-3: #d1d5db;
+    --vp-c-gray-soft: rgba(107, 114, 128, 0.1);
 
-    --vp-c-indigo-1: #5b6cef;
-    --vp-c-indigo-2: #4c5dd8;
-    --vp-c-indigo-3: #6677ff;
-    --vp-c-indigo-soft: rgba(91, 108, 239, 0.14);
+    /* Professional Indigo - Primary Brand Color */
+    --vp-c-indigo-1: #4f46e5;
+    --vp-c-indigo-2: #6366f1;
+    --vp-c-indigo-3: #818cf8;
+    --vp-c-indigo-soft: rgba(79, 70, 229, 0.1);
 
-    --vp-c-purple-1: #8b5cf6;
-    --vp-c-purple-2: #7c3aed;
+    /* Subtle Purple for Accents */
+    --vp-c-purple-1: #7c3aed;
+    --vp-c-purple-2: #8b5cf6;
     --vp-c-purple-3: #a78bfa;
-    --vp-c-purple-soft: rgba(139, 92, 246, 0.14);
+    --vp-c-purple-soft: rgba(124, 58, 237, 0.1);
 
-    --vp-c-green-1: #18794e;
-    --vp-c-green-2: #299764;
-    --vp-c-green-3: #30a46c;
-    --vp-c-green-soft: rgba(16, 185, 129, 0.14);
+    /* Professional Green for Success */
+    --vp-c-green-1: #059669;
+    --vp-c-green-2: #10b981;
+    --vp-c-green-3: #34d399;
+    --vp-c-green-soft: rgba(5, 150, 105, 0.1);
 
-    --vp-c-yellow-1: #915930;
-    --vp-c-yellow-2: #946300;
-    --vp-c-yellow-3: #9f6a00;
-    --vp-c-yellow-soft: rgba(234, 179, 8, 0.14);
+    /* Amber for Warnings */
+    --vp-c-yellow-1: #d97706;
+    --vp-c-yellow-2: #f59e0b;
+    --vp-c-yellow-3: #fbbf24;
+    --vp-c-yellow-soft: rgba(217, 119, 6, 0.1);
 
-    --vp-c-red-1: #b8272c;
-    --vp-c-red-2: #d5393e;
-    --vp-c-red-3: #e0575b;
-    --vp-c-red-soft: rgba(244, 63, 94, 0.14);
+    /* Professional Red for Errors */
+    --vp-c-red-1: #dc2626;
+    --vp-c-red-2: #ef4444;
+    --vp-c-red-3: #f87171;
+    --vp-c-red-soft: rgba(220, 38, 38, 0.1);
 
-    --vp-c-sponsor: #db2777;
+    --vp-c-sponsor: #ec4899;
 }
 
 .dark {
-    --vp-c-gray-1: #515c67;
-    --vp-c-gray-2: #414853;
-    --vp-c-gray-3: #32363f;
-    --vp-c-gray-soft: rgba(101, 117, 133, 0.16);
+    /* Dark Mode Gray Scale */
+    --vp-c-gray-1: #9ca3af;
+    --vp-c-gray-2: #6b7280;
+    --vp-c-gray-3: #4b5563;
+    --vp-c-gray-soft: rgba(156, 163, 175, 0.1);
 
-    --vp-c-indigo-1: #a8b1ff;
-    --vp-c-indigo-2: #818cf8;
-    --vp-c-indigo-3: #6366f1;
-    --vp-c-indigo-soft: rgba(99, 102, 241, 0.16);
+    /* Dark Mode Indigo */
+    --vp-c-indigo-1: #818cf8;
+    --vp-c-indigo-2: #6366f1;
+    --vp-c-indigo-3: #4f46e5;
+    --vp-c-indigo-soft: rgba(129, 140, 248, 0.15);
 
-    --vp-c-purple-1: #c4b5fd;
-    --vp-c-purple-2: #a78bfa;
-    --vp-c-purple-3: #8b5cf6;
-    --vp-c-purple-soft: rgba(139, 92, 246, 0.16);
+    /* Dark Mode Purple */
+    --vp-c-purple-1: #a78bfa;
+    --vp-c-purple-2: #8b5cf6;
+    --vp-c-purple-3: #7c3aed;
+    --vp-c-purple-soft: rgba(167, 139, 250, 0.15);
 
-    --vp-c-green-1: #3dd68c;
-    --vp-c-green-2: #30a46c;
-    --vp-c-green-3: #298459;
-    --vp-c-green-soft: rgba(16, 185, 129, 0.16);
+    /* Dark Mode Green */
+    --vp-c-green-1: #34d399;
+    --vp-c-green-2: #10b981;
+    --vp-c-green-3: #059669;
+    --vp-c-green-soft: rgba(52, 211, 153, 0.15);
 
-    --vp-c-yellow-1: #f9b44e;
-    --vp-c-yellow-2: #da8b17;
-    --vp-c-yellow-3: #a46a0a;
-    --vp-c-yellow-soft: rgba(234, 179, 8, 0.16);
+    /* Dark Mode Yellow */
+    --vp-c-yellow-1: #fbbf24;
+    --vp-c-yellow-2: #f59e0b;
+    --vp-c-yellow-3: #d97706;
+    --vp-c-yellow-soft: rgba(251, 191, 36, 0.15);
 
-    --vp-c-red-1: #f66f81;
-    --vp-c-red-2: #f14158;
-    --vp-c-red-3: #b62a3c;
-    --vp-c-red-soft: rgba(244, 63, 94, 0.16);
+    /* Dark Mode Red */
+    --vp-c-red-1: #f87171;
+    --vp-c-red-2: #ef4444;
+    --vp-c-red-3: #dc2626;
+    --vp-c-red-soft: rgba(248, 113, 113, 0.15);
 }
 
 /**
  * Colors: Background
- *
- * - `bg`: The bg color used for main screen.
- *
- * - `bg-alt`: The alternative bg color used in places such as "sidebar",
- *   or "code block".
- *
- * - `bg-elv`: The elevated bg color. This is used at parts where it "floats",
- *   such as "dialog".
- *
- * - `bg-soft`: The bg color to slightly distinguish some components from
- *   the page. Used for things like "carbon ads" or "table".
+ * Clean backgrounds with subtle contrast
  * -------------------------------------------------------------------------- */
 
 :root {
     --vp-c-bg: #ffffff;
-    --vp-c-bg-alt: #f6f6f7;
+    --vp-c-bg-alt: #f9fafb;
     --vp-c-bg-elv: #ffffff;
-    --vp-c-bg-soft: #f6f6f7;
+    --vp-c-bg-soft: #f3f4f6;
 }
 
 .dark {
-    --vp-c-bg: #1b1b1f;
-    --vp-c-bg-alt: #161618;
-    --vp-c-bg-elv: #202127;
-    --vp-c-bg-soft: #202127;
+    --vp-c-bg: #111827;
+    --vp-c-bg-alt: #1f2937;
+    --vp-c-bg-elv: #1f2937;
+    --vp-c-bg-soft: #374151;
 }
 
 /**
  * Colors: Borders
- *
- * - `divider`: This is used for separators. This is used to divide sections
- *   within the same components, such as having separator on "h2" heading.
- *
- * - `border`: This is designed for borders on interactive components.
- *   For example this should be used for a button outline.
- *
- * - `gutter`: This is used to divide components in the page. For example
- *   the header and the lest of the page.
+ * Subtle borders for better content separation
  * -------------------------------------------------------------------------- */
 
 :root {
-    --vp-c-border: #c2c2c4;
-    --vp-c-divider: #e2e2e3;
-    --vp-c-gutter: #e2e2e3;
+    --vp-c-border: #e5e7eb;
+    --vp-c-divider: #f3f4f6;
+    --vp-c-gutter: #e5e7eb;
 }
 
 .dark {
-    --vp-c-border: #3c3f44;
-    --vp-c-divider: #2e2e32;
-    --vp-c-gutter: #000000;
+    --vp-c-border: #374151;
+    --vp-c-divider: #4b5563;
+    --vp-c-gutter: #1f2937;
 }
 
 /**
  * Colors: Text
- *
- * - `text-1`: Used for primary text.
- *
- * - `text-2`: Used for muted texts, such as "inactive menu" or "info texts".
- *
- * - `text-3`: Used for subtle texts, such as "placeholders" or "caret icon".
+ * High contrast for excellent readability
  * -------------------------------------------------------------------------- */
 
 :root {
-    --vp-c-text-1: rgba(60, 60, 67);
-    --vp-c-text-2: rgba(60, 60, 67, 0.78);
-    --vp-c-text-3: rgba(60, 60, 67, 0.56);
+    --vp-c-text-1: #1f2937;
+    --vp-c-text-2: #4b5563;
+    --vp-c-text-3: #6b7280;
 }
 
 .dark {
-    --vp-c-text-1: rgba(255, 255, 245, 0.86);
-    --vp-c-text-2: rgba(235, 235, 245, 0.6);
-    --vp-c-text-3: rgba(235, 235, 245, 0.38);
+    --vp-c-text-1: #f9fafb;
+    --vp-c-text-2: #d1d5db;
+    --vp-c-text-3: #9ca3af;
 }
 
 /**
  * Colors: Function
- *
- * - `default`: The color used purely for subtle indication without any
- *   special meanings attached to it such as bg color for menu hover state.
- *
- * - `brand`: Used for primary brand colors, such as link text, button with
- *   brand theme, etc.
- *
- * - `tip`: Used to indicate useful information. The default theme uses the
- *   brand color for this by default.
- *
- * - `warning`: Used to indicate warning to the users. Used in custom
- *   container, badges, etc.
- *
- * - `danger`: Used to show error, or dangerous message to the users. Used
- *   in custom container, badges, etc.
- *
- * To understand the scaling system, refer to "Colors: Palette" section.
+ * Clean, professional functional colors
  * -------------------------------------------------------------------------- */
 
 :root {
@@ -258,33 +209,33 @@
 
 /**
  * Typography
+ * Professional font stack for excellent readability
  * -------------------------------------------------------------------------- */
 
 :root {
-    --vp-font-family-base: 'Inter', ui-sans-serif, system-ui, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-    --vp-font-family-mono: ui-monospace, 'Menlo', 'Monaco', 'Consolas',
-    'Liberation Mono', 'Courier New', monospace;
+    --vp-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    --vp-font-family-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
     font-optical-sizing: auto;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 :root:where(:lang(zh)) {
-    --vp-font-family-base: 'Punctuation SC', 'Inter', ui-sans-serif, system-ui,
-    'PingFang SC', 'Noto Sans CJK SC', 'Noto Sans SC', 'Heiti SC',
-    'Microsoft YaHei', 'DengXian', sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --vp-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
 }
 
 /**
  * Shadows
+ * Professional shadow system for depth
  * -------------------------------------------------------------------------- */
 
 :root {
-    --vp-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
-    --vp-shadow-2: 0 3px 12px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0, 0, 0, 0.07);
-    --vp-shadow-3: 0 12px 32px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08);
-    --vp-shadow-4: 0 14px 44px rgba(0, 0, 0, 0.12), 0 3px 9px rgba(0, 0, 0, 0.12);
-    --vp-shadow-5: 0 18px 56px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.16);
+    --vp-shadow-1: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    --vp-shadow-2: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+    --vp-shadow-3: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+    --vp-shadow-4: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+    --vp-shadow-5: 0 25px 50px rgba(0, 0, 0, 0.25);
 }
 
 /**
@@ -314,14 +265,6 @@
     --vp-layout-max-width: 100%;
 }
 
-.content{
-    width: 129px;
-}
-
-.main{
-    width: 100%;
-}
-
 /**
  * Component: Header Anchor
  * -------------------------------------------------------------------------- */
@@ -332,6 +275,7 @@
 
 /**
  * Component: Code
+ * Clean code styling
  * -------------------------------------------------------------------------- */
 
 :root {
@@ -377,6 +321,7 @@
 
 /**
  * Component: Button
+ * Clean, professional button styles
  * -------------------------------------------------------------------------- */
 
 :root {
@@ -390,15 +335,15 @@
     --vp-button-brand-active-text: var(--vp-c-white);
     --vp-button-brand-active-bg: var(--vp-c-brand-1);
 
-    --vp-button-alt-border: transparent;
+    --vp-button-alt-border: var(--vp-c-border);
     --vp-button-alt-text: var(--vp-c-text-1);
-    --vp-button-alt-bg: var(--vp-c-default-3);
-    --vp-button-alt-hover-border: transparent;
-    --vp-button-alt-hover-text: var(--vp-c-text-1);
-    --vp-button-alt-hover-bg: var(--vp-c-default-2);
-    --vp-button-alt-active-border: transparent;
-    --vp-button-alt-active-text: var(--vp-c-text-1);
-    --vp-button-alt-active-bg: var(--vp-c-default-1);
+    --vp-button-alt-bg: var(--vp-c-bg);
+    --vp-button-alt-hover-border: var(--vp-c-brand-1);
+    --vp-button-alt-hover-text: var(--vp-c-brand-1);
+    --vp-button-alt-hover-bg: var(--vp-c-bg);
+    --vp-button-alt-active-border: var(--vp-c-brand-1);
+    --vp-button-alt-active-text: var(--vp-c-brand-1);
+    --vp-button-alt-active-bg: var(--vp-c-brand-soft);
 
     --vp-button-sponsor-border: var(--vp-c-text-2);
     --vp-button-sponsor-text: var(--vp-c-text-2);
@@ -413,46 +358,47 @@
 
 /**
  * Component: Custom Block
+ * Clean custom block styling
  * -------------------------------------------------------------------------- */
 
 :root {
     --vp-custom-block-font-size: 14px;
     --vp-custom-block-code-font-size: 13px;
 
-    --vp-custom-block-info-border: transparent;
+    --vp-custom-block-info-border: var(--vp-c-border);
     --vp-custom-block-info-text: var(--vp-c-text-1);
-    --vp-custom-block-info-bg: var(--vp-c-default-soft);
-    --vp-custom-block-info-code-bg: var(--vp-c-default-soft);
+    --vp-custom-block-info-bg: var(--vp-c-bg-soft);
+    --vp-custom-block-info-code-bg: var(--vp-c-bg-alt);
 
-    --vp-custom-block-note-border: transparent;
+    --vp-custom-block-note-border: var(--vp-c-border);
     --vp-custom-block-note-text: var(--vp-c-text-1);
-    --vp-custom-block-note-bg: var(--vp-c-default-soft);
-    --vp-custom-block-note-code-bg: var(--vp-c-default-soft);
+    --vp-custom-block-note-bg: var(--vp-c-bg-soft);
+    --vp-custom-block-note-code-bg: var(--vp-c-bg-alt);
 
-    --vp-custom-block-tip-border: transparent;
+    --vp-custom-block-tip-border: var(--vp-c-brand-1);
     --vp-custom-block-tip-text: var(--vp-c-text-1);
-    --vp-custom-block-tip-bg: var(--vp-c-tip-soft);
-    --vp-custom-block-tip-code-bg: var(--vp-c-tip-soft);
+    --vp-custom-block-tip-bg: var(--vp-c-brand-soft);
+    --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
 
-    --vp-custom-block-important-border: transparent;
+    --vp-custom-block-important-border: var(--vp-c-purple-1);
     --vp-custom-block-important-text: var(--vp-c-text-1);
-    --vp-custom-block-important-bg: var(--vp-c-important-soft);
-    --vp-custom-block-important-code-bg: var(--vp-c-important-soft);
+    --vp-custom-block-important-bg: var(--vp-c-purple-soft);
+    --vp-custom-block-important-code-bg: var(--vp-c-purple-soft);
 
-    --vp-custom-block-warning-border: transparent;
+    --vp-custom-block-warning-border: var(--vp-c-yellow-1);
     --vp-custom-block-warning-text: var(--vp-c-text-1);
-    --vp-custom-block-warning-bg: var(--vp-c-warning-soft);
-    --vp-custom-block-warning-code-bg: var(--vp-c-warning-soft);
+    --vp-custom-block-warning-bg: var(--vp-c-yellow-soft);
+    --vp-custom-block-warning-code-bg: var(--vp-c-yellow-soft);
 
-    --vp-custom-block-danger-border: transparent;
+    --vp-custom-block-danger-border: var(--vp-c-red-1);
     --vp-custom-block-danger-text: var(--vp-c-text-1);
-    --vp-custom-block-danger-bg: var(--vp-c-danger-soft);
-    --vp-custom-block-danger-code-bg: var(--vp-c-danger-soft);
+    --vp-custom-block-danger-bg: var(--vp-c-red-soft);
+    --vp-custom-block-danger-code-bg: var(--vp-c-red-soft);
 
-    --vp-custom-block-caution-border: transparent;
+    --vp-custom-block-caution-border: var(--vp-c-red-1);
     --vp-custom-block-caution-text: var(--vp-c-text-1);
-    --vp-custom-block-caution-bg: var(--vp-c-caution-soft);
-    --vp-custom-block-caution-code-bg: var(--vp-c-caution-soft);
+    --vp-custom-block-caution-bg: var(--vp-c-red-soft);
+    --vp-custom-block-caution-code-bg: var(--vp-c-red-soft);
 
     --vp-custom-block-details-border: var(--vp-custom-block-info-border);
     --vp-custom-block-details-text: var(--vp-custom-block-info-text);
@@ -473,6 +419,7 @@
 
 /**
  * Component: Nav
+ * Clean navigation styling
  * -------------------------------------------------------------------------- */
 
 :root {
@@ -517,23 +464,14 @@
 
 /**
  * Component: Home
+ * Clean hero section without gradients
  * -------------------------------------------------------------------------- */
 
 :root {
-    --vp-home-hero-name-color: transparent;
-    --vp-home-hero-name-background: linear-gradient(
-            120deg,
-            #5b6cef 0%,
-            #8b5cf6 30%,
-            #ec4899 60%,
-            #6677ff 100%
-    );
-    --vp-home-hero-image-background-image: linear-gradient(
-            135deg,
-            rgba(91, 108, 239, 0.1) 0%,
-            rgba(139, 92, 246, 0.1) 100%
-    );
-    --vp-home-hero-image-filter: blur(80px);
+    --vp-home-hero-name-color: var(--vp-c-text-1);
+    --vp-home-hero-name-background: none;
+    --vp-home-hero-image-background-image: none;
+    --vp-home-hero-image-filter: none;
 }
 
 /**
