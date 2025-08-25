@@ -62,13 +62,6 @@
   font-weight: 500;
 }
 
-/* Language switcher icons */
-.VPNavBarMenuGroup .text::before {
-  content: '🌐';
-  margin-right: 0.5rem;
-  font-size: 1.1em;
-}
-
 /* ========================================================================
    Navigation Bar Enhancements
    ======================================================================== */
