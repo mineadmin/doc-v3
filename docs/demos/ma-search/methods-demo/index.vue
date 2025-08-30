@@ -198,39 +198,55 @@ const searchItems = ref<MaSearchItem[]>([
     label: '用户名',
     prop: 'username',
     render: 'input',
-    props: { placeholder: '请输入用户名', clearable: true },
-    rules: [{ required: true, message: '用户名不能为空', trigger: 'blur' }]
+    renderProps: {
+      placeholder: '请输入用户名',
+      clearable: true,
+    },
+    itemProps: {
+      rules: [
+          { required: true, message: '用户名不能为空', trigger: 'blur' }
+      ]
+    }
   },
   {
     label: '邮箱',
     prop: 'email',
     render: 'input',
-    props: { placeholder: '请输入邮箱', clearable: true },
-    rules: [
-      { required: true, message: '邮箱不能为空', trigger: 'blur' },
-      { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
-    ]
+    renderProps: {
+      placeholder: '请输入邮箱',
+      clearable: true,
+    },
+    itemProps: {
+      rules: [
+        { required: true, message: '邮箱不能为空', trigger: 'blur' },
+        { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
+      ]
+    }
   },
   {
     label: '状态',
     prop: 'status',
     render: 'select',
-    options: [
-      { label: '全部', value: '' },
-      { label: '启用', value: 1 },
-      { label: '禁用', value: 0 }
-    ]
+    renderProps: {
+      options: [
+        { label: '全部', value: '' },
+        { label: '启用', value: 1 },
+        { label: '禁用', value: 0 }
+      ]
+    }
   },
   {
     label: '部门',
     prop: 'department',
     render: 'select',
-    options: [
-      { label: '全部部门', value: '' },
-      { label: '技术部', value: 'tech' },
-      { label: '产品部', value: 'product' },
-      { label: '运营部', value: 'operation' }
-    ]
+    renderProps: {
+      options: [
+        { label: '全部部门', value: '' },
+        { label: '技术部', value: 'tech' },
+        { label: '产品部', value: 'product' },
+        { label: '运营部', value: 'operation' }
+      ]
+    }
   }
 ])
 
@@ -243,10 +259,10 @@ const searchOptions = ref({
   foldRows: 2,
   show: true,
   text: {
-    searchBtn: '搜索',
-    resetBtn: '重置',
-    isFoldBtn: '展开',
-    notFoldBtn: '收起'
+    searchBtn: () => '搜索',
+    resetBtn: () => '重置',
+    isFoldBtn: () => '展开',
+    notFoldBtn: () => '收起'
   }
 })
 

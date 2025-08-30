@@ -371,20 +371,20 @@
 .VPDoc input,
 .VPDoc textarea,
 .VPDoc select {
-  background: var(--vp-c-bg);
-  border: 1px solid var(--vp-c-border);
-  border-radius: 6px;
-  padding: 0.5rem 0.75rem;
-  color: var(--vp-c-text-1);
-  transition: border-color 0.2s ease;
+  /*background: var(--vp-c-bg);*/
+  /*border: 1px solid var(--vp-c-border);*/
+  /*border-radius: 6px;*/
+  /*padding: 0.5rem 0.75rem;*/
+  /*color: var(--vp-c-text-1);*/
+  /*transition: border-color 0.2s ease;*/
 }
 
 .VPDoc input:focus,
 .VPDoc textarea:focus,
 .VPDoc select:focus {
-  outline: none;
-  border-color: var(--vp-c-brand-1);
-  box-shadow: 0 0 0 2px var(--vp-c-brand-soft);
+  /*outline: none;*/
+  /*border-color: var(--vp-c-brand-1);*/
+  /*box-shadow: 0 0 0 2px var(--vp-c-brand-soft);*/
 }
 
 /* ===================================================================

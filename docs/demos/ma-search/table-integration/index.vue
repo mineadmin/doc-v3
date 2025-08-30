@@ -184,47 +184,53 @@ const searchItems = ref<MaSearchItem[]>([
     label: '用户名',
     prop: 'username',
     render: 'input',
-    props: { placeholder: '请输入用户名', clearable: true }
+    renderProps: { placeholder: '请输入用户名', clearable: true }
   },
   {
     label: '邮箱',
     prop: 'email',
     render: 'input',
-    props: { placeholder: '请输入邮箱', clearable: true }
+    renderProps: {
+      placeholder: '请输入邮箱', clearable: true
+    }
   },
   {
     label: '手机号',
     prop: 'phone',
     render: 'input',
-    props: { placeholder: '请输入手机号', clearable: true }
+    renderProps: { placeholder: '请输入手机号', clearable: true }
   },
   {
     label: '部门',
     prop: 'department',
     render: 'select',
-    options: [
-      { label: '全部部门', value: '' },
-      { label: '技术部', value: 'tech' },
-      { label: '产品部', value: 'product' },
-      { label: '运营部', value: 'operation' },
-      { label: '市场部', value: 'marketing' }
-    ]
+    renderProps: {
+      options: [
+        { label: '全部部门', value: '' },
+        { label: '技术部', value: 'tech' },
+        { label: '产品部', value: 'product' },
+        { label: '运营部', value: 'operation' },
+        { label: '市场部', value: 'marketing' }
+      ]
+    }
   },
   {
     label: '状态',
     prop: 'status',
     render: 'select',
-    options: [
-      { label: '全部状态', value: '' },
-      { label: '启用', value: 1 },
-      { label: '禁用', value: 0 }
-    ]
+    renderProps: {
+      options: [
+        { label: '全部状态', value: '' },
+        { label: '启用', value: 1 },
+        { label: '禁用', value: 0 }
+      ]
+    }
   },
   {
     label: '创建时间',
     prop: 'created_at',
     render: 'date-picker',
-    props: { 
+    renderProps: {
       type: 'datetimerange', 
       placeholder: ['开始时间', '结束时间'],
       format: 'YYYY-MM-DD HH:mm:ss'
@@ -240,8 +246,8 @@ const searchOptions = {
   fold: true,
   foldRows: 2,
   text: {
-    searchBtn: '查询',
-    resetBtn: '重置'
+    searchBtn: () => '查询',
+    resetBtn: () => '重置'
   }
 }
 
