@@ -181,31 +181,41 @@ const basicValidationItems = ref<MaSearchItem[]>([
     label: '用户名',
     prop: 'username',
     render: 'input',
-    props: { placeholder: '请输入用户名' },
-    rules: [
-      { required: true, message: '用户名不能为空', trigger: 'blur' },
-      { min: 3, max: 20, message: '用户名长度在3-20个字符', trigger: 'blur' }
-    ]
+    renderProps: { placeholder: '请输入用户名' },
+    itemProps: {
+      rules: [
+        {required: true, message: '用户名不能为空', trigger: 'blur'},
+        {min: 3, max: 20, message: '用户名长度在3-20个字符', trigger: 'blur'}
+      ]
+    }
   },
   {
     label: '邮箱',
     prop: 'email',
     render: 'input',
-    props: { placeholder: '请输入邮箱地址' },
-    rules: [
-      { required: true, message: '邮箱不能为空', trigger: 'blur' },
-      { validator: validateEmail, trigger: 'blur' }
-    ]
+    renderProps: { placeholder: '请输入邮箱地址' },
+    itemProps: {
+      rules: [
+        { required: true, message: '邮箱不能为空', trigger: 'blur' },
+        { validator: validateEmail, trigger: 'blur' }
+      ]
+    }
   },
   {
     label: '年龄',
     prop: 'age',
-    render: 'input-number',
-    props: { min: 1, max: 120, placeholder: '请输入年龄' },
-    rules: [
-      { required: true, message: '年龄不能为空', trigger: 'blur' },
-      { validator: validateAge, trigger: 'change' }
-    ]
+    render: () => <el-input-number />,
+    renderProps: {
+      min: 1,
+      max: 120,
+      placeholder: '请输入年龄'
+    },
+    itemProps: {
+      rules: [
+        {required: true, message: '年龄不能为空', trigger: 'blur'},
+        {validator: validateAge, trigger: 'change'}
+      ]
+    }
   }
 ])
 
@@ -220,50 +230,58 @@ const advancedValidationItems = ref<MaSearchItem[]>([
     label: '手机号',
     prop: 'phone',
     render: 'input',
-    props: { placeholder: '请输入11位手机号' },
-    rules: [
-      { required: true, message: '手机号不能为空', trigger: 'blur' },
-      { validator: validatePhone, trigger: 'blur' }
-    ]
+    renderProps: { placeholder: '请输入11位手机号' },
+    itemProps: {
+      rules: [
+        {required: true, message: '手机号不能为空', trigger: 'blur'},
+        {validator: validatePhone, trigger: 'blur'}
+      ]
+    }
   },
   {
     label: '身份证号',
     prop: 'idcard',
     render: 'input',
-    props: { placeholder: '请输入身份证号' },
-    rules: [
-      { required: true, message: '身份证号不能为空', trigger: 'blur' },
-      { pattern: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/, message: '身份证号格式不正确', trigger: 'blur' }
-    ]
+    renderProps: { placeholder: '请输入身份证号' },
+    itemProps: {
+      rules: [
+        {required: true, message: '身份证号不能为空', trigger: 'blur'},
+        {pattern: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/, message: '身份证号格式不正确', trigger: 'blur'}
+      ]
+    }
   },
   {
     label: '工资范围',
     prop: 'salary_min',
-    render: 'input-number',
-    props: { min: 0, placeholder: '最低工资' },
-    rules: [
-      { type: 'number', message: '请输入数字', trigger: 'change' }
-    ]
+    render: () => <el-input-number />,
+    renderProps: { min: 0, placeholder: '最低工资' },
+    itemProps: {
+      rules: [
+        {type: 'number', message: '请输入数字', trigger: 'change'}
+      ]
+    }
   },
   {
     label: '到',
     prop: 'salary_max',
-    render: 'input-number',
-    props: { min: 0, placeholder: '最高工资' },
-    rules: [
-      { type: 'number', message: '请输入数字', trigger: 'change' },
-      {
-        validator: (rule: any, value: any, callback: any) => {
-          const formData = advancedValidationRef.value?.getSearchForm() || {}
-          if (value && formData.salary_min && value <= formData.salary_min) {
-            callback(new Error('最高工资必须大于最低工资'))
-          } else {
-            callback()
-          }
-        },
-        trigger: 'change'
-      }
-    ]
+    render: () => <el-input-number />,
+    renderProps: { min: 0, placeholder: '最高工资' },
+    itemProps: {
+      rules: [
+        {type: 'number', message: '请输入数字', trigger: 'change'},
+        {
+          validator: (rule: any, value: any, callback: any) => {
+            const formData = advancedValidationRef.value?.getSearchForm() || {}
+            if (value && formData.salary_min && value <= formData.salary_min) {
+              callback(new Error('最高工资必须大于最低工资'))
+            } else {
+              callback()
+            }
+          },
+          trigger: 'change'
+        }
+      ]
+    }
   }
 ])
 
@@ -277,21 +295,25 @@ const asyncValidationItems = ref<MaSearchItem[]>([
     label: '用户名',
     prop: 'async_username',
     render: 'input',
-    props: { placeholder: '输入用户名检查是否存在' },
-    rules: [
-      { required: true, message: '用户名不能为空', trigger: 'blur' },
-      { validator: asyncValidateUsername, trigger: 'blur' }
-    ]
+    renderProps: { placeholder: '输入用户名检查是否存在' },
+    itemProps: {
+      rules: [
+        {required: true, message: '用户名不能为空', trigger: 'blur'},
+        {validator: asyncValidateUsername, trigger: 'blur'}
+      ]
+    }
   },
   {
     label: '邮箱',
     prop: 'async_email',
     render: 'input',
-    props: { placeholder: '请输入邮箱' },
-    rules: [
-      { required: true, message: '邮箱不能为空', trigger: 'blur' },
-      { validator: validateEmail, trigger: 'blur' }
-    ]
+    renderProps: { placeholder: '请输入邮箱' },
+    itemProps: {
+      rules: [
+        {required: true, message: '邮箱不能为空', trigger: 'blur'},
+        {validator: validateEmail, trigger: 'blur'}
+      ]
+    }
   }
 ])
 
@@ -305,51 +327,57 @@ const conditionalValidationItems = ref<MaSearchItem[]>([
     label: '查询类型',
     prop: 'query_type',
     render: 'radio-group',
-    options: [
-      { label: '按用户名', value: 'username' },
-      { label: '按邮箱', value: 'email' },
-      { label: '按手机号', value: 'phone' }
-    ],
-    rules: [
-      { required: true, message: '请选择查询类型', trigger: 'change' }
-    ]
+    renderProps: {
+      options: [
+        {label: '按用户名', value: 'username'},
+        {label: '按邮箱', value: 'email'},
+        {label: '按手机号', value: 'phone'}
+      ],
+    },
+    itemProps: {
+      rules: [
+        {required: true, message: '请选择查询类型', trigger: 'change'}
+      ]
+    }
   },
   {
     label: '查询值',
     prop: 'query_value',
     render: 'input',
-    props: { placeholder: '请输入查询值' },
-    rules: [
-      { required: true, message: '查询值不能为空', trigger: 'blur' },
-      {
-        validator: (rule: any, value: any, callback: any) => {
-          if (!value) {
-            callback()
-            return
-          }
-          
-          const formData = conditionalValidationRef.value?.getSearchForm() || {}
-          const queryType = formData.query_type
-          
-          if (queryType === 'email' && !validateEmail(null, value, () => {})) {
-            callback(new Error('请输入正确的邮箱格式'))
-          } else if (queryType === 'phone' && !/^1[3-9]\d{9}$/.test(value)) {
-            callback(new Error('请输入正确的手机号格式'))
-          } else if (queryType === 'username' && (value.length < 3 || value.length > 20)) {
-            callback(new Error('用户名长度在3-20个字符'))
-          } else {
-            callback()
-          }
-        },
-        trigger: 'blur'
-      }
-    ]
+    renderProps: { placeholder: '请输入查询值' },
+    itemProps: {
+      rules: [
+        {required: true, message: '查询值不能为空', trigger: 'blur'},
+        {
+          validator: (rule: any, value: any, callback: any) => {
+            if (!value) {
+              callback()
+              return
+            }
+
+            const formData = conditionalValidationRef.value?.getSearchForm() || {}
+            const queryType = formData.query_type
+
+            if (queryType === 'email' && !validateEmail(null, value, () => {})) {
+              callback(new Error('请输入正确的邮箱格式'))
+            } else if (queryType === 'phone' && !/^1[3-9]\d{9}$/.test(value)) {
+              callback(new Error('请输入正确的手机号格式'))
+            } else if (queryType === 'username' && (value.length < 3 || value.length > 20)) {
+              callback(new Error('用户名长度在3-20个字符'))
+            } else {
+              callback()
+            }
+          },
+          trigger: 'blur'
+        }
+      ]
+    }
   },
   {
     label: '是否精确匹配',
     prop: 'exact_match',
     render: 'switch',
-    props: { activeText: '是', inactiveText: '否' }
+    renderProps: { activeText: '是', inactiveText: '否' }
   }
 ])
 

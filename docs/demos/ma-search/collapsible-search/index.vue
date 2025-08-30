@@ -87,11 +87,13 @@ const searchItems = ref([
     label: '状态',
     prop: 'status',
     render: 'select',
-    options: [
-      { label: '全部', value: '' },
-      { label: '启用', value: 1 },
-      { label: '禁用', value: 0 }
-    ]
+    renderProps: {
+      options: [
+        { label: '全部', value: '' },
+        { label: '启用', value: 1 },
+        { label: '禁用', value: 0 }
+      ]
+    }
   }
 ])
 
@@ -131,12 +133,14 @@ const moreSearchItems = ref([
     label: '部门',
     prop: 'department',
     render: 'select',
-    options: [
-      { label: '全部部门', value: '' },
-      { label: '技术部', value: 'tech' },
-      { label: '产品部', value: 'product' },
-      { label: '运营部', value: 'operation' }
-    ]
+    renderProps: {
+      options: [
+        { label: '全部部门', value: 'all' },
+        { label: '技术部', value: 'tech' },
+        { label: '产品部', value: 'product' },
+        { label: '运营部', value: 'operation' }
+      ]
+    }
   },
   {
     label: '职位',
@@ -161,10 +165,10 @@ const foldOptions1 = {
   fold: true,
   foldRows: 1,
   text: {
-    searchBtn: '搜索',
-    resetBtn: '重置',
-    isFoldBtn: '展开更多',
-    notFoldBtn: '收起'
+    searchBtn: () => '搜索',
+    resetBtn: () => '重置',
+    isFoldBtn: () => '展开更多',
+    notFoldBtn: () => '收起'
   }
 }
 
@@ -173,10 +177,10 @@ const foldOptions2 = {
   fold: true,
   foldRows: 3,
   text: {
-    searchBtn: '开始搜索',
-    resetBtn: '清空重置',
-    isFoldBtn: '显示全部条件',
-    notFoldBtn: '收起部分条件'
+    searchBtn: () => '开始搜索',
+    resetBtn: () => '清空重置',
+    isFoldBtn: () => '显示全部条件',
+    notFoldBtn: () => '收起部分条件'
   }
 }
 
@@ -191,7 +195,7 @@ const handleReset = (formData: any) => {
 }
 
 const handleFoldToggle = (state: boolean) => {
-  ElMessage(`搜索框${state ? '已折叠' : '已展开'}`)
+  ElMessage.info(`搜索框${state ? '已折叠' : '已展开'}`)
 }
 
 const toggleFold1 = () => {
