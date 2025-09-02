@@ -1,910 +1,911 @@
-/*!***/
-/* * Chinese Documentation Optimizations for VitePress*/
-/* * Tailored for MineAdmin Enterprise Documentation*/
-/* **/
-/* * This stylesheet provides comprehensive optimizations for Chinese technical documentation,*/
-/* * focusing on readability, professional aesthetics, and enterprise-grade user experience.*/
-/* *!*/
-
-/*!* ========================================================================*/
-/*   Chinese Typography Foundation*/
-/*   ======================================================================== *!*/
-
-/*!* Optimized font stack for Chinese reading *!*/
-/*:root {*/
-/*  !* Enhanced Chinese font variables *!*/
-/*  --cn-font-sans: 'Source Han Sans CN', 'Noto Sans CJK SC', 'PingFang SC',*/
-/*                  'Hiragino Sans GB', 'Microsoft YaHei UI', 'Microsoft YaHei',*/
-/*                  'WenQuanYi Micro Hei', sans-serif;*/
-/*  --cn-font-serif: 'Source Han Serif CN', 'Noto Serif CJK SC', 'Songti SC',*/
-/*                   'SimSun', serif;*/
-/*  --cn-font-kai: 'Kaiti SC', 'KaiTi', 'STKaiti', '楷体', serif;*/
-
-/*  !* Optimized spacing for Chinese content *!*/
-/*  --cn-line-height-base: 1.8;*/
-/*  --cn-line-height-heading: 1.4;*/
-/*  --cn-line-height-compact: 1.6;*/
-/*  --cn-line-height-relaxed: 2.0;*/
-
-/*  !* Character spacing *!*/
-/*  --cn-letter-spacing-normal: 0.05em;*/
-/*  --cn-letter-spacing-wide: 0.08em;*/
-/*  --cn-letter-spacing-tight: 0.02em;*/
-
-/*  !* Content width for optimal reading *!*/
-/*  --cn-content-width: 840px;*/
-/*  --cn-content-width-wide: 960px;*/
-/*  --cn-content-width-narrow: 720px;*/
-
-/*  !* Spacing rhythm *!*/
-/*  --cn-spacing-unit: 0.25rem;*/
-/*  --cn-paragraph-spacing: 1.5rem;*/
-/*  --cn-section-spacing: 3rem;*/
-/*  --cn-heading-spacing-top: 2.5rem;*/
-/*  --cn-heading-spacing-bottom: 1rem;*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Global Chinese Content Optimizations*/
-/*   ======================================================================== *!*/
-
-/*!* Apply Chinese-optimized typography to main content *!*/
-/*.VPDoc .vp-doc :lang(zh),*/
-/*.VPDoc .vp-doc :lang(zh-CN),*/
-/*.VPDoc .vp-doc :lang(zh-TW),*/
-/*.VPDoc .vp-doc :lang(zh-HK) {*/
-/*  font-family: var(--cn-font-sans);*/
-/*  text-rendering: optimizeLegibility;*/
-/*  -webkit-font-smoothing: antialiased;*/
-/*  font-feature-settings: 'kern' 1;*/
-/*}*/
-
-/*!* Main content container optimization *!*/
-/*.VPDoc.has-aside .content-container {*/
-/*  max-width: var(--cn-content-width);*/
-/*}*/
-
-/*.VPDoc:not(.has-aside) .content-container {*/
-/*  max-width: var(--cn-content-width-wide);*/
-/*}*/
-
-/*!* Content area padding and spacing *!*/
-/*.vp-doc {*/
-/*  padding: 2rem 2.5rem 3rem;*/
-/*  font-size: 16px;*/
-/*  line-height: var(--cn-line-height-base);*/
-/*}*/
-
-/*@media (max-width: 768px) {*/
-/*  .vp-doc {*/
-/*    padding: 1.5rem 1.25rem 2rem;*/
-/*    font-size: 15px;*/
-/*  }*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Enhanced Paragraph Styling for Chinese*/
-/*   ======================================================================== *!*/
-
-/*.vp-doc p {*/
-/*  margin: var(--cn-paragraph-spacing) 0;*/
-/*  line-height: var(--cn-line-height-base);*/
-/*  letter-spacing: var(--cn-letter-spacing-normal);*/
-/*  text-justify: inter-character;*/
-/*  word-break: keep-all;*/
-/*  overflow-wrap: break-word;*/
-/*  hyphens: none;*/
-/*}*/
-
-/*!* First paragraph emphasis *!*/
-/*.vp-doc > p:first-of-type {*/
-/*  font-size: 1.125rem;*/
-/*  line-height: var(--cn-line-height-relaxed);*/
-/*  color: var(--vp-c-text-2);*/
-/*  margin-bottom: 2rem;*/
-/*}*/
-
-/*!* Consecutive paragraphs spacing *!*/
-/*.vp-doc p + p {*/
-/*  margin-top: 1rem;*/
-/*}*/
-
-/*!* Paragraph with following list *!*/
-/*.vp-doc p + ul,*/
-/*.vp-doc p + ol {*/
-/*  margin-top: 0.75rem;*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Heading Hierarchy Optimization*/
-/*   ======================================================================== *!*/
-
-/*.vp-doc h1,*/
-/*.vp-doc h2,*/
-/*.vp-doc h3,*/
-/*.vp-doc h4,*/
-/*.vp-doc h5,*/
-/*.vp-doc h6 {*/
-/*  font-family: var(--cn-font-sans);*/
-/*  font-weight: 600;*/
-/*  line-height: var(--cn-line-height-heading);*/
-/*  letter-spacing: var(--cn-letter-spacing-tight);*/
-/*  position: relative;*/
-/*  scroll-margin-top: calc(var(--vp-nav-height) + 24px);*/
-/*}*/
-
-/*!* H1 - Page Title *!*/
-/*.vp-doc h1 {*/
-/*  font-size: 2.25rem;*/
-/*  font-weight: 700;*/
-/*  margin: 0 0 2rem;*/
-/*  padding-bottom: 1rem;*/
-/*  border-bottom: 3px solid var(--vp-c-brand-1);*/
-/*  letter-spacing: -0.02em;*/
-/*  background: linear-gradient(135deg, var(--vp-c-text-1) 0%, var(--vp-c-brand-1) 100%);*/
-/*  -webkit-background-clip: text;*/
-/*  background-clip: text;*/
-/*  -webkit-text-fill-color: transparent;*/
-/*}*/
-
-/*!* H2 - Major Sections *!*/
-/*.vp-doc h2 {*/
-/*  font-size: 1.75rem;*/
-/*  font-weight: 600;*/
-/*  margin: var(--cn-section-spacing) 0 var(--cn-heading-spacing-bottom) 0;*/
-/*  padding-bottom: 0.75rem;*/
-/*  border-bottom: 2px solid var(--vp-c-divider);*/
-/*  position: relative;*/
-/*}*/
-
-/*!* H2 with decorative element *!*/
-/*.vp-doc h2::before {*/
-/*  content: '';*/
-/*  position: absolute;*/
-/*  left: 0;*/
-/*  bottom: -2px;*/
-/*  width: 60px;*/
-/*  height: 2px;*/
-/*  background: var(--vp-c-brand-1);*/
-/*  transition: width 0.3s ease;*/
-/*}*/
-
-/*.vp-doc h2:hover::before {*/
-/*  width: 100px;*/
-/*}*/
-
-/*!* H3 - Subsections *!*/
-/*.vp-doc h3 {*/
-/*  font-size: 1.375rem;*/
-/*  font-weight: 600;*/
-/*  margin: calc(var(--cn-heading-spacing-top) * 0.8) 0 var(--cn-heading-spacing-bottom) 0;*/
-/*  padding-left: 12px;*/
-/*  border-left: 3px solid var(--vp-c-brand-1);*/
-/*}*/
-
-/*!* H4 - Minor Subsections *!*/
-/*.vp-doc h4 {*/
-/*  font-size: 1.125rem;*/
-/*  font-weight: 600;*/
-/*  margin: calc(var(--cn-heading-spacing-top) * 0.6) 0 calc(var(--cn-heading-spacing-bottom) * 0.8) 0;*/
-/*  color: var(--vp-c-text-1);*/
-/*}*/
-
-/*!* H5 & H6 - Detailed Sections *!*/
-/*.vp-doc h5 {*/
-/*  font-size: 1rem;*/
-/*  font-weight: 600;*/
-/*  margin: calc(var(--cn-heading-spacing-top) * 0.5) 0 calc(var(--cn-heading-spacing-bottom) * 0.6) 0;*/
-/*  text-transform: uppercase;*/
-/*  letter-spacing: 0.05em;*/
-/*  color: var(--vp-c-text-2);*/
-/*}*/
-
-/*.vp-doc h6 {*/
-/*  font-size: 0.875rem;*/
-/*  font-weight: 600;*/
-/*  margin: calc(var(--cn-heading-spacing-top) * 0.4) 0 calc(var(--cn-heading-spacing-bottom) * 0.5) 0;*/
-/*  color: var(--vp-c-text-3);*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Enhanced List Styling*/
-/*   ======================================================================== *!*/
-
-/*.vp-doc ul,*/
-/*.vp-doc ol {*/
-/*  margin: 1.25rem 0;*/
-/*  padding-left: 2rem;*/
-/*  line-height: var(--cn-line-height-base);*/
-/*}*/
-
-/*.vp-doc li {*/
-/*  margin: 0.5rem 0;*/
-/*  position: relative;*/
-/*  padding-left: 0.25rem;*/
-/*}*/
-
-/*!* Custom bullet points for unordered lists *!*/
-/*.vp-doc ul > li::marker {*/
-/*  content: '▸';*/
-/*  color: var(--vp-c-brand-1);*/
-/*  font-size: 1.2em;*/
-/*  font-weight: bold;*/
-/*}*/
-
-/*!* Nested list styling *!*/
-/*.vp-doc li ul,*/
-/*.vp-doc li ol {*/
-/*  margin: 0.5rem 0 0.5rem 0;*/
-/*}*/
-
-/*.vp-doc li ul > li::marker {*/
-/*  content: '◦';*/
-/*  font-size: 1em;*/
-/*}*/
-
-/*.vp-doc li li ul > li::marker {*/
-/*  content: '▪';*/
-/*  font-size: 0.8em;*/
-/*}*/
-
-/*!* Ordered list enhancement *!*/
-/*.vp-doc ol {*/
-/*  counter-reset: list-counter;*/
-/*  list-style: none;*/
-/*}*/
-
-/*.vp-doc ol > li {*/
-/*  counter-increment: list-counter;*/
-/*  position: relative;*/
-/*  padding-left: 2rem;*/
-/*}*/
-
-/*.vp-doc ol > li::before {*/
-/*  content: counter(list-counter);*/
-/*  position: absolute;*/
-/*  left: 0;*/
-/*  top: 0.125rem;*/
-/*  width: 1.5rem;*/
-/*  height: 1.5rem;*/
-/*  background: var(--vp-c-brand-soft);*/
-/*  color: var(--vp-c-brand-1);*/
-/*  border-radius: 50%;*/
-/*  display: flex;*/
-/*  align-items: center;*/
-/*  justify-content: center;*/
-/*  font-weight: 600;*/
-/*  font-size: 0.875rem;*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Enhanced Link Styling*/
-/*   ======================================================================== *!*/
-
-/*.vp-doc a {*/
-/*  color: var(--vp-c-brand-1);*/
-/*  text-decoration: none;*/
-/*  position: relative;*/
-/*  font-weight: 500;*/
-/*  transition: color 0.25s ease;*/
-/*  padding-bottom: 1px;*/
-/*  border-bottom: 1px solid transparent;*/
-/*}*/
-
-/*.vp-doc a:hover {*/
-/*  color: var(--vp-c-brand-2);*/
-/*  border-bottom-color: var(--vp-c-brand-2);*/
-/*}*/
-
-/*!* External link indicator *!*/
-/*.vp-doc a[target="_blank"]::after {*/
-/*  content: ' ↗';*/
-/*  font-size: 0.75em;*/
-/*  vertical-align: super;*/
-/*  margin-left: 0.125rem;*/
-/*  color: var(--vp-c-text-3);*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Custom Block (Tips/Warnings) Enhancement*/
-/*   ======================================================================== *!*/
-
-/*.vp-doc .tip,*/
-/*.vp-doc .warning,*/
-/*.vp-doc .danger,*/
-/*.vp-doc .info,*/
-/*.vp-doc .details {*/
-/*  margin: 2rem 0;*/
-/*  padding: 1.25rem 1.5rem;*/
-/*  border-radius: 8px;*/
-/*  border: 1px solid;*/
-/*  position: relative;*/
-/*  overflow: hidden;*/
-/*}*/
-
-/*!* Enhanced tip block *!*/
-/*.vp-doc .tip {*/
-/*  background: linear-gradient(135deg, var(--vp-c-tip-soft) 0%, transparent 100%);*/
-/*  border-color: var(--vp-c-tip-1);*/
-/*  border-left-width: 4px;*/
-/*}*/
-
-/*.vp-doc .tip::before {*/
-/*  content: '💡';*/
-/*  position: absolute;*/
-/*  top: 1.25rem;*/
-/*  right: 1.5rem;*/
-/*  font-size: 1.5rem;*/
-/*  opacity: 0.3;*/
-/*}*/
-
-/*!* Enhanced warning block *!*/
-/*.vp-doc .warning {*/
-/*  background: linear-gradient(135deg, var(--vp-c-warning-soft) 0%, transparent 100%);*/
-/*  border-color: var(--vp-c-warning-1);*/
-/*  border-left-width: 4px;*/
-/*}*/
-
-/*.vp-doc .warning::before {*/
-/*  content: '⚠️';*/
-/*  position: absolute;*/
-/*  top: 1.25rem;*/
-/*  right: 1.5rem;*/
-/*  font-size: 1.5rem;*/
-/*  opacity: 0.3;*/
-/*}*/
-
-/*!* Enhanced danger block *!*/
-/*.vp-doc .danger {*/
-/*  background: linear-gradient(135deg, var(--vp-c-danger-soft) 0%, transparent 100%);*/
-/*  border-color: var(--vp-c-danger-1);*/
-/*  border-left-width: 4px;*/
-/*}*/
-
-/*.vp-doc .danger::before {*/
-/*  content: '🚫';*/
-/*  position: absolute;*/
-/*  top: 1.25rem;*/
-/*  right: 1.5rem;*/
-/*  font-size: 1.5rem;*/
-/*  opacity: 0.3;*/
-/*}*/
-
-/*!* Custom block title styling *!*/
-/*.vp-doc .custom-block-title {*/
-/*  font-weight: 700;*/
-/*  margin-bottom: 0.5rem;*/
-/*  font-size: 1.05rem;*/
-/*  letter-spacing: var(--cn-letter-spacing-tight);*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Code Block Enhancements*/
-/*   ======================================================================== *!*/
-
-/*!* Inline code styling *!*/
-/*.vp-doc code:not(pre code) {*/
-/*  background: linear-gradient(135deg, var(--vp-c-brand-soft) 0%, var(--vp-c-brand-soft) 100%);*/
-/*  color: var(--vp-c-brand-1);*/
-/*  padding: 0.2rem 0.4rem;*/
-/*  border-radius: 4px;*/
-/*  font-size: 0.875em;*/
-/*  font-weight: 500;*/
-/*  font-family: 'JetBrains Mono', 'Fira Code', monospace;*/
-/*  white-space: nowrap;*/
-/*  margin: 0 0.125rem;*/
-/*}*/
-
-/*!* Code block container *!*/
-/*.vp-doc div[class*='language-'] {*/
-/*  margin: 1.5rem 0;*/
-/*  border-radius: 8px;*/
-/*  overflow: hidden;*/
-/*  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);*/
-/*  border: 1px solid var(--vp-c-divider);*/
-/*}*/
-
-/*.dark .vp-doc div[class*='language-'] {*/
-/*  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);*/
-/*}*/
-
-/*!* Code block title bar *!*/
-/*.vp-doc div[class*='language-'] .lang {*/
-/*  position: absolute;*/
-/*  top: 8px;*/
-/*  right: 8px;*/
-/*  z-index: 2;*/
-/*  padding: 0.125rem 0.5rem;*/
-/*  background: var(--vp-c-brand-soft);*/
-/*  color: var(--vp-c-brand-1);*/
-/*  border-radius: 4px;*/
-/*  font-size: 0.75rem;*/
-/*  font-weight: 600;*/
-/*  text-transform: uppercase;*/
-/*}*/
-
-/*!* Code content *!*/
-/*.vp-doc div[class*='language-'] pre {*/
-/*  padding: 1.25rem 1.5rem;*/
-/*  overflow-x: auto;*/
-/*  line-height: 1.6;*/
-/*  font-size: 0.875rem;*/
-/*}*/
-
-/*!* Line numbers styling *!*/
-/*.vp-doc div[class*='language-'].line-numbers-mode pre {*/
-/*  padding-left: 3.5rem;*/
-/*}*/
-
-/*.vp-doc .line-numbers-wrapper {*/
-/*  width: 2.5rem;*/
-/*  text-align: right;*/
-/*  padding-right: 1rem;*/
-/*  color: var(--vp-c-text-3);*/
-/*  font-size: 0.75rem;*/
-/*  line-height: 1.6;*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Table Styling for Documentation*/
-/*   ======================================================================== *!*/
-
-/*.vp-doc table {*/
-/*  !*margin: 2rem 0;*!*/
-/*  !*width: 100%;*!*/
-/*  !*border-collapse: separate;*!*/
-/*  !*border-spacing: 0;*!*/
-/*  !*border-radius: 8px;*!*/
-/*  !*overflow: hidden;*!*/
-/*  !*box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);*!*/
-/*  !*font-size: 0.9375rem;*!*/
-/*}*/
-
-/*.vp-doc thead {*/
-/*  background: linear-gradient(135deg, var(--vp-c-brand-soft) 0%, var(--vp-c-brand-soft) 100%);*/
-/*}*/
-
-/*.vp-doc th {*/
-/*  padding: 0.875rem 1rem;*/
-/*  text-align: left;*/
-/*  font-weight: 600;*/
-/*  color: var(--vp-c-brand-1);*/
-/*  border-bottom: 2px solid var(--vp-c-brand-1);*/
-/*  letter-spacing: var(--cn-letter-spacing-tight);*/
-/*}*/
-
-/*.vp-doc td {*/
-/*  padding: 0.75rem 1rem;*/
-/*  border-bottom: 1px solid var(--vp-c-divider);*/
-/*}*/
-
-/*.vp-doc tbody tr:last-child td {*/
-/*  border-bottom: none;*/
-/*}*/
-
-/*.vp-doc tbody tr:hover {*/
-/*  background: var(--vp-c-bg-soft);*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Section Dividers and Visual Separators*/
-/*   ======================================================================== *!*/
-
-/*.vp-doc hr {*/
-/*  margin: var(--cn-section-spacing) 0;*/
-/*  border: none;*/
-/*  height: 1px;*/
-/*  background: linear-gradient(90deg,*/
-/*    transparent,*/
-/*    var(--vp-c-divider) 10%,*/
-/*    var(--vp-c-divider) 90%,*/
-/*    transparent);*/
-/*  position: relative;*/
-/*}*/
-
-/*!* Decorative divider *!*/
-/*.vp-doc hr::after {*/
-/*  content: '◈';*/
-/*  position: absolute;*/
-/*  top: 50%;*/
-/*  left: 50%;*/
-/*  transform: translate(-50%, -50%);*/
-/*  background: var(--vp-c-bg);*/
-/*  padding: 0 1rem;*/
-/*  color: var(--vp-c-brand-1);*/
-/*  font-size: 1.25rem;*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Blockquote Styling*/
-/*   ======================================================================== *!*/
-
-/*.vp-doc blockquote {*/
-/*  margin: 2rem 0;*/
-/*  padding: 1.25rem 1.5rem 1.25rem 2rem;*/
-/*  border-left: 4px solid var(--vp-c-brand-1);*/
-/*  background: linear-gradient(135deg, var(--vp-c-brand-soft) 0%, transparent 50%);*/
-/*  border-radius: 0 8px 8px 0;*/
-/*  position: relative;*/
-/*  font-style: normal;*/
-/*}*/
-
-/*.vp-doc blockquote::before {*/
-/*  content: '"';*/
-/*  position: absolute;*/
-/*  top: -0.5rem;*/
-/*  left: 1rem;*/
-/*  font-size: 4rem;*/
-/*  color: var(--vp-c-brand-1);*/
-/*  opacity: 0.2;*/
-/*  font-family: Georgia, serif;*/
-/*}*/
-
-/*.vp-doc blockquote p {*/
-/*  margin: 0.5rem 0;*/
-/*  line-height: var(--cn-line-height-relaxed);*/
-/*  color: var(--vp-c-text-1);*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Table of Contents Enhancement*/
-/*   ======================================================================== *!*/
-
-/*.VPDocAside .outline-title {*/
-/*  font-weight: 700;*/
-/*  font-size: 0.875rem;*/
-/*  text-transform: uppercase;*/
-/*  letter-spacing: 0.05em;*/
-/*  margin-bottom: 1rem;*/
-/*  color: var(--vp-c-text-2);*/
-/*}*/
-
-/*.VPDocAside .outline-link {*/
-/*  padding: 0.375rem 0;*/
-/*  line-height: 1.5;*/
-/*  font-size: 0.875rem;*/
-/*  transition: all 0.3s ease;*/
-/*  display: block;*/
-/*  position: relative;*/
-/*  color: var(--vp-c-text-2);*/
-/*}*/
-
-/*.VPDocAside .outline-link:hover {*/
-/*  color: var(--vp-c-brand-1);*/
-/*  padding-left: 0.5rem;*/
-/*}*/
-
-/*.VPDocAside .outline-link.active {*/
-/*  color: var(--vp-c-brand-1);*/
-/*  font-weight: 600;*/
-/*  padding-left: 0.5rem;*/
-/*}*/
-
-/*.VPDocAside .outline-link.active::before {*/
-/*  content: '';*/
-/*  position: absolute;*/
-/*  left: -1rem;*/
-/*  top: 50%;*/
-/*  transform: translateY(-50%);*/
-/*  width: 3px;*/
-/*  height: 1.5rem;*/
-/*  background: var(--vp-c-brand-1);*/
-/*  border-radius: 2px;*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Reading Progress Indicator*/
-/*   ======================================================================== *!*/
-
-/*!* Add a reading progress bar *!*/
-/*.vp-doc::before {*/
-/*  content: '';*/
-/*  position: fixed;*/
-/*  top: var(--vp-nav-height);*/
-/*  left: 0;*/
-/*  width: var(--reading-progress, 0%);*/
-/*  height: 3px;*/
-/*  background: linear-gradient(90deg, var(--vp-c-brand-1), var(--vp-c-brand-2));*/
-/*  z-index: 1000;*/
-/*  transition: width 0.1s ease;*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Smooth Scrolling and Scroll Behavior*/
-/*   ======================================================================== *!*/
-
-/*html {*/
-/*  scroll-behavior: smooth;*/
-/*  scroll-padding-top: calc(var(--vp-nav-height) + 20px);*/
-/*}*/
-
-/*!* Smooth transitions for anchor links *!*/
-/*.vp-doc [id] {*/
-/*  scroll-margin-top: calc(var(--vp-nav-height) + 20px);*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Print Styles for Documentation*/
-/*   ======================================================================== *!*/
-
-/*@media print {*/
-/*  .vp-doc {*/
-/*    font-size: 12pt;*/
-/*    line-height: 1.5;*/
-/*    max-width: 100%;*/
-/*  }*/
-
-/*  .vp-doc h1 {*/
-/*    font-size: 20pt;*/
-/*    page-break-after: avoid;*/
-/*  }*/
-
-/*  .vp-doc h2 {*/
-/*    font-size: 16pt;*/
-/*    page-break-after: avoid;*/
-/*  }*/
-
-/*  .vp-doc h3 {*/
-/*    font-size: 14pt;*/
-/*    page-break-after: avoid;*/
-/*  }*/
-
-/*  .vp-doc pre,*/
-/*  .vp-doc blockquote,*/
-/*  .vp-doc table {*/
-/*    page-break-inside: avoid;*/
-/*  }*/
-
-/*  .vp-doc a {*/
-/*    color: inherit;*/
-/*    text-decoration: underline;*/
-/*  }*/
-
-/*  .vp-doc a[href^="http"]:after {*/
-/*    content: " (" attr(href) ")";*/
-/*    font-size: 0.8em;*/
-/*  }*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Mobile Responsive Optimizations*/
-/*   ======================================================================== *!*/
-
-/*@media (max-width: 768px) {*/
-/*  .vp-doc {*/
-/*    font-size: 15px;*/
-/*  }*/
-
-/*  .vp-doc h1 {*/
-/*    font-size: 1.875rem;*/
-/*  }*/
-
-/*  .vp-doc h2 {*/
-/*    font-size: 1.5rem;*/
-/*  }*/
-
-/*  .vp-doc h3 {*/
-/*    font-size: 1.25rem;*/
-/*  }*/
-
-/*  .vp-doc p {*/
-/*    text-align: left;*/
-/*    line-height: 1.75;*/
-/*  }*/
-
-/*  .vp-doc ul,*/
-/*  .vp-doc ol {*/
-/*    padding-left: 1.5rem;*/
-/*  }*/
-
-/*  .vp-doc table {*/
-/*    font-size: 0.875rem;*/
-/*  }*/
-
-/*  .vp-doc th,*/
-/*  .vp-doc td {*/
-/*    padding: 0.5rem;*/
-/*  }*/
-
-/*  .vp-doc div[class*='language-'] pre {*/
-/*    padding: 1rem;*/
-/*    font-size: 0.8125rem;*/
-/*  }*/
-/*}*/
-
-/*@media (max-width: 480px) {*/
-/*  .vp-doc {*/
-/*    font-size: 14px;*/
-/*    padding: 1rem;*/
-/*  }*/
-
-/*  .vp-doc h1 {*/
-/*    font-size: 1.5rem;*/
-/*  }*/
-
-/*  .vp-doc h2 {*/
-/*    font-size: 1.25rem;*/
-/*  }*/
-
-/*  .vp-doc h3 {*/
-/*    font-size: 1.125rem;*/
-/*  }*/
-
-/*  .vp-doc p {*/
-/*    margin: 1rem 0;*/
-/*  }*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Dark Mode Optimizations*/
-/*   ======================================================================== *!*/
-
-/*.dark .vp-doc h1 {*/
-/*  background: linear-gradient(135deg, var(--vp-c-text-1) 0%, var(--vp-c-brand-1) 100%);*/
-/*  -webkit-background-clip: text;*/
-/*  background-clip: text;*/
-/*  -webkit-text-fill-color: transparent;*/
-/*}*/
-
-/*.dark .vp-doc code:not(pre code) {*/
-/*  background: linear-gradient(135deg,*/
-/*    rgba(99, 102, 241, 0.2) 0%,*/
-/*    rgba(99, 102, 241, 0.15) 100%);*/
-/*}*/
-
-/*.dark .vp-doc blockquote {*/
-/*  background: linear-gradient(135deg,*/
-/*    rgba(99, 102, 241, 0.1) 0%,*/
-/*    transparent 50%);*/
-/*}*/
-
-/*.dark .vp-doc table {*/
-/*  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);*/
-/*}*/
-
-/*.dark .vp-doc thead {*/
-/*  background: linear-gradient(135deg,*/
-/*    rgba(99, 102, 241, 0.15) 0%,*/
-/*    rgba(99, 102, 241, 0.1) 100%);*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Animation and Interaction Enhancements*/
-/*   ======================================================================== *!*/
-
-/*!* Smooth fade-in for content sections *!*/
-/*.vp-doc > * {*/
-/*  animation: fadeInUp 0.5s ease-out;*/
-/*}*/
-
-/*@keyframes fadeInUp {*/
-/*  from {*/
-/*    opacity: 0;*/
-/*    transform: translateY(10px);*/
-/*  }*/
-/*  to {*/
-/*    opacity: 1;*/
-/*    transform: translateY(0);*/
-/*  }*/
-/*}*/
-
-/*!* Hover effects for interactive elements *!*/
-/*.vp-doc a,*/
-/*.vp-doc button,*/
-/*.vp-doc .custom-block,*/
-/*.vp-doc code:not(pre code) {*/
-/*  transition: all 0.3s ease;*/
-/*}*/
-
-/*!* Focus styles for accessibility *!*/
-/*.vp-doc a:focus-visible,*/
-/*.vp-doc button:focus-visible {*/
-/*  outline: 2px solid var(--vp-c-brand-1);*/
-/*  outline-offset: 2px;*/
-/*  border-radius: 4px;*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Special Chinese Content Patterns*/
-/*   ======================================================================== *!*/
-
-/*!* Emphasis for important Chinese terms *!*/
-/*.vp-doc strong,*/
-/*.vp-doc b {*/
-/*  color: var(--vp-c-brand-1);*/
-/*  font-weight: 600;*/
-/*  padding: 0 0.125rem;*/
-/*}*/
-
-/*!* Mixed Chinese-English content optimization *!*/
-/*.vp-doc :lang(zh) code:not(pre code),*/
-/*.vp-doc :lang(zh-CN) code:not(pre code) {*/
-/*  margin: 0 0.25rem;*/
-/*  padding: 0.125rem 0.375rem;*/
-/*}*/
-
-/*!* Definition lists for documentation *!*/
-/*.vp-doc dl {*/
-/*  margin: 1.5rem 0;*/
-/*  padding: 1rem;*/
-/*  background: var(--vp-c-bg-soft);*/
-/*  border-radius: 8px;*/
-/*}*/
-
-/*.vp-doc dt {*/
-/*  font-weight: 600;*/
-/*  color: var(--vp-c-brand-1);*/
-/*  margin-bottom: 0.5rem;*/
-/*  font-size: 1.05rem;*/
-/*}*/
-
-/*.vp-doc dd {*/
-/*  margin-left: 1.5rem;*/
-/*  margin-bottom: 1rem;*/
-/*  color: var(--vp-c-text-2);*/
-/*  line-height: var(--cn-line-height-base);*/
-/*}*/
-
-/*.vp-doc dd:last-child {*/
-/*  margin-bottom: 0;*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Utility Classes for Content Layout*/
-/*   ======================================================================== *!*/
-
-/*!* Content alignment utilities *!*/
-/*.vp-doc .text-center {*/
-/*  text-align: center;*/
-/*}*/
-
-/*.vp-doc .text-right {*/
-/*  text-align: right;*/
-/*}*/
-
-/*.vp-doc .text-left {*/
-/*  text-align: left;*/
-/*}*/
-
-/*!* Spacing utilities *!*/
-/*.vp-doc .mt-4 {*/
-/*  margin-top: 2rem;*/
-/*}*/
-
-/*.vp-doc .mb-4 {*/
-/*  margin-bottom: 2rem;*/
-/*}*/
-
-/*.vp-doc .my-4 {*/
-/*  margin-top: 2rem;*/
-/*  margin-bottom: 2rem;*/
-/*}*/
-
-/*!* Visual highlight *!*/
-/*.vp-doc .highlight {*/
-/*  background: linear-gradient(180deg, transparent 60%, var(--vp-c-brand-soft) 60%);*/
-/*  padding: 0.125rem 0.25rem;*/
-/*  border-radius: 2px;*/
-/*}*/
-
-/*!* Feature grid for documentation *!*/
-/*.vp-doc .feature-grid {*/
-/*  display: grid;*/
-/*  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));*/
-/*  gap: 1.5rem;*/
-/*  margin: 2rem 0;*/
-/*}*/
-
-/*.vp-doc .feature-card {*/
-/*  padding: 1.5rem;*/
-/*  background: var(--vp-c-bg-soft);*/
-/*  border-radius: 8px;*/
-/*  border: 1px solid var(--vp-c-divider);*/
-/*  transition: all 0.3s ease;*/
-/*}*/
-
-/*.vp-doc .feature-card:hover {*/
-/*  transform: translateY(-4px);*/
-/*  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);*/
-/*  border-color: var(--vp-c-brand-1);*/
-/*}*/
+/**
+ * Chinese Documentation Optimizations for VitePress
+ * Tailored for MineAdmin Enterprise Documentation
+ *
+ * This stylesheet provides comprehensive optimizations for Chinese technical documentation,
+ * focusing on readability, professional aesthetics, and enterprise-grade user experience.
+ */
+
+/* ========================================================================
+   Chinese Typography Foundation
+   ======================================================================== */
+
+/* Optimized font stack for Chinese reading */
+:root {
+    /* Enhanced Chinese font variables */
+    --cn-font-sans: 'Source Han Sans CN', 'Noto Sans CJK SC', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei UI', 'Microsoft YaHei',
+    'WenQuanYi Micro Hei', sans-serif;
+    --cn-font-serif: 'Source Han Serif CN', 'Noto Serif CJK SC', 'Songti SC',
+    'SimSun', serif;
+    --cn-font-kai: 'Kaiti SC', 'KaiTi', 'STKaiti', '楷体', serif;
+
+    /* Optimized spacing for Chinese content */
+    --cn-line-height-base: 1.8;
+    --cn-line-height-heading: 1.4;
+    --cn-line-height-compact: 1.6;
+    --cn-line-height-relaxed: 2.0;
+
+    /* Character spacing */
+    --cn-letter-spacing-normal: 0.05em;
+    --cn-letter-spacing-wide: 0.08em;
+    --cn-letter-spacing-tight: 0.02em;
+
+    /* Content width for optimal reading */
+    --cn-content-width: 840px;
+    --cn-content-width-wide: 960px;
+    --cn-content-width-narrow: 720px;
+
+    /* Spacing rhythm */
+    --cn-spacing-unit: 0.25rem;
+    --cn-paragraph-spacing: 1.5rem;
+    --cn-section-spacing: 3rem;
+    --cn-heading-spacing-top: 2.5rem;
+    --cn-heading-spacing-bottom: 1rem;
+}
+
+/* ========================================================================
+   Global Chinese Content Optimizations
+   ======================================================================== */
+
+/* Apply Chinese-optimized typography to main content */
+.VPDoc .vp-doc :lang(zh),
+.VPDoc .vp-doc :lang(zh-CN),
+.VPDoc .vp-doc :lang(zh-TW),
+.VPDoc .vp-doc :lang(zh-HK) {
+    font-family: var(--cn-font-sans);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: 'kern' 1;
+}
+
+/* Main content container optimization */
+.VPDoc.has-aside .content-container {
+    max-width: var(--cn-content-width);
+}
+
+.VPDoc:not(.has-aside) .content-container {
+    max-width: var(--cn-content-width-wide);
+}
+
+/* Content area padding and spacing */
+.vp-doc {
+    padding: 2rem 2.5rem 3rem;
+    font-size: 16px;
+    line-height: var(--cn-line-height-base);
+}
+
+@media (max-width: 768px) {
+    .vp-doc {
+        padding: 1.5rem 1.25rem 2rem;
+        font-size: 15px;
+    }
+}
+
+/* ========================================================================
+   Enhanced Paragraph Styling for Chinese
+   ======================================================================== */
+
+.vp-doc p {
+    margin: var(--cn-paragraph-spacing) 0;
+    line-height: var(--cn-line-height-base);
+    letter-spacing: var(--cn-letter-spacing-normal);
+    text-align: justify;
+    text-justify: inter-character;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    hyphens: none;
+}
+
+/* First paragraph emphasis */
+.vp-doc > p:first-of-type {
+    font-size: 1.125rem;
+    line-height: var(--cn-line-height-relaxed);
+    color: var(--vp-c-text-2);
+    margin-bottom: 2rem;
+}
+
+/* Consecutive paragraphs spacing */
+.vp-doc p + p {
+    margin-top: 1rem;
+}
+
+/* Paragraph with following list */
+.vp-doc p + ul,
+.vp-doc p + ol {
+    margin-top: 0.75rem;
+}
+
+/* ========================================================================
+   Heading Hierarchy Optimization
+   ======================================================================== */
+
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc h4,
+.vp-doc h5,
+.vp-doc h6 {
+    font-family: var(--cn-font-sans);
+    font-weight: 600;
+    line-height: var(--cn-line-height-heading);
+    letter-spacing: var(--cn-letter-spacing-tight);
+    position: relative;
+    scroll-margin-top: calc(var(--vp-nav-height) + 24px);
+}
+
+/* H1 - Page Title */
+.vp-doc h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin: 0 0 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--vp-c-brand-1);
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--vp-c-text-1) 0%, var(--vp-c-brand-1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* H2 - Major Sections */
+.vp-doc h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: var(--cn-section-spacing) 0 var(--cn-heading-spacing-bottom) 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--vp-c-divider);
+    position: relative;
+}
+
+/* H2 with decorative element */
+.vp-doc h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 60px;
+    height: 2px;
+    background: var(--vp-c-brand-1);
+    transition: width 0.3s ease;
+}
+
+.vp-doc h2:hover::before {
+    width: 100px;
+}
+
+/* H3 - Subsections */
+.vp-doc h3 {
+    font-size: 1.375rem;
+    font-weight: 600;
+    margin: calc(var(--cn-heading-spacing-top) * 0.8) 0 var(--cn-heading-spacing-bottom) 0;
+    padding-left: 12px;
+    border-left: 3px solid var(--vp-c-brand-1);
+}
+
+/* H4 - Minor Subsections */
+.vp-doc h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: calc(var(--cn-heading-spacing-top) * 0.6) 0 calc(var(--cn-heading-spacing-bottom) * 0.8) 0;
+    color: var(--vp-c-text-1);
+}
+
+/* H5 & H6 - Detailed Sections */
+.vp-doc h5 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: calc(var(--cn-heading-spacing-top) * 0.5) 0 calc(var(--cn-heading-spacing-bottom) * 0.6) 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--vp-c-text-2);
+}
+
+.vp-doc h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin: calc(var(--cn-heading-spacing-top) * 0.4) 0 calc(var(--cn-heading-spacing-bottom) * 0.5) 0;
+    color: var(--vp-c-text-3);
+}
+
+/* ========================================================================
+   Enhanced List Styling
+   ======================================================================== */
+
+.vp-doc ul,
+.vp-doc ol {
+    margin: 1.25rem 0;
+    padding-left: 2rem;
+    line-height: var(--cn-line-height-base);
+}
+
+.vp-doc li {
+    margin: 0.5rem 0;
+    position: relative;
+    padding-left: 0.25rem;
+}
+
+/* Custom bullet points for unordered lists */
+.vp-doc ul > li::marker {
+    content: '▸';
+    color: var(--vp-c-brand-1);
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Nested list styling */
+.vp-doc li ul,
+.vp-doc li ol {
+    margin: 0.5rem 0 0.5rem 0;
+}
+
+.vp-doc li ul > li::marker {
+    content: '◦';
+    font-size: 1em;
+}
+
+.vp-doc li li ul > li::marker {
+    content: '▪';
+    font-size: 0.8em;
+}
+
+/* Ordered list enhancement */
+.vp-doc ol {
+    counter-reset: list-counter;
+    list-style: none;
+}
+
+.vp-doc ol > li {
+    counter-increment: list-counter;
+    position: relative;
+    padding-left: 2rem;
+}
+
+.vp-doc ol > li::before {
+    content: counter(list-counter);
+    position: absolute;
+    left: 0;
+    top: 0.125rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: var(--vp-c-brand-soft);
+    color: var(--vp-c-brand-1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+/* ========================================================================
+   Enhanced Link Styling
+   ======================================================================== */
+
+.vp-doc a {
+    color: var(--vp-c-brand-1);
+    text-decoration: none;
+    position: relative;
+    font-weight: 500;
+    transition: color 0.25s ease;
+    padding-bottom: 1px;
+    border-bottom: 1px solid transparent;
+}
+
+.vp-doc a:hover {
+    color: var(--vp-c-brand-2);
+    border-bottom-color: var(--vp-c-brand-2);
+}
+
+/* External link indicator */
+.vp-doc a[target="_blank"]::after {
+    content: ' ↗';
+    font-size: 0.75em;
+    vertical-align: super;
+    margin-left: 0.125rem;
+    color: var(--vp-c-text-3);
+}
+
+/* ========================================================================
+   Custom Block (Tips/Warnings) Enhancement
+   ======================================================================== */
+
+.vp-doc .tip,
+.vp-doc .warning,
+.vp-doc .danger,
+.vp-doc .info,
+.vp-doc .details {
+    margin: 2rem 0;
+    padding: 1.25rem 1.5rem;
+    border-radius: 8px;
+    border: 1px solid;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Enhanced tip block */
+.vp-doc .tip {
+    background: linear-gradient(135deg, var(--vp-c-tip-soft) 0%, transparent 100%);
+    border-color: var(--vp-c-tip-1);
+    border-left-width: 4px;
+}
+
+.vp-doc .tip::before {
+    content: '💡';
+    position: absolute;
+    top: 1.25rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+    opacity: 0.3;
+}
+
+/* Enhanced warning block */
+.vp-doc .warning {
+    background: linear-gradient(135deg, var(--vp-c-warning-soft) 0%, transparent 100%);
+    border-color: var(--vp-c-warning-1);
+    border-left-width: 4px;
+}
+
+.vp-doc .warning::before {
+    content: '⚠️';
+    position: absolute;
+    top: 1.25rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+    opacity: 0.3;
+}
+
+/* Enhanced danger block */
+.vp-doc .danger {
+    background: linear-gradient(135deg, var(--vp-c-danger-soft) 0%, transparent 100%);
+    border-color: var(--vp-c-danger-1);
+    border-left-width: 4px;
+}
+
+.vp-doc .danger::before {
+    content: '🚫';
+    position: absolute;
+    top: 1.25rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+    opacity: 0.3;
+}
+
+/* Custom block title styling */
+.vp-doc .custom-block-title {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+    letter-spacing: var(--cn-letter-spacing-tight);
+}
+
+/* ========================================================================
+   Code Block Enhancements
+   ======================================================================== */
+
+/* Inline code styling */
+.vp-doc code:not(pre code) {
+    background: linear-gradient(135deg, var(--vp-c-brand-soft) 0%, var(--vp-c-brand-soft) 100%);
+    color: var(--vp-c-brand-1);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.875em;
+    font-weight: 500;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    white-space: nowrap;
+    margin: 0 0.125rem;
+}
+
+/* Code block container */
+.vp-doc div[class*='language-'] {
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--vp-c-divider);
+}
+
+.dark .vp-doc div[class*='language-'] {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Code block title bar */
+.vp-doc div[class*='language-'] .lang {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 2;
+    padding: 0.125rem 0.5rem;
+    background: var(--vp-c-brand-soft);
+    color: var(--vp-c-brand-1);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Code content */
+.vp-doc div[class*='language-'] pre {
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    line-height: 1.6;
+    font-size: 0.875rem;
+}
+
+/* Line numbers styling */
+.vp-doc div[class*='language-'].line-numbers-mode pre {
+    padding-left: 3.5rem;
+}
+
+.vp-doc .line-numbers-wrapper {
+    width: 2.5rem;
+    text-align: right;
+    padding-right: 1rem;
+    color: var(--vp-c-text-3);
+    font-size: 0.75rem;
+    line-height: 1.6;
+}
+
+/* ========================================================================
+   Table Styling for Documentation
+   ======================================================================== */
+
+.vp-doc table {
+    margin: 2rem 0;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    font-size: 0.9375rem;
+}
+
+.vp-doc thead {
+    background: linear-gradient(135deg, var(--vp-c-brand-soft) 0%, var(--vp-c-brand-soft) 100%);
+}
+
+.vp-doc th {
+    padding: 0.875rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: var(--vp-c-brand-1);
+    border-bottom: 2px solid var(--vp-c-brand-1);
+    letter-spacing: var(--cn-letter-spacing-tight);
+}
+
+.vp-doc td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.vp-doc tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.vp-doc tbody tr:hover {
+    background: var(--vp-c-bg-soft);
+}
+
+/* ========================================================================
+   Section Dividers and Visual Separators
+   ======================================================================== */
+
+.vp-doc hr {
+    margin: var(--cn-section-spacing) 0;
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg,
+    transparent,
+    var(--vp-c-divider) 10%,
+    var(--vp-c-divider) 90%,
+    transparent);
+    position: relative;
+}
+
+/* Decorative divider */
+.vp-doc hr::after {
+    content: '◈';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--vp-c-bg);
+    padding: 0 1rem;
+    color: var(--vp-c-brand-1);
+    font-size: 1.25rem;
+}
+
+/* ========================================================================
+   Blockquote Styling
+   ======================================================================== */
+
+.vp-doc blockquote {
+    margin: 2rem 0;
+    padding: 1.25rem 1.5rem 1.25rem 2rem;
+    border-left: 4px solid var(--vp-c-brand-1);
+    background: linear-gradient(135deg, var(--vp-c-brand-soft) 0%, transparent 50%);
+    border-radius: 0 8px 8px 0;
+    position: relative;
+    font-style: normal;
+}
+
+.vp-doc blockquote::before {
+    content: '"';
+    position: absolute;
+    top: -0.5rem;
+    left: 1rem;
+    font-size: 4rem;
+    color: var(--vp-c-brand-1);
+    opacity: 0.2;
+    font-family: Georgia, serif;
+}
+
+.vp-doc blockquote p {
+    margin: 0.5rem 0;
+    line-height: var(--cn-line-height-relaxed);
+    color: var(--vp-c-text-1);
+}
+
+/* ========================================================================
+   Table of Contents Enhancement
+   ======================================================================== */
+
+.VPDocAside .outline-title {
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    color: var(--vp-c-text-2);
+}
+
+.VPDocAside .outline-link {
+    padding: 0.375rem 0;
+    line-height: 1.5;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    display: block;
+    position: relative;
+    color: var(--vp-c-text-2);
+}
+
+.VPDocAside .outline-link:hover {
+    color: var(--vp-c-brand-1);
+    padding-left: 0.5rem;
+}
+
+.VPDocAside .outline-link.active {
+    color: var(--vp-c-brand-1);
+    font-weight: 600;
+    padding-left: 0.5rem;
+}
+
+.VPDocAside .outline-link.active::before {
+    content: '';
+    position: absolute;
+    left: -1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 1.5rem;
+    background: var(--vp-c-brand-1);
+    border-radius: 2px;
+}
+
+/* ========================================================================
+   Reading Progress Indicator
+   ======================================================================== */
+
+/* Add a reading progress bar */
+.vp-doc::before {
+    content: '';
+    position: fixed;
+    top: var(--vp-nav-height);
+    left: 0;
+    width: var(--reading-progress, 0%);
+    height: 3px;
+    background: linear-gradient(90deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
+    z-index: 1000;
+    transition: width 0.1s ease;
+}
+
+/* ========================================================================
+   Smooth Scrolling and Scroll Behavior
+   ======================================================================== */
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--vp-nav-height) + 20px);
+}
+
+/* Smooth transitions for anchor links */
+.vp-doc [id] {
+    scroll-margin-top: calc(var(--vp-nav-height) + 20px);
+}
+
+/* ========================================================================
+   Print Styles for Documentation
+   ======================================================================== */
+
+@media print {
+    .vp-doc {
+        font-size: 12pt;
+        line-height: 1.5;
+        max-width: 100%;
+    }
+
+    .vp-doc h1 {
+        font-size: 20pt;
+        page-break-after: avoid;
+    }
+
+    .vp-doc h2 {
+        font-size: 16pt;
+        page-break-after: avoid;
+    }
+
+    .vp-doc h3 {
+        font-size: 14pt;
+        page-break-after: avoid;
+    }
+
+    .vp-doc pre,
+    .vp-doc blockquote,
+    .vp-doc table {
+        page-break-inside: avoid;
+    }
+
+    .vp-doc a {
+        color: inherit;
+        text-decoration: underline;
+    }
+
+    .vp-doc a[href^="http"]:after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+}
+
+/* ========================================================================
+   Mobile Responsive Optimizations
+   ======================================================================== */
+
+@media (max-width: 768px) {
+    .vp-doc {
+        font-size: 15px;
+    }
+
+    .vp-doc h1 {
+        font-size: 1.875rem;
+    }
+
+    .vp-doc h2 {
+        font-size: 1.5rem;
+    }
+
+    .vp-doc h3 {
+        font-size: 1.25rem;
+    }
+
+    .vp-doc p {
+        text-align: left;
+        line-height: 1.75;
+    }
+
+    .vp-doc ul,
+    .vp-doc ol {
+        padding-left: 1.5rem;
+    }
+
+    .vp-doc table {
+        font-size: 0.875rem;
+    }
+
+    .vp-doc th,
+    .vp-doc td {
+        padding: 0.5rem;
+    }
+
+    .vp-doc div[class*='language-'] pre {
+        padding: 1rem;
+        font-size: 0.8125rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .vp-doc {
+        font-size: 14px;
+        padding: 1rem;
+    }
+
+    .vp-doc h1 {
+        font-size: 1.5rem;
+    }
+
+    .vp-doc h2 {
+        font-size: 1.25rem;
+    }
+
+    .vp-doc h3 {
+        font-size: 1.125rem;
+    }
+
+    .vp-doc p {
+        margin: 1rem 0;
+    }
+}
+
+/* ========================================================================
+   Dark Mode Optimizations
+   ======================================================================== */
+
+.dark .vp-doc h1 {
+    background: linear-gradient(135deg, var(--vp-c-text-1) 0%, var(--vp-c-brand-1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.dark .vp-doc code:not(pre code) {
+    background: linear-gradient(135deg,
+    rgba(99, 102, 241, 0.2) 0%,
+    rgba(99, 102, 241, 0.15) 100%);
+}
+
+.dark .vp-doc blockquote {
+    background: linear-gradient(135deg,
+    rgba(99, 102, 241, 0.1) 0%,
+    transparent 50%);
+}
+
+.dark .vp-doc table {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.dark .vp-doc thead {
+    background: linear-gradient(135deg,
+    rgba(99, 102, 241, 0.15) 0%,
+    rgba(99, 102, 241, 0.1) 100%);
+}
+
+/* ========================================================================
+   Animation and Interaction Enhancements
+   ======================================================================== */
+
+/* Smooth fade-in for content sections */
+.vp-doc > * {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hover effects for interactive elements */
+.vp-doc a,
+.vp-doc button,
+.vp-doc .custom-block,
+.vp-doc code:not(pre code) {
+    transition: all 0.3s ease;
+}
+
+/* Focus styles for accessibility */
+.vp-doc a:focus-visible,
+.vp-doc button:focus-visible {
+    outline: 2px solid var(--vp-c-brand-1);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* ========================================================================
+   Special Chinese Content Patterns
+   ======================================================================== */
+
+/* Emphasis for important Chinese terms */
+.vp-doc strong,
+.vp-doc b {
+    color: var(--vp-c-brand-1);
+    font-weight: 600;
+    padding: 0 0.125rem;
+}
+
+/* Mixed Chinese-English content optimization */
+.vp-doc :lang(zh) code:not(pre code),
+.vp-doc :lang(zh-CN) code:not(pre code) {
+    margin: 0 0.25rem;
+    padding: 0.125rem 0.375rem;
+}
+
+/* Definition lists for documentation */
+.vp-doc dl {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: var(--vp-c-bg-soft);
+    border-radius: 8px;
+}
+
+.vp-doc dt {
+    font-weight: 600;
+    color: var(--vp-c-brand-1);
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+}
+
+.vp-doc dd {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--vp-c-text-2);
+    line-height: var(--cn-line-height-base);
+}
+
+.vp-doc dd:last-child {
+    margin-bottom: 0;
+}
+
+/* ========================================================================
+   Utility Classes for Content Layout
+   ======================================================================== */
+
+/* Content alignment utilities */
+.vp-doc .text-center {
+    text-align: center;
+}
+
+.vp-doc .text-right {
+    text-align: right;
+}
+
+.vp-doc .text-left {
+    text-align: left;
+}
+
+/* Spacing utilities */
+.vp-doc .mt-4 {
+    margin-top: 2rem;
+}
+
+.vp-doc .mb-4 {
+    margin-bottom: 2rem;
+}
+
+.vp-doc .my-4 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Visual highlight */
+.vp-doc .highlight {
+    background: linear-gradient(180deg, transparent 60%, var(--vp-c-brand-soft) 60%);
+    padding: 0.125rem 0.25rem;
+    border-radius: 2px;
+}
+
+/* Feature grid for documentation */
+.vp-doc .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.vp-doc .feature-card {
+    padding: 1.5rem;
+    background: var(--vp-c-bg-soft);
+    border-radius: 8px;
+    border: 1px solid var(--vp-c-divider);
+    transition: all 0.3s ease;
+}
+
+.vp-doc .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border-color: var(--vp-c-brand-1);
+}

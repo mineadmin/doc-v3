@@ -49,11 +49,11 @@
 
 /* Sync with MineAdmin shadow system */
 .VPDocAsideOutline {
-  /*box-shadow: var(--ma-shadow-sm, var(--toc-shadow-subtle));*/
+  box-shadow: var(--ma-shadow-sm, var(--toc-shadow-subtle));
 }
 
 .VPDocAsideOutline:hover {
-  /*box-shadow: var(--ma-shadow-md, var(--toc-shadow-hover));*/
+  box-shadow: var(--ma-shadow-md, var(--toc-shadow-hover));
 }
 
 /* ========================================================================
@@ -146,9 +146,9 @@
 
 .dark .VPDocAsideOutline {
   background: linear-gradient(
-    135deg,
-    rgba(30, 30, 34, 0.8) 0%,
-    rgba(30, 30, 34, 0.6) 100%
+          135deg,
+          rgba(30, 30, 34, 0.8) 0%,
+          rgba(30, 30, 34, 0.6) 100%
   );
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -156,17 +156,17 @@
 
 .dark .VPDocAsideOutline .outline-link:hover {
   background: linear-gradient(
-    90deg,
-    rgba(91, 103, 234, 0.15) 0%,
-    transparent 100%
+          90deg,
+          rgba(91, 103, 234, 0.15) 0%,
+          transparent 100%
   );
 }
 
 .dark .VPDocAsideOutline .outline-link.active {
   background: linear-gradient(
-    90deg,
-    rgba(91, 103, 234, 0.25) 0%,
-    transparent 100%
+          90deg,
+          rgba(91, 103, 234, 0.25) 0%,
+          transparent 100%
   );
 }
 
@@ -193,7 +193,7 @@
   .VPDocAsideOutline {
     border: 2px solid var(--vp-c-text-1);
   }
-  
+
   .VPDocAsideOutline .outline-link.active {
     background: var(--vp-c-brand-1);
     color: var(--vp-c-bg);
@@ -320,7 +320,7 @@
   .VPDocAsideOutline {
     background: var(--vp-c-bg);
   }
-  
+
   .dark .VPDocAsideOutline {
     background: rgba(30, 30, 34, 0.95);
   }

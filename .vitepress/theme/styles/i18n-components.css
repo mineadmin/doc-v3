@@ -1,739 +1,741 @@
-/*!***/
-/* * International Components Styling for VitePress*/
-/* * Language-specific UI Components and Visual Enhancements*/
-/* * */
-/* * This stylesheet provides language-aware component styling for:*/
-/* * - Language switcher*/
-/* * - Navigation elements*/
-/* * - Sidebar optimization*/
-/* * - Search interface*/
-/* * - Footer and social links*/
-/* * - Task lists and interactive elements*/
-/* *!*/
-
-/*!* ========================================================================*/
-/*   Language Switcher Component*/
-/*   ======================================================================== *!*/
-
-/*!* Language indicator badge *!*/
-/*.VPNavBar::before {*/
-/*  content: attr(data-lang);*/
-/*  position: absolute;*/
-/*  top: 50%;*/
-/*  right: 20px;*/
-/*  transform: translateY(-50%);*/
-/*  padding: 0.25rem 0.75rem;*/
-/*  background: linear-gradient(135deg, var(--vp-c-brand-1), var(--vp-c-brand-2));*/
-/*  color: white;*/
-/*  border-radius: 20px;*/
-/*  font-size: 0.75rem;*/
-/*  font-weight: 600;*/
-/*  text-transform: uppercase;*/
-/*  letter-spacing: 0.05em;*/
-/*  z-index: 10;*/
-/*  pointer-events: none;*/
-/*  opacity: 0.9;*/
-/*}*/
-
-/*!* Language-specific indicator text *!*/
-/*:root[lang="zh"] .VPNavBar::before,*/
-/*:root[lang="zh-CN"] .VPNavBar::before {*/
-/*  content: '简体中文';*/
-/*}*/
-
-/*:root[lang="zh-HK"] .VPNavBar::before {*/
-/*  content: '繁體中文 (香港)';*/
-/*}*/
-
-/*:root[lang="zh-TW"] .VPNavBar::before {*/
-/*  content: '繁體中文 (台灣)';*/
-/*}*/
-
-/*:root[lang="ja"] .VPNavBar::before {*/
-/*  content: '日本語';*/
-/*}*/
-
-/*:root[lang="en"] .VPNavBar::before {*/
-/*  content: 'English';*/
-/*}*/
-
-/*!* Language switcher dropdown enhancement *!*/
-/*.VPNavBarMenuGroup .text {*/
-/*  font-weight: 500;*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Navigation Bar Enhancements*/
-/*   ======================================================================== *!*/
-
-/*!* Navigation item styling based on language *!*/
-/*.VPNavBarMenu .VPNavBarMenuLink {*/
-/*  font-weight: 500;*/
-/*  transition: all 0.3s ease;*/
-/*  position: relative;*/
-/*}*/
-
-/*!* CJK navigation items - slightly larger *!*/
-/*:root[lang^="zh"] .VPNavBarMenu .VPNavBarMenuLink,*/
-/*:root[lang="ja"] .VPNavBarMenu .VPNavBarMenuLink {*/
-/*  font-size: 0.95rem;*/
-/*  letter-spacing: 0.02em;*/
-/*}*/
-
-/*!* Active nav indicator *!*/
-/*.VPNavBarMenu .VPNavBarMenuLink.active::after {*/
-/*  content: '';*/
-/*  position: absolute;*/
-/*  bottom: -2px;*/
-/*  left: 50%;*/
-/*  transform: translateX(-50%);*/
-/*  width: 80%;*/
-/*  height: 2px;*/
-/*  background: var(--vp-c-brand-1);*/
-/*  border-radius: 1px;*/
-/*  animation: slideIn 0.3s ease;*/
-/*}*/
-
-/*@keyframes slideIn {*/
-/*  from {*/
-/*    width: 0;*/
-/*  }*/
-/*  to {*/
-/*    width: 80%;*/
-/*  }*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Sidebar Optimization for Different Languages*/
-/*   ======================================================================== *!*/
-
-/*!* Sidebar container *!*/
-/*.VPSidebar {*/
-/*  font-size: 0.875rem;*/
-/*}*/
-
-/*!* CJK sidebar adjustments *!*/
-/*:root[lang^="zh"] .VPSidebar,*/
-/*:root[lang="ja"] .VPSidebar {*/
-/*  font-size: 0.9rem;*/
-/*}*/
-
-/*!* Sidebar item styling *!*/
-/*.VPSidebarItem .text {*/
-/*  line-height: 1.5;*/
-/*  transition: all 0.3s ease;*/
-/*}*/
-
-/*!* CJK sidebar items *!*/
-/*:root[lang^="zh"] .VPSidebarItem .text,*/
-/*:root[lang="ja"] .VPSidebarItem .text {*/
-/*  line-height: 1.6;*/
-/*  letter-spacing: 0.02em;*/
-/*}*/
-
-/*!* Sidebar item hover effect *!*/
-/*.VPSidebarItem .VPLink:hover .text {*/
-/*  color: var(--vp-c-brand-1);*/
-/*  transform: translateX(4px);*/
-/*}*/
-
-/*!* Active sidebar item *!*/
-/*.VPSidebarItem .VPLink.active {*/
-/*  background: linear-gradient(90deg, var(--vp-c-brand-soft) 0%, transparent 100%);*/
-/*  border-left: 3px solid var(--vp-c-brand-1);*/
-/*  padding-left: calc(1rem - 3px);*/
-/*}*/
-
-/*!* Sidebar group title *!*/
-/*.VPSidebarItem .title {*/
-/*  font-weight: 700;*/
-/*  text-transform: uppercase;*/
-/*  font-size: 0.75rem;*/
-/*  letter-spacing: 0.05em;*/
-/*  color: var(--vp-c-text-2);*/
-/*  margin: 1.5rem 0 0.5rem;*/
-/*}*/
-
-/*!* CJK group titles *!*/
-/*:root[lang^="zh"] .VPSidebarItem .title,*/
-/*:root[lang="ja"] .VPSidebarItem .title {*/
-/*  text-transform: none;*/
-/*  font-size: 0.8rem;*/
-/*  letter-spacing: 0.03em;*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Search Interface Localization*/
-/*   ======================================================================== *!*/
-
-/*!* Search button *!*/
-/*.VPNavBarSearch .DocSearch-Button {*/
-/*  border-radius: 8px;*/
-/*  transition: all 0.3s ease;*/
-/*}*/
-
-/*!* Language-specific search placeholder *!*/
-/*:root[lang="zh"] .DocSearch-Button-Placeholder::before,*/
-/*:root[lang="zh-CN"] .DocSearch-Button-Placeholder::before {*/
-/*  content: '搜索文档...';*/
-/*}*/
-
-/*:root[lang="zh-HK"] .DocSearch-Button-Placeholder::before {*/
-/*  content: '搜尋文檔...';*/
-/*}*/
-
-/*:root[lang="zh-TW"] .DocSearch-Button-Placeholder::before {*/
-/*  content: '搜尋文件...';*/
-/*}*/
-
-/*:root[lang="ja"] .DocSearch-Button-Placeholder::before {*/
-/*  content: 'ドキュメントを検索...';*/
-/*}*/
-
-/*:root[lang="en"] .DocSearch-Button-Placeholder::before {*/
-/*  content: 'Search docs...';*/
-/*}*/
-
-/*!* Hide default placeholder when custom is shown *!*/
-/*:root[lang] .DocSearch-Button-Placeholder {*/
-/*  font-size: 0;*/
-/*}*/
-
-/*:root[lang] .DocSearch-Button-Placeholder::before {*/
-/*  font-size: 0.875rem;*/
-/*}*/
-
-/*!* Search results optimization *!*/
-/*.DocSearch-Hit-title {*/
-/*  font-weight: 600;*/
-/*}*/
-
-/*!* CJK search results *!*/
-/*:root[lang^="zh"] .DocSearch-Hit-title,*/
-/*:root[lang="ja"] .DocSearch-Hit-title {*/
-/*  letter-spacing: 0.02em;*/
-/*  line-height: 1.5;*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Table of Contents (Outline) Enhancements*/
-/*   ======================================================================== *!*/
-
-/*!* Outline container *!*/
-/*.VPDocOutlineItem {*/
-/*  line-height: 1.5;*/
-/*}*/
-
-/*!* CJK outline items *!*/
-/*:root[lang^="zh"] .VPDocOutlineItem,*/
-/*:root[lang="ja"] .VPDocOutlineItem {*/
-/*  line-height: 1.6;*/
-/*  letter-spacing: 0.01em;*/
-/*}*/
-
-/*!* Outline link styling *!*/
-/*.VPDocOutlineItem .outline-link {*/
-/*  padding: 0.375rem 0;*/
-/*  font-size: 0.875rem;*/
-/*  transition: all 0.3s ease;*/
-/*  display: block;*/
-/*  position: relative;*/
-/*  color: var(--vp-c-text-2);*/
-/*}*/
-
-/*!* Active outline item *!*/
-/*.VPDocOutlineItem .outline-link.active {*/
-/*  color: var(--vp-c-brand-1);*/
-/*  font-weight: 600;*/
-/*  padding-left: 0.5rem;*/
-/*}*/
-
-/*.VPDocOutlineItem .outline-link.active::before {*/
-/*  content: '';*/
-/*  position: absolute;*/
-/*  left: -1rem;*/
-/*  top: 50%;*/
-/*  transform: translateY(-50%);*/
-/*  width: 3px;*/
-/*  height: 1.5rem;*/
-/*  background: var(--vp-c-brand-1);*/
-/*  border-radius: 2px;*/
-/*}*/
-
-/*!* Nested outline items *!*/
-/*.VPDocOutlineItem .nested {*/
-/*  padding-left: 1rem;*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Footer Localization*/
-/*   ======================================================================== *!*/
-
-/*!* Footer text styling *!*/
-/*.VPFooter .message,*/
-/*.VPFooter .copyright {*/
-/*  line-height: 1.5;*/
-/*}*/
-
-/*!* CJK footer text *!*/
-/*:root[lang^="zh"] .VPFooter .message,*/
-/*:root[lang^="zh"] .VPFooter .copyright,*/
-/*:root[lang="ja"] .VPFooter .message,*/
-/*:root[lang="ja"] .VPFooter .copyright {*/
-/*  line-height: 1.6;*/
-/*  letter-spacing: 0.02em;*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Home Page Hero Section*/
-/*   ======================================================================== *!*/
-
-/*!* Hero title styling *!*/
-/*.VPHero .name {*/
-/*  font-weight: 700;*/
-/*  line-height: 1.2;*/
-/*}*/
-
-/*!* CJK hero title *!*/
-/*:root[lang^="zh"] .VPHero .name,*/
-/*:root[lang="ja"] .VPHero .name {*/
-/*  line-height: 1.4;*/
-/*  letter-spacing: 0.02em;*/
-/*}*/
-
-/*!* Hero tagline *!*/
-/*.VPHero .tagline {*/
-/*  line-height: 1.5;*/
-/*  font-size: 1.25rem;*/
-/*}*/
-
-/*!* CJK hero tagline *!*/
-/*:root[lang^="zh"] .VPHero .tagline,*/
-/*:root[lang="ja"] .VPHero .tagline {*/
-/*  line-height: 1.6;*/
-/*  font-size: 1.125rem;*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Feature Cards*/
-/*   ======================================================================== *!*/
-
-/*!* Feature card container *!*/
-/*.VPFeature {*/
-/*  border-radius: 12px;*/
-/*  transition: all 0.3s ease;*/
-/*}*/
-
-/*!* Feature title *!*/
-/*.VPFeature .title {*/
-/*  font-weight: 600;*/
-/*  line-height: 1.3;*/
-/*}*/
-
-/*!* CJK feature title *!*/
-/*:root[lang^="zh"] .VPFeature .title,*/
-/*:root[lang="ja"] .VPFeature .title {*/
-/*  line-height: 1.5;*/
-/*  letter-spacing: 0.02em;*/
-/*}*/
-
-/*!* Feature details *!*/
-/*.VPFeature .details {*/
-/*  line-height: 1.6;*/
-/*}*/
-
-/*!* CJK feature details *!*/
-/*:root[lang^="zh"] .VPFeature .details,*/
-/*:root[lang="ja"] .VPFeature .details {*/
-/*  line-height: 1.75;*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Button Styling (Language-Aware)*/
-/*   ======================================================================== *!*/
-
-/*!* Base button styling *!*/
-/*.VPButton {*/
-/*  font-weight: 600;*/
-/*  transition: all 0.3s ease;*/
-/*  position: relative;*/
-/*  overflow: hidden;*/
-/*}*/
-
-/*!* CJK button text *!*/
-/*:root[lang^="zh"] .VPButton,*/
-/*:root[lang="ja"] .VPButton {*/
-/*  letter-spacing: 0.05em;*/
-/*  padding-left: 1.5rem;*/
-/*  padding-right: 1.5rem;*/
-/*}*/
-
-/*!* Button hover effect *!*/
-/*.VPButton::before {*/
-/*  content: '';*/
-/*  position: absolute;*/
-/*  top: 50%;*/
-/*  left: 50%;*/
-/*  width: 0;*/
-/*  height: 0;*/
-/*  border-radius: 50%;*/
-/*  background: rgba(255, 255, 255, 0.2);*/
-/*  transform: translate(-50%, -50%);*/
-/*  transition: width 0.6s, height 0.6s;*/
-/*}*/
-
-/*.VPButton:hover::before {*/
-/*  width: 300px;*/
-/*  height: 300px;*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Badge and Tag Components*/
-/*   ======================================================================== *!*/
-
-/*!* Version badge *!*/
-/*.version-badge {*/
-/*  display: inline-block;*/
-/*  padding: 0.125rem 0.5rem;*/
-/*  background: linear-gradient(135deg, var(--vp-c-brand-1), var(--vp-c-brand-2));*/
-/*  color: white;*/
-/*  border-radius: 12px;*/
-/*  font-size: 0.75rem;*/
-/*  font-weight: 600;*/
-/*  margin-left: 0.5rem;*/
-/*}*/
-
-/*!* Tag styling *!*/
-/*.tag {*/
-/*  display: inline-block;*/
-/*  padding: 0.25rem 0.75rem;*/
-/*  background: var(--vp-c-brand-soft);*/
-/*  color: var(--vp-c-brand-1);*/
-/*  border-radius: 20px;*/
-/*  font-size: 0.875rem;*/
-/*  font-weight: 500;*/
-/*  margin: 0.25rem;*/
-/*  transition: all 0.3s ease;*/
-/*}*/
-
-/*.tag:hover {*/
-/*  background: var(--vp-c-brand-1);*/
-/*  color: white;*/
-/*  transform: translateY(-2px);*/
-/*  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Breadcrumb Navigation*/
-/*   ======================================================================== *!*/
-
-/*!* Breadcrumb container *!*/
-/*.breadcrumb {*/
-/*  display: flex;*/
-/*  align-items: center;*/
-/*  font-size: 0.875rem;*/
-/*  color: var(--vp-c-text-2);*/
-/*  margin-bottom: 1rem;*/
-/*}*/
-
-/*!* Breadcrumb separator *!*/
-/*.breadcrumb-separator {*/
-/*  margin: 0 0.5rem;*/
-/*  color: var(--vp-c-text-3);*/
-/*}*/
-
-/*!* Language-specific separators *!*/
-/*:root[lang="en"] .breadcrumb-separator::before {*/
-/*  content: '/';*/
-/*}*/
-
-/*:root[lang^="zh"] .breadcrumb-separator::before {*/
-/*  content: '›';*/
-/*}*/
-
-/*:root[lang="ja"] .breadcrumb-separator::before {*/
-/*  content: '＞';*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Loading States and Skeletons*/
-/*   ======================================================================== *!*/
-
-/*!* Loading spinner *!*/
-/*.loading-spinner {*/
-/*  display: inline-block;*/
-/*  width: 20px;*/
-/*  height: 20px;*/
-/*  border: 2px solid var(--vp-c-divider);*/
-/*  border-top-color: var(--vp-c-brand-1);*/
-/*  border-radius: 50%;*/
-/*  animation: spin 1s linear infinite;*/
-/*}*/
-
-/*@keyframes spin {*/
-/*  to {*/
-/*    transform: rotate(360deg);*/
-/*  }*/
-/*}*/
-
-/*!* Skeleton loader *!*/
-/*.skeleton {*/
-/*  background: linear-gradient(*/
-/*    90deg,*/
-/*    var(--vp-c-bg-soft) 25%,*/
-/*    var(--vp-c-divider) 50%,*/
-/*    var(--vp-c-bg-soft) 75%*/
-/*  );*/
-/*  background-size: 200% 100%;*/
-/*  animation: loading 1.5s infinite;*/
-/*  border-radius: 4px;*/
-/*}*/
-
-/*@keyframes loading {*/
-/*  0% {*/
-/*    background-position: 200% 0;*/
-/*  }*/
-/*  100% {*/
-/*    background-position: -200% 0;*/
-/*  }*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Notification and Alert Components*/
-/*   ======================================================================== *!*/
-
-/*!* Notification banner *!*/
-/*.notification-banner {*/
-/*  position: fixed;*/
-/*  top: var(--vp-nav-height);*/
-/*  left: 0;*/
-/*  right: 0;*/
-/*  padding: 0.75rem 1.5rem;*/
-/*  background: linear-gradient(90deg, var(--vp-c-brand-1), var(--vp-c-brand-2));*/
-/*  color: white;*/
-/*  text-align: center;*/
-/*  z-index: 100;*/
-/*  animation: slideDown 0.3s ease;*/
-/*}*/
-
-/*@keyframes slideDown {*/
-/*  from {*/
-/*    transform: translateY(-100%);*/
-/*  }*/
-/*  to {*/
-/*    transform: translateY(0);*/
-/*  }*/
-/*}*/
-
-/*!* Alert message *!*/
-/*.alert {*/
-/*  padding: 1rem 1.25rem;*/
-/*  border-radius: 8px;*/
-/*  border-left: 4px solid;*/
-/*  margin: 1rem 0;*/
-/*  animation: fadeIn 0.3s ease;*/
-/*}*/
-
-/*@keyframes fadeIn {*/
-/*  from {*/
-/*    opacity: 0;*/
-/*  }*/
-/*  to {*/
-/*    opacity: 1;*/
-/*  }*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Mobile Menu Enhancements*/
-/*   ======================================================================== *!*/
-
-/*!* Mobile menu item *!*/
-/*.VPMenu .VPMenuLink {*/
-/*  padding: 0.75rem 1rem;*/
-/*  transition: all 0.3s ease;*/
-/*}*/
-
-/*!* CJK mobile menu *!*/
-/*:root[lang^="zh"] .VPMenu .VPMenuLink,*/
-/*:root[lang="ja"] .VPMenu .VPMenuLink {*/
-/*  font-size: 1rem;*/
-/*  line-height: 1.6;*/
-/*}*/
-
-/*!* Mobile menu active state *!*/
-/*.VPMenu .VPMenuLink.active {*/
-/*  background: var(--vp-c-brand-soft);*/
-/*  border-left: 3px solid var(--vp-c-brand-1);*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Accessibility Enhancements*/
-/*   ======================================================================== *!*/
-
-/*!* Skip to content link *!*/
-/*.skip-to-content {*/
-/*  position: fixed;*/
-/*  top: -40px;*/
-/*  left: 0;*/
-/*  background: var(--vp-c-brand-1);*/
-/*  color: white;*/
-/*  padding: 0.5rem 1rem;*/
-/*  border-radius: 0 0 8px 0;*/
-/*  text-decoration: none;*/
-/*  z-index: 1001;*/
-/*  transition: top 0.3s ease;*/
-/*}*/
-
-/*.skip-to-content:focus {*/
-/*  top: 0;*/
-/*}*/
-
-/*!* Focus visible states *!*/
-/**:focus-visible {*/
-/*  outline: 2px solid var(--vp-c-brand-1);*/
-/*  outline-offset: 2px;*/
-/*  border-radius: 4px;*/
-/*}*/
-
-/*!* High contrast mode support *!*/
-/*@media (prefers-contrast: high) {*/
-/*  .vp-doc a {*/
-/*    text-decoration: underline;*/
-/*  }*/
-/*  */
-/*  .VPButton {*/
-/*    border: 2px solid currentColor;*/
-/*  }*/
-/*}*/
-
-/*!* Reduced motion support *!*/
-/*@media (prefers-reduced-motion: reduce) {*/
-/*  *,*/
-/*  *::before,*/
-/*  *::after {*/
-/*    animation-duration: 0.01ms !important;*/
-/*    animation-iteration-count: 1 !important;*/
-/*    transition-duration: 0.01ms !important;*/
-/*  }*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   RTL Support Preparation (Future Enhancement)*/
-/*   ======================================================================== *!*/
-
-/*!* RTL language support (Arabic, Hebrew, etc.) *!*/
-/*[dir="rtl"] {*/
-/*  !* Flip horizontal margins and paddings *!*/
-/*  .VPSidebarItem .VPLink.active {*/
-/*    border-left: none;*/
-/*    border-right: 3px solid var(--vp-c-brand-1);*/
-/*    padding-left: 1rem;*/
-/*    padding-right: calc(1rem - 3px);*/
-/*  }*/
-/*  */
-/*  .vp-doc h3 {*/
-/*    padding-left: 0;*/
-/*    padding-right: 12px;*/
-/*    border-left: none;*/
-/*    border-right: 3px solid var(--vp-c-brand-1);*/
-/*  }*/
-/*  */
-/*  !* Flip animations *!*/
-/*  .VPSidebarItem .VPLink:hover .text {*/
-/*    transform: translateX(-4px);*/
-/*  }*/
-/*}*/
-
-/*!* ========================================================================*/
-/*   Task Lists Styling*/
-/*   ======================================================================== *!*/
-
-/*!* Enhanced task list styling for better visual appearance *!*/
-/*.vp-doc .task-list-item {*/
-/*  list-style: none;*/
-/*  margin: 0.5rem 0;*/
-/*  position: relative;*/
-/*  padding-left: 2rem;*/
-/*}*/
-
-/*.vp-doc .task-list-item input[type="checkbox"] {*/
-/*  position: absolute;*/
-/*  left: 0;*/
-/*  top: 0.125rem;*/
-/*  width: 1.25rem;*/
-/*  height: 1.25rem;*/
-/*  margin: 0;*/
-/*  appearance: none;*/
-/*  -webkit-appearance: none;*/
-/*  background: var(--vp-c-bg);*/
-/*  border: 2px solid var(--vp-c-border);*/
-/*  border-radius: 4px;*/
-/*  cursor: pointer;*/
-/*  transition: all 0.2s ease;*/
-/*}*/
-
-/*.vp-doc .task-list-item input[type="checkbox"]:hover {*/
-/*  border-color: var(--vp-c-brand-1);*/
-/*  background: var(--vp-c-brand-soft);*/
-/*}*/
-
-/*.vp-doc .task-list-item input[type="checkbox"]:checked {*/
-/*  background: var(--vp-c-brand-1);*/
-/*  border-color: var(--vp-c-brand-1);*/
-/*  position: relative;*/
-/*}*/
-
-/*.vp-doc .task-list-item input[type="checkbox"]:checked::after {*/
-/*  content: '✓';*/
-/*  position: absolute;*/
-/*  top: 50%;*/
-/*  left: 50%;*/
-/*  transform: translate(-50%, -50%);*/
-/*  color: white;*/
-/*  font-size: 0.875rem;*/
-/*  font-weight: bold;*/
-/*  line-height: 1;*/
-/*}*/
-
-/*!* Strikethrough for completed tasks *!*/
-/*.vp-doc .task-list-item input[type="checkbox"]:checked + * {*/
-/*  text-decoration: line-through;*/
-/*  opacity: 0.6;*/
-/*  color: var(--vp-c-text-3);*/
-/*}*/
-
-/*!* Focus state for accessibility *!*/
-/*.vp-doc .task-list-item input[type="checkbox"]:focus {*/
-/*  outline: 2px solid var(--vp-c-brand-1);*/
-/*  outline-offset: 2px;*/
-/*}*/
-
-/*!* Dark theme adjustments *!*/
-/*.dark .vp-doc .task-list-item input[type="checkbox"] {*/
-/*  background: var(--vp-c-bg-alt);*/
-/*  border-color: var(--vp-c-border);*/
-/*}*/
-
-/*.dark .vp-doc .task-list-item input[type="checkbox"]:hover {*/
-/*  background: var(--vp-c-brand-soft);*/
-/*}*/
-
-/*!* Language-specific spacing adjustments *!*/
-/*:root[lang="zh"] .vp-doc .task-list-item,*/
-/*:root[lang="zh-CN"] .vp-doc .task-list-item,*/
-/*:root[lang="zh-HK"] .vp-doc .task-list-item,*/
-/*:root[lang="zh-TW"] .vp-doc .task-list-item,*/
-/*:root[lang="ja"] .vp-doc .task-list-item {*/
-/*  line-height: 1.8;*/
-/*  margin: 0.75rem 0;*/
-/*}*/
-
-/*!* Task list in nested lists *!*/
-/*.vp-doc ul .task-list-item,*/
-/*.vp-doc ol .task-list-item {*/
-/*  margin-left: 0;*/
-/*}*/
-
-/*.vp-doc .task-list-item .task-list-item {*/
-/*  margin-left: 1.5rem;*/
-/*}*/
+
+/**
+ * International Components Styling for VitePress
+ * Language-specific UI Components and Visual Enhancements
+ * 
+ * This stylesheet provides language-aware component styling for:
+ * - Language switcher
+ * - Navigation elements
+ * - Sidebar optimization
+ * - Search interface
+ * - Footer and social links
+ * - Task lists and interactive elements
+ */
+
+/* ========================================================================
+   Language Switcher Component
+   ======================================================================== */
+
+/* Language indicator badge */
+.VPNavBar::before {
+    content: attr(data-lang);
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    padding: 0.25rem 0.75rem;
+    background: linear-gradient(135deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
+    color: white;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+/* Language-specific indicator text */
+:root[lang="zh"] .VPNavBar::before,
+:root[lang="zh-CN"] .VPNavBar::before {
+    content: '简体中文';
+}
+
+:root[lang="zh-HK"] .VPNavBar::before {
+    content: '繁體中文 (香港)';
+}
+
+:root[lang="zh-TW"] .VPNavBar::before {
+    content: '繁體中文 (台灣)';
+}
+
+:root[lang="ja"] .VPNavBar::before {
+    content: '日本語';
+}
+
+:root[lang="en"] .VPNavBar::before {
+    content: 'English';
+}
+
+/* Language switcher dropdown enhancement */
+.VPNavBarMenuGroup .text {
+    font-weight: 500;
+}
+
+/* ========================================================================
+   Navigation Bar Enhancements
+   ======================================================================== */
+
+/* Navigation item styling based on language */
+.VPNavBarMenu .VPNavBarMenuLink {
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* CJK navigation items - slightly larger */
+:root[lang^="zh"] .VPNavBarMenu .VPNavBarMenuLink,
+:root[lang="ja"] .VPNavBarMenu .VPNavBarMenuLink {
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+}
+
+/* Active nav indicator */
+.VPNavBarMenu .VPNavBarMenuLink.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 2px;
+    background: var(--vp-c-brand-1);
+    border-radius: 1px;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        width: 0;
+    }
+    to {
+        width: 80%;
+    }
+}
+
+/* ========================================================================
+   Sidebar Optimization for Different Languages
+   ======================================================================== */
+
+/* Sidebar container */
+.VPSidebar {
+    font-size: 0.875rem;
+}
+
+/* CJK sidebar adjustments */
+:root[lang^="zh"] .VPSidebar,
+:root[lang="ja"] .VPSidebar {
+    font-size: 0.9rem;
+}
+
+/* Sidebar item styling */
+.VPSidebarItem .text {
+    line-height: 1.5;
+    transition: all 0.3s ease;
+}
+
+/* CJK sidebar items */
+:root[lang^="zh"] .VPSidebarItem .text,
+:root[lang="ja"] .VPSidebarItem .text {
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+}
+
+/* Sidebar item hover effect */
+.VPSidebarItem .VPLink:hover .text {
+    color: var(--vp-c-brand-1);
+    transform: translateX(4px);
+}
+
+/* Active sidebar item */
+.VPSidebarItem .VPLink.active {
+    background: linear-gradient(90deg, var(--vp-c-brand-soft) 0%, transparent 100%);
+    border-left: 3px solid var(--vp-c-brand-1);
+    padding-left: calc(1rem - 3px);
+}
+
+/* Sidebar group title */
+.VPSidebarItem .title {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    color: var(--vp-c-text-2);
+    margin: 1.5rem 0 0.5rem;
+}
+
+/* CJK group titles */
+:root[lang^="zh"] .VPSidebarItem .title,
+:root[lang="ja"] .VPSidebarItem .title {
+    text-transform: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+}
+
+/* ========================================================================
+   Search Interface Localization
+   ======================================================================== */
+
+/* Search button */
+.VPNavBarSearch .DocSearch-Button {
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+/* Language-specific search placeholder */
+:root[lang="zh"] .DocSearch-Button-Placeholder::before,
+:root[lang="zh-CN"] .DocSearch-Button-Placeholder::before {
+    content: '搜索文档...';
+}
+
+:root[lang="zh-HK"] .DocSearch-Button-Placeholder::before {
+    content: '搜尋文檔...';
+}
+
+:root[lang="zh-TW"] .DocSearch-Button-Placeholder::before {
+    content: '搜尋文件...';
+}
+
+:root[lang="ja"] .DocSearch-Button-Placeholder::before {
+    content: 'ドキュメントを検索...';
+}
+
+:root[lang="en"] .DocSearch-Button-Placeholder::before {
+    content: 'Search docs...';
+}
+
+/* Hide default placeholder when custom is shown */
+:root[lang] .DocSearch-Button-Placeholder {
+    font-size: 0;
+}
+
+:root[lang] .DocSearch-Button-Placeholder::before {
+    font-size: 0.875rem;
+}
+
+/* Search results optimization */
+.DocSearch-Hit-title {
+    font-weight: 600;
+}
+
+/* CJK search results */
+:root[lang^="zh"] .DocSearch-Hit-title,
+:root[lang="ja"] .DocSearch-Hit-title {
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+}
+
+/* ========================================================================
+   Table of Contents (Outline) Enhancements
+   ======================================================================== */
+
+/* Outline container */
+.VPDocOutlineItem {
+    line-height: 1.5;
+}
+
+/* CJK outline items */
+:root[lang^="zh"] .VPDocOutlineItem,
+:root[lang="ja"] .VPDocOutlineItem {
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+}
+
+/* Outline link styling */
+.VPDocOutlineItem .outline-link {
+    padding: 0.375rem 0;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    display: block;
+    position: relative;
+    color: var(--vp-c-text-2);
+}
+
+/* Active outline item */
+.VPDocOutlineItem .outline-link.active {
+    color: var(--vp-c-brand-1);
+    font-weight: 600;
+    padding-left: 0.5rem;
+}
+
+.VPDocOutlineItem .outline-link.active::before {
+    content: '';
+    position: absolute;
+    left: -1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 1.5rem;
+    background: var(--vp-c-brand-1);
+    border-radius: 2px;
+}
+
+/* Nested outline items */
+.VPDocOutlineItem .nested {
+    padding-left: 1rem;
+}
+
+/* ========================================================================
+   Footer Localization
+   ======================================================================== */
+
+/* Footer text styling */
+.VPFooter .message,
+.VPFooter .copyright {
+    line-height: 1.5;
+}
+
+/* CJK footer text */
+:root[lang^="zh"] .VPFooter .message,
+:root[lang^="zh"] .VPFooter .copyright,
+:root[lang="ja"] .VPFooter .message,
+:root[lang="ja"] .VPFooter .copyright {
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+}
+
+/* ========================================================================
+   Home Page Hero Section
+   ======================================================================== */
+
+/* Hero title styling */
+.VPHero .name {
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* CJK hero title */
+:root[lang^="zh"] .VPHero .name,
+:root[lang="ja"] .VPHero .name {
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+}
+
+/* Hero tagline */
+.VPHero .tagline {
+    line-height: 1.5;
+    font-size: 1.25rem;
+}
+
+/* CJK hero tagline */
+:root[lang^="zh"] .VPHero .tagline,
+:root[lang="ja"] .VPHero .tagline {
+    line-height: 1.6;
+    font-size: 1.125rem;
+}
+
+/* ========================================================================
+   Feature Cards
+   ======================================================================== */
+
+/* Feature card container */
+.VPFeature {
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+/* Feature title */
+.VPFeature .title {
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+/* CJK feature title */
+:root[lang^="zh"] .VPFeature .title,
+:root[lang="ja"] .VPFeature .title {
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+}
+
+/* Feature details */
+.VPFeature .details {
+    line-height: 1.6;
+}
+
+/* CJK feature details */
+:root[lang^="zh"] .VPFeature .details,
+:root[lang="ja"] .VPFeature .details {
+    line-height: 1.75;
+    text-align: justify;
+}
+
+/* ========================================================================
+   Button Styling (Language-Aware)
+   ======================================================================== */
+
+/* Base button styling */
+.VPButton {
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* CJK button text */
+:root[lang^="zh"] .VPButton,
+:root[lang="ja"] .VPButton {
+    letter-spacing: 0.05em;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+/* Button hover effect */
+.VPButton::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.VPButton:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* ========================================================================
+   Badge and Tag Components
+   ======================================================================== */
+
+/* Version badge */
+.version-badge {
+    display: inline-block;
+    padding: 0.125rem 0.5rem;
+    background: linear-gradient(135deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
+    color: white;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+
+/* Tag styling */
+.tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--vp-c-brand-soft);
+    color: var(--vp-c-brand-1);
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin: 0.25rem;
+    transition: all 0.3s ease;
+}
+
+.tag:hover {
+    background: var(--vp-c-brand-1);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================================================
+   Breadcrumb Navigation
+   ======================================================================== */
+
+/* Breadcrumb container */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    color: var(--vp-c-text-2);
+    margin-bottom: 1rem;
+}
+
+/* Breadcrumb separator */
+.breadcrumb-separator {
+    margin: 0 0.5rem;
+    color: var(--vp-c-text-3);
+}
+
+/* Language-specific separators */
+:root[lang="en"] .breadcrumb-separator::before {
+    content: '/';
+}
+
+:root[lang^="zh"] .breadcrumb-separator::before {
+    content: '›';
+}
+
+:root[lang="ja"] .breadcrumb-separator::before {
+    content: '＞';
+}
+
+/* ========================================================================
+   Loading States and Skeletons
+   ======================================================================== */
+
+/* Loading spinner */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--vp-c-divider);
+    border-top-color: var(--vp-c-brand-1);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Skeleton loader */
+.skeleton {
+    background: linear-gradient(
+            90deg,
+            var(--vp-c-bg-soft) 25%,
+            var(--vp-c-divider) 50%,
+            var(--vp-c-bg-soft) 75%
+    );
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ========================================================================
+   Notification and Alert Components
+   ======================================================================== */
+
+/* Notification banner */
+.notification-banner {
+    position: fixed;
+    top: var(--vp-nav-height);
+    left: 0;
+    right: 0;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(90deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
+    color: white;
+    text-align: center;
+    z-index: 100;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Alert message */
+.alert {
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    border-left: 4px solid;
+    margin: 1rem 0;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* ========================================================================
+   Mobile Menu Enhancements
+   ======================================================================== */
+
+/* Mobile menu item */
+.VPMenu .VPMenuLink {
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+
+/* CJK mobile menu */
+:root[lang^="zh"] .VPMenu .VPMenuLink,
+:root[lang="ja"] .VPMenu .VPMenuLink {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Mobile menu active state */
+.VPMenu .VPMenuLink.active {
+    background: var(--vp-c-brand-soft);
+    border-left: 3px solid var(--vp-c-brand-1);
+}
+
+/* ========================================================================
+   Accessibility Enhancements
+   ======================================================================== */
+
+/* Skip to content link */
+.skip-to-content {
+    position: fixed;
+    top: -40px;
+    left: 0;
+    background: var(--vp-c-brand-1);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0 0 8px 0;
+    text-decoration: none;
+    z-index: 1001;
+    transition: top 0.3s ease;
+}
+
+.skip-to-content:focus {
+    top: 0;
+}
+
+/* Focus visible states */
+*:focus-visible {
+    outline: 2px solid var(--vp-c-brand-1);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .vp-doc a {
+        text-decoration: underline;
+    }
+
+    .VPButton {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ========================================================================
+   RTL Support Preparation (Future Enhancement)
+   ======================================================================== */
+
+/* RTL language support (Arabic, Hebrew, etc.) */
+[dir="rtl"] {
+    /* Flip horizontal margins and paddings */
+    .VPSidebarItem .VPLink.active {
+        border-left: none;
+        border-right: 3px solid var(--vp-c-brand-1);
+        padding-left: 1rem;
+        padding-right: calc(1rem - 3px);
+    }
+
+    .vp-doc h3 {
+        padding-left: 0;
+        padding-right: 12px;
+        border-left: none;
+        border-right: 3px solid var(--vp-c-brand-1);
+    }
+
+    /* Flip animations */
+    .VPSidebarItem .VPLink:hover .text {
+        transform: translateX(-4px);
+    }
+}
+
+/* ========================================================================
+   Task Lists Styling
+   ======================================================================== */
+
+/* Enhanced task list styling for better visual appearance */
+.vp-doc .task-list-item {
+    list-style: none;
+    margin: 0.5rem 0;
+    position: relative;
+    padding-left: 2rem;
+}
+
+.vp-doc .task-list-item input[type="checkbox"] {
+    position: absolute;
+    left: 0;
+    top: 0.125rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    background: var(--vp-c-bg);
+    border: 2px solid var(--vp-c-border);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.vp-doc .task-list-item input[type="checkbox"]:hover {
+    border-color: var(--vp-c-brand-1);
+    background: var(--vp-c-brand-soft);
+}
+
+.vp-doc .task-list-item input[type="checkbox"]:checked {
+    background: var(--vp-c-brand-1);
+    border-color: var(--vp-c-brand-1);
+    position: relative;
+}
+
+.vp-doc .task-list-item input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 0.875rem;
+    font-weight: bold;
+    line-height: 1;
+}
+
+/* Strikethrough for completed tasks */
+.vp-doc .task-list-item input[type="checkbox"]:checked + * {
+    text-decoration: line-through;
+    opacity: 0.6;
+    color: var(--vp-c-text-3);
+}
+
+/* Focus state for accessibility */
+.vp-doc .task-list-item input[type="checkbox"]:focus {
+    outline: 2px solid var(--vp-c-brand-1);
+    outline-offset: 2px;
+}
+
+/* Dark theme adjustments */
+.dark .vp-doc .task-list-item input[type="checkbox"] {
+    background: var(--vp-c-bg-alt);
+    border-color: var(--vp-c-border);
+}
+
+.dark .vp-doc .task-list-item input[type="checkbox"]:hover {
+    background: var(--vp-c-brand-soft);
+}
+
+/* Language-specific spacing adjustments */
+:root[lang="zh"] .vp-doc .task-list-item,
+:root[lang="zh-CN"] .vp-doc .task-list-item,
+:root[lang="zh-HK"] .vp-doc .task-list-item,
+:root[lang="zh-TW"] .vp-doc .task-list-item,
+:root[lang="ja"] .vp-doc .task-list-item {
+    line-height: 1.8;
+    margin: 0.75rem 0;
+}
+
+/* Task list in nested lists */
+.vp-doc ul .task-list-item,
+.vp-doc ol .task-list-item {
+    margin-left: 0;
+}
+
+.vp-doc .task-list-item .task-list-item {
+    margin-left: 1.5rem;
+}

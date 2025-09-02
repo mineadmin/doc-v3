@@ -1,496 +1,497 @@
-/*!***/
-/* * Clean, Professional Homepage Styles*/
-/* * Inspired by modern open-source documentation sites*/
-/* * Minimal animations, clean typography, professional aesthetics*/
-/* * -------------------------------------------------------------------------- *!*/
-
-/*!* ===================================================================*/
-/*   Hero Section - Clean and Professional*/
-/*   =================================================================== *!*/
-
-/*.VPHero {*/
-/*  position: relative;*/
-/*  background: var(--vp-c-bg);*/
-/*  padding: 4rem 2rem;*/
-/*  text-align: center;*/
-/*}*/
-
-/*!* Clean hero content *!*/
-/*.VPHero .VPHeroContent {*/
-/*  max-width: 1152px;*/
-/*  margin: 0 auto;*/
-/*}*/
-
-/*!* Professional title styling *!*/
-/*.VPHero .name {*/
-/*  font-family: var(--vp-font-family-base);*/
-/*  font-weight: 700;*/
-/*  color: var(--vp-c-text-1);*/
-/*  margin-bottom: 1.5rem;*/
-/*  line-height: 1.2;*/
-/*  letter-spacing: -0.02em;*/
-/*}*/
-
-/*!* Subtitle styling *!*/
-/*.VPHero .text {*/
-/*  font-size: 1.5rem;*/
-/*  color: var(--vp-c-text-2);*/
-/*  margin-bottom: 1rem;*/
-/*  font-weight: 400;*/
-/*  line-height: 1.4;*/
-/*}*/
-
-/*.VPHero .tagline {*/
-/*  font-size: 1.125rem;*/
-/*  color: var(--vp-c-text-2);*/
-/*  margin-bottom: 2rem;*/
-/*  font-weight: 400;*/
-/*  line-height: 1.5;*/
-/*}*/
-
-/*!* ===================================================================*/
-/*   Action Buttons - Clean and Simple*/
-/*   =================================================================== *!*/
-
-/*.VPHero .actions {*/
-/*  display: flex;*/
-/*  justify-content: center;*/
-/*  flex-wrap: wrap;*/
-/*  gap: 1rem;*/
-/*  margin-top: 2rem;*/
-/*}*/
-
-/*!* Primary brand button *!*/
-/*.VPHero .action .VPButton.brand {*/
-/*  background: var(--vp-c-brand-1);*/
-/*  color: var(--vp-c-white);*/
-/*  border: none;*/
-/*  font-weight: 600;*/
-/*  padding: 0.75rem 2rem;*/
-/*  border-radius: 8px;*/
-/*  transition: all 0.25s ease;*/
-/*  box-shadow: var(--vp-shadow-1);*/
-/*}*/
-
-/*.VPHero .action .VPButton.brand:hover {*/
-/*  background: var(--vp-c-brand-2);*/
-/*  transform: translateY(-1px);*/
-/*  box-shadow: var(--vp-shadow-2);*/
-/*}*/
-
-/*!* Alternative button *!*/
-/*.VPHero .action .VPButton.alt {*/
-/*  background: var(--vp-c-bg);*/
-/*  color: var(--vp-c-text-1);*/
-/*  border: 2px solid var(--vp-c-border);*/
-/*  font-weight: 600;*/
-/*  padding: 0.75rem 2rem;*/
-/*  border-radius: 8px;*/
-/*  transition: all 0.25s ease;*/
-/*}*/
-
-/*.VPHero .action .VPButton.alt:hover {*/
-/*  border-color: var(--vp-c-brand-1);*/
-/*  color: var(--vp-c-brand-1);*/
-/*  transform: translateY(-1px);*/
-/*  box-shadow: var(--vp-shadow-1);*/
-/*}*/
-
-/*!* ===================================================================*/
-/*   Feature Cards - Clean Grid Layout*/
-/*   =================================================================== *!*/
-
-/*.VPFeatures {*/
-/*  padding: 4rem 2rem;*/
-/*  background: var(--vp-c-bg-soft);*/
-/*}*/
-
-/*.VPFeatures .container {*/
-/*  max-width: 1152px;*/
-/*  margin: 0 auto;*/
-/*}*/
-
-/*.VPFeatures .items {*/
-/*  display: grid;*/
-/*  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));*/
-/*  gap: 2rem;*/
-/*  margin-top: 2rem;*/
-/*}*/
-
-/*!* Clean feature card design *!*/
-/*.VPFeature {*/
-/*  background: var(--vp-c-bg);*/
-/*  border: 1px solid var(--vp-c-border);*/
-/*  border-radius: 12px;*/
-/*  padding: 2rem;*/
-/*  transition: all 0.25s ease;*/
-/*  position: relative;*/
-/*}*/
-
-/*.VPFeature:hover {*/
-/*  transform: translateY(-2px);*/
-/*  box-shadow: var(--vp-shadow-3);*/
-/*  border-color: var(--vp-c-brand-1);*/
-/*}*/
-
-/*!* Feature icon *!*/
-/*.VPFeature .icon {*/
-/*  font-size: 2rem;*/
-/*  color: var(--vp-c-brand-1);*/
-/*  margin-bottom: 1rem;*/
-/*  display: inline-block;*/
-/*}*/
-
-/*!* Feature title *!*/
-/*.VPFeature .title {*/
-/*  font-size: 1.25rem;*/
-/*  font-weight: 600;*/
-/*  color: var(--vp-c-text-1);*/
-/*  margin-bottom: 0.75rem;*/
-/*  line-height: 1.3;*/
-/*}*/
-
-/*!* Feature description *!*/
-/*.VPFeature .details {*/
-/*  color: var(--vp-c-text-2);*/
-/*  line-height: 1.6;*/
-/*  font-size: 0.95rem;*/
-/*}*/
-
-/*!* ===================================================================*/
-/*   Typography Enhancements*/
-/*   =================================================================== *!*/
-
-/*!* Improved heading hierarchy *!*/
-/*.VPDoc h1 {*/
-/*  font-size: 2.5rem;*/
-/*  font-weight: 700;*/
-/*  color: var(--vp-c-text-1);*/
-/*  margin-bottom: 1.5rem;*/
-/*  line-height: 1.2;*/
-/*  border-bottom: 2px solid var(--vp-c-divider);*/
-/*  padding-bottom: 1rem;*/
-/*}*/
-
-/*.VPDoc h2 {*/
-/*  font-size: 1.875rem;*/
-/*  font-weight: 600;*/
-/*  color: var(--vp-c-text-1);*/
-/*  margin-top: 3rem;*/
-/*  margin-bottom: 1rem;*/
-/*  line-height: 1.3;*/
-/*  position: relative;*/
-/*  padding-left: 1rem;*/
-/*}*/
-
-/*.VPDoc h2::before {*/
-/*  content: '';*/
-/*  position: absolute;*/
-/*  left: 0;*/
-/*  top: 0.2em;*/
-/*  width: 4px;*/
-/*  height: 1.2em;*/
-/*  background: var(--vp-c-brand-1);*/
-/*  border-radius: 2px;*/
-/*}*/
-
-/*.VPDoc h3 {*/
-/*  font-size: 1.5rem;*/
-/*  font-weight: 600;*/
-/*  color: var(--vp-c-text-1);*/
-/*  margin-top: 2rem;*/
-/*  margin-bottom: 0.75rem;*/
-/*  line-height: 1.3;*/
-/*}*/
-
-/*!* Better paragraph spacing *!*/
-/*.VPDoc p {*/
-/*  line-height: 1.7;*/
-/*  color: var(--vp-c-text-1);*/
-/*  margin: 1rem 0;*/
-/*}*/
-
-/*!* ===================================================================*/
-/*   Code Blocks Enhancement*/
-/*   =================================================================== *!*/
-
-/*.VPDoc div[class*='language-'] {*/
-/*  border-radius: 8px;*/
-/*  border: 1px solid var(--vp-c-border);*/
-/*  margin: 1.5rem 0;*/
-/*  overflow: hidden;*/
-/*  box-shadow: var(--vp-shadow-1);*/
-/*}*/
-
-/*.VPDoc div[class*='language-'] > span.lang {*/
-/*  background: var(--vp-c-brand-1);*/
-/*  color: var(--vp-c-white);*/
-/*  padding: 0.25rem 0.75rem;*/
-/*  font-size: 0.75rem;*/
-/*  font-weight: 600;*/
-/*  text-transform: uppercase;*/
-/*  letter-spacing: 0.05em;*/
-/*}*/
-
-/*!* Inline code *!*/
-/*.VPDoc :not(pre) > code {*/
-/*  background: var(--vp-c-brand-soft);*/
-/*  color: var(--vp-c-brand-1);*/
-/*  padding: 0.2rem 0.4rem;*/
-/*  border-radius: 4px;*/
-/*  font-size: 0.875em;*/
-/*  font-weight: 500;*/
-/*  border: 1px solid rgba(79, 70, 229, 0.2);*/
-/*}*/
-
-/*!* ===================================================================*/
-/*   Custom Blocks Enhancement*/
-/*   =================================================================== *!*/
-
-/*.VPDoc .custom-block {*/
-/*  border-radius: 8px;*/
-/*  padding: 1rem 1.5rem;*/
-/*  margin: 1.5rem 0;*/
-/*  border-left: 4px solid var(--vp-c-brand-1);*/
-/*  background: var(--vp-c-bg-soft);*/
-/*  position: relative;*/
-/*}*/
-
-/*.VPDoc .custom-block.tip {*/
-/*  border-left-color: var(--vp-c-brand-1);*/
-/*  background: var(--vp-c-brand-soft);*/
-/*}*/
-
-/*.VPDoc .custom-block.warning {*/
-/*  border-left-color: var(--vp-c-yellow-1);*/
-/*  background: var(--vp-c-yellow-soft);*/
-/*}*/
-
-/*.VPDoc .custom-block.danger {*/
-/*  border-left-color: var(--vp-c-red-1);*/
-/*  background: var(--vp-c-red-soft);*/
-/*}*/
-
-/*.VPDoc .custom-block.info {*/
-/*  border-left-color: var(--vp-c-gray-1);*/
-/*  background: var(--vp-c-gray-soft);*/
-/*}*/
-
-/*.VPDoc .custom-block-title {*/
-/*  font-weight: 600;*/
-/*  color: var(--vp-c-text-1);*/
-/*  margin-bottom: 0.5rem;*/
-/*}*/
-
-/*!* ===================================================================*/
-/*   Tables Enhancement*/
-/*   =================================================================== *!*/
-
-/*.VPDoc table {*/
-/*  border-radius: 8px;*/
-/*  overflow: hidden;*/
-/*  border: 1px solid var(--vp-c-border);*/
-/*  margin: 2rem 0;*/
-/*  width: 100%;*/
-/*  border-collapse: collapse;*/
-/*  box-shadow: var(--vp-shadow-1);*/
-/*}*/
-
-/*.VPDoc table thead {*/
-/*  background: var(--vp-c-bg-soft);*/
-/*}*/
-
-/*.VPDoc table thead th {*/
-/*  font-weight: 600;*/
-/*  color: var(--vp-c-text-1);*/
-/*  padding: 1rem;*/
-/*  text-align: left;*/
-/*  border-bottom: 1px solid var(--vp-c-border);*/
-/*}*/
-
-/*.VPDoc table tbody tr {*/
-/*  transition: background-color 0.2s;*/
-/*}*/
-
-/*.VPDoc table tbody tr:hover {*/
-/*  background: var(--vp-c-bg-soft);*/
-/*}*/
-
-/*.VPDoc table td {*/
-/*  padding: 0.875rem 1rem;*/
-/*  border-bottom: 1px solid var(--vp-c-divider);*/
-/*}*/
-
-/*!* ===================================================================*/
-/*   Links Enhancement*/
-/*   =================================================================== *!*/
-
-/*.VPDoc a {*/
-/*  color: var(--vp-c-brand-1);*/
-/*  text-decoration: none;*/
-/*  font-weight: 500;*/
-/*  transition: color 0.25s;*/
-/*  position: relative;*/
-/*}*/
-
-/*.VPDoc a:hover {*/
-/*  color: var(--vp-c-brand-2);*/
-/*  text-decoration: underline;*/
-/*}*/
-
-/*!* ===================================================================*/
-/*   Responsive Design*/
-/*   =================================================================== *!*/
-
-/*@media (max-width: 768px) {*/
-/*  .VPHero {*/
-/*    padding: 3rem 1.5rem;*/
-/*  }*/
-/*  */
-/*  .VPHero .name {*/
-/*    font-size: 2rem;*/
-/*  }*/
-/*  */
-/*  .VPHero .text {*/
-/*    font-size: 1.25rem;*/
-/*  }*/
-/*  */
-/*  .VPHero .tagline {*/
-/*    font-size: 1rem;*/
-/*  }*/
-/*  */
-/*  .VPHero .actions {*/
-/*    flex-direction: column;*/
-/*    align-items: center;*/
-/*  }*/
-/*  */
-/*  .VPHero .action {*/
-/*    width: 100%;*/
-/*    max-width: 300px;*/
-/*  }*/
-/*  */
-/*  .VPFeatures {*/
-/*    padding: 3rem 1.5rem;*/
-/*  }*/
-/*  */
-/*  .VPFeatures .items {*/
-/*    grid-template-columns: 1fr;*/
-/*    gap: 1.5rem;*/
-/*  }*/
-/*  */
-/*  .VPFeature {*/
-/*    padding: 1.5rem;*/
-/*  }*/
-/*  */
-/*  .VPDoc h1 {*/
-/*    font-size: 2rem;*/
-/*  }*/
-/*  */
-/*  .VPDoc h2 {*/
-/*    font-size: 1.5rem;*/
-/*  }*/
-/*}*/
-
-/*@media (max-width: 480px) {*/
-/*  .VPHero {*/
-/*    padding: 2rem 1rem;*/
-/*  }*/
-/*  */
-/*  .VPFeatures {*/
-/*    padding: 2rem 1rem;*/
-/*  }*/
-/*  */
-/*  .VPFeature {*/
-/*    padding: 1rem;*/
-/*  }*/
-/*}*/
-
-/*!* ===================================================================*/
-/*   Dark Mode Optimizations*/
-/*   =================================================================== *!*/
-
-/*.dark .VPFeature {*/
-/*  background: var(--vp-c-bg-alt);*/
-/*  border-color: var(--vp-c-border);*/
-/*}*/
-
-/*.dark .VPFeature:hover {*/
-/*  background: var(--vp-c-bg);*/
-/*  border-color: var(--vp-c-brand-1);*/
-/*}*/
-
-/*.dark .VPDoc div[class*='language-'] {*/
-/*  border-color: var(--vp-c-border);*/
-/*}*/
-
-/*.dark .VPDoc table {*/
-/*  border-color: var(--vp-c-border);*/
-/*}*/
-
-/*.dark .VPDoc table thead {*/
-/*  background: var(--vp-c-bg-soft);*/
-/*}*/
-
-/*.dark .VPDoc table td {*/
-/*  border-bottom-color: var(--vp-c-divider);*/
-/*}*/
-
-/*!* ===================================================================*/
-/*   Print Styles*/
-/*   =================================================================== *!*/
-
-/*@media print {*/
-/*  .VPHero {*/
-/*    background: white !important;*/
-/*    padding: 2rem 0;*/
-/*  }*/
-/*  */
-/*  .VPHero .actions {*/
-/*    display: none;*/
-/*  }*/
-/*  */
-/*  .VPFeatures {*/
-/*    background: white !important;*/
-/*    padding: 2rem 0;*/
-/*  }*/
-/*  */
-/*  .VPFeature {*/
-/*    border: 1px solid #ddd !important;*/
-/*    background: white !important;*/
-/*    break-inside: avoid;*/
-/*  }*/
-/*}*/
-
-/*!* ===================================================================*/
-/*   Accessibility Improvements*/
-/*   =================================================================== *!*/
-
-/*!* Focus states *!*/
-/*.VPButton:focus-visible {*/
-/*  outline: 2px solid var(--vp-c-brand-1);*/
-/*  outline-offset: 2px;*/
-/*}*/
-
-/*!* Reduced motion support *!*/
-/*@media (prefers-reduced-motion: reduce) {*/
-/*  .VPFeature,*/
-/*  .VPButton {*/
-/*    transition: none;*/
-/*  }*/
-/*  */
-/*  .VPFeature:hover,*/
-/*  .VPButton:hover {*/
-/*    transform: none;*/
-/*  }*/
-/*}*/
-
-/*!* High contrast mode *!*/
-/*@media (prefers-contrast: high) {*/
-/*  .VPFeature {*/
-/*    border-width: 2px;*/
-/*  }*/
-/*  */
-/*  .VPDoc .custom-block {*/
-/*    border-left-width: 6px;*/
-/*  }*/
-/*}*/
+
+/**
+ * Clean, Professional Homepage Styles
+ * Inspired by modern open-source documentation sites
+ * Minimal animations, clean typography, professional aesthetics
+ * -------------------------------------------------------------------------- */
+
+/* ===================================================================
+   Hero Section - Clean and Professional
+   =================================================================== */
+
+.VPHero {
+    position: relative;
+    background: var(--vp-c-bg);
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+/* Clean hero content */
+.VPHero .VPHeroContent {
+    max-width: 1152px;
+    margin: 0 auto;
+}
+
+/* Professional title styling */
+.VPHero .name {
+    font-family: var(--vp-font-family-base);
+    font-weight: 700;
+    color: var(--vp-c-text-1);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+/* Subtitle styling */
+.VPHero .text {
+    font-size: 1.5rem;
+    color: var(--vp-c-text-2);
+    margin-bottom: 1rem;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.VPHero .tagline {
+    font-size: 1.125rem;
+    color: var(--vp-c-text-2);
+    margin-bottom: 2rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* ===================================================================
+   Action Buttons - Clean and Simple
+   =================================================================== */
+
+.VPHero .actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Primary brand button */
+.VPHero .action .VPButton.brand {
+    background: var(--vp-c-brand-1);
+    color: var(--vp-c-white);
+    border: none;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+    box-shadow: var(--vp-shadow-1);
+}
+
+.VPHero .action .VPButton.brand:hover {
+    background: var(--vp-c-brand-2);
+    transform: translateY(-1px);
+    box-shadow: var(--vp-shadow-2);
+}
+
+/* Alternative button */
+.VPHero .action .VPButton.alt {
+    background: var(--vp-c-bg);
+    color: var(--vp-c-text-1);
+    border: 2px solid var(--vp-c-border);
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+}
+
+.VPHero .action .VPButton.alt:hover {
+    border-color: var(--vp-c-brand-1);
+    color: var(--vp-c-brand-1);
+    transform: translateY(-1px);
+    box-shadow: var(--vp-shadow-1);
+}
+
+/* ===================================================================
+   Feature Cards - Clean Grid Layout
+   =================================================================== */
+
+.VPFeatures {
+    padding: 4rem 2rem;
+    background: var(--vp-c-bg-soft);
+}
+
+.VPFeatures .container {
+    max-width: 1152px;
+    margin: 0 auto;
+}
+
+.VPFeatures .items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* Clean feature card design */
+.VPFeature {
+    background: var(--vp-c-bg);
+    border: 1px solid var(--vp-c-border);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.25s ease;
+    position: relative;
+}
+
+.VPFeature:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--vp-shadow-3);
+    border-color: var(--vp-c-brand-1);
+}
+
+/* Feature icon */
+.VPFeature .icon {
+    font-size: 2rem;
+    color: var(--vp-c-brand-1);
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+/* Feature title */
+.VPFeature .title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--vp-c-text-1);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+}
+
+/* Feature description */
+.VPFeature .details {
+    color: var(--vp-c-text-2);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* ===================================================================
+   Typography Enhancements
+   =================================================================== */
+
+/* Improved heading hierarchy */
+.VPDoc h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--vp-c-text-1);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    border-bottom: 2px solid var(--vp-c-divider);
+    padding-bottom: 1rem;
+}
+
+.VPDoc h2 {
+    font-size: 1.875rem;
+    font-weight: 600;
+    color: var(--vp-c-text-1);
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.VPDoc h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.2em;
+    width: 4px;
+    height: 1.2em;
+    background: var(--vp-c-brand-1);
+    border-radius: 2px;
+}
+
+.VPDoc h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--vp-c-text-1);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+}
+
+/* Better paragraph spacing */
+.VPDoc p {
+    line-height: 1.7;
+    color: var(--vp-c-text-1);
+    margin: 1rem 0;
+}
+
+/* ===================================================================
+   Code Blocks Enhancement
+   =================================================================== */
+
+.VPDoc div[class*='language-'] {
+    border-radius: 8px;
+    border: 1px solid var(--vp-c-border);
+    margin: 1.5rem 0;
+    overflow: hidden;
+    box-shadow: var(--vp-shadow-1);
+}
+
+.VPDoc div[class*='language-'] > span.lang {
+    background: var(--vp-c-brand-1);
+    color: var(--vp-c-white);
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Inline code */
+.VPDoc :not(pre) > code {
+    background: var(--vp-c-brand-soft);
+    color: var(--vp-c-brand-1);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.875em;
+    font-weight: 500;
+    border: 1px solid rgba(79, 70, 229, 0.2);
+}
+
+/* ===================================================================
+   Custom Blocks Enhancement
+   =================================================================== */
+
+.VPDoc .custom-block {
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    border-left: 4px solid var(--vp-c-brand-1);
+    background: var(--vp-c-bg-soft);
+    position: relative;
+}
+
+.VPDoc .custom-block.tip {
+    border-left-color: var(--vp-c-brand-1);
+    background: var(--vp-c-brand-soft);
+}
+
+.VPDoc .custom-block.warning {
+    border-left-color: var(--vp-c-yellow-1);
+    background: var(--vp-c-yellow-soft);
+}
+
+.VPDoc .custom-block.danger {
+    border-left-color: var(--vp-c-red-1);
+    background: var(--vp-c-red-soft);
+}
+
+.VPDoc .custom-block.info {
+    border-left-color: var(--vp-c-gray-1);
+    background: var(--vp-c-gray-soft);
+}
+
+.VPDoc .custom-block-title {
+    font-weight: 600;
+    color: var(--vp-c-text-1);
+    margin-bottom: 0.5rem;
+}
+
+/* ===================================================================
+   Tables Enhancement
+   =================================================================== */
+
+.VPDoc table {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--vp-c-border);
+    margin: 2rem 0;
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: var(--vp-shadow-1);
+}
+
+.VPDoc table thead {
+    background: var(--vp-c-bg-soft);
+}
+
+.VPDoc table thead th {
+    font-weight: 600;
+    color: var(--vp-c-text-1);
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--vp-c-border);
+}
+
+.VPDoc table tbody tr {
+    transition: background-color 0.2s;
+}
+
+.VPDoc table tbody tr:hover {
+    background: var(--vp-c-bg-soft);
+}
+
+.VPDoc table td {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid var(--vp-c-divider);
+}
+
+/* ===================================================================
+   Links Enhancement
+   =================================================================== */
+
+.VPDoc a {
+    color: var(--vp-c-brand-1);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.25s;
+    position: relative;
+}
+
+.VPDoc a:hover {
+    color: var(--vp-c-brand-2);
+    text-decoration: underline;
+}
+
+/* ===================================================================
+   Responsive Design
+   =================================================================== */
+
+@media (max-width: 768px) {
+    .VPHero {
+        padding: 3rem 1.5rem;
+    }
+
+    .VPHero .name {
+        font-size: 2rem;
+    }
+
+    .VPHero .text {
+        font-size: 1.25rem;
+    }
+
+    .VPHero .tagline {
+        font-size: 1rem;
+    }
+
+    .VPHero .actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .VPHero .action {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .VPFeatures {
+        padding: 3rem 1.5rem;
+    }
+
+    .VPFeatures .items {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .VPFeature {
+        padding: 1.5rem;
+    }
+
+    .VPDoc h1 {
+        font-size: 2rem;
+    }
+
+    .VPDoc h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .VPHero {
+        padding: 2rem 1rem;
+    }
+
+    .VPFeatures {
+        padding: 2rem 1rem;
+    }
+
+    .VPFeature {
+        padding: 1rem;
+    }
+}
+
+/* ===================================================================
+   Dark Mode Optimizations
+   =================================================================== */
+
+.dark .VPFeature {
+    background: var(--vp-c-bg-alt);
+    border-color: var(--vp-c-border);
+}
+
+.dark .VPFeature:hover {
+    background: var(--vp-c-bg);
+    border-color: var(--vp-c-brand-1);
+}
+
+.dark .VPDoc div[class*='language-'] {
+    border-color: var(--vp-c-border);
+}
+
+.dark .VPDoc table {
+    border-color: var(--vp-c-border);
+}
+
+.dark .VPDoc table thead {
+    background: var(--vp-c-bg-soft);
+}
+
+.dark .VPDoc table td {
+    border-bottom-color: var(--vp-c-divider);
+}
+
+/* ===================================================================
+   Print Styles
+   =================================================================== */
+
+@media print {
+    .VPHero {
+        background: white !important;
+        padding: 2rem 0;
+    }
+
+    .VPHero .actions {
+        display: none;
+    }
+
+    .VPFeatures {
+        background: white !important;
+        padding: 2rem 0;
+    }
+
+    .VPFeature {
+        border: 1px solid #ddd !important;
+        background: white !important;
+        break-inside: avoid;
+    }
+}
+
+/* ===================================================================
+   Accessibility Improvements
+   =================================================================== */
+
+/* Focus states */
+.VPButton:focus-visible {
+    outline: 2px solid var(--vp-c-brand-1);
+    outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .VPFeature,
+    .VPButton {
+        transition: none;
+    }
+
+    .VPFeature:hover,
+    .VPButton:hover {
+        transform: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .VPFeature {
+        border-width: 2px;
+    }
+
+    .VPDoc .custom-block {
+        border-left-width: 6px;
+    }
+}

@@ -1,216 +1,216 @@
-/*!***/
-/* * Table Style Override*/
-/* * Force override any conflicting VitePress default table styles*/
-/* * This file should be loaded after enhanced-tables.css*/
-/* *!*/
+/**
+ * Table Style Override
+ * Force override any conflicting VitePress default table styles
+ * This file should be loaded after enhanced-tables.css
+ */
 
-/*!* Remove all default VitePress table styles *!*/
-/*.VPDoc table,*/
-/*.VPDoc table * {*/
-/*  !*all: unset;*!*/
-/*  !*display: revert;*!*/
-/*  !*box-sizing: border-box;*!*/
-/*}*/
+/* Remove all default VitePress table styles */
+.VPDoc table,
+.VPDoc table * {
+    all: unset;
+    display: revert;
+    box-sizing: border-box;
+}
 
-/*!* Reapply our enhanced table styles with maximum specificity *!*/
-/*.VPDoc .vp-doc table,*/
-/*div[class*="language-"] + table,*/
-/*.VPDoc > div > table {*/
-/*  !* Foundation reset *!*/
-/*  !*width: 100% !important;*!*/
-/*  !*max-width: 100% !important;*!*/
-/*  !*border-collapse: separate !important;*!*/
-/*  !*border-spacing: 0 !important;*!*/
-/*  !*margin: 2rem 0 !important;*!*/
-/*  !*font-size: 0.9375rem !important;*!*/
-/*  !*font-family: inherit !important;*!*/
-/*  */
-/*  !*!* Core visual design *!*!*/
-/*  !*background: #ffffff !important;*!*/
-/*  !*border: 2px solid #d0d7de !important;*!*/
-/*  !*border-radius: 12px !important;*!*/
-/*  !*overflow: hidden !important;*!*/
-/*  !*box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), *!*/
-/*  !*            0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;*!*/
-/*}*/
+/* Reapply our enhanced table styles with maximum specificity */
+.VPDoc .vp-doc table,
+div[class*="language-"] + table,
+.VPDoc > div > table {
+    /* Foundation reset */
+    width: 100% !important;
+    max-width: 100% !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    margin: 2rem 0 !important;
+    font-size: 0.9375rem !important;
+    font-family: inherit !important;
 
-/*!* Dark mode table base *!*/
-/*.dark .VPDoc table {*/
-/*  !*background: #161b22 !important;*!*/
-/*  !*border-color: #484f58 !important;*!*/
-/*  !*box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), *!*/
-/*  !*            0 2px 4px -1px rgba(0, 0, 0, 0.2) !important;*!*/
-/*}*/
+    /* Core visual design */
+    background: #ffffff !important;
+    border: 2px solid #d0d7de !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
 
-/*!* Force header styles *!*/
-/*.VPDoc table > thead {*/
-/*  !*background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;*!*/
-/*}*/
+/* Dark mode table base */
+.dark .VPDoc table {
+    background: #161b22 !important;
+    border-color: #484f58 !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
+    0 2px 4px -1px rgba(0, 0, 0, 0.2) !important;
+}
 
-/*.dark .VPDoc table > thead {*/
-/*  !*background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%) !important;*!*/
-/*}*/
+/* Force header styles */
+.VPDoc table > thead {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+}
 
-/*.VPDoc table > thead > tr > th {*/
-/*  !*color: #ffffff !important;*!*/
-/*  !*font-weight: 600 !important;*!*/
-/*  !*font-size: 0.9375rem !important;*!*/
-/*  !*text-align: left !important;*!*/
-/*  !*padding: 0.875rem 1rem !important;*!*/
-/*  !*letter-spacing: 0.025em !important;*!*/
-/*  !*text-transform: none !important;*!*/
-/*  !*background: transparent !important;*!*/
-/*  !*border: none !important;*!*/
-/*  !*border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;*!*/
-/*  !*vertical-align: middle !important;*!*/
-/*}*/
+.dark .VPDoc table > thead {
+    background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%) !important;
+}
 
-/*!* Force body row styles *!*/
-/*.VPDoc table > tbody > tr {*/
-/*  !*background: transparent !important;*!*/
-/*  !*transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;*!*/
-/*}*/
+.VPDoc table > thead > tr > th {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    font-size: 0.9375rem !important;
+    text-align: left !important;
+    padding: 0.875rem 1rem !important;
+    letter-spacing: 0.025em !important;
+    text-transform: none !important;
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+    vertical-align: middle !important;
+}
 
-/*!* Zebra striping *!*/
-/*.VPDoc table > tbody > tr:nth-child(even) {*/
-/*  !*background: #fafbfc !important;*!*/
-/*}*/
+/* Force body row styles */
+.VPDoc table > tbody > tr {
+    background: transparent !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
 
-/*.dark .VPDoc table > tbody > tr:nth-child(even) {*/
-/*  !*background: #0d1117 !important;*!*/
-/*}*/
+/* Zebra striping */
+.VPDoc table > tbody > tr:nth-child(even) {
+    background: #fafbfc !important;
+}
 
-/*!* Hover effect *!*/
-/*.VPDoc table > tbody > tr:hover {*/
-/*  !*background: #f6f8fa !important;*!*/
-/*  !*transform: translateX(2px) !important;*!*/
-/*  !*box-shadow: inset 4px 0 0 0 #6366f1 !important;*!*/
-/*}*/
+.dark .VPDoc table > tbody > tr:nth-child(even) {
+    background: #0d1117 !important;
+}
 
-/*.dark .VPDoc table > tbody > tr:hover {*/
-/*  !*background: #1f2937 !important;*!*/
-/*  !*box-shadow: inset 4px 0 0 0 #a855f7 !important;*!*/
-/*}*/
+/* Hover effect */
+.VPDoc table > tbody > tr:hover {
+    background: #f6f8fa !important;
+    transform: translateX(2px) !important;
+    box-shadow: inset 4px 0 0 0 #6366f1 !important;
+}
 
-/*!* Force cell styles *!*/
-/*.VPDoc table > tbody > tr > td {*/
-/*  !*color: var(--vp-c-text-1) !important;*!*/
-/*  !*padding: 0.875rem 1rem !important;*!*/
-/*  !*line-height: 1.6 !important;*!*/
-/*  !*vertical-align: middle !important;*!*/
-/*  !*background: transparent !important;*!*/
-/*  !*border: none !important;*!*/
-/*  !*border-bottom: 1px solid #e8eaed !important;*!*/
-/*  !*border-right: 1px solid #e8eaed !important;*!*/
-/*}*/
+.dark .VPDoc table > tbody > tr:hover {
+    background: #1f2937 !important;
+    box-shadow: inset 4px 0 0 0 #a855f7 !important;
+}
 
-/*.dark .VPDoc table > tbody > tr > td {*/
-/*  !*border-bottom-color: #21262d !important;*!*/
-/*  !*border-right-color: #21262d !important;*!*/
-/*}*/
+/* Force cell styles */
+.VPDoc table > tbody > tr > td {
+    color: var(--vp-c-text-1) !important;
+    padding: 0.875rem 1rem !important;
+    line-height: 1.6 !important;
+    vertical-align: middle !important;
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid #e8eaed !important;
+    border-right: 1px solid #e8eaed !important;
+}
 
-/*!* Remove border from last row *!*/
-/*.VPDoc table > tbody > tr:last-child > td {*/
-/*  !*border-bottom: none !important;*!*/
-/*}*/
+.dark .VPDoc table > tbody > tr > td {
+    border-bottom-color: #21262d !important;
+    border-right-color: #21262d !important;
+}
 
-/*!* Remove right border from last cell *!*/
-/*.VPDoc table > tbody > tr > td:last-child,*/
-/*.VPDoc table > thead > tr > th:last-child {*/
-/*  !*border-right: none !important;*!*/
-/*}*/
+/* Remove border from last row */
+.VPDoc table > tbody > tr:last-child > td {
+    border-bottom: none !important;
+}
 
-/*!* First column emphasis *!*/
-/*.VPDoc table > tbody > tr > td:first-child {*/
-/*  !*font-weight: 500 !important;*!*/
-/*  !*color: var(--vp-c-brand-1) !important;*!*/
-/*}*/
+/* Remove right border from last cell */
+.VPDoc table > tbody > tr > td:last-child,
+.VPDoc table > thead > tr > th:last-child {
+    border-right: none !important;
+}
 
-/*!* Code in tables *!*/
-/*.VPDoc table code {*/
-/*  !*padding: 0.125rem 0.375rem !important;*!*/
-/*  !*font-size: 0.875em !important;*!*/
-/*  !*background: var(--vp-c-brand-soft) !important;*!*/
-/*  !*color: var(--vp-c-brand-1) !important;*!*/
-/*  !*border-radius: 4px !important;*!*/
-/*  !*border: 1px solid var(--vp-c-brand-1) !important;*!*/
-/*  !*white-space: nowrap !important;*!*/
-/*  !*display: inline-block !important;*!*/
-/*}*/
+/* First column emphasis */
+.VPDoc table > tbody > tr > td:first-child {
+    font-weight: 500 !important;
+    color: var(--vp-c-brand-1) !important;
+}
 
-/*!* Links in tables *!*/
-/*.VPDoc table a {*/
-/*  !*color: var(--vp-c-brand-1) !important;*!*/
-/*  !*font-weight: 500 !important;*!*/
-/*  !*text-decoration: none !important;*!*/
-/*  !*border-bottom: 1px dashed currentColor !important;*!*/
-/*  !*transition: all 0.2s !important;*!*/
-/*  !*display: inline !important;*!*/
-/*}*/
+/* Code in tables */
+.VPDoc table code {
+    padding: 0.125rem 0.375rem !important;
+    font-size: 0.875em !important;
+    background: var(--vp-c-brand-soft) !important;
+    color: var(--vp-c-brand-1) !important;
+    border-radius: 4px !important;
+    border: 1px solid var(--vp-c-brand-1) !important;
+    white-space: nowrap !important;
+    display: inline-block !important;
+}
 
-/*.VPDoc table a:hover {*/
-/*  !*color: var(--vp-c-brand-2) !important;*!*/
-/*  !*border-bottom-style: solid !important;*!*/
-/*}*/
+/* Links in tables */
+.VPDoc table a {
+    color: var(--vp-c-brand-1) !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    border-bottom: 1px dashed currentColor !important;
+    transition: all 0.2s !important;
+    display: inline !important;
+}
 
-/*!* Ensure proper display for all table elements *!*/
-/*.VPDoc table {*/
-/*  !*display: table !important;*!*/
-/*}*/
+.VPDoc table a:hover {
+    color: var(--vp-c-brand-2) !important;
+    border-bottom-style: solid !important;
+}
 
-/*.VPDoc table > thead {*/
-/*  !*display: table-header-group !important;*!*/
-/*}*/
+/* Ensure proper display for all table elements */
+.VPDoc table {
+    display: table !important;
+}
 
-/*.VPDoc table > tbody {*/
-/*  !*display: table-row-group !important;*!*/
-/*}*/
+.VPDoc table > thead {
+    display: table-header-group !important;
+}
 
-/*.VPDoc table > thead > tr,*/
-/*.VPDoc table > tbody > tr {*/
-/*  !*display: table-row !important;*!*/
-/*}*/
+.VPDoc table > tbody {
+    display: table-row-group !important;
+}
 
-/*.VPDoc table > thead > tr > th,*/
-/*.VPDoc table > tbody > tr > td {*/
-/*  !*display: table-cell !important;*!*/
-/*}*/
+.VPDoc table > thead > tr,
+.VPDoc table > tbody > tr {
+    display: table-row !important;
+}
 
-/*!* Mobile responsive adjustments *!*/
-/*@media (max-width: 768px) {*/
-/*  .VPDoc table {*/
-/*    !*font-size: 0.875rem !important;*!*/
-/*    !*display: block !important;*!*/
-/*    !*overflow-x: auto !important;*!*/
-/*    !*-webkit-overflow-scrolling: touch !important;*!*/
-/*  }*/
-/*  */
-/*  .VPDoc table > thead > tr > th,*/
-/*  .VPDoc table > tbody > tr > td {*/
-/*    !*padding: 0.625rem 0.875rem !important;*!*/
-/*    !*white-space: nowrap !important;*!*/
-/*  }*/
-/*}*/
+.VPDoc table > thead > tr > th,
+.VPDoc table > tbody > tr > td {
+    display: table-cell !important;
+}
 
-/*!* Print styles *!*/
-/*@media print {*/
-/*  .VPDoc table {*/
-/*    !*box-shadow: none !important;*!*/
-/*    !*border: 1px solid #000 !important;*!*/
-/*  }*/
-/*  */
-/*  .VPDoc table > thead {*/
-/*    !*background: #f0f0f0 !important;*!*/
-/*  }*/
-/*  */
-/*  .VPDoc table > thead > tr > th {*/
-/*    !*color: #000 !important;*!*/
-/*    !*border-bottom: 2px solid #000 !important;*!*/
-/*  }*/
-/*  */
-/*  .VPDoc table > tbody > tr:hover {*/
-/*    !*background: transparent !important;*!*/
-/*    !*transform: none !important;*!*/
-/*    !*box-shadow: none !important;*!*/
-/*  }*/
-/*}*/
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .VPDoc table {
+        font-size: 0.875rem !important;
+        display: block !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    .VPDoc table > thead > tr > th,
+    .VPDoc table > tbody > tr > td {
+        padding: 0.625rem 0.875rem !important;
+        white-space: nowrap !important;
+    }
+}
+
+/* Print styles */
+@media print {
+    .VPDoc table {
+        box-shadow: none !important;
+        border: 1px solid #000 !important;
+    }
+
+    .VPDoc table > thead {
+        background: #f0f0f0 !important;
+    }
+
+    .VPDoc table > thead > tr > th {
+        color: #000 !important;
+        border-bottom: 2px solid #000 !important;
+    }
+
+    .VPDoc table > tbody > tr:hover {
+        background: transparent !important;
+        transform: none !important;
+        box-shadow: none !important;
+    }
+}
