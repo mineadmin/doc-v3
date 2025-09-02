@@ -1,538 +1,538 @@
-/**
- * Professional Documentation Enhancements
- * Clean, minimal styling for improved UX
- * Inspired by modern open-source project documentation
- * -------------------------------------------------------------------------- */
-
-/* ===================================================================
-   Navigation Bar - Clean & Professional
-   =================================================================== */
-
-.VPNav {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--vp-c-divider);
-  transition: all 0.25s ease;
-}
-
-.dark .VPNav {
-  background: rgba(17, 24, 39, 0.85);
-}
-
-/* Clean nav logo and title */
-.VPNavBar .title {
-  font-weight: 600;
-  color: var(--vp-c-text-1);
-}
-
-/* Simple nav links */
-.VPNavBarMenuLink {
-  position: relative;
-  font-weight: 500;
-  transition: color 0.25s;
-  color: var(--vp-c-text-2);
-}
-
-.VPNavBarMenuLink:hover,
-.VPNavBarMenuLink.active {
-  color: var(--vp-c-brand-1);
-}
-
-.VPNavBarMenuLink::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 50%;
-  transform: translateX(-50%) scaleX(0);
-  width: 100%;
-  height: 2px;
-  background: var(--vp-c-brand-1);
-  transition: transform 0.25s ease;
-}
-
-.VPNavBarMenuLink:hover::after,
-.VPNavBarMenuLink.active::after {
-  transform: translateX(-50%) scaleX(1);
-}
-
-/* ===================================================================
-   Sidebar - Clean List Design
-   =================================================================== */
-
-.VPSidebar {
-  background: var(--vp-c-bg-alt);
-  border-right: 1px solid var(--vp-c-divider);
-}
-
-.VPSidebarItem {
-  margin: 0.125rem 0;
-}
-
-.VPSidebarItem .item {
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  transition: all 0.2s ease;
-  color: var(--vp-c-text-2);
-  font-weight: 500;
-  position: relative;
-}
-
-.VPSidebarItem .item:hover {
-  background: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-1);
-  padding-left: 1.25rem;
-}
-
-.VPSidebarItem .item.active {
-  background: var(--vp-c-brand-soft);
-  color: var(--vp-c-brand-1);
-  font-weight: 600;
-}
-
-.VPSidebarItem .item.active::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 60%;
-  background: var(--vp-c-brand-1);
-  border-radius: 0 2px 2px 0;
-}
-
-/* Sidebar group headers */
-.VPSidebarItem.level-0 > .item {
-  font-weight: 700;
-  color: var(--vp-c-text-1);
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-  opacity: 0.8;
-}
-
-/* ===================================================================
-   Content Area - Enhanced Typography
-   =================================================================== */
-
-.VPDoc {
-  padding-top: 2rem;
-}
-
-/* Smooth content transitions */
-.VPDocContent {
-  animation: fadeIn 0.3s ease-out;
-}
-
-@keyframes fadeIn {
-  from { 
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to { 
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Better blockquote styling */
-.VPDoc blockquote {
-  border-left: 4px solid var(--vp-c-brand-1);
-  background: var(--vp-c-bg-soft);
-  padding: 1rem 1.5rem;
-  border-radius: 0 8px 8px 0;
-  margin: 1.5rem 0;
-  font-style: italic;
-  color: var(--vp-c-text-2);
-}
-
-.VPDoc blockquote p {
-  margin: 0;
-}
-
-/* ===================================================================
-   Search - Clean Interface
-   =================================================================== */
-
-.VPLocalSearchBox {
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: var(--vp-shadow-3);
-  border: 1px solid var(--vp-c-border);
-}
-
-.VPLocalSearchBox .search-input {
-  font-size: 1rem;
-  padding: 1rem 1.25rem;
-  border: none;
-  background: var(--vp-c-bg);
-  color: var(--vp-c-text-1);
-}
-
-.VPLocalSearchBox .search-input:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--vp-c-brand-1) inset;
-}
-
-.VPLocalSearchBox .results {
-  max-height: 400px;
-  background: var(--vp-c-bg);
-}
-
-.VPLocalSearchBox .result {
-  padding: 0.75rem 1.25rem;
-  transition: all 0.2s ease;
-  border-bottom: 1px solid var(--vp-c-divider);
-}
-
-.VPLocalSearchBox .result:hover,
-.VPLocalSearchBox .result.selected {
-  background: var(--vp-c-brand-soft);
-  color: var(--vp-c-brand-1);
-}
-
-.VPLocalSearchBox .result:last-child {
-  border-bottom: none;
-}
-
-/* ===================================================================
-   Mobile Navigation - Improved UX
-   =================================================================== */
-
-@media (max-width: 959px) {
-  .VPNavScreen {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-  }
-  
-  .dark .VPNavScreen {
-    background: rgba(17, 24, 39, 0.95);
-  }
-  
-  .VPNavScreenMenuLink {
-    padding: 0.75rem 1.25rem;
-    border-radius: 8px;
-    margin: 0.25rem 1rem;
-    transition: all 0.2s ease;
-    color: var(--vp-c-text-2);
-    font-weight: 500;
-  }
-  
-  .VPNavScreenMenuLink:hover,
-  .VPNavScreenMenuLink.active {
-    background: var(--vp-c-brand-soft);
-    color: var(--vp-c-brand-1);
-    transform: translateX(4px);
-  }
-}
-
-/* ===================================================================
-   Improved Buttons
-   =================================================================== */
-
-.VPButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: 8px;
-  transition: all 0.25s ease;
-  cursor: pointer;
-  user-select: none;
-  outline: none;
-}
-
-.VPButton:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
-  outline-offset: 2px;
-}
-
-.VPButton:active {
-  transform: translateY(1px);
-}
-
-/* ===================================================================
-   Scrollbar Styling
-   =================================================================== */
-
-/* Clean scrollbars for webkit browsers */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--vp-c-bg-soft);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--vp-c-text-3);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--vp-c-text-2);
-}
-
-.dark ::-webkit-scrollbar-track {
-  background: var(--vp-c-bg-alt);
-}
-
-.dark ::-webkit-scrollbar-thumb {
-  background: var(--vp-c-text-3);
-}
-
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: var(--vp-c-text-2);
-}
-
-/* ===================================================================
-   Copy Code Button Enhancement
-   =================================================================== */
-
-.VPDoc div[class*='language-'] .copy {
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-border);
-  color: var(--vp-c-text-2);
-  border-radius: 4px;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.75rem;
-  transition: all 0.2s ease;
-}
-
-.VPDoc div[class*='language-'] .copy:hover {
-  background: var(--vp-c-brand-1);
-  color: var(--vp-c-white);
-  border-color: var(--vp-c-brand-1);
-}
-
-/* ===================================================================
-   Breadcrumb Styling
-   =================================================================== */
-
-.VPDocBreadcrumb {
-  padding: 0 0 1rem 0;
-  border-bottom: 1px solid var(--vp-c-divider);
-  margin-bottom: 2rem;
-}
-
-.VPDocBreadcrumb a {
-  color: var(--vp-c-text-3);
-  text-decoration: none;
-  font-size: 0.875rem;
-  transition: color 0.2s;
-}
-
-.VPDocBreadcrumb a:hover {
-  color: var(--vp-c-brand-1);
-}
-
-.VPDocBreadcrumb .separator {
-  color: var(--vp-c-text-3);
-  margin: 0 0.5rem;
-}
-
-/* ===================================================================
-   Footer Styling
-   =================================================================== */
-
-.VPDocFooter {
-  border-top: 1px solid var(--vp-c-divider);
-  padding-top: 2rem;
-  margin-top: 4rem;
-}
-
-.VPDocFooterPrev,
-.VPDocFooterNext {
-  padding: 1rem;
-  border: 1px solid var(--vp-c-border);
-  border-radius: 8px;
-  transition: all 0.25s ease;
-  text-decoration: none;
-  display: block;
-}
-
-.VPDocFooterPrev:hover,
-.VPDocFooterNext:hover {
-  border-color: var(--vp-c-brand-1);
-  box-shadow: var(--vp-shadow-2);
-  transform: translateY(-1px);
-}
-
-/* ===================================================================
-   Improved Form Elements
-   =================================================================== */
-
-.VPDoc input,
-.VPDoc textarea,
-.VPDoc select {
-  /*background: var(--vp-c-bg);*/
-  /*border: 1px solid var(--vp-c-border);*/
-  /*border-radius: 6px;*/
-  /*padding: 0.5rem 0.75rem;*/
-  /*color: var(--vp-c-text-1);*/
-  /*transition: border-color 0.2s ease;*/
-}
-
-.VPDoc input:focus,
-.VPDoc textarea:focus,
-.VPDoc select:focus {
-  /*outline: none;*/
-  /*border-color: var(--vp-c-brand-1);*/
-  /*box-shadow: 0 0 0 2px var(--vp-c-brand-soft);*/
-}
-
-/* ===================================================================
-   Badge Styling
-   =================================================================== */
-
-.VPBadge {
-  display: inline-block;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  border-radius: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.VPBadge.info {
-  background: var(--vp-c-default-soft);
-  color: var(--vp-c-default-1);
-}
-
-.VPBadge.tip {
-  background: var(--vp-c-brand-soft);
-  color: var(--vp-c-brand-1);
-}
-
-.VPBadge.warning {
-  background: var(--vp-c-warning-soft);
-  color: var(--vp-c-warning-1);
-}
-
-.VPBadge.danger {
-  background: var(--vp-c-danger-soft);
-  color: var(--vp-c-danger-1);
-}
-
-/* ===================================================================
-   Performance Optimizations
-   =================================================================== */
-
-/* Enable hardware acceleration for smooth animations */
-.VPButton,
-.VPFeature,
-.VPSidebarItem .item,
-.VPNavBarMenuLink {
-  will-change: transform;
-}
-
-/* Remove will-change after hover for better performance */
-@media (hover: hover) {
-  .VPButton:not(:hover),
-  .VPFeature:not(:hover),
-  .VPSidebarItem .item:not(:hover),
-  .VPNavBarMenuLink:not(:hover) {
-    will-change: auto;
-  }
-}
-
-/* ===================================================================
-   Print Optimizations
-   =================================================================== */
-
-@media print {
-  .VPNav,
-  .VPSidebar,
-  .VPLocalNav,
-  .VPDocFooter {
-    display: none;
-  }
-  
-  .VPDoc {
-    max-width: 100%;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .VPDoc h1,
-  .VPDoc h2,
-  .VPDoc h3,
-  .VPDoc h4,
-  .VPDoc h5,
-  .VPDoc h6 {
-    page-break-after: avoid;
-    color: #000 !important;
-  }
-  
-  .VPDoc pre,
-  .VPDoc .custom-block,
-  .VPDoc table {
-    page-break-inside: avoid;
-    border: 1px solid #ddd !important;
-  }
-  
-  .VPDoc a {
-    color: #000 !important;
-    text-decoration: underline !important;
-  }
-}
-
-/* ===================================================================
-   Accessibility Enhancements
-   =================================================================== */
-
-/* Skip link for keyboard navigation */
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 6px;
-  background: var(--vp-c-brand-1);
-  color: var(--vp-c-white);
-  padding: 8px;
-  text-decoration: none;
-  z-index: 100;
-  border-radius: 4px;
-  transition: top 0.3s;
-}
-
-.skip-link:focus {
-  top: 6px;
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .VPDoc a {
-    text-decoration: underline;
-  }
-  
-  .VPButton {
-    border: 2px solid currentColor;
-  }
-  
-  .VPFeature {
-    border-width: 2px;
-  }
-}
-
-/* Reduced motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-  
-  .VPDocContent {
-    animation: none;
-  }
-}
+/*!***/
+/* * Professional Documentation Enhancements*/
+/* * Clean, minimal styling for improved UX*/
+/* * Inspired by modern open-source project documentation*/
+/* * -------------------------------------------------------------------------- *!*/
+
+/*!* ===================================================================*/
+/*   Navigation Bar - Clean & Professional*/
+/*   =================================================================== *!*/
+
+/*.VPNav {*/
+/*  background: rgba(255, 255, 255, 0.85);*/
+/*  backdrop-filter: blur(12px);*/
+/*  -webkit-backdrop-filter: blur(12px);*/
+/*  border-bottom: 1px solid var(--vp-c-divider);*/
+/*  transition: all 0.25s ease;*/
+/*}*/
+
+/*.dark .VPNav {*/
+/*  background: rgba(17, 24, 39, 0.85);*/
+/*}*/
+
+/*!* Clean nav logo and title *!*/
+/*.VPNavBar .title {*/
+/*  font-weight: 600;*/
+/*  color: var(--vp-c-text-1);*/
+/*}*/
+
+/*!* Simple nav links *!*/
+/*.VPNavBarMenuLink {*/
+/*  position: relative;*/
+/*  font-weight: 500;*/
+/*  transition: color 0.25s;*/
+/*  color: var(--vp-c-text-2);*/
+/*}*/
+
+/*.VPNavBarMenuLink:hover,*/
+/*.VPNavBarMenuLink.active {*/
+/*  color: var(--vp-c-brand-1);*/
+/*}*/
+
+/*.VPNavBarMenuLink::after {*/
+/*  content: '';*/
+/*  position: absolute;*/
+/*  bottom: -4px;*/
+/*  left: 50%;*/
+/*  transform: translateX(-50%) scaleX(0);*/
+/*  width: 100%;*/
+/*  height: 2px;*/
+/*  background: var(--vp-c-brand-1);*/
+/*  transition: transform 0.25s ease;*/
+/*}*/
+
+/*.VPNavBarMenuLink:hover::after,*/
+/*.VPNavBarMenuLink.active::after {*/
+/*  transform: translateX(-50%) scaleX(1);*/
+/*}*/
+
+/*!* ===================================================================*/
+/*   Sidebar - Clean List Design*/
+/*   =================================================================== *!*/
+
+/*.VPSidebar {*/
+/*  background: var(--vp-c-bg-alt);*/
+/*  border-right: 1px solid var(--vp-c-divider);*/
+/*}*/
+
+/*.VPSidebarItem {*/
+/*  margin: 0.125rem 0;*/
+/*}*/
+
+/*.VPSidebarItem .item {*/
+/*  padding: 0.5rem 1rem;*/
+/*  border-radius: 6px;*/
+/*  transition: all 0.2s ease;*/
+/*  color: var(--vp-c-text-2);*/
+/*  font-weight: 500;*/
+/*  position: relative;*/
+/*}*/
+
+/*.VPSidebarItem .item:hover {*/
+/*  background: var(--vp-c-bg-soft);*/
+/*  color: var(--vp-c-text-1);*/
+/*  padding-left: 1.25rem;*/
+/*}*/
+
+/*.VPSidebarItem .item.active {*/
+/*  background: var(--vp-c-brand-soft);*/
+/*  color: var(--vp-c-brand-1);*/
+/*  font-weight: 600;*/
+/*}*/
+
+/*.VPSidebarItem .item.active::before {*/
+/*  content: '';*/
+/*  position: absolute;*/
+/*  left: 0;*/
+/*  top: 50%;*/
+/*  transform: translateY(-50%);*/
+/*  width: 3px;*/
+/*  height: 60%;*/
+/*  background: var(--vp-c-brand-1);*/
+/*  border-radius: 0 2px 2px 0;*/
+/*}*/
+
+/*!* Sidebar group headers *!*/
+/*.VPSidebarItem.level-0 > .item {*/
+/*  font-weight: 700;*/
+/*  color: var(--vp-c-text-1);*/
+/*  text-transform: uppercase;*/
+/*  font-size: 0.75rem;*/
+/*  letter-spacing: 0.05em;*/
+/*  margin-top: 1.5rem;*/
+/*  margin-bottom: 0.5rem;*/
+/*  opacity: 0.8;*/
+/*}*/
+
+/*!* ===================================================================*/
+/*   Content Area - Enhanced Typography*/
+/*   =================================================================== *!*/
+
+/*.VPDoc {*/
+/*  padding-top: 2rem;*/
+/*}*/
+
+/*!* Smooth content transitions *!*/
+/*.VPDocContent {*/
+/*  animation: fadeIn 0.3s ease-out;*/
+/*}*/
+
+/*@keyframes fadeIn {*/
+/*  from { */
+/*    opacity: 0;*/
+/*    transform: translateY(10px);*/
+/*  }*/
+/*  to { */
+/*    opacity: 1;*/
+/*    transform: translateY(0);*/
+/*  }*/
+/*}*/
+
+/*!* Better blockquote styling *!*/
+/*.VPDoc blockquote {*/
+/*  border-left: 4px solid var(--vp-c-brand-1);*/
+/*  background: var(--vp-c-bg-soft);*/
+/*  padding: 1rem 1.5rem;*/
+/*  border-radius: 0 8px 8px 0;*/
+/*  margin: 1.5rem 0;*/
+/*  font-style: italic;*/
+/*  color: var(--vp-c-text-2);*/
+/*}*/
+
+/*.VPDoc blockquote p {*/
+/*  margin: 0;*/
+/*}*/
+
+/*!* ===================================================================*/
+/*   Search - Clean Interface*/
+/*   =================================================================== *!*/
+
+/*.VPLocalSearchBox {*/
+/*  border-radius: 12px;*/
+/*  overflow: hidden;*/
+/*  box-shadow: var(--vp-shadow-3);*/
+/*  border: 1px solid var(--vp-c-border);*/
+/*}*/
+
+/*.VPLocalSearchBox .search-input {*/
+/*  font-size: 1rem;*/
+/*  padding: 1rem 1.25rem;*/
+/*  border: none;*/
+/*  background: var(--vp-c-bg);*/
+/*  color: var(--vp-c-text-1);*/
+/*}*/
+
+/*.VPLocalSearchBox .search-input:focus {*/
+/*  outline: none;*/
+/*  box-shadow: 0 0 0 2px var(--vp-c-brand-1) inset;*/
+/*}*/
+
+/*.VPLocalSearchBox .results {*/
+/*  max-height: 400px;*/
+/*  background: var(--vp-c-bg);*/
+/*}*/
+
+/*.VPLocalSearchBox .result {*/
+/*  padding: 0.75rem 1.25rem;*/
+/*  transition: all 0.2s ease;*/
+/*  border-bottom: 1px solid var(--vp-c-divider);*/
+/*}*/
+
+/*.VPLocalSearchBox .result:hover,*/
+/*.VPLocalSearchBox .result.selected {*/
+/*  background: var(--vp-c-brand-soft);*/
+/*  color: var(--vp-c-brand-1);*/
+/*}*/
+
+/*.VPLocalSearchBox .result:last-child {*/
+/*  border-bottom: none;*/
+/*}*/
+
+/*!* ===================================================================*/
+/*   Mobile Navigation - Improved UX*/
+/*   =================================================================== *!*/
+
+/*@media (max-width: 959px) {*/
+/*  .VPNavScreen {*/
+/*    background: rgba(255, 255, 255, 0.95);*/
+/*    backdrop-filter: blur(20px);*/
+/*    -webkit-backdrop-filter: blur(20px);*/
+/*  }*/
+/*  */
+/*  .dark .VPNavScreen {*/
+/*    background: rgba(17, 24, 39, 0.95);*/
+/*  }*/
+/*  */
+/*  .VPNavScreenMenuLink {*/
+/*    padding: 0.75rem 1.25rem;*/
+/*    border-radius: 8px;*/
+/*    margin: 0.25rem 1rem;*/
+/*    transition: all 0.2s ease;*/
+/*    color: var(--vp-c-text-2);*/
+/*    font-weight: 500;*/
+/*  }*/
+/*  */
+/*  .VPNavScreenMenuLink:hover,*/
+/*  .VPNavScreenMenuLink.active {*/
+/*    background: var(--vp-c-brand-soft);*/
+/*    color: var(--vp-c-brand-1);*/
+/*    transform: translateX(4px);*/
+/*  }*/
+/*}*/
+
+/*!* ===================================================================*/
+/*   Improved Buttons*/
+/*   =================================================================== *!*/
+
+/*.VPButton {*/
+/*  display: inline-flex;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*  font-weight: 600;*/
+/*  text-decoration: none;*/
+/*  border-radius: 8px;*/
+/*  transition: all 0.25s ease;*/
+/*  cursor: pointer;*/
+/*  user-select: none;*/
+/*  outline: none;*/
+/*}*/
+
+/*.VPButton:focus-visible {*/
+/*  outline: 2px solid var(--vp-c-brand-1);*/
+/*  outline-offset: 2px;*/
+/*}*/
+
+/*.VPButton:active {*/
+/*  transform: translateY(1px);*/
+/*}*/
+
+/*!* ===================================================================*/
+/*   Scrollbar Styling*/
+/*   =================================================================== *!*/
+
+/*!* Clean scrollbars for webkit browsers *!*/
+/*::-webkit-scrollbar {*/
+/*  width: 8px;*/
+/*  height: 8px;*/
+/*}*/
+
+/*::-webkit-scrollbar-track {*/
+/*  background: var(--vp-c-bg-soft);*/
+/*}*/
+
+/*::-webkit-scrollbar-thumb {*/
+/*  background: var(--vp-c-text-3);*/
+/*  border-radius: 4px;*/
+/*}*/
+
+/*::-webkit-scrollbar-thumb:hover {*/
+/*  background: var(--vp-c-text-2);*/
+/*}*/
+
+/*.dark ::-webkit-scrollbar-track {*/
+/*  background: var(--vp-c-bg-alt);*/
+/*}*/
+
+/*.dark ::-webkit-scrollbar-thumb {*/
+/*  background: var(--vp-c-text-3);*/
+/*}*/
+
+/*.dark ::-webkit-scrollbar-thumb:hover {*/
+/*  background: var(--vp-c-text-2);*/
+/*}*/
+
+/*!* ===================================================================*/
+/*   Copy Code Button Enhancement*/
+/*   =================================================================== *!*/
+
+/*.VPDoc div[class*='language-'] .copy {*/
+/*  background: var(--vp-c-bg-soft);*/
+/*  border: 1px solid var(--vp-c-border);*/
+/*  color: var(--vp-c-text-2);*/
+/*  border-radius: 4px;*/
+/*  padding: 0.25rem 0.5rem;*/
+/*  font-size: 0.75rem;*/
+/*  transition: all 0.2s ease;*/
+/*}*/
+
+/*.VPDoc div[class*='language-'] .copy:hover {*/
+/*  background: var(--vp-c-brand-1);*/
+/*  color: var(--vp-c-white);*/
+/*  border-color: var(--vp-c-brand-1);*/
+/*}*/
+
+/*!* ===================================================================*/
+/*   Breadcrumb Styling*/
+/*   =================================================================== *!*/
+
+/*.VPDocBreadcrumb {*/
+/*  padding: 0 0 1rem 0;*/
+/*  border-bottom: 1px solid var(--vp-c-divider);*/
+/*  margin-bottom: 2rem;*/
+/*}*/
+
+/*.VPDocBreadcrumb a {*/
+/*  color: var(--vp-c-text-3);*/
+/*  text-decoration: none;*/
+/*  font-size: 0.875rem;*/
+/*  transition: color 0.2s;*/
+/*}*/
+
+/*.VPDocBreadcrumb a:hover {*/
+/*  color: var(--vp-c-brand-1);*/
+/*}*/
+
+/*.VPDocBreadcrumb .separator {*/
+/*  color: var(--vp-c-text-3);*/
+/*  margin: 0 0.5rem;*/
+/*}*/
+
+/*!* ===================================================================*/
+/*   Footer Styling*/
+/*   =================================================================== *!*/
+
+/*.VPDocFooter {*/
+/*  border-top: 1px solid var(--vp-c-divider);*/
+/*  padding-top: 2rem;*/
+/*  margin-top: 4rem;*/
+/*}*/
+
+/*.VPDocFooterPrev,*/
+/*.VPDocFooterNext {*/
+/*  padding: 1rem;*/
+/*  border: 1px solid var(--vp-c-border);*/
+/*  border-radius: 8px;*/
+/*  transition: all 0.25s ease;*/
+/*  text-decoration: none;*/
+/*  display: block;*/
+/*}*/
+
+/*.VPDocFooterPrev:hover,*/
+/*.VPDocFooterNext:hover {*/
+/*  border-color: var(--vp-c-brand-1);*/
+/*  box-shadow: var(--vp-shadow-2);*/
+/*  transform: translateY(-1px);*/
+/*}*/
+
+/*!* ===================================================================*/
+/*   Improved Form Elements*/
+/*   =================================================================== *!*/
+
+/*.VPDoc input,*/
+/*.VPDoc textarea,*/
+/*.VPDoc select {*/
+/*  !*background: var(--vp-c-bg);*!*/
+/*  !*border: 1px solid var(--vp-c-border);*!*/
+/*  !*border-radius: 6px;*!*/
+/*  !*padding: 0.5rem 0.75rem;*!*/
+/*  !*color: var(--vp-c-text-1);*!*/
+/*  !*transition: border-color 0.2s ease;*!*/
+/*}*/
+
+/*.VPDoc input:focus,*/
+/*.VPDoc textarea:focus,*/
+/*.VPDoc select:focus {*/
+/*  !*outline: none;*!*/
+/*  !*border-color: var(--vp-c-brand-1);*!*/
+/*  !*box-shadow: 0 0 0 2px var(--vp-c-brand-soft);*!*/
+/*}*/
+
+/*!* ===================================================================*/
+/*   Badge Styling*/
+/*   =================================================================== *!*/
+
+/*.VPBadge {*/
+/*  display: inline-block;*/
+/*  padding: 0.25rem 0.5rem;*/
+/*  font-size: 0.75rem;*/
+/*  font-weight: 600;*/
+/*  border-radius: 4px;*/
+/*  text-transform: uppercase;*/
+/*  letter-spacing: 0.05em;*/
+/*}*/
+
+/*.VPBadge.info {*/
+/*  background: var(--vp-c-default-soft);*/
+/*  color: var(--vp-c-default-1);*/
+/*}*/
+
+/*.VPBadge.tip {*/
+/*  background: var(--vp-c-brand-soft);*/
+/*  color: var(--vp-c-brand-1);*/
+/*}*/
+
+/*.VPBadge.warning {*/
+/*  background: var(--vp-c-warning-soft);*/
+/*  color: var(--vp-c-warning-1);*/
+/*}*/
+
+/*.VPBadge.danger {*/
+/*  background: var(--vp-c-danger-soft);*/
+/*  color: var(--vp-c-danger-1);*/
+/*}*/
+
+/*!* ===================================================================*/
+/*   Performance Optimizations*/
+/*   =================================================================== *!*/
+
+/*!* Enable hardware acceleration for smooth animations *!*/
+/*.VPButton,*/
+/*.VPFeature,*/
+/*.VPSidebarItem .item,*/
+/*.VPNavBarMenuLink {*/
+/*  will-change: transform;*/
+/*}*/
+
+/*!* Remove will-change after hover for better performance *!*/
+/*@media (hover: hover) {*/
+/*  .VPButton:not(:hover),*/
+/*  .VPFeature:not(:hover),*/
+/*  .VPSidebarItem .item:not(:hover),*/
+/*  .VPNavBarMenuLink:not(:hover) {*/
+/*    will-change: auto;*/
+/*  }*/
+/*}*/
+
+/*!* ===================================================================*/
+/*   Print Optimizations*/
+/*   =================================================================== *!*/
+
+/*@media print {*/
+/*  .VPNav,*/
+/*  .VPSidebar,*/
+/*  .VPLocalNav,*/
+/*  .VPDocFooter {*/
+/*    display: none;*/
+/*  }*/
+/*  */
+/*  .VPDoc {*/
+/*    max-width: 100%;*/
+/*    padding: 0;*/
+/*    margin: 0;*/
+/*  }*/
+/*  */
+/*  .VPDoc h1,*/
+/*  .VPDoc h2,*/
+/*  .VPDoc h3,*/
+/*  .VPDoc h4,*/
+/*  .VPDoc h5,*/
+/*  .VPDoc h6 {*/
+/*    page-break-after: avoid;*/
+/*    color: #000 !important;*/
+/*  }*/
+/*  */
+/*  .VPDoc pre,*/
+/*  .VPDoc .custom-block,*/
+/*  .VPDoc table {*/
+/*    page-break-inside: avoid;*/
+/*    border: 1px solid #ddd !important;*/
+/*  }*/
+/*  */
+/*  .VPDoc a {*/
+/*    color: #000 !important;*/
+/*    text-decoration: underline !important;*/
+/*  }*/
+/*}*/
+
+/*!* ===================================================================*/
+/*   Accessibility Enhancements*/
+/*   =================================================================== *!*/
+
+/*!* Skip link for keyboard navigation *!*/
+/*.skip-link {*/
+/*  position: absolute;*/
+/*  top: -40px;*/
+/*  left: 6px;*/
+/*  background: var(--vp-c-brand-1);*/
+/*  color: var(--vp-c-white);*/
+/*  padding: 8px;*/
+/*  text-decoration: none;*/
+/*  z-index: 100;*/
+/*  border-radius: 4px;*/
+/*  transition: top 0.3s;*/
+/*}*/
+
+/*.skip-link:focus {*/
+/*  top: 6px;*/
+/*}*/
+
+/*!* High contrast mode support *!*/
+/*@media (prefers-contrast: high) {*/
+/*  .VPDoc a {*/
+/*    text-decoration: underline;*/
+/*  }*/
+/*  */
+/*  .VPButton {*/
+/*    border: 2px solid currentColor;*/
+/*  }*/
+/*  */
+/*  .VPFeature {*/
+/*    border-width: 2px;*/
+/*  }*/
+/*}*/
+
+/*!* Reduced motion preferences *!*/
+/*@media (prefers-reduced-motion: reduce) {*/
+/*  *,*/
+/*  *::before,*/
+/*  *::after {*/
+/*    animation-duration: 0.01ms !important;*/
+/*    animation-iteration-count: 1 !important;*/
+/*    transition-duration: 0.01ms !important;*/
+/*    scroll-behavior: auto !important;*/
+/*  }*/
+/*  */
+/*  .VPDocContent {*/
+/*    animation: none;*/
+/*  }*/
+/*}*/

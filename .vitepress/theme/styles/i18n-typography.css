@@ -1,796 +1,796 @@
-/**
- * International Typography System for VitePress
- * Multi-language Support for MineAdmin Documentation
- * 
- * This stylesheet provides comprehensive typography optimization for:
- * - Chinese (Simplified & Traditional)
- * - Japanese
- * - English
- * - Cross-language content mixing
- */
-
-/* ========================================================================
-   Language-Specific CSS Custom Properties
-   ======================================================================== */
-
-:root {
-  /* Universal Base Values */
-  --base-font-size: 16px;
-  --base-line-height: 1.6;
-  --base-spacing-unit: 0.25rem;
-  
-  /* Default (English) Typography Stack */
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 
-               'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
-  --font-serif: 'Merriweather', 'Georgia', 'Times New Roman', serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 
-               'Consolas', 'Liberation Mono', monospace;
-  
-  /* Default Typography Metrics */
-  --line-height-body: 1.6;
-  --line-height-heading: 1.2;
-  --line-height-relaxed: 1.8;
-  --letter-spacing-normal: 0;
-  --letter-spacing-wide: 0.025em;
-  --word-spacing: 0;
-  
-  /* Content Width Variables */
-  --content-width-narrow: 680px;
-  --content-width-normal: 780px;
-  --content-width-wide: 880px;
-  
-  /* Paragraph Spacing */
-  --paragraph-spacing: 1.25rem;
-  --section-spacing: 2.5rem;
-  --heading-margin-top: 2rem;
-  --heading-margin-bottom: 0.75rem;
-}
-
-/* ========================================================================
-   Chinese (Simplified) - zh
-   ======================================================================== */
-
-:root[lang="zh"],
-:root[lang="zh-CN"] {
-  --font-sans: 'PingFang SC', 'Microsoft YaHei UI', 'Microsoft YaHei',
-               'Source Han Sans CN', 'Noto Sans CJK SC', 'Hiragino Sans GB',
-               'WenQuanYi Micro Hei', -apple-system, BlinkMacSystemFont, 
-               'Segoe UI', sans-serif;
-  --font-serif: 'Source Han Serif CN', 'Noto Serif CJK SC', 'Songti SC',
-                'SimSun', 'STSong', serif;
-  --font-kai: 'Kaiti SC', 'KaiTi', 'STKaiti', serif;
-  
-  /* Chinese-optimized metrics */
-  --line-height-body: 1.75;
-  --line-height-heading: 1.4;
-  --line-height-relaxed: 2.0;
-  --letter-spacing-normal: 0.02em;
-  --letter-spacing-wide: 0.05em;
-  --word-spacing: 0.1em;
-  
-  /* Wider content for Chinese */
-  --content-width-normal: 820px;
-  --content-width-wide: 920px;
-  
-  /* Increased spacing for better readability */
-  --paragraph-spacing: 1.5rem;
-  --section-spacing: 3rem;
-}
-
-/* ========================================================================
-   Chinese (Traditional - Hong Kong) - zh-HK
-   ======================================================================== */
-
-:root[lang="zh-HK"] {
-  --font-sans: 'PingFang HK', 'PingFang TC', 'Microsoft JhengHei UI',
-               'Microsoft JhengHei', 'Source Han Sans HC', 'Noto Sans CJK HK',
-               'Hiragino Sans CNS', -apple-system, BlinkMacSystemFont, 
-               'Segoe UI', sans-serif;
-  --font-serif: 'Source Han Serif HC', 'Noto Serif CJK HK', 'Songti TC',
-                'MingLiU', 'PMingLiU', serif;
-  
-  /* Traditional Chinese metrics (similar to simplified) */
-  --line-height-body: 1.75;
-  --line-height-heading: 1.4;
-  --line-height-relaxed: 2.0;
-  --letter-spacing-normal: 0.02em;
-  --letter-spacing-wide: 0.05em;
-  --word-spacing: 0.1em;
-  
-  --content-width-normal: 820px;
-  --content-width-wide: 920px;
-  --paragraph-spacing: 1.5rem;
-}
-
-/* ========================================================================
-   Chinese (Traditional - Taiwan) - zh-TW
-   ======================================================================== */
-
-:root[lang="zh-TW"] {
-  --font-sans: 'PingFang TC', 'Microsoft JhengHei UI', 'Microsoft JhengHei',
-               'Source Han Sans TC', 'Noto Sans CJK TC', 'Hiragino Sans CNS',
-               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-serif: 'Source Han Serif TC', 'Noto Serif CJK TC', 'Songti TC',
-                'MingLiU', 'PMingLiU', serif;
-  
-  /* Traditional Chinese metrics */
-  --line-height-body: 1.75;
-  --line-height-heading: 1.4;
-  --line-height-relaxed: 2.0;
-  --letter-spacing-normal: 0.02em;
-  --letter-spacing-wide: 0.05em;
-  --word-spacing: 0.1em;
-  
-  --content-width-normal: 820px;
-  --content-width-wide: 920px;
-  --paragraph-spacing: 1.5rem;
-}
-
-/* ========================================================================
-   Japanese - ja
-   ======================================================================== */
-
-:root[lang="ja"] {
-  --font-sans: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic UI',
-               'Yu Gothic', 'Meiryo UI', 'Meiryo', 'Source Han Sans JP',
-               'Noto Sans CJK JP', -apple-system, BlinkMacSystemFont,
-               'Segoe UI', sans-serif;
-  --font-serif: 'Hiragino Mincho ProN', 'Yu Mincho', 'MS Mincho',
-                'Source Han Serif JP', 'Noto Serif CJK JP', serif;
-  
-  /* Japanese-optimized metrics */
-  --line-height-body: 1.8;
-  --line-height-heading: 1.5;
-  --line-height-relaxed: 2.1;
-  --letter-spacing-normal: 0.03em;
-  --letter-spacing-wide: 0.06em;
-  --word-spacing: 0;
-  
-  /* Japanese content width */
-  --content-width-normal: 800px;
-  --content-width-wide: 900px;
-  
-  /* Japanese spacing preferences */
-  --paragraph-spacing: 1.75rem;
-  --section-spacing: 3.25rem;
-}
-
-/* ========================================================================
-   English - en
-   ======================================================================== */
-
-:root[lang="en"] {
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-               'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
-  --font-serif: 'Merriweather', 'Georgia', 'Times New Roman', serif;
-  
-  /* English-optimized metrics */
-  --line-height-body: 1.6;
-  --line-height-heading: 1.2;
-  --line-height-relaxed: 1.75;
-  --letter-spacing-normal: 0;
-  --letter-spacing-wide: 0.025em;
-  --word-spacing: 0;
-  
-  /* English content width (narrower for better readability) */
-  --content-width-normal: 740px;
-  --content-width-wide: 840px;
-  
-  /* English spacing */
-  --paragraph-spacing: 1.25rem;
-  --section-spacing: 2.5rem;
-}
-
-/* ========================================================================
-   Universal Base Typography
-   ======================================================================== */
-
-/* Apply language-specific fonts globally */
-.VPDoc {
-  font-family: var(--font-sans);
-  font-size: var(--base-font-size);
-  line-height: var(--line-height-body);
-  letter-spacing: var(--letter-spacing-normal);
-  word-spacing: var(--word-spacing);
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: 'kern' 1, 'liga' 1;
-}
-
-/* Content container width based on language */
-.VPDoc .vp-doc {
-  /*max-width: var(--content-width-normal);*/
-  margin: 0 auto;
-  padding: 2rem 2.5rem 3rem;
-}
-
-.VPDoc.has-aside .content-container {
-  max-width: var(--content-width-normal);
-}
-
-.VPDoc:not(.has-aside) .content-container {
-  max-width: var(--content-width-wide);
-}
-
-/* ========================================================================
-   Paragraph Optimization
-   ======================================================================== */
-
-.vp-doc p {
-  margin: var(--paragraph-spacing) 0;
-  line-height: var(--line-height-body);
-  letter-spacing: var(--letter-spacing-normal);
-}
-
-/* CJK-specific paragraph justification */
-:root[lang^="zh"] .vp-doc p,
-:root[lang="ja"] .vp-doc p {
-  /*text-align: justify;*/
-  /*text-justify: inter-character;*/
-  word-break: keep-all;
-  overflow-wrap: break-word;
-  hyphens: none;
-}
-
-/* English paragraph optimization */
-:root[lang="en"] .vp-doc p {
-  text-align: left;
-  text-justify: inter-word;
-  word-break: normal;
-  overflow-wrap: break-word;
-  hyphens: auto;
-}
-
-/* First paragraph emphasis (universal) */
-.vp-doc > p:first-of-type {
-  font-size: 1.125rem;
-  line-height: var(--line-height-relaxed);
-  color: var(--vp-c-text-2);
-  margin-bottom: 2rem;
-}
-
-/* ========================================================================
-   Heading System (Language-Aware)
-   ======================================================================== */
-
-.vp-doc h1,
-.vp-doc h2,
-.vp-doc h3,
-.vp-doc h4,
-.vp-doc h5,
-.vp-doc h6 {
-  font-family: var(--font-sans);
-  font-weight: 600;
-  line-height: var(--line-height-heading);
-  letter-spacing: var(--letter-spacing-normal);
-  scroll-margin-top: calc(var(--vp-nav-height) + 24px);
-  position: relative;
-}
-
-/* Language-specific heading weight adjustments */
-:root[lang^="zh"] .vp-doc h1,
-:root[lang^="zh"] .vp-doc h2,
-:root[lang^="zh"] .vp-doc h3,
-:root[lang="ja"] .vp-doc h1,
-:root[lang="ja"] .vp-doc h2,
-:root[lang="ja"] .vp-doc h3 {
-  font-weight: 700; /* Heavier for CJK languages */
-}
-
-/* H1 - Universal styling with gradient */
-.vp-doc h1 {
-  font-size: 2.25rem;
-  margin: 0 0 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 3px solid var(--vp-c-brand-1);
-  background: linear-gradient(135deg, var(--vp-c-text-1) 0%, var(--vp-c-brand-1) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Adjust H1 size for CJK languages */
-:root[lang^="zh"] .vp-doc h1,
-:root[lang="ja"] .vp-doc h1 {
-  font-size: 2rem;
-}
-
-/* H2 - Major sections */
-.vp-doc h2 {
-  font-size: 1.75rem;
-  margin: var(--section-spacing) 0 var(--heading-margin-bottom) 0;
-  padding-bottom: 0.75rem;
-  border-bottom: 2px solid var(--vp-c-divider);
-}
-
-:root[lang^="zh"] .vp-doc h2,
-:root[lang="ja"] .vp-doc h2 {
-  font-size: 1.625rem;
-}
-
-/* H3 - Subsections */
-.vp-doc h3 {
-  font-size: 1.375rem;
-  margin: calc(var(--heading-margin-top) * 0.8) 0 var(--heading-margin-bottom) 0;
-  padding-left: 12px;
-  border-left: 3px solid var(--vp-c-brand-1);
-}
-
-:root[lang^="zh"] .vp-doc h3,
-:root[lang="ja"] .vp-doc h3 {
-  font-size: 1.25rem;
-}
-
-/* H4-H6 - Minor sections */
-.vp-doc h4 {
-  font-size: 1.125rem;
-  margin: calc(var(--heading-margin-top) * 0.6) 0 calc(var(--heading-margin-bottom) * 0.8) 0;
-}
-
-.vp-doc h5 {
-  font-size: 1rem;
-  margin: calc(var(--heading-margin-top) * 0.5) 0 calc(var(--heading-margin-bottom) * 0.6) 0;
-}
-
-.vp-doc h6 {
-  font-size: 0.875rem;
-  margin: calc(var(--heading-margin-top) * 0.4) 0 calc(var(--heading-margin-bottom) * 0.5) 0;
-}
-
-/* ========================================================================
-   List Styling (Language-Aware)
-   ======================================================================== */
-
-.vp-doc ul,
-.vp-doc ol {
-  margin: 1.25rem 0;
-  padding-left: 2rem;
-  line-height: var(--line-height-body);
-}
-
-/* Adjust list padding for CJK */
-:root[lang^="zh"] .vp-doc ul,
-:root[lang^="zh"] .vp-doc ol,
-:root[lang="ja"] .vp-doc ul,
-:root[lang="ja"] .vp-doc ol {
-  padding-left: 2.5rem;
-}
-
-.vp-doc li {
-  margin: 0.5rem 0;
-  position: relative;
-}
-
-/* CJK list item spacing */
-:root[lang^="zh"] .vp-doc li,
-:root[lang="ja"] .vp-doc li {
-  margin: 0.625rem 0;
-}
-
-/* Custom bullet points */
-.vp-doc ul > li::marker {
-  color: var(--vp-c-brand-1);
-}
-
-/* Language-specific bullets */
-:root[lang="en"] .vp-doc ul > li::marker {
-  content: '•';
-}
-
-:root[lang^="zh"] .vp-doc ul > li::marker {
-  content: '▸';
-}
-
-:root[lang="ja"] .vp-doc ul > li::marker {
-  content: '◆';
-}
-
-/* ========================================================================
-   Code Block Styling (Universal)
-   ======================================================================== */
-
-/* Inline code */
-.vp-doc code:not(pre code) {
-  font-family: var(--font-mono);
-  background: linear-gradient(135deg, var(--vp-c-brand-soft) 0%, var(--vp-c-brand-soft) 100%);
-  color: var(--vp-c-brand-1);
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
-  font-size: 0.875em;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-/* Adjust inline code spacing for mixed content */
-:root[lang^="zh"] .vp-doc code:not(pre code),
-:root[lang="ja"] .vp-doc code:not(pre code) {
-  margin: 0 0.25rem;
-}
-
-:root[lang="en"] .vp-doc code:not(pre code) {
-  margin: 0 0.125rem;
-}
-
-/* Code blocks */
-.vp-doc div[class*='language-'] {
-  margin: 1.5rem 0;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  border: 1px solid var(--vp-c-divider);
-}
-
-.vp-doc div[class*='language-'] pre {
-  font-family: var(--font-mono);
-  padding: 1.25rem 1.5rem;
-  overflow-x: auto;
-  line-height: 1.5;
-  font-size: 0.875rem;
-}
-
-/* ========================================================================
-   Link Styling (Language-Aware)
-   ======================================================================== */
-
-.vp-doc a {
-  color: var(--vp-c-brand-1);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.25s ease;
-  border-bottom: 1px solid transparent;
-}
-
-.vp-doc a:hover {
-  color: var(--vp-c-brand-2);
-  border-bottom-color: var(--vp-c-brand-2);
-}
-
-/* CJK link underline offset */
-:root[lang^="zh"] .vp-doc a,
-:root[lang="ja"] .vp-doc a {
-  text-underline-offset: 0.15em;
-}
-
-/* External link indicator (universal) */
-.vp-doc a[target="_blank"]::after {
-  content: ' ↗';
-  font-size: 0.75em;
-  vertical-align: super;
-  margin-left: 0.125rem;
-  color: var(--vp-c-text-3);
-}
-
-/* ========================================================================
-   Table Styling (Language-Optimized)
-   ======================================================================== */
-
-.vp-doc table {
-  margin: 2rem 0;
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  font-size: 0.9375rem;
-}
-
-/* Adjust table font size for CJK */
-:root[lang^="zh"] .vp-doc table,
-:root[lang="ja"] .vp-doc table {
-  font-size: 0.875rem;
-}
-
-.vp-doc th {
-  padding: 0.875rem 1rem;
-  text-align: left;
-  font-weight: 600;
-  background: linear-gradient(135deg, var(--vp-c-brand-soft) 0%, var(--vp-c-brand-soft) 100%);
-  color: var(--vp-c-brand-1);
-  border-bottom: 2px solid var(--vp-c-brand-1);
-}
-
-.vp-doc td {
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--vp-c-divider);
-}
-
-/* ========================================================================
-   Blockquote Styling (Language-Aware)
-   ======================================================================== */
-
-.vp-doc blockquote {
-  margin: 2rem 0;
-  padding: 1.25rem 1.5rem 1.25rem 2rem;
-  border-left: 4px solid var(--vp-c-brand-1);
-  background: linear-gradient(135deg, var(--vp-c-brand-soft) 0%, transparent 50%);
-  border-radius: 0 8px 8px 0;
-  position: relative;
-  font-style: normal;
-}
-
-/* Language-specific quote marks */
-.vp-doc blockquote::before {
-  position: absolute;
-  top: -0.5rem;
-  left: 1rem;
-  font-size: 4rem;
-  color: var(--vp-c-brand-1);
-  opacity: 0.2;
-  font-family: Georgia, serif;
-}
-
-:root[lang="en"] .vp-doc blockquote::before {
-  content: '"';
-}
-
-:root[lang^="zh"] .vp-doc blockquote::before {
-  content: '「';
-  font-family: var(--font-serif);
-}
-
-:root[lang="ja"] .vp-doc blockquote::before {
-  content: '「';
-  font-family: var(--font-serif);
-}
-
-/* ========================================================================
-   Custom Blocks (Tips/Warnings) - Universal
-   ======================================================================== */
-
-.vp-doc .tip,
-.vp-doc .warning,
-.vp-doc .danger,
-.vp-doc .info,
-.vp-doc .details {
-  margin: 2rem 0;
-  padding: 1.25rem 1.5rem;
-  border-radius: 8px;
-  border: 1px solid;
-  position: relative;
-  overflow: hidden;
-}
-
-.vp-doc .tip {
-  background: linear-gradient(135deg, var(--vp-c-tip-soft) 0%, transparent 100%);
-  border-color: var(--vp-c-tip-1);
-  border-left-width: 4px;
-}
-
-.vp-doc .warning {
-  background: linear-gradient(135deg, var(--vp-c-warning-soft) 0%, transparent 100%);
-  border-color: var(--vp-c-warning-1);
-  border-left-width: 4px;
-}
-
-.vp-doc .danger {
-  background: linear-gradient(135deg, var(--vp-c-danger-soft) 0%, transparent 100%);
-  border-color: var(--vp-c-danger-1);
-  border-left-width: 4px;
-}
-
-.vp-doc .custom-block-title {
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  font-size: 1.05rem;
-}
-
-/* ========================================================================
-   Responsive Design (Mobile)
-   ======================================================================== */
-
-@media (max-width: 768px) {
-  :root {
-    --base-font-size: 15px;
-  }
-  
-  .vp-doc {
-    padding: 1.5rem 1.25rem 2rem;
-  }
-  
-  .vp-doc h1 {
-    font-size: 1.875rem;
-  }
-  
-  .vp-doc h2 {
-    font-size: 1.5rem;
-  }
-  
-  .vp-doc h3 {
-    font-size: 1.25rem;
-  }
-  
-  /* Adjust CJK specific sizes */
-  :root[lang^="zh"] .vp-doc h1,
-  :root[lang="ja"] .vp-doc h1 {
-    font-size: 1.75rem;
-  }
-  
-  :root[lang^="zh"] .vp-doc h2,
-  :root[lang="ja"] .vp-doc h2 {
-    font-size: 1.375rem;
-  }
-  
-  /* Remove text justification on mobile for CJK */
-  :root[lang^="zh"] .vp-doc p,
-  :root[lang="ja"] .vp-doc p {
-    text-align: left;
-  }
-}
-
-@media (max-width: 480px) {
-  :root {
-    --base-font-size: 14px;
-  }
-  
-  .vp-doc {
-    padding: 1rem;
-  }
-  
-  .vp-doc h1 {
-    font-size: 1.5rem;
-  }
-  
-  .vp-doc h2 {
-    font-size: 1.25rem;
-  }
-  
-  .vp-doc h3 {
-    font-size: 1.125rem;
-  }
-}
-
-/* ========================================================================
-   Dark Mode Adjustments
-   ======================================================================== */
-
-.dark .vp-doc h1 {
-  background: linear-gradient(135deg, var(--vp-c-text-1) 0%, var(--vp-c-brand-1) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.dark .vp-doc code:not(pre code) {
-  background: linear-gradient(135deg, 
-    rgba(99, 102, 241, 0.2) 0%, 
-    rgba(99, 102, 241, 0.15) 100%);
-}
-
-.dark .vp-doc blockquote {
-  background: linear-gradient(135deg, 
-    rgba(99, 102, 241, 0.1) 0%, 
-    transparent 50%);
-}
-
-.dark .vp-doc table {
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
-}
-
-.dark .vp-doc th {
-  background: linear-gradient(135deg, 
-    rgba(99, 102, 241, 0.15) 0%, 
-    rgba(99, 102, 241, 0.1) 100%);
-}
-
-/* ========================================================================
-   Print Styles
-   ======================================================================== */
-
-@media print {
-  .vp-doc {
-    font-size: 12pt;
-    line-height: 1.5;
-    max-width: 100%;
-  }
-  
-  /* Language-specific print adjustments */
-  :root[lang^="zh"] .vp-doc,
-  :root[lang="ja"] .vp-doc {
-    font-size: 11pt;
-    line-height: 1.6;
-  }
-  
-  .vp-doc h1 {
-    font-size: 20pt;
-    page-break-after: avoid;
-  }
-  
-  .vp-doc h2 {
-    font-size: 16pt;
-    page-break-after: avoid;
-  }
-  
-  .vp-doc h3 {
-    font-size: 14pt;
-    page-break-after: avoid;
-  }
-  
-  .vp-doc pre,
-  .vp-doc blockquote,
-  .vp-doc table {
-    page-break-inside: avoid;
-  }
-  
-  .vp-doc a {
-    color: inherit;
-    text-decoration: underline;
-  }
-}
-
-/* ========================================================================
-   Smooth Scrolling and Focus States
-   ======================================================================== */
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--vp-nav-height) + 20px);
-}
-
-.vp-doc [id] {
-  scroll-margin-top: calc(var(--vp-nav-height) + 20px);
-}
-
-/* Focus styles for accessibility */
-.vp-doc a:focus-visible,
-.vp-doc button:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
-
-/* ========================================================================
-   Animation and Transitions
-   ======================================================================== */
-
-.vp-doc > * {
-  animation: fadeInUp 0.5s ease-out;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Smooth transitions for interactive elements */
-.vp-doc a,
-.vp-doc button,
-.vp-doc .custom-block,
-.vp-doc code:not(pre code) {
-  transition: all 0.3s ease;
-}
-
-/* ========================================================================
-   Reading Experience Enhancements
-   ======================================================================== */
-
-/* Reading progress indicator */
-.vp-doc::before {
-  content: '';
-  position: fixed;
-  top: var(--vp-nav-height);
-  left: 0;
-  width: var(--reading-progress, 0%);
-  height: 3px;
-  background: linear-gradient(90deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
-  z-index: 1000;
-  transition: width 0.1s ease;
-}
-
-/* Selection colors */
-::selection {
-  background: var(--vp-c-brand-soft);
-  color: var(--vp-c-brand-1);
-}
-
-::-moz-selection {
-  background: var(--vp-c-brand-soft);
-  color: var(--vp-c-brand-1);
-}
+/*!***/
+/* * International Typography System for VitePress*/
+/* * Multi-language Support for MineAdmin Documentation*/
+/* **/
+/* * This stylesheet provides comprehensive typography optimization for:*/
+/* * - Chinese (Simplified & Traditional)*/
+/* * - Japanese*/
+/* * - English*/
+/* * - Cross-language content mixing*/
+/* *!*/
+
+/*!* ========================================================================*/
+/*   Language-Specific CSS Custom Properties*/
+/*   ======================================================================== *!*/
+
+/*:root {*/
+/*  !* Universal Base Values *!*/
+/*  --base-font-size: 16px;*/
+/*  --base-line-height: 1.6;*/
+/*  --base-spacing-unit: 0.25rem;*/
+
+/*  !* Default (English) Typography Stack *!*/
+/*  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter',*/
+/*               'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;*/
+/*  --font-serif: 'Merriweather', 'Georgia', 'Times New Roman', serif;*/
+/*  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco',*/
+/*               'Consolas', 'Liberation Mono', monospace;*/
+
+/*  !* Default Typography Metrics *!*/
+/*  --line-height-body: 1.6;*/
+/*  --line-height-heading: 1.2;*/
+/*  --line-height-relaxed: 1.8;*/
+/*  --letter-spacing-normal: 0;*/
+/*  --letter-spacing-wide: 0.025em;*/
+/*  --word-spacing: 0;*/
+
+/*  !* Content Width Variables *!*/
+/*  --content-width-narrow: 680px;*/
+/*  --content-width-normal: 780px;*/
+/*  --content-width-wide: 880px;*/
+
+/*  !* Paragraph Spacing *!*/
+/*  --paragraph-spacing: 1.25rem;*/
+/*  --section-spacing: 2.5rem;*/
+/*  --heading-margin-top: 2rem;*/
+/*  --heading-margin-bottom: 0.75rem;*/
+/*}*/
+
+/*!* ========================================================================*/
+/*   Chinese (Simplified) - zh*/
+/*   ======================================================================== *!*/
+
+/*:root[lang="zh"],*/
+/*:root[lang="zh-CN"] {*/
+/*  --font-sans: 'PingFang SC', 'Microsoft YaHei UI', 'Microsoft YaHei',*/
+/*               'Source Han Sans CN', 'Noto Sans CJK SC', 'Hiragino Sans GB',*/
+/*               'WenQuanYi Micro Hei', -apple-system, BlinkMacSystemFont,*/
+/*               'Segoe UI', sans-serif;*/
+/*  --font-serif: 'Source Han Serif CN', 'Noto Serif CJK SC', 'Songti SC',*/
+/*                'SimSun', 'STSong', serif;*/
+/*  --font-kai: 'Kaiti SC', 'KaiTi', 'STKaiti', serif;*/
+
+/*  !* Chinese-optimized metrics *!*/
+/*  --line-height-body: 1.75;*/
+/*  --line-height-heading: 1.4;*/
+/*  --line-height-relaxed: 2.0;*/
+/*  --letter-spacing-normal: 0.02em;*/
+/*  --letter-spacing-wide: 0.05em;*/
+/*  --word-spacing: 0.1em;*/
+
+/*  !* Wider content for Chinese *!*/
+/*  --content-width-normal: 820px;*/
+/*  --content-width-wide: 920px;*/
+
+/*  !* Increased spacing for better readability *!*/
+/*  --paragraph-spacing: 1.5rem;*/
+/*  --section-spacing: 3rem;*/
+/*}*/
+
+/*!* ========================================================================*/
+/*   Chinese (Traditional - Hong Kong) - zh-HK*/
+/*   ======================================================================== *!*/
+
+/*:root[lang="zh-HK"] {*/
+/*  --font-sans: 'PingFang HK', 'PingFang TC', 'Microsoft JhengHei UI',*/
+/*               'Microsoft JhengHei', 'Source Han Sans HC', 'Noto Sans CJK HK',*/
+/*               'Hiragino Sans CNS', -apple-system, BlinkMacSystemFont,*/
+/*               'Segoe UI', sans-serif;*/
+/*  --font-serif: 'Source Han Serif HC', 'Noto Serif CJK HK', 'Songti TC',*/
+/*                'MingLiU', 'PMingLiU', serif;*/
+
+/*  !* Traditional Chinese metrics (similar to simplified) *!*/
+/*  --line-height-body: 1.75;*/
+/*  --line-height-heading: 1.4;*/
+/*  --line-height-relaxed: 2.0;*/
+/*  --letter-spacing-normal: 0.02em;*/
+/*  --letter-spacing-wide: 0.05em;*/
+/*  --word-spacing: 0.1em;*/
+
+/*  --content-width-normal: 820px;*/
+/*  --content-width-wide: 920px;*/
+/*  --paragraph-spacing: 1.5rem;*/
+/*}*/
+
+/*!* ========================================================================*/
+/*   Chinese (Traditional - Taiwan) - zh-TW*/
+/*   ======================================================================== *!*/
+
+/*:root[lang="zh-TW"] {*/
+/*  --font-sans: 'PingFang TC', 'Microsoft JhengHei UI', 'Microsoft JhengHei',*/
+/*               'Source Han Sans TC', 'Noto Sans CJK TC', 'Hiragino Sans CNS',*/
+/*               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;*/
+/*  --font-serif: 'Source Han Serif TC', 'Noto Serif CJK TC', 'Songti TC',*/
+/*                'MingLiU', 'PMingLiU', serif;*/
+
+/*  !* Traditional Chinese metrics *!*/
+/*  --line-height-body: 1.75;*/
+/*  --line-height-heading: 1.4;*/
+/*  --line-height-relaxed: 2.0;*/
+/*  --letter-spacing-normal: 0.02em;*/
+/*  --letter-spacing-wide: 0.05em;*/
+/*  --word-spacing: 0.1em;*/
+
+/*  --content-width-normal: 820px;*/
+/*  --content-width-wide: 920px;*/
+/*  --paragraph-spacing: 1.5rem;*/
+/*}*/
+
+/*!* ========================================================================*/
+/*   Japanese - ja*/
+/*   ======================================================================== *!*/
+
+/*:root[lang="ja"] {*/
+/*  --font-sans: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic UI',*/
+/*               'Yu Gothic', 'Meiryo UI', 'Meiryo', 'Source Han Sans JP',*/
+/*               'Noto Sans CJK JP', -apple-system, BlinkMacSystemFont,*/
+/*               'Segoe UI', sans-serif;*/
+/*  --font-serif: 'Hiragino Mincho ProN', 'Yu Mincho', 'MS Mincho',*/
+/*                'Source Han Serif JP', 'Noto Serif CJK JP', serif;*/
+
+/*  !* Japanese-optimized metrics *!*/
+/*  --line-height-body: 1.8;*/
+/*  --line-height-heading: 1.5;*/
+/*  --line-height-relaxed: 2.1;*/
+/*  --letter-spacing-normal: 0.03em;*/
+/*  --letter-spacing-wide: 0.06em;*/
+/*  --word-spacing: 0;*/
+
+/*  !* Japanese content width *!*/
+/*  --content-width-normal: 800px;*/
+/*  --content-width-wide: 900px;*/
+
+/*  !* Japanese spacing preferences *!*/
+/*  --paragraph-spacing: 1.75rem;*/
+/*  --section-spacing: 3.25rem;*/
+/*}*/
+
+/*!* ========================================================================*/
+/*   English - en*/
+/*   ======================================================================== *!*/
+
+/*:root[lang="en"] {*/
+/*  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',*/
+/*               'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;*/
+/*  --font-serif: 'Merriweather', 'Georgia', 'Times New Roman', serif;*/
+
+/*  !* English-optimized metrics *!*/
+/*  --line-height-body: 1.6;*/
+/*  --line-height-heading: 1.2;*/
+/*  --line-height-relaxed: 1.75;*/
+/*  --letter-spacing-normal: 0;*/
+/*  --letter-spacing-wide: 0.025em;*/
+/*  --word-spacing: 0;*/
+
+/*  !* English content width (narrower for better readability) *!*/
+/*  --content-width-normal: 740px;*/
+/*  --content-width-wide: 840px;*/
+
+/*  !* English spacing *!*/
+/*  --paragraph-spacing: 1.25rem;*/
+/*  --section-spacing: 2.5rem;*/
+/*}*/
+
+/*!* ========================================================================*/
+/*   Universal Base Typography*/
+/*   ======================================================================== *!*/
+
+/*!* Apply language-specific fonts globally *!*/
+/*.VPDoc {*/
+/*  font-family: var(--font-sans);*/
+/*  font-size: var(--base-font-size);*/
+/*  line-height: var(--line-height-body);*/
+/*  letter-spacing: var(--letter-spacing-normal);*/
+/*  word-spacing: var(--word-spacing);*/
+/*  text-rendering: optimizeLegibility;*/
+/*  -webkit-font-smoothing: antialiased;*/
+/*  -moz-osx-font-smoothing: grayscale;*/
+/*  font-feature-settings: 'kern' 1, 'liga' 1;*/
+/*}*/
+
+/*!* Content container width based on language *!*/
+/*.VPDoc .vp-doc {*/
+/*  !*max-width: var(--content-width-normal);*!*/
+/*  margin: 0 auto;*/
+/*  padding: 2rem 2.5rem 3rem;*/
+/*}*/
+
+/*.VPDoc.has-aside .content-container {*/
+/*  max-width: var(--content-width-normal);*/
+/*}*/
+
+/*.VPDoc:not(.has-aside) .content-container {*/
+/*  max-width: var(--content-width-wide);*/
+/*}*/
+
+/*!* ========================================================================*/
+/*   Paragraph Optimization*/
+/*   ======================================================================== *!*/
+
+/*.vp-doc p {*/
+/*  margin: var(--paragraph-spacing) 0;*/
+/*  line-height: var(--line-height-body);*/
+/*  letter-spacing: var(--letter-spacing-normal);*/
+/*}*/
+
+/*!* CJK-specific paragraph justification *!*/
+/*:root[lang^="zh"] .vp-doc p,*/
+/*:root[lang="ja"] .vp-doc p {*/
+/*  !*text-align: justify;*!*/
+/*  !*text-justify: inter-character;*!*/
+/*  word-break: keep-all;*/
+/*  overflow-wrap: break-word;*/
+/*  hyphens: none;*/
+/*}*/
+
+/*!* English paragraph optimization *!*/
+/*:root[lang="en"] .vp-doc p {*/
+/*  text-align: left;*/
+/*  text-justify: inter-word;*/
+/*  word-break: normal;*/
+/*  overflow-wrap: break-word;*/
+/*  hyphens: auto;*/
+/*}*/
+
+/*!* First paragraph emphasis (universal) *!*/
+/*.vp-doc > p:first-of-type {*/
+/*  font-size: 1.125rem;*/
+/*  line-height: var(--line-height-relaxed);*/
+/*  color: var(--vp-c-text-2);*/
+/*  margin-bottom: 2rem;*/
+/*}*/
+
+/*!* ========================================================================*/
+/*   Heading System (Language-Aware)*/
+/*   ======================================================================== *!*/
+
+/*.vp-doc h1,*/
+/*.vp-doc h2,*/
+/*.vp-doc h3,*/
+/*.vp-doc h4,*/
+/*.vp-doc h5,*/
+/*.vp-doc h6 {*/
+/*  font-family: var(--font-sans);*/
+/*  font-weight: 600;*/
+/*  line-height: var(--line-height-heading);*/
+/*  letter-spacing: var(--letter-spacing-normal);*/
+/*  scroll-margin-top: calc(var(--vp-nav-height) + 24px);*/
+/*  position: relative;*/
+/*}*/
+
+/*!* Language-specific heading weight adjustments *!*/
+/*:root[lang^="zh"] .vp-doc h1,*/
+/*:root[lang^="zh"] .vp-doc h2,*/
+/*:root[lang^="zh"] .vp-doc h3,*/
+/*:root[lang="ja"] .vp-doc h1,*/
+/*:root[lang="ja"] .vp-doc h2,*/
+/*:root[lang="ja"] .vp-doc h3 {*/
+/*  font-weight: 700; !* Heavier for CJK languages *!*/
+/*}*/
+
+/*!* H1 - Universal styling with gradient *!*/
+/*.vp-doc h1 {*/
+/*  font-size: 2.25rem;*/
+/*  margin: 0 0 2rem;*/
+/*  padding-bottom: 1rem;*/
+/*  border-bottom: 3px solid var(--vp-c-brand-1);*/
+/*  background: linear-gradient(135deg, var(--vp-c-text-1) 0%, var(--vp-c-brand-1) 100%);*/
+/*  -webkit-background-clip: text;*/
+/*  background-clip: text;*/
+/*  -webkit-text-fill-color: transparent;*/
+/*}*/
+
+/*!* Adjust H1 size for CJK languages *!*/
+/*:root[lang^="zh"] .vp-doc h1,*/
+/*:root[lang="ja"] .vp-doc h1 {*/
+/*  font-size: 2rem;*/
+/*}*/
+
+/*!* H2 - Major sections *!*/
+/*.vp-doc h2 {*/
+/*  font-size: 1.75rem;*/
+/*  margin: var(--section-spacing) 0 var(--heading-margin-bottom) 0;*/
+/*  padding-bottom: 0.75rem;*/
+/*  border-bottom: 2px solid var(--vp-c-divider);*/
+/*}*/
+
+/*:root[lang^="zh"] .vp-doc h2,*/
+/*:root[lang="ja"] .vp-doc h2 {*/
+/*  font-size: 1.625rem;*/
+/*}*/
+
+/*!* H3 - Subsections *!*/
+/*.vp-doc h3 {*/
+/*  font-size: 1.375rem;*/
+/*  margin: calc(var(--heading-margin-top) * 0.8) 0 var(--heading-margin-bottom) 0;*/
+/*  padding-left: 12px;*/
+/*  border-left: 3px solid var(--vp-c-brand-1);*/
+/*}*/
+
+/*:root[lang^="zh"] .vp-doc h3,*/
+/*:root[lang="ja"] .vp-doc h3 {*/
+/*  font-size: 1.25rem;*/
+/*}*/
+
+/*!* H4-H6 - Minor sections *!*/
+/*.vp-doc h4 {*/
+/*  font-size: 1.125rem;*/
+/*  margin: calc(var(--heading-margin-top) * 0.6) 0 calc(var(--heading-margin-bottom) * 0.8) 0;*/
+/*}*/
+
+/*.vp-doc h5 {*/
+/*  font-size: 1rem;*/
+/*  margin: calc(var(--heading-margin-top) * 0.5) 0 calc(var(--heading-margin-bottom) * 0.6) 0;*/
+/*}*/
+
+/*.vp-doc h6 {*/
+/*  font-size: 0.875rem;*/
+/*  margin: calc(var(--heading-margin-top) * 0.4) 0 calc(var(--heading-margin-bottom) * 0.5) 0;*/
+/*}*/
+
+/*!* ========================================================================*/
+/*   List Styling (Language-Aware)*/
+/*   ======================================================================== *!*/
+
+/*.vp-doc ul,*/
+/*.vp-doc ol {*/
+/*  margin: 1.25rem 0;*/
+/*  padding-left: 2rem;*/
+/*  line-height: var(--line-height-body);*/
+/*}*/
+
+/*!* Adjust list padding for CJK *!*/
+/*:root[lang^="zh"] .vp-doc ul,*/
+/*:root[lang^="zh"] .vp-doc ol,*/
+/*:root[lang="ja"] .vp-doc ul,*/
+/*:root[lang="ja"] .vp-doc ol {*/
+/*  padding-left: 2.5rem;*/
+/*}*/
+
+/*.vp-doc li {*/
+/*  margin: 0.5rem 0;*/
+/*  position: relative;*/
+/*}*/
+
+/*!* CJK list item spacing *!*/
+/*:root[lang^="zh"] .vp-doc li,*/
+/*:root[lang="ja"] .vp-doc li {*/
+/*  margin: 0.625rem 0;*/
+/*}*/
+
+/*!* Custom bullet points *!*/
+/*.vp-doc ul > li::marker {*/
+/*  color: var(--vp-c-brand-1);*/
+/*}*/
+
+/*!* Language-specific bullets *!*/
+/*:root[lang="en"] .vp-doc ul > li::marker {*/
+/*  content: '•';*/
+/*}*/
+
+/*:root[lang^="zh"] .vp-doc ul > li::marker {*/
+/*  content: '▸';*/
+/*}*/
+
+/*:root[lang="ja"] .vp-doc ul > li::marker {*/
+/*  content: '◆';*/
+/*}*/
+
+/*!* ========================================================================*/
+/*   Code Block Styling (Universal)*/
+/*   ======================================================================== *!*/
+
+/*!* Inline code *!*/
+/*.vp-doc code:not(pre code) {*/
+/*  font-family: var(--font-mono);*/
+/*  background: linear-gradient(135deg, var(--vp-c-brand-soft) 0%, var(--vp-c-brand-soft) 100%);*/
+/*  color: var(--vp-c-brand-1);*/
+/*  padding: 0.2rem 0.4rem;*/
+/*  border-radius: 4px;*/
+/*  font-size: 0.875em;*/
+/*  font-weight: 500;*/
+/*  white-space: nowrap;*/
+/*}*/
+
+/*!* Adjust inline code spacing for mixed content *!*/
+/*:root[lang^="zh"] .vp-doc code:not(pre code),*/
+/*:root[lang="ja"] .vp-doc code:not(pre code) {*/
+/*  margin: 0 0.25rem;*/
+/*}*/
+
+/*:root[lang="en"] .vp-doc code:not(pre code) {*/
+/*  margin: 0 0.125rem;*/
+/*}*/
+
+/*!* Code blocks *!*/
+/*.vp-doc div[class*='language-'] {*/
+/*  margin: 1.5rem 0;*/
+/*  border-radius: 8px;*/
+/*  overflow: hidden;*/
+/*  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);*/
+/*  border: 1px solid var(--vp-c-divider);*/
+/*}*/
+
+/*.vp-doc div[class*='language-'] pre {*/
+/*  font-family: var(--font-mono);*/
+/*  padding: 1.25rem 1.5rem;*/
+/*  overflow-x: auto;*/
+/*  line-height: 1.5;*/
+/*  font-size: 0.875rem;*/
+/*}*/
+
+/*!* ========================================================================*/
+/*   Link Styling (Language-Aware)*/
+/*   ======================================================================== *!*/
+
+/*.vp-doc a {*/
+/*  color: var(--vp-c-brand-1);*/
+/*  text-decoration: none;*/
+/*  font-weight: 500;*/
+/*  transition: color 0.25s ease;*/
+/*  border-bottom: 1px solid transparent;*/
+/*}*/
+
+/*.vp-doc a:hover {*/
+/*  color: var(--vp-c-brand-2);*/
+/*  border-bottom-color: var(--vp-c-brand-2);*/
+/*}*/
+
+/*!* CJK link underline offset *!*/
+/*:root[lang^="zh"] .vp-doc a,*/
+/*:root[lang="ja"] .vp-doc a {*/
+/*  text-underline-offset: 0.15em;*/
+/*}*/
+
+/*!* External link indicator (universal) *!*/
+/*.vp-doc a[target="_blank"]::after {*/
+/*  content: ' ↗';*/
+/*  font-size: 0.75em;*/
+/*  vertical-align: super;*/
+/*  margin-left: 0.125rem;*/
+/*  color: var(--vp-c-text-3);*/
+/*}*/
+
+/*!* ========================================================================*/
+/*   Table Styling (Language-Optimized)*/
+/*   ======================================================================== *!*/
+
+/*.vp-doc table {*/
+/*  !*margin: 2rem 0;*!*/
+/*  !*width: 100%;*!*/
+/*  !*border-collapse: separate;*!*/
+/*  !*border-spacing: 0;*!*/
+/*  !*border-radius: 8px;*!*/
+/*  !*overflow: hidden;*!*/
+/*  !*box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);*!*/
+/*  !*font-size: 0.9375rem;*!*/
+/*}*/
+
+/*!* Adjust table font size for CJK *!*/
+/*:root[lang^="zh"] .vp-doc table,*/
+/*:root[lang="ja"] .vp-doc table {*/
+/*  font-size: 0.875rem;*/
+/*}*/
+
+/*.vp-doc th {*/
+/*  padding: 0.875rem 1rem;*/
+/*  text-align: left;*/
+/*  font-weight: 600;*/
+/*  background: linear-gradient(135deg, var(--vp-c-brand-soft) 0%, var(--vp-c-brand-soft) 100%);*/
+/*  color: var(--vp-c-brand-1);*/
+/*  border-bottom: 2px solid var(--vp-c-brand-1);*/
+/*}*/
+
+/*.vp-doc td {*/
+/*  padding: 0.75rem 1rem;*/
+/*  border-bottom: 1px solid var(--vp-c-divider);*/
+/*}*/
+
+/*!* ========================================================================*/
+/*   Blockquote Styling (Language-Aware)*/
+/*   ======================================================================== *!*/
+
+/*.vp-doc blockquote {*/
+/*  margin: 2rem 0;*/
+/*  padding: 1.25rem 1.5rem 1.25rem 2rem;*/
+/*  border-left: 4px solid var(--vp-c-brand-1);*/
+/*  background: linear-gradient(135deg, var(--vp-c-brand-soft) 0%, transparent 50%);*/
+/*  border-radius: 0 8px 8px 0;*/
+/*  position: relative;*/
+/*  font-style: normal;*/
+/*}*/
+
+/*!* Language-specific quote marks *!*/
+/*.vp-doc blockquote::before {*/
+/*  position: absolute;*/
+/*  top: -0.5rem;*/
+/*  left: 1rem;*/
+/*  font-size: 4rem;*/
+/*  color: var(--vp-c-brand-1);*/
+/*  opacity: 0.2;*/
+/*  font-family: Georgia, serif;*/
+/*}*/
+
+/*:root[lang="en"] .vp-doc blockquote::before {*/
+/*  content: '"';*/
+/*}*/
+
+/*:root[lang^="zh"] .vp-doc blockquote::before {*/
+/*  content: '「';*/
+/*  font-family: var(--font-serif);*/
+/*}*/
+
+/*:root[lang="ja"] .vp-doc blockquote::before {*/
+/*  content: '「';*/
+/*  font-family: var(--font-serif);*/
+/*}*/
+
+/*!* ========================================================================*/
+/*   Custom Blocks (Tips/Warnings) - Universal*/
+/*   ======================================================================== *!*/
+
+/*.vp-doc .tip,*/
+/*.vp-doc .warning,*/
+/*.vp-doc .danger,*/
+/*.vp-doc .info,*/
+/*.vp-doc .details {*/
+/*  margin: 2rem 0;*/
+/*  padding: 1.25rem 1.5rem;*/
+/*  border-radius: 8px;*/
+/*  border: 1px solid;*/
+/*  position: relative;*/
+/*  overflow: hidden;*/
+/*}*/
+
+/*.vp-doc .tip {*/
+/*  background: linear-gradient(135deg, var(--vp-c-tip-soft) 0%, transparent 100%);*/
+/*  border-color: var(--vp-c-tip-1);*/
+/*  border-left-width: 4px;*/
+/*}*/
+
+/*.vp-doc .warning {*/
+/*  background: linear-gradient(135deg, var(--vp-c-warning-soft) 0%, transparent 100%);*/
+/*  border-color: var(--vp-c-warning-1);*/
+/*  border-left-width: 4px;*/
+/*}*/
+
+/*.vp-doc .danger {*/
+/*  background: linear-gradient(135deg, var(--vp-c-danger-soft) 0%, transparent 100%);*/
+/*  border-color: var(--vp-c-danger-1);*/
+/*  border-left-width: 4px;*/
+/*}*/
+
+/*.vp-doc .custom-block-title {*/
+/*  font-weight: 700;*/
+/*  margin-bottom: 0.5rem;*/
+/*  font-size: 1.05rem;*/
+/*}*/
+
+/*!* ========================================================================*/
+/*   Responsive Design (Mobile)*/
+/*   ======================================================================== *!*/
+
+/*@media (max-width: 768px) {*/
+/*  :root {*/
+/*    --base-font-size: 15px;*/
+/*  }*/
+
+/*  .vp-doc {*/
+/*    padding: 1.5rem 1.25rem 2rem;*/
+/*  }*/
+
+/*  .vp-doc h1 {*/
+/*    font-size: 1.875rem;*/
+/*  }*/
+
+/*  .vp-doc h2 {*/
+/*    font-size: 1.5rem;*/
+/*  }*/
+
+/*  .vp-doc h3 {*/
+/*    font-size: 1.25rem;*/
+/*  }*/
+
+/*  !* Adjust CJK specific sizes *!*/
+/*  :root[lang^="zh"] .vp-doc h1,*/
+/*  :root[lang="ja"] .vp-doc h1 {*/
+/*    font-size: 1.75rem;*/
+/*  }*/
+
+/*  :root[lang^="zh"] .vp-doc h2,*/
+/*  :root[lang="ja"] .vp-doc h2 {*/
+/*    font-size: 1.375rem;*/
+/*  }*/
+
+/*  !* Remove text justification on mobile for CJK *!*/
+/*  :root[lang^="zh"] .vp-doc p,*/
+/*  :root[lang="ja"] .vp-doc p {*/
+/*    text-align: left;*/
+/*  }*/
+/*}*/
+
+/*@media (max-width: 480px) {*/
+/*  :root {*/
+/*    --base-font-size: 14px;*/
+/*  }*/
+
+/*  .vp-doc {*/
+/*    padding: 1rem;*/
+/*  }*/
+
+/*  .vp-doc h1 {*/
+/*    font-size: 1.5rem;*/
+/*  }*/
+
+/*  .vp-doc h2 {*/
+/*    font-size: 1.25rem;*/
+/*  }*/
+
+/*  .vp-doc h3 {*/
+/*    font-size: 1.125rem;*/
+/*  }*/
+/*}*/
+
+/*!* ========================================================================*/
+/*   Dark Mode Adjustments*/
+/*   ======================================================================== *!*/
+
+/*.dark .vp-doc h1 {*/
+/*  background: linear-gradient(135deg, var(--vp-c-text-1) 0%, var(--vp-c-brand-1) 100%);*/
+/*  -webkit-background-clip: text;*/
+/*  background-clip: text;*/
+/*  -webkit-text-fill-color: transparent;*/
+/*}*/
+
+/*.dark .vp-doc code:not(pre code) {*/
+/*  background: linear-gradient(135deg,*/
+/*    rgba(99, 102, 241, 0.2) 0%,*/
+/*    rgba(99, 102, 241, 0.15) 100%);*/
+/*}*/
+
+/*.dark .vp-doc blockquote {*/
+/*  background: linear-gradient(135deg,*/
+/*    rgba(99, 102, 241, 0.1) 0%,*/
+/*    transparent 50%);*/
+/*}*/
+
+/*.dark .vp-doc table {*/
+/*  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);*/
+/*}*/
+
+/*.dark .vp-doc th {*/
+/*  background: linear-gradient(135deg,*/
+/*    rgba(99, 102, 241, 0.15) 0%,*/
+/*    rgba(99, 102, 241, 0.1) 100%);*/
+/*}*/
+
+/*!* ========================================================================*/
+/*   Print Styles*/
+/*   ======================================================================== *!*/
+
+/*@media print {*/
+/*  .vp-doc {*/
+/*    font-size: 12pt;*/
+/*    line-height: 1.5;*/
+/*    max-width: 100%;*/
+/*  }*/
+
+/*  !* Language-specific print adjustments *!*/
+/*  :root[lang^="zh"] .vp-doc,*/
+/*  :root[lang="ja"] .vp-doc {*/
+/*    font-size: 11pt;*/
+/*    line-height: 1.6;*/
+/*  }*/
+
+/*  .vp-doc h1 {*/
+/*    font-size: 20pt;*/
+/*    page-break-after: avoid;*/
+/*  }*/
+
+/*  .vp-doc h2 {*/
+/*    font-size: 16pt;*/
+/*    page-break-after: avoid;*/
+/*  }*/
+
+/*  .vp-doc h3 {*/
+/*    font-size: 14pt;*/
+/*    page-break-after: avoid;*/
+/*  }*/
+
+/*  .vp-doc pre,*/
+/*  .vp-doc blockquote,*/
+/*  .vp-doc table {*/
+/*    page-break-inside: avoid;*/
+/*  }*/
+
+/*  .vp-doc a {*/
+/*    color: inherit;*/
+/*    text-decoration: underline;*/
+/*  }*/
+/*}*/
+
+/*!* ========================================================================*/
+/*   Smooth Scrolling and Focus States*/
+/*   ======================================================================== *!*/
+
+/*html {*/
+/*  scroll-behavior: smooth;*/
+/*  scroll-padding-top: calc(var(--vp-nav-height) + 20px);*/
+/*}*/
+
+/*.vp-doc [id] {*/
+/*  scroll-margin-top: calc(var(--vp-nav-height) + 20px);*/
+/*}*/
+
+/*!* Focus styles for accessibility *!*/
+/*.vp-doc a:focus-visible,*/
+/*.vp-doc button:focus-visible {*/
+/*  outline: 2px solid var(--vp-c-brand-1);*/
+/*  outline-offset: 2px;*/
+/*  border-radius: 4px;*/
+/*}*/
+
+/*!* ========================================================================*/
+/*   Animation and Transitions*/
+/*   ======================================================================== *!*/
+
+/*.vp-doc > * {*/
+/*  animation: fadeInUp 0.5s ease-out;*/
+/*}*/
+
+/*@keyframes fadeInUp {*/
+/*  from {*/
+/*    opacity: 0;*/
+/*    transform: translateY(10px);*/
+/*  }*/
+/*  to {*/
+/*    opacity: 1;*/
+/*    transform: translateY(0);*/
+/*  }*/
+/*}*/
+
+/*!* Smooth transitions for interactive elements *!*/
+/*.vp-doc a,*/
+/*.vp-doc button,*/
+/*.vp-doc .custom-block,*/
+/*.vp-doc code:not(pre code) {*/
+/*  transition: all 0.3s ease;*/
+/*}*/
+
+/*!* ========================================================================*/
+/*   Reading Experience Enhancements*/
+/*   ======================================================================== *!*/
+
+/*!* Reading progress indicator *!*/
+/*.vp-doc::before {*/
+/*  content: '';*/
+/*  position: fixed;*/
+/*  top: var(--vp-nav-height);*/
+/*  left: 0;*/
+/*  width: var(--reading-progress, 0%);*/
+/*  height: 3px;*/
+/*  background: linear-gradient(90deg, var(--vp-c-brand-1), var(--vp-c-brand-2));*/
+/*  z-index: 1000;*/
+/*  transition: width 0.1s ease;*/
+/*}*/
+
+/*!* Selection colors *!*/
+/*::selection {*/
+/*  background: var(--vp-c-brand-soft);*/
+/*  color: var(--vp-c-brand-1);*/
+/*}*/
+
+/*::-moz-selection {*/
+/*  background: var(--vp-c-brand-soft);*/
+/*  color: var(--vp-c-brand-1);*/
+/*}*/

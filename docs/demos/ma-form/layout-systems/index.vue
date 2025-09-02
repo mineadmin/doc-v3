@@ -67,55 +67,43 @@ const baseFormItems: MaFormItem[] = [
     label: '国家',
     prop: 'country',
     render: 'select',
-    renderProps: { placeholder: '请选择国家' },
-    renderSlots: {
-      default: () => [
+    renderProps: {
+      options: [
         { label: '中国', value: 'china' },
         { label: '美国', value: 'usa' },
         { label: '日本', value: 'japan' },
         { label: '韩国', value: 'korea' }
-      ].map(item => h('el-option', { 
-        key: item.value, 
-        label: item.label, 
-        value: item.value 
-      }))
-    }
+      ],
+      placeholder: '请选择国家'
+    },
   },
   {
     label: '省份',
     prop: 'province',
     render: 'select',
-    renderProps: { placeholder: '请选择省份' },
-    renderSlots: {
-      default: () => [
+    renderProps: {
+      options: [
         { label: '北京', value: 'beijing' },
         { label: '上海', value: 'shanghai' },
         { label: '广东', value: 'guangdong' },
         { label: '江苏', value: 'jiangsu' }
-      ].map(item => h('el-option', { 
-        key: item.value, 
-        label: item.label, 
-        value: item.value 
-      }))
-    }
+      ],
+      placeholder: '请选择省份'
+    },
   },
   {
     label: '城市',
     prop: 'city',
     render: 'select',
-    renderProps: { placeholder: '请选择城市' },
-    renderSlots: {
-      default: () => [
+    renderProps: {
+      options: [
         { label: '北京', value: 'beijing' },
         { label: '上海', value: 'shanghai' },
         { label: '深圳', value: 'shenzhen' },
         { label: '杭州', value: 'hangzhou' }
-      ].map(item => h('el-option', { 
-        key: item.value, 
-        label: item.label, 
-        value: item.value 
-      }))
-    }
+      ],
+      placeholder: '请选择城市'
+    },
   },
   {
     label: '详细地址',
@@ -161,21 +149,24 @@ const baseFormItems: MaFormItem[] = [
   {
     label: '兴趣爱好',
     prop: 'hobbies',
-    render: 'checkboxGroup',
-    renderSlots: {
-      default: () => [
-        { label: '阅读', value: 'reading' },
-        { label: '编程', value: 'coding' },
-        { label: '运动', value: 'sports' },
-        { label: '音乐', value: 'music' },
-        { label: '旅行', value: 'travel' },
-        { label: '摄影', value: 'photography' }
-      ].map(item => h('el-checkbox', { 
-        key: item.value, 
-        label: item.value,
-        value: item.value 
-      }, () => item.label))
-    }
+    render: () => {
+      return (
+          <el-checkbox-group>
+            {[
+              { label: '阅读', value: 'reading' },
+              { label: '编程', value: 'coding' },
+              { label: '运动', value: 'sports' },
+              { label: '音乐', value: 'music' },
+              { label: '旅行', value: 'travel' },
+              { label: '摄影', value: 'photography' }
+            ].map((item) => (
+                <el-checkbox key={item.value} label={item.value}>
+                  {item.label}
+                </el-checkbox>
+            ))}
+          </el-checkbox-group>
+      )
+    },
   },
   {
     label: '状态',
@@ -491,9 +482,7 @@ const activeCollapse = ref(['config'])
 
 <style scoped>
 .layout-systems-demo {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+
 }
 
 .demo-controls {

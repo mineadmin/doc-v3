@@ -2,7 +2,7 @@
   <div>
     <h3>响应式布局</h3>
     <p>演示搜索表单在不同屏幕尺寸下的响应式布局效果，以及如何配置不同断点的列数。</p>
-    
+
     <div class="viewport-indicator">
       <h4>当前视口信息</h4>
       <div class="viewport-info">
@@ -14,35 +14,20 @@
 
     <div class="demo-section">
       <h4>默认响应式配置</h4>
-      <ma-search
-        :search-items="searchItems"
-        :form-options="formOptions"
-        :options="defaultResponsiveOptions"
-        @search="handleSearch"
-        @reset="handleReset"
-      />
+      <ma-search :search-items="demoConfigs.demo1.searchItems" :form-options="demoConfigs.demo1.formOptions"
+        :options="demoConfigs.demo1.searchOptions" @search="handleSearch" @reset="handleReset" />
     </div>
 
     <div class="demo-section">
       <h4>自定义响应式配置</h4>
-      <ma-search
-        :search-items="moreSearchItems"
-        :form-options="formOptions"
-        :options="customResponsiveOptions"
-        @search="handleSearch"
-        @reset="handleReset"
-      />
+      <ma-search :search-items="demoConfigs.demo2.searchItems" :form-options="demoConfigs.demo2.formOptions"
+        :options="demoConfigs.demo2.searchOptions" @search="handleSearch" @reset="handleReset" />
     </div>
 
     <div class="demo-section">
       <h4>极端响应式配置 (适合内容密集型界面)</h4>
-      <ma-search
-        :search-items="extendedSearchItems"
-        :form-options="formOptions"
-        :options="extremeResponsiveOptions"
-        @search="handleSearch"
-        @reset="handleReset"
-      />
+      <ma-search :search-items="demoConfigs.demo3.searchItems" :form-options="demoConfigs.demo3.formOptions"
+        :options="demoConfigs.demo3.searchOptions" @search="handleSearch" @reset="handleReset" />
     </div>
 
     <div class="breakpoint-examples">
@@ -54,14 +39,10 @@
             <span class="breakpoint-range">{{ bp.range }}</span>
           </div>
           <div class="breakpoint-preview" :style="{ width: bp.previewWidth }">
-            <ma-search
-              :search-items="previewItems"
-              :form-options="{ labelWidth: '80px' }"
-              :options="{ 
-                cols: { [bp.key]: bp.cols },
-                show: true
-              }"
-            />
+            <ma-search :search-items="previewItems" :form-options="{ labelWidth: '80px' }" :options="{
+              cols: { [bp.key]: bp.cols },
+              show: true
+            }" />
           </div>
         </div>
       </div>
@@ -70,69 +51,39 @@
     <div class="configuration-panel">
       <h4>动态配置测试</h4>
       <div class="config-controls">
-        <div class="control-group">
+        <div class="control-group w-1/3">
           <label>XS (< 768px):</label>
-          <el-input-number 
-            v-model="dynamicCols.xs" 
-            :min="1" 
-            :max="6"
-            @change="updateDynamicConfig"
-          />
+              <el-input-number v-model="dynamicCols.xs" :min="1" :max="6" @change="updateDynamicConfig" />
         </div>
-        <div class="control-group">
+        <div class="control-group w-1/3">
           <label>SM (≥ 768px):</label>
-          <el-input-number 
-            v-model="dynamicCols.sm" 
-            :min="1" 
-            :max="6"
-            @change="updateDynamicConfig"
-          />
+          <el-input-number v-model="dynamicCols.sm" :min="1" :max="6" @change="updateDynamicConfig" />
         </div>
-        <div class="control-group">
+        <div class="control-group w-1/3">
           <label>MD (≥ 992px):</label>
-          <el-input-number 
-            v-model="dynamicCols.md" 
-            :min="1" 
-            :max="6"
-            @change="updateDynamicConfig"
-          />
+          <el-input-number v-model="dynamicCols.md" :min="1" :max="6" @change="updateDynamicConfig" />
         </div>
-        <div class="control-group">
+        <div class="control-group w-1/3">
           <label>LG (≥ 1200px):</label>
-          <el-input-number 
-            v-model="dynamicCols.lg" 
-            :min="1" 
-            :max="8"
-            @change="updateDynamicConfig"
-          />
+          <el-input-number v-model="dynamicCols.lg" :min="1" :max="8" @change="updateDynamicConfig" />
         </div>
-        <div class="control-group">
+        <div class="control-group w-1/3">
           <label>XL (≥ 1920px):</label>
-          <el-input-number 
-            v-model="dynamicCols.xl" 
-            :min="1" 
-            :max="8"
-            @change="updateDynamicConfig"
-          />
+          <el-input-number v-model="dynamicCols.xl" :min="1" :max="8" @change="updateDynamicConfig" />
         </div>
       </div>
-      
-      <ma-search
-        ref="dynamicSearchRef"
-        :search-items="dynamicSearchItems"
-        :form-options="formOptions"
-        :options="dynamicOptions"
-        @search="handleSearch"
-        @reset="handleReset"
-      />
+
+      <ma-search ref="dynamicSearchRef" :search-items="dynamicSearchItems" :form-options="formOptions"
+        :options="dynamicOptions" @search="handleSearch" @reset="handleReset" />
     </div>
   </div>
 </template>
 
 <script setup lang="tsx">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
-import type { MaSearchItem } from '@mineadmin/search'
+import { ref, computed, onMounted, onUnmounted, reactive } from 'vue'
+import type { MaSearchItem, MaSearchOptions } from '@mineadmin/search'
 import { ElMessage } from 'element-plus'
+import { MaFormOptions } from "@mineadmin/form";
 
 const dynamicSearchRef = ref<any>(null)
 const windowWidth = ref(window.innerWidth)
@@ -143,91 +94,98 @@ const searchItems = ref<MaSearchItem[]>([
     label: '用户名',
     prop: 'username',
     render: 'input',
-    props: { placeholder: '请输入用户名' }
+    renderProps: { placeholder: '请输入用户名' }
   },
   {
     label: '邮箱',
     prop: 'email',
     render: 'input',
-    props: { placeholder: '请输入邮箱' }
+    renderProps: { placeholder: '请输入邮箱' }
   },
   {
     label: '状态',
     prop: 'status',
     render: 'select',
-    options: [
-      { label: '全部', value: '' },
-      { label: '启用', value: 1 },
-      { label: '禁用', value: 0 }
-    ]
+    renderProps: {
+      options: [
+        { label: '全部', value: '' },
+        { label: '启用', value: 1 },
+        { label: '禁用', value: 0 }
+      ]
+    }
   },
   {
     label: '部门',
     prop: 'department',
     render: 'select',
-    options: [
-      { label: '全部部门', value: '' },
-      { label: '技术部', value: 'tech' },
-      { label: '产品部', value: 'product' }
-    ]
+    renderProps: {
+      options: [
+        { label: '全部部门', value: '' },
+        { label: '技术部', value: 'tech' },
+        { label: '产品部', value: 'product' }
+      ]
+    }
   }
 ])
 
 // 更多搜索项
 const moreSearchItems = ref<MaSearchItem[]>([
-  ...searchItems.value,
   {
     label: '手机号',
     prop: 'phone',
     render: 'input',
-    props: { placeholder: '请输入手机号' }
+    renderProps: { placeholder: '请输入手机号' }
   },
   {
     label: '注册时间',
     prop: 'register_date',
-    render: 'date-picker',
-    props: { type: 'daterange', placeholder: ['开始日期', '结束日期'] }
+    render: 'datePicker',
+    renderProps: {
+      type: 'daterange',
+      rangeSeparator: '-',
+      startPlaceholder: '请选择开始时间',
+      endPlaceholder: '请选择结束时间'
+    }
   }
 ])
 
 // 扩展搜索项
 const extendedSearchItems = ref<MaSearchItem[]>([
-  ...moreSearchItems.value,
   {
     label: '年龄',
     prop: 'age',
-    render: 'input-number',
-    props: { min: 0, max: 120 }
+    render: 'inputNumber',
+    renderProps: { min: 0, max: 120 }
   },
   {
     label: '地区',
     prop: 'region',
     render: 'input',
-    props: { placeholder: '请输入地区' }
+    renderProps: { placeholder: '请输入地区' }
   },
   {
     label: '职位',
     prop: 'position',
     render: 'input',
-    props: { placeholder: '请输入职位' }
+    renderProps: { placeholder: '请输入职位' }
   }
 ])
 
 // 预览用搜索项
 const previewItems = ref<MaSearchItem[]>([
   { label: '姓名', prop: 'name', render: 'input' },
-  { label: '状态', prop: 'status', render: 'select', options: [{ label: '全部', value: '' }] },
-  { label: '时间', prop: 'time', render: 'date-picker' }
+  { label: '状态', prop: 'status', render: 'select', renderProps: { options: [{ label: '全部', value: '' }] } },
+  { label: '时间', prop: 'time', render: 'datePicker' }
 ])
 
 // 动态配置搜索项
 const dynamicSearchItems = ref<MaSearchItem[]>([
   { label: 'ID', prop: 'id', render: 'input' },
   { label: '名称', prop: 'name', render: 'input' },
-  { label: '类型', prop: 'type', render: 'select', options: [{ label: '全部', value: '' }] },
-  { label: '状态', prop: 'status', render: 'select', options: [{ label: '全部', value: '' }] },
-  { label: '创建时间', prop: 'created_at', render: 'date-picker' },
-  { label: '更新时间', prop: 'updated_at', render: 'date-picker' }
+  { label: '类型', prop: 'type', render: 'select', renderProps: { options: [{ label: '全部', value: '' }] } },
+  { label: '状态', prop: 'status', render: 'select', renderProps: { options: [{ label: '全部', value: '' }] } },
+  { label: '创建时间', prop: 'created_at', render: 'datePicker' },
+  { label: '更新时间', prop: 'updated_at', render: 'datePicker' }
 ])
 
 const formOptions = {
@@ -235,20 +193,20 @@ const formOptions = {
 }
 
 // 默认响应式配置
-const defaultResponsiveOptions = {
+const defaultResponsiveOptions = reactive<MaSearchOptions>({
   cols: {
-    xs: 1,  // <768px 1列
-    sm: 2,  // ≥768px 2列
-    md: 2,  // ≥992px 2列
-    lg: 3,  // ≥1200px 3列
-    xl: 4   // ≥1920px 4列
+    xs: 1,
+    sm: 2,
+    md: 2,
+    lg: 3,
+    xl: 4
   },
   fold: true,
-  foldRows: 2
-}
+  foldRows: 2,
+})
 
 // 自定义响应式配置
-const customResponsiveOptions = {
+const customResponsiveOptions = reactive<MaSearchOptions>({
   cols: {
     xs: 1,  // 小屏单列
     sm: 1,  // 中小屏也保持单列
@@ -258,10 +216,10 @@ const customResponsiveOptions = {
   },
   fold: true,
   foldRows: 1
-}
+})
 
 // 极端响应式配置
-const extremeResponsiveOptions = {
+const extremeResponsiveOptions = reactive<MaSearchOptions>({
   cols: {
     xs: 1,
     sm: 2,
@@ -271,7 +229,7 @@ const extremeResponsiveOptions = {
   },
   fold: true,
   foldRows: 2
-}
+})
 
 // 动态列数配置
 const dynamicCols = ref({
@@ -282,10 +240,10 @@ const dynamicCols = ref({
   xl: 5
 })
 
-const dynamicOptions = ref({
-  cols: { ...dynamicCols.value },
+const dynamicOptions = ref<MaSearchOptions>({
   fold: true,
-  foldRows: 2
+  foldRows: 2,
+  cols: { xs: 2, sm: 2, md: 2, lg: 2, xl: 2 }
 })
 
 // 断点信息
@@ -326,10 +284,55 @@ const updateDynamicConfig = () => {
     ...dynamicOptions.value,
     cols: { ...dynamicCols.value }
   }
-  
+
   if (dynamicSearchRef.value) {
     dynamicSearchRef.value.setOptions(dynamicOptions.value)
   }
+}
+
+
+// 工厂函数
+const createSearchItems = (type: 'default' | 'custom' | 'extreme'): MaSearchItem[] => {
+  let items: MaSearchItem[] = JSON.parse(JSON.stringify(searchItems.value)) // 基础项
+  if (type === 'custom' || type === 'extreme') {
+    items = [...items, ...JSON.parse(JSON.stringify(moreSearchItems.value))] // 加更多项
+  }
+  if (type === 'extreme') {
+    items = [...items, ...JSON.parse(JSON.stringify(extendedSearchItems.value))] // 加扩展项
+  }
+  return items
+}
+
+const createFormOptions = (): MaFormOptions => ({ labelWidth: '80px' })
+
+// 配置类型定义
+interface DemoConfig {
+  searchItems: MaSearchItem[]
+  formOptions: MaFormOptions
+  searchOptions: MaSearchOptions
+}
+
+// 为每个组件创建独立的数据
+const demoConfigs: {
+  demo1: DemoConfig,
+  demo2: DemoConfig,
+  demo3: DemoConfig,
+} = {
+  demo1: {
+    searchItems: createSearchItems('default'),
+    formOptions: createFormOptions(),
+    searchOptions: defaultResponsiveOptions
+  },
+  demo2: {
+    searchItems: createSearchItems('custom'),
+    formOptions: createFormOptions(),
+    searchOptions: customResponsiveOptions
+  },
+  demo3: {
+    searchItems: createSearchItems('extreme'),
+    formOptions: createFormOptions(),
+    searchOptions: extremeResponsiveOptions
+  },
 }
 
 const handleSearch = (formData: any) => {
@@ -484,25 +487,21 @@ onUnmounted(() => {
   font-weight: 500;
 }
 
-.control-group :deep(.el-input-number) {
-  width: 80px;
-}
-
 @media (max-width: 768px) {
   .viewport-info {
     flex-direction: column;
     gap: 8px;
   }
-  
+
   .breakpoint-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .config-controls {
     flex-direction: column;
     gap: 10px;
   }
-  
+
   .control-group {
     justify-content: space-between;
   }

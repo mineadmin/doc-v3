@@ -3,7 +3,7 @@
     <h3>表格集成</h3>
     <p>演示 ma-search 与数据表格的集成使用，包括搜索、分页、排序等完整的数据管理流程。</p>
     
-    <div class="search-table-container">
+    <div class="search-table-container p-5">
       <ma-search
         ref="searchRef"
         :search-items="searchItems"
@@ -229,10 +229,11 @@ const searchItems = ref<MaSearchItem[]>([
   {
     label: '创建时间',
     prop: 'created_at',
-    render: 'date-picker',
+    render: 'datePicker',
     renderProps: {
-      type: 'datetimerange', 
-      placeholder: ['开始时间', '结束时间'],
+      type: 'datetimerange',
+      startPlaceholder: '开始时间',
+      endPlaceholder: '结束时间',
       format: 'YYYY-MM-DD HH:mm:ss'
     }
   }
@@ -245,6 +246,7 @@ const formOptions = {
 const searchOptions = {
   fold: true,
   foldRows: 2,
+  cols: { xs: 2, sm: 2, md: 2, lg: 2, xl: 2 },
   text: {
     searchBtn: () => '查询',
     resetBtn: () => '重置'

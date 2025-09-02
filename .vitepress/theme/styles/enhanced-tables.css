@@ -8,520 +8,520 @@
    Table CSS Variables - Design System
    ======================================================================== */
 
-:root {
-  /* Table Color Palette */
-  --table-border-color: #e1e4e8;
-  --table-border-strong: #d0d7de;
-  --table-header-bg: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  --table-header-text: #ffffff;
-  --table-row-bg: #ffffff;
-  --table-row-hover: #f6f8fa;
-  --table-row-stripe: #fafbfc;
-  --table-cell-border: #e8eaed;
-  --table-highlight-border: #6366f1;
-  --table-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --table-shadow-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  
-  /* Typography */
-  --table-font-size: 0.9375rem;
-  --table-font-size-sm: 0.875rem;
-  --table-header-font-size: 0.9375rem;
-  --table-header-font-weight: 600;
-  --table-cell-padding: 0.875rem 1rem;
-  --table-cell-padding-compact: 0.625rem 0.875rem;
-  
-  /* Animations */
-  --table-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  /* Border Radius */
-  --table-radius: 12px;
-  --table-radius-sm: 8px;
-}
+/*:root {*/
+/*  !* Table Color Palette *!*/
+/*  --table-border-color: #e1e4e8;*/
+/*  --table-border-strong: #d0d7de;*/
+/*  --table-header-bg: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);*/
+/*  --table-header-text: #ffffff;*/
+/*  --table-row-bg: #ffffff;*/
+/*  --table-row-hover: #f6f8fa;*/
+/*  --table-row-stripe: #fafbfc;*/
+/*  --table-cell-border: #e8eaed;*/
+/*  --table-highlight-border: #6366f1;*/
+/*  --table-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);*/
+/*  --table-shadow-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);*/
+/*  */
+/*  !* Typography *!*/
+/*  --table-font-size: 0.9375rem;*/
+/*  --table-font-size-sm: 0.875rem;*/
+/*  --table-header-font-size: 0.9375rem;*/
+/*  --table-header-font-weight: 600;*/
+/*  --table-cell-padding: 0.875rem 1rem;*/
+/*  --table-cell-padding-compact: 0.625rem 0.875rem;*/
+/*  */
+/*  !* Animations *!*/
+/*  --table-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);*/
+/*  */
+/*  !* Border Radius *!*/
+/*  --table-radius: 12px;*/
+/*  --table-radius-sm: 8px;*/
+/*}*/
 
-/* Dark Mode Color Adjustments */
-.dark {
-  --table-border-color: #30363d;
-  --table-border-strong: #484f58;
-  --table-header-bg: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
-  --table-header-text: #ffffff;
-  --table-row-bg: #161b22;
-  --table-row-hover: #1f2937;
-  --table-row-stripe: #0d1117;
-  --table-cell-border: #21262d;
-  --table-highlight-border: #a855f7;
-  --table-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-  --table-shadow-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
-}
+/*!* Dark Mode Color Adjustments *!*/
+/*.dark {*/
+/*  --table-border-color: #30363d;*/
+/*  --table-border-strong: #484f58;*/
+/*  --table-header-bg: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);*/
+/*  --table-header-text: #ffffff;*/
+/*  --table-row-bg: #161b22;*/
+/*  --table-row-hover: #1f2937;*/
+/*  --table-row-stripe: #0d1117;*/
+/*  --table-cell-border: #21262d;*/
+/*  --table-highlight-border: #a855f7;*/
+/*  --table-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);*/
+/*  --table-shadow-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);*/
+/*}*/
 
 /* ========================================================================
    Base Table Styles - Override VitePress Defaults
    ======================================================================== */
 
-.VPDoc table {
-  /* Reset and base styles */
-  width: 100%;
-  border-collapse: separate !important;
-  border-spacing: 0;
-  margin: 2rem 0;
-  font-size: var(--table-font-size);
-  
-  /* Enhanced visual design */
-  background: var(--table-row-bg) !important;
-  border: 2px solid var(--table-border-strong) !important;
-  border-radius: var(--table-radius) !important;
-  overflow: hidden !important;
-  box-shadow: var(--table-shadow) !important;
-  
-  /* Performance */
-  transform: translateZ(0);
-  will-change: box-shadow;
-  transition: var(--table-transition);
-}
+/*.VPDoc table {*/
+/*  !* Reset and base styles *!*/
+/*  width: 100%;*/
+/*  border-collapse: separate !important;*/
+/*  border-spacing: 0;*/
+/*  margin: 2rem 0;*/
+/*  font-size: var(--table-font-size);*/
+/*  */
+/*  !* Enhanced visual design *!*/
+/*  background: var(--table-row-bg) !important;*/
+/*  border: 2px solid var(--table-border-strong) !important;*/
+/*  border-radius: var(--table-radius) !important;*/
+/*  overflow: hidden !important;*/
+/*  box-shadow: var(--table-shadow) !important;*/
+/*  */
+/*  !* Performance *!*/
+/*  transform: translateZ(0);*/
+/*  will-change: box-shadow;*/
+/*  transition: var(--table-transition);*/
+/*}*/
 
-/* Table hover effect */
-.VPDoc table:hover {
-  box-shadow: var(--table-shadow-hover);
-}
+/*!* Table hover effect *!*/
+/*.VPDoc table:hover {*/
+/*  box-shadow: var(--table-shadow-hover);*/
+/*}*/
 
-/* ========================================================================
-   Table Header Styles
-   ======================================================================== */
+/*!* ========================================================================*/
+/*   Table Header Styles*/
+/*   ======================================================================== *!*/
 
-.VPDoc table thead {
-  background: var(--table-header-bg) !important;
-  position: relative;
-}
+/*.VPDoc table thead {*/
+/*  background: var(--table-header-bg) !important;*/
+/*  position: relative;*/
+/*}*/
 
-/* Add subtle pattern to header */
-.VPDoc table thead::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 10px,
-    rgba(255, 255, 255, 0.03) 10px,
-    rgba(255, 255, 255, 0.03) 20px
-  );
-  pointer-events: none;
-}
+/*!* Add subtle pattern to header *!*/
+/*.VPDoc table thead::after {*/
+/*  content: '';*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  right: 0;*/
+/*  bottom: 0;*/
+/*  background-image: repeating-linear-gradient(*/
+/*    45deg,*/
+/*    transparent,*/
+/*    transparent 10px,*/
+/*    rgba(255, 255, 255, 0.03) 10px,*/
+/*    rgba(255, 255, 255, 0.03) 20px*/
+/*  );*/
+/*  pointer-events: none;*/
+/*}*/
 
-.VPDoc table thead th {
-  color: var(--table-header-text) !important;
-  font-weight: var(--table-header-font-weight) !important;
-  font-size: var(--table-header-font-size);
-  text-align: left;
-  padding: var(--table-cell-padding) !important;
-  letter-spacing: 0.025em !important;
-  text-transform: none !important;
-  position: relative;
-  white-space: nowrap;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-  background: transparent !important;
-}
-/* Header cell dividers */
-.VPDoc table thead th:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 25%;
-  height: 50%;
-  width: 1px;
-  background: rgba(255, 255, 255, 0.2);
-}
+/*.VPDoc table thead th {*/
+/*  color: var(--table-header-text) !important;*/
+/*  font-weight: var(--table-header-font-weight) !important;*/
+/*  font-size: var(--table-header-font-size);*/
+/*  text-align: left;*/
+/*  padding: var(--table-cell-padding) !important;*/
+/*  letter-spacing: 0.025em !important;*/
+/*  text-transform: none !important;*/
+/*  position: relative;*/
+/*  white-space: nowrap;*/
+/*  border-bottom: 2px solid rgba(255, 255, 255, 0.2);*/
+/*  background: transparent !important;*/
+/*}*/
+/*!* Header cell dividers *!*/
+/*.VPDoc table thead th:not(:last-child)::after {*/
+/*  content: '';*/
+/*  position: absolute;*/
+/*  right: 0;*/
+/*  top: 25%;*/
+/*  height: 50%;*/
+/*  width: 1px;*/
+/*  background: rgba(255, 255, 255, 0.2);*/
+/*}*/
 
-/* First header cell rounded corner */
-.VPDoc table thead th:first-child {
-  border-top-left-radius: var(--table-radius);
-}
+/*!* First header cell rounded corner *!*/
+/*.VPDoc table thead th:first-child {*/
+/*  border-top-left-radius: var(--table-radius);*/
+/*}*/
 
-/* Last header cell rounded corner */
-.VPDoc table thead th:last-child {
-  border-top-right-radius: var(--table-radius);
-}
+/*!* Last header cell rounded corner *!*/
+/*.VPDoc table thead th:last-child {*/
+/*  border-top-right-radius: var(--table-radius);*/
+/*}*/
 
-/* ========================================================================
-   Table Body Styles
-   ======================================================================== */
+/*!* ========================================================================*/
+/*   Table Body Styles*/
+/*   ======================================================================== *!*/
 
-.VPDoc table tbody tr {
-  background: var(--table-row-bg) !important;
-  transition: var(--table-transition);
-  position: relative;
-}
+/*.VPDoc table tbody tr {*/
+/*  background: var(--table-row-bg) !important;*/
+/*  transition: var(--table-transition);*/
+/*  position: relative;*/
+/*}*/
 
-/* Zebra striping for better readability */
-.VPDoc table tbody tr:nth-child(even) {
-  background: var(--table-row-stripe);
-}
+/*!* Zebra striping for better readability *!*/
+/*.VPDoc table tbody tr:nth-child(even) {*/
+/*  background: var(--table-row-stripe);*/
+/*}*/
 
-/* Row hover effect */
-.VPDoc table tbody tr:hover {
-  background: var(--table-row-hover) !important;
-  transform: translateX(2px);
-  box-shadow: inset 4px 0 0 0 var(--table-highlight-border);
-}
+/*!* Row hover effect *!*/
+/*.VPDoc table tbody tr:hover {*/
+/*  background: var(--table-row-hover) !important;*/
+/*  transform: translateX(2px);*/
+/*  box-shadow: inset 4px 0 0 0 var(--table-highlight-border);*/
+/*}*/
 
-/* Row borders */
-.VPDoc table tbody tr:not(:last-child) td {
-  border-bottom: 1px solid var(--table-cell-border);
-}
+/*!* Row borders *!*/
+/*.VPDoc table tbody tr:not(:last-child) td {*/
+/*  border-bottom: 1px solid var(--table-cell-border);*/
+/*}*/
 
-/* ========================================================================
-   Table Cell Styles
-   ======================================================================== */
+/*!* ========================================================================*/
+/*   Table Cell Styles*/
+/*   ======================================================================== *!*/
 
-.VPDoc table td,
-.VPDoc table th {
-  padding: var(--table-cell-padding) !important;
-  vertical-align: middle;
-  position: relative;
-  border: none !important;
-}
+/*.VPDoc table td,*/
+/*.VPDoc table th {*/
+/*  padding: var(--table-cell-padding) !important;*/
+/*  vertical-align: middle;*/
+/*  position: relative;*/
+/*  border: none !important;*/
+/*}*/
 
-/* Cell content alignment for different languages */
-.VPDoc table td {
-  color: var(--vp-c-text-1);
-  line-height: 1.6;
-}
+/*!* Cell content alignment for different languages *!*/
+/*.VPDoc table td {*/
+/*  color: var(--vp-c-text-1);*/
+/*  line-height: 1.6;*/
+/*}*/
 
-/* Vertical cell dividers for better structure visibility */
-.VPDoc table td:not(:last-child) {
-  border-right: 1px solid var(--table-cell-border);
-}
+/*!* Vertical cell dividers for better structure visibility *!*/
+/*.VPDoc table td:not(:last-child) {*/
+/*  border-right: 1px solid var(--table-cell-border);*/
+/*}*/
 
-/* First column emphasis */
-.VPDoc table tbody td:first-child {
-  font-weight: 500;
-  color: var(--vp-c-brand-1);
-}
+/*!* First column emphasis *!*/
+/*.VPDoc table tbody td:first-child {*/
+/*  font-weight: 500;*/
+/*  color: var(--vp-c-brand-1);*/
+/*}*/
 
-/* Code in tables */
-.VPDoc table code {
-  padding: 0.125rem 0.375rem;
-  font-size: 0.875em;
-  background: var(--vp-c-brand-soft);
-  color: var(--vp-c-brand-1);
-  border-radius: 4px;
-  border: 1px solid var(--vp-c-brand-1);
-  border-opacity: 0.2;
-  white-space: nowrap;
-}
+/*!* Code in tables *!*/
+/*.VPDoc table code {*/
+/*  padding: 0.125rem 0.375rem;*/
+/*  font-size: 0.875em;*/
+/*  background: var(--vp-c-brand-soft);*/
+/*  color: var(--vp-c-brand-1);*/
+/*  border-radius: 4px;*/
+/*  border: 1px solid var(--vp-c-brand-1);*/
+/*  border-opacity: 0.2;*/
+/*  white-space: nowrap;*/
+/*}*/
 
-/* Links in tables */
-.VPDoc table a {
-  color: var(--vp-c-brand-1);
-  font-weight: 500;
-  text-decoration: none;
-  border-bottom: 1px dashed currentColor;
-  transition: var(--table-transition);
-}
+/*!* Links in tables *!*/
+/*.VPDoc table a {*/
+/*  color: var(--vp-c-brand-1);*/
+/*  font-weight: 500;*/
+/*  text-decoration: none;*/
+/*  border-bottom: 1px dashed currentColor;*/
+/*  transition: var(--table-transition);*/
+/*}*/
 
-.VPDoc table a:hover {
-  color: var(--vp-c-brand-2);
-  border-bottom-style: solid;
-}
+/*.VPDoc table a:hover {*/
+/*  color: var(--vp-c-brand-2);*/
+/*  border-bottom-style: solid;*/
+/*}*/
 
-/* ========================================================================
-   Responsive Table Design
-   ======================================================================== */
+/*!* ========================================================================*/
+/*   Responsive Table Design*/
+/*   ======================================================================== *!*/
 
-/* Tablet and below */
-@media (max-width: 768px) {
-  .VPDoc table {
-    font-size: var(--table-font-size-sm);
-    margin: 1.5rem -1rem;
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-  }
-  
-  .VPDoc table thead th,
-  .VPDoc table td {
-    padding: var(--table-cell-padding-compact);
-  }
-  
-  /* Enable horizontal scroll on mobile */
-  .VPDoc .table-container,
-  .VPDoc table {
-    display: block;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  /* Minimum width for readability */
-  .VPDoc table {
-    min-width: 600px;
-  }
-  
-  /* Visual scroll indicator */
-  .VPDoc table::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 30px;
-    background: linear-gradient(90deg, transparent, var(--vp-c-bg) 90%);
-    pointer-events: none;
-  }
-}
+/*!* Tablet and below *!*/
+/*@media (max-width: 768px) {*/
+/*  .VPDoc table {*/
+/*    font-size: var(--table-font-size-sm);*/
+/*    margin: 1.5rem -1rem;*/
+/*    border-radius: 0;*/
+/*    border-left: none;*/
+/*    border-right: none;*/
+/*  }*/
+/*  */
+/*  .VPDoc table thead th,*/
+/*  .VPDoc table td {*/
+/*    padding: var(--table-cell-padding-compact);*/
+/*  }*/
+/*  */
+/*  !* Enable horizontal scroll on mobile *!*/
+/*  .VPDoc .table-container,*/
+/*  .VPDoc table {*/
+/*    display: block;*/
+/*    overflow-x: auto;*/
+/*    -webkit-overflow-scrolling: touch;*/
+/*  }*/
+/*  */
+/*  !* Minimum width for readability *!*/
+/*  .VPDoc table {*/
+/*    min-width: 600px;*/
+/*  }*/
+/*  */
+/*  !* Visual scroll indicator *!*/
+/*  .VPDoc table::after {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    right: 0;*/
+/*    top: 0;*/
+/*    bottom: 0;*/
+/*    width: 30px;*/
+/*    background: linear-gradient(90deg, transparent, var(--vp-c-bg) 90%);*/
+/*    pointer-events: none;*/
+/*  }*/
+/*}*/
 
-/* ========================================================================
-   Special Table Types
-   ======================================================================== */
+/*!* ========================================================================*/
+/*   Special Table Types*/
+/*   ======================================================================== *!*/
 
-/* Compact tables */
-.VPDoc table.compact {
-  font-size: var(--table-font-size-sm);
-}
+/*!* Compact tables *!*/
+/*.VPDoc table.compact {*/
+/*  font-size: var(--table-font-size-sm);*/
+/*}*/
 
-.VPDoc table.compact th,
-.VPDoc table.compact td {
-  padding: var(--table-cell-padding-compact);
-}
+/*.VPDoc table.compact th,*/
+/*.VPDoc table.compact td {*/
+/*  padding: var(--table-cell-padding-compact);*/
+/*}*/
 
-/* Borderless tables */
-.VPDoc table.borderless {
-  border: none;
-  box-shadow: none;
-}
+/*!* Borderless tables *!*/
+/*.VPDoc table.borderless {*/
+/*  border: none;*/
+/*  box-shadow: none;*/
+/*}*/
 
-.VPDoc table.borderless tbody tr:hover {
-  box-shadow: none;
-  transform: none;
-  background: var(--table-row-hover);
-}
+/*.VPDoc table.borderless tbody tr:hover {*/
+/*  box-shadow: none;*/
+/*  transform: none;*/
+/*  background: var(--table-row-hover);*/
+/*}*/
 
-.VPDoc table.borderless td {
-  border: none;
-}
+/*.VPDoc table.borderless td {*/
+/*  border: none;*/
+/*}*/
 
-/* Feature comparison tables */
-.VPDoc table.comparison tbody td:not(:first-child) {
-  text-align: center;
-}
+/*!* Feature comparison tables *!*/
+/*.VPDoc table.comparison tbody td:not(:first-child) {*/
+/*  text-align: center;*/
+/*}*/
 
-/* Status indicator in tables */
-.VPDoc table .status-indicator {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  margin-right: 0.5rem;
-}
+/*!* Status indicator in tables *!*/
+/*.VPDoc table .status-indicator {*/
+/*  display: inline-block;*/
+/*  width: 8px;*/
+/*  height: 8px;*/
+/*  border-radius: 50%;*/
+/*  margin-right: 0.5rem;*/
+/*}*/
 
-.VPDoc table .status-indicator.success {
-  background: #10b981;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
-}
+/*.VPDoc table .status-indicator.success {*/
+/*  background: #10b981;*/
+/*  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);*/
+/*}*/
 
-.VPDoc table .status-indicator.warning {
-  background: #f59e0b;
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
-}
+/*.VPDoc table .status-indicator.warning {*/
+/*  background: #f59e0b;*/
+/*  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);*/
+/*}*/
 
-.VPDoc table .status-indicator.error {
-  background: #ef4444;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
-}
+/*.VPDoc table .status-indicator.error {*/
+/*  background: #ef4444;*/
+/*  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);*/
+/*}*/
 
 /* ========================================================================
    CJK Language Optimizations
    ======================================================================== */
 
 /* Better spacing for Chinese/Japanese/Korean text */
-:lang(zh) .VPDoc table,
-:lang(ja) .VPDoc table,
-:lang(ko) .VPDoc table,
-:lang(zh-hk) .VPDoc table,
-:lang(zh-tw) .VPDoc table {
-  font-size: 0.9375rem;
-  line-height: 1.7;
-}
+/*:lang(zh) .VPDoc table,*/
+/*:lang(ja) .VPDoc table,*/
+/*:lang(ko) .VPDoc table,*/
+/*:lang(zh-hk) .VPDoc table,*/
+/*:lang(zh-tw) .VPDoc table {*/
+/*  font-size: 0.9375rem;*/
+/*  line-height: 1.7;*/
+/*}*/
 
-:lang(zh) .VPDoc table td,
-:lang(ja) .VPDoc table td,
-:lang(ko) .VPDoc table td,
-:lang(zh-hk) .VPDoc table td,
-:lang(zh-tw) .VPDoc table td {
-  letter-spacing: 0.02em;
-}
+/*:lang(zh) .VPDoc table td,*/
+/*:lang(ja) .VPDoc table td,*/
+/*:lang(ko) .VPDoc table td,*/
+/*:lang(zh-hk) .VPDoc table td,*/
+/*:lang(zh-tw) .VPDoc table td {*/
+/*  letter-spacing: 0.02em;*/
+/*}*/
 
 /* ========================================================================
    Accessibility Enhancements
    ======================================================================== */
 
-/* Focus styles for keyboard navigation */
-.VPDoc table tbody tr:focus-within {
-  outline: 2px solid var(--table-highlight-border);
-  outline-offset: -2px;
-}
+/*!* Focus styles for keyboard navigation *!*/
+/*.VPDoc table tbody tr:focus-within {*/
+/*  outline: 2px solid var(--table-highlight-border);*/
+/*  outline-offset: -2px;*/
+/*}*/
 
-/* Screen reader only captions */
-.VPDoc table caption {
-  position: absolute;
-  left: -10000px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
+/*!* Screen reader only captions *!*/
+/*.VPDoc table caption {*/
+/*  position: absolute;*/
+/*  left: -10000px;*/
+/*  top: auto;*/
+/*  width: 1px;*/
+/*  height: 1px;*/
+/*  overflow: hidden;*/
+/*}*/
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .VPDoc table {
-    border-width: 3px;
-  }
-  
-  .VPDoc table thead th {
-    border-bottom-width: 3px;
-  }
-  
-  .VPDoc table tbody tr:not(:last-child) td {
-    border-bottom-width: 2px;
-  }
-}
+/*!* High contrast mode support *!*/
+/*@media (prefers-contrast: high) {*/
+/*  .VPDoc table {*/
+/*    border-width: 3px;*/
+/*  }*/
+/*  */
+/*  .VPDoc table thead th {*/
+/*    border-bottom-width: 3px;*/
+/*  }*/
+/*  */
+/*  .VPDoc table tbody tr:not(:last-child) td {*/
+/*    border-bottom-width: 2px;*/
+/*  }*/
+/*}*/
 
-/* ========================================================================
-   Print Styles
-   ======================================================================== */
+/*!* ========================================================================*/
+/*   Print Styles*/
+/*   ======================================================================== *!*/
 
-@media print {
-  .VPDoc table {
-    box-shadow: none;
-    border: 1px solid #000;
-    page-break-inside: avoid;
-  }
-  
-  .VPDoc table thead {
-    background: #f0f0f0;
-  }
-  
-  .VPDoc table thead th {
-    color: #000;
-    border-bottom: 2px solid #000;
-  }
-  
-  .VPDoc table tbody tr:hover {
-    background: transparent;
-    transform: none;
-    box-shadow: none;
-  }
-}
+/*@media print {*/
+/*  .VPDoc table {*/
+/*    box-shadow: none;*/
+/*    border: 1px solid #000;*/
+/*    page-break-inside: avoid;*/
+/*  }*/
+/*  */
+/*  .VPDoc table thead {*/
+/*    background: #f0f0f0;*/
+/*  }*/
+/*  */
+/*  .VPDoc table thead th {*/
+/*    color: #000;*/
+/*    border-bottom: 2px solid #000;*/
+/*  }*/
+/*  */
+/*  .VPDoc table tbody tr:hover {*/
+/*    background: transparent;*/
+/*    transform: none;*/
+/*    box-shadow: none;*/
+/*  }*/
+/*}*/
 
-/* ========================================================================
-   Animation Effects
-   ======================================================================== */
+/*!* ========================================================================*/
+/*   Animation Effects*/
+/*   ======================================================================== *!*/
 
-/* Subtle entrance animation */
-.VPDoc table {
-  animation: tableSlideIn 0.4s ease-out;
-}
+/*!* Subtle entrance animation *!*/
+/*.VPDoc table {*/
+/*  animation: tableSlideIn 0.4s ease-out;*/
+/*}*/
 
-@keyframes tableSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/*@keyframes tableSlideIn {*/
+/*  from {*/
+/*    opacity: 0;*/
+/*    transform: translateY(10px);*/
+/*  }*/
+/*  to {*/
+/*    opacity: 1;*/
+/*    transform: translateY(0);*/
+/*  }*/
+/*}*/
 
-/* Loading state for dynamic tables */
-.VPDoc table.loading tbody {
-  opacity: 0.5;
-  pointer-events: none;
-}
+/*!* Loading state for dynamic tables *!*/
+/*.VPDoc table.loading tbody {*/
+/*  opacity: 0.5;*/
+/*  pointer-events: none;*/
+/*}*/
 
-.VPDoc table.loading::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
-  border: 3px solid var(--table-highlight-border);
-  border-top-color: transparent;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
+/*.VPDoc table.loading::before {*/
+/*  content: '';*/
+/*  position: absolute;*/
+/*  top: 50%;*/
+/*  left: 50%;*/
+/*  transform: translate(-50%, -50%);*/
+/*  width: 40px;*/
+/*  height: 40px;*/
+/*  border: 3px solid var(--table-highlight-border);*/
+/*  border-top-color: transparent;*/
+/*  border-radius: 50%;*/
+/*  animation: spin 1s linear infinite;*/
+/*}*/
 
-@keyframes spin {
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
+/*@keyframes spin {*/
+/*  to {*/
+/*    transform: translate(-50%, -50%) rotate(360deg);*/
+/*  }*/
+/*}*/
 
-/* ========================================================================
-   Advanced Features
-   ======================================================================== */
+/*!* ========================================================================*/
+/*   Advanced Features*/
+/*   ======================================================================== *!*/
 
-/* Sortable column indicators */
-.VPDoc table th.sortable {
-  cursor: pointer;
-  user-select: none;
-  padding-right: 2rem;
-}
+/*!* Sortable column indicators *!*/
+/*.VPDoc table th.sortable {*/
+/*  cursor: pointer;*/
+/*  user-select: none;*/
+/*  padding-right: 2rem;*/
+/*}*/
 
-.VPDoc table th.sortable::after {
-  content: '↕';
-  position: absolute;
-  right: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  opacity: 0.5;
-  font-size: 0.875em;
-}
+/*.VPDoc table th.sortable::after {*/
+/*  content: '↕';*/
+/*  position: absolute;*/
+/*  right: 0.75rem;*/
+/*  top: 50%;*/
+/*  transform: translateY(-50%);*/
+/*  opacity: 0.5;*/
+/*  font-size: 0.875em;*/
+/*}*/
 
-.VPDoc table th.sortable.sorted-asc::after {
-  content: '↑';
-  opacity: 1;
-}
+/*.VPDoc table th.sortable.sorted-asc::after {*/
+/*  content: '↑';*/
+/*  opacity: 1;*/
+/*}*/
 
-.VPDoc table th.sortable.sorted-desc::after {
-  content: '↓';
-  opacity: 1;
-}
+/*.VPDoc table th.sortable.sorted-desc::after {*/
+/*  content: '↓';*/
+/*  opacity: 1;*/
+/*}*/
 
-/* Expandable rows */
-.VPDoc table tr.expandable {
-  cursor: pointer;
-}
+/*!* Expandable rows *!*/
+/*.VPDoc table tr.expandable {*/
+/*  cursor: pointer;*/
+/*}*/
 
-.VPDoc table tr.expandable td:first-child::before {
-  content: '▶';
-  display: inline-block;
-  margin-right: 0.5rem;
-  transition: transform 0.2s;
-  font-size: 0.75em;
-}
+/*.VPDoc table tr.expandable td:first-child::before {*/
+/*  content: '▶';*/
+/*  display: inline-block;*/
+/*  margin-right: 0.5rem;*/
+/*  transition: transform 0.2s;*/
+/*  font-size: 0.75em;*/
+/*}*/
 
-.VPDoc table tr.expandable.expanded td:first-child::before {
-  transform: rotate(90deg);
-}
+/*.VPDoc table tr.expandable.expanded td:first-child::before {*/
+/*  transform: rotate(90deg);*/
+/*}*/
 
-.VPDoc table tr.expanded-content {
-  background: var(--vp-c-bg-soft);
-}
+/*.VPDoc table tr.expanded-content {*/
+/*  background: var(--vp-c-bg-soft);*/
+/*}*/
 
-.VPDoc table tr.expanded-content td {
-  padding: 1.25rem;
-  border-top: none;
-}
+/*.VPDoc table tr.expanded-content td {*/
+/*  padding: 1.25rem;*/
+/*  border-top: none;*/
+/*}*/
 
-/* Performance optimization */
-@media (prefers-reduced-motion: reduce) {
-  .VPDoc table,
-  .VPDoc table * {
-    animation: none !important;
-    transition: none !important;
-  }
-}
+/*!* Performance optimization *!*/
+/*@media (prefers-reduced-motion: reduce) {*/
+/*  .VPDoc table,*/
+/*  .VPDoc table * {*/
+/*    animation: none !important;*/
+/*    transition: none !important;*/
+/*  }*/
+/*}*/

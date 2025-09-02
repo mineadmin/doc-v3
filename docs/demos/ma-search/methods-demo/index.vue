@@ -511,13 +511,13 @@ const setItems = () => {
         label: '新用户名',
         prop: 'new_username',
         render: 'input',
-        props: { placeholder: '请输入新用户名' }
+        renderProps: { placeholder: '请输入新用户名' }
       },
       {
         label: '新状态',
         prop: 'new_status',
         render: 'select',
-        options: [
+        renderProps: [
           { label: '全部', value: '' },
           { label: '活跃', value: 'active' },
           { label: '非活跃', value: 'inactive' }
@@ -540,7 +540,7 @@ const appendItem = () => {
       label: '动态添加项',
       prop: 'dynamic_field',
       render: 'input',
-      props: { placeholder: '这是动态添加的字段' }
+      renderProps: { placeholder: '这是动态添加的字段' }
     }
     methodDemoRef.value?.appendItem(newItem)
     recordResult('appendItem', true, newItem)

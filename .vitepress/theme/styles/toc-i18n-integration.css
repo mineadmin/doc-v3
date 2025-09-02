@@ -49,11 +49,11 @@
 
 /* Sync with MineAdmin shadow system */
 .VPDocAsideOutline {
-  box-shadow: var(--ma-shadow-sm, var(--toc-shadow-subtle));
+  /*box-shadow: var(--ma-shadow-sm, var(--toc-shadow-subtle));*/
 }
 
 .VPDocAsideOutline:hover {
-  box-shadow: var(--ma-shadow-md, var(--toc-shadow-hover));
+  /*box-shadow: var(--ma-shadow-md, var(--toc-shadow-hover));*/
 }
 
 /* ========================================================================

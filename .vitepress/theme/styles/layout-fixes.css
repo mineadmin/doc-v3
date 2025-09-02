@@ -1,172 +1,172 @@
-/**
- * Layout Fixes for VitePress Documentation
- * Fixes TOC width and content alignment issues
- */
+/*!***/
+/* * Layout Fixes for VitePress Documentation*/
+/* * Fixes TOC width and content alignment issues*/
+/* *!*/
 
-/* ========================================================================
-   Fix TOC Width Issues
-   ======================================================================== */
+/*!* ========================================================================*/
+/*   Fix TOC Width Issues*/
+/*   ======================================================================== *!*/
 
-/* Increase TOC width for better content visibility */
-.VPDocAsideOutline {
-  /* Override the too-narrow width constraints */
-  min-width: 280px !important;
-  max-width: 320px !important;
-  width: 320px !important;
-}
+/*!* Increase TOC width for better content visibility *!*/
+/*.VPDocAsideOutline {*/
+/*  !* Override the too-narrow width constraints *!*/
+/*  min-width: 280px !important;*/
+/*  max-width: 320px !important;*/
+/*  width: 320px !important;*/
+/*}*/
 
-/* Better responsive widths */
-@media (min-width: 1024px) and (max-width: 1280px) {
-  .VPDocAsideOutline {
-    min-width: 260px !important;
-    max-width: 280px !important;
-    width: 280px !important;
-  }
-}
+/*!* Better responsive widths *!*/
+/*@media (min-width: 1024px) and (max-width: 1280px) {*/
+/*  .VPDocAsideOutline {*/
+/*    min-width: 260px !important;*/
+/*    max-width: 280px !important;*/
+/*    width: 280px !important;*/
+/*  }*/
+/*}*/
 
-@media (min-width: 1920px) {
-  .VPDocAsideOutline {
-    min-width: 320px !important;
-    max-width: 360px !important;
-    width: 360px !important;
-  }
-}
+/*@media (min-width: 1920px) {*/
+/*  .VPDocAsideOutline {*/
+/*    min-width: 320px !important;*/
+/*    max-width: 360px !important;*/
+/*    width: 360px !important;*/
+/*  }*/
+/*}*/
 
-/* ========================================================================
-   Fix Content Alignment Issues
-   ======================================================================== */
+/*!* ========================================================================*/
+/*   Fix Content Alignment Issues*/
+/*   ======================================================================== *!*/
 
-/* Fix the weird centering issue */
-.VPDoc .content-container {
-  margin: 0 !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
+/*!* Fix the weird centering issue *!*/
+/*.VPDoc .content-container {*/
+/*  margin: 0 !important;*/
+/*  margin-left: 0 !important;*/
+/*  margin-right: 0 !important;*/
+/*}*/
 
-.VPDoc .vp-doc {
-  margin: 0 !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
+/*.VPDoc .vp-doc {*/
+/*  margin: 0 !important;*/
+/*  margin-left: 0 !important;*/
+/*  margin-right: 0 !important;*/
+/*  padding-left: 2rem;*/
+/*  padding-right: 2rem;*/
+/*}*/
 
-/* Better content width management */
-.VPDoc.has-aside .content-container {
-  max-width: none !important;
-}
+/*!* Better content width management *!*/
+/*.VPDoc.has-aside .content-container {*/
+/*  max-width: none !important;*/
+/*}*/
 
-.VPDoc:not(.has-aside) .content-container {
-  max-width: var(--content-width-wide);
-  margin: 0 auto;
-}
+/*.VPDoc:not(.has-aside) .content-container {*/
+/*  max-width: var(--content-width-wide);*/
+/*  margin: 0 auto;*/
+/*}*/
 
-/* ========================================================================
-   Adjust Layout Grid
-   ======================================================================== */
+/*!* ========================================================================*/
+/*   Adjust Layout Grid*/
+/*   ======================================================================== *!*/
 
-/* Fix the overall layout to prevent weird spacing */
-@media (min-width: 960px) {
-  .VPContent.has-sidebar {
-    padding-left: var(--vp-sidebar-width);
-    padding-right: 0;
-  }
-  
-  .VPContent.has-aside {
-    padding-right: 0;
-  }
-  
-  .VPDoc.has-aside {
-    padding-right: 340px; /* TOC width + spacing */
-  }
-  
-  .VPDocAsideOutline {
-    position: fixed;
-    right: 24px;
-    top: calc(var(--vp-nav-height) + 2rem);
-    bottom: 24px;
-    overflow-y: auto;
-    margin: 0;
-  }
-}
+/*!* Fix the overall layout to prevent weird spacing *!*/
+/*@media (min-width: 960px) {*/
+/*  .VPContent.has-sidebar {*/
+/*    padding-left: var(--vp-sidebar-width);*/
+/*    padding-right: 0;*/
+/*  }*/
+/*  */
+/*  .VPContent.has-aside {*/
+/*    padding-right: 0;*/
+/*  }*/
+/*  */
+/*  .VPDoc.has-aside {*/
+/*    padding-right: 340px; !* TOC width + spacing *!*/
+/*  }*/
+/*  */
+/*  .VPDocAsideOutline {*/
+/*    position: fixed;*/
+/*    right: 24px;*/
+/*    top: calc(var(--vp-nav-height) + 2rem);*/
+/*    bottom: 24px;*/
+/*    overflow-y: auto;*/
+/*    margin: 0;*/
+/*  }*/
+/*}*/
 
-/* ========================================================================
-   Fix TOC Content Overflow
-   ======================================================================== */
+/*!* ========================================================================*/
+/*   Fix TOC Content Overflow*/
+/*   ======================================================================== *!*/
 
-.VPDocAsideOutline .outline-link {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-  display: block;
-}
+/*.VPDocAsideOutline .outline-link {*/
+/*  white-space: nowrap;*/
+/*  overflow: hidden;*/
+/*  text-overflow: ellipsis;*/
+/*  max-width: 100%;*/
+/*  display: block;*/
+/*}*/
 
-/* Show full text on hover */
-.VPDocAsideOutline .outline-link:hover {
-  white-space: normal;
-  overflow: visible;
-  text-overflow: initial;
-  z-index: 10;
-  position: relative;
-  background: var(--vp-c-bg);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border-radius: 6px;
-  padding: 0.5rem 0.75rem;
-}
+/*!* Show full text on hover *!*/
+/*.VPDocAsideOutline .outline-link:hover {*/
+/*  white-space: normal;*/
+/*  overflow: visible;*/
+/*  text-overflow: initial;*/
+/*  z-index: 10;*/
+/*  position: relative;*/
+/*  background: var(--vp-c-bg);*/
+/*  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);*/
+/*  border-radius: 6px;*/
+/*  padding: 0.5rem 0.75rem;*/
+/*}*/
 
-/* ========================================================================
-   Better Mobile Layout
-   ======================================================================== */
+/*!* ========================================================================*/
+/*   Better Mobile Layout*/
+/*   ======================================================================== *!*/
 
-@media (max-width: 959px) {
-  .VPDoc.has-aside {
-    padding-right: 0 !important;
-  }
-  
-  .VPDocAsideOutline {
-    position: static !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: unset !important;
-    margin: 2rem 0;
-    right: unset !important;
-    top: unset !important;
-    bottom: unset !important;
-  }
-}
+/*@media (max-width: 959px) {*/
+/*  .VPDoc.has-aside {*/
+/*    padding-right: 0 !important;*/
+/*  }*/
+/*  */
+/*  .VPDocAsideOutline {*/
+/*    position: static !important;*/
+/*    width: 100% !important;*/
+/*    max-width: 100% !important;*/
+/*    min-width: unset !important;*/
+/*    margin: 2rem 0;*/
+/*    right: unset !important;*/
+/*    top: unset !important;*/
+/*    bottom: unset !important;*/
+/*  }*/
+/*}*/
 
-/* ========================================================================
-   Fix Typography in Narrow TOC
-   ======================================================================== */
+/*!* ========================================================================*/
+/*   Fix Typography in Narrow TOC*/
+/*   ======================================================================== *!*/
 
-.VPDocAsideOutline {
-  font-size: 0.875rem;
-  line-height: 1.4;
-}
+/*.VPDocAsideOutline {*/
+/*  font-size: 0.875rem;*/
+/*  line-height: 1.4;*/
+/*}*/
 
-.VPDocAsideOutline .outline-link {
-  padding: 0.4rem 0.75rem;
-  margin: 0.125rem 0;
-}
+/*.VPDocAsideOutline .outline-link {*/
+/*  padding: 0.4rem 0.75rem;*/
+/*  margin: 0.125rem 0;*/
+/*}*/
 
-/* Different indent levels */
-.VPDocAsideOutline .outline-2 { padding-left: 1rem; }
-.VPDocAsideOutline .outline-3 { padding-left: 1.5rem; }
-.VPDocAsideOutline .outline-4 { padding-left: 2rem; }
-.VPDocAsideOutline .outline-5 { padding-left: 2.5rem; }
-.VPDocAsideOutline .outline-6 { padding-left: 3rem; }
+/*!* Different indent levels *!*/
+/*.VPDocAsideOutline .outline-2 { padding-left: 1rem; }*/
+/*.VPDocAsideOutline .outline-3 { padding-left: 1.5rem; }*/
+/*.VPDocAsideOutline .outline-4 { padding-left: 2rem; }*/
+/*.VPDocAsideOutline .outline-5 { padding-left: 2.5rem; }*/
+/*.VPDocAsideOutline .outline-6 { padding-left: 3rem; }*/
 
-/* ========================================================================
-   Performance Optimizations
-   ======================================================================== */
+/*!* ========================================================================*/
+/*   Performance Optimizations*/
+/*   ======================================================================== *!*/
 
-.VPDocAsideOutline {
-  contain: layout style paint;
-  will-change: scroll-position;
-}
+/*.VPDocAsideOutline {*/
+/*  contain: layout style paint;*/
+/*  will-change: scroll-position;*/
+/*}*/
 
-.VPDocAsideOutline .outline-link {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
+/*.VPDocAsideOutline .outline-link {*/
+/*  transform: translateZ(0);*/
+/*  backface-visibility: hidden;*/
+/*}*/

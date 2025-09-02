@@ -151,7 +151,7 @@ const moreSearchItems = ref([
   {
     label: '入职时间',
     prop: 'join_date',
-    render: 'date-picker',
+    render: 'datePicker',
     renderProps: { type: 'daterange', startPlaceholder: '开始日期', endPlaceholder: '结束日期' }
   }
 ])
@@ -164,6 +164,7 @@ const formOptions = {
 const foldOptions1 = {
   fold: true,
   foldRows: 1,
+  cols: { xs: 2, sm: 2, md: 2, lg: 2, xl: 2 },
   text: {
     searchBtn: () => '搜索',
     resetBtn: () => '重置',
@@ -176,6 +177,7 @@ const foldOptions1 = {
 const foldOptions2 = {
   fold: true,
   foldRows: 3,
+  cols: { xs: 2, sm: 2, md: 2, lg: 2, xl: 2 },
   text: {
     searchBtn: () => '开始搜索',
     resetBtn: () => '清空重置',
