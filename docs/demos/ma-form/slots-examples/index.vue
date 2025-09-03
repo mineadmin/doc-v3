@@ -630,8 +630,6 @@ const activeTech = ref(['item-slot', 'render-slots'])
 <style scoped>
 .slots-examples-demo {
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
 }
 
 .demo-description {

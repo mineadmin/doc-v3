@@ -319,9 +319,9 @@ const formItems = computed((): MaFormItem[] => [
   {
     label: '填写地址信息',
     prop: 'needAddress',
-    render: 'checkbox',
-    renderSlots: {
-      default: () => '需要填写详细地址'
+    render: () => <el-checkbox />,
+    renderProps: {
+      label: '需要填写详细地址'
     },
     show: (item: MaFormItem, model: FormData) => !!model.userType,
     dependencies: ['userType'],

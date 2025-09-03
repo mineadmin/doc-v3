@@ -8,7 +8,7 @@
       <ma-search
         ref="searchRef1"
         :search-items="searchItems"
-        :form-options="formOptions"
+        :form-options="formOptions1"
         :options="foldOptions1"
         @search="handleSearch"
         @reset="handleReset"
@@ -21,7 +21,7 @@
       <ma-search
         ref="searchRef2"
         :search-items="moreSearchItems"
-        :form-options="formOptions"
+        :form-options="formOptions2"
         :options="foldOptions2"
         @search="handleSearch"
         @reset="handleReset"
@@ -55,8 +55,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus'
+import type { MaSearchItem, MaSearchOptions } from '@mineadmin/search'
 
 const searchRef1 = ref<any>(null)
 const searchRef2 = ref<any>(null)
@@ -151,38 +152,44 @@ const moreSearchItems = ref([
   {
     label: '入职时间',
     prop: 'join_date',
-    render: 'date-picker',
+    render: 'datePicker',
     renderProps: { type: 'daterange', startPlaceholder: '开始日期', endPlaceholder: '结束日期' }
   }
 ])
 
-const formOptions = {
+const formOptions1 = ref({
   labelWidth: '120px'
-}
+})
+
+const formOptions2 = ref({
+  labelWidth: '120px'
+})
 
 // 折叠配置 - 基本
-const foldOptions1 = {
+const foldOptions1 = ref<MaSearchOptions>({
   fold: true,
   foldRows: 1,
+  cols: { xs: 2, sm: 2, md: 2, lg: 2, xl: 2 },
   text: {
     searchBtn: () => '搜索',
     resetBtn: () => '重置',
     isFoldBtn: () => '展开更多',
     notFoldBtn: () => '收起'
   }
-}
+})
 
 // 折叠配置 - 自定义
-const foldOptions2 = {
+const foldOptions2 = ref<MaSearchOptions>({
   fold: true,
   foldRows: 3,
+  cols: { xs: 2, sm: 2, md: 2, lg: 2, xl: 2 },
   text: {
     searchBtn: () => '开始搜索',
     resetBtn: () => '清空重置',
     isFoldBtn: () => '显示全部条件',
     notFoldBtn: () => '收起部分条件'
   }
-}
+})
 
 const handleSearch = (formData: any) => {
   ElMessage.success('执行搜索操作')

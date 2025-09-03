@@ -358,15 +358,15 @@ const conditionalValidationItems = ref<MaSearchItem[]>([
             const formData = conditionalValidationRef.value?.getSearchForm() || {}
             const queryType = formData.query_type
 
-            if (queryType === 'email' && !validateEmail(null, value, () => {})) {
-              callback(new Error('请输入正确的邮箱格式'))
-            } else if (queryType === 'phone' && !/^1[3-9]\d{9}$/.test(value)) {
-              callback(new Error('请输入正确的手机号格式'))
-            } else if (queryType === 'username' && (value.length < 3 || value.length > 20)) {
-              callback(new Error('用户名长度在3-20个字符'))
-            } else {
-              callback()
-            }
+            if (queryType === 'email') {
+             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+               if (!emailRegex.test(value)) return callback(new Error('请输入正确的邮箱格式'))
+             } else if (queryType === 'phone') {
+               if (!/^1[3-9]\d{9}$/.test(value)) return callback(new Error('请输入正确的手机号格式'))
+             } else if (queryType === 'username') {
+               if (value.length < 3 || value.length > 20) return callback(new Error('用户名长度在3-20个字符'))
+             }
+             callback()
           },
           trigger: 'blur'
         }

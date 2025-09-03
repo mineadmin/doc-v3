@@ -1,5 +1,5 @@
-<script setup lang="ts">
-import {ref, computed, nextTick, h} from 'vue'
+<script setup lang="tsx">
+import { ref, computed, nextTick, h } from 'vue'
 import { ElMessage, ElNotification } from 'element-plus'
 import type { MaFormItem, MaFormOptions } from '@mineadmin/components'
 
@@ -11,14 +11,14 @@ const mockApi = {
     const existingUsers = ['admin', 'user', 'test', 'demo']
     return existingUsers.includes(username.toLowerCase())
   },
-  
+
   // 检查邮箱是否已注册
   checkEmail: async (email: string): Promise<boolean> => {
     await new Promise(resolve => setTimeout(resolve, 1000))
     const existingEmails = ['admin@test.com', 'user@test.com', 'demo@example.com']
     return existingEmails.includes(email.toLowerCase())
   },
-  
+
   // 验证手机号是否有效
   verifyPhone: async (phone: string): Promise<{ valid: boolean, operator?: string }> => {
     await new Promise(resolve => setTimeout(resolve, 800))
@@ -26,21 +26,21 @@ const mockApi = {
     if (!phoneRegex.test(phone)) {
       return { valid: false }
     }
-    
+
     // 模拟运营商识别
     const operators = {
       '13': '中国移动',
-      '15': '中国移动', 
+      '15': '中国移动',
       '18': '中国移动',
       '14': '中国联通',
       '16': '中国联通',
       '17': '中国电信',
       '19': '中国电信'
     }
-    
+
     const prefix = phone.substring(0, 2)
     const operator = operators[prefix as keyof typeof operators] || '未知运营商'
-    
+
     return { valid: true, operator }
   }
 }
@@ -53,24 +53,24 @@ const formData = ref({
   phone: '',
   password: '',
   confirmPassword: '',
-  
+
   // 动态验证字段
   userType: '',
   idCard: '',
   birthDate: '',
   emergencyContact: '',
-  
+
   // 条件验证字段
   hasCompany: false,
   companyName: '',
   companyType: '',
   registrationNumber: '',
-  
+
   // 自定义验证字段
   customField: '',
   securityQuestion: '',
   securityAnswer: '',
-  
+
   // 其他字段
   agreePolicy: false,
   subscribeNewsletter: false
@@ -86,20 +86,20 @@ const createCustomValidator = (fieldName: string, validator: (value: any) => Pro
       callback()
       return
     }
-    
+
     try {
       // 设置加载状态
       validationStatus.value[fieldName] = { loading: true, message: '验证中...', type: '' }
-      
+
       const result = await validator(value)
-      
+
       // 更新验证状态
-      validationStatus.value[fieldName] = { 
-        loading: false, 
+      validationStatus.value[fieldName] = {
+        loading: false,
         message: result.message || (result.valid ? '验证通过' : '验证失败'),
         type: result.type || (result.valid ? 'success' : 'error')
       }
-      
+
       if (result.valid) {
         callback()
       } else {
@@ -129,7 +129,7 @@ const formItems = computed<MaFormItem[]>(() => [
         { required: true, message: '请输入用户名', trigger: 'blur' },
         { min: 4, max: 20, message: '用户名长度为4-20个字符', trigger: 'blur' },
         { pattern: /^[a-zA-Z0-9_]+$/, message: '用户名只能包含字母、数字和下划线', trigger: 'blur' },
-        { 
+        {
           asyncValidator: createCustomValidator('username', async (username: string) => {
             const exists = await mockApi.checkUsername(username)
             return {
@@ -138,13 +138,13 @@ const formItems = computed<MaFormItem[]>(() => [
               type: exists ? 'error' : 'success'
             }
           }),
-          trigger: 'blur' 
+          trigger: 'blur'
         }
       ]
     },
     cols: { span: 12 }
   },
-  
+
   {
     label: '邮箱地址',
     prop: 'email',
@@ -173,7 +173,7 @@ const formItems = computed<MaFormItem[]>(() => [
     },
     cols: { span: 12 }
   },
-  
+
   {
     label: '手机号',
     prop: 'phone',
@@ -202,7 +202,7 @@ const formItems = computed<MaFormItem[]>(() => [
     },
     cols: { span: 12 }
   },
-  
+
   // 密码相关验证
   {
     label: '密码',
@@ -218,17 +218,17 @@ const formItems = computed<MaFormItem[]>(() => [
       rules: [
         { required: true, message: '请输入密码', trigger: 'blur' },
         { min: 8, message: '密码长度不能少于8位', trigger: 'blur' },
-        { 
+        {
           validator: (rule: any, value: string, callback: Function) => {
             if (!value) {
               callback()
               return
             }
-            
+
             const hasLetter = /[a-zA-Z]/.test(value)
             const hasNumber = /\d/.test(value)
             const hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value)
-            
+
             if (!hasLetter || !hasNumber) {
               callback(new Error('密码必须包含字母和数字'))
             } else if (hasSpecial && hasLetter && hasNumber) {
@@ -243,7 +243,7 @@ const formItems = computed<MaFormItem[]>(() => [
     },
     cols: { span: 12 }
   },
-  
+
   {
     label: '确认密码',
     prop: 'confirmPassword',
@@ -271,30 +271,26 @@ const formItems = computed<MaFormItem[]>(() => [
     },
     cols: { span: 12 }
   },
-  
+
   // 动态验证条件
   {
     label: '用户类型',
     prop: 'userType',
     render: 'select',
-    renderProps: { placeholder: '请选择用户类型' },
-    renderSlots: {
-      default: () => [
+    renderProps: {
+      placeholder: '请选择用户类型',
+      options: [
         { label: '个人用户', value: 'personal' },
         { label: '企业用户', value: 'business' },
         { label: '开发者', value: 'developer' }
-      ].map(item => h('el-option', { 
-        key: item.value, 
-        label: item.label, 
-        value: item.value 
-      }))
+      ]
     },
     itemProps: {
       rules: [{ required: true, message: '请选择用户类型', trigger: 'change' }]
     },
     cols: { span: 8 }
   },
-  
+
   // 条件验证 - 身份证（个人用户必填）
   {
     label: '身份证号',
@@ -308,12 +304,12 @@ const formItems = computed<MaFormItem[]>(() => [
     itemProps: {
       rules: computed(() => {
         const rules: any[] = []
-        
+
         // 个人用户身份证必填
         if (formData.value.userType === 'personal') {
           rules.push({ required: true, message: '个人用户必须填写身份证号', trigger: 'blur' })
         }
-        
+
         // 身份证格式验证
         if (formData.value.idCard) {
           rules.push({
@@ -322,7 +318,7 @@ const formItems = computed<MaFormItem[]>(() => [
                 callback()
                 return
               }
-              
+
               const idCardRegex = /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
               if (!idCardRegex.test(value)) {
                 callback(new Error('请输入正确的身份证号格式'))
@@ -333,7 +329,7 @@ const formItems = computed<MaFormItem[]>(() => [
             trigger: 'blur'
           })
         }
-        
+
         return rules
       }).value
     },
@@ -341,7 +337,7 @@ const formItems = computed<MaFormItem[]>(() => [
     dependencies: ['userType'],
     cols: { span: 8 }
   },
-  
+
   // 出生日期验证（从身份证提取或手动输入）
   {
     label: '出生日期',
@@ -363,7 +359,7 @@ const formItems = computed<MaFormItem[]>(() => [
               callback()
               return
             }
-            
+
             // 从身份证提取出生日期
             const idCard = formData.value.idCard
             if (idCard.length === 18) {
@@ -385,7 +381,7 @@ const formItems = computed<MaFormItem[]>(() => [
     dependencies: ['userType'],
     cols: { span: 8 }
   },
-  
+
   // 紧急联系人（开发者必填）
   {
     label: '紧急联系人',
@@ -398,11 +394,11 @@ const formItems = computed<MaFormItem[]>(() => [
     itemProps: {
       rules: computed(() => {
         const rules: any[] = []
-        
+
         if (formData.value.userType === 'developer') {
           rules.push({ required: true, message: '开发者必须填写紧急联系人', trigger: 'blur' })
         }
-        
+
         if (formData.value.emergencyContact) {
           rules.push({ pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号格式', trigger: 'blur' })
           rules.push({
@@ -416,7 +412,7 @@ const formItems = computed<MaFormItem[]>(() => [
             trigger: 'blur'
           })
         }
-        
+
         return rules
       }).value
     },
@@ -424,7 +420,7 @@ const formItems = computed<MaFormItem[]>(() => [
     dependencies: ['userType'],
     cols: { span: 12 }
   },
-  
+
   // 企业信息条件验证
   {
     label: '是否有公司',
@@ -438,7 +434,7 @@ const formItems = computed<MaFormItem[]>(() => [
     dependencies: ['userType'],
     cols: { span: 8 }
   },
-  
+
   {
     label: '公司名称',
     prop: 'companyName',
@@ -471,23 +467,19 @@ const formItems = computed<MaFormItem[]>(() => [
     dependencies: ['hasCompany'],
     cols: { span: 12 }
   },
-  
+
   {
     label: '公司类型',
     prop: 'companyType',
     render: 'select',
-    renderProps: { placeholder: '请选择公司类型' },
-    renderSlots: {
-      default: () => [
+    renderProps: {
+      placeholder: '请选择公司类型',
+      options: [
         { label: '有限责任公司', value: 'ltd' },
         { label: '股份有限公司', value: 'corp' },
         { label: '个人独资企业', value: 'sole' },
         { label: '合伙企业', value: 'partnership' }
-      ].map(item => h('el-option', { 
-        key: item.value, 
-        label: item.label, 
-        value: item.value 
-      }))
+      ]
     },
     itemProps: {
       rules: [{ required: true, message: '请选择公司类型', trigger: 'change' }]
@@ -496,7 +488,7 @@ const formItems = computed<MaFormItem[]>(() => [
     dependencies: ['hasCompany'],
     cols: { span: 8 }
   },
-  
+
   {
     label: '工商注册号',
     prop: 'registrationNumber',
@@ -508,7 +500,7 @@ const formItems = computed<MaFormItem[]>(() => [
     itemProps: {
       rules: [
         { required: true, message: '请输入工商注册号', trigger: 'blur' },
-        { 
+        {
           validator: (rule: any, value: string, callback: Function) => {
             // 统一社会信用代码验证
             const creditCodeRegex = /^[0-9A-HJ-NPQRTUWXY]{2}\d{6}[0-9A-HJ-NPQRTUWXY]{10}$/
@@ -518,7 +510,7 @@ const formItems = computed<MaFormItem[]>(() => [
               callback()
             }
           },
-          trigger: 'blur' 
+          trigger: 'blur'
         }
       ]
     },
@@ -526,7 +518,7 @@ const formItems = computed<MaFormItem[]>(() => [
     dependencies: ['hasCompany'],
     cols: { span: 8 }
   },
-  
+
   // 自定义复杂验证
   {
     label: '自定义字段',
@@ -544,32 +536,32 @@ const formItems = computed<MaFormItem[]>(() => [
               callback()
               return
             }
-            
+
             // 复杂的自定义验证逻辑
             const hasUpperCase = /[A-Z]/.test(value)
             const hasLowerCase = /[a-z]/.test(value)
             const hasNumber = /\d/.test(value)
             const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value)
             const length = value.length
-            
+
             let score = 0
             let messages = []
-            
+
             if (hasUpperCase) score += 1
             else messages.push('包含大写字母')
-            
+
             if (hasLowerCase) score += 1
             else messages.push('包含小写字母')
-            
+
             if (hasNumber) score += 1
             else messages.push('包含数字')
-            
+
             if (hasSpecialChar) score += 1
             else messages.push('包含特殊字符')
-            
+
             if (length >= 8) score += 1
             else messages.push('长度至少8位')
-            
+
             if (score < 3) {
               callback(new Error(`字段强度不够，还需要：${messages.join('、')}`))
             } else {
@@ -582,28 +574,24 @@ const formItems = computed<MaFormItem[]>(() => [
     },
     cols: { span: 24 }
   },
-  
+
   // 安全问题（联动验证）
   {
     label: '安全问题',
     prop: 'securityQuestion',
     render: 'select',
-    renderProps: { placeholder: '请选择安全问题' },
-    renderSlots: {
-      default: () => [
+    renderProps: {
+      placeholder: '请选择安全问题',
+      options: [
         { label: '您的出生城市是？', value: 'birthCity' },
         { label: '您小学的名字是？', value: 'primarySchool' },
         { label: '您的第一个宠物叫什么？', value: 'petName' },
         { label: '您最喜欢的电影是？', value: 'favoriteMovie' }
-      ].map(item => h('el-option', { 
-        key: item.value, 
-        label: item.label, 
-        value: item.value 
-      }))
+      ]
     },
     cols: { span: 12 }
   },
-  
+
   {
     label: '安全答案',
     prop: 'securityAnswer',
@@ -615,12 +603,12 @@ const formItems = computed<MaFormItem[]>(() => [
     itemProps: {
       rules: computed(() => {
         const rules: any[] = []
-        
+
         if (formData.value.securityQuestion) {
           rules.push({ required: true, message: '请输入安全问题答案', trigger: 'blur' })
           rules.push({ min: 2, max: 20, message: '答案长度为2-20个字符', trigger: 'blur' })
         }
-        
+
         return rules
       }).value
     },
@@ -628,14 +616,14 @@ const formItems = computed<MaFormItem[]>(() => [
     dependencies: ['securityQuestion'],
     cols: { span: 12 }
   },
-  
+
   // 协议同意（必须验证）
   {
     label: '用户协议',
     prop: 'agreePolicy',
-    render: 'checkbox',
-    renderSlots: {
-      default: () => '我已阅读并同意《用户服务协议》和《隐私政策》'
+    render: () => <el-checkbox />,
+    renderProps: {
+      label: '我已阅读并同意《用户服务协议》和《隐私政策》'
     },
     itemProps: {
       rules: [
@@ -653,13 +641,13 @@ const formItems = computed<MaFormItem[]>(() => [
     },
     cols: { span: 12 }
   },
-  
+
   {
     label: '订阅通知',
     prop: 'subscribeNewsletter',
-    render: 'checkbox',
-    renderSlots: {
-      default: () => '订阅产品更新和营销信息（可选）'
+    render: () => <el-checkbox />,
+    renderProps: {
+      label: '订阅产品更新和营销信息（可选）'
     },
     cols: { span: 12 }
   }
@@ -676,14 +664,14 @@ const formOptions: MaFormOptions = {
 const passwordStrength = computed(() => {
   const password = formData.value.password
   if (!password) return { level: 0, text: '未设置', color: '#ddd' }
-  
+
   let score = 0
   if (password.length >= 8) score += 1
   if (/[a-z]/.test(password)) score += 1
   if (/[A-Z]/.test(password)) score += 1
   if (/\d/.test(password)) score += 1
   if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) score += 1
-  
+
   if (score <= 2) return { level: score, text: '弱', color: '#f56c6c' }
   if (score <= 3) return { level: score, text: '中等', color: '#e6a23c' }
   return { level: score, text: '强', color: '#67c23a' }
@@ -693,23 +681,23 @@ const passwordStrength = computed(() => {
 const handleSubmit = async () => {
   try {
     formRef.value?.setLoadingState(true)
-    
+
     // 等待所有异步验证完成
     await nextTick()
-    
+
     const isValid = await formRef.value?.getElFormRef()?.validate()
-    
+
     if (isValid) {
       // 模拟提交延迟
       await new Promise(resolve => setTimeout(resolve, 2000))
-      
+
       ElNotification({
         title: '注册成功',
         message: '账户已创建，所有验证通过！',
         type: 'success',
         duration: 3000
       })
-      
+
       console.log('表单数据:', formData.value)
     }
   } catch (error) {
@@ -762,20 +750,23 @@ const activeRules = ref(['async', 'conditional'])
         <template #header>
           <span>实时验证状态</span>
         </template>
-        
+
         <div class="status-grid">
-          <div 
-            v-for="(status, field) in validationStatus" 
-            :key="field" 
-            class="status-item"
-            :class="status.type"
-          >
+          <div v-for="(status, field) in validationStatus" :key="field" class="status-item" :class="status.type">
             <div class="status-field">{{ field }}</div>
             <div class="status-message">
-              <el-icon v-if="status.loading" class="is-loading"><Loading /></el-icon>
-              <el-icon v-else-if="status.type === 'success'"><SuccessFilled /></el-icon>
-              <el-icon v-else-if="status.type === 'error'"><CircleCloseFilled /></el-icon>
-              <el-icon v-else-if="status.type === 'warning'"><WarningFilled /></el-icon>
+              <el-icon v-if="status.loading" class="is-loading">
+                <Loading />
+              </el-icon>
+              <el-icon v-else-if="status.type === 'success'">
+                <SuccessFilled />
+              </el-icon>
+              <el-icon v-else-if="status.type === 'error'">
+                <CircleCloseFilled />
+              </el-icon>
+              <el-icon v-else-if="status.type === 'warning'">
+                <WarningFilled />
+              </el-icon>
               <span>{{ status.message }}</span>
             </div>
           </div>
@@ -789,16 +780,13 @@ const activeRules = ref(['async', 'conditional'])
         <template #header>
           <span>密码强度评估</span>
         </template>
-        
+
         <div class="strength-indicator">
           <div class="strength-bar">
-            <div 
-              class="strength-fill" 
-              :style="{ 
-                width: `${(passwordStrength.level / 5) * 100}%`,
-                backgroundColor: passwordStrength.color
-              }"
-            ></div>
+            <div class="strength-fill" :style="{
+              width: `${(passwordStrength.level / 5) * 100}%`,
+              backgroundColor: passwordStrength.color
+            }"></div>
           </div>
           <div class="strength-text" :style="{ color: passwordStrength.color }">
             {{ passwordStrength.text }} ({{ passwordStrength.level }}/5)
@@ -809,12 +797,7 @@ const activeRules = ref(['async', 'conditional'])
 
     <!-- 动态验证表单 -->
     <div class="demo-form">
-      <ma-form 
-        ref="formRef"
-        v-model="formData" 
-        :options="formOptions"
-        :items="formItems"
-      >
+      <ma-form ref="formRef" v-model="formData" :options="formOptions" :items="formItems">
         <!-- 自定义底部操作栏 -->
         <template #footer>
           <div class="form-footer">
@@ -832,61 +815,61 @@ const activeRules = ref(['async', 'conditional'])
         <template #header>
           <span>验证规则说明</span>
         </template>
-        
+
         <el-collapse v-model="activeRules">
           <el-collapse-item title="异步验证规则" name="async">
             <div class="rule-content">
               <h5>用户名检查</h5>
               <p>• 异步检查用户名是否已存在（模拟1.5秒延迟）</p>
               <p>• 已存在的用户名：admin, user, test, demo</p>
-              
+
               <h5>邮箱检查</h5>
               <p>• 异步检查邮箱是否已注册（模拟1秒延迟）</p>
               <p>• 已注册的邮箱：admin@test.com, user@test.com, demo@example.com</p>
-              
+
               <h5>手机号验证</h5>
               <p>• 异步验证手机号有效性并识别运营商（模拟0.8秒延迟）</p>
               <p>• 同时进行格式验证和运营商识别</p>
             </div>
           </el-collapse-item>
-          
+
           <el-collapse-item title="条件验证规则" name="conditional">
             <div class="rule-content">
               <h5>用户类型条件验证</h5>
               <p>• 个人用户：身份证号必填，需要格式验证</p>
               <p>• 企业用户：可选择是否填写公司信息</p>
               <p>• 开发者：紧急联系人必填，且不能是本人手机号</p>
-              
+
               <h5>企业信息验证</h5>
               <p>• 有公司时：公司名称、类型、注册号全部必填</p>
               <p>• 工商注册号使用统一社会信用代码格式验证</p>
             </div>
           </el-collapse-item>
-          
+
           <el-collapse-item title="自定义验证规则" name="custom">
             <div class="rule-content">
               <h5>密码强度验证</h5>
               <p>• 长度至少8位</p>
               <p>• 必须包含字母和数字</p>
               <p>• 包含特殊字符可获得更高强度评分</p>
-              
+
               <h5>自定义字段验证</h5>
               <p>• 复杂的多条件验证示例</p>
               <p>• 需要满足至少3个条件：大写字母、小写字母、数字、特殊字符、长度≥8</p>
-              
+
               <h5>身份证与出生日期联动验证</h5>
               <p>• 从身份证提取出生日期进行交叉验证</p>
             </div>
           </el-collapse-item>
-          
+
           <el-collapse-item title="联动验证规则" name="linked">
             <div class="rule-content">
               <h5>密码确认</h5>
               <p>• 实时检查两次密码输入是否一致</p>
-              
+
               <h5>安全问题联动</h5>
               <p>• 选择安全问题后，答案字段变为必填</p>
-              
+
               <h5>协议同意验证</h5>
               <p>• 必须同意用户协议才能提交</p>
             </div>
@@ -1067,6 +1050,7 @@ const activeRules = ref(['async', 'conditional'])
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -1077,20 +1061,20 @@ const activeRules = ref(['async', 'conditional'])
   .dynamic-validation-demo {
     padding: 10px;
   }
-  
+
   .demo-features {
     justify-content: center;
   }
-  
+
   .form-footer {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .status-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .strength-indicator {
     flex-direction: column;
     align-items: stretch;

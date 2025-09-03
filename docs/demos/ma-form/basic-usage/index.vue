@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="tsx">
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import type {MaFormExpose} from "@mineadmin/form";
@@ -132,15 +132,23 @@ const formItems = ref([
   {
     label: '爱好',
     prop: 'hobbies',
-    render: 'checkboxGroup',
-    renderProps: {
-      options: [
-        { label: '阅读', value: 'reading' },
-        { label: '编程', value: 'coding' },
-        { label: '运动', value: 'sports' },
-        { label: '音乐', value: 'music' },
-        { label: '旅行', value: 'travel' }
-      ]
+    render: () => {
+      return (
+          <el-checkbox-group>
+          {[
+                { label: '阅读', value: 'reading' },
+          { label: '编程', value: 'coding' },
+          { label: '运动', value: 'sports' },
+          { label: '音乐', value: 'music' },
+          { label: '旅行', value: 'travel' },
+          { label: '摄影', value: 'photography' }
+        ].map((item) => (
+              <el-checkbox key={item.value} label={item.value}>
+              {item.label}
+              </el-checkbox>
+        ))}
+          </el-checkbox-group>
+        )
     },
     cols: { span: 12 }
   },
@@ -157,7 +165,7 @@ const formItems = ref([
   {
     label: '同意条款',
     prop: 'agreeTerms',
-    render: 'checkbox',
+    render: () => <el-checkbox />,
     renderProps: {
       label: '我已阅读并同意用户协议'
     },
@@ -325,8 +333,7 @@ const handleClear = () => {
 
 <style scoped>
 .basic-usage-demo {
-  max-width: 1000px;
-  margin: 0 auto;
+
 }
 
 .demo-description {

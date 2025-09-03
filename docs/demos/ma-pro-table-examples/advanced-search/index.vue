@@ -2,7 +2,7 @@
   <div class="demo-advanced-search">
     <h3>高级搜索</h3>
     <p>展示多种搜索组件类型和复杂搜索逻辑，包含日期范围、数字范围、多选等功能。</p>
-    
+
     <MaProTable ref="tableRef" :options="options" :schema="schema" />
   </div>
 </template>
@@ -10,96 +10,110 @@
 <script setup lang="tsx">
 import { ref, reactive } from 'vue'
 import type { MaProTableExpose, MaProTableOptions, MaProTableSchema } from "@mineadmin/pro-table"
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElTag } from 'element-plus'
 
 const tableRef = ref<MaProTableExpose>()
 
 // 表单数据
 const formData = reactive({
-  salaryMin: undefined,
-  salaryMax: undefined,
-  performanceMin: undefined,
-  performanceMax: undefined
+  // 姓名
+  name: '',
+  // 部门，多选
+  department: [],
+  // 薪资范围
+  salaryMin: 0,
+  salaryMax: 10,
+  // 工作经验
+  experience: [0, 15], // 如果 slider range 默认值
+  // 入职时间范围
+  joinDateRange: [],
+  // 职级，多选
+  level: [],
+  // 绩效评分
+  performanceMin: 1,
+  performanceMax: 2,
+  // 在职状态
+  status: '',
 })
 
 // 模拟 API 接口
 const getAdvancedList = async (params: any) => {
   console.log('高级搜索参数:', params)
-  
+
   // 模拟更复杂的数据
   const data = [
-    { 
-      id: 1, 
-      name: '张三', 
-      department: ['技术部', '研发中心'], 
-      position: '高级前端工程师', 
+    {
+      id: 1,
+      name: '张三',
+      department: ['技术部', '研发中心'],
+      position: '高级前端工程师',
       salary: 25000,
       experience: 5,
       skills: ['Vue', 'React', 'TypeScript'],
       level: 'P6',
-      status: 1, 
+      status: 1,
       joinDate: '2019-03-15',
       lastLogin: '2024-01-20 14:30:00',
       performance: 85
     },
-    { 
-      id: 2, 
-      name: '李四', 
-      department: ['产品部'], 
-      position: '产品总监', 
+    {
+      id: 2,
+      name: '李四',
+      department: ['产品部'],
+      position: '产品总监',
       salary: 35000,
       experience: 8,
       skills: ['产品设计', '用户研究', '项目管理'],
       level: 'P8',
-      status: 1, 
+      status: 1,
       joinDate: '2017-08-20',
       lastLogin: '2024-01-20 16:45:00',
       performance: 92
     },
-    { 
-      id: 3, 
-      name: '王五', 
-      department: ['设计部'], 
-      position: 'UI设计师', 
+    {
+      id: 3,
+      name: '王五',
+      department: ['设计部'],
+      position: 'UI设计师',
       salary: 18000,
       experience: 3,
       skills: ['Figma', 'Sketch', 'Principle'],
       level: 'P4',
-      status: 0, 
+      status: 0,
       joinDate: '2021-12-10',
       lastLogin: '2024-01-19 10:15:00',
       performance: 78
     },
-    { 
-      id: 4, 
-      name: '赵六', 
-      department: ['技术部', '架构组'], 
-      position: '架构师', 
+    {
+      id: 4,
+      name: '赵六',
+      department: ['技术部', '架构组'],
+      position: '架构师',
       salary: 45000,
       experience: 10,
       skills: ['Java', 'Spring', '微服务', 'Kubernetes'],
       level: 'P9',
-      status: 1, 
+      status: 1,
       joinDate: '2015-06-01',
       lastLogin: '2024-01-20 18:20:00',
       performance: 95
     },
-    { 
-      id: 5, 
-      name: '孙七', 
-      department: ['运营部', '增长团队'], 
-      position: '增长运营专家', 
+    {
+      id: 5,
+      name: '孙七',
+      department: ['运营部', '增长团队'],
+      position: '增长运营专家',
       salary: 22000,
       experience: 4,
       skills: ['数据分析', 'A/B测试', '用户增长'],
       level: 'P5',
-      status: 1, 
+      status: 1,
       joinDate: '2020-09-15',
       lastLogin: '2024-01-20 12:10:00',
       performance: 88
     }
   ]
-  
+
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
@@ -128,7 +142,11 @@ const options = reactive<MaProTableOptions>({
     }
   },
   searchOptions: {
-    fold: true
+    fold: true,
+    text: {
+      searchBtn: () => '高级搜索',
+      resetBtn: () => '清空条件'
+    }
   },
   header: {
     show: true,
@@ -178,7 +196,7 @@ const schema = reactive<MaProTableSchema>({
     {
       label: '薪资范围',
       prop: 'salaryRange',
-      render: () => (
+      render: ({ formData }: any) => (
         <div style="display: flex; gap: 8px; align-items: center;">
           <el-input-number
             v-model={formData.salaryMin}
@@ -248,7 +266,7 @@ const schema = reactive<MaProTableSchema>({
     {
       label: '绩效评分',
       prop: 'performanceRange',
-      render: () => (
+      render: ({ formData }: any) => (
         <div style="display: flex; gap: 8px; align-items: center;">
           <el-input-number
             v-model={formData.performanceMin}
@@ -286,44 +304,44 @@ const schema = reactive<MaProTableSchema>({
   tableColumns: [
     { label: 'ID', prop: 'id', width: 60 },
     { label: '姓名', prop: 'name', width: 100, fixed: 'left' },
-    { 
-      label: '部门', 
-      prop: 'department', 
+    {
+      label: '部门',
+      prop: 'department',
       width: 200,
       formatter: (row: any) => row.department.join(' / ')
     },
     { label: '职位', prop: 'position', width: 150 },
-    { 
-      label: '薪资', 
-      prop: 'salary', 
-      width: 120, 
+    {
+      label: '薪资',
+      prop: 'salary',
+      width: 120,
       formatter: (row: any) => `￥${row.salary.toLocaleString()}`,
       sortable: true
     },
-    { 
-      label: '工作经验', 
-      prop: 'experience', 
-      width: 100,
+    {
+      label: '工作经验',
+      prop: 'experience',
+      width: 120,
       formatter: (row: any) => `${row.experience}年`,
       sortable: true
     },
-    { 
-      label: '技能标签', 
-      prop: 'skills', 
+    {
+      label: '技能标签',
+      prop: 'skills',
       width: 200,
       cellRender: ({ row }: any) => (
         <div>
-          {row.skills.map((skill: string, index: number) => (
+          {row.skills && Array.isArray(row.skills) ? row.skills.map((skill: string, index: number) => (
             <el-tag key={index} size="small" style="margin-right: 4px; margin-bottom: 2px;">
               {skill}
             </el-tag>
-          ))}
+          )) : null}
         </div>
       )
     },
-    { 
-      label: '职级', 
-      prop: 'level', 
+    {
+      label: '职级',
+      prop: 'level',
       width: 80,
       cellRenderTo: {
         name: 'tag',
@@ -332,30 +350,28 @@ const schema = reactive<MaProTableSchema>({
         })
       }
     },
-    { 
-      label: '绩效评分', 
-      prop: 'performance', 
+    {
+      label: '绩效评分',
+      prop: 'performance',
       width: 120,
       cellRender: ({ row }: any) => (
-        <el-progress 
-          percentage={row.performance} 
+        <el-progress
+          percentage={row.performance}
           color={row.performance >= 90 ? '#67c23a' : row.performance >= 80 ? '#e6a23c' : '#f56c6c'}
           stroke-width={8}
           text-inside
         />
       )
     },
-    { 
-      label: '状态', 
-      prop: 'status', 
+    {
+      label: '状态',
+      prop: 'status',
       width: 80,
-      cellRenderTo: {
-        name: 'tag',
-        props: (data: any) => ({
-          type: data.row.status === 1 ? 'success' : 'info'
-        })
-      },
-      formatter: (row: any) => row.status === 1 ? '在职' : '离职'
+      cellRender: ({ row }) => (
+        <ElTag type={row.status === 1 ? 'success' : 'danger'}>
+          {row.status === 1 ? '在职' : '离职'}
+        </ElTag>
+      ),
     },
     { label: '入职时间', prop: 'joinDate', width: 120 },
     { label: '最后登录', prop: 'lastLogin', width: 160 },

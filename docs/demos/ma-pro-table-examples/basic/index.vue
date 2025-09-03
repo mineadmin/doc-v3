@@ -10,7 +10,7 @@
 <script setup lang="tsx">
 import { ref, reactive } from 'vue'
 import type { MaProTableExpose, MaProTableOptions, MaProTableSchema } from "@mineadmin/pro-table"
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElTag } from 'element-plus'
 
 const tableRef = ref<MaProTableExpose>()
 
@@ -94,15 +94,12 @@ const schema = reactive<MaProTableSchema>({
     { label: '薪资', prop: 'salary', width: 120, formatter: (row: any) => `￥${row.salary.toLocaleString()}` },
     { 
       label: '状态', 
-      prop: 'status', 
-      width: 100,
-      cellRenderTo: {
-        name: 'tag',
-        props: (data: any) => ({
-          type: data.row.status === 1 ? 'success' : 'danger'
-        })
-      },
-      formatter: (row: any) => row.status === 1 ? '在职' : '离职'
+      prop: 'status',
+      cellRender: ({ row }) => (
+          <ElTag type={row.status === 1 ? 'success' : 'danger'}>
+            {row.status === 1 ? '在职' : '离职'}
+          </ElTag>
+      ),
     },
     { label: '入职时间', prop: 'createTime', width: 150 },
     {
