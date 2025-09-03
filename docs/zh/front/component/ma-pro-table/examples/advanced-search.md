@@ -15,6 +15,7 @@
 ## 搜索组件类型
 
 ### 基础输入组件
+
 ```javascript
 {
   label: '姓名',
@@ -28,6 +29,7 @@
 ```
 
 ### 选择器组件
+
 ```javascript
 // 单选
 {
@@ -61,36 +63,39 @@
 ```
 
 ### 数字范围组件
+
+使用`children`方式需要`"@mineadmin/form": "^1.0.53",` 版本支持
+
 ```javascript
 {
   label: '薪资范围',
   prop: 'salaryRange',
-  render: () => (
-    <div style="display: flex; gap: 8px; align-items: center;">
-      <el-input-number
-        v-model={formData.salaryMin}
-        placeholder="最低薪资"
-        min={0}
-        max={100000}
-        controls-position="right"
-        style="width: 140px;"
-      />
-      <span>-</span>
-      <el-input-number
-        v-model={formData.salaryMax}
-        placeholder="最高薪资"
-        min={0}
-        max={100000}
-        controls-position="right"
-        style="width: 140px;"
-      />
-    </div>
-  ),
-  span: 2
-}
+  render: () => <div class="!p-0 flex gap-2 w-full" />,
+  children: [
+    {
+      prop: 'salaryMin',
+      render: 'InputNumber',
+      renderProps: {
+        controlsPosition: 'right',
+        placeholder: '最低薪资',
+      },
+      cols: { md: 12, xs: 24 },
+    },
+    {
+      prop: 'salaryMax',
+      render: 'InputNumber',
+      renderProps: {
+        controlsPosition: 'right',
+        placeholder: '最高薪资',
+      },
+      cols: { md: 12, xs: 24 },
+    },
+  ],
+},
 ```
 
 ### 日期范围组件
+
 ```javascript
 {
   label: '入职时间',
@@ -107,6 +112,7 @@
 ```
 
 ### 滑块组件
+
 ```javascript
 {
   label: '工作经验',
@@ -127,6 +133,7 @@
 ```
 
 ### 复选框组组件
+
 ```javascript
 {
   label: '职级',
@@ -144,6 +151,7 @@
 ```
 
 ### 单选框组组件
+
 ```javascript
 {
   label: '在职状态',
@@ -160,6 +168,7 @@
 ## 自定义渲染组件
 
 ### JSX 自定义渲染
+
 对于复杂的输入组件，可以使用 JSX 进行自定义渲染：
 
 ```javascript
@@ -199,6 +208,7 @@ const formData = reactive({
 ```
 
 ### 组件配置要点
+
 - `options` 数组直接配置在搜索项中，不需要嵌套在 `renderProps` 内
 - `renderProps` 用于配置组件的其他属性（如 placeholder、multiple 等）
 - 自定义 JSX 渲染需要配合响应式数据使用
@@ -207,41 +217,44 @@ const formData = reactive({
 ## 搜索配置
 
 ### 展示控制
+
 ```javascript
 const options = {
   searchOptions: {
-    showNumber: 3,      // 默认显示3个搜索项
-    layout: 'auto'      // 布局模式：auto/inline/vertical
-  }
-}
+    showNumber: 3, // 默认显示3个搜索项
+    layout: "auto", // 布局模式：auto/inline/vertical
+  },
+};
 ```
 
 ### 搜索事件
+
 ```javascript
 const options = {
   onSearchSubmit: (form) => {
-    console.log('搜索条件:', form)
+    console.log("搜索条件:", form);
     // 可以对搜索条件进行预处理
-    return form
+    return form;
   },
   onSearchReset: (form) => {
-    console.log('重置搜索')
-    return form
-  }
-}
+    console.log("重置搜索");
+    return form;
+  },
+};
 ```
 
 ## 高级表格列
 
 ### 进度条显示
+
 ```javascript
 {
   label: '绩效评分',
   prop: 'performance',
   width: 120,
   cellRender: ({ row }) => (
-    <el-progress 
-      percentage={row.performance} 
+    <el-progress
+      percentage={row.performance}
       color={row.performance >= 90 ? '#67c23a' : '#e6a23c'}
       stroke-width={8}
       text-inside
@@ -251,6 +264,7 @@ const options = {
 ```
 
 ### 多标签显示
+
 ```javascript
 {
   label: '技能标签',
@@ -269,6 +283,7 @@ const options = {
 ```
 
 ### 条件操作
+
 ```javascript
 {
   type: 'operation',

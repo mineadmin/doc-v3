@@ -21,8 +21,8 @@ const formData = reactive({
   // 部门，多选
   department: [],
   // 薪资范围
-  salaryMin: 0,
-  salaryMax: 10,
+  salaryMin: undefined,
+  salaryMax: undefined,
   // 工作经验
   experience: [0, 15], // 如果 slider range 默认值
   // 入职时间范围
@@ -30,11 +30,69 @@ const formData = reactive({
   // 职级，多选
   level: [],
   // 绩效评分
-  performanceMin: 1,
-  performanceMax: 2,
+  performanceMin: undefined,
+  performanceMax: undefined,
   // 在职状态
   status: '',
 })
+
+// 通用过滤方法
+function filterData(data: any[], params: any) {
+  return data.filter(item => {
+    return Object.entries(params).every(([key, value]) => {
+      if (value == null || value === '' || (Array.isArray(value) && value.length === 0)) {
+        return true // 跳过空参数
+      }
+
+      switch (key) {
+        case 'name': // 模糊匹配
+          return item.name.includes(value)
+
+        case 'department': // 多选匹配
+          return Array.isArray(value) && value.some((dep: string) => item.department.includes(dep))
+
+        case 'salaryMin':
+          return item.salary >= value
+        case 'salaryMax':
+          return item.salary <= value
+
+        case 'experience': // 工作经验范围
+          if (Array.isArray(value) && value.length === 2) {
+            const [min, max] = value
+            return item.experience >= min && item.experience <= max
+          }
+          return true
+
+        case 'joinDateRange': // 入职时间范围
+          if (Array.isArray(value) && value.length === 2) {
+            const [startDate, endDate] = value
+            const itemDate = new Date(item.joinDate)
+            const start = new Date(startDate)
+            const end = new Date(endDate)
+            return itemDate >= start && itemDate <= end
+          }
+          return true
+
+        case 'level': // 职级多选
+          if (Array.isArray(value) && value.length > 0) {
+            return value.includes(item.level)
+          }
+          return true
+
+        case 'performanceMin':
+          return item.performance >= value
+        case 'performanceMax':
+          return item.performance <= value
+
+        case 'status': // 精确匹配
+          return item.status === value
+
+        default:
+          return true
+      }
+    })
+  })
+}
 
 // 模拟 API 接口
 const getAdvancedList = async (params: any) => {
@@ -114,13 +172,15 @@ const getAdvancedList = async (params: any) => {
     }
   ]
 
+  const filtered = filterData(data, params)
+
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
         code: 200,
         data: {
-          list: data,
-          total: data.length
+          list: filtered,
+          total: filtered.length
         }
       })
     }, 800)
@@ -141,11 +201,15 @@ const options = reactive<MaProTableOptions>({
       pageSize: 10
     }
   },
+  searchFormOptions: { labelWidth: '90px' },
   searchOptions: {
     fold: true,
+    cols: { xs: 2, sm: 2, md: 2, lg: 2, xl: 2 },
     text: {
-      searchBtn: () => '高级搜索',
-      resetBtn: () => '清空条件'
+      searchBtn: () => '立即搜索',
+      resetBtn: () => '重置条件',
+      isFoldBtn: () => '展开更多条件',
+      notFoldBtn: () => '收起条件'
     }
   },
   header: {
@@ -159,12 +223,32 @@ const options = reactive<MaProTableOptions>({
   },
   onSearchReset: (form: Record<string, any>) => {
     ElMessage.info('搜索条件已重置')
+
+    // 重置表单数据到初始状态
+    Object.assign(formData, {
+      name: '',
+      department: [],
+      salaryMin: undefined,
+      salaryMax: undefined,
+      experience: [0, 15],
+      joinDateRange: [],
+      level: [],
+      performanceMin: undefined,
+      performanceMax: undefined,
+      status: '',
+    })
+
+    // 重新请求数据
+    if (tableRef.value) {
+      tableRef.value.refresh()
+    }
+
     return form
   }
 })
 
 // 表格架构
-const schema = reactive<MaProTableSchema>({
+const schema = ref<MaProTableSchema>({
   searchItems: [
     {
       label: '姓名',
@@ -196,34 +280,34 @@ const schema = reactive<MaProTableSchema>({
     {
       label: '薪资范围',
       prop: 'salaryRange',
-      render: ({ formData }: any) => (
-        <div style="display: flex; gap: 8px; align-items: center;">
-          <el-input-number
-            v-model={formData.salaryMin}
-            placeholder="最低薪资"
-            min={0}
-            max={100000}
-            controls-position="right"
-            style="width: 140px;"
-          />
-          <span>-</span>
-          <el-input-number
-            v-model={formData.salaryMax}
-            placeholder="最高薪资"
-            min={0}
-            max={100000}
-            controls-position="right"
-            style="width: 140px;"
-          />
-        </div>
-      ),
-      span: 2
+      render: () => <div class="!p-0 flex gap-2 w-full isPadding" />,
+      children: [
+        {
+          prop: 'salaryMin',
+          render: 'InputNumber',
+          renderProps: {
+            controlsPosition: 'right',
+            placeholder: '最低薪资',
+          },
+          cols: { md: 12, xs: 24 },
+        },
+        {
+          prop: 'salaryMax',
+          render: 'InputNumber',
+          renderProps: {
+            controlsPosition: 'right',
+            placeholder: '最高薪资',
+          },
+          cols: { md: 12, xs: 24 },
+        },
+      ],
     },
     {
       label: '工作经验',
       prop: 'experience',
       render: 'slider',
       renderProps: {
+        size: 'small',
         min: 0,
         max: 15,
         range: true,
@@ -266,28 +350,27 @@ const schema = reactive<MaProTableSchema>({
     {
       label: '绩效评分',
       prop: 'performanceRange',
-      render: ({ formData }: any) => (
-        <div style="display: flex; gap: 8px; align-items: center;">
-          <el-input-number
-            v-model={formData.performanceMin}
-            placeholder="最低分"
-            min={0}
-            max={100}
-            controls-position="right"
-            style="width: 120px;"
-          />
-          <span>-</span>
-          <el-input-number
-            v-model={formData.performanceMax}
-            placeholder="最高分"
-            min={0}
-            max={100}
-            controls-position="right"
-            style="width: 120px;"
-          />
-        </div>
-      ),
-      span: 2
+      render: () => <div class="!p-0 flex gap-2 w-full isPadding" />,
+      children: [
+        {
+          prop: 'performanceMin',
+          render: 'InputNumber',
+          renderProps: {
+            controlsPosition: 'right',
+            placeholder: '最低分',
+          },
+          cols: { md: 12, xs: 24 },
+        },
+        {
+          prop: 'performanceMax',
+          render: 'InputNumber',
+          renderProps: {
+            controlsPosition: 'right',
+            placeholder: '最高分',
+          },
+          cols: { md: 12, xs: 24 },
+        },
+      ],
     },
     {
       label: '在职状态',
@@ -434,10 +517,6 @@ const schema = reactive<MaProTableSchema>({
 </script>
 
 <style scoped>
-.demo-advanced-search {
-  padding: 20px;
-}
-
 .demo-advanced-search h3 {
   margin-bottom: 8px;
   color: #333;
@@ -447,5 +526,9 @@ const schema = reactive<MaProTableSchema>({
   margin-bottom: 16px;
   color: #666;
   font-size: 14px;
+}
+
+:deep(.isPadding > div) {
+  padding-left: 0 !important;
 }
 </style>
