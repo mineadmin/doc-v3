@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, h, computed } from 'vue'
+import { ref, h, computed, nextTick, onMounted } from 'vue'
 import { ElMessage, ElNotification } from 'element-plus'
 import type { MaFormExpose } from '@mineadmin/form'
 import type { MaFormItem, MaFormOptions } from '@mineadmin/form'
@@ -10,18 +10,18 @@ const formData = ref({
   name: 'admin',
   email: 'admin@example.com',
   phone: '13800138000',
-  
+
   // 详细信息
   company: 'MineAdmin',
   position: 'Developer',
   experience: 3,
-  
+
   // 地址信息
   country: 'china',
   province: 'beijing',
   city: 'beijing',
   address: '朝阳区建国路88号',
-  
+
   // 其他信息
   hobbies: ['coding', 'reading'],
   birthDate: '1995-01-01',
@@ -53,6 +53,11 @@ const operationQueue = ref<Array<{
   endTime?: number
 }>>([])
 
+// 确保 operationQueue 始终是一个数组
+if (!operationQueue.value) {
+  operationQueue.value = []
+}
+
 // 模拟 API 调用
 const mockApi = {
   validateEmail: async (email: string): Promise<{ valid: boolean, message: string }> => {
@@ -64,7 +69,7 @@ const mockApi = {
       message: exists ? '邮箱已被注册' : '邮箱可以使用'
     }
   },
-  
+
   fetchCityList: async (province: string): Promise<string[]> => {
     await new Promise(resolve => setTimeout(resolve, 1500))
     const cityMap: Record<string, string[]> = {
@@ -75,12 +80,12 @@ const mockApi = {
     }
     return cityMap[province] || []
   },
-  
+
   uploadFile: async (file: File): Promise<{ url: string }> => {
     await new Promise(resolve => setTimeout(resolve, 3000))
     return { url: `https://example.com/files/${file.name}` }
   },
-  
+
   submitForm: async (data: any): Promise<{ success: boolean, id: string }> => {
     await new Promise(resolve => setTimeout(resolve, 2500))
     return { success: true, id: `FORM_${Date.now()}` }
@@ -90,6 +95,9 @@ const mockApi = {
 // 添加操作到队列
 const addOperation = (type: string, description: string, duration: number): string => {
   const id = `op_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+  if (!operationQueue.value) {
+    operationQueue.value = []
+  }
   operationQueue.value.push({
     id,
     type,
@@ -102,7 +110,7 @@ const addOperation = (type: string, description: string, duration: number): stri
 
 // 更新操作状态
 const updateOperation = (id: string, status: 'running' | 'completed' | 'failed', startTime?: number, endTime?: number) => {
-  const operation = operationQueue.value.find(op => op.id === id)
+  const operation = safeOperationQueue.value.find(op => op.id === id)
   if (operation) {
     operation.status = status
     if (startTime) operation.startTime = startTime
@@ -112,6 +120,11 @@ const updateOperation = (id: string, status: 'running' | 'completed' | 'failed',
 
 // 城市数据
 const cityOptions = ref<string[]>([])
+
+// 确保 cityOptions 始终是一个数组
+if (!cityOptions.value) {
+  cityOptions.value = []
+}
 
 // 表单项配置
 const formItems = computed<MaFormItem[]>(() => [
@@ -128,7 +141,7 @@ const formItems = computed<MaFormItem[]>(() => [
     },
     cols: { span: 8 }
   },
-  
+
   // 异步验证的邮箱字段
   {
     label: '邮箱地址',
@@ -149,16 +162,16 @@ const formItems = computed<MaFormItem[]>(() => [
               callback()
               return
             }
-            
+
             try {
               loadingStates.value.asyncField = true
               const opId = addOperation('validation', '验证邮箱是否已注册', 2000)
               updateOperation(opId, 'running', Date.now())
-              
+
               const result = await mockApi.validateEmail(value)
-              
+
               updateOperation(opId, 'completed', undefined, Date.now())
-              
+
               if (result.valid) {
                 callback()
               } else {
@@ -176,7 +189,7 @@ const formItems = computed<MaFormItem[]>(() => [
     },
     cols: { span: 8 }
   },
-  
+
   {
     label: '手机号',
     prop: 'phone',
@@ -193,7 +206,7 @@ const formItems = computed<MaFormItem[]>(() => [
     },
     cols: { span: 8 }
   },
-  
+
   {
     label: '公司名称',
     prop: 'company',
@@ -204,7 +217,7 @@ const formItems = computed<MaFormItem[]>(() => [
     },
     cols: { span: 8 }
   },
-  
+
   {
     label: '职位',
     prop: 'position',
@@ -215,7 +228,7 @@ const formItems = computed<MaFormItem[]>(() => [
     },
     cols: { span: 8 }
   },
-  
+
   {
     label: '工作经验',
     prop: 'experience',
@@ -228,28 +241,22 @@ const formItems = computed<MaFormItem[]>(() => [
     },
     cols: { span: 8 }
   },
-  
+
   {
     label: '国家',
     prop: 'country',
     render: 'select',
     renderProps: {
-      placeholder: '请选择国家'
-    },
-    renderSlots: {
-      default: () => [
+      placeholder: '请选择国家',
+      options: [
         { label: '中国', value: 'china' },
         { label: '美国', value: 'usa' },
         { label: '日本', value: 'japan' }
-      ].map(item => h('el-option', { 
-        key: item.value, 
-        label: item.label, 
-        value: item.value 
-      }))
+      ]
     },
     cols: { span: 6 }
   },
-  
+
   // 级联加载的省份字段
   {
     label: '省份',
@@ -257,20 +264,26 @@ const formItems = computed<MaFormItem[]>(() => [
     render: 'select',
     renderProps: {
       placeholder: '请选择省份',
+      options: [
+        { label: '北京', value: 'beijing' },
+        { label: '上海', value: 'shanghai' },
+        { label: '广东', value: 'guangdong' },
+        { label: '江苏', value: 'jiangsu' }
+      ],
       onChange: async (value: string) => {
         if (value) {
           try {
             loadingStates.value.dataFetch = true
             formData.value.city = '' // 清空城市选择
-            
+
             const opId = addOperation('data-fetch', `获取${value}的城市列表`, 1500)
             updateOperation(opId, 'running', Date.now())
-            
+
             const cities = await mockApi.fetchCityList(value)
-            cityOptions.value = cities
-            
+            cityOptions.value = cities || []
+
             updateOperation(opId, 'completed', undefined, Date.now())
-            ElMessage.success(`已加载${cities.length}个城市`)
+            ElMessage.success(`已加载${(cities || []).length}个城市`)
           } catch (error) {
             ElMessage.error('获取城市列表失败')
           } finally {
@@ -279,47 +292,30 @@ const formItems = computed<MaFormItem[]>(() => [
         }
       }
     },
-    renderSlots: {
-      default: () => [
-        { label: '北京', value: 'beijing' },
-        { label: '上海', value: 'shanghai' },
-        { label: '广东', value: 'guangdong' },
-        { label: '江苏', value: 'jiangsu' }
-      ].map(item => h('el-option', { 
-        key: item.value, 
-        label: item.label, 
-        value: item.value 
-      }))
-    },
     when: (item, model) => model.country === 'china',
     dependencies: ['country'],
     cols: { span: 6 }
   },
-  
+
   // 动态加载的城市字段
   {
     label: '城市',
     prop: 'city',
     render: 'select',
     renderProps: {
-      placeholder: cityOptions.value.length > 0 ? '请选择城市' : '请先选择省份',
+      placeholder: safeCityOptions.value.length > 0 ? '请选择城市' : '请先选择省份',
       loading: loadingStates.value.dataFetch,
-      disabled: cityOptions.value.length === 0
-    },
-    renderSlots: {
-      default: () => cityOptions.value.map(city => 
-        h('el-option', { 
-          key: city, 
-          label: city, 
-          value: city 
-        })
-      )
+      disabled: safeCityOptions.value.length === 0,
+      options: computed(() => safeCityOptions.value.map(city => ({
+        label: city,
+        value: city
+      })))
     },
     when: (item, model) => !!model.province,
     dependencies: ['province'],
     cols: { span: 6 }
   },
-  
+
   {
     label: '详细地址',
     prop: 'address',
@@ -332,27 +328,24 @@ const formItems = computed<MaFormItem[]>(() => [
     dependencies: ['city'],
     cols: { span: 6 }
   },
-  
+
   // 兴趣爱好
   {
     label: '兴趣爱好',
     prop: 'hobbies',
     render: 'checkboxGroup',
-    renderSlots: {
-      default: () => [
+    renderProps: {
+      options: [
         { label: '编程', value: 'coding' },
         { label: '阅读', value: 'reading' },
         { label: '运动', value: 'sports' },
         { label: '音乐', value: 'music' },
         { label: '旅行', value: 'travel' }
-      ].map(item => h('el-checkbox', { 
-        key: item.value,
-        label: item.value 
-      }, () => item.label))
+      ]
     },
     cols: { span: 12 }
   },
-  
+
   {
     label: '出生日期',
     prop: 'birthDate',
@@ -365,7 +358,7 @@ const formItems = computed<MaFormItem[]>(() => [
     },
     cols: { span: 8 }
   },
-  
+
   // 带加载状态的文件上传
   {
     label: '文件上传',
@@ -381,9 +374,9 @@ const formItems = computed<MaFormItem[]>(() => [
               loadingStates.value.fileUpload = true
               const opId = addOperation('upload', `上传文件 ${file.name}`, 3000)
               updateOperation(opId, 'running', Date.now())
-              
+
               const result = await mockApi.uploadFile(file)
-              
+
               updateOperation(opId, 'completed', undefined, Date.now())
               ElMessage.success(`文件上传成功: ${result.url}`)
               return true
@@ -404,7 +397,7 @@ const formItems = computed<MaFormItem[]>(() => [
     },
     cols: { span: 12 }
   },
-  
+
   {
     label: '个人描述',
     prop: 'description',
@@ -418,13 +411,13 @@ const formItems = computed<MaFormItem[]>(() => [
     },
     cols: { span: 24 }
   },
-  
+
   {
     label: '同意条款',
     prop: 'agreeTerms',
     render: 'checkbox',
-    renderSlots: {
-      default: () => '我已阅读并同意相关服务条款'
+    renderProps: {
+      label: '我已阅读并同意相关服务条款'
     },
     itemProps: {
       rules: [
@@ -453,17 +446,17 @@ const formOptions: MaFormOptions = {
 
 // 计算加载状态统计
 const loadingStats = computed(() => {
-  const activeLoadings = Object.values(loadingStates.value).filter(Boolean).length
-  const completedOperations = operationQueue.value.filter(op => op.status === 'completed').length
-  const runningOperations = operationQueue.value.filter(op => op.status === 'running').length
-  const failedOperations = operationQueue.value.filter(op => op.status === 'failed').length
-  
+  const activeLoadings = Object.values(loadingStates.value || {}).filter(Boolean).length
+  const completedOperations = safeOperationQueue.value.filter(op => op.status === 'completed').length
+  const runningOperations = safeOperationQueue.value.filter(op => op.status === 'running').length
+  const failedOperations = safeOperationQueue.value.filter(op => op.status === 'failed').length
+
   return {
     active: activeLoadings,
     completed: completedOperations,
     running: runningOperations,
     failed: failedOperations,
-    total: operationQueue.value.length
+    total: safeOperationQueue.value.length
   }
 })
 
@@ -473,16 +466,16 @@ const loadingStats = computed(() => {
 const handleGlobalLoading = async (duration: number = 3000) => {
   loadingStates.value.global = true
   formRef.value?.setLoadingState(true)
-  
+
   const opId = addOperation('global', `全局加载状态 (${duration}ms)`, duration)
   updateOperation(opId, 'running', Date.now())
-  
+
   await new Promise(resolve => setTimeout(resolve, duration))
-  
+
   updateOperation(opId, 'completed', undefined, Date.now())
   loadingStates.value.global = false
   formRef.value?.setLoadingState(false)
-  
+
   ElMessage.success('全局加载完成')
 }
 
@@ -492,14 +485,14 @@ const handleValidateWithLoading = async () => {
     loadingStates.value.validation = true
     const opId = addOperation('validation', '表单验证', 1000)
     updateOperation(opId, 'running', Date.now())
-    
+
     // 模拟验证延迟
     await new Promise(resolve => setTimeout(resolve, 1000))
-    
+
     const isValid = await formRef.value?.getElFormRef()?.validate()
-    
+
     updateOperation(opId, 'completed', undefined, Date.now())
-    
+
     if (isValid) {
       ElNotification({
         title: '验证成功',
@@ -523,17 +516,17 @@ const handleSubmitWithLoading = async () => {
   try {
     // 先验证表单
     await handleValidateWithLoading()
-    
+
     loadingStates.value.submission = true
     formRef.value?.setLoadingState(true)
-    
+
     const opId = addOperation('submission', '提交表单数据', 2500)
     updateOperation(opId, 'running', Date.now())
-    
+
     const result = await mockApi.submitForm(formData.value)
-    
+
     updateOperation(opId, 'completed', undefined, Date.now())
-    
+
     ElNotification({
       title: '提交成功',
       message: `表单已成功提交，ID: ${result.id}`,
@@ -560,19 +553,19 @@ const handleBatchOperations = async () => {
     { name: '上传文件', duration: 3000 },
     { name: '提交表单', duration: 2500 }
   ]
-  
+
   ElMessage.info('开始批量异步操作...')
-  
+
   for (const op of operations) {
     const opId = addOperation('batch', op.name, op.duration)
     updateOperation(opId, 'running', Date.now())
-    
+
     await new Promise(resolve => setTimeout(resolve, op.duration))
-    
+
     updateOperation(opId, 'completed', undefined, Date.now())
     ElMessage.success(`${op.name} 完成`)
   }
-  
+
   ElNotification({
     title: '批量操作完成',
     message: '所有异步操作都已成功完成！',
@@ -582,7 +575,9 @@ const handleBatchOperations = async () => {
 
 // 清空操作记录
 const handleClearOperations = () => {
-  operationQueue.value.splice(0)
+  if (safeOperationQueue.value) {
+    safeOperationQueue.value.splice(0)
+  }
   ElMessage.info('操作记录已清空')
 }
 
@@ -590,21 +585,44 @@ const handleClearOperations = () => {
 const handleSimulateError = async () => {
   loadingStates.value.global = true
   formRef.value?.setLoadingState(true)
-  
+
   const opId = addOperation('error', '模拟网络错误', 2000)
   updateOperation(opId, 'running', Date.now())
-  
+
   await new Promise(resolve => setTimeout(resolve, 2000))
-  
+
   updateOperation(opId, 'failed', undefined, Date.now())
-  
+
   loadingStates.value.global = false
   formRef.value?.setLoadingState(false)
-  
+
   ElMessage.error('模拟操作失败')
 }
 
 const activeTech = ref(['global', 'validation'])
+
+// 安全的操作队列计算属性
+const safeOperationQueue = computed(() => {
+  return operationQueue.value || []
+})
+
+// 安全的城市选项计算属性
+const safeCityOptions = computed(() => {
+  return cityOptions.value || []
+})
+
+// 确保响应式数据在组件挂载后正确初始化
+onMounted(() => {
+  nextTick(() => {
+    // 确保所有 ref 都被正确初始化
+    if (!operationQueue.value) {
+      operationQueue.value = []
+    }
+    if (!cityOptions.value) {
+      cityOptions.value = []
+    }
+  })
+})
 </script>
 
 <template>
@@ -629,36 +647,23 @@ const activeTech = ref(['global', 'validation'])
           <div class="controls-header">
             <span>加载状态控制面板</span>
             <div class="loading-indicators">
-              <el-tag 
-                v-for="(loading, key) in loadingStates" 
-                :key="key"
-                :type="loading ? 'success' : 'info'"
-                size="small"
-                :effect="loading ? 'dark' : 'plain'"
-              >
+              <el-tag v-for="(loading, key) in loadingStates" :key="key" :type="loading ? 'success' : 'info'"
+                size="small" :effect="loading ? 'dark' : 'plain'">
                 {{ key }}: {{ loading ? 'ON' : 'OFF' }}
               </el-tag>
             </div>
           </div>
         </template>
-        
+
         <div class="controls-grid">
           <!-- 全局加载控制 -->
           <div class="control-group">
             <h4>全局加载控制</h4>
             <div class="control-buttons">
-              <el-button 
-                type="primary" 
-                :loading="loadingStates.global"
-                @click="handleGlobalLoading(2000)"
-              >
+              <el-button type="primary" :loading="loadingStates.global" @click="handleGlobalLoading(2000)">
                 2秒全局加载
               </el-button>
-              <el-button 
-                type="success" 
-                :loading="loadingStates.global"
-                @click="handleGlobalLoading(5000)"
-              >
+              <el-button type="success" :loading="loadingStates.global" @click="handleGlobalLoading(5000)">
                 5秒全局加载
               </el-button>
             </div>
@@ -668,18 +673,10 @@ const activeTech = ref(['global', 'validation'])
           <div class="control-group">
             <h4>表单操作</h4>
             <div class="control-buttons">
-              <el-button 
-                type="warning" 
-                :loading="loadingStates.validation"
-                @click="handleValidateWithLoading"
-              >
+              <el-button type="warning" :loading="loadingStates.validation" @click="handleValidateWithLoading">
                 验证表单
               </el-button>
-              <el-button 
-                type="danger" 
-                :loading="loadingStates.submission"
-                @click="handleSubmitWithLoading"
-              >
+              <el-button type="danger" :loading="loadingStates.submission" @click="handleSubmitWithLoading">
                 提交表单
               </el-button>
             </div>
@@ -718,12 +715,7 @@ const activeTech = ref(['global', 'validation'])
 
     <!-- 加载状态演示表单 -->
     <div class="demo-form">
-      <ma-form 
-        ref="formRef"
-        v-model="formData" 
-        :options="formOptions"
-        :items="formItems"
-      >
+      <ma-form ref="formRef" v-model="formData" :options="formOptions" :items="formItems">
         <!-- 自定义底部操作栏 -->
         <template #footer>
           <div class="form-footer">
@@ -732,7 +724,9 @@ const activeTech = ref(['global', 'validation'])
                 <el-icon v-if="loadingStats.active > 0" class="is-loading">
                   <Loading />
                 </el-icon>
-                <el-icon v-else><SuccessFilled /></el-icon>
+                <el-icon v-else>
+                  <SuccessFilled />
+                </el-icon>
                 {{ loadingStats.active > 0 ? `${loadingStats.active} 个操作进行中` : '所有操作已完成' }}
               </el-text>
             </div>
@@ -740,13 +734,11 @@ const activeTech = ref(['global', 'validation'])
               <el-button @click="formRef?.getElFormRef()?.resetFields()">
                 重置表单
               </el-button>
-              <el-button 
-                type="primary" 
-                :loading="loadingStates.submission"
-                @click="handleSubmitWithLoading"
-              >
+              <el-button type="primary" :loading="loadingStates.submission" @click="handleSubmitWithLoading">
                 <template v-if="!loadingStates.submission">
-                  <el-icon class="mr-1"><Check /></el-icon>
+                  <el-icon class="mr-1">
+                    <Check />
+                  </el-icon>
                 </template>
                 {{ loadingStates.submission ? '提交中...' : '提交表单' }}
               </el-button>
@@ -767,32 +759,25 @@ const activeTech = ref(['global', 'validation'])
             </el-text>
           </div>
         </template>
-        
+
         <div class="queue-container">
-          <div v-if="operationQueue.length === 0" class="empty-queue">
+          <div v-if="safeOperationQueue.length === 0" class="empty-queue">
             <el-empty description="暂无操作记录，请点击上方按钮进行测试" />
           </div>
-          
+
           <div v-else class="operations-list">
-            <div 
-              v-for="operation in operationQueue.slice().reverse()" 
-              :key="operation.id"
-              class="operation-item"
-              :class="operation.status"
-            >
+            <div v-for="operation in safeOperationQueue.slice().reverse()" :key="operation.id" class="operation-item"
+              :class="operation.status">
               <div class="operation-header">
                 <div class="operation-info">
-                  <el-tag 
-                    :type="operation.status === 'completed' ? 'success' : 
-                          operation.status === 'failed' ? 'danger' : 
-                          operation.status === 'running' ? 'warning' : 'info'"
-                    size="small"
-                  >
+                  <el-tag :type="operation.status === 'completed' ? 'success' :
+                    operation.status === 'failed' ? 'danger' :
+                      operation.status === 'running' ? 'warning' : 'info'" size="small">
                     {{ operation.type }}
                   </el-tag>
                   <span class="operation-desc">{{ operation.description }}</span>
                 </div>
-                
+
                 <div class="operation-status">
                   <el-icon v-if="operation.status === 'running'" class="is-loading">
                     <Loading />
@@ -808,22 +793,22 @@ const activeTech = ref(['global', 'validation'])
                   </el-icon>
                 </div>
               </div>
-              
+
               <!-- 进度条 -->
               <div v-if="operation.status === 'running'" class="operation-progress">
-                <el-progress 
+                <el-progress
                   :percentage="Math.min(100, ((Date.now() - (operation.startTime || 0)) / operation.duration) * 100)"
-                  :stroke-width="4"
-                  status="active"
-                />
+                  :stroke-width="4" status="active" />
               </div>
-              
+
               <!-- 时间信息 -->
               <div v-if="operation.startTime || operation.endTime" class="operation-time">
                 <el-text size="small" type="info">
                   {{ operation.startTime ? `开始: ${new Date(operation.startTime).toLocaleTimeString()}` : '' }}
                   {{ operation.endTime ? ` | 结束: ${new Date(operation.endTime).toLocaleTimeString()}` : '' }}
-                  {{ operation.startTime && operation.endTime ? ` | 耗时: ${operation.endTime - operation.startTime}ms` : '' }}
+                  {{ operation.startTime && operation.endTime ? ` | 耗时: ${operation.endTime - operation.startTime}ms` :
+                    ''
+                  }}
                 </el-text>
               </div>
             </div>
@@ -838,7 +823,7 @@ const activeTech = ref(['global', 'validation'])
         <template #header>
           <span>加载状态技术说明</span>
         </template>
-        
+
         <el-collapse v-model="activeTech">
           <el-collapse-item title="全局加载状态" name="global">
             <div class="tech-content">
@@ -846,73 +831,73 @@ const activeTech = ref(['global', 'validation'])
               <p>• 控制整个表单的全局加载状态</p>
               <p>• 加载时禁用所有表单项，显示加载动画</p>
               <p>• 适用于表单提交、数据获取等场景</p>
-              
+
               <h5>使用示例</h5>
               <pre><code>// 开启加载状态
-formRef.value?.setLoadingState(true)
+              formRef.value?.setLoadingState(true)
 
-// 执行异步操作
-await submitForm()
+              // 执行异步操作
+              await submitForm()
 
-// 关闭加载状态
-formRef.value?.setLoadingState(false)</code></pre>
+              // 关闭加载状态
+              formRef.value?.setLoadingState(false)</code></pre>
             </div>
           </el-collapse-item>
-          
+
           <el-collapse-item title="异步验证加载" name="validation">
             <div class="tech-content">
               <h5>asyncValidator</h5>
               <p>• 表单项支持异步验证规则</p>
               <p>• 验证过程中可以显示加载状态</p>
               <p>• 支持复杂的远程验证逻辑</p>
-              
+
               <h5>配置方法</h5>
               <pre><code>itemProps: {
-  rules: [{
-    asyncValidator: async (rule, value, callback) => {
-      // 设置加载状态
-      setLoading(true)
-      
-      // 异步验证逻辑
-      const result = await validateRemote(value)
-      
-      // 处理验证结果
-      if (result.valid) {
-        callback()
-      } else {
-        callback(new Error(result.message))
-      }
-      
-      // 清除加载状态
-      setLoading(false)
-    }
-  }]
-}</code></pre>
+              rules: [{
+              asyncValidator: async (rule, value, callback) => {
+              // 设置加载状态
+              setLoading(true)
+
+              // 异步验证逻辑
+              const result = await validateRemote(value)
+
+              // 处理验证结果
+              if (result.valid) {
+              callback()
+              } else {
+              callback(new Error(result.message))
+              }
+
+              // 清除加载状态
+              setLoading(false)
+              }
+              }]
+              }</code></pre>
             </div>
           </el-collapse-item>
-          
+
           <el-collapse-item title="组件级加载" name="component">
             <div class="tech-content">
               <h5>组件内置加载状态</h5>
               <p>• Select、Upload 等组件支持 loading 属性</p>
               <p>• 可以为单个组件设置独立的加载状态</p>
               <p>• 不影响其他表单项的交互</p>
-              
+
               <h5>使用示例</h5>
               <pre><code>renderProps: {
-  loading: isLoading.value,
-  placeholder: '加载中...'
-}</code></pre>
+              loading: isLoading.value,
+              placeholder: '加载中...'
+              }</code></pre>
             </div>
           </el-collapse-item>
-          
+
           <el-collapse-item title="批量操作管理" name="batch">
             <div class="tech-content">
               <h5>操作队列管理</h5>
               <p>• 跟踪多个异步操作的状态</p>
               <p>• 提供操作进度和时间统计</p>
               <p>• 支持操作失败重试和错误处理</p>
-              
+
               <h5>最佳实践</h5>
               <p>• 为每个异步操作分配唯一 ID</p>
               <p>• 记录操作开始和结束时间</p>
@@ -929,8 +914,6 @@ formRef.value?.setLoadingState(false)</code></pre>
 <style scoped>
 .loading-states-demo {
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
 }
 
 .demo-description {
@@ -1155,6 +1138,7 @@ formRef.value?.setLoadingState(false)</code></pre>
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -1165,43 +1149,43 @@ formRef.value?.setLoadingState(false)</code></pre>
   .loading-states-demo {
     padding: 10px;
   }
-  
+
   .demo-features {
     justify-content: center;
   }
-  
+
   .controls-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .controls-header,
   .queue-header {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .loading-indicators {
     width: 100%;
     justify-content: center;
   }
-  
+
   .form-footer {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .footer-info {
     justify-content: center;
   }
-  
+
   .footer-actions {
     justify-content: center;
   }
-  
+
   .stats-info {
     justify-content: space-around;
   }
-  
+
   .operation-header {
     flex-direction: column;
     align-items: flex-start;

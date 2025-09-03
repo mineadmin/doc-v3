@@ -2,14 +2,9 @@
   <div>
     <h3>高级搜索</h3>
     <p>包含多种表单组件类型的复杂搜索场景，展示丰富的表单元素和配置选项。</p>
-    
-    <ma-search
-      :search-items="searchItems"
-      :form-options="formOptions"
-      :options="searchOptions"
-      @search="handleSearch"
-      @reset="handleReset"
-    />
+
+    <ma-search :search-items="searchItems" :form-options="formOptions" :options="searchOptions" @search="handleSearch"
+      @reset="handleReset" />
 
     <div v-if="searchResult" class="result-display">
       <h4>搜索条件：</h4>
@@ -21,7 +16,8 @@
 <script setup lang="tsx">
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
-import {MaSearchItem, MaSearchOptions} from "@mineadmin/search";
+import { MaSearchItem, MaSearchOptions } from "@mineadmin/search";
+import type {MaFormOptions} from "@mineadmin/form";
 
 const searchResult = ref<any>(null)
 
@@ -34,7 +30,8 @@ const searchItems = ref<MaSearchItem[]>([
     renderProps: {
       placeholder: '支持模糊搜索',
       clearable: true
-    }
+    },
+
   },
   {
     label: '用户角色',
@@ -55,7 +52,7 @@ const searchItems = ref<MaSearchItem[]>([
   {
     label: '注册时间',
     prop: 'register_time',
-    render: 'date-picker',
+    render: 'datePicker',
     renderProps: {
       type: 'datetimerange',
       startPlaceholder: '开始时间',
@@ -65,27 +62,27 @@ const searchItems = ref<MaSearchItem[]>([
   },
   {
     label: '年龄范围',
-    prop: 'age_range',
-    render: 'input-number',
-    renderProps: {
-      placeholder: '最小年龄',
-      min: 0,
-      max: 120,
-      style: 'width: 120px; margin-right: 10px;'
-    },
-    span: 1
-  },
-  {
-    label: '',
-    prop: 'age_max',
-    render: 'input-number',
-    renderProps: {
-      placeholder: '最大年龄',
-      min: 0,
-      max: 120,
-      style: 'width: 120px;'
-    },
-    span: 1
+    render: () => <div class="!p-0 flex gap-2 w-full" />,
+    children: [
+      {
+        prop: 'age_range',
+        render: 'InputNumber',
+        renderProps: {
+          placeholder: '最小年龄',
+          min: 0,
+        },
+        cols: {md: 12, xs: 24},
+      },
+      {
+        prop: 'age_max',
+        render: 'InputNumber',
+        renderProps: {
+          placeholder: '最大年龄',
+          max: 120,
+        },
+        cols: {md: 12, xs: 24},
+      },
+    ],
   },
   {
     label: '账户状态',
@@ -98,7 +95,6 @@ const searchItems = ref<MaSearchItem[]>([
         <el-radio label={-1} value={-1}>锁定</el-radio>
       </el-radio-group>
     ),
-    span: 2
   },
   {
     label: '所属部门',
@@ -139,20 +135,20 @@ const searchItems = ref<MaSearchItem[]>([
         <el-checkbox label="活跃用户" value="active" />
       </el-checkbox-group>
     ),
-    span: 2
   }
 ])
 
-const formOptions:MaSearchOptions = {
-  fold: true
+const formOptions: MaFormOptions = {
+  labelWidth: 80
 }
 
-const searchOptions:MaSearchOptions = {
-  fold: true,
+const searchOptions: MaSearchOptions = {
+  fold: false,
   foldRows: 2,
+  cols: { xs: 2, sm: 2, md: 2, lg: 2, xl: 2 },
   text: {
-    searchBtn:()=> '高级搜索',
-    resetBtn: ()=>'清空条件'
+    searchBtn: () => '高级搜索',
+    resetBtn: () => '清空条件'
   }
 }
 

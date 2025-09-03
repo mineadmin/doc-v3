@@ -103,13 +103,13 @@ const dynamicSearchItems = ref<MaSearchItem[]>([
     label: '用户名',
     prop: 'username',
     render: 'input',
-    props: { placeholder: '请输入用户名' }
+    renderProps: { placeholder: '请输入用户名' }
   },
   {
     label: '邮箱',
     prop: 'email',
     render: 'input',
-    props: { placeholder: '请输入邮箱' }
+    renderProps: { placeholder: '请输入邮箱' }
   }
 ])
 
@@ -263,10 +263,10 @@ const updateOptions = () => {
     fold: !currentOptions.value.fold,
     foldRows: Math.floor(Math.random() * 3) + 1,
     text: {
-      searchBtn: '立即搜索',
-      resetBtn: '重置条件',
-      isFoldBtn: '展开更多条件',
-      notFoldBtn: '收起条件'
+      searchBtn: () => '立即搜索',
+      resetBtn: () => '重置条件',
+      isFoldBtn: () => '展开更多条件',
+      notFoldBtn: () => '收起条件'
     }
   }
   

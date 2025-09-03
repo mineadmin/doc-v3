@@ -8,7 +8,18 @@
       <div class="nav-grid">
         <div v-for="demo in demoList" :key="demo.key" class="nav-item" @click="activeDemo = demo.key">
           <div class="nav-icon">
-            <i :class="demo.icon"></i>
+            <el-icon>
+              <component
+                  :is="ElementIcons[
+                    demo.icon
+                      .replace('el-icon-', '')
+                      .split('-')
+                      .map(s => s.charAt(0).toUpperCase() + s.slice(1))
+                      .join('')
+                  ]
+                "
+              />
+            </el-icon>
           </div>
           <div class="nav-content">
             <h4>{{ demo.title }}</h4>
@@ -78,6 +89,7 @@
 import { ref } from 'vue'
 import type { MaSearchItem } from '@mineadmin/search'
 import { ElMessage } from 'element-plus'
+import * as ElementIcons from '@element-plus/icons-vue'
 
 // 导入所有演示组件
 import BasicUsage from '../basic-usage/index.vue'

@@ -48,13 +48,13 @@ const searchItems = ref([
     render: 'select',
     renderProps: {
       placeholder: '请选择状态',
-      clearable: true
+      clearable: true,
+      options: [
+        { label: '全部', value: '' },
+        { label: '启用', value: 1 },
+        { label: '禁用', value: 0 }
+      ]
     },
-    options: [
-      { label: '全部', value: '' },
-      { label: '启用', value: 1 },
-      { label: '禁用', value: 0 }
-    ]
   }
 ])
 

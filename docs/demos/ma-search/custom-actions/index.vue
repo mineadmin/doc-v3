@@ -2,35 +2,20 @@
   <div>
     <h3>自定义操作按钮</h3>
     <p>演示如何使用插槽自定义搜索表单的操作按钮区域，包括替换默认按钮、添加额外按钮等。</p>
-    
+
     <div class="demo-section">
       <h4>完全替换操作按钮 (actions 插槽)</h4>
-      <ma-search
-        :search-items="searchItems"
-        :form-options="formOptions"
-        @search="handleSearch"
-        @reset="handleReset"
-      >
+      <ma-search key="actions-demo" ref="customActionsOne" :search-items="demoConfigs.demo1.searchItems"
+        :form-options="demoConfigs.demo1.formOptions" :options="demoConfigs.demo1.searchOptions" @search="handleSearch"
+        @reset="handleReset">
         <template #actions>
-          <el-button 
-            type="primary"
-            @click="handleCustomSearch"
-            icon="Search"
-          >
+          <el-button type="primary" @click="handleCustomSearch" icon="Search">
             立即查询
           </el-button>
-          <el-button 
-            type="warning"
-            @click="handleCustomReset"
-            icon="Refresh"
-          >
+          <el-button type="warning" @click="handleCustomReset" icon="Refresh">
             清空条件
           </el-button>
-          <el-button 
-            type="success"
-            @click="handleExport"
-            icon="Download"
-          >
+          <el-button type="success" @click="handleExport" icon="Download">
             导出数据
           </el-button>
         </template>
@@ -39,12 +24,9 @@
 
     <div class="demo-section">
       <h4>在默认按钮前添加内容 (beforeActions 插槽)</h4>
-      <ma-search
-        :search-items="searchItems"
-        :form-options="formOptions"
-        @search="handleSearch"
-        @reset="handleReset"
-      >
+      <ma-search key="before-actions-demo" ref="customActionsTwo" :search-items="demoConfigs.demo2.searchItems"
+        :form-options="demoConfigs.demo2.formOptions" :options="demoConfigs.demo2.searchOptions" @search="handleSearch"
+        @reset="handleReset">
         <template #beforeActions>
           <el-button type="info" @click="handleSaveTemplate" icon="Collection">
             保存模板
@@ -58,12 +40,9 @@
 
     <div class="demo-section">
       <h4>在默认按钮后添加内容 (afterActions 插槽)</h4>
-      <ma-search
-        :search-items="searchItems"
-        :form-options="formOptions"
-        @search="handleSearch"
-        @reset="handleReset"
-      >
+      <ma-search key="after-actions-demo" ref="customActionsThree" :search-items="demoConfigs.demo3.searchItems"
+        :form-options="demoConfigs.demo3.formOptions" :options="demoConfigs.demo3.searchOptions" @search="handleSearch"
+        @reset="handleReset">
         <template #afterActions>
           <el-dropdown @command="handleMoreActions">
             <el-button type="primary" plain icon="More">
@@ -84,13 +63,9 @@
 
     <div class="demo-section">
       <h4>组合使用插槽</h4>
-      <ma-search
-        :search-items="moreSearchItems"
-        :form-options="formOptions"
-        :options="{ fold: true, foldRows: 2 }"
-        @search="handleSearch"
-        @reset="handleReset"
-      >
+      <ma-search key="combined-demo" ref="customActionsFour" :search-items="demoConfigs.demo4.searchItems"
+        :form-options="demoConfigs.demo4.formOptions" :options="demoConfigs.demo4.searchOptions" @search="handleSearch"
+        @reset="handleReset">
         <template #beforeActions>
           <el-button-group>
             <el-button type="primary" size="small" @click="handleQuickSearch('today')">
@@ -104,7 +79,7 @@
             </el-button>
           </el-button-group>
         </template>
-        
+
         <template #afterActions>
           <el-divider direction="vertical" />
           <el-button type="text" @click="handleHelp" icon="QuestionFilled">
@@ -129,24 +104,32 @@
 
 <script setup lang="tsx">
 import { ref } from 'vue'
-import type {MaSearchItem, MaSearchOptions} from '@mineadmin/search'
+import type { MaSearchItem, MaSearchOptions } from '@mineadmin/search'
+import type { MaFormOptions } from '@mineadmin/form'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { ArrowDown } from '@element-plus/icons-vue'
 
-const actionLog = ref<Array<{time: string, action: string, data?: any}>>([])
+// 组件引用类型定义
+const customActionsOne = ref<InstanceType<typeof HTMLElement> | null>(null)
+const customActionsTwo = ref<InstanceType<typeof HTMLElement> | null>(null)
+const customActionsThree = ref<InstanceType<typeof HTMLElement> | null>(null)
+const customActionsFour = ref<InstanceType<typeof HTMLElement> | null>(null)
 
-const searchItems = ref<MaSearchItem[]>([
+// 操作日志类型定义
+interface ActionLogItem {
+  time: string
+  action: string
+  data?: any
+}
+
+const actionLog = ref<ActionLogItem[]>([])
+
+// 基础搜索项配置
+const baseSearchItems: MaSearchItem[] = [
   {
     label: '订单号',
     prop: 'order_no',
     render: 'input',
-    cols:{
-      xs: 24,
-      sm: 12,
-      md: 8,
-      lg: 6,
-      xl: 4
-    },
     renderProps: { placeholder: '请输入订单号' }
   },
   {
@@ -159,93 +142,150 @@ const searchItems = ref<MaSearchItem[]>([
     label: '订单状态',
     prop: 'status',
     render: 'select',
-    renderProps:{
+    renderProps: {
       options: [
         { label: '全部', value: '' },
         { label: '待付款', value: 'pending' },
         { label: '已付款', value: 'paid' },
         { label: '已发货', value: 'shipped' },
         { label: '已完成', value: 'completed' }
-      ]
+      ],
+      placeholder: '请选择订单状态'
     },
   }
-])
+]
 
-const moreSearchItems = ref<MaSearchItem[]>([
-  ...searchItems.value,
+// 额外的搜索项
+const extraSearchItems: MaSearchItem[] = [
   {
     label: '订单金额',
     prop: 'amount_range',
     render: 'input',
-    renderProps: { placeholder: '最小金额' }
+    renderProps: {
+      placeholder: '最小金额'
+    }
   },
   {
     label: '创建时间',
     prop: 'create_time',
-    render: 'date-picker',
-    renderProps: { type: 'datetimerange', placeholder: ['开始时间', '结束时间'] }
+    render: 'DatePicker',
+    renderProps: {
+      type: 'datetimerange',
+      rangeSeparator: '-',
+      startPlaceholder: '请选择开始时间',
+      endPlaceholder: '请选择结束时间'
+    }
   },
   {
     label: '备注',
     prop: 'remark',
     render: 'input',
-    renderProps: { placeholder: '请输入备注信息' }
+    renderProps: {
+      placeholder: '请输入备注信息'
+    }
   }
-])
+]
 
-const formOptions:MaSearchOptions = {
-  fold:true
+// 工厂函数
+const createSearchItems = (includeExtra: boolean = false): MaSearchItem[] => {
+  const items: MaSearchItem[] = JSON.parse(JSON.stringify(baseSearchItems))
+  return includeExtra ? [...items, ...JSON.parse(JSON.stringify(extraSearchItems))] : items
 }
 
-const addLog = (action: string, data?: any) => {
+const createFormOptions = (): MaFormOptions => ({ labelWidth: '80px' })
+
+const createSearchOptions = (fold: boolean = false): MaSearchOptions => ({
+  fold,
+  ...(fold && { foldRows: 2 }),
+  cols: { xs: 2, sm: 2, md: 2, lg: 2, xl: 2 }
+})
+
+// 配置类型定义
+interface DemoConfig {
+  searchItems: MaSearchItem[]
+  formOptions: MaFormOptions
+  searchOptions: MaSearchOptions
+}
+
+// 为每个组件创建独立的数据
+const demoConfigs: {
+  demo1: DemoConfig,
+  demo2: DemoConfig,
+  demo3: DemoConfig,
+  demo4: DemoConfig
+} = {
+  demo1: {
+    searchItems: createSearchItems(),
+    formOptions: createFormOptions(),
+    searchOptions: createSearchOptions()
+  },
+  demo2: {
+    searchItems: createSearchItems(),
+    formOptions: createFormOptions(),
+    searchOptions: createSearchOptions()
+  },
+  demo3: {
+    searchItems: createSearchItems(),
+    formOptions: createFormOptions(),
+    searchOptions: createSearchOptions()
+  },
+  demo4: {
+    searchItems: createSearchItems(true), // 包含额外项
+    formOptions: createFormOptions(),
+    searchOptions: createSearchOptions(true) // 开启折叠
+  }
+}
+
+// 函数类型定义
+const addLog = (action: string, data?: Record<string, any>): void => {
   actionLog.value.unshift({
     time: new Date().toLocaleTimeString(),
     action,
     data
-  })
+  } as ActionLogItem)
   if (actionLog.value.length > 10) {
     actionLog.value = actionLog.value.slice(0, 10)
   }
 }
 
-const handleSearch = (formData: any) => {
+const handleSearch = (formData: Record<string, any>): void => {
   addLog('执行搜索', formData)
   ElMessage.success('搜索完成')
 }
 
-const handleReset = (formData: any) => {
+const handleReset = (formData: Record<string, any>): void => {
   addLog('重置搜索', formData)
   ElMessage.info('已重置搜索条件')
 }
 
-const handleCustomSearch = () => {
+const handleCustomSearch = (): void => {
   addLog('自定义搜索按钮点击')
   ElMessage.success('自定义搜索执行')
 }
 
-const handleCustomReset = () => {
+const handleCustomReset = (): void => {
   addLog('自定义重置按钮点击')
   ElMessage.info('自定义重置执行')
 }
 
-const handleExport = () => {
+const handleExport = (): void => {
   addLog('导出数据')
   ElMessage.success('开始导出数据...')
 }
 
-const handleSaveTemplate = () => {
+const handleSaveTemplate = (): void => {
   addLog('保存搜索模板')
   ElMessage.success('搜索模板已保存')
 }
 
-const handleLoadTemplate = () => {
+const handleLoadTemplate = (): void => {
   addLog('加载搜索模板')
   ElMessage.success('搜索模板已加载')
 }
 
-const handleMoreActions = (command: string) => {
+const handleMoreActions = (command: string): void => {
   addLog('更多操作', { command })
-  
+
   switch (command) {
     case 'batch-delete':
       ElMessageBox.confirm('确认批量删除选中项？', '提示', {
@@ -265,12 +305,13 @@ const handleMoreActions = (command: string) => {
   }
 }
 
-const handleQuickSearch = (type: string) => {
+const handleQuickSearch = (type: 'today' | 'week' | 'month'): void => {
   addLog('快速搜索', { type })
-  ElMessage.success(`执行${type === 'today' ? '今日' : type === 'week' ? '本周' : '本月'}数据搜索`)
+  const typeText = type === 'today' ? '今日' : type === 'week' ? '本周' : '本月'
+  ElMessage.success(`执行${typeText}数据搜索`)
 }
 
-const handleHelp = () => {
+const handleHelp = (): void => {
   addLog('查看帮助')
   ElMessage.info('打开帮助文档')
 }
