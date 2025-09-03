@@ -200,7 +200,7 @@
 
 /* Content container width based on language */
 .VPDoc .vp-doc {
-    /*max-width: var(--content-width-normal);*/
+    max-width: var(--content-width-normal);
     margin: 0 auto;
     padding: 2rem 2.5rem 3rem;
 }
@@ -226,8 +226,8 @@
 /* CJK-specific paragraph justification */
 :root[lang^="zh"] .vp-doc p,
 :root[lang="ja"] .vp-doc p {
-    /*text-align: justify;*/
-    /*text-justify: inter-character;*/
+    text-align: justify;
+    text-justify: inter-character;
     word-break: keep-all;
     overflow-wrap: break-word;
     hyphens: none;
