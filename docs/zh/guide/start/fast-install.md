@@ -166,7 +166,10 @@ docker-compose logs -f mineadmin
 # 进入应用容器
 docker-compose exec mineadmin bash
 
-# 安装后端依赖
+# 安装依赖包（开发环境）
+composer install -vvv
+
+# 生产环境安装（可选）
 composer install --no-dev --optimize-autoloader
 
 # 数据库迁移
