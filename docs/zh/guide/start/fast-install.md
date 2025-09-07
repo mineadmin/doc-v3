@@ -166,7 +166,12 @@ docker-compose logs -f mineadmin
 # 进入应用容器
 docker-compose exec mineadmin bash
 
-# 安装后端依赖
+# 安装依赖（按场景二选一）
+
+# 开发环境:
+composer install -vvv
+
+# 生产环境安装:
 composer install --no-dev --optimize-autoloader
 
 # 数据库迁移
@@ -227,10 +232,12 @@ pnpm --version
 1. **安装 PHP 依赖**
 
 ```bash
-# 安装依赖包（开发环境）
+# 安装依赖（按场景二选一）
+
+# 开发环境:
 composer install -vvv
 
-# 生产环境安装（可选）
+# 生产环境安装:
 composer install --no-dev --optimize-autoloader
 ```
 
