@@ -51,6 +51,13 @@ location /uploads/ {
     add_header Access-Control-Allow-Origin https://example.com;  # https://example.com ドメインのウェブページのみがこのリソースにクロスオリジンリクエストできるようにし、セキュリティ向上
 }
 ```
+
+::: warning
+
+すべての設定が正しいことを確認しても、依然としてアクセスできず **403 Forbidden** が表示される場合は、`uploads` ディレクトリのパーミッションが **755** に設定されているか、所有者が `www` であるかを確認してください。
+
+:::
+
 2. 開発環境では、/config/autoload/server.phpに以下のように設定：
 ```php
 'settings' => [
