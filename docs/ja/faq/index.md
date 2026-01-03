@@ -61,3 +61,56 @@ location /uploads/ {
 ],
 ```
 .envファイルでAPP_DEBUGをtrueに変更し、設定後にサービスを再起動してください。
+
+---
+
+## WindowsでDockerを使用すると起動が遅いのはなぜですか？
+
+### 原因分析
+
+WindowsシステムでDockerを使用する際、起動速度が遅い主な原因はDockerのファイルシステム特性によるものです。DockerはWindows上で仮想化技術（WSL2やHyper-Vなど）を使用して動作しており、バインドマウント方式でWindowsホストのディレクトリをコンテナ内にマウントすると、クロスファイルシステムアクセスのオーバーヘッドが発生します。
+
+特に大量の小さなファイルを含むディレクトリ（`vendor`ディレクトリには数千の依存パッケージファイルが含まれ、`runtime`ディレクトリにはログやキャッシュファイルが含まれる）をマウントする場合、各ファイルの読み書きは以下を経由する必要があります：
+1. コンテナ内のファイルシステム
+2. Docker仮想化層
+3. Windowsホストのファイルシステム
+
+このようなクロスファイルシステムでの頻繁なI/O操作は、パフォーマンスを著しく低下させ、アプリケーションの起動が遅くなります。
+
+### 解決策
+
+頻繁に変更する必要のないディレクトリをDockerの名前付きボリューム（named volumes）で管理し、これらのディレクトリをDocker内部のファイルシステムで完全に管理することで、クロスファイルシステムアクセスを回避します。同時に、必要なソースコードディレクトリのみをマウントすることで、パフォーマンスと開発の利便性のバランスを実現します。
+
+`docker-compose.yml`で以下のように設定します：
+
+```yaml
+services:
+  hyperf:
+    volumes:
+      # vendorとruntimeを名前付きボリュームに保存し、クロスファイルシステムアクセスを回避
+      - vendor_data:/www/vendor
+      - runtime_data:/www/runtime
+      # 必要なソースコードディレクトリのみをマウント
+      - ./app:/www/app
+      - ./config:/www/config
+      - ./bin:/www/bin
+      - ./plugin:/www/plugin
+      - ./databases:/www/databases
+      - ./storage:/www/storage
+      - ./web:/www/web
+      - ./composer.json:/www/composer.json
+      - ./composer.lock:/www/composer.lock
+      - ./.env:/www/.env
+
+# 名前付きボリュームの定義
+volumes:
+  vendor_data:
+  runtime_data:
+```
+
+**設定の説明：**
+- `vendor_data` と `runtime_data` はDockerの名前付きボリュームで、データはDocker管理領域に保存され、ネイティブに近いI/Oパフォーマンスを実現
+- ソースコードディレクトリ（`app`、`config`など）は引き続きホストにマウントされ、リアルタイムでの編集とデバッグが可能
+- `composer.json`、`composer.lock`、`.env` は個別にマウントされ、依存関係の設定と環境変数をリアルタイムで同期可能
+
+この設定により、アプリケーションの起動速度が大幅に向上します。

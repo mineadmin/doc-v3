@@ -66,3 +66,56 @@ location /uploads/ {
 ],
 ```
 .env文件，APP_DEBUG改為true，配置後重啓服務。
+
+---
+
+## Windows下使用Docker啟動為什麼這麼慢
+
+### 原因分析
+
+在Windows系統下使用Docker時，啟動速度慢主要係由於Docker嘅文件系統特性導致嘅。Docker喺Windows上運行時，底層使用嘅係虛擬化技術（如WSL2或Hyper-V），當使用bind mount（綁定掛載）方式將Windows宿主機嘅目錄掛載到容器內時，會產生跨文件系統嘅訪問開銷。
+
+特別係當掛載包含大量細文件嘅目錄（如`vendor`目錄包含成千上萬個依賴包文件，`runtime`目錄包含日誌同緩存文件）時，每次文件讀寫都需要經過：
+1. 容器內嘅文件系統
+2. Docker虛擬化層
+3. Windows主機文件系統
+
+呢種跨文件系統嘅頻繁I/O操作會顯著降低性能，導致應用啟動緩慢。
+
+### 解決方案
+
+通過使用Docker嘅命名卷（named volumes）嚟管理唔需要頻繁修改嘅目錄，令呢啲目錄完全喺Docker內部嘅文件系統中管理，避免跨文件系統訪問。同時只掛載必要嘅源代碼目錄，實現性能同開發便利性嘅平衡。
+
+喺`docker-compose.yml`中配置如下：
+
+```yaml
+services:
+  hyperf:
+    volumes:
+      # 使用命名卷存儲vendor同runtime，避免跨文件系統訪問
+      - vendor_data:/www/vendor
+      - runtime_data:/www/runtime
+      # 只掛載必要嘅源代碼目錄
+      - ./app:/www/app
+      - ./config:/www/config
+      - ./bin:/www/bin
+      - ./plugin:/www/plugin
+      - ./databases:/www/databases
+      - ./storage:/www/storage
+      - ./web:/www/web
+      - ./composer.json:/www/composer.json
+      - ./composer.lock:/www/composer.lock
+      - ./.env:/www/.env
+
+# 定義命名卷
+volumes:
+  vendor_data:
+  runtime_data:
+```
+
+**配置說明：**
+- `vendor_data` 同 `runtime_data` 係Docker命名卷，數據存儲喺Docker管理嘅空間中，I/O性能接近原生
+- 源代碼目錄（如`app`、`config`等）仍然掛載到宿主機，方便實時編輯同調試
+- `composer.json`、`composer.lock`同`.env`單獨掛載，確保依賴配置同環境變量可以實時同步
+
+採用呢種配置後，應用啟動速度可以顯著提升。

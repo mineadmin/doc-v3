@@ -61,3 +61,56 @@ location /uploads/ {
 ],
 ```
 In the `.env` file, set `APP_DEBUG` to `true`. After configuration, restart the service.
+
+---
+
+## Why is Docker startup so slow on Windows?
+
+### Root Cause
+
+When using Docker on Windows systems, slow startup speeds are primarily caused by Docker's file system characteristics. Docker on Windows runs on virtualization technology (such as WSL2 or Hyper-V). When using bind mounts to mount Windows host directories into containers, cross-filesystem access overhead occurs.
+
+This is especially noticeable when mounting directories with a large number of small files (such as the `vendor` directory containing thousands of dependency files, and the `runtime` directory containing logs and cache files). Each file read/write operation must go through:
+1. Container's file system
+2. Docker virtualization layer
+3. Windows host file system
+
+This frequent cross-filesystem I/O significantly reduces performance, causing slow application startup.
+
+### Solution
+
+Use Docker named volumes to manage directories that don't need frequent modification, allowing these directories to be fully managed within Docker's internal file system, avoiding cross-filesystem access. Meanwhile, only mount necessary source code directories to balance performance and development convenience.
+
+Configure in `docker-compose.yml` as follows:
+
+```yaml
+services:
+  hyperf:
+    volumes:
+      # Use named volumes for vendor and runtime to avoid cross-filesystem access
+      - vendor_data:/www/vendor
+      - runtime_data:/www/runtime
+      # Only mount necessary source code directories
+      - ./app:/www/app
+      - ./config:/www/config
+      - ./bin:/www/bin
+      - ./plugin:/www/plugin
+      - ./databases:/www/databases
+      - ./storage:/www/storage
+      - ./web:/www/web
+      - ./composer.json:/www/composer.json
+      - ./composer.lock:/www/composer.lock
+      - ./.env:/www/.env
+
+# Define named volumes
+volumes:
+  vendor_data:
+  runtime_data:
+```
+
+**Configuration Explanation:**
+- `vendor_data` and `runtime_data` are Docker named volumes, with data stored in Docker-managed space for near-native I/O performance
+- Source code directories (such as `app`, `config`, etc.) are still mounted to the host for real-time editing and debugging
+- `composer.json`, `composer.lock`, and `.env` are mounted separately to ensure dependency configurations and environment variables can be synchronized in real-time
+
+With this configuration, application startup speed can be significantly improved.
