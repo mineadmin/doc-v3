@@ -66,3 +66,56 @@ location /uploads/ {
 ],
 ```
 .env文件，APP_DEBUG改为true，配置后重启服务。
+
+---
+
+## Windows下使用Docker启动为什么这么慢
+
+### 原因分析
+
+在Windows系统下使用Docker时，启动速度慢主要是由于Docker的文件系统特性导致的。Docker在Windows上运行时，底层使用的是虚拟化技术（如WSL2或Hyper-V），当使用bind mount（绑定挂载）方式将Windows宿主机的目录挂载到容器内时，会产生跨文件系统的访问开销。
+
+特别是当挂载包含大量小文件的目录（如`vendor`目录包含成千上万个依赖包文件，`runtime`目录包含日志和缓存文件）时，每次文件读写都需要经过：
+1. 容器内的文件系统
+2. Docker虚拟化层
+3. Windows主机文件系统
+
+这种跨文件系统的频繁I/O操作会显著降低性能，导致应用启动缓慢。
+
+### 解决方案
+
+通过使用Docker的命名卷（named volumes）来管理不需要频繁修改的目录，让这些目录完全在Docker内部的文件系统中管理，避免跨文件系统访问。同时只挂载必要的源代码目录，实现性能和开发便利性的平衡。
+
+在`docker-compose.yml`中配置如下：
+
+```yaml
+services:
+  hyperf:
+    volumes:
+      # 使用命名卷存储vendor和runtime，避免跨文件系统访问
+      - vendor_data:/www/vendor
+      - runtime_data:/www/runtime
+      # 只挂载必要的源代码目录
+      - ./app:/www/app
+      - ./config:/www/config
+      - ./bin:/www/bin
+      - ./plugin:/www/plugin
+      - ./databases:/www/databases
+      - ./storage:/www/storage
+      - ./web:/www/web
+      - ./composer.json:/www/composer.json
+      - ./composer.lock:/www/composer.lock
+      - ./.env:/www/.env
+
+# 定义命名卷
+volumes:
+  vendor_data:
+  runtime_data:
+```
+
+**配置说明：**
+- `vendor_data` 和 `runtime_data` 是Docker命名卷，数据存储在Docker管理的空间中，I/O性能接近原生
+- 源代码目录（如`app`、`config`等）仍然挂载到宿主机，方便实时编辑和调试
+- `composer.json`、`composer.lock`和`.env`单独挂载，确保依赖配置和环境变量可以实时同步
+
+采用这种配置后，应用启动速度可以显著提升。
