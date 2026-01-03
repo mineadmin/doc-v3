@@ -51,6 +51,13 @@ location /uploads/ {
     add_header Access-Control-Allow-Origin https://example.com;  # Only allow cross-origin requests from https://example.com for enhanced security
 }
 ```
+
+::: warning
+
+If all configurations are confirmed to be correct but you still cannot access the site and encounter a 403 Forbidden error, please check whether the `uploads` directory permissions are set to 755 and ensure that the owner is `www`.
+
+:::
+
 2. In a development environment, configure the following in `/config/autoload/server.php`:
 ```php
 'settings' => [

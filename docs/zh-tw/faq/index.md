@@ -56,6 +56,13 @@ location /uploads/ {
     add_header Access-Control-Allow-Origin https://example.com;  # 只允許 https://example.com 域名的網頁跨域請求本資源，提升安全性
 }
 ```
+
+::: warning
+
+如果已確認所有設定均正確，但仍無法訪問並出現 403 Forbidden，請檢查 `uploads` 目錄的權限是否設為 755，並確保所屬使用者為 `www`。
+
+:::
+
 2. 開發環境下，在/config/autoload/server.php，配置如下：
 ```php
 'settings' => [

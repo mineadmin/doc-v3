@@ -50,12 +50,29 @@ Swow 安装请参考 [Swow 官方文档](https://docs.toast.run/swow-blog/chs/in
 ```nginx
 # 代理 uploads 中的图片资源
 location /uploads/ {
-    alias /mineadmin/storage/uploads/; # 示例路径，请根据实际部署环境调整
-    expires 7d;
-    add_header Cache-Control "public";  # 允许所有用户和中间缓存服务器（如CDN）缓存此资源，提高缓存效率
-    add_header Access-Control-Allow-Origin https://example.com;  # 只允许 https://example.com 域名的网页跨域请求本资源，提升安全性
+    alias /www/wwwroot/MineAdmin/storage/uploads/;
+    expires 30d;
+    add_header Cache-Control "public";
+    add_header Access-Control-Allow-Origin *;
+    
+    # 只允许图片文件
+    location ~* \.(jpg|jpeg|png|gif|webp|svg|ico|bmp)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+    
+    # 防止访问其他文件类型
+    location ~* \.(php|html|htm|js|css)$ {
+        deny all;
+    }
 }
 ```
+::: warning
+
+如果确认所有配置均正确，但仍无法访问并且出现 403 Forbidden，请检查 `uploads` 目录的权限是否设置为 755，并确保所属用户为 `www`。
+
+:::
+
 2. 开发环境下，在/config/autoload/server.php，配置如下：
 ```php
 'settings' => [
