@@ -3,59 +3,59 @@ import type {DefaultTheme} from "vitepress";
 const sidebar:DefaultTheme.Sidebar = {
   '/guide/': [
     {
-      text: '📚 Introduction',
+      text: 'Introduction',
       collapsed: false,
       items: [
         {
-          text: '💡 Why Choose Us?',
+          text: 'Why Choose Us?',
           link: '/guide/introduce/mineadmin',
         },
         {
-          text: '📝 Changelog',
+          text: 'Changelog',
           link: '/guide/changelog',
         },
         {
-          text: '⚖️ Disclaimer',
+          text: 'Disclaimer',
           link: '/guide/introduce/declaration',
         },
         {
-          text: '🙏 Acknowledgments',
+          text: 'Acknowledgments',
           link: '/guide/introduce/thank',
         },
         {
-          text: '🗣️ Contact Us',
+          text: 'Contact Us',
           link: '/guide/introduce/contact',
         }
       ]
     },
     {
-      text: '🚀 Quick Start',
+      text: 'Quick Start',
       collapsed: false,
       items: [
         {
-          text: '⚡ Quick Installation',
+          text: 'Quick Installation',
           link: '/guide/start/fast-install',
         },
         {
-          text: "🌐 Deployment",
+          text: "Deployment",
           link: "/guide/start/deployment"
         }
       ]
     },
     {
-      text: '📋 Other Resources',
+      text: 'Other Resources',
       collapsed: true,
       items: [
         {
-          text:"📦 Release Notes",
+          text:"Release Notes",
           link:'/guide/releases'
         },
         {
-          text:"🔄 Upgrade Guide",
+          text:"Upgrade Guide",
           link:"/guide/upgrade"
         },
         {
-          text:"🤝 Contribution Guide",
+          text:"Contribution Guide",
           link:"/guide/contributions"
         }
       ]
@@ -63,91 +63,91 @@ const sidebar:DefaultTheme.Sidebar = {
   ],
   '/front/': [
     {
-      text: '🎯 Basics',
+      text: 'Basics',
       collapsed: false,
       items: [
         {
-          text: '📖 Basic Concepts',
+          text: 'Basic Concepts',
           link: '/front/base/concept'
         },
         {
-          text: '🎬 Quick Start',
+          text: 'Quick Start',
           link: '/front/base/start'
         },
         {
-          text: '🧭 Routes & Menus',
+          text: 'Routes & Menus',
           link: '/front/base/route-menu'
         },
         {
-          text: '⚙️ Configuration',
+          text: 'Configuration',
           link: '/front/base/configure'
         },
         {
-          text: '🎨 Icons',
+          text: 'Icons',
           link: '/front/base/icon'
         },
         {
-          text: '🔨 Build & Preview',
+          text: 'Build & Preview',
           link: '/front/base/build-preview'
         }
       ]
     },
     {
-      text: '🚀 Advanced Development',
+      text: 'Advanced Development',
       collapsed: false,
       items: [
         {
-          text: '⚡ System Configuration',
+          text: 'System Configuration',
           link: '/front/advanced/system-config'
         },
         {
-          text: '🤖 Auto Import',
+          text: 'Auto Import',
           link: '/front/advanced/auto-import'
         },
         {
-          text: '🌐 Requests & Interceptors',
+          text: 'Requests & Interceptors',
           link: '/front/advanced/request'
         },
         {
-          text: '🔐 Login & Welcome Page',
+          text: 'Login & Welcome Page',
           link: '/front/advanced/login-welcome'
         },
         {
-          text: '📦 Modularization',
+          text: 'Modularization',
           link: '/front/advanced/module'
         },
         {
-          text: '🎛️ Layout',
+          text: 'Layout',
           link: '/front/advanced/layout'
         },
         {
-          text: '🛠️ Toolbar Extensions',
+          text: 'Toolbar Extensions',
           link: '/front/advanced/tools'
         },
         {
-          text: '🔒 Permissions',
+          text: 'Permissions',
           link: '/front/advanced/permission'
         },
         {
-          text: '💾 Page Caching',
+          text: 'Page Caching',
           link: '/front/advanced/cache'
         }
       ]
     },
     {
-      text: '🎪 Advanced Topics',
+      text: 'Advanced Topics',
       collapsed: true,
       items: [
         {
-          text: '🌍 Internationalization',
+          text: 'Internationalization',
           link: '/front/high/i18n'
         },
         {
-          text: '🔌 Service Providers',
+          text: 'Service Providers',
           link: '/front/high/provider'
         },
         {
-          text: '🪝 Hooks',
+          text: 'Hooks',
           link: '/front/high/hooks'
         },
         {
@@ -155,197 +155,197 @@ const sidebar:DefaultTheme.Sidebar = {
           link: '/front/high/store'
         },
         {
-          text: '🧩 Plugin System',
+          text: 'Plugin System',
           link: '/front/high/plugins'
         },
         {
-          text: '⚛️ JSX & TSX Development',
+          text: 'JSX & TSX Development',
           link: '/front/high/tsx'
         }
       ],
     },
     {
-      text: '🧱 Component Tutorials',
+      text: 'Component Tutorials',
       collapsed: false,
       items: [
         {
-          text: '📝 MaForm Component',
+          text: 'MaForm Component',
           link: '/front/component/ma-form',
           collapsed: true,
           items: [
             {
-              text: '🎯 Basic Usage',
+              text: 'Basic Usage',
               link: '/front/component/ma-form/examples/basic-usage'
             },
             {
-              text: '🎛️ Layout System',
+              text: 'Layout System',
               link: '/front/component/ma-form/examples/layout-systems'
             },
             {
-              text: '🔀 Conditional Rendering',
+              text: 'Conditional Rendering',
               link: '/front/component/ma-form/examples/conditional-rendering'
             },
             {
-              text: '✅ Dynamic Validation',
+              text: 'Dynamic Validation',
               link: '/front/component/ma-form/examples/dynamic-validation'
             },
             {
-              text: '🧩 Component Rendering',
+              text: 'Component Rendering',
               link: '/front/component/ma-form/examples/component-rendering'
             },
             {
-              text: '🎪 Slot Examples',
+              text: 'Slot Examples',
               link: '/front/component/ma-form/examples/slots-examples'
             },
             {
-              text: '🔧 Exposed Methods',
+              text: 'Exposed Methods',
               link: '/front/component/ma-form/examples/expose-methods'
             },
             {
-              text: '⏳ Loading States',
+              text: 'Loading States',
               link: '/front/component/ma-form/examples/loading-states'
             },
             {
-              text: '🔗 Nested Forms',
+              text: 'Nested Forms',
               link: '/front/component/ma-form/examples/nested-forms'
             },
             {
-              text: '📱 Mobile Adaptation',
+              text: 'Mobile Adaptation',
               link: '/front/component/ma-form/examples/mobile-responsive'
             },
             {
-              text: '🎭 Advanced Scenarios',
+              text: 'Advanced Scenarios',
               link: '/front/component/ma-form/examples/advanced-scenarios'
             },
             {
-              text: '⚡ Performance Demo',
+              text: 'Performance Demo',
               link: '/front/component/ma-form/examples/performance-demo'
             }
           ]
         },
         {
-          text: '📊 MaTable Component',
+          text: 'MaTable Component',
           link: '/front/component/ma-table',
           collapsed: true,
           items: [
             {
-              text: '📋 Basic Table',
+              text: 'Basic Table',
               link: '/front/component/ma-table/basic'
             },
             {
-              text: '↕️ Table Sorting',
+              text: 'Table Sorting',
               link: '/front/component/ma-table/sorting'
             },
             {
-              text: '🔍 Table Filtering',
+              text: 'Table Filtering',
               link: '/front/component/ma-table/filter'
             },
             {
-              text: '🎨 Custom Rendering',
+              text: 'Custom Rendering',
               link: '/front/component/ma-table/custom-render'
             },
             {
-              text: '🔧 Dynamic Columns',
+              text: 'Dynamic Columns',
               link: '/front/component/ma-table/dynamic-columns'
             },
             {
-              text: '📄 Pagination Table',
+              text: 'Pagination Table',
               link: '/front/component/ma-table/pagination'
             },
             {
-              text: '🌲 Tree Table',
+              text: 'Tree Table',
               link: '/front/component/ma-table/tree-table'
             },
             {
-              text: '☑️ Multi-select Table',
+              text: 'Multi-select Table',
               link: '/front/component/ma-table/selection'
             },
             {
-              text: '📱 Responsive Table',
+              text: 'Responsive Table',
               link: '/front/component/ma-table/responsive'
             }
           ]
         },
         {
-          text: '🔍 MaSearch Component',
+          text: 'MaSearch Component',
           link: '/front/component/ma-search',
           collapsed: true,
           items: [
             {
-              text: '🎯 Basic Usage',
+              text: 'Basic Usage',
               link: '/front/component/ma-search/examples/basic-usage'
             },
             {
-              text: '🚀 Advanced Search',
+              text: 'Advanced Search',
               link: '/front/component/ma-search/examples/advanced-search'
             },
             {
-              text: '🔽 Collapsible Search',
+              text: 'Collapsible Search',
               link: '/front/component/ma-search/examples/collapsible-search'
             },
             {
-              text: '⚙️ Custom Actions',
+              text: 'Custom Actions',
               link: '/front/component/ma-search/examples/custom-actions'
             },
             {
-              text: '🔄 Dynamic Management',
+              text: 'Dynamic Management',
               link: '/front/component/ma-search/examples/dynamic-items'
             },
             {
-              text: '📱 Responsive Layout',
+              text: 'Responsive Layout',
               link: '/front/component/ma-search/examples/responsive-layout'
             },
             {
-              text: '🔗 Table Integration',
+              text: 'Table Integration',
               link: '/front/component/ma-search/examples/table-integration'
             },
             {
-              text: '✅ Form Validation',
+              text: 'Form Validation',
               link: '/front/component/ma-search/examples/form-validation'
             },
             {
-              text: '🔧 Methods Demo',
+              text: 'Methods Demo',
               link: '/front/component/ma-search/examples/methods-demo'
             }
           ]
         },
         {
-          text: '📈 MaProTable Advanced Table',
+          text: 'MaProTable Advanced Table',
           link: '/front/component/ma-pro-table',
           collapsed: true,
           items: [
             {
-              text: '🎯 Basic Usage',
+              text: 'Basic Usage',
               link: '/front/component/ma-pro-table/examples/basic'
             },
             {
-              text: '🔍 Advanced Search',
+              text: 'Advanced Search',
               link: '/front/component/ma-pro-table/examples/advanced-search'
             },
             {
-              text: '⚙️ Custom Operations',
+              text: 'Custom Operations',
               link: '/front/component/ma-pro-table/examples/custom-operations'
             },
             {
-              text: '🧩 Cell Render Plugins',
+              text: 'Cell Render Plugins',
               link: '/front/component/ma-pro-table/examples/cell-render-plugins'
             },
             {
-              text: '🔧 Toolbar Extensions',
+              text: 'Toolbar Extensions',
               link: '/front/component/ma-pro-table/examples/toolbar-extensions'
             },
             {
-              text: '📁 Data Management',
+              text: 'Data Management',
               link: '/front/component/ma-pro-table/examples/data-management'
             },
             {
-              text: '📱 Responsive Layout',
+              text: 'Responsive Layout',
               link: '/front/component/ma-pro-table/examples/responsive-layout'
             }
           ]
         },
         {
-          text: '📉 MaEcharts Chart Component',
+          text: 'MaEcharts Chart Component',
           link: '/front/component/ma-echarts'
         },
       ]
@@ -353,68 +353,68 @@ const sidebar:DefaultTheme.Sidebar = {
   ],
   '/backend/':[
     {
-      text:"🚀 Core Features",
+      text:"Core Features",
       collapsed: false,
       items:[
         {
-          text: "📁 Directory Structure",
+          text: "Directory Structure",
           link: "/backend/base/structure"
         },
         {
-          text: "🔄 Lifecycle",
+          text: "Lifecycle",
           link: "/backend/base/lifecycle"
         },
-        { text: "🌐 Routes & API Docs",link: "/backend/base/router"},
-        { text: "⚠️ Error Handling",link: "/backend/base/error-handler"},
-        {text: "📄 Logging",link: "/backend/base/logger"},
-        {text: "📡 Events",link: "/backend/base/event-handler"},
-        {text: "📄 File Upload",link: "/backend/base/upload"},
-        {text: "🌍 Multilingual",link: "/backend/base/lang"},
+        { text: "Routes & API Docs",link: "/backend/base/router"},
+        { text: "Error Handling",link: "/backend/base/error-handler"},
+        {text: "Logging",link: "/backend/base/logger"},
+        {text: "Events",link: "/backend/base/event-handler"},
+        {text: "File Upload",link: "/backend/base/upload"},
+        {text: "Multilingual",link: "/backend/base/lang"},
       ]
     },
     {
-      text:"🔒 Security",
+      text:"Security",
       collapsed: false,
       items:[
         {
-          text: "🔑 User Authentication",
+          text: "User Authentication",
           link: "/backend/security/passport"
         },
         {
-          text: "🔐 User Authorization (RBAC)",
+          text: "User Authorization (RBAC)",
           link: "/backend/security/access"
         },
         {
-          text: "🌍 Client IP Detection",
+          text: "Client IP Detection",
           link: "/backend/security/client-ip"
         }
       ]
     },{
-      text:"🛡️ Data Permissions",
+      text:"Data Permissions",
       collapsed: true,
       items:[
         {
-          text: "💡 Core Concepts",
+          text: "Core Concepts",
           link: "/backend/data-permission/overview"
         },
         {
-          text: "⚙️ Configuration & Demo",
+          text: "Configuration & Demo",
           link: "/backend/data-permission/config"
         },
         {
-          text: "📋 API Reference & Advanced Usage",
+          text: "API Reference & Advanced Usage",
           link: "/backend/data-permission/example"
         },
         {
-          text: "⚡ Performance Optimization",
+          text: "Performance Optimization",
           link: "/backend/data-permission/performance"
         },
         {
-          text: "🔧 Troubleshooting",
+          text: "Troubleshooting",
           link: "/backend/data-permission/troubleshooting"
         },
         {
-          text: "⚠️ Notes & Best Practices",
+          text: "Notes & Best Practices",
           link: "/backend/data-permission/notice"
         }
       ]
@@ -422,104 +422,104 @@ const sidebar:DefaultTheme.Sidebar = {
   ],
   '/plugin/':[
     {
-      text:"🚀 Quick Start",
+      text:"Quick Start",
       collapsed: false,
       items:
           [
             {
-              text:"📖 Plugin System Overview",
+              text:"Plugin System Overview",
               link:"/plugin/index"
             },
             {
-              text:"🎯 Quick Start Guide",
+              text:"Quick Start Guide",
               link:"/plugin/guide"
             },
             {
-              text:"💻 Plugin Commands",
+              text:"Plugin Commands",
               link:"/plugin/command"
             },
             {
-              text:"✨ Create Application",
+              text:"Create Application",
               link:"/plugin/create"
             }
           ]
     },
     {
-      text:"📚 Core Concepts",
+      text:"Core Concepts",
       collapsed: false,
       items:
           [
             {
-              text:"📁 Plugin Directory Structure",
+              text:"Plugin Directory Structure",
               link:"/plugin/structure"
             },
             {
-              text:"📄 mine.json Configuration",
+              text:"mine.json Configuration",
               link:"/plugin/mineJson"
             },
             {
-              text:"⚙️ ConfigProvider Guide",
+              text:"ConfigProvider Guide",
               link:"/plugin/configProvider"
             },
             {
-              text:"🔄 Lifecycle Management",
+              text:"Lifecycle Management",
               link:"/plugin/lifecycle"
             }
           ]
     },
     {
-      text:"💡 Development Guide",
+      text:"Development Guide",
       collapsed: false,
       items:
           [
             {
-              text:"🛠️ Plugin Development Guide",
+              text:"Plugin Development Guide",
               link:"/plugin/develop"
             },
             {
-              text:"📚 API Reference",
+              text:"API Reference",
               link:"/plugin/api"
             },
             {
-              text:"📝 Example Code",
+              text:"Example Code",
               link:"/plugin/examples"
             }
           ]
     },
     {
-      text:"🔧 Backend Development",
+      text:"Backend Development",
       collapsed: false,
       items:[
         {
-          text: "📀 Database Migrations",
+          text: "Database Migrations",
           link: "/plugin/backend/migrate"
         },
         {
-          text: "🧪 Unit Testing",
+          text: "Unit Testing",
           link: "/plugin/backend/unit-test"
         },
       ]
     },
     {
-      text:"🎨 Frontend Development",
+      text:"Frontend Development",
       collapsed: false,
       items:[
         {
-          text: "📋 Frontend Development Standards",
+          text: "Frontend Development Standards",
           link: "/plugin/front/develop"
         }
       ]
     },
     {
-      text:"🚀 Application Publishing",
+      text:"Application Publishing",
       collapsed: true,
       items:[
         {
-          text: "📦 App Publishing",
+          text: "App Publishing",
           link: "/plugin/develop/publish"
         },
         {
-          text: "⚠️ Notes",
+          text: "Notes",
           link: "/plugin/develop/question"
         }
       ]
