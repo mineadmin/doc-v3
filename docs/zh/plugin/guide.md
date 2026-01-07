@@ -48,7 +48,7 @@ php bin/hyperf.php mine-extension:initial
 # 创建一个混合型插件
 php bin/hyperf.php mine-extension:create mycompany/hello-world \
     --name "Hello World" \
-    --type mixed \
+    --type mix \
     --author "Your Name" \
     --description "我的第一个MineAdmin插件"
 ```
@@ -56,7 +56,7 @@ php bin/hyperf.php mine-extension:create mycompany/hello-world \
 **参数说明**：
 - `mycompany/hello-world`：插件路径 (命名空间/插件名)
 - `--name`：插件显示名称
-- `--type`：插件类型 (mixed/backend/frontend)
+- `--type`：插件类型 (mix/backend/frontend)
 - `--author`：作者名称
 - `--description`：插件描述
 
@@ -97,9 +97,9 @@ plugin/mycompany/hello-world/
   ],
   "composer": {
     "psr-4": {
-      "Plugin\\MyCompany\\HelloWorld\\": "src"
+      "Plugin\\Mycompany\\HelloWorld\\": "src"
     },
-    "config": "Plugin\\MyCompany\\HelloWorld\\ConfigProvider"
+    "config": "Plugin\\Mycompany\\HelloWorld\\ConfigProvider"
   }
 }
 ```
@@ -111,7 +111,7 @@ plugin/mycompany/hello-world/
 ```php
 <?php
 
-namespace Plugin\MyCompany\HelloWorld;
+namespace Plugin\Mycompany\HelloWorld;
 
 class ConfigProvider
 {
@@ -143,7 +143,7 @@ class ConfigProvider
 ```php
 <?php
 
-namespace Plugin\MyCompany\HelloWorld\Controller;
+namespace Plugin\Mycompany\HelloWorld\Controller;
 
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\GetMapping;
@@ -151,7 +151,7 @@ use Hyperf\HttpServer\Annotation\GetMapping;
 #[Controller(prefix: '/hello-world')]
 class HelloController
 {
-    #[GetMapping('/greeting')]
+    #[GetMapping('greeting')]
     public function greeting(): array
     {
         return [
