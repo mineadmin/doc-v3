@@ -125,7 +125,7 @@ bin/
 
 - **VitePress** - Static site generator
 - **Vue 3** - Component framework for interactive demos
-- **TypeScript** - Type safety for configuration
+- **TypeScript** - Type safety for configuration 
 - **Element Plus** - UI component library for demos
 - **UnoCSS** - Utility-first CSS framework
 - **PlantUML** - Diagram generation support
