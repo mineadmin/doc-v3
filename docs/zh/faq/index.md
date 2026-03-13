@@ -136,3 +136,15 @@ volumes:
 - `composer.json`、`composer.lock`和`.env`单独挂载，确保依赖配置和环境变量可以实时同步
 
 采用这种配置后，应用启动速度可以显著提升。
+
+---
+
+## 定时任务-Command类型，只有第一次成功，后续都失败问题。
+
+调用目标，需要加上--disable-event-dispatcher: ture配置。
+即crontab表中的value值为：
+```json
+{"command":"mine:xxx","--disable-event-dispatcher":true}
+```
+
+详细文档：https://hyperf.wiki/3.1/#/zh-cn/crontab
