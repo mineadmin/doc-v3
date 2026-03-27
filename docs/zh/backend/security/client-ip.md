@@ -2,6 +2,8 @@
 
 ::: warning 
 
+使用此方法获取客户端 ip 。需要手动  require symfony/http-foundation !!!
+
 mineadmin/support >= 3.0.21
 
 :::
