@@ -55,4 +55,6 @@ jobs:
           docker build . -t doc-v3:${{ matrix.language }}-latest
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY
           docker tag doc-v3:${{ matrix.language }}-latest $DOCKER_REGISTRY/mineadmins/docs:${{ matrix.language }}-$DATE
+          docker tag doc-v3:${{ matrix.language }}-latest $DOCKER_REGISTRY/mineadmins/docs:${{ matrix.language }}-latest
           docker push $DOCKER_REGISTRY/mineadmins/docs:${{ matrix.language }}-$DATE
+          docker push $DOCKER_REGISTRY/mineadmins/docs:${{ matrix.language }}-latest
