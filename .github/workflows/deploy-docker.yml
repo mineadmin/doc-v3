@@ -58,3 +58,20 @@ jobs:
           docker tag doc-v3:${{ matrix.language }}-latest $DOCKER_REGISTRY/mineadmins/docs:${{ matrix.language }}-latest
           docker push $DOCKER_REGISTRY/mineadmins/docs:${{ matrix.language }}-$DATE
           docker push $DOCKER_REGISTRY/mineadmins/docs:${{ matrix.language }}-latest
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: Trigger n8n deploy webhook
+        env:
+          DEPLOY_WEBHOOK_URL: ${{ secrets.MINEADMIN_DEPLOY_WEBHOOK_URL }}
+          DEPLOY_WEBHOOK_TOKEN: ${{ secrets.MINEADMIN_DEPLOY_TOKEN }}
+          DEPLOY_SERVICE: docs
+          DEPLOY_DOCKER_TAG: zh-latest
+        run: |
+          curl --fail --show-error --silent --get "$DEPLOY_WEBHOOK_URL" \
+            --data-urlencode "service=$DEPLOY_SERVICE" \
+            --data-urlencode "docker=$DEPLOY_DOCKER_TAG" \
+            --header "X-MINEADMIN-DEPLOY: $DEPLOY_WEBHOOK_TOKEN"
