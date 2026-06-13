@@ -1,6 +1,5 @@
-import {defineConfigWithTheme, type MarkdownRenderer, type UserConfig} from 'vitepress'
+import {defineConfig, type MarkdownRenderer, type UserConfig} from 'vitepress'
 
-import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
 import { plantuml } from "@mdit/plugin-plantuml";
 import { demoPreviewPlugin } from './plugins/previewPlugin'
 import taskLists from 'markdown-it-task-lists'
@@ -8,7 +7,6 @@ import UnoCSS from 'unocss/vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import llmstxt from 'vitepress-plugin-llms'
 import { copyOrDownloadAsMarkdownButtons } from 'vitepress-plugin-llms'
-import {defineConfig} from "unocss";
 import type {UserConfig as ViteConfig} from "vite"
 import { visualizer } from 'rollup-plugin-visualizer'
 
@@ -54,6 +52,10 @@ async function getLangConfig() {
 
 const { nav: langNav, config: langConfig, sidebar: langSidebar } = await getLangConfig()
 const viteConfig:ViteConfig = {
+  build: {
+    // Keep Vite 8/Rolldown while avoiding Lightning CSS failures in bundled MineAdmin CSS.
+    cssMinify: 'esbuild',
+  },
   plugins:[
     vueJsx(),
     UnoCSS(),
