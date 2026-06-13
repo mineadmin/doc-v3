@@ -88,8 +88,11 @@ pnpm run docs:translate:full
 
 ```
 docs/
-├── zh/          # Chinese documentation (primary)
+├── zh/          # Chinese documentation (primary source)
+│   ├── v3/      # MineAdmin v3 product documentation
+│   └── libs/    # Independently versioned ecosystem libraries
 ├── en/          # English documentation
+├── ja/          # Japanese documentation
 ├── zh-hk/       # Traditional Chinese (Hong Kong)
 ├── zh-tw/       # Traditional Chinese (Taiwan)
 └── demos/       # Vue component demos
@@ -108,6 +111,8 @@ bin/
 ## Features
 
 - **Multilingual Support**: 8+ languages with automated translation system
+- **Versioned Product Docs**: MineAdmin product docs are grouped by product version, starting with `/v3`
+- **Independent Library Docs**: Ecosystem libraries live under `/libs/{library}/latest/`
 - **Interactive Demos**: Vue 3 components with live preview and code display
 - **TypeScript**: Full type safety for configuration and translation tools
 - **Modern Stack**: VitePress, Vue 3, Element Plus, UnoCSS
@@ -115,10 +120,11 @@ bin/
 
 ## Content Categories
 
-- **Guide** - Introduction, installation, deployment
-- **Frontend** - Vue.js components, advanced topics, development patterns
-- **Backend** - PHP/Hyperf framework topics, security, data permissions
-- **Plugins** - Extension system, development, migration
+- **V3 Guide** - Introduction, installation, deployment
+- **V3 Frontend** - Vue.js components, advanced topics, development patterns
+- **V3 Backend** - PHP/Hyperf framework topics, security, data permissions
+- **V3 Plugins** - Extension system, development, migration
+- **Libraries** - Independently maintained packages such as MaForm, MaTable, MaSearch, and MaProTable
 - **FAQ** - Common questions and troubleshooting
 
 ## Technology Stack
