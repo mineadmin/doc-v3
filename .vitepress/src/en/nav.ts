@@ -1,40 +1,52 @@
 import type {DefaultTheme} from "vitepress";
+import { createLibraryNavItems, createProductVersionNavItems } from "../shared";
 
 const nav:DefaultTheme.NavItem[] = [
     { 
         text: '📚 Guide', 
-        link: '/guide/introduce/mineadmin',
-        activeMatch: '/guide/'
+        link: '/v3/guide/introduce/mineadmin',
+        activeMatch: '/v3/guide/'
     },
     { 
         text: '🎨 Frontend', 
-        link: '/front/base/concept',
-        activeMatch: '/front/'
+        link: '/v3/front/base/concept',
+        activeMatch: '/v3/front/'
     },
     { 
         text: '🔧 Backend', 
-        link: '/backend/index',
-        activeMatch: '/backend/'
+        link: '/v3/backend/index',
+        activeMatch: '/v3/backend/'
     },
     { 
         text: '🧩 Plugins',
-        link: "/plugin/index",
-        activeMatch: '/plugin/'
+        link: "/v3/plugin/index",
+        activeMatch: '/v3/plugin/'
     },
     { 
         text: '❓ FAQ', 
-        link: '/faq/index',
-        activeMatch: '/faq/'
+        link: '/v3/faq/index',
+        activeMatch: '/v3/faq/'
+    },
+    {
+        text: '📦 Libraries',
+        items: [
+            { text: 'Library Overview', link: '/libs/' },
+            ...createLibraryNavItems()
+        ]
+    },
+    {
+        text: '🏷️ Version',
+        items: createProductVersionNavItems()
     },
     { 
         text: '🔗 More Recommendations',
         items:[
             { 
-                text: '📖 Legacy Documentation', 
+                text: '📖 Old Version Docs', 
                 link: 'https://docv2.mineadmin.com' 
             },
             { 
-                text: '📦 Out-of-the-box Hyperf Components', 
+                text: '📦 Out-of-the-box Hyperf Component Library', 
                 link: 'https://hyperf.fans/' 
             },
             { 
@@ -44,13 +56,13 @@ const nav:DefaultTheme.NavItem[] = [
         ]
     },
     { 
-        text: '🌍 Language', 
+        text: '🌍 Language Switch', 
         items: [
             { text: '🇨🇳 Chinese (Simplified)', link: 'https://doc.mineadmin.com' },
             { text: '🇺🇸 English', link: 'https://en.doc.mineadmin.com' },
-            { text: '🇯🇵 日本語', link: 'https://ja.doc.mineadmin.com' },
-            { text: '🇭🇰 Chinese (Hong Kong)', link: 'https://zh-hk.doc.mineadmin.com' },
-            { text: '🇹🇼 Chinese (Taiwan)', link: 'https://zh-tw.doc.mineadmin.com' }
+            { text: '🇯🇵 Japanese', link: 'https://ja.doc.mineadmin.com' },
+            { text: '🇭🇰 Traditional Chinese (Hong Kong)', link: 'https://zh-hk.doc.mineadmin.com' },
+            { text: '🇹🇼 Traditional Chinese (Taiwan)', link: 'https://zh-tw.doc.mineadmin.com' }
         ]
     }
 ]

@@ -14,7 +14,7 @@ hero:
   actions:
     - theme: brand
       text: 快速開始 ->
-      link: /guide/introduce/mineadmin
+      link: /v3/guide/introduce/mineadmin
     - theme: alt
       text: 查看演示
       link: https://demo.mineadmin.com

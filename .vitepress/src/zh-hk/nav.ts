@@ -1,30 +1,42 @@
 import type {DefaultTheme} from "vitepress";
+import { createLibraryNavItems, createProductVersionNavItems } from "../shared";
 
 const nav:DefaultTheme.NavItem[] = [
     { 
         text: '📚 指南', 
-        link: '/guide/introduce/mineadmin',
-        activeMatch: '/guide/'
+        link: '/v3/guide/introduce/mineadmin',
+        activeMatch: '/v3/guide/'
     },
     { 
         text: '🎨 前端', 
-        link: '/front/base/concept',
-        activeMatch: '/front/'
+        link: '/v3/front/base/concept',
+        activeMatch: '/v3/front/'
     },
     { 
         text: '🔧 後端', 
-        link: '/backend/index',
-        activeMatch: '/backend/'
+        link: '/v3/backend/index',
+        activeMatch: '/v3/backend/'
     },
     { 
         text: '🧩 插件',
-        link: "/plugin/index",
-        activeMatch: '/plugin/'
+        link: "/v3/plugin/index",
+        activeMatch: '/v3/plugin/'
     },
     { 
         text: '❓ 常見問題', 
-        link: '/faq/index',
-        activeMatch: '/faq/'
+        link: '/v3/faq/index',
+        activeMatch: '/v3/faq/'
+    },
+    {
+        text: '📦 庫',
+        items: [
+            { text: '庫總覽', link: '/libs/' },
+            ...createLibraryNavItems()
+        ]
+    },
+    {
+        text: '🏷️ 版本',
+        items: createProductVersionNavItems()
     },
     { 
         text: '🔗 更多推薦',
