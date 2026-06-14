@@ -1,30 +1,32 @@
+```typescript
 import type {DefaultTheme} from "vitepress";
+import { createLibrarySidebar } from "../shared";
 
 const sidebar:DefaultTheme.Sidebar = {
-  '/guide/': [
+  '/v3/guide/': [
     {
       text: 'Introduction',
       collapsed: false,
       items: [
         {
           text: 'Why Choose Us?',
-          link: '/guide/introduce/mineadmin',
+          link: '/v3/guide/introduce/mineadmin',
         },
         {
           text: 'Changelog',
-          link: '/guide/changelog',
+          link: '/v3/guide/changelog',
         },
         {
           text: 'Disclaimer',
-          link: '/guide/introduce/declaration',
+          link: '/v3/guide/introduce/declaration',
         },
         {
           text: 'Acknowledgments',
-          link: '/guide/introduce/thank',
+          link: '/v3/guide/introduce/thank',
         },
         {
           text: 'Contact Us',
-          link: '/guide/introduce/contact',
+          link: '/v3/guide/introduce/contact',
         }
       ]
     },
@@ -33,12 +35,12 @@ const sidebar:DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         {
-          text: 'Quick Installation',
-          link: '/guide/start/fast-install',
+          text: 'Fast Installation',
+          link: '/v3/guide/start/fast-install',
         },
         {
           text: "Deployment",
-          link: "/guide/start/deployment"
+          link: "/v3/guide/start/deployment"
         }
       ]
     },
@@ -48,47 +50,47 @@ const sidebar:DefaultTheme.Sidebar = {
       items: [
         {
           text:"Release Notes",
-          link:'/guide/releases'
+          link:'/v3/guide/releases'
         },
         {
           text:"Upgrade Guide",
-          link:"/guide/upgrade"
+          link:"/v3/guide/upgrade"
         },
         {
           text:"Contribution Guide",
-          link:"/guide/contributions"
+          link:"/v3/guide/contributions"
         }
       ]
     }
   ],
-  '/front/': [
+  '/v3/front/': [
     {
-      text: 'Basics',
+      text: 'Getting Started',
       collapsed: false,
       items: [
         {
           text: 'Basic Concepts',
-          link: '/front/base/concept'
+          link: '/v3/front/base/concept'
         },
         {
           text: 'Quick Start',
-          link: '/front/base/start'
+          link: '/v3/front/base/start'
         },
         {
-          text: 'Routes & Menus',
-          link: '/front/base/route-menu'
+          text: 'Routes and Menus',
+          link: '/v3/front/base/route-menu'
         },
         {
           text: 'Configuration',
-          link: '/front/base/configure'
+          link: '/v3/front/base/configure'
         },
         {
           text: 'Icons',
-          link: '/front/base/icon'
+          link: '/v3/front/base/icon'
         },
         {
-          text: 'Build & Preview',
-          link: '/front/base/build-preview'
+          text: 'Build and Preview',
+          link: '/v3/front/base/build-preview'
         }
       ]
     },
@@ -97,40 +99,40 @@ const sidebar:DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         {
-          text: 'System Configuration',
-          link: '/front/advanced/system-config'
+          text: 'System Parameter Configuration',
+          link: '/v3/front/advanced/system-config'
         },
         {
           text: 'Auto Import',
-          link: '/front/advanced/auto-import'
+          link: '/v3/front/advanced/auto-import'
         },
         {
-          text: 'Requests & Interceptors',
-          link: '/front/advanced/request'
+          text: 'Request and Interceptors',
+          link: '/v3/front/advanced/request'
         },
         {
-          text: 'Login & Welcome Page',
-          link: '/front/advanced/login-welcome'
+          text: 'Login and Welcome Page',
+          link: '/v3/front/advanced/login-welcome'
         },
         {
           text: 'Modularization',
-          link: '/front/advanced/module'
+          link: '/v3/front/advanced/module'
         },
         {
           text: 'Layout',
-          link: '/front/advanced/layout'
+          link: '/v3/front/advanced/layout'
         },
         {
           text: 'Toolbar Extensions',
-          link: '/front/advanced/tools'
+          link: '/v3/front/advanced/tools'
         },
         {
           text: 'Permissions',
-          link: '/front/advanced/permission'
+          link: '/v3/front/advanced/permission'
         },
         {
           text: 'Page Caching',
-          link: '/front/advanced/cache'
+          link: '/v3/front/advanced/cache'
         }
       ]
     },
@@ -139,28 +141,28 @@ const sidebar:DefaultTheme.Sidebar = {
       collapsed: true,
       items: [
         {
-          text: 'Internationalization',
-          link: '/front/high/i18n'
+          text: 'Internationalization Configuration',
+          link: '/v3/front/high/i18n'
         },
         {
-          text: 'Service Providers',
-          link: '/front/high/provider'
+          text: 'Service Provider',
+          link: '/v3/front/high/provider'
         },
         {
           text: 'Hooks',
-          link: '/front/high/hooks'
+          link: '/v3/front/high/hooks'
         },
         {
           text: '🗄️ Common Stores',
-          link: '/front/high/store'
+          link: '/v3/front/high/store'
         },
         {
           text: 'Plugin System',
-          link: '/front/high/plugins'
+          link: '/v3/front/high/plugins'
         },
         {
-          text: 'JSX & TSX Development',
-          link: '/front/high/tsx'
+          text: 'JSX and TSX Development',
+          link: '/v3/front/high/tsx'
         }
       ],
     },
@@ -169,224 +171,224 @@ const sidebar:DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         {
-          text: 'MaForm Component',
-          link: '/front/component/ma-form',
+          text: 'MaForm Form Component',
+          link: '/v3/front/component/ma-form',
           collapsed: true,
           items: [
             {
               text: 'Basic Usage',
-              link: '/front/component/ma-form/examples/basic-usage'
+              link: '/v3/front/component/ma-form/examples/basic-usage'
             },
             {
               text: 'Layout System',
-              link: '/front/component/ma-form/examples/layout-systems'
+              link: '/v3/front/component/ma-form/examples/layout-systems'
             },
             {
               text: 'Conditional Rendering',
-              link: '/front/component/ma-form/examples/conditional-rendering'
+              link: '/v3/front/component/ma-form/examples/conditional-rendering'
             },
             {
               text: 'Dynamic Validation',
-              link: '/front/component/ma-form/examples/dynamic-validation'
+              link: '/v3/front/component/ma-form/examples/dynamic-validation'
             },
             {
               text: 'Component Rendering',
-              link: '/front/component/ma-form/examples/component-rendering'
+              link: '/v3/front/component/ma-form/examples/component-rendering'
             },
             {
-              text: 'Slot Examples',
-              link: '/front/component/ma-form/examples/slots-examples'
+              text: 'Slots Examples',
+              link: '/v3/front/component/ma-form/examples/slots-examples'
             },
             {
               text: 'Exposed Methods',
-              link: '/front/component/ma-form/examples/expose-methods'
+              link: '/v3/front/component/ma-form/examples/expose-methods'
             },
             {
               text: 'Loading States',
-              link: '/front/component/ma-form/examples/loading-states'
+              link: '/v3/front/component/ma-form/examples/loading-states'
             },
             {
               text: 'Nested Forms',
-              link: '/front/component/ma-form/examples/nested-forms'
+              link: '/v3/front/component/ma-form/examples/nested-forms'
             },
             {
-              text: 'Mobile Adaptation',
-              link: '/front/component/ma-form/examples/mobile-responsive'
+              text: 'Mobile Responsive',
+              link: '/v3/front/component/ma-form/examples/mobile-responsive'
             },
             {
               text: 'Advanced Scenarios',
-              link: '/front/component/ma-form/examples/advanced-scenarios'
+              link: '/v3/front/component/ma-form/examples/advanced-scenarios'
             },
             {
               text: 'Performance Demo',
-              link: '/front/component/ma-form/examples/performance-demo'
+              link: '/v3/front/component/ma-form/examples/performance-demo'
             }
           ]
         },
         {
-          text: 'MaTable Component',
-          link: '/front/component/ma-table',
+          text: 'MaTable Table Component',
+          link: '/v3/front/component/ma-table',
           collapsed: true,
           items: [
             {
               text: 'Basic Table',
-              link: '/front/component/ma-table/basic'
+              link: '/v3/front/component/ma-table/basic'
             },
             {
               text: 'Table Sorting',
-              link: '/front/component/ma-table/sorting'
+              link: '/v3/front/component/ma-table/sorting'
             },
             {
               text: 'Table Filtering',
-              link: '/front/component/ma-table/filter'
+              link: '/v3/front/component/ma-table/filter'
             },
             {
               text: 'Custom Rendering',
-              link: '/front/component/ma-table/custom-render'
+              link: '/v3/front/component/ma-table/custom-render'
             },
             {
-              text: 'Dynamic Columns',
-              link: '/front/component/ma-table/dynamic-columns'
+              text: 'Dynamic Column Management',
+              link: '/v3/front/component/ma-table/dynamic-columns'
             },
             {
               text: 'Pagination Table',
-              link: '/front/component/ma-table/pagination'
+              link: '/v3/front/component/ma-table/pagination'
             },
             {
               text: 'Tree Table',
-              link: '/front/component/ma-table/tree-table'
+              link: '/v3/front/component/ma-table/tree-table'
             },
             {
-              text: 'Multi-select Table',
-              link: '/front/component/ma-table/selection'
+              text: 'Selection Table',
+              link: '/v3/front/component/ma-table/selection'
             },
             {
               text: 'Responsive Table',
-              link: '/front/component/ma-table/responsive'
+              link: '/v3/front/component/ma-table/responsive'
             }
           ]
         },
         {
-          text: 'MaSearch Component',
-          link: '/front/component/ma-search',
+          text: 'MaSearch Search Component',
+          link: '/v3/front/component/ma-search',
           collapsed: true,
           items: [
             {
               text: 'Basic Usage',
-              link: '/front/component/ma-search/examples/basic-usage'
+              link: '/v3/front/component/ma-search/examples/basic-usage'
             },
             {
               text: 'Advanced Search',
-              link: '/front/component/ma-search/examples/advanced-search'
+              link: '/v3/front/component/ma-search/examples/advanced-search'
             },
             {
               text: 'Collapsible Search',
-              link: '/front/component/ma-search/examples/collapsible-search'
+              link: '/v3/front/component/ma-search/examples/collapsible-search'
             },
             {
               text: 'Custom Actions',
-              link: '/front/component/ma-search/examples/custom-actions'
+              link: '/v3/front/component/ma-search/examples/custom-actions'
             },
             {
               text: 'Dynamic Management',
-              link: '/front/component/ma-search/examples/dynamic-items'
+              link: '/v3/front/component/ma-search/examples/dynamic-items'
             },
             {
               text: 'Responsive Layout',
-              link: '/front/component/ma-search/examples/responsive-layout'
+              link: '/v3/front/component/ma-search/examples/responsive-layout'
             },
             {
               text: 'Table Integration',
-              link: '/front/component/ma-search/examples/table-integration'
+              link: '/v3/front/component/ma-search/examples/table-integration'
             },
             {
               text: 'Form Validation',
-              link: '/front/component/ma-search/examples/form-validation'
+              link: '/v3/front/component/ma-search/examples/form-validation'
             },
             {
               text: 'Methods Demo',
-              link: '/front/component/ma-search/examples/methods-demo'
+              link: '/v3/front/component/ma-search/examples/methods-demo'
             }
           ]
         },
         {
           text: 'MaProTable Advanced Table',
-          link: '/front/component/ma-pro-table',
+          link: '/v3/front/component/ma-pro-table',
           collapsed: true,
           items: [
             {
               text: 'Basic Usage',
-              link: '/front/component/ma-pro-table/examples/basic'
+              link: '/v3/front/component/ma-pro-table/examples/basic'
             },
             {
               text: 'Advanced Search',
-              link: '/front/component/ma-pro-table/examples/advanced-search'
+              link: '/v3/front/component/ma-pro-table/examples/advanced-search'
             },
             {
               text: 'Custom Operations',
-              link: '/front/component/ma-pro-table/examples/custom-operations'
+              link: '/v3/front/component/ma-pro-table/examples/custom-operations'
             },
             {
               text: 'Cell Render Plugins',
-              link: '/front/component/ma-pro-table/examples/cell-render-plugins'
+              link: '/v3/front/component/ma-pro-table/examples/cell-render-plugins'
             },
             {
               text: 'Toolbar Extensions',
-              link: '/front/component/ma-pro-table/examples/toolbar-extensions'
+              link: '/v3/front/component/ma-pro-table/examples/toolbar-extensions'
             },
             {
               text: 'Data Management',
-              link: '/front/component/ma-pro-table/examples/data-management'
+              link: '/v3/front/component/ma-pro-table/examples/data-management'
             },
             {
               text: 'Responsive Layout',
-              link: '/front/component/ma-pro-table/examples/responsive-layout'
+              link: '/v3/front/component/ma-pro-table/examples/responsive-layout'
             }
           ]
         },
         {
           text: 'MaEcharts Chart Component',
-          link: '/front/component/ma-echarts'
+          link: '/v3/front/component/ma-echarts'
         },
       ]
     }
   ],
-  '/backend/':[
+  '/v3/backend/':[
     {
       text:"Core Features",
       collapsed: false,
       items:[
         {
           text: "Directory Structure",
-          link: "/backend/base/structure"
+          link: "/v3/backend/base/structure"
         },
         {
           text: "Lifecycle",
-          link: "/backend/base/lifecycle"
+          link: "/v3/backend/base/lifecycle"
         },
-        { text: "Routes & API Docs",link: "/backend/base/router"},
-        { text: "Error Handling",link: "/backend/base/error-handler"},
-        {text: "Logging",link: "/backend/base/logger"},
-        {text: "Events",link: "/backend/base/event-handler"},
-        {text: "File Upload",link: "/backend/base/upload"},
-        {text: "Multilingual",link: "/backend/base/lang"},
+        { text: "Routing and API Documentation",link: "/v3/backend/base/router"},
+        { text: "Error Handling",link: "/v3/backend/base/error-handler"},
+        {text: "Logging",link: "/v3/backend/base/logger"},
+        {text: "Events",link: "/v3/backend/base/event-handler"},
+        {text: "File Upload",link: "/v3/backend/base/upload"},
+        {text: "Multilingual",link: "/v3/backend/base/lang"},
       ]
     },
     {
-      text:"Security",
+      text:"Security Related",
       collapsed: false,
       items:[
         {
           text: "User Authentication",
-          link: "/backend/security/passport"
+          link: "/v3/backend/security/passport"
         },
         {
           text: "User Authorization (RBAC)",
-          link: "/backend/security/access"
+          link: "/v3/backend/security/access"
         },
         {
-          text: "Client IP Detection",
-          link: "/backend/security/client-ip"
+          text: "Getting Client IP",
+          link: "/v3/backend/security/client-ip"
         }
       ]
     },{
@@ -395,32 +397,32 @@ const sidebar:DefaultTheme.Sidebar = {
       items:[
         {
           text: "Core Concepts",
-          link: "/backend/data-permission/overview"
+          link: "/v3/backend/data-permission/overview"
         },
         {
-          text: "Configuration & Demo",
-          link: "/backend/data-permission/config"
+          text: "Permission Configuration and Effect Demo",
+          link: "/v3/backend/data-permission/config"
         },
         {
-          text: "API Reference & Advanced Usage",
-          link: "/backend/data-permission/example"
+          text: "API Reference and Advanced Usage",
+          link: "/v3/backend/data-permission/example"
         },
         {
-          text: "Performance Optimization",
-          link: "/backend/data-permission/performance"
+          text: "Performance Optimization Guide",
+          link: "/v3/backend/data-permission/performance"
         },
         {
-          text: "Troubleshooting",
-          link: "/backend/data-permission/troubleshooting"
+          text: "Troubleshooting Guide",
+          link: "/v3/backend/data-permission/troubleshooting"
         },
         {
-          text: "Notes & Best Practices",
-          link: "/backend/data-permission/notice"
+          text: "Notes and Best Practices",
+          link: "/v3/backend/data-permission/notice"
         }
       ]
     }
   ],
-  '/plugin/':[
+  '/v3/plugin/':[
     {
       text:"Quick Start",
       collapsed: false,
@@ -428,19 +430,19 @@ const sidebar:DefaultTheme.Sidebar = {
           [
             {
               text:"Plugin System Overview",
-              link:"/plugin/index"
+              link:"/v3/plugin/index"
             },
             {
               text:"Quick Start Guide",
-              link:"/plugin/guide"
+              link:"/v3/plugin/guide"
             },
             {
               text:"Plugin Commands",
-              link:"/plugin/command"
+              link:"/v3/plugin/command"
             },
             {
-              text:"Create Application",
-              link:"/plugin/create"
+              text:"Creating an Application",
+              link:"/v3/plugin/create"
             }
           ]
     },
@@ -451,19 +453,19 @@ const sidebar:DefaultTheme.Sidebar = {
           [
             {
               text:"Plugin Directory Structure",
-              link:"/plugin/structure"
+              link:"/v3/plugin/structure"
             },
             {
               text:"mine.json Configuration",
-              link:"/plugin/mineJson"
+              link:"/v3/plugin/mineJson"
             },
             {
-              text:"ConfigProvider Guide",
-              link:"/plugin/configProvider"
+              text:"ConfigProvider Explanation",
+              link:"/v3/plugin/configProvider"
             },
             {
               text:"Lifecycle Management",
-              link:"/plugin/lifecycle"
+              link:"/v3/plugin/lifecycle"
             }
           ]
     },
@@ -474,15 +476,15 @@ const sidebar:DefaultTheme.Sidebar = {
           [
             {
               text:"Plugin Development Guide",
-              link:"/plugin/develop"
+              link:"/v3/plugin/develop"
             },
             {
-              text:"API Reference",
-              link:"/plugin/api"
+              text:"API Reference Documentation",
+              link:"/v3/plugin/api"
             },
             {
               text:"Example Code",
-              link:"/plugin/examples"
+              link:"/v3/plugin/examples"
             }
           ]
     },
@@ -491,12 +493,12 @@ const sidebar:DefaultTheme.Sidebar = {
       collapsed: false,
       items:[
         {
-          text: "Database Migrations",
-          link: "/plugin/backend/migrate"
+          text: "Database Migration",
+          link: "/v3/plugin/backend/migrate"
         },
         {
           text: "Unit Testing",
-          link: "/plugin/backend/unit-test"
+          link: "/v3/plugin/backend/unit-test"
         },
       ]
     },
@@ -506,7 +508,7 @@ const sidebar:DefaultTheme.Sidebar = {
       items:[
         {
           text: "Frontend Development Standards",
-          link: "/plugin/front/develop"
+          link: "/v3/plugin/front/develop"
         }
       ]
     },
@@ -515,16 +517,22 @@ const sidebar:DefaultTheme.Sidebar = {
       collapsed: true,
       items:[
         {
-          text: "App Publishing",
-          link: "/plugin/develop/publish"
+          text: "Application Release",
+          link: "/v3/plugin/develop/publish"
         },
         {
           text: "Notes",
-          link: "/plugin/develop/question"
+          link: "/v3/plugin/develop/question"
         }
       ]
     }
-  ]
+  ],
+  '/libs/': createLibrarySidebar({
+    title: 'Independent Libraries',
+    overview: 'Library Overview',
+    currentVersion: 'Current Version'
+  })
 }
 
 export default sidebar
+```

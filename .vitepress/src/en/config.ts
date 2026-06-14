@@ -1,7 +1,7 @@
 export default {
     title: "🚀 MineAdmin",
-    description: "✨ Enterprise Backend Management System - Efficient, Secure, User-friendly",
-    tagline: "🎯 New Version, Modern Solution Out-of-the-Box",
+    description: "✨ Enterprise-level backend management system - Efficient, Secure, Easy to Use",
+    tagline: "🎯 New version, out-of-the-box modern solution",
     themeConfig: {
         siteTitle: "🚀 MineAdmin",
         logo: "/logo.svg",
@@ -10,7 +10,7 @@ export default {
             text: '📝 Edit this page on GitHub'
         },
         lastUpdated: {
-            text: '🕒 Last updated',
+            text: '🕒 Last updated on',
             formatOptions: {
                 dateStyle: 'short',
                 timeStyle: 'medium'
@@ -24,7 +24,7 @@ export default {
         skipToContentLabel: '⏭️ Skip to main content',
         externalLinkIcon: true,
         footer: {
-            message: 'Released under MIT License | 💖 Crafted with care',
+            message: 'Released under the MIT License | 💖 Made with care',
             copyright: `Copyright © 2019-${new Date().getFullYear()} MineAdmin Team`
         }
     }
