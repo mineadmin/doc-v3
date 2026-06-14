@@ -64,7 +64,7 @@ const viteConfig:ViteConfig = {
     }),
     visualizer({
       filename: 'stats.html',
-      open: true
+      open: !process.env.CI
     })
   ],
 }
