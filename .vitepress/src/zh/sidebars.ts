@@ -1,5 +1,5 @@
 import type {DefaultTheme} from "vitepress";
-import { createLibrarySidebar } from "../shared";
+import { createBackendFrameworkSidebarItems, createLibrarySidebar } from "../shared";
 
 const sidebar:DefaultTheme.Sidebar = {
   '/v3/guide/': [
@@ -354,29 +354,13 @@ const sidebar:DefaultTheme.Sidebar = {
   ],
   '/v3/backend/':[
     {
-      text:"核心功能",
+      text:"后端概览",
       collapsed: false,
       items:[
         {
-          text: "目录结构",
-          link: "/v3/backend/base/structure"
+          text: "后端总览",
+          link: "/v3/backend/index"
         },
-        {
-          text: "生命周期",
-          link: "/v3/backend/base/lifecycle"
-        },
-        { text: "路由与API文档",link: "/v3/backend/base/router"},
-        { text: "错误处理",link: "/v3/backend/base/error-handler"},
-        {text: "日志",link: "/v3/backend/base/logger"},
-        {text: "事件",link: "/v3/backend/base/event-handler"},
-        {text: "文件上传",link: "/v3/backend/base/upload"},
-        {text: "多语言",link: "/v3/backend/base/lang"},
-      ]
-    },
-    {
-      text:"安全相关",
-      collapsed: false,
-      items:[
         {
           text: "用户认证",
           link: "/v3/backend/security/passport"
@@ -388,37 +372,112 @@ const sidebar:DefaultTheme.Sidebar = {
         {
           text: "获取客户端 IP",
           link: "/v3/backend/security/client-ip"
+        },
+        {
+          text:"数据权限",
+          link: "/v3/backend/data-permission/overview",
+          collapsed: true,
+          items:[
+            {
+              text: "核心概念",
+              link: "/v3/backend/data-permission/overview"
+            },
+            {
+              text: "权限配置与效果演示",
+              link: "/v3/backend/data-permission/config"
+            },
+            {
+              text: "API 参考与高级用法",
+              link: "/v3/backend/data-permission/example"
+            },
+            {
+              text: "性能优化指南",
+              link: "/v3/backend/data-permission/performance"
+            },
+            {
+              text: "故障排除指南",
+              link: "/v3/backend/data-permission/troubleshooting"
+            },
+            {
+              text: "注意事项与最佳实践",
+              link: "/v3/backend/data-permission/notice"
+            }
+          ]
         }
       ]
-    },{
-      text:"数据权限",
-      collapsed: true,
+    },
+    {
+      text:"公共契约",
+      collapsed: false,
       items:[
         {
-          text: "核心概念",
-          link: "/v3/backend/data-permission/overview"
+          text: "契约总览",
+          link: "/v3/backend/contracts/"
         },
         {
-          text: "权限配置与效果演示",
-          link: "/v3/backend/data-permission/config"
+          text: "数据模型",
+          link: "/v3/backend/contracts/data-model"
         },
         {
-          text: "API 参考与高级用法",
-          link: "/v3/backend/data-permission/example"
+          text: "后台路由",
+          link: "/v3/backend/contracts/routing"
         },
         {
-          text: "性能优化指南",
-          link: "/v3/backend/data-permission/performance"
+          text: "接口元数据",
+          link: "/v3/backend/contracts/api-metadata"
         },
         {
-          text: "故障排除指南",
-          link: "/v3/backend/data-permission/troubleshooting"
+          text: "响应结构",
+          link: "/v3/backend/contracts/response"
         },
         {
-          text: "注意事项与最佳实践",
-          link: "/v3/backend/data-permission/notice"
+          text: "前台模板对接",
+          link: "/v3/backend/contracts/frontend-template"
         }
       ]
+    },
+    {
+      text:"框架实现",
+      collapsed: false,
+      items:createBackendFrameworkSidebarItems({
+        stable: '稳定实现',
+        planned: '规划中'
+      }, {
+        hyperf: [
+          {
+            text: "目录结构",
+            link: "/v3/backend/frameworks/hyperf/base/structure"
+          },
+          {
+            text: "生命周期",
+            link: "/v3/backend/frameworks/hyperf/base/lifecycle"
+          },
+          {
+            text: "路由与API文档",
+            link: "/v3/backend/frameworks/hyperf/base/router"
+          },
+          {
+            text: "错误处理",
+            link: "/v3/backend/frameworks/hyperf/base/error-handler"
+          },
+          {
+            text: "日志",
+            link: "/v3/backend/frameworks/hyperf/base/logger"
+          },
+          {
+            text: "事件",
+            link: "/v3/backend/frameworks/hyperf/base/event-handler"
+          },
+          {
+            text: "文件上传",
+            link: "/v3/backend/frameworks/hyperf/base/upload"
+          },
+          {
+            text: "多语言",
+            link: "/v3/backend/frameworks/hyperf/base/lang"
+          }
+        ]
+      })
     }
   ],
   '/v3/plugin/':[

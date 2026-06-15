@@ -1,156 +1,41 @@
 # 后端文档
 
-欢迎来到 MineAdmin 3.x 后端开发文档。本文档将帮助您深入理解 MineAdmin 的后端架构、开发规范和最佳实践。
+欢迎来到 MineAdmin 3.x 后端开发文档。后端文档现在按“公共契约”和“框架实现”组织：公共契约描述前台模板、后台路由、接口元数据、响应结构和数据模型等稳定约定；框架实现描述 Hyperf、Laravel 以及未来其他实现的落地差异。
 
-## 架构概述
+## 阅读路径
 
-MineAdmin 后端采用现代化的 PHP 技术栈构建，基于 Hyperf 3.x 框架开发，运行在高性能的协程环境中。
+如果你只关心业务开发，建议先阅读公共契约，再进入当前项目使用的框架实现：
 
-### 核心特性
+1. [公共契约](/v3/backend/contracts/)：了解所有后端实现必须保持一致的接口、模型和响应规范。
+2. [Hyperf 实现](/v3/backend/frameworks/hyperf/)：当前 v3 稳定实现，包含生命周期、中间件、异常处理、日志、事件、上传、多语言等细节。
+3. [Laravel 实现](/v3/backend/frameworks/laravel/)：预留实现入口，后续 Laravel 版本将复用同一套公共契约。
 
-- **高性能协程**: 基于 Swoole/Swow 扩展的协程特性，提供卓越的并发性能
-- **现代化架构**: 分层架构清晰
-- **安全可靠**: 内置双 Token 认证机制，完善的权限控制系统
-- **易于扩展**: 支持插件化开发，模块化架构设计
+## 架构原则
 
-## 技术栈
+MineAdmin 的后端实现可以由不同框架承载，但面向前台模板和外部集成时需要保持一致：
 
-| 技术组件 | 版本 | 说明 |
-|---------|------|------|
-| PHP | 8.x+ | 现代化 PHP 语言特性支持 |
-| Hyperf | 3.x | 高性能协程框架 |
-| Swoole/Swow | 最新稳定版 | 协程运行时环境 |
-| MySQL | 5.7+ / 8.0+ | 主数据库 |
-| Redis | 6.0+ | 缓存和会话存储 |
-| JWT | - | 基于 lcobucci/jwt 的认证方案 |
+- 数据模型语义一致：用户、角色、菜单、部门、岗位、附件等核心模型保持同一业务含义。
+- 后台路由一致：同类后台资源使用一致的路由语义、权限标识和操作边界。
+- 接口元数据一致：OpenAPI/Swagger 元数据需要描述同一套请求、响应和认证要求。
+- 响应结构一致：接口统一返回业务状态码、消息和数据载荷，避免前台因框架差异分支处理。
+- 前台模板一致：同一套前台模板可以通过同一套接口契约对接不同后端实现。
 
-## 快速开始
+## 当前实现状态
 
-### 环境要求
+| 实现 | 语言 | 状态 | 说明 |
+|------|------|------|------|
+| Hyperf | PHP | 稳定实现 | MineAdmin 3.x 当前默认后端实现，运行在 Swoole/Swow 协程环境中。 |
+| Laravel | PHP | 规划中 | 第一阶段只保留入口，后续按公共契约补齐实现文档。 |
 
-- PHP >= 8.1
-- Swoole >= 5.1 或 Swow >= 1.0
-- MySQL 
-- Redis 
+## 核心专题
 
-### 启动服务
-
-```bash
-# 启动 HTTP 服务
-php bin/hyperf.php start
-```
-
-### 开发模式
-
-```bash
-# 热重载模式（开发环境推荐）
-php bin/hyperf.php server:watch
-```
-
-## 项目结构
-
-MineAdmin 的目录结构参考了 Laravel 的设计理念，如果您有 Laravel 开发经验，将会很快上手。
-
-### 根目录结构
-
-```
-├── App/              # 应用核心代码目录
-├── Config/           # 配置文件目录
-├── Database/         # 数据库相关文件
-├── Storage/          # 存储目录（日志、上传文件等）
-├── Tests/            # 测试代码目录
-├── Web/              # 前端应用代码
-└── Plugin/           # 插件目录
-```
-
-### App 目录详解
-
-```
-App/
-├── Exceptions/       # 异常处理
-├── Http/            # HTTP 相关（控制器、中间件、请求验证）
-├── Model/           # 数据模型（Eloquent ORM）
-├── Service/         # 业务逻辑层
-├── Repository/      # 数据访问层
-└── Schema/          # API 文档 Schema 定义
-```
-
-**架构分层说明**:
-
-- **Controller**: 处理 HTTP 请求，参数验证和响应格式化
-- **Service**: 业务逻辑编排，调度 Repository 和 Model
-- **Repository**: 数据访问抽象，统一数据来源（MySQL、Redis、ES等）
-- **Model**: 数据模型定义，基于协程版 Eloquent ORM
-
-## 核心功能
-
-### 认证授权
-
-- **双 Token 机制**: Access Token + Refresh Token 无感刷新
-- **RBAC 权限控制**: 基于角色的访问控制，支持数据权限
-- **多端支持**: 支持 Web、移动端、API 等多种客户端
-
-### 数据权限
-
-- **灵活配置**: 基于规则的数据权限控制
-- **多维度支持**: 支持部门、用户、角色等多维度权限控制
-- **透明集成**: 与业务逻辑无感集成
-
-### 日志监控
-
-- **操作日志**: 详细记录用户操作行为
-- **登录日志**: 用户登录记录和安全分析
-- **系统日志**: 应用运行日志和错误追踪
-
-## 开发指南
-
-### 基础开发
-
-- [目录结构详解](./base/structure.md) - 深入了解项目目录组织
-- [生命周期](./base/lifecycle.md) - 理解应用启动和请求处理流程
-- [路由系统](./base/router.md) - 路由定义和中间件使用
-- [异常处理](./base/error-handler.md) - 统一异常处理机制
-
-### 进阶功能
-
-- [安全机制](./security/passport.md) - 认证和授权详解
-- [数据权限](./data-permission/overview.md) - 数据权限系统使用
-- [事件处理](./base/event-handler.md) - 事件驱动开发
-
-### 部署运维
-
-- [日志管理](./base/logger.md) - 日志配置和管理
-- [文件上传](./base/upload.md) - 文件处理和存储
-
-## 插件开发
-
-MineAdmin 支持插件化扩展，您可以通过插件机制快速扩展系统功能：
-
-- [插件开发指南](../plugin/index.md) - 插件开发完整教程
-- [应用市场](../plugin/develop/publish.md) - 插件发布和分发
-
-## API 文档
-
-- [API 接口文档](../api/) - 完整的 REST API 文档
-- Swagger 文档地址：`/swagger` （开发环境）
-
-## 常见问题
-
-- [FAQ 常见问题](../faq/) - 开发中的常见问题和解决方案
-
-## 社区与支持
-
-- **GitHub**: [https://github.com/mineadmin/mineadmin](https://github.com/mineadmin/mineadmin)
-- **文档问题**: [提交 Issue](https://github.com/mineadmin/doc-v3/issues)
-- **技术交流**: 加入官方社区群组
+- [用户认证](/v3/backend/security/passport)：双 Token、JWT 与登录流程。
+- [用户授权（RBAC）](/v3/backend/security/access)：角色、菜单、权限校验与审计。
+- [数据权限](/v3/backend/data-permission/overview)：部门、岗位、策略和数据过滤规则。
+- [插件开发](/v3/plugin/index)：通过插件机制扩展系统功能。
 
 ## 参考资料
 
-本文档在编写过程中参考了以下优秀项目的文档（排名不分先后）：
-
-1. [Laravel 官方文档](https://laravel.com/docs/11.x/)
-2. [Hyperf 官方文档](https://hyperf.wiki/3.1)
-
----
-
-**下一步**: 建议先阅读 [目录结构详解](./base/structure.md) 来深入理解项目架构。
+- [公共契约总览](/v3/backend/contracts/)
+- [Hyperf 官方文档](https://hyperf.wiki/3.1)
+- [Laravel 官方文档](https://laravel.com/docs/11.x/)

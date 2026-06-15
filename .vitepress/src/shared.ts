@@ -41,10 +41,34 @@ export const libraries = [
   }
 ] as const
 
+export type BackendFrameworkStatus = 'stable' | 'planned'
+
+export const backendFrameworks = [
+  {
+    key: 'hyperf',
+    name: 'Hyperf',
+    language: 'PHP',
+    status: 'stable' as BackendFrameworkStatus,
+    link: '/v3/backend/frameworks/hyperf/'
+  },
+  {
+    key: 'laravel',
+    name: 'Laravel',
+    language: 'PHP',
+    status: 'planned' as BackendFrameworkStatus,
+    link: '/v3/backend/frameworks/laravel/'
+  }
+] as const
+
 export interface LibrarySidebarLabels {
   title: string
   overview: string
   currentVersion: string
+}
+
+export interface BackendFrameworkStatusLabels {
+  stable: string
+  planned: string
 }
 
 export function createProductVersionNavItems(): DefaultTheme.NavItemWithLink[] {
@@ -59,6 +83,22 @@ export function createLibraryNavItems(): DefaultTheme.NavItemWithLink[] {
     text: `${library.name} (${library.packageName})`,
     link: `/libs/${library.key}/${library.latest}/`
   }))
+}
+
+export function createBackendFrameworkSidebarItems(
+  labels: BackendFrameworkStatusLabels,
+  itemsByFramework: Record<string, DefaultTheme.SidebarItem[]> = {}
+): DefaultTheme.SidebarItem[] {
+  return backendFrameworks.map(framework => {
+    const items = itemsByFramework[framework.key]
+
+    return {
+      text: `${framework.name} (${framework.language} / ${labels[framework.status]})`,
+      link: framework.link,
+      collapsed: framework.status !== 'stable',
+      ...(items ? { items } : {})
+    }
+  })
 }
 
 export function createLibrarySidebar(labels: LibrarySidebarLabels): DefaultTheme.SidebarItem[] {
