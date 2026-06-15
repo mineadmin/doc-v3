@@ -1,6 +1,99 @@
 import type {DefaultTheme} from "vitepress";
 import { createBackendFrameworkSidebarItems, createLibrarySidebar } from "../shared";
 
+const createHyperfSidebarItems = (version: '3.1' | '3.2'): DefaultTheme.SidebarItem[] => {
+  const base = `/backend/frameworks/hyperf/${version}`
+
+  return [
+    {
+      text: "目录结构",
+      link: `${base}/base/structure`
+    },
+    {
+      text: "生命周期",
+      link: `${base}/base/lifecycle`
+    },
+    {
+      text: "路由与API文档",
+      link: `${base}/base/router`
+    },
+    {
+      text: "错误处理",
+      link: `${base}/base/error-handler`
+    },
+    {
+      text: "日志",
+      link: `${base}/base/logger`
+    },
+    {
+      text: "事件",
+      link: `${base}/base/event-handler`
+    },
+    {
+      text: "文件上传",
+      link: `${base}/base/upload`
+    },
+    {
+      text: "多语言",
+      link: `${base}/base/lang`
+    },
+    {
+      text: "安全相关",
+      link: `${base}/security/passport`,
+      collapsed: true,
+      items: [
+        {
+          text: "用户认证",
+          link: `${base}/security/passport`
+        },
+        {
+          text: "用户授权(RBAC)",
+          link: `${base}/security/access`
+        },
+        {
+          text: "获取客户端 IP",
+          link: `${base}/security/client-ip`
+        }
+      ]
+    },
+    {
+      text:"数据权限",
+      link: `${base}/data-permission/overview`,
+      collapsed: true,
+      items:[
+        {
+          text: "核心概念",
+          link: `${base}/data-permission/overview`
+        },
+        {
+          text: "架构设计",
+          link: `${base}/data-permission/architecture`
+        },
+        {
+          text: "权限配置与效果演示",
+          link: `${base}/data-permission/config`
+        },
+        {
+          text: "API 参考与高级用法",
+          link: `${base}/data-permission/example`
+        },
+        {
+          text: "性能优化指南",
+          link: `${base}/data-permission/performance`
+        },
+        {
+          text: "故障排除指南",
+          link: `${base}/data-permission/troubleshooting`
+        },
+        {
+          text: "注意事项与最佳实践",
+          link: `${base}/data-permission/notice`
+        }
+      ]
+    }
+  ]
+}
+
 const sidebar:DefaultTheme.Sidebar = {
   '/v3/guide/': [
     {
@@ -222,97 +315,38 @@ const sidebar:DefaultTheme.Sidebar = {
       collapsed: false,
       items:createBackendFrameworkSidebarItems({
         stable: '稳定实现',
-        planned: '规划中'
-      }, {
-        hyperf: [
-          {
-            text: "目录结构",
-            link: "/v3/backend/frameworks/hyperf/base/structure"
-          },
-          {
-            text: "生命周期",
-            link: "/v3/backend/frameworks/hyperf/base/lifecycle"
-          },
-          {
-            text: "路由与API文档",
-            link: "/v3/backend/frameworks/hyperf/base/router"
-          },
-          {
-            text: "错误处理",
-            link: "/v3/backend/frameworks/hyperf/base/error-handler"
-          },
-          {
-            text: "日志",
-            link: "/v3/backend/frameworks/hyperf/base/logger"
-          },
-          {
-            text: "事件",
-            link: "/v3/backend/frameworks/hyperf/base/event-handler"
-          },
-          {
-            text: "文件上传",
-            link: "/v3/backend/frameworks/hyperf/base/upload"
-          },
-          {
-            text: "多语言",
-            link: "/v3/backend/frameworks/hyperf/base/lang"
-          },
-          {
-            text: "安全相关",
-            link: "/v3/backend/frameworks/hyperf/security/passport",
-            collapsed: true,
-            items: [
-              {
-                text: "用户认证",
-                link: "/v3/backend/frameworks/hyperf/security/passport"
-              },
-              {
-                text: "用户授权(RBAC)",
-                link: "/v3/backend/frameworks/hyperf/security/access"
-              },
-              {
-                text: "获取客户端 IP",
-                link: "/v3/backend/frameworks/hyperf/security/client-ip"
-              }
-            ]
-          },
-          {
-            text:"数据权限",
-            link: "/v3/backend/frameworks/hyperf/data-permission/overview",
-            collapsed: true,
-            items:[
-              {
-                text: "核心概念",
-                link: "/v3/backend/frameworks/hyperf/data-permission/overview"
-              },
-              {
-                text: "架构设计",
-                link: "/v3/backend/frameworks/hyperf/data-permission/architecture"
-              },
-              {
-                text: "权限配置与效果演示",
-                link: "/v3/backend/frameworks/hyperf/data-permission/config"
-              },
-              {
-                text: "API 参考与高级用法",
-                link: "/v3/backend/frameworks/hyperf/data-permission/example"
-              },
-              {
-                text: "性能优化指南",
-                link: "/v3/backend/frameworks/hyperf/data-permission/performance"
-              },
-              {
-                text: "故障排除指南",
-                link: "/v3/backend/frameworks/hyperf/data-permission/troubleshooting"
-              },
-              {
-                text: "注意事项与最佳实践",
-                link: "/v3/backend/frameworks/hyperf/data-permission/notice"
-              }
-            ]
-          }
-        ]
+        planned: '规划中',
+        latest: 'latest'
       })
+    }
+  ],
+  '/backend/frameworks/': [
+    {
+      text:"框架实现",
+      collapsed: false,
+      items:[
+        {
+          text: "实现总览",
+          link: "/backend/frameworks/"
+        },
+        {
+          text: "Hyperf latest / 3.2",
+          link: "/backend/frameworks/hyperf/",
+          collapsed: false,
+          items: createHyperfSidebarItems('3.2')
+        },
+        {
+          text: "Hyperf 3.1",
+          link: "/backend/frameworks/hyperf/3.1/",
+          collapsed: true,
+          items: createHyperfSidebarItems('3.1')
+        },
+        {
+          text: "Laravel 1.0",
+          link: "/backend/frameworks/laravel/1.0/",
+          collapsed: true
+        }
+      ]
     }
   ],
   '/v3/plugin/':[

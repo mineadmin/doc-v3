@@ -1,6 +1,6 @@
-# Hyperf 实现
+# Hyperf 3.2 实现
 
-Hyperf 是 MineAdmin 3.x 当前稳定的后端实现。它运行在 Swoole/Swow 协程环境中，并通过 Hyperf 的中间件、事件、异常处理、配置加载和组件生态落地 MineAdmin 的公共契约。
+Hyperf 3.2 是 MineAdmin 3.x 当前 latest 后端实现。它运行在 Swoole/Swow 协程环境中，并通过 Hyperf 的中间件、事件、异常处理、配置加载和组件生态落地 MineAdmin 的公共契约。
 
 ## 实现边界
 

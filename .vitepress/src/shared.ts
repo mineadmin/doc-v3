@@ -48,15 +48,38 @@ export const backendFrameworks = [
     key: 'hyperf',
     name: 'Hyperf',
     language: 'PHP',
-    status: 'stable' as BackendFrameworkStatus,
-    link: '/v3/backend/frameworks/hyperf/'
+    latest: '3.2',
+    versions: [
+      {
+        version: '3.2',
+        status: 'stable' as BackendFrameworkStatus,
+        link: '/backend/frameworks/hyperf/',
+        canonicalLink: '/backend/frameworks/hyperf/3.2/',
+        compatibleProductVersions: ['v3']
+      },
+      {
+        version: '3.1',
+        status: 'stable' as BackendFrameworkStatus,
+        link: '/backend/frameworks/hyperf/3.1/',
+        canonicalLink: '/backend/frameworks/hyperf/3.1/',
+        compatibleProductVersions: ['v3']
+      }
+    ]
   },
   {
     key: 'laravel',
     name: 'Laravel',
     language: 'PHP',
-    status: 'planned' as BackendFrameworkStatus,
-    link: '/v3/backend/frameworks/laravel/'
+    latest: '1.0',
+    versions: [
+      {
+        version: '1.0',
+        status: 'planned' as BackendFrameworkStatus,
+        link: '/backend/frameworks/laravel/1.0/',
+        canonicalLink: '/backend/frameworks/laravel/1.0/',
+        compatibleProductVersions: ['v3']
+      }
+    ]
   }
 ] as const
 
@@ -69,6 +92,7 @@ export interface LibrarySidebarLabels {
 export interface BackendFrameworkStatusLabels {
   stable: string
   planned: string
+  latest: string
 }
 
 export function createProductVersionNavItems(): DefaultTheme.NavItemWithLink[] {
@@ -86,19 +110,17 @@ export function createLibraryNavItems(): DefaultTheme.NavItemWithLink[] {
 }
 
 export function createBackendFrameworkSidebarItems(
-  labels: BackendFrameworkStatusLabels,
-  itemsByFramework: Record<string, DefaultTheme.SidebarItem[]> = {}
+  labels: BackendFrameworkStatusLabels
 ): DefaultTheme.SidebarItem[] {
-  return backendFrameworks.map(framework => {
-    const items = itemsByFramework[framework.key]
-
-    return {
-      text: `${framework.name} (${framework.language} / ${labels[framework.status]})`,
-      link: framework.link,
-      collapsed: framework.status !== 'stable',
-      ...(items ? { items } : {})
-    }
-  })
+  return backendFrameworks.flatMap(framework =>
+    framework.versions.map(version => ({
+      text: version.version === framework.latest
+        ? `${framework.name} ${labels.latest} / ${version.version} (${framework.language} / ${labels[version.status]})`
+        : `${framework.name} ${version.version} (${framework.language} / ${labels[version.status]})`,
+      link: version.link,
+      collapsed: version.status !== 'stable'
+    }))
+  )
 }
 
 export function createLibrarySidebar(labels: LibrarySidebarLabels): DefaultTheme.SidebarItem[] {

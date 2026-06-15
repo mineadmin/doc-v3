@@ -181,4 +181,4 @@ paths:
 
 ## 框架实现
 
-Hyperf 当前通过 MineAdmin Swagger 注解封装生成接口元数据，具体用法见 [Hyperf 路由与 API 文档](/v3/backend/frameworks/hyperf/base/router)。
+Hyperf 当前通过 MineAdmin Swagger 注解封装生成接口元数据，具体用法见 [Hyperf 路由与 API 文档](/backend/frameworks/hyperf/3.2/base/router)。

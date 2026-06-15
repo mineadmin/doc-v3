@@ -130,4 +130,4 @@
 
 ## 框架实现
 
-Hyperf 当前通过注解、控制器和中间件承载路由与 API 文档生成，具体用法见 [Hyperf 路由与 API 文档](/v3/backend/frameworks/hyperf/base/router)。
+Hyperf 当前通过注解、控制器和中间件承载路由与 API 文档生成，具体用法见 [Hyperf 路由与 API 文档](/backend/frameworks/hyperf/3.2/base/router)。

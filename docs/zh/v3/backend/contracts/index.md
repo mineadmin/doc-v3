@@ -16,4 +16,4 @@
 
 公共契约只描述“必须一致”的行为，不绑定具体框架 API。框架实现文档负责说明这些契约在对应框架中的落地方式，例如中间件注册、服务容器、生命周期、事件系统、异常处理和文件上传配置。
 
-当前稳定实现是 [Hyperf 实现](/v3/backend/frameworks/hyperf/)，Laravel 入口已在 [Laravel 实现](/v3/backend/frameworks/laravel/) 中预留。
+当前稳定实现是 [Hyperf 实现](/backend/frameworks/hyperf/)，Laravel 入口已在 [Laravel 实现](/backend/frameworks/laravel/1.0/) 中预留。
