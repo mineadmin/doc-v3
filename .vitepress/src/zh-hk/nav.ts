@@ -15,7 +15,7 @@ const nav:DefaultTheme.NavItem[] = [
     { 
         text: '🔧 後端', 
         link: '/v3/backend/index',
-        activeMatch: '/v3/backend/'
+        activeMatch: '^/(v3/backend|backend/frameworks)/'
     },
     { 
         text: '🧩 插件',

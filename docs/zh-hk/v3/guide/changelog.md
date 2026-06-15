@@ -4,6 +4,63 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### ✨ Features
+- feat: (menu) 菜單頁面可選擇是否使用默認佈局 ([31134bd](https://github.com/mineadmin/mineadmin/commit/31134bdf0893e1bd9f8b622103faeb9afbad91f5))
+- feat: 佈局新增支持不使用默認佈局功能 ([0ad8418](https://github.com/mineadmin/mineadmin/commit/0ad8418aae56d4c90bec4626d00163694ec0e09b))
+- 支持語言切換時保存用户設置至服務器，修復多語言切換後刷新頁面無法正確使用當前語言問題 ([#719](https://github.com/mineadmin/mineadmin/pull/719)) ([06a8155](https://github.com/mineadmin/mineadmin/commit/06a8155271f7beccb09d696faa04ecf5791714d4))
+- feat:(department merge to master) 合併部門分支到主分支 ([02f7b91](https://github.com/mineadmin/mineadmin/commit/02f7b9144d6d2cf65e164bfe16aea7bf0a4c7e6e))
+
+### 🐛 Bug Fixes
+- 修復菜單從編輯切回「新增頂級菜單」時，保存會出現“此操作已執行過，請點擊左側菜單重新操作”的問題 ([#722](https://github.com/mineadmin/mineadmin/pull/722)) ([7c75b38](https://github.com/mineadmin/mineadmin/commit/7c75b381a6325f22a0f2d5b0ccd5ababe6b561f2))
+- fix: 修復部門更新邏輯並升級依賴版本 ([1695ec6](https://github.com/mineadmin/mineadmin/commit/1695ec6f51eb95f084698e139dc2dd3fa8b2d729))
+- fix(department): 更新部門時同步保存基礎信息 ([#721](https://github.com/mineadmin/mineadmin/pull/721)) ([a70884c](https://github.com/mineadmin/mineadmin/commit/a70884c5fbb809fa95e646fedd07e2401a2c205a))
+- fix(department): 修復部門成員顯示報錯 ([#720](https://github.com/mineadmin/mineadmin/pull/720)) ([7948261](https://github.com/mineadmin/mineadmin/commit/794826167ac53faf1cd07a3060f69ee26be16230))
+- fix: 修復菜單 badge 空值時仍然顯示的問題 ([#716](https://github.com/mineadmin/mineadmin/pull/716)) ([c7c7345](https://github.com/mineadmin/mineadmin/commit/c7c734565b38ee5345c722568068f9e69f6b6499))
+- fix: (user) 修復用户新增不選擇數據權限報錯問題，升級依賴，增加前端離線圖標自動加載功能，優化用户操作菜單功能排序 ([16efd4a](https://github.com/mineadmin/mineadmin/commit/16efd4a0a28813481816736e79c22a03aae2b05b))
+- fix: 升級多個依賴包版本，修復 pro-table 搜索和重置非第一頁情況下點擊會請求兩遍的問題 ([25d3253](https://github.com/mineadmin/mineadmin/commit/25d3253d76b53c186baf980b42466459d67b101a))
+
+### 🔧 Others
+- chore: 移除 vconsole 依賴並更新構建配置 ([86dc71e](https://github.com/mineadmin/mineadmin/commit/86dc71e411b70792bb28fbcc699db5890d9abf09))
+- Update global.d.ts ([34983a5](https://github.com/mineadmin/mineadmin/commit/34983a528d3a51cb6ddd0c1ea6ed32f6c512629e))
+- build: 更新 @mineadmin/pro-table 依賴版本至 1.0.87 ([6513f21](https://github.com/mineadmin/mineadmin/commit/6513f218756e8d681b59915fc9f214357f31f1b2))
+- build: 更新 @mineadmin/table 依賴版本至 1.0.51 ([8171b06](https://github.com/mineadmin/mineadmin/commit/8171b06a0e8b354b92ca9ea3a6786e5ed99f50bd))
+- chore: 更新依賴包版本 ([eb3e6df](https://github.com/mineadmin/mineadmin/commit/eb3e6dff7b20dc6f9023beb97b62d3e7412aa1dd))
+- Master department ([#712](https://github.com/mineadmin/mineadmin/pull/712)) ([6e6dac6](https://github.com/mineadmin/mineadmin/commit/6e6dac673f573c72c9956e9713f6520ce5b20aec))
+
+## [v3.0.9] - 2025-09-24
+
+### 🐛 Bug Fixes
+- fix(mineadmin/table、pro-table) 更新到最新版本，修復搜索和重置時，讓表格分頁回到第一頁 ([02955ec](https://github.com/mineadmin/mineadmin/commit/02955ecf71368493451b97096425c3f30ccec0c7))
+- fix(ma-dict-select): 修復 slot 透傳並支持自定義 option 渲染 ([#698](https://github.com/mineadmin/mineadmin/pull/698)) ([269c514](https://github.com/mineadmin/mineadmin/commit/269c5149eccee270817f8d1c043bb8e857a2b62e))
+
+### 🔧 Others
+- up: 升級 mineadmin/search 到 1.0.59，升級 element plus 到 2.11.3 ([2e18e58](https://github.com/mineadmin/mineadmin/commit/2e18e589f847b71c7dc17d987e3be4096249f59c))
+
+## [v3.0.8] - 2025-09-15
+
+### ✨ Features
+- feat(formOpen): 新增 `form-open` 組件，提供 `dialog` 或者 `drawer` 與 `ma-form` 結合，業務中快速實現彈窗表單或者抽屜表單，提供 `@submit` 事件快速實現提交功能 ([6b5c973](https://github.com/mineadmin/mineadmin/commit/6b5c97355a48afbf5241b0b9fcebf1b243903cec))
+
+### 🐛 Bug Fixes
+- Fix(eslint): 優化代碼格式 ([5bda1cb](https://github.com/mineadmin/mineadmin/commit/5bda1cb67575273de0f16f0a59de5e3bd46739b2))
+- Fix(userStore): refactor setUserSetting to be async and ensure proper setting initialization ([#685](https://github.com/mineadmin/mineadmin/pull/685)) ([09c8d92](https://github.com/mineadmin/mineadmin/commit/09c8d9290c3c9b04be952d17eae33cbe851933f9))
+
+### 📚 Documentation
+- Docs(README): update logo source to local file and add logo.svg ([#681](https://github.com/mineadmin/mineadmin/pull/681)) ([f8f2e88](https://github.com/mineadmin/mineadmin/commit/f8f2e88fd80f90d2256c65b7b2be9eac4a9c2df7))
+
+### 🔧 Others
+- up(@mineadmin/form): 更新依賴到 1.0.55 版本，修復 render 函數調用時的一個 bug ([88437ff](https://github.com/mineadmin/mineadmin/commit/88437ff9f1a741d1d259f70ad53f882de0281e4f))
+- 更新依賴，提升 `node` 最低版本需求: 20.19.0 ([a0d9ecc](https://github.com/mineadmin/mineadmin/commit/a0d9ecce935e991af560488b4c3851a830be140e))
+- update(CI): update `swoole` version in test matrix to v5.1.8 ([#692](https://github.com/mineadmin/mineadmin/pull/692)) ([bc8bb38](https://github.com/mineadmin/mineadmin/commit/bc8bb38e0588f0346b9f98d1053adafad7f37136))
+
+## [v3.0.7] - 2025-08-18
+
+### 🐛 Bug Fixes
+- Fix(app-store): add DeBugOnlyMiddleware and apply debug/auth check to IndexController ([#680](https://github.com/mineadmin/mineadmin/pull/680)) ([0a600ca](https://github.com/mineadmin/mineadmin/commit/0a600caa9bd5a389a74c902515a6818b80f89782))
+
+### 📚 Documentation
+- Docs(README): add Japanese README and update language links ([#677](https://github.com/mineadmin/mineadmin/pull/677)) ([0a61d77](https://github.com/mineadmin/mineadmin/commit/0a61d77275a07d0115a9cc704e31a77a6a58ebcc))
+
 ## [v3.0.6] - 2025-08-02
 
 ### ✨ Features
