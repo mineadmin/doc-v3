@@ -3,7 +3,7 @@
 `ma-search` は `ma-form` をベースにカプセル化され、検索フォームを素早く構築するために使用されます。豊富な設定オプション、レスポンシブレイアウト、フォームバリデーションなどの機能を提供し、管理システムの検索機能構築に最適です。
 
 :::tip ヒント
-`form` と `form-item` は `ma-form` のパラメータと同じです。詳細な設定は [ma-form ドキュメント](ma-form) を参照してください。
+`form` と `form-item` は `ma-form` のパラメータと同じです。詳細な設定は [ma-form ドキュメント](/libs/ma-form/latest/) を参照してください。
 :::
 
 ## クイックスタート
@@ -34,8 +34,8 @@
 | パラメータ | 説明 | 型 | デフォルト値 | バージョン |
 |-----------|------|------|-----------|----------|
 | `options` | `ma-search` コンポーネントの設定オプション | `MaSearchOptions` | - | 1.0.0 |
-| `formOptions` | `ma-form` コンポーネントの設定オプション、詳細は [ma-form Props](ma-form#props) を参照 | `MaFormOptions` | - | 1.0.0 |
-| `searchItems` | 検索フォーム項目設定、[ma-form-item](ma-form#maformitem) を拡張 | `MaSearchItem[]` | - | 1.0.0 |
+| `formOptions` | `ma-form` コンポーネントの設定オプション、詳細は [ma-form Props](/libs/ma-form/latest/#props) を参照 | `MaFormOptions` | - | 1.0.0 |
+| `searchItems` | 検索フォーム項目設定、[ma-form-item](/libs/ma-form/latest/#maformitem) を拡張 | `MaSearchItem[]` | - | 1.0.0 |
 
 ### MaSearchOptions
 

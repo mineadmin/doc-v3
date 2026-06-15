@@ -1,5 +1,98 @@
 import type {DefaultTheme} from "vitepress";
-import { createLibrarySidebar } from "../shared";
+import { createBackendFrameworkSidebarItems, createLibrarySidebar } from "../shared";
+
+const createHyperfSidebarItems = (version: '3.1' | '3.2'): DefaultTheme.SidebarItem[] => {
+  const base = `/backend/frameworks/hyperf/${version}`
+
+  return [
+    {
+      text: "目录结构",
+      link: `${base}/base/structure`
+    },
+    {
+      text: "生命周期",
+      link: `${base}/base/lifecycle`
+    },
+    {
+      text: "路由与API文档",
+      link: `${base}/base/router`
+    },
+    {
+      text: "错误处理",
+      link: `${base}/base/error-handler`
+    },
+    {
+      text: "日志",
+      link: `${base}/base/logger`
+    },
+    {
+      text: "事件",
+      link: `${base}/base/event-handler`
+    },
+    {
+      text: "文件上传",
+      link: `${base}/base/upload`
+    },
+    {
+      text: "多语言",
+      link: `${base}/base/lang`
+    },
+    {
+      text: "安全相关",
+      link: `${base}/security/passport`,
+      collapsed: true,
+      items: [
+        {
+          text: "用户认证",
+          link: `${base}/security/passport`
+        },
+        {
+          text: "用户授权(RBAC)",
+          link: `${base}/security/access`
+        },
+        {
+          text: "获取客户端 IP",
+          link: `${base}/security/client-ip`
+        }
+      ]
+    },
+    {
+      text:"数据权限",
+      link: `${base}/data-permission/overview`,
+      collapsed: true,
+      items:[
+        {
+          text: "核心概念",
+          link: `${base}/data-permission/overview`
+        },
+        {
+          text: "架构设计",
+          link: `${base}/data-permission/architecture`
+        },
+        {
+          text: "权限配置与效果演示",
+          link: `${base}/data-permission/config`
+        },
+        {
+          text: "API 参考与高级用法",
+          link: `${base}/data-permission/example`
+        },
+        {
+          text: "性能优化指南",
+          link: `${base}/data-permission/performance`
+        },
+        {
+          text: "故障排除指南",
+          link: `${base}/data-permission/troubleshooting`
+        },
+        {
+          text: "注意事项与最佳实践",
+          link: `${base}/data-permission/notice`
+        }
+      ]
+    }
+  ]
+}
 
 const sidebar:DefaultTheme.Sidebar = {
   '/v3/guide/': [
@@ -170,182 +263,6 @@ const sidebar:DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         {
-          text: 'MaForm 表单组件',
-          link: '/v3/front/component/ma-form',
-          collapsed: true,
-          items: [
-            {
-              text: '基础用法',
-              link: '/v3/front/component/ma-form/examples/basic-usage'
-            },
-            {
-              text: '布局系统',
-              link: '/v3/front/component/ma-form/examples/layout-systems'
-            },
-            {
-              text: '条件渲染',
-              link: '/v3/front/component/ma-form/examples/conditional-rendering'
-            },
-            {
-              text: '动态验证',
-              link: '/v3/front/component/ma-form/examples/dynamic-validation'
-            },
-            {
-              text: '组件渲染',
-              link: '/v3/front/component/ma-form/examples/component-rendering'
-            },
-            {
-              text: '插槽示例',
-              link: '/v3/front/component/ma-form/examples/slots-examples'
-            },
-            {
-              text: '暴露方法',
-              link: '/v3/front/component/ma-form/examples/expose-methods'
-            },
-            {
-              text: '加载状态',
-              link: '/v3/front/component/ma-form/examples/loading-states'
-            },
-            {
-              text: '嵌套表单',
-              link: '/v3/front/component/ma-form/examples/nested-forms'
-            },
-            {
-              text: '移动端适配',
-              link: '/v3/front/component/ma-form/examples/mobile-responsive'
-            },
-            {
-              text: '高级场景',
-              link: '/v3/front/component/ma-form/examples/advanced-scenarios'
-            },
-            {
-              text: '性能演示',
-              link: '/v3/front/component/ma-form/examples/performance-demo'
-            }
-          ]
-        },
-        {
-          text: 'MaTable 表格组件',
-          link: '/v3/front/component/ma-table',
-          collapsed: true,
-          items: [
-            {
-              text: '基础表格',
-              link: '/v3/front/component/ma-table/basic'
-            },
-            {
-              text: '表格排序',
-              link: '/v3/front/component/ma-table/sorting'
-            },
-            {
-              text: '表格筛选',
-              link: '/v3/front/component/ma-table/filter'
-            },
-            {
-              text: '自定义渲染',
-              link: '/v3/front/component/ma-table/custom-render'
-            },
-            {
-              text: '动态列管理',
-              link: '/v3/front/component/ma-table/dynamic-columns'
-            },
-            {
-              text: '分页表格',
-              link: '/v3/front/component/ma-table/pagination'
-            },
-            {
-              text: '树形表格',
-              link: '/v3/front/component/ma-table/tree-table'
-            },
-            {
-              text: '多选表格',
-              link: '/v3/front/component/ma-table/selection'
-            },
-            {
-              text: '响应式表格',
-              link: '/v3/front/component/ma-table/responsive'
-            }
-          ]
-        },
-        {
-          text: 'MaSearch 搜索组件',
-          link: '/v3/front/component/ma-search',
-          collapsed: true,
-          items: [
-            {
-              text: '基础用法',
-              link: '/v3/front/component/ma-search/examples/basic-usage'
-            },
-            {
-              text: '高级搜索',
-              link: '/v3/front/component/ma-search/examples/advanced-search'
-            },
-            {
-              text: '折叠搜索',
-              link: '/v3/front/component/ma-search/examples/collapsible-search'
-            },
-            {
-              text: '自定义操作',
-              link: '/v3/front/component/ma-search/examples/custom-actions'
-            },
-            {
-              text: '动态管理',
-              link: '/v3/front/component/ma-search/examples/dynamic-items'
-            },
-            {
-              text: '响应式布局',
-              link: '/v3/front/component/ma-search/examples/responsive-layout'
-            },
-            {
-              text: '表格集成',
-              link: '/v3/front/component/ma-search/examples/table-integration'
-            },
-            {
-              text: '表单验证',
-              link: '/v3/front/component/ma-search/examples/form-validation'
-            },
-            {
-              text: '方法演示',
-              link: '/v3/front/component/ma-search/examples/methods-demo'
-            }
-          ]
-        },
-        {
-          text: 'MaProTable 高级表格',
-          link: '/v3/front/component/ma-pro-table',
-          collapsed: true,
-          items: [
-            {
-              text: '基础用法',
-              link: '/v3/front/component/ma-pro-table/examples/basic'
-            },
-            {
-              text: '高级搜索',
-              link: '/v3/front/component/ma-pro-table/examples/advanced-search'
-            },
-            {
-              text: '自定义操作',
-              link: '/v3/front/component/ma-pro-table/examples/custom-operations'
-            },
-            {
-              text: '单元格渲染插件',
-              link: '/v3/front/component/ma-pro-table/examples/cell-render-plugins'
-            },
-            {
-              text: '工具栏扩展',
-              link: '/v3/front/component/ma-pro-table/examples/toolbar-extensions'
-            },
-            {
-              text: '数据管理',
-              link: '/v3/front/component/ma-pro-table/examples/data-management'
-            },
-            {
-              text: '响应式布局',
-              link: '/v3/front/component/ma-pro-table/examples/responsive-layout'
-            }
-          ]
-        },
-        {
           text: 'MaEcharts 图表组件',
           link: '/v3/front/component/ma-echarts'
         },
@@ -354,69 +271,80 @@ const sidebar:DefaultTheme.Sidebar = {
   ],
   '/v3/backend/':[
     {
-      text:"核心功能",
+      text:"后端概览",
       collapsed: false,
       items:[
         {
-          text: "目录结构",
-          link: "/v3/backend/base/structure"
-        },
-        {
-          text: "生命周期",
-          link: "/v3/backend/base/lifecycle"
-        },
-        { text: "路由与API文档",link: "/v3/backend/base/router"},
-        { text: "错误处理",link: "/v3/backend/base/error-handler"},
-        {text: "日志",link: "/v3/backend/base/logger"},
-        {text: "事件",link: "/v3/backend/base/event-handler"},
-        {text: "文件上传",link: "/v3/backend/base/upload"},
-        {text: "多语言",link: "/v3/backend/base/lang"},
+          text: "后端总览",
+          link: "/v3/backend/index"
+        }
       ]
     },
     {
-      text:"安全相关",
+      text:"公共契约",
       collapsed: false,
       items:[
         {
-          text: "用户认证",
-          link: "/v3/backend/security/passport"
+          text: "契约总览",
+          link: "/v3/backend/contracts/"
         },
         {
-          text: "用户授权(RBAC)",
-          link: "/v3/backend/security/access"
+          text: "数据模型",
+          link: "/v3/backend/contracts/data-model"
         },
         {
-          text: "获取客户端 IP",
-          link: "/v3/backend/security/client-ip"
+          text: "后台路由",
+          link: "/v3/backend/contracts/routing"
+        },
+        {
+          text: "接口元数据",
+          link: "/v3/backend/contracts/api-metadata"
+        },
+        {
+          text: "响应结构",
+          link: "/v3/backend/contracts/response"
+        },
+        {
+          text: "前台模板对接",
+          link: "/v3/backend/contracts/frontend-template"
         }
       ]
-    },{
-      text:"数据权限",
-      collapsed: true,
+    },
+    {
+      text:"框架实现",
+      collapsed: false,
+      items:createBackendFrameworkSidebarItems({
+        stable: '稳定实现',
+        planned: '规划中',
+        latest: 'latest'
+      })
+    }
+  ],
+  '/backend/frameworks/': [
+    {
+      text:"框架实现",
+      collapsed: false,
       items:[
         {
-          text: "核心概念",
-          link: "/v3/backend/data-permission/overview"
+          text: "实现总览",
+          link: "/backend/frameworks/"
         },
         {
-          text: "权限配置与效果演示",
-          link: "/v3/backend/data-permission/config"
+          text: "Hyperf latest / 3.2",
+          link: "/backend/frameworks/hyperf/",
+          collapsed: false,
+          items: createHyperfSidebarItems('3.2')
         },
         {
-          text: "API 参考与高级用法",
-          link: "/v3/backend/data-permission/example"
+          text: "Hyperf 3.1",
+          link: "/backend/frameworks/hyperf/3.1/",
+          collapsed: true,
+          items: createHyperfSidebarItems('3.1')
         },
         {
-          text: "性能优化指南",
-          link: "/v3/backend/data-permission/performance"
-        },
-        {
-          text: "故障排除指南",
-          link: "/v3/backend/data-permission/troubleshooting"
-        },
-        {
-          text: "注意事项与最佳实践",
-          link: "/v3/backend/data-permission/notice"
+          text: "Laravel 1.0",
+          link: "/backend/frameworks/laravel/1.0/",
+          collapsed: true
         }
       ]
     }

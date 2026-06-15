@@ -8,9 +8,6 @@
 - パッケージ名：`@mineadmin/form`
 - バージョン戦略：独立したリリース、MineAdminメイン製品のメジャーバージョンには従わない
 
-## 関連ドキュメント
+## ドキュメント
 
-- [V3 コンポーネントチュートリアル](/v3/front/component/ma-form)
-- [基本使用法](/v3/front/component/ma-form/examples/basic-usage)
-- [高度なシナリオ](/v3/front/component/ma-form/examples/advanced-scenarios)
-- [パフォーマンスデモ](/v3/front/component/ma-form/examples/performance-demo)
+MaForm は独立したライブラリ文書として `/libs/ma-form/latest/` に配置されています。
