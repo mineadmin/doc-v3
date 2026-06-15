@@ -1,4 +1,3 @@
-```typescript
 import type {DefaultTheme} from "vitepress";
 import { createLibrarySidebar } from "../shared";
 
@@ -535,4 +534,3 @@ const sidebar:DefaultTheme.Sidebar = {
 }
 
 export default sidebar
-```
