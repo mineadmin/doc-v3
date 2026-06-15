@@ -49,6 +49,10 @@ app
 
 ## 快速开始
 
+下面示例展示了一个包含搜索、分页、行拖拽、操作列、工具栏插槽和右键菜单的完整 `ma-pro-table`。
+
+<DemoPreview dir="demos/ma-pro-table" />
+
 ```vue
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
@@ -117,6 +121,50 @@ const schema = reactive<MaProTableSchema>({
   <ma-pro-table ref="tableRef" :options="options" :schema="schema" />
 </template>
 ```
+
+## 示例演示
+
+### 基础用法
+
+最简单的表格使用方式，包含搜索、分页和基本操作功能。
+
+<DemoPreview dir="demos/ma-pro-table-examples/basic" />
+
+### 高级搜索
+
+展示多种搜索组件类型和复杂搜索逻辑，包含日期范围、数字范围、多选等场景。
+
+<DemoPreview dir="demos/ma-pro-table-examples/advanced-search" />
+
+### 自定义操作
+
+展示操作列、批量动作、条件显示和拖拽排序等交互配置。
+
+<DemoPreview dir="demos/ma-pro-table-examples/custom-operations" />
+
+### 单元格渲染插件
+
+演示内置 `tag` 插件以及自定义渲染插件的注册与使用。
+
+<DemoPreview dir="demos/ma-pro-table-examples/cell-render-plugins" />
+
+### 工具栏扩展
+
+通过 `useProTableToolbar()` 和插槽扩展默认工具栏。
+
+<DemoPreview dir="demos/ma-pro-table-examples/toolbar-extensions" />
+
+### 数据管理
+
+展示新增、编辑、删除、选中导出和统计联动等完整 CRUD 流程。
+
+<DemoPreview dir="demos/ma-pro-table-examples/data-management" />
+
+### 响应式布局
+
+演示不同宽度下的表格和搜索区域布局适配。
+
+<DemoPreview dir="demos/ma-pro-table-examples/responsive-layout" />
 
 ## 组件参数
 
