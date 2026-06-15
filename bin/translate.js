@@ -5,15 +5,13 @@ import process from "node:process";
 import path from "path";
 
 process.noDeprecation = true;
-const endpoint = "https://api.deepseek.com";
-const token = process.env["DEEPSEEK_API_KEY"] || '';
-const MAX_CONCURRENT = 15; // 增加并发数
-const MAX_RETRIES = 3; // 最大重试次数
-const RATE_LIMIT_DELAY = 100; // API调用间隔(毫秒)
-const BATCH_DELAY = 1000; // 批次间延迟(毫秒)
-const CHANGE_FILES = process.env["ALL_CHANGED_FILES"]?.split('\n') ||  [];
+const DEFAULT_MODEL = "gpt-4o-mini";
 const SOURCE_DIRS = ['docs', '.vitepress/src'];
 const SOURCE_LANG = 'zh'; // 源语言
+const CHANGE_FILES = (process.env["ALL_CHANGED_FILES"] || '')
+    .split('\n')
+    .map(file => file.trim())
+    .filter(Boolean);
 
 const SUPPORTED_LANGUAGES = {
     'en': {
@@ -32,15 +30,97 @@ const SUPPORTED_LANGUAGES = {
     }
 };
 
-if (!token) {
-    console.error("❌ Please set the environment variable DEEPSEEK_API_KEY");
+function readEnv(names) {
+    for (const name of names) {
+        const value = process.env[name];
+        if (typeof value === 'string' && value.trim() !== '') {
+            return value.trim();
+        }
+    }
+    return '';
+}
+
+function parsePositiveInteger(names, defaultValue) {
+    const rawValue = readEnv(names);
+    if (!rawValue) {
+        return defaultValue;
+    }
+
+    const value = Number.parseInt(rawValue, 10);
+    if (!Number.isInteger(value) || value <= 0) {
+        console.warn(`⚠️ Invalid ${names.join('/')}="${rawValue}", using default ${defaultValue}`);
+        return defaultValue;
+    }
+
+    return value;
+}
+
+function parseBoolean(names, defaultValue = false) {
+    const rawValue = readEnv(names);
+    if (!rawValue) {
+        return defaultValue;
+    }
+
+    if (['1', 'true', 'yes', 'on'].includes(rawValue.toLowerCase())) {
+        return true;
+    }
+
+    if (['0', 'false', 'no', 'off'].includes(rawValue.toLowerCase())) {
+        return false;
+    }
+
+    console.warn(`⚠️ Invalid ${names.join('/')}="${rawValue}", using default ${defaultValue}`);
+    return defaultValue;
+}
+
+function parseTargetLanguages() {
+    const rawValue = readEnv(['TARGET_LANGUAGES']);
+    const configuredLanguages = rawValue
+        ? rawValue.split(',').map(lang => lang.trim()).filter(Boolean)
+        : Object.keys(SUPPORTED_LANGUAGES);
+
+    const targetLanguages = [...new Set(configuredLanguages)];
+    const unsupportedLanguages = targetLanguages.filter(lang => lang !== SOURCE_LANG && !SUPPORTED_LANGUAGES[lang]);
+
+    if (unsupportedLanguages.length > 0) {
+        throw new Error(
+            `Unsupported target languages: ${unsupportedLanguages.join(', ')}. ` +
+            `Supported: ${Object.keys(SUPPORTED_LANGUAGES).join(', ')}`
+        );
+    }
+
+    return targetLanguages;
+}
+
+const TRANSLATION_CONFIG = {
+    baseURL: readEnv(['OPENAI_BASE_URL']),
+    apiKey: readEnv(['OPENAI_API_KEY']),
+    model: readEnv(['OPENAI_MODEL']) || DEFAULT_MODEL,
+    targetLanguages: parseTargetLanguages(),
+    maxConcurrent: parsePositiveInteger(['MAX_CONCURRENT'], 15),
+    maxRetries: parsePositiveInteger(['MAX_RETRIES'], 3),
+    rateLimitDelay: parsePositiveInteger(['RATE_LIMIT_DELAY'], 100),
+    batchDelay: parsePositiveInteger(['BATCH_DELAY'], 1000),
+    forceTranslateAll: parseBoolean(['FORCE_TRANSLATE_ALL'], false),
+};
+
+if (!TRANSLATION_CONFIG.apiKey) {
+    console.error("❌ Please set OPENAI_API_KEY");
+    console.error("   Example:");
+    console.error("   OPENAI_BASE_URL=https://api.example.com/v1 OPENAI_API_KEY=sk-xxx OPENAI_MODEL=gpt-4o-mini pnpm run docs:translate");
     process.exit(1);
 }
 
-const openai = new OpenAI({
-    baseURL: endpoint,
-    apiKey: token,
-});
+const openaiOptions = {
+    baseURL: TRANSLATION_CONFIG.baseURL,
+    apiKey: TRANSLATION_CONFIG.apiKey,
+};
+
+if (!openaiOptions.baseURL) {
+    delete openaiOptions.baseURL;
+}
+
+const openai = new OpenAI(openaiOptions);
 
 // 进度跟踪器
 class ProgressTracker {
@@ -79,18 +159,18 @@ class ProgressTracker {
 async function translateWithRetry(content, retries = 0, systemContent = '', filePath = '') {
     try {
         // 添加轻量级的速率限制
-        await new Promise(resolve => setTimeout(resolve, RATE_LIMIT_DELAY));
+        await new Promise(resolve => setTimeout(resolve, TRANSLATION_CONFIG.rateLimitDelay));
         
         const completion = await openai.chat.completions.create({
             messages: [
                 { role: "system", content: systemContent },
                 { role: "user", content: content }
             ],
-            model: "deepseek-chat",
+            model: TRANSLATION_CONFIG.model,
         });
         return completion.choices[0].message.content;
     } catch (error) {
-        if (retries < MAX_RETRIES) {
+        if (retries < TRANSLATION_CONFIG.maxRetries) {
             const backoffDelay = 1000 * Math.pow(2, retries); // 指数退避
             await new Promise(resolve => setTimeout(resolve, backoffDelay));
             return translateWithRetry(content, retries + 1, systemContent, filePath);
@@ -183,8 +263,14 @@ async function processFile(srcPath, destPath, targetLang = 'en', progressTracker
 
 async function handle() {
     // 先扫描zh目录，获取所有需要处理的文件
-    let targetLanguages = Object.keys(SUPPORTED_LANGUAGES);
-    console.log(`🌐 Supported languages: ${targetLanguages.join(', ')}`);
+    let targetLanguages = TRANSLATION_CONFIG.targetLanguages;
+    console.log(`🔌 Translation endpoint: ${TRANSLATION_CONFIG.baseURL || 'OpenAI default endpoint'}`);
+    console.log(`🤖 Translation model: ${TRANSLATION_CONFIG.model}`);
+    console.log(`⚙️  Max concurrent: ${TRANSLATION_CONFIG.maxConcurrent}`);
+    console.log(`🌐 Target languages: ${targetLanguages.join(', ')}`);
+    if (TRANSLATION_CONFIG.forceTranslateAll) {
+        console.log('♻️  Force mode: translate all source files');
+    }
     console.log('----------------------------------------');
     for (const dir of SOURCE_DIRS) {
         let source_lang_dir = `${dir}/${SOURCE_LANG}`;
@@ -217,7 +303,9 @@ async function handle() {
                 let orphanFiles = targetFiles.filter(file => !sourceFiles.includes(file));
 
                 // 合并 filesToTranslate 和 changeInDirFiles
-                let files = [...new Set([...changeInDirFiles, ...filesToTranslate])];
+                let files = TRANSLATION_CONFIG.forceTranslateAll
+                    ? sourceFiles
+                    : [...new Set([...changeInDirFiles, ...filesToTranslate])];
 
                 console.log(`    - 📝 Untranslated files: ${filesToTranslate.length}`);
                 console.log(`    - 🗑️ Orphan files: ${orphanFiles.length}`);
@@ -237,13 +325,13 @@ async function handle() {
                 const failedFiles = [];
 
                 // 并行处理所有文件，但使用信号量控制并发
-                const semaphore = new Array(MAX_CONCURRENT).fill(null);
+                const semaphore = new Array(TRANSLATION_CONFIG.maxConcurrent).fill(null);
                 let semaphoreIndex = 0;
 
                 const processBatch = async (filesBatch) => {
                     const promises = filesBatch.map(async (file) => {
                         // 获取信号量槽位
-                        const slotIndex = semaphoreIndex++ % MAX_CONCURRENT;
+                        const slotIndex = semaphoreIndex++ % TRANSLATION_CONFIG.maxConcurrent;
                         await semaphore[slotIndex];
                         
                         const srcPath = path.join(source_lang_dir, file);
@@ -265,14 +353,14 @@ async function handle() {
                 };
 
                 // 分批处理以避免内存过载
-                const BATCH_SIZE = MAX_CONCURRENT * 3; // 每批处理3倍并发数
+                const BATCH_SIZE = TRANSLATION_CONFIG.maxConcurrent * 3; // 每批处理3倍并发数
                 for (let i = 0; i < files.length; i += BATCH_SIZE) {
                     const batch = files.slice(i, i + BATCH_SIZE);
                     await processBatch(batch);
                     
                     // 短暂延迟以避免API限制
                     if (i + BATCH_SIZE < files.length) {
-                        await new Promise(resolve => setTimeout(resolve, BATCH_DELAY));
+                        await new Promise(resolve => setTimeout(resolve, TRANSLATION_CONFIG.batchDelay));
                     }
                 }
 

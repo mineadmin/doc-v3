@@ -116,7 +116,7 @@ bin/
 - **Interactive Demos**: Vue 3 components with live preview and code display
 - **TypeScript**: Full type safety for configuration and translation tools
 - **Modern Stack**: VitePress, Vue 3, Element Plus, UnoCSS
-- **Translation System**: DeepSeek API integration with concurrent processing
+- **Translation System**: OpenAI-compatible API integration with concurrent processing
 
 ## Content Categories
 
@@ -138,10 +138,21 @@ bin/
 
 ## Environment Variables
 
-- `DEEPSEEK_API_KEY` - Required for translation features
-- `TARGET_LANGUAGES` - Comma-separated language codes (default: "en,ja")
-- `MAX_CONCURRENT` - Maximum concurrent translations (default: 10)
-- `FORCE_TRANSLATE_ALL` - Force translate all files (default: false)
+- `OPENAI_API_KEY` - Required for translation features
+- `OPENAI_BASE_URL` - Optional OpenAI-compatible API endpoint
+- `OPENAI_MODEL` - Chat completion model name (default: `gpt-4o-mini`)
+- `TARGET_LANGUAGES` - Comma-separated language codes (default: `en,ja`)
+- `MAX_CONCURRENT` - Maximum concurrent translations (default: `15`)
+- `FORCE_TRANSLATE_ALL` - Force translate all files (default: `false`)
+
+```bash
+OPENAI_BASE_URL=https://api.example.com/v1 \
+OPENAI_API_KEY=sk-xxx \
+OPENAI_MODEL=gpt-4o-mini \
+pnpm run docs:translate
+```
+
+For GitHub Actions, set `OPENAI_API_KEY` as a repository secret. Set `OPENAI_BASE_URL` and `OPENAI_MODEL` as repository variables when using a custom OpenAI-compatible provider.
 
 ## Contributing
 
