@@ -360,49 +360,6 @@ const sidebar:DefaultTheme.Sidebar = {
         {
           text: "后端总览",
           link: "/v3/backend/index"
-        },
-        {
-          text: "用户认证",
-          link: "/v3/backend/security/passport"
-        },
-        {
-          text: "用户授权(RBAC)",
-          link: "/v3/backend/security/access"
-        },
-        {
-          text: "获取客户端 IP",
-          link: "/v3/backend/security/client-ip"
-        },
-        {
-          text:"数据权限",
-          link: "/v3/backend/data-permission/overview",
-          collapsed: true,
-          items:[
-            {
-              text: "核心概念",
-              link: "/v3/backend/data-permission/overview"
-            },
-            {
-              text: "权限配置与效果演示",
-              link: "/v3/backend/data-permission/config"
-            },
-            {
-              text: "API 参考与高级用法",
-              link: "/v3/backend/data-permission/example"
-            },
-            {
-              text: "性能优化指南",
-              link: "/v3/backend/data-permission/performance"
-            },
-            {
-              text: "故障排除指南",
-              link: "/v3/backend/data-permission/troubleshooting"
-            },
-            {
-              text: "注意事项与最佳实践",
-              link: "/v3/backend/data-permission/notice"
-            }
-          ]
         }
       ]
     },
@@ -475,6 +432,60 @@ const sidebar:DefaultTheme.Sidebar = {
           {
             text: "多语言",
             link: "/v3/backend/frameworks/hyperf/base/lang"
+          },
+          {
+            text: "安全相关",
+            link: "/v3/backend/frameworks/hyperf/security/passport",
+            collapsed: true,
+            items: [
+              {
+                text: "用户认证",
+                link: "/v3/backend/frameworks/hyperf/security/passport"
+              },
+              {
+                text: "用户授权(RBAC)",
+                link: "/v3/backend/frameworks/hyperf/security/access"
+              },
+              {
+                text: "获取客户端 IP",
+                link: "/v3/backend/frameworks/hyperf/security/client-ip"
+              }
+            ]
+          },
+          {
+            text:"数据权限",
+            link: "/v3/backend/frameworks/hyperf/data-permission/overview",
+            collapsed: true,
+            items:[
+              {
+                text: "核心概念",
+                link: "/v3/backend/frameworks/hyperf/data-permission/overview"
+              },
+              {
+                text: "架构设计",
+                link: "/v3/backend/frameworks/hyperf/data-permission/architecture"
+              },
+              {
+                text: "权限配置与效果演示",
+                link: "/v3/backend/frameworks/hyperf/data-permission/config"
+              },
+              {
+                text: "API 参考与高级用法",
+                link: "/v3/backend/frameworks/hyperf/data-permission/example"
+              },
+              {
+                text: "性能优化指南",
+                link: "/v3/backend/frameworks/hyperf/data-permission/performance"
+              },
+              {
+                text: "故障排除指南",
+                link: "/v3/backend/frameworks/hyperf/data-permission/troubleshooting"
+              },
+              {
+                text: "注意事项与最佳实践",
+                link: "/v3/backend/frameworks/hyperf/data-permission/notice"
+              }
+            ]
           }
         ]
       })

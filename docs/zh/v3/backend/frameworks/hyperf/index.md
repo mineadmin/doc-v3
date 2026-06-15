@@ -24,6 +24,10 @@ Hyperf 实现负责说明框架相关的细节：
 - [事件](./base/event-handler.md)
 - [文件上传](./base/upload.md)
 - [多语言](./base/lang.md)
+- [用户认证](./security/passport.md)
+- [用户授权（RBAC）](./security/access.md)
+- [获取客户端 IP](./security/client-ip.md)
+- [数据权限](./data-permission/overview.md)
 
 ## 适用场景
 
