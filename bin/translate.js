@@ -20,14 +20,14 @@ const SUPPORTED_LANGUAGES = {
         name: 'English',
         systemPrompt: {
             md: 'You are a professional technical translator. Translate Simplified Chinese to English. IMPORTANT: Provide ONLY the translated text with no introductions, explanations, or summaries. Do not change markdown syntax, code fences, inline code, front-matter keys, or link targets. Do not translate code blocks.',
-            code: 'You are a professional technical translator. Translate ONLY comments and string literals from Simplified Chinese to English. IMPORTANT: This is a JS or TS file. You are not allowed to add anything to the original text. Provide ONLY the translated code with no introductions or summaries. NEVER alter code tokens, identifiers, imports/exports, types, or file paths. Preserve formatting exactly.'
+            code: 'You are a professional technical translator. Translate ONLY comments and string literals from Simplified Chinese to English. CRITICAL RULES: 1) Output raw code directly - NO markdown code blocks, NO ```typescript, NO ```javascript, NO ```. 2) Do NOT add any explanations before or after the code. 3) The first character of your response must be the first character of the translated code. 4) Preserve all formatting, whitespace, and line breaks exactly as given. 5) NEVER alter code tokens, identifiers, imports/exports, types, or file paths.'
         }
     },
     'ja': {
         name: 'Japanese',
         systemPrompt: {
             md: 'You are a professional technical translator. Translate Simplified Chinese to Japanese. IMPORTANT: Provide ONLY the translated text with no introductions, explanations, or summaries. Do not change markdown syntax, code fences, inline code, front-matter keys, or link targets. Do not translate code blocks.',
-            code: 'You are a professional technical translator. Translate ONLY comments and string literals from Simplified Chinese to Japanese. IMPORTANT: This is a JS or TS file. You are not allowed to add anything to the original text. Provide ONLY the translated code with no introductions or summaries. NEVER alter code tokens, identifiers, imports/exports, types, or file paths. Preserve formatting exactly.'
+            code: 'You are a professional technical translator. Translate ONLY comments and string literals from Simplified Chinese to Japanese. CRITICAL RULES: 1) Output raw code directly - NO markdown code blocks, NO ```typescript, NO ```javascript, NO ```. 2) Do NOT add any explanations before or after the code. 3) The first character of your response must be the first character of the translated code. 4) Preserve all formatting, whitespace, and line breaks exactly as given. 5) NEVER alter code tokens, identifiers, imports/exports, types, or file paths.'
         }
     }
 };
@@ -122,6 +122,19 @@ function replaceZhLinks(content, lang, type = 'md') {
     return content;
 }
 
+function cleanCodeBlockMarkers(content) {
+    // 移除开头的 markdown 代码块标记 (```typescript, ```javascript, ```ts, ```js, 等)
+    content = content.replace(/^```(?:typescript|javascript|ts|js|json|jsx|tsx)?\s*\n/i, '');
+
+    // 移除结尾的 markdown 代码块标记
+    content = content.replace(/\n```\s*$/, '');
+
+    // 移除可能的额外前导/尾随空行
+    content = content.trim();
+
+    return content;
+}
+
 async function processFile(srcPath, destPath, targetLang = 'en', progressTracker = null) {
     try {
         const destFolder = path.dirname(destPath);
@@ -144,7 +157,13 @@ async function processFile(srcPath, destPath, targetLang = 'en', progressTracker
             systemContent = langConfig.systemPrompt.md; // 默认使用md提示
         }
 
-        const translatedContent = await translateWithRetry(content, 0, systemContent, srcPath);
+        let translatedContent = await translateWithRetry(content, 0, systemContent, srcPath);
+
+        // 清理代码文件中可能出现的 markdown 代码块标记
+        if (systemContentType === 'code') {
+            translatedContent = cleanCodeBlockMarkers(translatedContent);
+        }
+
         const finalContent = replaceZhLinks(translatedContent, targetLang, systemContentType);
         await writeFile(destPath, finalContent);
         
