@@ -18,7 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        language: [zh, en, ja, zh-hk, zh-tw]
+#        language: [zh, en, ja, zh-hk, zh-tw]
+        language: [zh]
     env:
       NODE_OPTIONS: "--max-old-space-size=64000"
       CURRENT_LANGUAGE: ${{ matrix.language }}
