@@ -57,6 +57,8 @@ app.use(MaForm, { ssr: true })
 
 `MaForm` 接收一个对象模型和一组表单项配置。每个 `item` 通过 `prop` 绑定模型路径，通过 `render` 指定要渲染的 Element Plus 组件或自定义组件。
 
+<DemoPreview dir="demos/ma-form/default" />
+
 ```vue
 <script setup lang="tsx">
 import { ref } from 'vue'
@@ -377,9 +379,9 @@ const items: MaFormItem[] = [
 
 ### 接入 Table 组件
 
-`@mineadmin/form` 当前源码没有在内置 `componentMap` 中注册 `table`，因此不能通过 `render: 'table'` 直接渲染表格。需要在应用里额外安装并注册表格组件，然后通过 `render` 函数把 `MaTable`、`ElTable` 或业务表格组件放进表单项。
+`@mineadmin/form` 当前源码没有在内置 `componentMap` 中注册 `table`，因此不能通过 `render: 'table'` 直接渲染表格。需要在应用里额外安装并注册表格组件，然后通过自定义渲染把 `MaTable`、`ElTable` 或业务表格组件放进表单项。
 
-以 `@mineadmin/table` 为例，先在入口完成注册：
+如果使用 `@mineadmin/table` 的 `MaTable`，需要先在入口完成注册；如果使用 Element Plus 的 `ElTable`，已随 `ElementPlus` 注册：
 
 ```ts
 import MaForm from '@mineadmin/form'
@@ -389,13 +391,14 @@ app.use(MaForm)
 app.use(MaTable)
 ```
 
-表格组件通常不使用 `v-model`，需要显式把表单模型里的数组传给表格。单元格编辑、增删行等操作直接修改这个数组即可，最终提交时仍然从 `ma-form` 的 `v-model` 中读取完整数据。
+表格组件通常不使用 `v-model`，需要显式把表单模型里的数组传给表格。单元格编辑、增删行等操作直接修改这个数组即可，最终提交时仍然从 `ma-form` 的 `v-model` 中读取完整数据。对于表格这类不需要 MaForm 自动注入 `modelValue` 的组件，推荐使用 `itemSlots.default` 填充表单项内容。
+
+<DemoPreview dir="demos/ma-form/table-in-form" title="表格明细表单" description="在 MaForm 中通过 itemSlots.default 接入 ElTable，并把明细行保存到表单模型。" />
 
 ```tsx
-import { h, resolveComponent } from 'vue'
-import { ElButton, ElInput, ElInputNumber } from 'element-plus'
+import { computed, ref } from 'vue'
+import { ElButton, ElInput, ElInputNumber, ElTable, ElTableColumn } from 'element-plus'
 import type { MaFormItem, MaModel } from '@mineadmin/form'
-import type { MaTableColumns, MaTableOptions } from '@mineadmin/table'
 
 interface ProductRow {
   name: string
@@ -403,54 +406,16 @@ interface ProductRow {
   price: number
 }
 
-const ensureProducts = (formData: MaModel): ProductRow[] => {
-  formData.products ??= []
-  return formData.products
-}
+const model = ref<MaModel>({
+  products: [
+    { name: 'MineAdmin 专业版', quantity: 1, price: 2999 },
+  ],
+})
 
-const productColumns: MaTableColumns[] = [
-  {
-    label: '商品名称',
-    prop: 'name',
-    cellRender: ({ row }) => (
-      <ElInput
-        modelValue={row.name}
-        placeholder="请输入商品名称"
-        onUpdate:modelValue={value => row.name = String(value ?? '')}
-      />
-    ),
-  },
-  {
-    label: '数量',
-    prop: 'quantity',
-    width: 160,
-    cellRender: ({ row }) => (
-      <ElInputNumber
-        modelValue={row.quantity}
-        min={1}
-        onUpdate:modelValue={value => row.quantity = value ?? 1}
-      />
-    ),
-  },
-  {
-    label: '单价',
-    prop: 'price',
-    width: 160,
-    cellRender: ({ row }) => (
-      <ElInputNumber
-        modelValue={row.price}
-        min={0}
-        precision={2}
-        onUpdate:modelValue={value => row.price = value ?? 0}
-      />
-    ),
-  },
-]
+const rows = computed<ProductRow[]>(() => model.value.products ?? [])
 
-const productTableOptions: MaTableOptions = {
-  border: true,
-  stripe: true,
-  showOverflowTooltip: true,
+const addRow = () => {
+  rows.value.push({ name: '', quantity: 1, price: 0 })
 }
 
 const items: MaFormItem[] = [
@@ -461,33 +426,65 @@ const items: MaFormItem[] = [
     itemProps: {
       help: '表格数据会保存在 model.products 中，可随表单一起校验和提交。',
     },
-    render: ({ formData }) => {
-      const rows = ensureProducts(formData)
-      const MaTable = resolveComponent('ma-table')
-
-      return (
-        <div style="width: 100%">
-          {h(MaTable, {
-            columns: productColumns,
-            data: rows,
-            options: productTableOptions,
-          })}
-          <ElButton
-            type="primary"
-            link
-            onClick={() => rows.push({ name: '', quantity: 1, price: 0 })}
-          >
-            新增一行
-          </ElButton>
-        </div>
-      )
+    itemSlots: {
+      default: () => {
+        return (
+          <div style="width: 100%">
+            <ElTable data={rows.value} border stripe style={{ width: '100%' }}>
+              <ElTableColumn label="商品名称" minWidth={180}>
+                {{
+                  default: ({ row }: { row: ProductRow }) => (
+                    <ElInput
+                      modelValue={row.name}
+                      placeholder="请输入商品名称"
+                      onUpdate:modelValue={value => row.name = String(value ?? '')}
+                    />
+                  ),
+                }}
+              </ElTableColumn>
+              <ElTableColumn label="数量" width={150}>
+                {{
+                  default: ({ row }: { row: ProductRow }) => (
+                    <ElInputNumber
+                      modelValue={row.quantity}
+                      min={1}
+                      onUpdate:modelValue={value => row.quantity = value ?? 1}
+                    />
+                  ),
+                }}
+              </ElTableColumn>
+              <ElTableColumn label="单价" width={160}>
+                {{
+                  default: ({ row }: { row: ProductRow }) => (
+                    <ElInputNumber
+                      modelValue={row.price}
+                      min={0}
+                      precision={2}
+                      onUpdate:modelValue={value => row.price = value ?? 0}
+                    />
+                  ),
+                }}
+              </ElTableColumn>
+            </ElTable>
+            <ElButton
+              type="primary"
+              link
+              onClick={addRow}
+            >
+              新增一行
+            </ElButton>
+          </div>
+        )
+      },
     },
   },
 ]
 ```
 
+如果你希望完全通过 `render` 维护表格，也可以在 `render` 函数中返回一个表格容器组件，并由该组件内部管理 `MaTable` 的 `data`、`columns` 和行编辑逻辑。
+
 :::tip
-`MaForm` 会把 `modelValue` 和 `onUpdate:modelValue` 注入给最终渲染组件，但表格类组件更常见的是 `data`、`columns`、`options` 这类属性。接入这类组件时，以 `formData` 作为数据源会更直观，也能避免误以为 `render: 'table'` 是内置能力。
+`MaForm` 会把 `modelValue` 和 `onUpdate:modelValue` 注入给最终渲染组件，但表格类组件更常见的是 `data`、`columns`、`options` 这类属性。接入这类组件时，以表单模型中的数组作为数据源会更直观，也能避免误以为 `render: 'table'` 是内置能力。
 :::
 
 ## 嵌套表单项

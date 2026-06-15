@@ -15,10 +15,10 @@ import DefaultTheme from 'vitepress/theme'
 import Layout from './components/layout.vue'
 
 import ContextMenu from '@imengyu/vue3-context-menu'
-import MaTable from '@mineadmin/table/dist/index.umd.js'
-import MaSearch from '@mineadmin/search/dist/index.umd.js'
-import MaForm from '@mineadmin/form/dist/index.umd.js'
-import MaProTable from '@mineadmin/pro-table/dist/index.umd.js'
+import MaTable from '@mineadmin/table'
+import MaSearch from '@mineadmin/search'
+import MaForm from '@mineadmin/form'
+import MaProTable from '@mineadmin/pro-table'
 
 // maTable样式
 import '@mineadmin/table/dist/style.css'
@@ -43,6 +43,22 @@ import "virtual:uno.css";
 import DemoPreview from '../components/demo-preview.vue';
 import CopyOrDownloadAsMarkdownButtons from 'vitepress-plugin-llms/vitepress-components/CopyOrDownloadAsMarkdownButtons.vue'
 
+const resolveMineAdminPlugin = (plugin: any) => {
+  if (plugin?.install) {
+    return plugin
+  }
+
+  if (plugin?.default?.install) {
+    return plugin.default
+  }
+
+  if (plugin?.default?.default?.install) {
+    return plugin.default.default
+  }
+
+  return plugin
+}
+
 
 export default {
   async enhanceApp(ctx: EnhanceAppContext) {
@@ -54,10 +70,10 @@ export default {
       const zh = await import('element-plus/dist/locale/zh-cn.mjs')
       // @ts-ignore
       app.use(ElementPlus.default, { locale: zh.default })
-      app.use(MaTable, { ssr: true })
-      app.use(MaSearch, { ssr: true })
-      app.use(MaForm, { ssr: true })
-      app.use(MaProTable, {
+      app.use(resolveMineAdminPlugin(MaTable), { ssr: true })
+      app.use(resolveMineAdminPlugin(MaSearch), { ssr: true })
+      app.use(resolveMineAdminPlugin(MaForm), { ssr: true })
+      app.use(resolveMineAdminPlugin(MaProTable), {
         ssr: true,
         provider: {
           app,

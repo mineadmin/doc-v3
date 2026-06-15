@@ -53,6 +53,8 @@ app.use(MaSearch, { ssr: true })
 - `formOptions`：透传给内部 `ma-form` 的表单配置，例如 `labelWidth`。
 - `searchItems`：搜索项配置，类型继承自 `MaFormItem`，额外扩展 `span`、`offset` 和 `hide`。
 
+<DemoPreview dir="demos/ma-search/default" />
+
 ```vue
 <script setup lang="tsx">
 import { ref } from 'vue'
@@ -148,6 +150,62 @@ const searchItems: MaSearchItem[] = [
 ```
 
 输入组件监听回车键，按下 `Enter` 会触发一次 `search` 事件。
+
+## 示例演示
+
+### 基础搜索
+
+常规输入框、选择器、日期范围等搜索项组合。
+
+<DemoPreview dir="demos/ma-search/basic-usage" />
+
+### 高级搜索
+
+展示 TSX 自定义渲染、多选、级联等复杂筛选场景。
+
+<DemoPreview dir="demos/ma-search/advanced-search" />
+
+### 折叠搜索
+
+搜索项较多时，可以通过 `fold` 和 `foldRows` 控制初始展示数量。
+
+<DemoPreview dir="demos/ma-search/collapsible-search" />
+
+### 自定义操作区
+
+使用 `actions`、`beforeActions` 和 `afterActions` 插槽扩展按钮区域。
+
+<DemoPreview dir="demos/ma-search/custom-actions" />
+
+### 动态搜索项
+
+通过暴露方法在运行时添加、删除或替换搜索项。
+
+<DemoPreview dir="demos/ma-search/dynamic-items" />
+
+### 响应式布局
+
+使用 `cols` 配置不同断点下的搜索项列数。
+
+<DemoPreview dir="demos/ma-search/responsive-layout" />
+
+### 表格集成
+
+把 `search` 和 `reset` 事件转换为列表查询参数。
+
+<DemoPreview dir="demos/ma-search/table-integration" />
+
+### 表单验证
+
+配合内部 `ma-form` 的规则校验能力控制搜索提交。
+
+<DemoPreview dir="demos/ma-search/form-validation" />
+
+### 方法演示
+
+演示 `setSearchForm`、`setOptions`、`appendItem`、按钮属性设置等实例方法。
+
+<DemoPreview dir="demos/ma-search/methods-demo" />
 
 ## Props
 
