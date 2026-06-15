@@ -3,7 +3,7 @@
 `ma-search` is built on top of `ma-form` to quickly construct a search form. It offers rich configuration options, responsive layout, form validation, and more, making it an ideal choice for building search functionality in backend management systems.
 
 :::tip Tip
-The parameters for `form` and `form-item` are consistent with `ma-form`. For more detailed configuration, please refer to the [ma-form documentation](ma-form).
+The parameters for `form` and `form-item` are consistent with `ma-form`. For more detailed configuration, please refer to the [ma-form documentation](/libs/ma-form/latest/).
 :::
 
 ## Quick Start
@@ -34,8 +34,8 @@ The parameters for `form` and `form-item` are consistent with `ma-form`. For mor
 | Parameter | Description | Type | Default | Version |
 |-----------|-------------|------|---------|---------|
 | `options` | `ma-search` component configuration options | `MaSearchOptions` | - | 1.0.0 |
-| `formOptions` | `ma-form` component configuration options, see [ma-form Props](ma-form#props) | `MaFormOptions` | - | 1.0.0 |
-| `searchItems` | Search form item configuration, extended from [ma-form-item](ma-form#maformitem) | `MaSearchItem[]` | - | 1.0.0 |
+| `formOptions` | `ma-form` component configuration options, see [ma-form Props](/libs/ma-form/latest/#props) | `MaFormOptions` | - | 1.0.0 |
+| `searchItems` | Search form item configuration, extended from [ma-form-item](/libs/ma-form/latest/#maformitem) | `MaSearchItem[]` | - | 1.0.0 |
 
 ### MaSearchOptions
 

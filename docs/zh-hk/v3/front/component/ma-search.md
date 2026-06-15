@@ -3,7 +3,7 @@
 `ma-search` 基於 `ma-form` 封裝而來，用於快速構建一個搜索表單。它提供了豐富的配置選項、響應式佈局、表單驗證等功能，是構建後台管理系統搜索功能的理想選擇。
 
 :::tip 提示
-`form` 和 `form-item` 與 `ma-form` 的參數一致。更多詳細配置請參考 [ma-form 文檔](ma-form)。
+`form` 和 `form-item` 與 `ma-form` 的參數一致。更多詳細配置請參考 [ma-form 文檔](/libs/ma-form/latest/)。
 :::
 
 ## 快速開始
@@ -34,8 +34,8 @@
 | 參數 | 説明 | 類型 | 默認值 | 版本 |
 |------|------|------|-------|------|
 | `options` | `ma-search` 組件配置選項 | `MaSearchOptions` | - | 1.0.0 |
-| `formOptions` | `ma-form` 組件配置選項，詳見 [ma-form Props](ma-form#props) | `MaFormOptions` | - | 1.0.0 |
-| `searchItems` | 搜索表單項配置，基於 [ma-form-item](ma-form#maformitem) 擴展 | `MaSearchItem[]` | - | 1.0.0 |
+| `formOptions` | `ma-form` 組件配置選項，詳見 [ma-form Props](/libs/ma-form/latest/#props) | `MaFormOptions` | - | 1.0.0 |
+| `searchItems` | 搜索表單項配置，基於 [ma-form-item](/libs/ma-form/latest/#maformitem) 擴展 | `MaSearchItem[]` | - | 1.0.0 |
 
 ### MaSearchOptions
 

@@ -8,9 +8,6 @@
 - 包名：`@mineadmin/form`
 - 版本策略：獨立發版，不跟隨 MineAdmin 主產品大版本
 
-## 相關文檔
+## 文檔
 
-- [V3 組件教程](/v3/front/component/ma-form)
-- [基礎用法](/v3/front/component/ma-form/examples/basic-usage)
-- [高級場景](/v3/front/component/ma-form/examples/advanced-scenarios)
-- [性能演示](/v3/front/component/ma-form/examples/performance-demo)
+MaForm 已作為獨立庫文檔維護在 `/libs/ma-form/latest/`。

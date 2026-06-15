@@ -170,61 +170,6 @@ const sidebar:DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         {
-          text: 'MaForm Form Component',
-          link: '/v3/front/component/ma-form',
-          collapsed: true,
-          items: [
-            {
-              text: 'Basic Usage',
-              link: '/v3/front/component/ma-form/examples/basic-usage'
-            },
-            {
-              text: 'Layout System',
-              link: '/v3/front/component/ma-form/examples/layout-systems'
-            },
-            {
-              text: 'Conditional Rendering',
-              link: '/v3/front/component/ma-form/examples/conditional-rendering'
-            },
-            {
-              text: 'Dynamic Validation',
-              link: '/v3/front/component/ma-form/examples/dynamic-validation'
-            },
-            {
-              text: 'Component Rendering',
-              link: '/v3/front/component/ma-form/examples/component-rendering'
-            },
-            {
-              text: 'Slots Examples',
-              link: '/v3/front/component/ma-form/examples/slots-examples'
-            },
-            {
-              text: 'Exposed Methods',
-              link: '/v3/front/component/ma-form/examples/expose-methods'
-            },
-            {
-              text: 'Loading States',
-              link: '/v3/front/component/ma-form/examples/loading-states'
-            },
-            {
-              text: 'Nested Forms',
-              link: '/v3/front/component/ma-form/examples/nested-forms'
-            },
-            {
-              text: 'Mobile Responsive',
-              link: '/v3/front/component/ma-form/examples/mobile-responsive'
-            },
-            {
-              text: 'Advanced Scenarios',
-              link: '/v3/front/component/ma-form/examples/advanced-scenarios'
-            },
-            {
-              text: 'Performance Demo',
-              link: '/v3/front/component/ma-form/examples/performance-demo'
-            }
-          ]
-        },
-        {
           text: 'MaTable Table Component',
           link: '/v3/front/component/ma-table',
           collapsed: true,
